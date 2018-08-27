@@ -127,6 +127,11 @@
 		A7AC8170212BE12A00C6AB6C /* XLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AC816F212BE12A00C6AB6C /* XLButton.m */; };
 		A7AC8176212C2AA800C6AB6C /* MyNewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AC8175212C2AA700C6AB6C /* MyNewsVC.m */; };
 		A7AC8179212C2C1F00C6AB6C /* MyNewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7AC8178212C2C1F00C6AB6C /* MyNewsCell.m */; };
+		A7B5A1012133A2F300BC197B /* VehicleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1002133A2F300BC197B /* VehicleVC.m */; };
+		A7B5A1042133A3A400BC197B /* VehicleDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1032133A3A400BC197B /* VehicleDetailsVC.m */; };
+		A7B5A1072133A9F100BC197B /* VehicleInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1062133A9F100BC197B /* VehicleInformationVC.m */; };
+		A7B5A10A2133C86800BC197B /* RegistrationInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */; };
+		A7B5A10D2133CF8200BC197B /* StudentDetailsEditorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */; };
 		DA03437F1F508221008E7BE1 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = DA03437E1F508221008E7BE1 /* test.html */; };
 		DA0343831F508F30008E7BE1 /* FMTokenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0343821F508F30008E7BE1 /* FMTokenStatus.m */; };
 		DA0346261F509098008E7BE1 /* FMAnalyticsConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0343881F509097008E7BE1 /* FMAnalyticsConfigManager.m */; };
@@ -821,6 +826,16 @@
 		A7AC8175212C2AA700C6AB6C /* MyNewsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewsVC.m; sourceTree = "<group>"; };
 		A7AC8177212C2C1F00C6AB6C /* MyNewsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNewsCell.h; sourceTree = "<group>"; };
 		A7AC8178212C2C1F00C6AB6C /* MyNewsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewsCell.m; sourceTree = "<group>"; };
+		A7B5A0FF2133A2F300BC197B /* VehicleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VehicleVC.h; sourceTree = "<group>"; };
+		A7B5A1002133A2F300BC197B /* VehicleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VehicleVC.m; sourceTree = "<group>"; };
+		A7B5A1022133A3A400BC197B /* VehicleDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VehicleDetailsVC.h; sourceTree = "<group>"; };
+		A7B5A1032133A3A400BC197B /* VehicleDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VehicleDetailsVC.m; sourceTree = "<group>"; };
+		A7B5A1052133A9F100BC197B /* VehicleInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VehicleInformationVC.h; sourceTree = "<group>"; };
+		A7B5A1062133A9F100BC197B /* VehicleInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VehicleInformationVC.m; sourceTree = "<group>"; };
+		A7B5A1082133C86800BC197B /* RegistrationInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RegistrationInformationVC.h; sourceTree = "<group>"; };
+		A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationInformationVC.m; sourceTree = "<group>"; };
+		A7B5A10B2133CF8200BC197B /* StudentDetailsEditorVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentDetailsEditorVC.h; sourceTree = "<group>"; };
+		A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentDetailsEditorVC.m; sourceTree = "<group>"; };
 		DA03437E1F508221008E7BE1 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		DA0343811F508F30008E7BE1 /* FMTokenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMTokenStatus.h; sourceTree = "<group>"; };
 		DA0343821F508F30008E7BE1 /* FMTokenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMTokenStatus.m; sourceTree = "<group>"; };
@@ -2206,6 +2221,8 @@
 				A735A095212FB7A10044E9BC /* EnrollVC.m */,
 				A735A0AD212FEC3B0044E9BC /* StudentsListVC.h */,
 				A735A0AE212FEC3B0044E9BC /* StudentsListVC.m */,
+				A7B5A10B2133CF8200BC197B /* StudentDetailsEditorVC.h */,
+				A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -2235,6 +2252,21 @@
 				A7AC8178212C2C1F00C6AB6C /* MyNewsCell.m */,
 			);
 			path = V;
+			sourceTree = "<group>";
+		};
+		A7B5A0FE2133A2BA00BC197B /* Vehicle(车辆管理) */ = {
+			isa = PBXGroup;
+			children = (
+				A7B5A0FF2133A2F300BC197B /* VehicleVC.h */,
+				A7B5A1002133A2F300BC197B /* VehicleVC.m */,
+				A7B5A1022133A3A400BC197B /* VehicleDetailsVC.h */,
+				A7B5A1032133A3A400BC197B /* VehicleDetailsVC.m */,
+				A7B5A1052133A9F100BC197B /* VehicleInformationVC.h */,
+				A7B5A1062133A9F100BC197B /* VehicleInformationVC.m */,
+				A7B5A1082133C86800BC197B /* RegistrationInformationVC.h */,
+				A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */,
+			);
+			path = "Vehicle(车辆管理)";
 			sourceTree = "<group>";
 		};
 		B7203E403AEBDA14A5F197ED /* Frameworks */ = {
@@ -3935,6 +3967,7 @@
 		DA611C8E1F25DF0700FDDE13 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A7B5A0FE2133A2BA00BC197B /* Vehicle(车辆管理) */,
 				A71907A1213105B40072B8CF /* Subordinate(所属驾校) */,
 				4FF9266620CA62A100AB3E43 /* 支付详情 */,
 				4F89247620B54B5B00A5D9CD /* HomeVC.h */,
@@ -4886,10 +4919,12 @@
 				4F09449A1F39A83200BA80E5 /* ToolbarVC.m in Sources */,
 				DA0346571F509098008E7BE1 /* NSDecimalNumber+Extensions.m in Sources */,
 				DA0347241F509098008E7BE1 /* FMHelper.m in Sources */,
+				A7B5A10A2133C86800BC197B /* RegistrationInformationVC.m in Sources */,
 				DA867D351F58F86B00D4D011 /* NSError+JYHandle.m in Sources */,
 				DAE212801EF2867B000EAB90 /* FMSearchBarViewController.m in Sources */,
 				DA78C30D1F5D41A3009BAA90 /* YTKChainRequest.m in Sources */,
 				DA03462F1F509098008E7BE1 /* NSManagedObjectContext+ObjectClear.m in Sources */,
+				A7B5A1012133A2F300BC197B /* VehicleVC.m in Sources */,
 				DA0346931F509098008E7BE1 /* UIApplication+KeyboardFrame.m in Sources */,
 				DA867D441F58FE6000D4D011 /* UIImage+JYHandle.m in Sources */,
 				DA0347251F509098008E7BE1 /* FMMediator.m in Sources */,
@@ -5180,6 +5215,7 @@
 				DA9AEF501FB59FE900341137 /* JKCountDownLable.m in Sources */,
 				DA4FA4CA1FDF7B7300C7C1F1 /* MynewsModel.m in Sources */,
 				DA4FA4C11FDF7B7300C7C1F1 /* ForgotPasswordVC.m in Sources */,
+				A7B5A1042133A3A400BC197B /* VehicleDetailsVC.m in Sources */,
 				DAE212B01EF2867B000EAB90 /* FMMediator+UserModuleActions.m in Sources */,
 				4FA3BE0C2112EADB00EFCFB0 /* UITextField+MicrometerLevelFormat.m in Sources */,
 				DA0347131F509098008E7BE1 /* WebView+Debug.m in Sources */,
@@ -5244,6 +5280,7 @@
 				DAE2129F1EF2867B000EAB90 /* FMDesignerConfigManager.m in Sources */,
 				4FEBE2D620CFA09500893117 /* XLPay.m in Sources */,
 				DA03466A1F509098008E7BE1 /* NSString+Contains.m in Sources */,
+				A7B5A10D2133CF8200BC197B /* StudentDetailsEditorVC.m in Sources */,
 				DA0346521F509098008E7BE1 /* NSIndexPath+Offset.m in Sources */,
 				4FE3378F1F31C3FE00760778 /* XLTextField.m in Sources */,
 				4F055C3C1FB2FF73001D6B5C /* RouteAnnotation.mm in Sources */,
@@ -5253,6 +5290,7 @@
 				4FEBE2DC20D0F23500893117 /* OrderProgressV.m in Sources */,
 				DA0346D11F509098008E7BE1 /* UINavigationBar+Awesome.m in Sources */,
 				DA0347261F509098008E7BE1 /* FMAlertView.m in Sources */,
+				A7B5A1072133A9F100BC197B /* VehicleInformationVC.m in Sources */,
 				DA0346BC1F509098008E7BE1 /* UIImage+FX.m in Sources */,
 				A735A0AB212FE68C0044E9BC /* LLSearchViewController.m in Sources */,
 				DAE212951EF2867B000EAB90 /* XLshare.m in Sources */,

@@ -1,49 +1,30 @@
 //
-//  StudentsListVC.m
+//  VehicleVC.m
 //  MobileProject
 //
-//  Created by 向蕾 on 2018/8/24.
+//  Created by 向蕾 on 2018/8/27.
 //  Copyright © 2018年 ZSGY. All rights reserved.
 //
 
-#import "StudentsListVC.h"
+#import "VehicleVC.h"
 #import "UITableView+FMPlaceholder.h"
 #import "StudentsOneCell.h"
 #import "StudentsTwoCell.h"
-#import "StudentDetailsEditorVC.h"
-@interface StudentsListVC ()<UITableViewDelegate,UITableViewDataSource>
+#import "VehicleDetailsVC.h"
+@interface VehicleVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
 @end
 
-@implementation StudentsListVC
-- (NSMutableArray *)dataArr{
-    if (_dataArr==nil) {
-        _dataArr=[NSMutableArray array];
-    }
-    return _dataArr;
-}
+@implementation VehicleVC
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationView setTitle:@"车辆管理"];
     [self loadtable];
     // Do any additional setup after loading the view.
 }
-- (NSInteger)pageNum {
-    
-    if (_pageNum < 1) {
-        _pageNum = 1;
-    }
-    
-    return _pageNum;
-}
 
-- (NSInteger)pageSize {
-    
-    if (_pageSize < 1) {
-        _pageSize = 20;
-    }
-    return _pageSize;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -52,7 +33,8 @@
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+        make.left.right.bottom.mas_equalTo(self.view);
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
@@ -86,30 +68,30 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-            [_table.mj_footer endRefreshing];
-            [_table.mj_header endRefreshing];
-//    NSString *url=[NSString stringWithFormat:GETordersList,self.pageNum,[User UserOb].token,self.orderType];
-//    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-//        NSArray *tpArray = responseObject[@"data"];
-//        if (self.pageNum==1) {
-//            [self.dataArr removeAllObjects];
-//        }
-//        if (tpArray) {
-//            for (NSDictionary *dic in tpArray) {
-//                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-//                [self.dataArr addObject:mode];
-//            }
-//        }
-//        [_table reloadData];
-//        [_table.mj_footer endRefreshing];
-//        [_table.mj_header endRefreshing];
-//    } failureBlock:^(NSError *error) {
-//        KKLog(@"%@", error);
-//        [_table.mj_footer endRefreshing];
-//        [_table.mj_header endRefreshing];
-//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-//
-//    }];
+    [_table.mj_footer endRefreshing];
+    [_table.mj_header endRefreshing];
+    //    NSString *url=[NSString stringWithFormat:GETordersList,self.pageNum,[User UserOb].token,self.orderType];
+    //    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    //        NSArray *tpArray = responseObject[@"data"];
+    //        if (self.pageNum==1) {
+    //            [self.dataArr removeAllObjects];
+    //        }
+    //        if (tpArray) {
+    //            for (NSDictionary *dic in tpArray) {
+    //                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
+    //                [self.dataArr addObject:mode];
+    //            }
+    //        }
+    //        [_table reloadData];
+    //        [_table.mj_footer endRefreshing];
+    //        [_table.mj_header endRefreshing];
+    //    } failureBlock:^(NSError *error) {
+    //        KKLog(@"%@", error);
+    //        [_table.mj_footer endRefreshing];
+    //        [_table.mj_header endRefreshing];
+    //    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+    //
+    //    }];
 }
 
 #pragma mark-tableview代理
@@ -117,27 +99,20 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return self.dataArr.count;
+    //    return self.dataArr.count;
     return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (self.PayCost) {
-        NSString *cellID = [NSString stringWithFormat:@"StudentsOneCell"];
-        StudentsOneCell *cell = (StudentsOneCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        if (!cell) {
-            cell = [[StudentsOneCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-        }
-        return cell;
-    }else{
-        NSString *cellID = [NSString stringWithFormat:@"StudentsTwoCell"];
-        StudentsTwoCell *cell = (StudentsTwoCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        if (!cell) {
-            cell = [[StudentsTwoCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-        }
-        return cell;
+    
+    NSString *cellID = [NSString stringWithFormat:@"StudentsOneCell"];
+    StudentsOneCell *cell = (StudentsOneCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[StudentsOneCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
+    return cell;
+    
     
 }
 
@@ -147,10 +122,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+    VehicleDetailsVC *vc = [[VehicleDetailsVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 /*
 #pragma mark - Navigation
 

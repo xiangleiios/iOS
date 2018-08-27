@@ -17,6 +17,7 @@
 #import "MyNewsVC.h"
 #import "BusinessCardVC.h"
 #import "SubordinateVC.h"
+#import "VehicleVC.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -233,7 +234,8 @@
         }
             break;
         case 1:{
-            
+            VehicleVC *vc =[[VehicleVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
         }
             break;
         case 2:{

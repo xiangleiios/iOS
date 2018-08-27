@@ -30,7 +30,7 @@
 //    [self loadNavigation];
     
     /*图标*/
-//    [self loadingIcon];
+    [self loadingIcon];
     /* 账号密码*/
     [self loadTheLoginBox];
     /* 登录注册按钮*/
@@ -72,11 +72,11 @@
     self.logimg=img;
     [self.view addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(90));
+        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(150));
         make.centerX.mas_equalTo(self.view);
-        make.height.width.mas_equalTo(KFit_W6S(140));
+        make.height.width.mas_equalTo(KFit_W6S(200));
     }];
-    [img setImage:[UIImage imageNamed:@"icon_logo"]];
+    [img setImage:[UIImage imageNamed:@"logo_icon"]];
 }
 
 
@@ -84,28 +84,28 @@
     UIView *v=[[UIView alloc]init];
     [self.view addSubview:v];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(10));
-        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(50));
-        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(50));
+        make.top.mas_equalTo(self.logimg.mas_bottom).mas_offset(KFit_H6S(180));
+        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(70));
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(70));
         make.height.mas_equalTo(KFit_H6S(220));
     }];
-    UIImageView *imgpho=[[UIImageView alloc]initWithFrame:CGRectMake(0, KFit_H6S(30), KFit_W6S(32), KFit_H6S(50))];
-    [imgpho setImage:[UIImage imageNamed:@"tel"]];
-    [v addSubview:imgpho];
-    self.pho=[[TKPhoneTextField alloc]initWithFrame:CGRectMake(KFit_W6S(60), 0, KFit_W6S(350), KFit_H6S(110))];
+//    UIImageView *imgpho=[[UIImageView alloc]initWithFrame:CGRectMake(0, KFit_H6S(30), KFit_W6S(32), KFit_H6S(50))];
+//    [imgpho setImage:[UIImage imageNamed:@"tel"]];
+//    [v addSubview:imgpho];
+    self.pho=[[TKPhoneTextField alloc]initWithFrame:CGRectMake(0, 0, KFit_W6S(350), KFit_H6S(110))];
     self.pho.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.pho];
-    self.pho.placeholder=@"请输入手机号";
+    self.pho.placeholder=@"请输入账号";
     self.pho.keyboardType=UIKeyboardTypeNumberPad;
     self.pho.delegate =self;
     
-    UIImageView *imgpass=[[UIImageView alloc]initWithFrame:CGRectMake(0, KFit_H6S(140), KFit_W6S(32), KFit_H6S(45))];
-    [imgpass setImage:[UIImage imageNamed:@"password"]];
-    [v addSubview:imgpass];
-    self.password=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(60), KFit_H6S(110), KFit_W6S(350), KFit_H6S(110))];
+//    UIImageView *imgpass=[[UIImageView alloc]initWithFrame:CGRectMake(0, KFit_H6S(140), KFit_W6S(32), KFit_H6S(45))];
+//    [imgpass setImage:[UIImage imageNamed:@"password"]];
+//    [v addSubview:imgpass];
+    self.password=[[UITextField alloc]initWithFrame:CGRectMake(0, KFit_H6S(110), KFit_W6S(450), KFit_H6S(110))];
     self.password.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.password];
-    self.password.placeholder=@"请输入密码";
+    self.password.placeholder=@"请输入密码（6-20位字母与数字组合）";
     self.password.secureTextEntry=YES;
     
     
@@ -213,8 +213,8 @@
     
     UIButton *login=[[UIButton alloc]init];
     [self.view addSubview:login];
-    login.backgroundColor=kRGBColor(144, 214, 180 );
-    [login setTitle:@"登  录" forState:UIControlStateNormal];
+    login.backgroundColor=kRGBColor(0, 112, 234 );
+    [login setTitle:@"确定" forState:UIControlStateNormal];
     login.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(18)];
     [login addTarget:self action:@selector(loging) forControlEvents:UIControlEventTouchUpInside];
     [login mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -227,17 +227,17 @@
     
     
     
-    UIButton *but = [[UIButton alloc] init];
-    [but setTitle:@"忘记密码" forState:UIControlStateNormal];
-    [but setTitleColor:appcoloer forState:UIControlStateNormal];
-    but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
-    [but addTarget:self action:@selector(forgotpassword) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:but];
-    [but mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(login);
-        make.top.mas_equalTo(login.mas_bottom).mas_offset(20);
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(20)));
-    }];
+//    UIButton *but = [[UIButton alloc] init];
+//    [but setTitle:@"忘记密码" forState:UIControlStateNormal];
+//    [but setTitleColor:appcoloer forState:UIControlStateNormal];
+//    but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+//    [but addTarget:self action:@selector(forgotpassword) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:but];
+//    [but mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(login);
+//        make.top.mas_equalTo(login.mas_bottom).mas_offset(20);
+//        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(20)));
+//    }];
 //    NSArray *arr=[NSArray arrayWithObjects:registered,login, nil];
 //    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:KFit_W6S(20)  leadSpacing:KFit_W6S(120) tailSpacing:KFit_W6S(120)];
 //    [arr mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -44,6 +44,30 @@
 @end
 
 
+#pragma mark - 报考信息表单2
+@interface SignUpTwoFormsV : XLView
+/// 手机号
+@property (nonatomic , strong)XLInformationV *phone;
+/// 户口
+@property (nonatomic , strong)XLInformationV *hukou;
+/// 车型
+@property (nonatomic , strong)XLInformationV *carType;
+/// 报考价格
+@property (nonatomic , strong)XLInformationV *price;
+/// 报考驾校
+@property (nonatomic , strong)XLInformationV *school;
+/// 是否报名驾考中心
+@property (nonatomic , strong)XLInformationV *jiaKao;
+/// 申请类型
+@property (nonatomic , strong)XLInformationV *type;
+
+@end
+
+
+
+
+
+
 #pragma mark - 其他报考信息表单
 @interface OtherFormsV : XLView
 /// 推荐人
