@@ -1,0 +1,187 @@
+PODS:
+  - AFNetworking (3.1.0):
+    - AFNetworking/NSURLSession (= 3.1.0)
+    - AFNetworking/Reachability (= 3.1.0)
+    - AFNetworking/Security (= 3.1.0)
+    - AFNetworking/Serialization (= 3.1.0)
+    - AFNetworking/UIKit (= 3.1.0)
+  - AFNetworking/NSURLSession (3.1.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.1.0)
+  - AFNetworking/Security (3.1.0)
+  - AFNetworking/Serialization (3.1.0)
+  - AFNetworking/UIKit (3.1.0):
+    - AFNetworking/NSURLSession
+  - Aspects (1.4.1)
+  - BaiduMapKit (3.4.2)
+  - BANetManager (2.2.2):
+    - AFNetworking
+    - YYCache
+  - CYLTabBarController (1.14.2)
+  - DACircularProgress (2.3.1)
+  - DYSafeObject (0.1.1)
+  - EasyNavigation (1.0.5)
+  - FLEX (2.1.1)
+  - FMDB (2.6.2):
+    - FMDB/standard (= 2.6.2)
+  - FMDB/standard (2.6.2)
+  - GTSDK (1.6.3.0)
+  - IQKeyboardManager (6.1.1)
+  - JCore (1.1.6)
+  - JPush (3.0.7):
+    - JCore (~> 1.1.6)
+  - JSONModel (1.0.2)
+  - JXCategoryView (0.0.2)
+  - Masonry (0.6.4)
+  - MBProgressHUD (0.9.2)
+  - MJExtension (3.0.13)
+  - MJRefresh (3.1.15.1)
+  - MWPhotoBrowser (2.1.2):
+    - DACircularProgress (~> 2.3)
+    - MBProgressHUD (~> 0.9)
+    - "SDWebImage (!= 3.7.2, ~> 3.7)"
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
+    - ReactiveCocoa/no-arc
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
+  - RealReachability (1.1.9):
+    - RealReachability/Connection (= 1.1.9)
+    - RealReachability/Ping (= 1.1.9)
+  - RealReachability/Connection (1.1.9)
+  - RealReachability/Ping (1.1.9)
+  - SDCycleScrollView (1.65):
+    - SDWebImage (~> 3.7)
+  - SDWebImage (3.7.6):
+    - SDWebImage/Core (= 3.7.6)
+  - SDWebImage/Core (3.7.6)
+  - UMengAnalytics-NO-IDFA (4.2.5)
+  - UMengUShare/Core (6.4.7):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.7)
+  - UMengUShare/Social/QQ (6.4.7):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedQQ
+  - UMengUShare/Social/ReducedQQ (6.4.7):
+    - UMengUShare/Core
+  - UMengUShare/Social/ReducedSina (6.4.7):
+    - UMengUShare/Core
+  - UMengUShare/Social/ReducedWeChat (6.4.7):
+    - UMengUShare/Core
+  - UMengUShare/Social/Sina (6.4.7):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedSina
+  - UMengUShare/Social/WeChat (6.4.7):
+    - UMengUShare/Core
+    - UMengUShare/Social/ReducedWeChat
+  - UMengUShare/UI (6.4.7):
+    - UMengUShare/Core
+  - XAspect (1.0.5):
+    - XAspect/Core (= 1.0.5)
+    - XAspect/Macros (= 1.0.5)
+  - XAspect/Core (1.0.5):
+    - XAspect/Macros
+  - XAspect/Macros (1.0.5)
+  - YYCache (1.0.4)
+
+DEPENDENCIES:
+  - AFNetworking (~> 3.1.0)
+  - Aspects (~> 1.4.1)
+  - BaiduMapKit (~> 3.4.0)
+  - BANetManager (~> 2.2.2)
+  - CYLTabBarController (~> 1.14.2)
+  - DYSafeObject (~> 0.1.1)
+  - EasyNavigation (~> 1.0)
+  - FLEX (~> 2.1.1)
+  - FMDB (~> 2.6.2)
+  - GTSDK (~> 1.6.3.0)
+  - IQKeyboardManager (~> 6.1.1)
+  - JPush (~> 3.0.6)
+  - JSONModel (~> 1.0.2)
+  - JXCategoryView
+  - Masonry (~> 0.6.4)
+  - MJExtension (~> 3.0.13)
+  - MJRefresh (~> 3.1.12)
+  - MWPhotoBrowser (~> 2.1.2)
+  - ReactiveCocoa (~> 2.5)
+  - RealReachability (~> 1.1.9)
+  - SDCycleScrollView (~> 1.65)
+  - SDWebImage (~> 3.7.6)
+  - UMengAnalytics-NO-IDFA
+  - UMengUShare/Social/QQ
+  - UMengUShare/Social/Sina
+  - UMengUShare/Social/WeChat
+  - UMengUShare/UI
+  - XAspect (~> 1.0.5)
+  - YYCache (~> 1.0.4)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - Aspects
+    - BaiduMapKit
+    - BANetManager
+    - CYLTabBarController
+    - DACircularProgress
+    - DYSafeObject
+    - EasyNavigation
+    - FLEX
+    - FMDB
+    - GTSDK
+    - IQKeyboardManager
+    - JCore
+    - JPush
+    - JSONModel
+    - JXCategoryView
+    - Masonry
+    - MBProgressHUD
+    - MJExtension
+    - MJRefresh
+    - MWPhotoBrowser
+    - ReactiveCocoa
+    - RealReachability
+    - SDCycleScrollView
+    - SDWebImage
+    - UMengAnalytics-NO-IDFA
+    - UMengUShare
+    - XAspect
+    - YYCache
+
+SPEC CHECKSUMS:
+  AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
+  BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
+  BANetManager: bd2e6d0bcb5fc7397f3098b90c3bcf25a04127b5
+  CYLTabBarController: 5eac1940e20aa934a609ecec38837da63a41dcfe
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
+  DYSafeObject: b566d93cf04e9fb4481f3f3488a5bb31708c7516
+  EasyNavigation: 3414769a995d032e5dd9441f2bdd4eda7dd10089
+  FLEX: 27b768fcae23a313a1eb115076d429180ca9b472
+  FMDB: 854a0341b4726e53276f2a8996f06f1b80f9259a
+  GTSDK: 2969a96c0fc55421033f8131952d78d612fcdef4
+  IQKeyboardManager: 79c57795f5c2408d259d37b9da2ed07efcbb5225
+  JCore: 18fc8725124f26e55625eaf224659b3a999dcf63
+  JPush: 111b79b8a0169ab8fd4c486dac3ed166ed69293e
+  JSONModel: 6ffcb4ffa3659c9e9a2e5d45d6c7705bab187c03
+  JXCategoryView: 7b39ba811406bb1c8a6f7d877150784d58256fd9
+  Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MJRefresh: 5f8552bc25ca8751c010f621c1098dbdaacbccd6
+  MWPhotoBrowser: 5836d7aa041dc05a13de380c246826578adc5ea5
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  RealReachability: a8c483900986a0f3305733961effbfbb00637a02
+  SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
+  SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
+  UMengUShare: 5055d0e01c844379e173bdca0840fc9fa9297d88
+  XAspect: db50bf487f92dbb8557a7a5365556966c8493af8
+  YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+
+PODFILE CHECKSUM: dd2ee9b40d7c65d190a51aa27b0ced3694ac9b24
+
+COCOAPODS: 1.5.3

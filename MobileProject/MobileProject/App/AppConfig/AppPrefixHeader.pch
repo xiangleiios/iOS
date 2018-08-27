@@ -1,0 +1,77 @@
+//
+//  AppPrefixHeader.pch
+//  MobileProject
+//
+//  Created by Mingoy on 16/9/21.
+//  Copyright © 2016年 Mingoy. All rights reserved.
+//
+
+#ifndef AppPrefixHeader_pch
+#define AppPrefixHeader_pch
+
+#import <JavaScriptCore/JavaScriptCore.h>
+#import <AVFoundation/AVFoundation.h>
+#import <MediaPlayer/MediaPlayer.h>
+#import "AppDelegate.h"
+
+#import <Masonry.h>
+#import <UIImageView+WebCache.h>
+#import <AFNetworking.h>
+#import <MJRefresh.h>
+#import <FMDB/FMDB.h>
+#import "MBProgressHUD+MP.h"
+//#import <WRNavigationBar.h>
+#import <MJExtension.h>
+#import "ToolbarVC.h"
+//#import "FMBaseRequest+App.h"
+//#import "FMCocoaLumberjack.h"
+
+#import "ConfigMacroPublic.h"
+#import "ConfigMacroSpecial.h"
+#import "FMBaseMacro.h"
+#import "FMCategoryHead.h"
+#import "UIView+Frame.h"
+#import "API.h"
+#import "FMMainModel.h"
+#import "LoginVC.h"
+#import "FMTokenStatus.h"
+
+#import "FMRegExpTool.h"
+#import "XLshare.h"
+#import "XLHeader.h"
+#import "User.h"
+#import "FMMainModel.h"
+
+#import "FMNetworkHelper.h"
+
+#import "UIButton+Item.h"
+#import "UINavigationController+FMObjMethods.h"
+#import "UIButton+TouchAreaInsets.h"
+#import "LoginVC.h"
+#import "XLTextField.h"
+#import "XLCommonUse.h"
+#import "UITableViewCell+LayoutHeight.h"
+#import "UIImage+Adaptation.h"
+#import "XLxqbut.h"
+#import "PictureDetailViewController.h"
+#import "XLAlertView.h"
+
+#import "XLSingleton.h"
+#import <EasyNavigation/EasyNavigation.h>
+#import "XLView.h"
+#import "TKPhoneTextField.h"
+#import "MBProgressHUD+Additions.h"
+//DDLog等级
+//static const int ddLogLevel = DDLogLevelVerbose;
+#define HEIGHT_CHATBOXVIEW  215
+//输入框高度
+#define HEIGHT_INPUT kFit_Font6(50)
+//输入框textview的高度
+#define HEIGHT_TEXTVIEW (HEIGHT_INPUT-kFit_Font6(16))
+//输入框最大高度
+#define MAX_TEXTVIEW_HEIGHT 104
+//左侧菜单宽度百分比
+#define LEFT_WIDTH_RATIO (0.8)
+
+#define KHistorySearchPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"PYSearchhistories.plist"]
+#endif /* AppPrefixHeader_pch */

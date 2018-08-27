@@ -1,0 +1,54 @@
+platform :ios, "8.0"
+
+target 'MobileProject’ do
+#pod 'FWSideMenu'  #QQ侧滑菜单
+#use_frameworks!
+
+inhibit_all_warnings!                   #消除所有第三方的警告
+
+pod 'CYLTabBarController', '~> 1.14.2'
+pod 'SDCycleScrollView', '~> 1.65'
+pod 'AFNetworking', '~> 3.1.0'
+pod 'ReactiveCocoa', '~> 2.5'
+pod 'SDWebImage', '~> 3.7.6'
+pod 'JSONModel', '~> 1.0.2'
+pod 'Masonry','~> 0.6.4'
+
+pod 'MWPhotoBrowser',   '~> 2.1.2'
+#pod 'IQKeyboardManager','~> 3.3.7'
+#pod 'WRNavigationBar', '~> 1.0.1'
+#pod 'PagingButton', '~> 0.1.7'
+pod 'MJExtension', '~> 3.0.13'
+pod 'BANetManager', '~> 2.2.2'
+#pod 'PPNetworkHelper', '~> 0.8.0'
+#pod 'PYSearch', '~> 0.8.3' #搜索
+
+pod 'XAspect','~> 1.0.5'
+pod 'Aspects','~> 1.4.1'
+
+pod 'MJRefresh','~> 3.1.12'
+pod 'FMDB', '~> 2.6.2'
+pod 'YYCache','~> 1.0.4'
+#pod 'KSYMediaPlayer_iOS','~> 2.3.0' #金山云iOS播放SDK
+#pod 'ZFPlayer', '~> 2.1.5' #为便于自定义，已经改成手托在FMCoreTool文件夹
+#pod 'UITableView+FDTemplateLayoutCell', '~> 1.6'
+#pod 'SVProgressHUD','~> 2.1.2'
+pod 'RealReachability', '~> 1.1.9' #实际网络连接状态检测
+pod 'FLEX', '~> 2.1.1' #应用内调试和探测工具集
+
+pod 'JPush','~> 3.0.6'  #极光推送
+pod 'GTSDK','~> 1.6.3.0' #个推推送
+pod 'UMengAnalytics-NO-IDFA' #友盟分析统计
+pod 'UMengUShare/UI'            # 友盟分享UI
+pod 'UMengUShare/Social/Sina'     # 集成新浪微博
+pod 'UMengUShare/Social/WeChat'   # 集成微信
+pod 'UMengUShare/Social/QQ'      # 集成QQ
+pod 'BaiduMapKit', '~> 3.4.0'   #集成百度地图
+pod 'EasyNavigation','~>1.0' #导航
+
+pod 'DYSafeObject', '~> 0.1.1' #为了避免线上项目中的用到的数据而产生的Crash
+pod 'IQKeyboardManager','~> 6.1.1'    #键盘处理
+
+pod 'JXCategoryView'    #分页切换滚动视图
+
+end
