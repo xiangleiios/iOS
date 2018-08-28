@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <UShareUI/UShareUI.h>
 @interface XLshare : NSObject
 @property (nonatomic , strong)NSString *title;
 @property (nonatomic , strong)NSString *image_url;
@@ -15,5 +15,5 @@
 @property (nonatomic , strong)NSString *subTitle;
 
 - (void)umengShare:(UIView*)view;
-
+- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType;
 @end

@@ -9,6 +9,7 @@
 #import "AddStudentVC.h"
 #import "XLInformationV.h"
 #import "AddInformationOneVC.h"
+#import "QrCodeVC.h"
 @interface AddStudentVC ()
 
 @end
@@ -57,6 +58,8 @@
     [backview addSubview:automatic];
     automatic.senterBlock = ^{
         KKLog(@"dianji111");
+        QrCodeVC *vc = [[QrCodeVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     };
     NSArray *arr = @[manual,automatic];
     [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:1 leadSpacing:1 tailSpacing:1];

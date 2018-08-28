@@ -16,10 +16,17 @@
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIButton *choose;
+@property (nonatomic, strong) NSMutableArray *dataArr;
 @end
 
 @implementation StudentsVC
-
+- (NSMutableArray *)dataArr{
+    if (_dataArr == nil) {
+        _dataArr = [NSMutableArray array];
+    }
+    return _dataArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self laodNavigation];
@@ -27,9 +34,27 @@
     [self loadMyCategoryView];
     [self loadScroll];
     [self loadAddBut];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(studentsSubmit:) name:@"NotificationStudentsSubmit" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(studentsDelete:) name:@"NotificationStudentsDelete" object:nil];
     // Do any additional setup after loading the view.
 }
+- (void)studentsSubmit:(NSNotification *)idid{
+    NSString *str = [idid object];
+    [self.dataArr addObject:str];
+    KKLog(@"%@",self.dataArr);
+}
 
+- (void)studentsDelete:(NSNotification *)idid{
+    NSString *str = [idid object];
+    [self.dataArr removeObject:str];
+    KKLog(@"%@",self.dataArr);
+    
+}
+-(void)dealloc{
+    //移除观察者，Observer不能为nil
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -97,6 +122,15 @@
 #pragma mark - 导航相关
 - (void)laodNavigation{
     [self.navigationView setTitle:@"学员"];
+    kWeakSelf(self)
+    self.choose = [self.navigationView addRightButtonWithTitle:@"提交资料" clickCallBack:^(UIView *view) {
+        
+        
+    }];
+    [self.choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+    self.choose.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+//    [self.choose setTitle:@"完成" forState:UIControlStateSelected];
+    
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

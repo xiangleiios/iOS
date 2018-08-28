@@ -117,6 +117,9 @@
 		A75F943D212D4C0B00384EB0 /* AddInformationTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943C212D4C0B00384EB0 /* AddInformationTwoVC.m */; };
 		A75F9440212D57F900384EB0 /* AddInformationThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943F212D57F900384EB0 /* AddInformationThreeVC.m */; };
 		A75F9446212D706600384EB0 /* BusinessCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9445212D706600384EB0 /* BusinessCardVC.m */; };
+		A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F8682134DF0B008A8948 /* StudentsListTwoVC.m */; };
+		A778F86C2134E004008A8948 /* StudentsThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86B2134E004008A8948 /* StudentsThreeCell.m */; };
+		A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86E2134EEDA008A8948 /* QrCodeVC.m */; };
 		A79276FE212A525D00B4D65D /* AddStudentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79276FD212A525D00B4D65D /* AddStudentVC.m */; };
 		A7927701212A900200B4D65D /* StudentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7927700212A900200B4D65D /* StudentsVC.m */; };
 		A7A213BB212E4F9300920678 /* ChangeCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213BA212E4F9300920678 /* ChangeCardVC.m */; };
@@ -132,6 +135,7 @@
 		A7B5A1072133A9F100BC197B /* VehicleInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1062133A9F100BC197B /* VehicleInformationVC.m */; };
 		A7B5A10A2133C86800BC197B /* RegistrationInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */; };
 		A7B5A10D2133CF8200BC197B /* StudentDetailsEditorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */; };
+		A7E979D6213535CB00EA6F14 /* CodeShareV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E979D5213535CB00EA6F14 /* CodeShareV.m */; };
 		DA03437F1F508221008E7BE1 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = DA03437E1F508221008E7BE1 /* test.html */; };
 		DA0343831F508F30008E7BE1 /* FMTokenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0343821F508F30008E7BE1 /* FMTokenStatus.m */; };
 		DA0346261F509098008E7BE1 /* FMAnalyticsConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0343881F509097008E7BE1 /* FMAnalyticsConfigManager.m */; };
@@ -806,6 +810,12 @@
 		A75F943F212D57F900384EB0 /* AddInformationThreeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInformationThreeVC.m; sourceTree = "<group>"; };
 		A75F9444212D706600384EB0 /* BusinessCardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessCardVC.h; sourceTree = "<group>"; };
 		A75F9445212D706600384EB0 /* BusinessCardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessCardVC.m; sourceTree = "<group>"; };
+		A778F8672134DF0B008A8948 /* StudentsListTwoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsListTwoVC.h; sourceTree = "<group>"; };
+		A778F8682134DF0B008A8948 /* StudentsListTwoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsListTwoVC.m; sourceTree = "<group>"; };
+		A778F86A2134E004008A8948 /* StudentsThreeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsThreeCell.h; sourceTree = "<group>"; };
+		A778F86B2134E004008A8948 /* StudentsThreeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsThreeCell.m; sourceTree = "<group>"; };
+		A778F86D2134EEDA008A8948 /* QrCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QrCodeVC.h; sourceTree = "<group>"; };
+		A778F86E2134EEDA008A8948 /* QrCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QrCodeVC.m; sourceTree = "<group>"; };
 		A79276FC212A525D00B4D65D /* AddStudentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddStudentVC.h; sourceTree = "<group>"; };
 		A79276FD212A525D00B4D65D /* AddStudentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentVC.m; sourceTree = "<group>"; };
 		A79276FF212A900200B4D65D /* StudentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsVC.h; sourceTree = "<group>"; };
@@ -836,6 +846,8 @@
 		A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationInformationVC.m; sourceTree = "<group>"; };
 		A7B5A10B2133CF8200BC197B /* StudentDetailsEditorVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentDetailsEditorVC.h; sourceTree = "<group>"; };
 		A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentDetailsEditorVC.m; sourceTree = "<group>"; };
+		A7E979D4213535CB00EA6F14 /* CodeShareV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeShareV.h; sourceTree = "<group>"; };
+		A7E979D5213535CB00EA6F14 /* CodeShareV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeShareV.m; sourceTree = "<group>"; };
 		DA03437E1F508221008E7BE1 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		DA0343811F508F30008E7BE1 /* FMTokenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMTokenStatus.h; sourceTree = "<group>"; };
 		DA0343821F508F30008E7BE1 /* FMTokenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMTokenStatus.m; sourceTree = "<group>"; };
@@ -2204,6 +2216,8 @@
 				A735A0B4213000CD0044E9BC /* StudentsOneCell.m */,
 				A719079E2130EED50072B8CF /* StudentsTwoCell.h */,
 				A719079F2130EED50072B8CF /* StudentsTwoCell.m */,
+				A778F86A2134E004008A8948 /* StudentsThreeCell.h */,
+				A778F86B2134E004008A8948 /* StudentsThreeCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2223,6 +2237,12 @@
 				A735A0AE212FEC3B0044E9BC /* StudentsListVC.m */,
 				A7B5A10B2133CF8200BC197B /* StudentDetailsEditorVC.h */,
 				A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */,
+				A778F8672134DF0B008A8948 /* StudentsListTwoVC.h */,
+				A778F8682134DF0B008A8948 /* StudentsListTwoVC.m */,
+				A778F86D2134EEDA008A8948 /* QrCodeVC.h */,
+				A778F86E2134EEDA008A8948 /* QrCodeVC.m */,
+				A7E979D4213535CB00EA6F14 /* CodeShareV.h */,
+				A7E979D5213535CB00EA6F14 /* CodeShareV.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -4725,6 +4745,7 @@
 				TargetAttributes = {
 					347BAF9C1D87E30200D12F0B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = MZK92D33T9;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -4998,6 +5019,7 @@
 				DA0346B61F509098008E7BE1 /* UIImage+BetterFace.m in Sources */,
 				DA03464C1F509098008E7BE1 /* NSDictionary+URL.m in Sources */,
 				4F852CFB20DB8E3C009EAF72 /* RechargeVC.m in Sources */,
+				A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */,
 				DA03470B1F509098008E7BE1 /* UIWebView+Alert.m in Sources */,
 				DA03466B1F509098008E7BE1 /* NSString+DictionaryValue.m in Sources */,
 				DA78C3041F5D41A3009BAA90 /* FMBaseRequest.m in Sources */,
@@ -5024,6 +5046,7 @@
 				DA03464A1F509098008E7BE1 /* NSDictionary+Merge.m in Sources */,
 				DA03473A1F509098008E7BE1 /* FMShareConfigManager.m in Sources */,
 				DA03468A1F509098008E7BE1 /* MKMapView+ZoomLevel.m in Sources */,
+				A7E979D6213535CB00EA6F14 /* CodeShareV.m in Sources */,
 				DA6730561FB08033002B6894 /* MSSBrowseCollectionViewCell.m in Sources */,
 				DA0346A51F509098008E7BE1 /* UIButton+TouchAreaInsets.m in Sources */,
 				DA0346F01F509098008E7BE1 /* UIView+BlockGesture.m in Sources */,
@@ -5271,6 +5294,7 @@
 				DA4FA4C91FDF7B7300C7C1F1 /* ModelWatchRecord.m in Sources */,
 				DA81E08920439CAF00A9F622 /* XLInputvc.m in Sources */,
 				DA959E4B1F53BEE9002389F6 /* UIView+CustomControlView.m in Sources */,
+				A778F86C2134E004008A8948 /* StudentsThreeCell.m in Sources */,
 				DA0346461F509098008E7BE1 /* NSDateFormatter+Make.m in Sources */,
 				DA4C99621FAAF66B0031ACDA /* FMFillOrderVC.m in Sources */,
 				DA0346AA1F509098008E7BE1 /* UIColor+Random.m in Sources */,
@@ -5321,6 +5345,7 @@
 				DA03465E1F509098008E7BE1 /* NSObject+AutoCoding.m in Sources */,
 				DA0346ED1F509098008E7BE1 /* UITextView+PlaceHolder.m in Sources */,
 				DA0346471F509098008E7BE1 /* NSDictionary+Block.m in Sources */,
+				A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */,
 				DA0347111F509098008E7BE1 /* UIWebView+Style.m in Sources */,
 				A75F943A212D329F00384EB0 /* FormsV.m in Sources */,
 				DA0346881F509098008E7BE1 /* MKMapView+BetterMaps.m in Sources */,
@@ -5548,7 +5573,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MZK92D33T9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5577,7 +5602,7 @@
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/AlipayWechatPay/WechatPay",
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/AlipayWechatPay/UPPay(银联支付)/paymentcontrol/libs",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cndianliyun.tdb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ztjw.ztjx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -5599,7 +5624,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = MZK92D33T9;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5628,7 +5653,7 @@
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/AlipayWechatPay/WechatPay",
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/AlipayWechatPay/UPPay(银联支付)/paymentcontrol/libs",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cndianliyun.tdb;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ztjw.ztjx;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

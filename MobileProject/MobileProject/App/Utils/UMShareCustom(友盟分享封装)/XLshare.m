@@ -7,7 +7,12 @@
 //
 
 #import "XLshare.h"
-#import <UShareUI/UShareUI.h>
+
+
+@interface XLshare ()
+
+@end
+
 @implementation XLshare
 {
     MBProgressHUD * hub;
@@ -15,6 +20,7 @@
 
 
 - (void)umengShare:(UIView*)view{
+    [UMSocialShareUIConfig shareInstance].sharePageGroupViewConfig.sharePageGroupViewPostionType = UMSocialSharePageGroupViewPositionType_Middle;
     [UMSocialUIManager setPreDefinePlatforms:@[@(UMSocialPlatformType_WechatSession),@(UMSocialPlatformType_WechatTimeLine)]];
     [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
         // 根据获取的platformType确定所选平台进行下一步操作

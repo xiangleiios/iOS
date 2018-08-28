@@ -9,12 +9,13 @@
 #import "EnrollVC.h"
 #import "JXCategoryTitleView.h"
 #import "LLSearchViewController.h"
-
+#import "StudentsListTwoVC.h"
 #import "StudentsListVC.h"
 @interface EnrollVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong)StudentsListVC *allStudent;
 @end
 
 @implementation EnrollVC
@@ -26,8 +27,11 @@
     [self loadSousuo];
     [self loadMyCategoryView];
     [self loadScroll];
+    
+    
     // Do any additional setup after loading the view.
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -108,14 +112,12 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, 0);
     self.myCategoryView.contentScrollView = self.scrollView;
     
-    StudentsListVC *vc = [[StudentsListVC alloc] init];
-    vc.PayCost = YES;
+    StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
-    StudentsListVC *vctwo = [[StudentsListVC alloc] init];
-    vctwo.PayCost = YES;
+    StudentsListTwoVC *vctwo = [[StudentsListTwoVC alloc] init];
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
     vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
@@ -132,8 +134,7 @@
     [self.scrollView addSubview:vcfour.view];
     vcfour.view.frame = CGRectMake(SCREEN_WIDTH * 3,0 , self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
-    StudentsListVC *vcfive = [[StudentsListVC alloc] init];
-    vcfive.PayCost = YES;
+    StudentsListTwoVC *vcfive = [[StudentsListTwoVC alloc] init];
     [self addChildViewController:vcfive];
     [self.scrollView addSubview:vcfive.view];
     vcfive.view.frame = CGRectMake(SCREEN_WIDTH * 4, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);

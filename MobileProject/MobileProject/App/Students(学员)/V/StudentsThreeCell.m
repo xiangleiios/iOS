@@ -1,14 +1,14 @@
 //
-//  StudentsOneCell.m
+//  StudentsThreeCell.m
 //  MobileProject
 //
-//  Created by 向蕾 on 2018/8/24.
+//  Created by 向蕾 on 2018/8/28.
 //  Copyright © 2018年 ZSGY. All rights reserved.
 //
 
-#import "StudentsOneCell.h"
+#import "StudentsThreeCell.h"
 
-@implementation StudentsOneCell
+@implementation StudentsThreeCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -20,6 +20,7 @@
 
     // Configure the view for the selected state
 }
+
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     if ([super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self loadSubview];
@@ -28,11 +29,23 @@
 }
 
 - (void)loadSubview{
+    
+    self.selelctBut = [[UIButton alloc] init];
+    [self.contentView addSubview:self.selelctBut];
+    [self.selelctBut setImage:[UIImage imageNamed:@"nor_button"] forState:UIControlStateNormal];
+    [self.selelctBut setImage:[UIImage imageNamed:@"down_button"] forState:UIControlStateSelected];
+    [self.selelctBut mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
+        make.centerY.mas_equalTo(self.contentView);
+        make.width.height.mas_equalTo(KFit_W6S(50));
+    }];
+    
+    
     UIImageView * img = [[UIImageView alloc] init];
     [self.contentView addSubview:img];
     [img setImage:[UIImage imageNamed:@"head_nor"]];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(self.selelctBut.mas_right).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView);
         make.width.height.mas_equalTo(KFit_W6S(80));
     }];
@@ -116,4 +129,5 @@
     }];
     
 }
+
 @end
