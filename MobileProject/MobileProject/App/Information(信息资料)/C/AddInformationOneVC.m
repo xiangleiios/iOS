@@ -9,7 +9,9 @@
 #import "AddInformationOneVC.h"
 #import "FormsV.h"
 #import "AddInformationTwoVC.h"
-@interface AddInformationOneVC ()
+#import "AVCaptureViewController.h"
+#import "IDInfo.h"
+@interface AddInformationOneVC ()<AVCaptureViewControllerDelegate>
 @property (nonatomic , strong)FormsV *SFZforms;
 @end
 
@@ -57,6 +59,7 @@
     UIButton *but = [[UIButton alloc] init];
     [backView addSubview:but];
     [but setImage:[UIImage imageNamed:@"card_nor"] forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(IdentificationCrdZM) forControlEvents:UIControlEventTouchUpInside];
     [but mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(backView);
         make.left.mas_equalTo(backView).mas_offset(KFit_W6S(30));
@@ -109,12 +112,155 @@
         make.height.mas_equalTo(KFit_H6S(90));
     }];
 }
+- (void)IdentificationCrdZM{
+    AVCaptureViewController *AVCaptureVC = [[AVCaptureViewController alloc] init];
+    AVCaptureVC.delegate = self;
+    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+}
 
+- (void)cardInformationScanning:(IDInfo *)info{
+    self.SFZforms.name.subfield.text = info.name;
+    self.SFZforms.gender.subfield.text = info.gender;
+    self.SFZforms.ethnic.subfield.text = info.nation;
+    self.SFZforms.address.subfield.text = info.address;
+    self.SFZforms.IdNumber.subfield.text = info.num;
+    self.SFZforms.birthday.subfield.text = [self birthdayStrFromIdentityCard:info.num];
+}
 
 
 - (void)nextVC{
     AddInformationTwoVC *vc = [[AddInformationTwoVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (NSString *)birthdayStrFromIdentityCard:(NSString *)numberStr{
+    
+    NSMutableString *result = [NSMutableString stringWithCapacity:0];
+    
+    NSString *year = nil;
+    
+    NSString *month = nil;
+    
+    
+    BOOL isAllNumber = YES;
+    
+    NSString *day = nil;
+    
+    if([numberStr length]<14)
+        
+        return result;
+    
+    if (numberStr.length == 18) {
+        
+        //**截取前14位
+        
+        NSString *fontNumer = [numberStr substringWithRange:NSMakeRange(0, 13)];
+        
+        
+        
+        //**检测前14位否全都是数字;
+        
+        const char *str = [fontNumer UTF8String];
+        
+        const char *p = str;
+        
+        while (*p!='\0') {
+            
+            if(!(*p>='0'&&*p<='9'))
+                
+                isAllNumber = NO;
+            
+            p++;
+            
+        }
+        
+        
+        
+        if(!isAllNumber)
+            
+            return result;
+        
+        
+        
+        year = [numberStr substringWithRange:NSMakeRange(6, 4)];
+        
+        month = [numberStr substringWithRange:NSMakeRange(10, 2)];
+        
+        day = [numberStr substringWithRange:NSMakeRange(12,2)];
+        
+        
+        
+        [result appendString:year];
+        
+        [result appendString:@"-"];
+        
+        [result appendString:month];
+        
+        [result appendString:@"-"];
+        
+        [result appendString:day];
+        
+        return result;
+        
+        
+    }else{
+        
+        NSString *fontNumer = [numberStr substringWithRange:NSMakeRange(0, 11)];
+        
+        
+        
+        //**检测前14位否全都是数字;
+        
+        const char *str = [fontNumer UTF8String];
+        
+        const char *p = str;
+        
+        while (*p!='\0') {
+            
+            if(!(*p>='0'&&*p<='9'))
+                
+                isAllNumber = NO;
+            
+            p++;
+            
+        }
+        
+        
+        
+        if(!isAllNumber)
+            
+            return result;
+        
+        
+        
+        year = [numberStr substringWithRange:NSMakeRange(6, 2)];
+        
+        month = [numberStr substringWithRange:NSMakeRange(8, 2)];
+        
+        day = [numberStr substringWithRange:NSMakeRange(10,2)];
+        
+        
+        
+        //        [result appendString:year];
+        
+        //        [result appendString:@"-"];
+        
+        //        [result appendString:month];
+        
+        //        [result appendString:@"-"];
+        
+        //        [result appendString:day];
+        
+        NSString* resultAll = [NSString stringWithFormat:@"19%@-%@-%@",year,month,day];
+        
+        return resultAll;
+        
+        
+    }
+    
+    
+    
 }
 /*
 #pragma mark - Navigation

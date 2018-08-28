@@ -32,14 +32,14 @@
         };
         self.ethnic = [[XLInformationV alloc] informationWithTitle:@"民族" SubTitle:@"" TSSubTitle:@"请选择民族" Must:YES Click:YES];
         self.ethnic.senterBlock = ^{
-            [CGXPickerView showStringPickerWithTitle:@"民族" DataSource:[CGXPickerView showStringPickerDataSourceStyle:CGXStringPickerViewStylNation] DefaultSelValue:@"汉" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+            [CGXPickerView showStringPickerWithTitle:@"民族" DataSource:[CGXPickerView showStringPickerDataSourceStyle:CGXStringPickerViewStylNation] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.ethnic.subfield.text = selectValue;
             }];
         };
         self.birthday = [[XLInformationV alloc] informationWithTitle:@"出生年月日" SubTitle:@"" TSSubTitle:@"请选择出生年月日" Must:YES Click:YES];
         self.birthday.senterBlock = ^{
-            [CGXPickerView showDatePickerWithTitle:@"出生年月日" DateType:UIDatePickerModeDate DefaultSelValue:nil MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
+            [CGXPickerView showDatePickerWithTitle:@"出生年月日" DateType:UIDatePickerModeDate DefaultSelValue: weakself.birthday.subfield.text MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
                 NSLog(@"%@",selectValue);
                 weakself.birthday.subfield.text = selectValue;
             }];
