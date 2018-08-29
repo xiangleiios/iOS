@@ -406,6 +406,7 @@
     return self;
 }
 - (void)butblock:(UIButton *)senter{
+    
     self.senterBlock();
 }
 @end

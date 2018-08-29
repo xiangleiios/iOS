@@ -25,6 +25,7 @@
         self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:@"" TSSubTitle:@"请输入姓名" Must:YES Click:NO];
         self.gender = [[XLInformationV alloc] informationWithTitle:@"性别" SubTitle:@"" TSSubTitle:@"请选择性别" Must:YES Click:YES];
         self.gender.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"性别" DataSource:@[@"男",@"女"] DefaultSelValue:@"男" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.gender.subfield.text = selectValue;
@@ -32,6 +33,7 @@
         };
         self.ethnic = [[XLInformationV alloc] informationWithTitle:@"民族" SubTitle:@"" TSSubTitle:@"请选择民族" Must:YES Click:YES];
         self.ethnic.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"民族" DataSource:[CGXPickerView showStringPickerDataSourceStyle:CGXStringPickerViewStylNation] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.ethnic.subfield.text = selectValue;
@@ -39,6 +41,7 @@
         };
         self.birthday = [[XLInformationV alloc] informationWithTitle:@"出生年月日" SubTitle:@"" TSSubTitle:@"请选择出生年月日" Must:YES Click:YES];
         self.birthday.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showDatePickerWithTitle:@"出生年月日" DateType:UIDatePickerModeDate DefaultSelValue: weakself.birthday.subfield.text MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
                 NSLog(@"%@",selectValue);
                 weakself.birthday.subfield.text = selectValue;
@@ -73,8 +76,9 @@
     if (self) {
         kWeakSelf(self)
         self.phone = [[XLInformationV alloc] informationWithTitle:@"手机号" SubTitle:@"" TSSubTitle:@"请输入手机号" Must:YES Click:NO];
-        self.carType = [[XLInformationV alloc] informationWithTitle:@"车型" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
+        self.carType = [[XLInformationV alloc] informationWithTitle:@"车型" SubTitle:@"" TSSubTitle:@"" Must:YES Click:YES];
         self.carType.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"车型" DataSource:@[@"C1",@"C2"] DefaultSelValue:@"C1" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.carType.subfield.text = selectValue;
@@ -84,21 +88,23 @@
         self.price = [[XLInformationV alloc] informationWithTitle:@"报考价格" SubTitle:@"" TSSubTitle:@"请输入报名金额" Must:NO Click:NO];
         self.school = [[XLInformationV alloc] informationWithTitle:@"报考驾校" SubTitle:@"" TSSubTitle:@"请选择报考驾校" Must:YES Click:YES];
         self.school.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:@[@"报考驾校1",@"报考驾校2"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.school.subfield.text = selectValue;
             }];
         };
         
-        self.jiaKao = [[XLInformationV alloc] informationWithTitle:@"是否报名驾考中心" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
-        self.jiaKao.senterBlock = ^{
-            [CGXPickerView showStringPickerWithTitle:@"是否报名驾考中心" DataSource:@[@"是",@"否"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
-                NSLog(@"%@",selectValue);
-                weakself.jiaKao.subfield.text = selectValue;
-            }];
-        };
-        self.type = [[XLInformationV alloc] informationWithTitle:@"申请类型" SubTitle:@"" TSSubTitle:@"请选择申请类型" Must:NO Click:YES];
+//        self.jiaKao = [[XLInformationV alloc] informationWithTitle:@"是否报名驾考中心" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
+//        self.jiaKao.senterBlock = ^{
+//            [CGXPickerView showStringPickerWithTitle:@"是否报名驾考中心" DataSource:@[@"是",@"否"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+//                NSLog(@"%@",selectValue);
+//                weakself.jiaKao.subfield.text = selectValue;
+//            }];
+//        };
+        self.type = [[XLInformationV alloc] informationWithTitle:@"申请类型" SubTitle:@"" TSSubTitle:@"请选择申请类型" Must:YES Click:YES];
         self.type.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"申请类型" DataSource:@[@"初次申请",@"再次申请"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.type.subfield.text = selectValue;
@@ -108,11 +114,11 @@
         [self addSubview:self.carType];
         [self addSubview:self.price];
         [self addSubview:self.school];
-        [self addSubview:self.jiaKao];
+//        [self addSubview:self.jiaKao];
         [self addSubview:self.type];
         
         
-        NSArray *arr = @[self.phone,self.carType,self.price,self.school,self.jiaKao,self.type];
+        NSArray *arr = @[self.phone,self.carType,self.price,self.school,self.type];
         [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
         [arr mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self);
@@ -137,6 +143,7 @@
         
         self.hukou = [[XLInformationV alloc] informationWithTitle:@"本外地" SubTitle:@"" TSSubTitle:@"" Must:YES Click:YES];
         self.hukou.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"本外地" DataSource:@[@"本地",@"外地"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.carType.subfield.text = selectValue;
@@ -145,6 +152,7 @@
         
         self.carType = [[XLInformationV alloc] informationWithTitle:@"车型" SubTitle:@"" TSSubTitle:@"" Must:YES Click:YES];
         self.carType.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"车型" DataSource:@[@"C1",@"C2"] DefaultSelValue:@"C1" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.carType.subfield.text = selectValue;
@@ -152,10 +160,11 @@
         };
         
         
-        self.price = [[XLInformationV alloc] informationWithTitle:@"报考价格" SubTitle:@"" TSSubTitle:@"请输入报名金额" Must:YES Click:NO];
+        self.price = [[XLInformationV alloc] informationWithTitle:@"报考价格" SubTitle:@"" TSSubTitle:@"请输入报名金额" Must:NO Click:NO];
         
         self.school = [[XLInformationV alloc] informationWithTitle:@"报考驾校" SubTitle:@"" TSSubTitle:@"请选择报考驾校" Must:YES Click:YES];
         self.school.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:@[@"报考驾校1",@"报考驾校2"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.school.subfield.text = selectValue;
@@ -172,6 +181,7 @@
         
         self.type = [[XLInformationV alloc] informationWithTitle:@"申请类型" SubTitle:@"" TSSubTitle:@"请选择申请类型" Must:YES Click:YES];
         self.type.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"申请类型" DataSource:@[@"初次申请",@"再次申请"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.type.subfield.text = selectValue;
@@ -211,6 +221,7 @@
         self.note = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:@"" TSSubTitle:@"请输入备注" Must:NO Click:NO];
         self.state = [[XLInformationV alloc] informationWithTitle:@"报考状态" SubTitle:@"" TSSubTitle:@"请选择报考状态" Must:YES Click:YES];
         self.state.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"报考状态" DataSource:@[@"已收费",@"未收费"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.state.subfield.text = selectValue;
@@ -247,6 +258,7 @@
         self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.gender = [[XLInformationV alloc] informationWithTitle:@"性别" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
         self.gender.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"性别" DataSource:@[@"男",@"女"] DefaultSelValue:@"男" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.gender.subfield.text = selectValue;
@@ -254,6 +266,7 @@
         };
         self.school = [[XLInformationV alloc] informationWithTitle:@"驾校" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
         self.school.senterBlock = ^{
+            [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:@[@"报考驾校1",@"报考驾校2"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.school.subfield.text = selectValue;

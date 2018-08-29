@@ -131,8 +131,8 @@
         make.height.mas_equalTo(KFit_H6S(24));
     }];
     
-    XLButton *add = [[XLButton alloc] initWithTitle:@"添加学员" SubTitle:@"这里是添加学员" BackgroundImg:@"student_card"];
-    XLButton *card = [[XLButton alloc] initWithTitle:@"招生名片" SubTitle:@"这里是招生名片" BackgroundImg:@"buss_card"];
+    XLButton *add = [[XLButton alloc] initWithTitle:@"添加学员" SubTitle:@"学员信息录入" BackgroundImg:@"student_card"];
+    XLButton *card = [[XLButton alloc] initWithTitle:@"招生名片" SubTitle:@"招生信息编辑" BackgroundImg:@"buss_card"];
     [self.backview addSubview:add];
     [self.backview addSubview:card];
     add.senterBlock = ^{

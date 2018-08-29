@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleDisplayName</key>
-	<string>淘电宝</string>
+	<string>中天驾考</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -292,7 +292,7 @@
 	<key>NSLocationUsageDescription</key>
 	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>需要获取当前的位置来推送与您最近的剧场</string>
+	<string>需要获取当前的位置</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>需要使用您的麦克风</string>
 	<key>NSMotionUsageDescription</key>

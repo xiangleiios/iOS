@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class IDInfo;
+@protocol JQAVCaptureViewControllerDelegate <NSObject>
+- (void)cardInformationScanningFM:(IDInfo *)info;
+@end
 @interface JQAVCaptureViewController : UIViewController
-
+@property (nonatomic , weak)id delegate;
 @end
 

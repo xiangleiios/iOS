@@ -10,7 +10,9 @@
 #import "XLInformationV.h"
 #import "CGXPickerView.h"
 #import "AddInformationThreeVC.h"
-@interface AddInformationTwoVC ()
+#import "JQAVCaptureViewController.h"
+#import "IDInfo.h"
+@interface AddInformationTwoVC ()<JQAVCaptureViewControllerDelegate>
 @property (nonatomic , strong)XLInformationV *start_time;
 @property (nonatomic , strong)XLInformationV *end_time;
 @property (nonatomic , strong)XLInformationV *hukou;
@@ -65,6 +67,7 @@
     UIButton *but = [[UIButton alloc] init];
     [backView addSubview:but];
     [but setImage:[UIImage imageNamed:@"card_nor"] forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(IdentificationCrdFM) forControlEvents:UIControlEventTouchUpInside];
     [but mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(backView);
         make.left.mas_equalTo(backView).mas_offset(KFit_W6S(30));
@@ -105,6 +108,7 @@
     kWeakSelf(self)
     self.start_time = [[XLInformationV alloc] informationWithTitle:@"有效期起始" SubTitle:@"" TSSubTitle:@"请选择日期" Must:YES Click:YES];
     self.start_time.senterBlock = ^{
+        [weakself.view endEditing:YES];
         [CGXPickerView showDatePickerWithTitle:@"有效期起始" DateType:UIDatePickerModeDate DefaultSelValue:nil MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
             NSLog(@"%@",selectValue);
             weakself.start_time.subfield.text = selectValue;
@@ -112,6 +116,7 @@
     };
     self.end_time = [[XLInformationV alloc] informationWithTitle:@"有效期结束" SubTitle:@"" TSSubTitle:@"请选择日期" Must:YES Click:YES];
     self.end_time.senterBlock = ^{
+        [weakself.view endEditing:YES];
         [CGXPickerView showDatePickerWithTitle:@"有效期结束" DateType:UIDatePickerModeDate DefaultSelValue:nil MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
             NSLog(@"%@",selectValue);
             weakself.end_time.subfield.text = selectValue;
@@ -120,6 +125,7 @@
     
     self.hukou = [[XLInformationV alloc] informationWithTitle:@"本/外地" SubTitle:@"" TSSubTitle:@"" Must:YES Click:YES];
     self.hukou.senterBlock = ^{
+        [weakself.view endEditing:YES];
         [CGXPickerView showStringPickerWithTitle:@"本/外地" DataSource:@[@"本地",@"外地"] DefaultSelValue:@"本地" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
             NSLog(@"%@",selectValue);
             weakself.hukou.subfield.text = selectValue;
@@ -153,6 +159,37 @@
         make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(40));
         make.height.mas_equalTo(KFit_H6S(90));
     }];
+}
+
+
+- (void)IdentificationCrdFM{
+    JQAVCaptureViewController *AVCaptureVC = [[JQAVCaptureViewController alloc] init];
+    AVCaptureVC.delegate = self;
+    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+}
+
+- (void)cardInformationScanningFM:(IDInfo *)info{
+    NSArray *arr = [info.valid componentsSeparatedByString:@"-"];
+    if (arr.count == 2) {
+        NSString *stat = [arr firstObject];
+        if (stat.length == 8) {
+            NSString * year = [[arr firstObject] substringWithRange:NSMakeRange(0, 4)];
+            NSString * month = [[arr firstObject] substringWithRange:NSMakeRange(4, 2)];
+            NSString * day = [[arr firstObject] substringWithRange:NSMakeRange(6,2)];
+            NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+            self.start_time.subfield.text = y;
+        }
+        NSString *end = [arr lastObject];
+        if (end.length == 8) {
+            NSString * year = [end substringWithRange:NSMakeRange(0, 4)];
+            NSString * month = [end substringWithRange:NSMakeRange(4, 2)];
+            NSString * day = [end substringWithRange:NSMakeRange(6,2)];
+            NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+            self.end_time.subfield.text = y;
+        }
+        
+    }
+//    self.start_time.subfield.text = info.
 }
 
 - (void)nextVC{

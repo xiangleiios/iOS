@@ -37,7 +37,7 @@
 /// 报考驾校
 @property (nonatomic , strong)XLInformationV *school;
 /// 是否报名驾考中心
-@property (nonatomic , strong)XLInformationV *jiaKao;
+//@property (nonatomic , strong)XLInformationV *jiaKao;
 /// 申请类型
 @property (nonatomic , strong)XLInformationV *type;
 

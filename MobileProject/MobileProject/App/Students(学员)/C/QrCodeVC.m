@@ -8,6 +8,7 @@
 
 #import "QrCodeVC.h"
 #import "CodeShareV.h"
+#import "UIImage+FMQrcodeBarcode.h"
 @interface QrCodeVC ()
 @property (nonatomic , strong)UIImageView *headimg;
 @property (nonatomic , strong)UILabel *titlelb;
@@ -107,7 +108,8 @@
     
     self.cordimg = [[UIImageView alloc] init];
     [backv addSubview:self.cordimg];
-    [self.cordimg setImage:[UIImage fm_createQRCodeFromString:@"222223333"]];
+
+    [self.cordimg setImage:[UIImage getQRWithString:@"www.baidu.com" size:KFit_W6S(420) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(42)]];
     [self.cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(backv);
         make.top.mas_equalTo(backv).mas_offset(KFit_H6S(50));

@@ -70,4 +70,5 @@
 
 /// 根据文字内容生成二维码
 + (UIImage *)fm_createQRCodeFromString:(NSString *)string;
+
 @end

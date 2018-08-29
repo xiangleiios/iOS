@@ -292,12 +292,17 @@
     [closeBtn setImage:[UIImage imageNamed:@"idcard_back"] forState:UIControlStateNormal];
     CGFloat closeBtnWidth = 40;
     CGFloat closeBtnHeight = closeBtnWidth;
-    CGRect viewFrame = self.view.frame;
-    closeBtn.frame = (CGRect){CGRectGetMaxX(viewFrame) - closeBtnWidth, CGRectGetMaxY(viewFrame) - closeBtnHeight, closeBtnWidth, closeBtnHeight};
+//    CGRect viewFrame = self.view.frame;
+//    closeBtn.frame = (CGRect){CGRectGetMaxX(viewFrame) - closeBtnWidth, CGRectGetMaxY(viewFrame) - closeBtnHeight, closeBtnWidth, closeBtnHeight};
     
     [closeBtn addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:closeBtn];
+    [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+        make.top.mas_equalTo(self.view).mas_offset(KFit_W6S(30));
+        make.size.mas_equalTo(CGSizeMake(closeBtnWidth, closeBtnHeight));
+    }];
 }
 
 #pragma mark 绑定“关闭按钮”的方法
@@ -467,7 +472,9 @@
                 IDInfoVC.IDImage = subImage;// 身份证图像
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [self.navigationController pushViewController:IDInfoVC animated:YES];
+                    [self.delegate cardInformationScanningFM:iDInfo];
+                    [self.navigationController popViewControllerAnimated:YES];
+//                    [self.navigationController pushViewController:IDInfoVC animated:YES];
                 });
             }
         }
