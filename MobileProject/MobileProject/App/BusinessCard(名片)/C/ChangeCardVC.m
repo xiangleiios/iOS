@@ -11,7 +11,9 @@
 #import "XLInformationV.h"
 #import "CourseV.h"
 #import "TemplateV.h"
-@interface ChangeCardVC ()
+
+#define BUT_W KFit_W6S(150)
+@interface ChangeCardVC ()<UIImagePickerControllerDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
 @property (nonatomic , strong)UIImageView *headImg;
@@ -19,10 +21,28 @@
 @property (nonatomic , strong)CourseFormsV *course;
 @property (nonatomic , strong)NSMutableArray *couresArr;
 @property (nonatomic , strong)UITextView *textView;
+@property (nonatomic , strong)XLView *imgBackView;
+@property (nonatomic , strong)UIButton *add_photo;
+@property (nonatomic ,strong)NSMutableArray *imgarr;
+@property (nonatomic , strong)UIButton *UpAttachment;
+@property (nonatomic ,strong)NSMutableArray *butarr;
 @end
 
 @implementation ChangeCardVC
 
+- (NSMutableArray *)butarr{
+    if (_butarr==nil) {
+        _butarr=[NSMutableArray array];
+    }
+    return _butarr;
+}
+
+- (NSMutableArray *)imgarr{
+    if (_imgarr==nil) {
+        _imgarr=[NSMutableArray array];
+    }
+    return _imgarr;
+}
 - (NSMutableArray *)couresArr{
     if (_couresArr == nil) {
         _couresArr = [NSMutableArray array];
@@ -69,6 +89,15 @@
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.backview.backgroundColor = kColor_N(240, 240, 240);
     [self.scroll addSubview:self.backview];
+    
+    UILabel *lb = [[UILabel alloc] init];
+    [self.view addSubview:lb];
+    lb.backgroundColor = kColor_N(240, 240, 240);
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.scroll.mas_bottom);
+        make.height.mas_equalTo(1);
+    }];
     
     UIButton *next = [[UIButton alloc] init];
     [self.view addSubview:next];
@@ -203,12 +232,108 @@
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
+    self.imgBackView = [[XLView alloc] init];
+    self.imgBackView.backgroundColor = [UIColor whiteColor];
+    [self.backview addSubview:self.imgBackView];
     
+    self.UpAttachment=[[UIButton alloc]initWithFrame:CGRectMake(KFit_W6S(30), KFit_W6S(30), BUT_W, BUT_W)];
+    [self.UpAttachment setImage:[UIImage imageNamed:@"add_photo"] forState:UIControlStateNormal];
+    [self.UpAttachment addTarget:self action:@selector(PhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+    [self.imgBackView addSubview:self.UpAttachment];
+    
+//    se
+    
+    [self.imgBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.top.mas_equalTo(environment.mas_bottom).mas_offset(1);
+        make.height.mas_equalTo([self.imgBackView getLayoutCellHeightWithFlex:KFit_H6S(30)]);
+    }];
     
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
+#pragma mark - 要上传的图片显示；
+- (void)loadimgview{
+    int j=0;
+    for (int i=0; i<self.imgarr.count; i++) {
+        UIImageView *imgv=self.imgarr[i];
+        imgv.frame=CGRectMake(i%3*(KFit_W6S(20)+BUT_W),i/3*(KFit_W6S(20)+BUT_W), BUT_W, BUT_W);;
+        [self.imgBackView addSubview:imgv];
+        
+        /*删除按钮 */
+        UIButton *but=[[UIButton alloc]init];
+        [but mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(imgv).mas_offset(-KFit_H6S(15));
+            make.left.mas_equalTo(imgv.mas_right).mas_offset(-KFit_H6S(15));
+            make.width.height.mas_equalTo(KFit_H6S(30));
+        }];
+        [but setImage:[UIImage imageNamed:@"icon_delet"] forState:UIControlStateNormal];
+        but.tag=i;
+        [self.backview addSubview:but];
+        [but addTarget:self action:@selector(deleteimgdata:) forControlEvents:UIControlEventTouchUpInside];
+        [self.butarr addObject:but];
+        j++;
+    }
+    self.UpAttachment.frame=CGRectMake(j%3*(KFit_W6S(20)+BUT_W),j/3*(KFit_W6S(20)+BUT_W), BUT_W, BUT_W);
+    self.UpAttachment.hidden=NO;
+    
+}
+#pragma mark -删除图片和数据
+- (void)deleteimgdata:(UIButton *)sender{
+    [self.imgarr removeObjectAtIndex:sender.tag];
+    [self loadimgview];
+}
+
+
+//照片库
+- (void)PhotoLibrary{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
+}
+
+#pragma mark -相册代理
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    KKLog(@"%@    ----- %@",picker,info);
+    [self uploadPictures:info[UIImagePickerControllerOriginalImage]];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (void)uploadPictures:(UIImage *)image{
+    [MBProgressHUD showLoadingHUD:@"正在上传图片"];
+    
+    NSString *url=[NSString stringWithFormat:POSTFileUpload,[User UserOb].token];
+    
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"image_file" fileName:@"tupian.png" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"成功返货=============%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [self.imgarr addObject:responseObject[@"data"]];
+            [self loadimgview];
+           
+        }else{
+            [MBProgressHUD showAutoMessage:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBProgressHUD hideLoadingHUD];
+    }];
+}
+
+
+
+
+
+
 
 - (void)laodCoutesView{
     

@@ -46,6 +46,16 @@
         make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
     }];
     
+    
+    UILabel *lb = [[UILabel alloc] init];
+    [self.view addSubview:lb];
+    lb.backgroundColor = kColor_N(240, 240, 240);
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.scroll.mas_bottom);
+        make.height.mas_equalTo(1);
+    }];
+    
     self.backview = [[XLView alloc] init];
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     self.backview.backgroundColor = [UIColor whiteColor];
