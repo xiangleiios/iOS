@@ -38,17 +38,17 @@
     UIView *v=[[UIView alloc]init];
     [self.view addSubview:v];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(10));
-        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(50));
-        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(50));
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(60));
+//        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(50));
+        make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(viewHight * 3);
     }];
     
     
-    UIImageView *imgpho=[[UIImageView alloc]initWithFrame:CGRectMake(0, imgY, KFit_W6S(32), KFit_H6S(45))];
-    [imgpho setImage:[UIImage imageNamed:@"password2"]];
-    [v addSubview:imgpho];
-    self.odlpassword=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(60), 0, KFit_W6S(400), viewHight)];
+//    UIImageView *imgpho=[[UIImageView alloc]initWithFrame:CGRectMake(0, imgY, KFit_W6S(32), KFit_H6S(45))];
+//    [imgpho setImage:[UIImage imageNamed:@"password2"]];
+//    [v addSubview:imgpho];
+    self.odlpassword=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), 0, KFit_W6S(400), viewHight)];
     self.odlpassword.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.odlpassword];
     self.odlpassword.placeholder=@"请输入旧密码";
@@ -56,20 +56,20 @@
     self.odlpassword.secureTextEntry=YES;
     
     
-    UIImageView *imgCompany = [[UIImageView alloc]initWithFrame:CGRectMake(0, imgY + viewHight, KFit_W6S(32), KFit_H6S(45))];
-    [imgCompany setImage:[UIImage imageNamed:@"password"]];
-    [v addSubview:imgCompany];
-    self.password=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(60), viewHight, KFit_W6S(550), viewHight)];
+//    UIImageView *imgCompany = [[UIImageView alloc]initWithFrame:CGRectMake(0, imgY + viewHight, KFit_W6S(32), KFit_H6S(45))];
+//    [imgCompany setImage:[UIImage imageNamed:@"password"]];
+//    [v addSubview:imgCompany];
+    self.password=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), viewHight, KFit_W6S(650), viewHight)];
     self.password.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.password];
-    self.password.placeholder=@"请输入密码(4-20位数字及字母)";
+    self.password.placeholder=@"请输入包含数字和字母的新密码6-11位密码";
     self.password.secureTextEntry=YES;
     
     
-    UIImageView *imgpass=[[UIImageView alloc]initWithFrame:CGRectMake(0, imgY + viewHight *2, KFit_W6S(32), KFit_H6S(45))];
-    [imgpass setImage:[UIImage imageNamed:@"password2"]];
-    [v addSubview:imgpass];
-    self.passwordtwo=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(60), viewHight * 2, KFit_W6S(450), viewHight)];
+//    UIImageView *imgpass=[[UIImageView alloc]initWithFrame:CGRectMake(0, imgY + viewHight *2, KFit_W6S(32), KFit_H6S(45))];
+//    [imgpass setImage:[UIImage imageNamed:@"password2"]];
+//    [v addSubview:imgpass];
+    self.passwordtwo=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), viewHight * 2, KFit_W6S(450), viewHight)];
     self.passwordtwo.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.passwordtwo];
     self.passwordtwo.placeholder=@"请再次输入密码";
@@ -109,12 +109,12 @@
     [self.view addSubview:but];
     [but mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.passwordtwo.mas_bottom).mas_offset(KFit_H6S(110));
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(40));
         make.width.mas_equalTo(KFit_W6S(650));
-        make.height.mas_equalTo(KFit_H6S(80));
+        make.height.mas_equalTo(KFit_H6S(90));
     }];
     but.layer.cornerRadius=5;
-    but.backgroundColor = kColor_N(40, 174, 104);
+    but.backgroundColor = kColor_N(0, 112, 234);
     [but setTitle:@"修改密码" forState:UIControlStateNormal];
     [but addTarget:self action:@selector(change) forControlEvents:UIControlEventTouchUpInside];
 }
@@ -176,6 +176,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

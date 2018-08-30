@@ -8,8 +8,10 @@
 
 #import "MyInfoVC.h"
 #import "XLMyNewsFunction.h"
+#import "XLInformationV.h"
+#import "ChangePasswordVC.h"
 #import <CommonCrypto/CommonDigest.h>//MD5加密导入框架
-@interface MyInfoVC ()<XLMyNewsFunctionDelegate,UIImagePickerControllerDelegate>
+@interface MyInfoVC ()<UIImagePickerControllerDelegate>
 @property (nonatomic , strong)XLMyNewsFunction *headerview;
 @end
 
@@ -24,40 +26,25 @@
 }
 
 - (void)loadSubView{
-    XLMyNewsFunction *myNewone=[[XLMyNewsFunction alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(120))];
-    myNewone.title.text=@"头像";
-    myNewone.type=MyNewsTypeHead;
-    myNewone.tag=1;
-    myNewone.delegate=self;
-    [self.view addSubview:myNewone];
-    self.headerview=myNewone;
+    XLInformationV *name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:@"13333333333"];
+    [self.view addSubview:name];
+    [name mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(60));
+        make.left.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
     
-    XLMyNewsFunction *myNewtwo=[[XLMyNewsFunction alloc]initWithFrame:CGRectMake(0, KFit_H6S(120), SCREEN_WIDTH, KFit_H6S(120))];
-    myNewtwo.title.text=@"昵称";
-    KKLog(@"%@",[User UserOb].nick_name);
-    User *user=[User UserOb];
-    myNewtwo.subtitle.text=[user.nick_name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    myNewtwo.type=MyNewsTypeCommon;
-    myNewtwo.tag=2;
-    myNewtwo.delegate=self;
-    [self.view addSubview:myNewtwo];
-    
-    XLMyNewsFunction *myNewthree=[[XLMyNewsFunction alloc]initWithFrame:CGRectMake(0, KFit_H6S(240), SCREEN_WIDTH, KFit_H6S(120))];
-    myNewthree.title.text=@"手机号码";
-    myNewthree.subtitle.text=[User UserOb].mobile;
-    myNewthree.type=MyNewsTypeCommon;
-    myNewthree.tag=3;
-    myNewthree.delegate=self;
-    [self.view addSubview:myNewthree];
-    
-//    XLMyNewsFunction *myNewfour=[[XLMyNewsFunction alloc]initWithFrame:CGRectMake(0, KFit_H6S(360), SCREEN_WIDTH, KFit_H6S(120))];
-//    myNewfour.title.text=@"收货地址";
-//    myNewfour.describe.text=@"修改/添加";
-//    myNewfour.type=MyNewsTypeCommon;
-//    myNewfour.tag=4;
-//    myNewfour.delegate=self;
-//    [self.view addSubview:myNewfour];
+    XLInformationV *mima = [[XLInformationV alloc] informationWithTitle:@"登录密码" SubTitle:@"" TSSubTitle:@"修改密码" Must:NO Click:YES];
+    [self.view addSubview:mima];
+    mima.senterBlock = ^{
+        ChangePasswordVC *vc = [[ChangePasswordVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    };
+    [mima mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(name.mas_bottom);
+        make.left.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
     
 }
 
@@ -88,30 +75,7 @@
 }
 
 
-- (void)XLMyNewsFunctionclickOnTheIndex:(NSInteger)index{
-    switch (index) {
-        case 1:
-        {
-            [self imageUpload];
-            break;
-        }
-        case 2:
-        {
-            [self promptedToChangeTheNickname];
-            break;
-        }
-        case 3:
-        {KKLog(@"我的消息");
-            
-            break;
-        }
-        case 4:
-        {KKLog(@"我的消息");
-            
-            break;
-        }
-    }
-}
+
 
 #pragma mark-图片选项提示；
 - (void)imageUpload{
