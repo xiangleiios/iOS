@@ -7,7 +7,7 @@
 //
 
 #import "XLInformationV.h"
-
+#define FONT kFit_Font6(16)
 @implementation XLInformationV
 
 /*
@@ -28,7 +28,7 @@
         UILabel *titleLable = [[UILabel alloc] init];
         [self addSubview:titleLable];
         titleLable.text = title;
-        titleLable.font = [UIFont systemFontOfSize:kFit_Font6(17)];
+        titleLable.font = [UIFont systemFontOfSize:FONT];
         if (must) {
             UILabel *redlb = [[UILabel alloc] init];
             [self addSubview:redlb];
@@ -60,7 +60,7 @@
         [self addSubview:self.subfield];
         self.subfield.placeholder = tssubtitle;
         self.subfield.textAlignment = NSTextAlignmentRight;
-        self.subfield.font = [UIFont systemFontOfSize:kFit_Font6(17)];
+        self.subfield.font = [UIFont systemFontOfSize:FONT];
         
         if (click) {
             UIImageView *imgtwo = [[UIImageView alloc] init];
@@ -112,7 +112,7 @@
         UILabel *titleLable = [[UILabel alloc] init];
         [self addSubview:titleLable];
         titleLable.text = title;
-        titleLable.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+        titleLable.font = [UIFont systemFontOfSize:FONT];
         [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
             make.centerY.mas_equalTo(self);
@@ -125,7 +125,7 @@
         subLable.text = subtitle;
         subLable.textColor = kColor_N(143, 155, 178);
         subLable.textAlignment = NSTextAlignmentRight;
-        subLable.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+        subLable.font = [UIFont systemFontOfSize:FONT];
         [subLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self).mas_offset(-KFit_W6S(30));
             make.centerY.mas_equalTo(self);
@@ -238,7 +238,7 @@
         UILabel *titleLable = [[UILabel alloc] init];
         [self addSubview:titleLable];
         titleLable.text = title;
-        titleLable.font = [UIFont systemFontOfSize:kFit_Font6(17)];
+        titleLable.font = [UIFont systemFontOfSize:FONT];
         [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(imgone.mas_right).mas_offset(KFit_W6S(30));
             make.centerY.mas_equalTo(self);
@@ -249,7 +249,7 @@
         UILabel *subtitleLable = [[UILabel alloc] init];
         [self addSubview:subtitleLable];
         subtitleLable.text = subtitle;
-        subtitleLable.font = [UIFont systemFontOfSize:kFit_Font6(17)];
+        subtitleLable.font = [UIFont systemFontOfSize:FONT];
 //        subtitleLable.textColor = kColor_N(183, 190, 205);
         subtitleLable.textAlignment = NSTextAlignmentRight;
         [subtitleLable mas_makeConstraints:^(MASConstraintMaker *make) {

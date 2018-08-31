@@ -8,6 +8,7 @@
 
 #import "CourseV.h"
 #import "LicenseTayeV.h"
+#import "UITextView+ZWPlaceHolder.h"
 @implementation CourseV
 
 /*
@@ -36,8 +37,11 @@
 }
 
 - (void)loadSubview{
-    self.frame = [UIScreen mainScreen].bounds;
+    self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     self.backgroundColor = kRGBAColor(0, 0, 0, 0.8);
+//    self.contentSize = CGSizeMake(0, SCREEN_HEIGHT+kNavBarH);
+//    UIScrollView *scr = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    [self addSubview:scr];
     
     UIView *bacview = [[UIView alloc] init];
     [self addSubview:bacview];
@@ -124,6 +128,8 @@
     
     self.textView = [[UITextView alloc] init];
     self.textView.backgroundColor = [UIColor clearColor];
+    self.textView.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    self.textView.placeholder = @"请填写课程介绍，例如：周一至周日，随到随学";
     [bacview addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(box).mas_offset(KFit_W6S(20));

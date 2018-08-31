@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 电话输入框
 @interface TKPhoneTextField : UITextField<UITextFieldDelegate>
 {
     NSString    *_previousTextFieldContent;

@@ -122,6 +122,7 @@
 		A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86E2134EEDA008A8948 /* QrCodeVC.m */; };
 		A79276FE212A525D00B4D65D /* AddStudentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79276FD212A525D00B4D65D /* AddStudentVC.m */; };
 		A7927701212A900200B4D65D /* StudentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7927700212A900200B4D65D /* StudentsVC.m */; };
+		A79DD8382137DFE800665245 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */; };
 		A7A213BB212E4F9300920678 /* ChangeCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213BA212E4F9300920678 /* ChangeCardVC.m */; };
 		A7A213BE212EA98600920678 /* CourseV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213BD212EA98600920678 /* CourseV.m */; };
 		A7A213C1212EBB0F00920678 /* LicenseTayeV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213C0212EBB0F00920678 /* LicenseTayeV.m */; };
@@ -834,6 +835,8 @@
 		A79276FD212A525D00B4D65D /* AddStudentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentVC.m; sourceTree = "<group>"; };
 		A79276FF212A900200B4D65D /* StudentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsVC.h; sourceTree = "<group>"; };
 		A7927700212A900200B4D65D /* StudentsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsVC.m; sourceTree = "<group>"; };
+		A79DD8362137DFE700665245 /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
+		A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
 		A7A213B9212E4F9300920678 /* ChangeCardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCardVC.h; sourceTree = "<group>"; };
 		A7A213BA212E4F9300920678 /* ChangeCardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCardVC.m; sourceTree = "<group>"; };
 		A7A213BC212EA98600920678 /* CourseV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseV.h; sourceTree = "<group>"; };
@@ -3446,6 +3449,8 @@
 		DA0345521F509098008E7BE1 /* UITextView */ = {
 			isa = PBXGroup;
 			children = (
+				A79DD8362137DFE700665245 /* UITextView+ZWPlaceHolder.h */,
+				A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */,
 				DA0345531F509098008E7BE1 /* UITextView+AddHiddenKeyBoard.h */,
 				DA0345541F509098008E7BE1 /* UITextView+AddHiddenKeyBoard.m */,
 				DA0345551F509098008E7BE1 /* UITextView+FMExtension.h */,
@@ -5343,6 +5348,7 @@
 				A7A213BB212E4F9300920678 /* ChangeCardVC.m in Sources */,
 				DA03464F1F509098008E7BE1 /* NSFileHandle+readLine.m in Sources */,
 				DAE212831EF2867B000EAB90 /* WebViewController1.m in Sources */,
+				A79DD8382137DFE800665245 /* UITextView+ZWPlaceHolder.m in Sources */,
 				4F0944971F39A83200BA80E5 /* CommentDetailsVC.m in Sources */,
 				DA4FA4EB1FE2757800C7C1F1 /* LMWebProgressLayer.m in Sources */,
 				DA4FA4C21FDF7B7300C7C1F1 /* LoginVC.m in Sources */,
