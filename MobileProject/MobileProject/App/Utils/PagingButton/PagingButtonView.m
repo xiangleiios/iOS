@@ -12,7 +12,7 @@
 
 #import "PagingButtonView.h"
 #import "UIImageView+WebCache.h"
-
+#import "XLImageView.h"
 #define ROW_SPACING kFit_Font6(8)           //行间距
 #define BUTTON_VIEW_WIDTH kFit_Font6(70)    //按钮视图的宽度
 #define ICON_WIDTH_HEIGHT kFit_Font6(45)    //图标的宽高度（宽高要一样）
@@ -33,8 +33,8 @@ const
 - (instancetype)initWithFrame:(CGRect)frame WithImageName:(NSString *)iconImageName WithTitle:(NSString *)title withTextColor:(UIColor *)textColor{
     self = [super initWithFrame:frame];
     if (self) {
-        UIImageView *iconImageview = [[UIImageView alloc]initWithFrame:CGRectMake((BUTTON_VIEW_WIDTH - ICON_WIDTH_HEIGHT)/2, IMAGE_TO_BUTTON_TOP, ICON_WIDTH_HEIGHT, ICON_WIDTH_HEIGHT)];
-        
+        XLImageView *iconImageview = [[XLImageView alloc]initWithFrame:CGRectMake((BUTTON_VIEW_WIDTH - ICON_WIDTH_HEIGHT)/2, IMAGE_TO_BUTTON_TOP, ICON_WIDTH_HEIGHT, ICON_WIDTH_HEIGHT)];
+//        iconImageview.userInteractionEnabled = YES;
         if ([iconImageName hasPrefix:@"http"]) {
             [iconImageview sd_setImageWithURL:[NSURL URLWithString:iconImageName] placeholderImage:[UIImage imageNamed:[@"PagingButtonView.bundle" stringByAppendingPathComponent:@"placeholder-button-ima.png"]]];
         }else

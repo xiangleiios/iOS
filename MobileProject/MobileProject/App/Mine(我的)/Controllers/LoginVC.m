@@ -125,8 +125,8 @@
     
     
 #ifdef DEBUG
-    self.pho.text = @"18627867633";
-    self.password.text = @"12345678";
+    self.pho.text = @"13871212320";
+    self.password.text = @"123456";
 #else
     
 #endif
@@ -295,25 +295,55 @@
         return;
     }
     
-    CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
-    //    self.tab = TabBarControllerConfig;
-    AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    appDelegate.window.rootViewController = TabBarControllerConfig.tabBarController;
+    
     //    appDelegate.tab = TabBarControllerConfig
-//    NSString *url=[NSString stringWithFormat:GETmembersLogin,phone,password];
-//    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在登陆" ToView:self.view];
+    NSString *url=[NSString stringWithFormat:GETmembersLogin,phone,password];
+    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在登陆" ToView:self.view];
+    
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        [hud hide:YES];
+        if ([responseObject[@"code"] integerValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"登录成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+            CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
+             [self presentViewController:TabBarControllerConfig.tabBarController animated:YES completion:NULL];
+//            AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//            
+//            appDelegate.window.rootViewController = TabBarControllerConfig.tabBarController;
+            User *user=[User UserOb];
+            user.accounttype=[NSNumber numberWithInteger:accountTypePhone];
+            [user UserSave:responseObject];
+            [UIWebView fm_setTokenToUIWebViewCookie]; //存token到域名cookie
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            
+        }
+    } failureBlock:^(NSError *error) {
+        [hud hide:YES];
+        KKLog(@"error :%@",error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 //    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
 //        [hud hide:YES];
 //
-//        if (kResponseObjectStatusCodeIsEqual(200)) {
+//        if ([responseObject[@"code"] integerValue] == 200) {
 //            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"登录成功" SuccessOrFailure:YES];
 //            [alert showPrompt];
+//            CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
+//            AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//            appDelegate.window.rootViewController = TabBarControllerConfig.tabBarController;
 //            User *user=[User UserOb];
 //            user.accounttype=[NSNumber numberWithInteger:accountTypePhone];
-//            [user UserSave:responseObject[@"data"]];
+//            [user UserSave:responseObject];
 //            [UIWebView fm_setTokenToUIWebViewCookie]; //存token到域名cookie
 //            [self.navigationController popViewControllerAnimated:YES];
+//        }else{
+//
 //        }
+//
+//
 //
 //    } failureBlock:^(NSError *error) {
 //        [hud hide:YES];

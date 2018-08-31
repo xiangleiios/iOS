@@ -10,19 +10,27 @@
 #import "XLInformationV.h"
 #import "AboutUs.h"
 #import "MyInfoVC.h"
+#import "XLMineCell.h"
 #define HEADERHEI KFit_H6S(320)
 
-@interface FMMineVC ()
+@interface FMMineVC ()<UITableViewDelegate,UITableViewDataSource>
 
-
+@property (nonatomic , strong)UITableView *table;
+@property (nonatomic , strong)NSArray *imgarr;
+@property (nonatomic , strong)NSArray *titlerr;
 @end
 
 @implementation FMMineVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.titlerr = @[@"账户信息",@"关于我们",@"清除缓存"];
+    self.imgarr = @[@"my_news_icon",@"my_about_icon",@"my_clean_icon"];
     [self laodNavigation];
-    [self laodSubview];
+    
+    [self loadtable];
+    
+//    [self laodSubview];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,6 +80,82 @@
     
     
 }
+
+
+- (void)loadtable{
+    self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [self.view addSubview:self.table];
+    [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(30));
+        make.left.right.bottom.mas_equalTo(self.view);
+    }];
+    self.table.delegate=self;
+    self.table.dataSource=self;
+    self.table.scrollEnabled = NO;
+    //设置可编辑
+    //    self.table.allowsMultipleSelectionDuringEditing = YES;
+    _table.tableFooterView = [UIView new];
+    self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+//    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+//    _table.needPlaceholderView = YES;
+//    __weak __typeof(self)weakSelf = self;
+//    _table.reloadBlock = ^{
+//        [weakSelf.table.mj_header beginRefreshing];
+//    };
+//    [self headerRefresh];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //    [self.table.mj_header beginRefreshing];
+}
+
+
+
+#pragma mark-tableview代理
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.titlerr.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *cellID = [NSString stringWithFormat:@"XLMineCell"];
+    XLMineCell *cell = (XLMineCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[XLMineCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    }
+    cell.title.text = self.titlerr[indexPath.row];
+    [cell.img setImage:[UIImage imageNamed:self.imgarr[indexPath.row]]];
+    if (indexPath.row == 2) {
+        cell.subtitle.text = @"0M";
+    }
+    //    cell.model = self.dataArr[indexPath.row];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return KFit_H6S(150);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 0) {
+        MyInfoVC *VC = [[MyInfoVC alloc] init];
+        [self.navigationController pushViewController:VC animated:YES];
+    }
+    if (indexPath.row == 1) {
+        AboutUs *vc = [[AboutUs alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 2) {
+        
+    }
+    
+}
+
 - (void)theLoginStatusChange{
     
 }

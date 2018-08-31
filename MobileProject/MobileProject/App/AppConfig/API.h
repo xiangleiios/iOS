@@ -39,6 +39,18 @@
 #define CIDHomeService 272 //文化服务
 
 
+
+#pragma mark 手机号登陆
+#define GETmembersLogin KURL(@"/app/login?mobile=%@&password=%@")
+
+
+
+
+
+
+
+
+#pragma mark 一下全部要删除掉
 #pragma mark -------订单
 /// 创建订单
 #define POSTOrdersCreate KURL(@"/api/orders/create?title=%@&num=%@&voltage=%@&max_price=%@&province=%@&start_date=%@&end_date=%@&yesteryear_total=%@&before_last_total=%@&industry=%@&area=%@&time_slot=%@&allow=1&token=%@")
@@ -102,8 +114,7 @@
 //合同
 #define HTMLContract KURL(@"/contract.html?id=%ld&token=%@")
 #pragma mark ------------------------------------ members
-//手机号登陆
-#define GETmembersLogin KURL(@"/api/members/login?member_name=%@&password=%@")
+
 //的三方登录
 #define GETmembersExlogin \
 KURL(@"/api/members/exlogin?member_name=%@&nick_name=%@&avatar_url=%@&source=%@")

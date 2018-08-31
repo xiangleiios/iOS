@@ -100,6 +100,8 @@
 		A71907A02130EED50072B8CF /* StudentsTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A719079F2130EED50072B8CF /* StudentsTwoCell.m */; };
 		A71907A4213106180072B8CF /* SubordinateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A3213106180072B8CF /* SubordinateVC.m */; };
 		A71907A721312B850072B8CF /* DrivingSchoolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A621312B850072B8CF /* DrivingSchoolVC.m */; };
+		A733725421393574005CD384 /* DIN-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A733725321393574005CD384 /* DIN-Medium.otf */; };
+		A733725B2139499A005CD384 /* XLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A733725A2139499A005CD384 /* XLImageView.m */; };
 		A735A090212F9A540044E9BC /* TemplateV.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A08F212F9A540044E9BC /* TemplateV.m */; };
 		A735A093212FB72F0044E9BC /* ConsultingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A092212FB72F0044E9BC /* ConsultingVC.m */; };
 		A735A096212FB7A10044E9BC /* EnrollVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A095212FB7A10044E9BC /* EnrollVC.m */; };
@@ -791,6 +793,9 @@
 		A71907A3213106180072B8CF /* SubordinateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubordinateVC.m; sourceTree = "<group>"; };
 		A71907A521312B850072B8CF /* DrivingSchoolVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrivingSchoolVC.h; sourceTree = "<group>"; };
 		A71907A621312B850072B8CF /* DrivingSchoolVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrivingSchoolVC.m; sourceTree = "<group>"; };
+		A733725321393574005CD384 /* DIN-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIN-Medium.otf"; sourceTree = "<group>"; };
+		A73372592139499A005CD384 /* XLImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLImageView.h; sourceTree = "<group>"; };
+		A733725A2139499A005CD384 /* XLImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLImageView.m; sourceTree = "<group>"; };
 		A735A08E212F9A540044E9BC /* TemplateV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TemplateV.h; sourceTree = "<group>"; };
 		A735A08F212F9A540044E9BC /* TemplateV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TemplateV.m; sourceTree = "<group>"; };
 		A735A091212FB72F0044E9BC /* ConsultingVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConsultingVC.h; sourceTree = "<group>"; };
@@ -2153,6 +2158,15 @@
 				A71907A621312B850072B8CF /* DrivingSchoolVC.m */,
 			);
 			path = "Subordinate(所属驾校)";
+			sourceTree = "<group>";
+		};
+		A733725821394960005CD384 /* UIImageView */ = {
+			isa = PBXGroup;
+			children = (
+				A73372592139499A005CD384 /* XLImageView.h */,
+				A733725A2139499A005CD384 /* XLImageView.m */,
+			);
+			path = UIImageView;
 			sourceTree = "<group>";
 		};
 		A735A097212FE5F40044E9BC /* Search(搜索) */ = {
@@ -4427,6 +4441,7 @@
 			children = (
 				DAFBAC7F1FA74C8A00F726FF /* 文化南宁.h */,
 				DAA053521F14693500B9CB9A /* MobileProject.entitlements */,
+				A733725321393574005CD384 /* DIN-Medium.otf */,
 				DAE20DCD1EF28679000EAB90 /* App */,
 				DAE211081EF2867A000EAB90 /* DesignerModule */,
 				DAE211301EF2867A000EAB90 /* UserModule */,
@@ -4612,6 +4627,7 @@
 		DAE210D71EF2867A000EAB90 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A733725821394960005CD384 /* UIImageView */,
 				4FA3BE092112EAA900EFCFB0 /* UITextField */,
 				4FFEBA8320DCFABC00FB095B /* UIlable */,
 				DA8597291FF1F60F00111B28 /* PagingButton */,
@@ -4936,6 +4952,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAE2125D1EF2867B000EAB90 /* FMApp.xcassets in Resources */,
+				A733725421393574005CD384 /* DIN-Medium.otf in Resources */,
 				4FB0F37920F5D7560047BF7B /* guidece_2@2x.png in Resources */,
 				DA0346451F509098008E7BE1 /* NSDateTimeAgo.bundle in Resources */,
 				DA56B9F61FBC2123007F94DA /* AlipaySDK.bundle in Resources */,
@@ -5474,6 +5491,7 @@
 				A7B5A1072133A9F100BC197B /* VehicleInformationVC.m in Sources */,
 				DA0346BC1F509098008E7BE1 /* UIImage+FX.m in Sources */,
 				A735A0AB212FE68C0044E9BC /* LLSearchViewController.m in Sources */,
+				A733725B2139499A005CD384 /* XLImageView.m in Sources */,
 				DAE212951EF2867B000EAB90 /* XLshare.m in Sources */,
 				DA0346AD1F509098008E7BE1 /* UIControl+Block.m in Sources */,
 				DA0346271F509098008E7BE1 /* FMAnalyticsHelper.m in Sources */,

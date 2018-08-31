@@ -39,7 +39,7 @@
 - (void)loadSubview{
     self.title = [[UILabel alloc] init];
     [self addSubview:self.title];
-    self.title.font = [UIFont fontWithName:@"ArialHebrew" size:kFit_Font6(30)];
+    self.title.font = [UIFont fontWithName:@"DIN-Medium" size:kFit_Font6(30)];
     self.title.textAlignment = NSTextAlignmentCenter;
     self.title.textColor = kColor_N(15, 115, 238);
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {

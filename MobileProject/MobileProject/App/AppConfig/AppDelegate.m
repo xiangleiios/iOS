@@ -87,30 +87,19 @@
     // 设置系统返回按钮为样式
     options.navigationBackButtonImage = [UIImage imageNamed:@"arrows_left_icon"];
     
-    //侧滑控制器
-//    PDSlideViewController *slideVC = [[PDSlideViewController alloc] init];
-//    //主控制器
-//    HomeVC *home = [[HomeVC alloc] init];
-//    EasyNavigationController *navVC = [[EasyNavigationController alloc]initWithRootViewController:home];
-//    slideVC.homeVC = navVC;
-//    //左滑控制器
-//    MyLeftVC *leftvc = [[MyLeftVC alloc] init];
-//    leftvc.homeVc = home;
-//    leftvc.back = ^(FMBaseViewController *vc) {
-//        [[PDSlideViewController slideVC] hideLeftVC];
-//        [navVC pushViewController:vc animated:YES];
-//    };
-//    slideVC.leftVC = leftvc;
-//    slideVC.navigationController.navigationBarHidden = YES;
     
-    LoginVC *Loginvc = [[LoginVC alloc] init];
-//    LoginVC *Loginvc = [[LoginVC alloc] init];
+
+    if ([User UserOb].UserLogin) {
+        CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.rootViewController  = TabBarControllerConfig.tabBarController ;
+    }else{
+        LoginVC *Loginvc = [[LoginVC alloc] init];
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.rootViewController  = Loginvc ;
+    }
     
-    //(3) 用navigationcontroller包裹controller的时候，使用EasyNavigationController。如果是tabbar的话，则tabbar的每一个item都需要使用EasyNavigationController。如果使用的xib，则需要把xib中的导航控制器改成EasyNavigationController。
-//    EasyNavigationController *navVC = [[EasyNavigationController alloc]initWithRootViewController:slideVC];
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    self.window.rootViewController  = slideVC ;
-    self.window.rootViewController  = Loginvc ;
+    
 
 
 

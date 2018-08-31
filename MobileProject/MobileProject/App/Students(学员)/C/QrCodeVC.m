@@ -23,7 +23,7 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"中天驾考"];
     kWeakSelf(self)
-    [self.navigationView addRightButtonWithImage:[UIImage imageNamed:@"share_icon"] clickCallBack:^(UIView *view) {
+    [self.navigationView addRightButtonWithImage:kImage(@"share_icon") hightImage:kImage(@"share_icon_down") clickCallBack:^(UIView *view) {
         [weakself share];
     }];
     self.view.backgroundColor = kColor_N(240, 240, 240);
@@ -109,11 +109,11 @@
     self.cordimg = [[UIImageView alloc] init];
     [backv addSubview:self.cordimg];
 
-    [self.cordimg setImage:[UIImage getQRWithString:@"www.baidu.com" size:KFit_W6S(420) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(42)]];
+    [self.cordimg setImage:[UIImage getQRWithString:@"www.baidu.com" size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
     [self.cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(backv);
         make.top.mas_equalTo(backv).mas_offset(KFit_H6S(50));
-        make.width.height.mas_equalTo(KFit_W6S(420));
+        make.width.height.mas_equalTo(KFit_W6S(400));
     }];
     
 }

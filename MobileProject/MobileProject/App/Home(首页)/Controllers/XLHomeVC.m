@@ -55,7 +55,7 @@
     kWeakSelf(self)
     [self.navigationView setTitle:@"中天驾校"];
     //添加一个带图片的按钮，如果这个按钮只有点击事件，可以这样写，更加简洁。
-    [self.navigationView addRightButtonWithImage:kImage(@"news_nor") hightImage:kImage(@"news_nor") clickCallBack:^(UIView *view) {
+    [self.navigationView addRightButtonWithImage:kImage(@"news_nor") hightImage:kImage(@"news_down") clickCallBack:^(UIView *view) {
         MyNewsVC *vc = [[MyNewsVC alloc] init];
         [weakself.navigationController pushViewController:vc animated:YES];
     }];
@@ -83,10 +83,10 @@
     }
     
     
-    self.banner = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0,0, kScreenW,KFit_H6S(250) ) delegate:self placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
+    self.banner = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0,0, kScreenW,KFit_H6S(250) ) delegate:self placeholderImage:[UIImage imageNamed:@"pacture"]];
     _banner.autoScrollTimeInterval = 3.0;// 自动滚动时间间隔
     _banner.pageControlStyle = SDCycleScrollViewPageContolStyleNone; //无pagecontrol
-    _banner.placeholderImage = [UIImage imageNamed:@"lb-jiazaitu"];
+    _banner.placeholderImage = [UIImage imageNamed:@"pacture"];
     _banner.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     _banner.clipsToBounds = YES;
     _banner.backgroundColor = kWhiteColor;
@@ -123,7 +123,7 @@
         make.height.mas_equalTo(kFit_Font6(1));
     }];
     
-    XLColumnsV *tool = [[XLColumnsV alloc] initWithTitle:@"招生工具" Color:kColor_N(15, 115, 238)];
+    XLColumnsV *tool = [[XLColumnsV alloc] initWithTitle:@"招生工具" Color:kColor_N(64, 75, 105)];
     [self.backview addSubview:tool];
     [tool mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(lbline.mas_bottom).mas_offset(KFit_H6S(30));
@@ -131,8 +131,8 @@
         make.height.mas_equalTo(KFit_H6S(24));
     }];
     
-    XLButton *add = [[XLButton alloc] initWithTitle:@"添加学员" SubTitle:@"学员信息录入" BackgroundImg:@"student_card"];
-    XLButton *card = [[XLButton alloc] initWithTitle:@"招生名片" SubTitle:@"招生信息编辑" BackgroundImg:@"buss_card"];
+    XLButton *add = [[XLButton alloc] initWithTitle:@"添加学员" SubTitle:@"学员信息录入" BackgroundImg:@"student_card" highlightedImg:@"student_card_down"];
+    XLButton *card = [[XLButton alloc] initWithTitle:@"招生名片" SubTitle:@"招生信息编辑" BackgroundImg:@"buss_card" highlightedImg:@"buss_card_down"];
     [self.backview addSubview:add];
     [self.backview addSubview:card];
     add.senterBlock = ^{
@@ -160,7 +160,7 @@
         make.height.mas_equalTo(KFit_H6S(20));
     }];
     
-    XLColumnsV *admissions = [[XLColumnsV alloc] initWithTitle:@"招生日报" Color:kColor_N(15, 115, 238)];
+    XLColumnsV *admissions = [[XLColumnsV alloc] initWithTitle:@"招生日报" Color:kColor_N(64, 75, 105)];
     [self.backview addSubview:admissions];
     [admissions mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(backlb.mas_bottom).mas_offset(KFit_H6S(30));
@@ -200,7 +200,7 @@
         make.height.mas_equalTo(KFit_H6S(20));
     }];
     
-    XLColumnsV *management = [[XLColumnsV alloc] initWithTitle:@"分校管理" Color:kColor_N(15, 115, 238)];
+    XLColumnsV *management = [[XLColumnsV alloc] initWithTitle:@"分校管理" Color:kColor_N(64, 75, 105)];
     [self.backview addSubview:management];
     [management mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(backlbtwo.mas_bottom).mas_offset(KFit_H6S(30));

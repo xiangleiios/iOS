@@ -10,7 +10,7 @@
 typedef void(^SenterBlcok) ();
 @interface XLButton : UIView
 @property (nonatomic , copy)SenterBlcok senterBlock;
-
+//@property (nonatomic , strong)UIImageView *butimg;
 /// 背景图 和 子父标题按钮
-- (instancetype)initWithTitle:(NSString *)title SubTitle:(NSString *)subtitle BackgroundImg:(NSString *)img;
+- (instancetype)initWithTitle:(NSString *)title SubTitle:(NSString *)subtitle BackgroundImg:(NSString *)img highlightedImg:(NSString *)hightImg;
 @end

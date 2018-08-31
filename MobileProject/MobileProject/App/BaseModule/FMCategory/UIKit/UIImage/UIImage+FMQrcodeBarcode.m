@@ -247,7 +247,7 @@ void ProviderReleaseData(void *info, const void *data, size_t size) {
     
     logo = [UIImage getRoundedRectImage:logo size:CGSizeMake(logoWidth, logoWidth) radius:radius];
     
-    CGFloat magin = 10.f;
+    CGFloat magin = 0.f;
     UIImage *whiteBackImage = [UIImage imageWithColor:[UIColor whiteColor] size:CGSizeMake(logoWidth+magin, logoWidth+magin)];
     whiteBackImage = [UIImage getRoundedRectImage:whiteBackImage size:CGSizeMake(logoWidth+magin, logoWidth+magin) radius:radius];
     

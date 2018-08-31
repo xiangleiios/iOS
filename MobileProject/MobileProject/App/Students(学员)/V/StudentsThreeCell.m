@@ -35,9 +35,9 @@
     [self.selelctBut setImage:[UIImage imageNamed:@"nor_button"] forState:UIControlStateNormal];
     [self.selelctBut setImage:[UIImage imageNamed:@"down_button"] forState:UIControlStateSelected];
     [self.selelctBut mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(27));
         make.centerY.mas_equalTo(self.contentView);
-        make.width.height.mas_equalTo(KFit_W6S(50));
+        make.width.height.mas_equalTo(KFit_W6S(56));
     }];
     
     
