@@ -26,11 +26,16 @@
 @property (nonatomic , strong)XLInformationV *shangxian;
 @property (nonatomic , strong)XLInformationV *address;
 @property (nonatomic , strong)XLInformationV *beizhu;
-
+@property (nonatomic , strong)NSMutableArray *imgArr;
 @end
 
 @implementation DrivingSchoolVC
-
+- (NSMutableArray *)imgArr{
+    if (_imgArr == nil) {
+        _imgArr = [NSMutableArray array];
+    }
+    return _imgArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"所属驾校"];
@@ -57,7 +62,6 @@
     
     self.backview = [[XLView alloc] init];
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//    self.backview.backgroundColor = kColor_N(240, 240, 240);
     [self.scroll addSubview:self.backview];
     
 }
@@ -72,19 +76,19 @@
         make.height.mas_equalTo(KFit_H6S(1170));
     }];
     
-    self.jiaoxiao = [[XLInformationV alloc] informationWithTitle:@"所属驾校" SubTitle:@"所属驾校"];
-    self.fendeiName = [[XLInformationV alloc] informationWithTitle:@"分队名" SubTitle:@"所属驾校"];
-    self.fenduiType = [[XLInformationV alloc] informationWithTitle:@"分队类型" SubTitle:@"所属驾校"];
-    self.jiaofei = [[XLInformationV alloc] informationWithTitle:@"缴费类型" SubTitle:@"所属驾校"];
-    self.baozhengjin = [[XLInformationV alloc] informationWithTitle:@"保证金" SubTitle:@"所属驾校"];
-    self.stat_time = [[XLInformationV alloc] informationWithTitle:@"合同起始时间" SubTitle:@"所属驾校"];
-    self.end_time = [[XLInformationV alloc] informationWithTitle:@"合同结束时间" SubTitle:@"所属驾校"];
-    self.fuzeren = [[XLInformationV alloc] informationWithTitle:@"负责人" SubTitle:@"所属驾校"];
-    self.pho = [[XLInformationV alloc] informationWithTitle:@"联系电话" SubTitle:@"所属驾校"];
-    self.shenfenz = [[XLInformationV alloc] informationWithTitle:@"负责人身份证号" SubTitle:@"所属驾校"];
-    self.shangxian = [[XLInformationV alloc] informationWithTitle:@"报名上限" SubTitle:@"所属驾校"];
-    self.address = [[XLInformationV alloc] informationWithTitle:@"地址" SubTitle:@"所属驾校"];
-    self.beizhu = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:@"所属驾校"];
+    self.jiaoxiao = [[XLInformationV alloc] informationWithTitle:@"所属驾校" SubTitle:_model.deptFatherName];
+    self.fendeiName = [[XLInformationV alloc] informationWithTitle:@"分队名" SubTitle:_model.name];
+    self.fenduiType = [[XLInformationV alloc] informationWithTitle:@"分队类型" SubTitle:_model.typeName];
+    self.jiaofei = [[XLInformationV alloc] informationWithTitle:@"缴费类型" SubTitle:_model.payName];
+    self.baozhengjin = [[XLInformationV alloc] informationWithTitle:@"保证金" SubTitle:_model.ensureCost];
+    self.stat_time = [[XLInformationV alloc] informationWithTitle:@"合同起始时间" SubTitle:_model.contractTimeStart];
+    self.end_time = [[XLInformationV alloc] informationWithTitle:@"合同结束时间" SubTitle:_model.contractTimeEnd];
+    self.fuzeren = [[XLInformationV alloc] informationWithTitle:@"负责人" SubTitle:_model.leader];
+    self.pho = [[XLInformationV alloc] informationWithTitle:@"联系电话" SubTitle:_model.phone];
+    self.shenfenz = [[XLInformationV alloc] informationWithTitle:@"负责人身份证号" SubTitle:_model.leaderIdCard];
+    self.shangxian = [[XLInformationV alloc] informationWithTitle:@"报名上限" SubTitle:_model.upperLimitNumber];
+    self.address = [[XLInformationV alloc] informationWithTitle:@"地址" SubTitle:_model.address];
+    self.beizhu = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:_model.remark];
     
     [v addSubview:self.jiaoxiao];
     [v addSubview:self.fendeiName];
@@ -118,7 +122,31 @@
         make.height.mas_equalTo(KFit_H6S(90));
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
     }];
-
+    
+    UIView *imgback = [[UIView alloc] init];
+    [self.backview addSubview:imgback];
+    [imgback mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.top.mas_equalTo(lb.mas_bottom).mas_offset(KFit_H6S(30));
+        make.height.mas_equalTo(KFit_H6S(150));
+    }];
+    
+    if (_model.idCardFrontUrl) {
+        [self.imgArr addObject:_model.idCardFrontUrl];
+    }
+    if (_model.idCardBackUrl) {
+        [self.imgArr addObject:_model.idCardBackUrl];
+    }
+    if (_model.contractUrl) {
+        [self.imgArr addObject:_model.contractUrl];
+    }
+    for (int i = 0; i<self.imgArr.count; i++) {
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(30+i * KFit_W6S(180), 0, KFit_W6S(150), KFit_W6S(150))];
+        [imgback addSubview:img];
+        [img sd_setImageWithURL:[NSURL URLWithString:self.imgArr[i]] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
+    }
+    
+    
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
     

@@ -10,7 +10,6 @@
 
 #import "CYLTabBarController.h"
 @interface CYLTabBarControllerConfig : NSObject
-
 @property (nonatomic, strong) UIViewController *homePushVc; //用于启动广告的 push 和 pop
 @property (nonatomic, retain) CYLTabBarController * tabBarController;
 

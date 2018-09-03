@@ -9,5 +9,5 @@
 #import "FMBaseViewController.h"
 
 @interface VehicleDetailsVC : FMBaseViewController
-
+@property (nonatomic , strong)FMMainModel *model;
 @end

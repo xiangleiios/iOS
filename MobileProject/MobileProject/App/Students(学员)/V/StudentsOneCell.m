@@ -28,10 +28,10 @@
 }
 
 - (void)loadSubview{
-    UIImageView * img = [[UIImageView alloc] init];
-    [self.contentView addSubview:img];
-    [img setImage:[UIImage imageNamed:@"head_nor"]];
-    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+    _img = [[UIImageView alloc] init];
+    [self.contentView addSubview:_img];
+    [_img setImage:[UIImage imageNamed:@"head_nor"]];
+    [_img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView);
         make.width.height.mas_equalTo(KFit_W6S(80));
@@ -42,7 +42,7 @@
     self.title.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [self.contentView addSubview:self.title];
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(img.mas_right).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(_img.mas_right).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(-KFit_H6S(25));
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(350), KFit_H6S(40)));
     }];
@@ -53,13 +53,13 @@
     self.typeone.layer.borderColor = kColor_N(0, 110, 230).CGColor;
     self.typeone.layer.cornerRadius = 3;
     self.typeone.textColor = kColor_N(0, 110, 230);
-    self.typeone.font = [UIFont systemFontOfSize:kFit_Font6(12)];
+    self.typeone.font = [UIFont systemFontOfSize:kFit_Font6(11)];
     self.typeone.textAlignment = NSTextAlignmentCenter;
     self.typeone.text = @"已收费";
     [self.typeone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(img.mas_right).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(_img.mas_right).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(110), KFit_H6S(40)));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
     }];
     
     self.typetwo = [[UILabel alloc] init];
@@ -68,13 +68,13 @@
     self.typetwo.layer.borderColor = kColor_N(0, 110, 230).CGColor;
     self.typetwo.layer.cornerRadius = 3;
     self.typetwo.textColor = kColor_N(0, 110, 230);
-    self.typetwo.font = [UIFont systemFontOfSize:kFit_Font6(12)];
+    self.typetwo.font = [UIFont systemFontOfSize:kFit_Font6(11)];
     self.typetwo.textAlignment = NSTextAlignmentCenter;
     self.typetwo.text = @"明安驾校";
     [self.typetwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.typeone.mas_right).mas_offset(KFit_W6S(10));
         make.centerY.mas_equalTo(self.typeone);
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(110), KFit_H6S(40)));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
     }];
     
     self.typethree = [[UILabel alloc] init];
@@ -83,13 +83,13 @@
     self.typethree.layer.borderColor = kColor_N(0, 110, 230).CGColor;
     self.typethree.layer.cornerRadius = 3;
     self.typethree.textColor = kColor_N(0, 110, 230);
-    self.typethree.font = [UIFont systemFontOfSize:kFit_Font6(12)];
+    self.typethree.font = [UIFont systemFontOfSize:kFit_Font6(11)];
     self.typethree.textAlignment = NSTextAlignmentCenter;
     self.typethree.text = @"已收费";
     [self.typethree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.typetwo.mas_right).mas_offset(KFit_W6S(10));
         make.centerY.mas_equalTo(self.typetwo);
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(110), KFit_H6S(40)));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
     }];
     
     self.typefour = [[UILabel alloc] init];
@@ -116,4 +116,30 @@
     }];
     
 }
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    
+    if (_type == CellTypeSuoShuJiaXiao) {
+        self.title.text = [NSString stringWithFormat:@"%@ %@",model.leader,model.phone];
+        self.typeone.text = [NSString stringWithFormat:@"车辆%@", model.teamSchoolCarCount];
+        self.typetwo.text = [NSString stringWithFormat:@"已报名%@", model.teamSchoolStudentCount];
+        self.typethree.hidden = YES;
+        self.typefour.text = model.payName;
+        if ([model.payName  isEqual: @"代缴"]) {
+            self.typefour.backgroundColor = kColor_N(0, 112, 234);
+        }else{
+            self.typefour.backgroundColor = kColor_N(238, 168, 58);
+        }
+    }else if (_type == CellTypeCheLiangGuanLi){
+         self.title.text = [NSString stringWithFormat:@"%@",model.carName];
+        self.typeone.text = [NSString stringWithFormat:@"%@", model.plateNumber];
+        self.typetwo.hidden = YES;
+        self.typethree.hidden = YES;
+        self.typefour.hidden = YES;
+    }
+    
+}
+
+
 @end

@@ -174,6 +174,106 @@
 #pragma mark - FMMainModel
 @interface FMMainModel : NSObject
 @property (nonatomic , strong)NSArray *images;
+
+@property (nonatomic , strong)NSString *teanSchoolId;
+@property (nonatomic , strong)NSString *teamCode;
+@property (nonatomic , strong)NSString *deptId;
+@property (nonatomic , strong)NSString *deptFatherName;// 所属驾校,
+@property (nonatomic , strong)NSString *name;// 分校名称,
+@property (nonatomic , strong)NSString *leader;//负责人 ,
+@property (nonatomic , strong)NSString *leaderIdCard;//负责人身份证号码 ,
+@property (nonatomic , strong)NSString *phone;// 联系电话,
+@property (nonatomic , strong)NSString *businessStatus;//
+@property (nonatomic , strong)NSString *teamType;//
+@property (nonatomic , strong)NSString *payType;//
+@property (nonatomic , strong)NSString *residencePermitCost;//
+@property (nonatomic , strong)NSString *manageCost;//
+@property (nonatomic , strong)NSString *physicalCost;//
+@property (nonatomic , strong)NSString *subjectOneCost;//
+@property (nonatomic , strong)NSString *subjectTwoCost;//
+@property (nonatomic , strong)NSString *subjectThreeCost;//
+@property (nonatomic , strong)NSString *ensureCost;// 保证金,
+@property (nonatomic , strong)NSString *signUpCost;// 0,
+@property (nonatomic , strong)NSString *contractTimeStart;//合同起始时间,
+@property (nonatomic , strong)NSString *contractTimeEnd;// 合同结束时间,
+@property (nonatomic , strong)NSString *upperLimitNumber;// 报名上限,
+@property (nonatomic , strong)NSString *address;// 地址,
+@property (nonatomic , strong)NSString *remark;// 备注,
+@property (nonatomic , strong)NSString *del;//
+@property (nonatomic , strong)NSString *idCardFrontUrl;//身份证正面,
+@property (nonatomic , strong)NSString *idCardBackUrl;// 身份证反面,
+@property (nonatomic , strong)NSString *contractUrl;// 合同图片,
+//@property (nonatomic , strong)NSString *createBy;//
+//@property (nonatomic , strong)NSString *createTime;//
+//@property (nonatomic , strong)NSString *updateBy;//
+//@property (nonatomic , strong)NSString *updateTime;//
+@property (nonatomic , strong)NSString *deptIds;//
+@property (nonatomic , strong)NSString *contractTimeStartS;//
+@property (nonatomic , strong)NSString *contractTimeStartE;//
+@property (nonatomic , strong)NSString *contractTimeEndS;//
+@property (nonatomic , strong)NSString *contractTimeEndE;//
+@property (nonatomic , strong)NSString *unpaidPrice;//
+@property (nonatomic , strong)NSString *signUpPrice;//
+@property (nonatomic , strong)NSString *teamSchoolCarCount;// 车辆数量,
+@property (nonatomic , strong)NSString *teamSchoolStudentCount;// 已报名学员数量,
+@property (nonatomic , strong)NSString *typeName;// 分队类型,
+@property (nonatomic , strong)NSString *payName;// 缴费类型
+
+@property (nonatomic , strong)NSString *searchValue;//
+@property (nonatomic , strong)NSString *createBy;//测试人",
+@property (nonatomic , strong)NSString *createTime;//2018-08-31T14:36:46.000+0800",
+@property (nonatomic , strong)NSString *updateBy;//
+@property (nonatomic , strong)NSString *updateTime;//
+//@property (nonatomic , strong)NSString *remark;// 备注,
+@property (nonatomic , strong)NSString *params;//
+@property (nonatomic , strong)NSString *idid;//
+@property (nonatomic , strong)NSString *schoolId;// 229,
+@property (nonatomic , strong)NSString *trainingId;// null,
+@property (nonatomic , strong)NSString *carNumber;// 车辆编号,
+@property (nonatomic , strong)NSString *user;// 负责人,
+@property (nonatomic , strong)NSString *userPhoneNumber;// 联系电话,
+@property (nonatomic , strong)NSString *carType;//车辆类型,
+@property (nonatomic , strong)NSString *carName;// 车辆名称,
+@property (nonatomic , strong)NSString *vin;// 车架号,
+@property (nonatomic , strong)NSString *plateNumber;// 车牌号,
+@property (nonatomic , strong)NSString *plateTrumpet;// null,
+@property (nonatomic , strong)NSString *engineNumber;// 发动机,
+@property (nonatomic , strong)NSString *reducibleNumber;// 200,
+@property (nonatomic , strong)NSString *buyTime;//购买日期,
+@property (nonatomic , strong)NSString *annualVerificationTime;//"2018-08-31T00:00:00.000+0800",
+@property (nonatomic , strong)NSString *registerTime;// 注册日期,
+@property (nonatomic , strong)NSString *isRegistration;// "0",
+@property (nonatomic , strong)NSString *registrationCertificatePic;// null,
+@property (nonatomic , strong)NSString *registrationCertificateValidityPeriod;//"2018-08-31T00:00:00.000+0800",
+@property (nonatomic , strong)NSString *scrapTime;//"2019-12-31T00:00:00.000+0800",
+@property (nonatomic , strong)NSString *isTransportationLicense;//
+@property (nonatomic , strong)NSString *transportationLicenseIssueTime;//
+@property (nonatomic , strong)NSString *transportationLicenseNumber;//null,
+@property (nonatomic , strong)NSString *transportationLicenseExpireTime;// null,
+@property (nonatomic , strong)NSString *transportationLicenseNextCheckTime;// null,
+@property (nonatomic , strong)NSString *transportationLicensePic;// null,
+@property (nonatomic , strong)NSString *isRating;// 等级评定 1 是， 0 无,
+@property (nonatomic , strong)NSString *ratingLevel;// 等级评定级别 1 一级 2二级 3三级,
+@property (nonatomic , strong)NSString *ratingTime;// 等级评定日期,
+@property (nonatomic , strong)NSString *ratingExpireTime;// 等级评定有效期,
+@property (nonatomic , strong)NSString *ratingNextCheckTime;// 下次等级评定日期,
+@property (nonatomic , strong)NSString *ratingLevelPic;// 等级评定扫描照片,
+@property (nonatomic , strong)NSString *trafficInsuranceCompanyName;// 交保险公司,
+@property (nonatomic , strong)NSString *trafficInsuranceBuyTime;// 强险购买日期,
+@property (nonatomic , strong)NSString *trafficInsuranceExpireTime;// 强险到期日期,
+@property (nonatomic , strong)NSString *trafficInsurancePic;// 等级评定扫描照片,
+@property (nonatomic , strong)NSString *businessInsuranceCompanyName;// 商险公司,
+@property (nonatomic , strong)NSString *businessInsuranceBuyTime;// 商险购买日期,
+@property (nonatomic , strong)NSString *businessInsuranceExpireTime;// 商险到期日期,
+@property (nonatomic , strong)NSString *businessInsurancePic;// 交强险扫描件照片,
+@property (nonatomic , strong)NSString *carPic;// "group1/M00/00/04/rBA3PluI4fuAMkaYAARzrxW7y6o871.jpg",
+@property (nonatomic , strong)NSString *purchaseTaxPic;// "group1/M00/00/04/rBA3PluI4fOAZ1HyAARzrxW7y6o680.jpg",
+@property (nonatomic , strong)NSString *invoicePic;//"group1/M00/00/04/rBA3PluI4fWAToQAAARzrxW7y6o438.jpg",
+@property (nonatomic , strong)NSString *otherPic;// "group1/M00/00/04/rBA3PluI4feATgarAARzrxW7y6o534.jpg",
+@property (nonatomic , strong)NSString *isDel;// 0,
+@property (nonatomic , strong)NSString *schoolName;// 所属队别,
+@property (nonatomic , strong)NSString *queryRegisterTimeStart;// null,
+@property (nonatomic , strong)NSString *queryRegisterTimeEnd;// null
 @end
 
 

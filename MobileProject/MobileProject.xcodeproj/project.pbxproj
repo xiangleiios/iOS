@@ -94,6 +94,7 @@
 		A778F86C2134E004008A8948 /* StudentsThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86B2134E004008A8948 /* StudentsThreeCell.m */; };
 		A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86E2134EEDA008A8948 /* QrCodeVC.m */; };
 		A7825C49213CD29D0056FDA2 /* AddStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C48213CD29D0056FDA2 /* AddStudentCell.m */; };
+		A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */; };
 		A79276FE212A525D00B4D65D /* AddStudentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79276FD212A525D00B4D65D /* AddStudentVC.m */; };
 		A7927701212A900200B4D65D /* StudentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7927700212A900200B4D65D /* StudentsVC.m */; };
 		A79DD8382137DFE800665245 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */; };
@@ -750,6 +751,8 @@
 		A778F86E2134EEDA008A8948 /* QrCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QrCodeVC.m; sourceTree = "<group>"; };
 		A7825C47213CD29D0056FDA2 /* AddStudentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddStudentCell.h; sourceTree = "<group>"; };
 		A7825C48213CD29D0056FDA2 /* AddStudentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentCell.m; sourceTree = "<group>"; };
+		A7825C4A213D35750056FDA2 /* InsuranceInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsuranceInformationVC.h; sourceTree = "<group>"; };
+		A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsuranceInformationVC.m; sourceTree = "<group>"; };
 		A79276FC212A525D00B4D65D /* AddStudentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddStudentVC.h; sourceTree = "<group>"; };
 		A79276FD212A525D00B4D65D /* AddStudentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentVC.m; sourceTree = "<group>"; };
 		A79276FF212A900200B4D65D /* StudentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsVC.h; sourceTree = "<group>"; };
@@ -2199,6 +2202,8 @@
 				A7B5A1062133A9F100BC197B /* VehicleInformationVC.m */,
 				A7B5A1082133C86800BC197B /* RegistrationInformationVC.h */,
 				A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */,
+				A7825C4A213D35750056FDA2 /* InsuranceInformationVC.h */,
+				A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */,
 			);
 			path = "Vehicle(车辆管理)";
 			sourceTree = "<group>";
@@ -4948,6 +4953,7 @@
 				DABD1A951F1F489B003A170A /* CYLTabBarControllerConfig.m in Sources */,
 				DA0346751F509098008E7BE1 /* NSString+QMUI.m in Sources */,
 				DA85972C1FF1F60F00111B28 /* PagingButtonView.m in Sources */,
+				A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */,
 				DAE2129D1EF2867B000EAB90 /* DesignerViewController.m in Sources */,
 				DA0346B71F509098008E7BE1 /* UIImage+Blur.m in Sources */,
 				DA0347211F509098008E7BE1 /* FMRegExpTool.m in Sources */,

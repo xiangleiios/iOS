@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = kColor_N(240, 240, 240);
     [self laodScroll];
     
     [self loadDataview];
@@ -60,12 +60,22 @@
         make.height.mas_equalTo(KFit_H6S(450));
     }];
     
+    NSString *str = [_model.isRating  isEqual: @"1"]?@"是":@"否";
     
-    self.dengji = [[XLInformationV alloc] informationWithTitle:@"是否进行登记评定" SubTitle:@"所属驾校"];
-    self.pingding_time = [[XLInformationV alloc] informationWithTitle:@"登记评定日期" SubTitle:@"所属驾校"];
-    self.xiaci_time = [[XLInformationV alloc] informationWithTitle:@"下次登记评定日期" SubTitle:@"所属驾校"];
-    self.jibie = [[XLInformationV alloc] informationWithTitle:@"登记评定级别" SubTitle:@"所属驾校"];
-    self.qixian = [[XLInformationV alloc] informationWithTitle:@"登记评定有限期限" SubTitle:@"所属驾校"];
+    self.dengji = [[XLInformationV alloc] informationWithTitle:@"是否进行登记评定" SubTitle:str];
+    self.pingding_time = [[XLInformationV alloc] informationWithTitle:@"登记评定日期" SubTitle:_model.ratingTime];
+    self.xiaci_time = [[XLInformationV alloc] informationWithTitle:@"下次登记评定日期" SubTitle:_model.ratingNextCheckTime];
+    
+    NSString *str1;
+    if ([_model.ratingLevel  isEqual: @"1"]) {
+        str1 = @"一级";
+    }else if ([_model.ratingLevel  isEqual: @"2"]){
+        str1 = @"二级";
+    }else {
+        str1 = @"三级";
+    }
+    self.jibie = [[XLInformationV alloc] informationWithTitle:@"登记评定级别" SubTitle:str1];
+    self.qixian = [[XLInformationV alloc] informationWithTitle:@"登记评定有限期限" SubTitle:_model.ratingExpireTime];
     
     [v addSubview:self.dengji];
     [v addSubview:self.pingding_time];

@@ -17,7 +17,12 @@
 @end
 
 @implementation SubordinateVC
-
+- (NSMutableArray *)dataArr{
+    if (_dataArr ==nil) {
+        _dataArr = [NSMutableArray array];
+    }
+    return _dataArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"所属驾校"];
@@ -68,14 +73,12 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    [_table.mj_footer endRefreshing];
-    [_table.mj_header endRefreshing];
     NSString *url = POSTTeamSchoolList;
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"data"];
+        NSArray *tpArray = responseObject[@"list"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -103,20 +106,19 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    return self.dataArr.count;
-    return 3;
+    return self.dataArr.count;
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-        NSString *cellID = [NSString stringWithFormat:@"StudentsOneCell"];
-        StudentsOneCell *cell = (StudentsOneCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-        if (!cell) {
-            cell = [[StudentsOneCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-        }
-        return cell;
-    
+    NSString *cellID = [NSString stringWithFormat:@"StudentsOneCell"];
+    StudentsOneCell *cell = (StudentsOneCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[StudentsOneCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    }
+    cell.type = CellTypeSuoShuJiaXiao;
+    cell.model = self.dataArr[indexPath.row];
+    return cell;
     
 }
 
@@ -127,6 +129,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DrivingSchoolVC *vc = [[DrivingSchoolVC alloc] init];
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 /*

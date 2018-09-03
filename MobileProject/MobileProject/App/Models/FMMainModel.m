@@ -30,17 +30,19 @@
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
              @"idid":@"id",
-             @"description_field":@"description",
+//             @"description_field":@"description",
              };
 }
 
-+ (NSDictionary *)objectClassInArray {
-    return @{@"images" : [FMSubmodel class],
-             @"replies" : [FMSubmodel class],
-             @"items" : [FMSubmodel class],
-             @"logs" : [FMSubmodel class]
-             };
-}
+//+ (NSDictionary *)objectClassInArray {
+//    return @{@"images" : [FMSubmodel class],
+//             @"replies" : [FMSubmodel class],
+//             @"items" : [FMSubmodel class],
+//             @"logs" : [FMSubmodel class]
+//             };
+//}
+
+
 //- (id)valueForUndefinedKey:(NSString *)key {
 //    return nil;
 //}

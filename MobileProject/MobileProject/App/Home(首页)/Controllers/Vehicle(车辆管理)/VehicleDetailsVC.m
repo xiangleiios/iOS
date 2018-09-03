@@ -10,7 +10,7 @@
 #import "JXCategoryTitleView.h"
 #import "VehicleInformationVC.h"
 #import "RegistrationInformationVC.h"
-
+#import "InsuranceInformationVC.h"
 @interface VehicleDetailsVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -71,16 +71,24 @@
     self.myCategoryView.contentScrollView = self.scrollView;
     
     VehicleInformationVC *vc = [[VehicleInformationVC alloc] init];
+    vc.model = _model;
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     
     RegistrationInformationVC *vctwo = [[RegistrationInformationVC alloc] init];
+    vctwo.model = _model;
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
     vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
-//    VehicleInformationVC
+    
+    
+    InsuranceInformationVC *vcthree = [[InsuranceInformationVC alloc] init];
+    vcthree.model = _model;
+    [self addChildViewController:vcthree];
+    [self.scrollView addSubview:vcthree.view];
+    vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

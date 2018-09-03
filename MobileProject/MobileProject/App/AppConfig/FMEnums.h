@@ -9,6 +9,16 @@
 #ifndef FMEnums_h
 #define FMEnums_h
 
+
+
+
+typedef NS_ENUM(NSInteger, CellType) {
+    CellTypeSuoShuJiaXiao = 0,
+    CellTypeCheLiangGuanLi = 1
+};
+
+
+
 typedef NS_ENUM(NSInteger, linkType) {
     /** 没有link外链 */
     linkTypeZero = 0,

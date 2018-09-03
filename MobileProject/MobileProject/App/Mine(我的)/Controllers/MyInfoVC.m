@@ -66,7 +66,12 @@
 }
 - (void)logOut:(UIButton *)sender{
     [[User UserOb] UserQuit];
-    [self.navigationController popViewControllerAnimated:YES];
+    LoginVC *Loginvc = [[LoginVC alloc] init];
+    AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UIViewController *vc = delegete.window.rootViewController;
+    delegete.window.rootViewController = Loginvc;
+    vc = nil;
+    [self presentViewController:Loginvc animated:YES completion:NULL];
 }
 
 - (void)didReceiveMemoryWarning {

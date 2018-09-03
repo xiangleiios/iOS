@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view.backgroundColor = kColor_N(240, 240, 240);
     
     [self laodScroll];
     
@@ -62,21 +62,20 @@
     [self.backview addSubview:v];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(self.backview);
-        make.height.mas_equalTo(KFit_H6S(1080));
+        make.height.mas_equalTo(KFit_H6S(990));
     }];
     
-    self.bianhao = [[XLInformationV alloc] informationWithTitle:@"车辆标号" SubTitle:@"所属驾校"];
-    self.duibie = [[XLInformationV alloc] informationWithTitle:@"所属对别" SubTitle:@"所属驾校"];
-    self.fuzeren = [[XLInformationV alloc] informationWithTitle:@"负责人" SubTitle:@"所属驾校"];
-    self.pho = [[XLInformationV alloc] informationWithTitle:@"联系电话" SubTitle:@"所属驾校"];
-    self.name = [[XLInformationV alloc] informationWithTitle:@"车辆名称" SubTitle:@"所属驾校"];
-    self.end_time = [[XLInformationV alloc] informationWithTitle:@"合同结束时间" SubTitle:@"所属驾校"];
-    self.chelianghao = [[XLInformationV alloc] informationWithTitle:@"车辆号" SubTitle:@"所属驾校"];
-    self.goumai_time = [[XLInformationV alloc] informationWithTitle:@"购买日期" SubTitle:@"所属驾校"];
-    self.zhuce_time = [[XLInformationV alloc] informationWithTitle:@"注册日期" SubTitle:@"所属驾校"];
-    self.chejia = [[XLInformationV alloc] informationWithTitle:@"车架号" SubTitle:@"所属驾校"];
-    self.fadongji = [[XLInformationV alloc] informationWithTitle:@"发动机" SubTitle:@"所属驾校"];
-    self.beizhu = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:@"所属驾校"];
+    self.bianhao = [[XLInformationV alloc] informationWithTitle:@"车辆编号" SubTitle:_model.carNumber];
+    self.duibie = [[XLInformationV alloc] informationWithTitle:@"所属队别" SubTitle:_model.schoolName];
+    self.fuzeren = [[XLInformationV alloc] informationWithTitle:@"负责人" SubTitle:_model.user];
+    self.pho = [[XLInformationV alloc] informationWithTitle:@"联系电话" SubTitle:_model.userPhoneNumber];
+    self.name = [[XLInformationV alloc] informationWithTitle:@"车辆名称" SubTitle:_model.carName];
+    self.chelianghao = [[XLInformationV alloc] informationWithTitle:@"车辆号" SubTitle:_model.plateNumber];
+    self.goumai_time = [[XLInformationV alloc] informationWithTitle:@"购买日期" SubTitle:_model.buyTime];
+    self.zhuce_time = [[XLInformationV alloc] informationWithTitle:@"注册日期" SubTitle:_model.registerTime];
+    self.chejia = [[XLInformationV alloc] informationWithTitle:@"车架号" SubTitle:_model.vin];
+    self.fadongji = [[XLInformationV alloc] informationWithTitle:@"发动机" SubTitle:_model.engineNumber];
+    self.beizhu = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:_model.remark];
     
     
     [v addSubview:self.bianhao];
@@ -84,7 +83,6 @@
     [v addSubview:self.fuzeren];
     [v addSubview:self.pho];
     [v addSubview:self.name];
-    [v addSubview:self.end_time];
     [v addSubview:self.chelianghao];
     [v addSubview:self.goumai_time];
     [v addSubview:self.zhuce_time];
@@ -93,7 +91,7 @@
     [v addSubview:self.beizhu];
     
     
-    NSArray *arr = @[self.bianhao,self.duibie,self.fuzeren,self.pho,self.name,self.end_time,self.chelianghao,self.goumai_time,self.zhuce_time,self.chejia,self.fadongji,self.beizhu];
+    NSArray *arr = @[self.bianhao,self.duibie,self.fuzeren,self.pho,self.name,self.chelianghao,self.goumai_time,self.zhuce_time,self.chejia,self.fadongji,self.beizhu];
     [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(v);
