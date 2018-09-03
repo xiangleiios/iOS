@@ -69,27 +69,7 @@
 }
 
 - (void)uploadDataReqWithIsRefresh{
-   
-    NSString *url = [NSString stringWithFormat:GETcommentsList,self.model.idid,self.model.module_type,self.pageSize,self.pageNum];
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        if (kResponseObjectStatusCodeIsEqual(200)) {
-            NSArray *tpArray = responseObject[@"data"];
-            if (tpArray) {
-                if (self.pageNum == 1) [self.dataArray removeAllObjects];
-                
-                for (NSDictionary *dic in tpArray) {
-                    FMMainModel *model = [FMMainModel mj_objectWithKeyValues:dic];
-                    [self.dataArray addObject:model];
-                }
-                [self.table reloadData];
-            }
-        }
-        [_table.mj_header endRefreshing];
-        [_table.mj_footer endRefreshing];
-    } failureBlock:^(NSError *error) {
-        [_table.mj_header endRefreshing];
-        [_table.mj_footer endRefreshing];
-    } progress:nil];
+
 
     
 }

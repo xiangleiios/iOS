@@ -125,7 +125,7 @@
     
     
 #ifdef DEBUG
-    self.pho.text = @"13871212320";
+    self.pho.text = @"18810395609";
     self.password.text = @"123456";
 #else
     
@@ -143,7 +143,6 @@
     [v addSubview:lbt];
     [lbt mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.centerX.bottom.mas_equalTo(v);
-        
         make.height.mas_equalTo(1);
     }];
     

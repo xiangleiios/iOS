@@ -125,122 +125,55 @@
 @end
 
 
-
+/**
+ "teanSchoolId": ,
+ "teamCode": ,
+ "deptId": null,
+ "deptFatherName": 所属驾校,
+ "name": 分校名称,
+ "leader":负责人 ,
+ "leaderIdCard":负责人身份证号码 ,
+ "phone": 联系电话,
+ "businessStatus": ,
+ "teamType": ,
+ "payType": 0,
+ "residencePermitCost": 0,
+ "manageCost": 0,
+ "physicalCost": 0,
+ "subjectOneCost": 0,
+ "subjectTwoCost": 0,
+ "subjectThreeCost": 0,
+ "ensureCost": 保证金,
+ "signUpCost": 0,
+ "contractTimeStart":合同起始时间,
+ "contractTimeEnd": 合同结束时间,
+ "upperLimitNumber": 报名上限,
+ "address": 地址,
+ "remark": 备注,
+ "del": null,
+ "idCardFrontUrl": 身份证正面,
+ "idCardBackUrl": 身份证反面,
+ "contractUrl": 合同图片,
+ "createBy": null,
+ "createTime": null,
+ "updateBy": null,
+ "updateTime": null,
+ "deptIds": null,
+ "contractTimeStartS": null,
+ "contractTimeStartE": null,
+ "contractTimeEndS": null,
+ "contractTimeEndE": null,
+ "unpaidPrice": 0,
+ "signUpPrice": 0,
+ "teamSchoolCarCount": 车辆数量,
+ "teamSchoolStudentCount": 已报名学员数量,
+ "typeName": 分队类型,
+ "payName": 缴费类型
+ */
 
 #pragma mark - FMMainModel
 @interface FMMainModel : NSObject
-@property (nonatomic , assign) NSInteger idid;
-@property (nonatomic , assign) BOOL is_answer;
-@property (nonatomic , assign) NSInteger category_id;
-@property (nonatomic , copy) NSString *description_field;
-@property (nonatomic , copy) NSString *name;
-@property (nonatomic , copy) NSString *type;
-@property (nonatomic , copy) NSString *types;
-@property (nonatomic , assign) NSInteger state;
-@property (nonatomic , copy) NSString *title;
-@property (nonatomic , copy) NSString *subtitle;
-@property (nonatomic , copy) NSString *keywords;
-@property (nonatomic , copy) NSString *author;
-@property (nonatomic , copy) NSString *tags;
-@property (nonatomic , copy) NSString *source;
-@property (nonatomic , copy) NSString  *link_type;
-@property (nonatomic , copy) NSString *link;
-@property (nonatomic , copy) NSString *image_url;
-@property (nonatomic , copy) NSString *video_url;
-@property (nonatomic , copy) NSString *live_url;
-@property (nonatomic , copy) NSString *summary;
-@property (nonatomic , assign) NSInteger clicks;
-@property (nonatomic , assign) NSInteger comments;
-@property (nonatomic , copy) NSString *favorites;
-@property (nonatomic , assign) NSInteger is_top;
-@property (nonatomic , assign) NSInteger is_essence;
-@property (nonatomic , assign) NSInteger is_recommend;
-@property (nonatomic , assign) NSInteger is_reply;
-@property (nonatomic , assign) NSInteger likes;
-/// 次数
-@property (nonatomic , assign) NSInteger times;
-/// 时间
-@property (nonatomic , copy) NSString *time;
-@property (nonatomic , copy) NSString *time_trans;
-@property (nonatomic , copy) NSString *video_duration;
-@property (nonatomic , copy) NSString *favorite_id;
-@property (nonatomic , strong) NSArray <FMSubmodel* >* images;
-@property (nonatomic , assign) NSInteger amount;
-@property (nonatomic , copy) NSString * begin_date;
-@property (nonatomic , copy) NSString * end_date;
-@property (nonatomic , strong) NSArray <FMSubmodel* >* items;
-@property (nonatomic , strong) NSArray <FMSubmodel* >* replies;
-@property (nonatomic , strong) NSArray <FMSubmodel* >* products;
-@property (nonatomic , assign) NSInteger multiple;
-@property (nonatomic , copy) NSString *member_name;
-@property (nonatomic , copy) NSString *avatar_url;
-@property (nonatomic , copy) NSString *nick_name;
-@property (nonatomic , copy) NSString *person_mobile;
-@property (nonatomic , assign) CGFloat cellHeight;
-@property (nonatomic, strong) NSArray * children;
-@property (nonatomic, copy) NSString * content;
-@property (nonatomic, assign) NSInteger member_id;
-@property (nonatomic, copy) NSString *username;
-@property (nonatomic, assign) NSInteger module_id;
-@property (nonatomic, assign) NSInteger parent_id;
-@property (nonatomic, copy) NSString *created_at;
-@property (nonatomic, copy) NSString *cover_url;
-@property (nonatomic, copy) NSString *deleted_at;
-@property (nonatomic, copy) NSString *code;
-@property (nonatomic, copy) NSString *updated_at;
-@property (nonatomic, assign) NSInteger sort;
-@property (nonatomic, assign) NSInteger site_id;
-
-@property (nonatomic, assign) NSInteger top;
-@property (nonatomic, copy) NSString *published_at;
-@property (nonatomic, assign) NSInteger user_id;
-@property (nonatomic, copy) NSString *origin;
-@property (nonatomic, assign) NSInteger comments_count;
-@property (nonatomic, assign) NSInteger clicks_count;
-@property (nonatomic, assign) NSInteger favorites_count;
-@property (nonatomic, assign) NSInteger follows_count;
-@property (nonatomic, assign) NSInteger likes_count;
-@property (nonatomic, copy) NSString *videos;
-@property (nonatomic ,assign) CGFloat rank;
-@property (nonatomic , assign)NSInteger hall_id;
-@property (nonatomic, copy) NSString *coordinate;
-@property (nonatomic, copy) NSString *address;
-@property (nonatomic, copy) NSString *start_time;
-@property (nonatomic, copy) NSString *end_time;
-@property (nonatomic, copy) NSString *date_range;
-@property (nonatomic, copy) NSString *specialty;
-@property (nonatomic, copy) NSString *famous_spot;
-@property (nonatomic, copy) NSString *lines;
-@property (nonatomic, copy) NSString *category;
-@property (nonatomic, copy) NSString *pano_url;
-@property (nonatomic, assign) NSInteger rate;
-@property (nonatomic, assign) CGFloat price;
-/// 各个模块类型 topic社区  activity活动  scenic景点 article文章 film剧目
-@property (nonatomic, copy) NSString *module_type;
-@property (nonatomic, copy) NSString *product_id;
-@property (nonatomic, assign) NSInteger order_id;
-@property (nonatomic, assign) NSInteger refer_id;
-@property (nonatomic, assign) NSInteger max_amount;
-@property (nonatomic, assign) float num;
-@property (nonatomic, copy) NSString *refer_type;
-@property (nonatomic, assign) CGFloat sum;
-@property (nonatomic , copy)NSString *hall_name;
-@property (nonatomic, copy)NSString *movieName;
-///发帖数
-@property (nonatomic, assign)NSInteger topics_count;
-@property (nonatomic, strong)NSString *background_url;
-@property (nonatomic, strong)FMSubmodel *refer;
-@property (nonatomic, assign)NSInteger distance;
-@property (nonatomic, copy) NSString *live_state;
-@property (nonatomic , assign)NSInteger selection;
-@property (nonatomic , strong)NSString *start_date;
-@property (nonatomic , strong)NSString *voltage;
-@property (nonatomic , strong)NSString *province;
-@property (nonatomic , assign)float max_price;
-@property (nonatomic , strong)NSArray <FMSubmodel* >*logs;
-@property (nonatomic , assign)NSInteger order_freeze_money;
-@property (nonatomic , assign)NSInteger read;//是否已读
-@property (nonatomic , strong)NSArray *more_info;
+@property (nonatomic , strong)NSArray *images;
 @end
 
 

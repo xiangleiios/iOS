@@ -8,7 +8,6 @@
 
 #import "XLUPPay.h"
 #import "UPPaymentControl.h"
-#import "PayComplete.h"
 #import "PDSlideViewController.h"
 @implementation XLUPPay
 + (void)upPayRequestWithOrder:(NSString *)order pushVc:(UIViewController *)pushVc;{
@@ -48,12 +47,12 @@
                                                                      error:nil];
                 NSString *sign = [[NSString alloc] initWithData:signData encoding:NSUTF8StringEncoding];
                 
-                PayComplete *vc = [[PayComplete alloc] init];
-                vc.title = @"银联支付";
-                vc.success = YES;
-                AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
-                PDSlideViewController *currentVc = (PDSlideViewController *)delegete.window.rootViewController;
-                [currentVc.leftVC.homeVc.navigationController pushViewController:vc animated:YES];
+//                PayComplete *vc = [[PayComplete alloc] init];
+//                vc.title = @"银联支付";
+//                vc.success = YES;
+//                AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//                PDSlideViewController *currentVc = (PDSlideViewController *)delegete.window.rootViewController;
+//                [currentVc.leftVC.homeVc.navigationController pushViewController:vc animated:YES];
                 //此处的verify建议送去商户后台做验签，如要放在手机端验，则代码必须支持更新证书
                 /// 目前没有验签
 //                if([self verify:sign]) {
@@ -67,12 +66,12 @@
             //结果code为成功时，去商户后台查询一下确保交易是成功的再展示成功
         }
         else if([code isEqualToString:@"fail"]) {
-            PayComplete *vc = [[PayComplete alloc] init];
-            vc.title = @"银联支付";
-            vc.success = NO;
-            AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
-            PDSlideViewController *currentVc = (PDSlideViewController *)delegete.window.rootViewController;
-            [currentVc.leftVC.homeVc.navigationController pushViewController:vc animated:YES];
+//            PayComplete *vc = [[PayComplete alloc] init];
+//            vc.title = @"银联支付";
+//            vc.success = NO;
+//            AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+//            PDSlideViewController *currentVc = (PDSlideViewController *)delegete.window.rootViewController;
+//            [currentVc.leftVC.homeVc.navigationController pushViewController:vc animated:YES];
             //交易失败
         }
         else if([code isEqualToString:@"cancel"]) {

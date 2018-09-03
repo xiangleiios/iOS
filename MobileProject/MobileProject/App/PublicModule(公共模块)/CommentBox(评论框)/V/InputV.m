@@ -228,28 +228,6 @@
     }
     content = [[NSString fm_disableEmoji:content] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
-    NSString *url;
-    if (self.vc.followsModel == nil) {
-        url=[NSString stringWithFormat:POSTcommentsCreate,self.vc.model.idid,self.vc.model.module_type,content,[User UserOb].token];
-    }else{
-        url=[NSString stringWithFormat:GETfollowsComments,self.vc.followsModel.idid,self.vc.followsModel.member_id,content,[User UserOb].token];
-    }
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        if (kResponseObjectStatusCodeIsEqual(200)) {
-//            [MBProgressHUD showAutoMessage:@"评论成功"];
-            self.textView.text=@"";
-            [self textViewDidChange:self.textView];
-            [self textViewDidEndEditing:self.textView];
-            
-            if (_delegate && [self.delegate respondsToSelector:@selector(chatBox:isSendCommentContentComplete:)]) {
-                [self.delegate chatBox:self isSendCommentContentComplete:YES];
-            }
-        }else{
-            [MBProgressHUD showAutoMessage:responseObject[@"message"]];
-        }
-    } failureBlock:^(NSError *error) {
-        
-    } progress:nil];
 }
 
 @end

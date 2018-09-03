@@ -103,7 +103,8 @@
     [self.view addSubview:next];
     [next setTitle:@"保存" forState:UIControlStateNormal];
     [next addTarget:self action:@selector(nextVC) forControlEvents:UIControlEventTouchUpInside];
-    next.backgroundColor = kColor_N(0, 112, 234);
+    [next setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+    [next setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
     [next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     next.layer.cornerRadius = 5;
     next.layer.masksToBounds = YES;

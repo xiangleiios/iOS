@@ -113,26 +113,7 @@
 #pragma mark-分享
 - (void)toshare{
     XLshare *share = [[XLshare alloc]init];
-    share.title = self.model.title;
-    share.image_url = self.model.image_url.length ? KURLIma(self.model.image_url) : (self.model.images.count > 0?KURLIma([self.model.images firstObject].url):@"");
-    share.subTitle = self.model.subtitle;
-    NSString *url = @"";
-    if ([self.model.module_type isEqualToString:[FMSingle moduleTypeScenic]]) { // 景点分享
-        url = [NSString stringWithFormat:GETscenicsShare,self.model.idid];
-        
-    }else if ([self.model.module_type isEqualToString:[FMSingle moduleTypeTopic]]) {
-        url = [NSString stringWithFormat:GETtopicsShare,self.model.idid];
-        
-    }else if ([self.model.module_type isEqualToString:[FMSingle moduleTypeArticle]]) {
-        url = [NSString stringWithFormat:GETarticlesShare,self.model.idid];
-    }else if ([self.model.module_type isEqualToString:[FMSingle moduleTypeFilm]]) {
-        url = [NSString stringWithFormat:GETfilmsShare,self.model.idid];
-    }else if ([self.model.module_type isEqualToString:[FMSingle moduleTypeActivity]]) {
-        url = [NSString stringWithFormat:GETactivitiesShare,self.model.idid];
-    }else if ([self.model.module_type isEqualToString:[FMSingle moduleTypeShow]]) {
-        url = [NSString stringWithFormat:GETshowsShare,self.model.idid];
-    }
-    share.url = url;
+//    share.url = url;
     [share umengShare:self.view];
 }
 
@@ -144,12 +125,10 @@
     }
     if (sender.selected) {
     //取消收藏
-        NSString *url = [NSString stringWithFormat:GETfavoritesDelete,self.model.idid,self.model.module_type,[User UserOb].token];
-        [self addOrCancelCollection:url finishShow:@"已取消" isGetRequest:YES];;
+        
     }else{
     //添加收藏
-        NSString *urladd = [NSString stringWithFormat:POSTaddFavorites,self.model.idid,self.model.module_type,[User UserOb].token];
-        [self addOrCancelCollection:urladd finishShow:@"收藏成功" isGetRequest:NO];
+        
     }
 }
 #pragma mark-添加取消收藏
@@ -184,14 +163,7 @@
 - (void)determineWhetherToCollect{
     //登录才判断
     if ([[User UserOb] UserLogin]) {
-        NSString *url = [NSString stringWithFormat:GETfavoritesExist,self.model.idid,self.model.module_type,[User UserOb].token];
-        [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-            if (kResponseObjectStatusCodeIsEqual(200)) {
-                self.collection.selected = YES;
-            }
-        } failureBlock:^(NSError *error) {
-            
-        } progress:nil];
+        
     }
 }
 

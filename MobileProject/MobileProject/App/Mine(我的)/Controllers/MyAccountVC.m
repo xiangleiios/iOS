@@ -7,7 +7,6 @@
 //
 
 #import "MyAccountVC.h"
-#import "RechargeVC.h"
 #import "BillVC.h"
 @interface MyAccountVC ()
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -324,8 +323,6 @@
 
 
 - (void)toPay{
-    RechargeVC *vc = [[RechargeVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

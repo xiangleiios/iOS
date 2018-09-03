@@ -28,14 +28,13 @@
 //首页
 #import "PDNavigationController.h"
 #import "PDSlideViewController.h"
-#import "HomeVC.h"
 #import "MyLeftVC.h"
-#import "FMWebViewVC.h"
+
 
 #import "BaiduMapHeader.h"
 
 #import "GuideView.h"
-#import "OrderDetailsVC.h"
+
 #import "XLUPPay.h"
 
 #import "LoginVC.h"
@@ -317,20 +316,7 @@
 
 #pragma mark - 获取推送过来的订单详情
 - (void)loadordersInfo:(NSInteger )idid{
-    NSString *url=[NSString stringWithFormat:GETOrdersInfo,idid,[User UserOb].token];
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
-        OrderDetailsVC *vc = [[OrderDetailsVC alloc] init];
-        vc.title = model.code;
-        vc.model = model;
-        PDSlideViewController *currentVc = (PDSlideViewController *)self.window.rootViewController;
-        [currentVc.leftVC.homeVc.navigationController pushViewController:vc animated:YES];
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
+    
 }
 
 

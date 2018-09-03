@@ -136,14 +136,14 @@
  */
 - (void)changeDataWithModel:(FMMainModel *)model TAG:(NSInteger )Tag{
       [self.db open];
-    NSString *sql=[NSString stringWithFormat:@"update collection set tagnum = %ld,title = '%@',image_url = '%@' where num = %ld",model.idid,model.title,model.image_url,Tag];
-    BOOL b=[self.db executeUpdate:sql];
-    if (!b) {
-        KKLog(@"修改数据失败");
-    }else{
-        KKLog(@"修改数据成功");
-    }
-    [self.db close];
+//    NSString *sql=[NSString stringWithFormat:@"update collection set tagnum = %ld,title = '%@',image_url = '%@' where num = %ld",model.idid,model.title,model.image_url,Tag];
+//    BOOL b=[self.db executeUpdate:sql];
+//    if (!b) {
+//        KKLog(@"修改数据失败");
+//    }else{
+//        KKLog(@"修改数据成功");
+//    }
+//    [self.db close];
     
 }
 
@@ -212,18 +212,7 @@
 
 - (void)sqlselectfrom:(NSInteger)Tag Block:(sqlSelect)block{
     [self.db open];
-    NSMutableArray * mutable = [NSMutableArray array];
-    NSString * select = [NSString stringWithFormat:@"select * from Collection where tagnum = %ld",Tag];
-    FMResultSet * result = [self.db executeQuery:select];
-    while ([result next]) {
-        FMMainModel * model = [[FMMainModel alloc]init];
-        //        model.tagnum = [NSNumber numberWithInt:[result intForColumn:@"tagnum"]];
-        model.idid=[result intForColumn:@"tagnum"];
-        model.image_url = [result stringForColumn:@"image_url"];
-        model.title = [result stringForColumn:@"title"];
-        [mutable addObject:model];
-    }
-    block(mutable);
+   
     [self.db close];
 
 }

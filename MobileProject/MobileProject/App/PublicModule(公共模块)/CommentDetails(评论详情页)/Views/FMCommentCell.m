@@ -73,58 +73,6 @@
 - (void)setModel:(FMMainModel *)model {
     _model = model;
     
-    [_yfHeadIcon sd_setImageWithURL:[NSURL URLWithString:model.avatar_url] placeholderImage:[UIImage imageNamed:@"wo-txw"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        
-    }];
-    NSString *nikeName = [ FMBool fm_valiMobile:model.nick_name] ? ([NSString fm_hiddenMiddleNumOfPhoneNum:model.nick_name]) : (model.nick_name);
-    if (!nikeName.length) {
-       nikeName = [FMBool fm_valiMobile:model.username] ? ([NSString fm_hiddenMiddleNumOfPhoneNum:model.username]) : (model.username);
-    }
-    
-    [_yfNikeName setText:[nikeName  stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [_yfTime setText:[model.time fm_currentDateFormatStringToOtherDateFormatString:model.time timeFormat:TimeFormatMM_dd]];
-    [_yfText setText:model.content];
-    /*
-    if (self.commentsType == commentsTypeVoteQA) {//投票里面的评论
-        
-        self.yfDianZan = [UIButton fm_initButtonNormalTitleColor:kTitleColor backgroundColor:nil font:kFit_Font6(12) normalImage:[UIImage imageNamed:@"wz-zan"] cornerRadius:0 addToSuperView:self.contentView normalTitle:@"12"];
-        self.yfDianZan.tag = model.idid;
-        [XLThumbUp thumbUpButton:self.yfDianZan idid:model.idid];
-        
-        [_yfDianZan setImage:[UIImage imageNamed:@"wz-zan-a"] forState:UIControlStateSelected];
-        [self.yfDianZan setImageEdgeInsets:UIEdgeInsetsMake(0, -kFit_Font6(10), 0,  kFit_Font6(10))];
-        [self.yfDianZan addTarget:self action:@selector(actionDianZan:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.yfDianZan setTitle:[NSString stringWithFormat:@"%ld",(long)model.likes] forState:UIControlStateNormal];
-        
-        if (([[User UserOb] UserLogin]) && (model.member_id == [[User UserOb].idid integerValue])) {
-            //是自己的评论
-            
-//            self.yfDianZan.hidden = YES;
-            [_yfDianZan removeFromSuperview];
-
-            
-            self.yfDelete = [UIButton fm_initButtonNormalTitleColor:kTitleColor backgroundColor:nil font:kFit_Font6(12) normalImage:[UIImage imageNamed:@"search_history_clear"] cornerRadius:0 addToSuperView:self.contentView normalTitle:nil];
-            [self.yfDelete addTarget:self action:@selector(actionDelete:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [_yfDelete mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(_yfText);
-                make.top.mas_equalTo(_yfText.mas_bottom).with.offset(padding);
-                make.size.mas_equalTo(CGSizeMake(kFit_Font6(50), kFit_Font6(20)));
-            }];
-        }else{
-//            self.yfDelete.hidden = YES;
-//            self.yfDianZan.hidden = NO;
-            [_yfDianZan mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(_yfText);
-                make.top.mas_equalTo(_yfText.mas_bottom).with.offset(padding);
-                make.size.mas_equalTo(CGSizeMake(kFit_Font6(50), kFit_Font6(20)));
-            }];
-            [_yfDelete removeFromSuperview];
-        }
-    }
-    */
-    
 }
 
 #pragma mark - 点赞和取消点赞
@@ -134,7 +82,6 @@
         [FMHelper fm_showLoginAlertWithController:self.pushVC tipsStringIfNilShowDefault:nil];
         return;
     }
-    [XLThumbUp thumbUpButton:sender thumbUpType:ThumbUpComments idid:self.model.idid model:self.model];
 }
 
 - (void)actionDelete:(UIButton *)sender {

@@ -7,12 +7,11 @@
 //
 
 #import "FMBaseViewController.h"
-#import "HomeVC.h"
 typedef void(^CallBackBlcok) (FMBaseViewController *vc);
 @interface MyLeftVC : FMBaseViewController
 @property (nonatomic , strong)UIButton *loginBut;
 @property (nonatomic , strong)UIButton *outBut;
 @property (nonatomic , copy)CallBackBlcok back;
-@property (nonatomic , strong)HomeVC *homeVc;
+
 - (void)loaddata;
 @end

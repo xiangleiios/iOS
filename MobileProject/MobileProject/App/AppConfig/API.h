@@ -42,9 +42,10 @@
 
 #pragma mark 手机号登陆
 #define GETmembersLogin KURL(@"/app/login?mobile=%@&password=%@")
-
-
-
+#pragma mark 分校车辆管理
+#define POSTTeamCarLis KURL(@"/app/team/teamCar/teamCarList")
+#pragma mark 分校所属驾校管理
+#define POSTTeamSchoolList KURL(@"/app/team/teamSchool/teamSchoolList")
 
 
 

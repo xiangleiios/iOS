@@ -9,7 +9,6 @@
 #import "MyLeftVC.h"
 #import "XLMineCell.h"
 #import "LoginVC.h"
-#import "OrderVC.h"
 #import "ChangePasswordVC.h"
 #import "MyAccountVC.h"
 #import "MyCouponVC.h"
@@ -134,7 +133,7 @@
 - (void)logOut{
     User *user = [User UserOb];
     [user UserQuit];
-    [self.homeVc.mineBut setImage:[UIImage imageNamed:@"mine"] forState:UIControlStateNormal];
+  
     [self loaddata];
     
 }
@@ -169,35 +168,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    MineModel *model = self.data[indexPath.row];
-    if ([model.title isEqualToString:@"我的订单"]) {
-        OrderVC *vc = [[OrderVC alloc] init];
-        self.back(vc);
-    }else if ([model.title isEqualToString:@"我的优惠券"]){
-        MyCouponVC *vc = [[MyCouponVC alloc] init];
-        self.back(vc);
-    }else if ([model.title isEqualToString:@"修改密码"]){
-        ChangePasswordVC *vc = [[ChangePasswordVC alloc] init];
-        self.back(vc);
-    }else if ([model.title isEqualToString:@"邀请好友"]){
-        [self toShare];
-    }else if ([model.title isEqualToString:@"淘电宝业务介绍"]){
-        HWebVc *vc= [[HWebVc alloc] init];
-        vc.title = @"淘电宝业务介绍";
-        vc.url = HTMLBusinessIntroduction;
-        self.back(vc);
-    }else if ([model.title isEqualToString:@"联系客服"]){
-        HWebVc *vc= [[HWebVc alloc] init];
-        vc.title = @"联系客服";
-        vc.url = HTMLCustomerService;
-        self.back(vc);
-    }else if ([model.title isEqualToString:@"意见反馈"]){
-        Feedback *vc= [[Feedback alloc] init];
-        self.back(vc);
-    }else if ([model.title isEqualToString:@"我的账户"]){
-        MyAccountVC *vc = [[MyAccountVC alloc] init];
-        self.back(vc);
-    }
+   
 }
 
 - (void)toShare{

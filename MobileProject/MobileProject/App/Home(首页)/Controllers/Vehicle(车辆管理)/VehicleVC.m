@@ -70,28 +70,32 @@
 - (void)loadRefreshData{
     [_table.mj_footer endRefreshing];
     [_table.mj_header endRefreshing];
-    //    NSString *url=[NSString stringWithFormat:GETordersList,self.pageNum,[User UserOb].token,self.orderType];
-    //    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-    //        NSArray *tpArray = responseObject[@"data"];
-    //        if (self.pageNum==1) {
-    //            [self.dataArr removeAllObjects];
-    //        }
-    //        if (tpArray) {
-    //            for (NSDictionary *dic in tpArray) {
-    //                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-    //                [self.dataArr addObject:mode];
-    //            }
-    //        }
-    //        [_table reloadData];
-    //        [_table.mj_footer endRefreshing];
-    //        [_table.mj_header endRefreshing];
-    //    } failureBlock:^(NSError *error) {
-    //        KKLog(@"%@", error);
-    //        [_table.mj_footer endRefreshing];
-    //        [_table.mj_header endRefreshing];
-    //    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-    //
-    //    }];
+    NSString *url = POSTTeamCarLis;
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        NSArray *tpArray = responseObject[@"data"];
+        if (self.pageNum==1) {
+            [self.dataArr removeAllObjects];
+        }
+        if (tpArray) {
+            for (NSDictionary *dic in tpArray) {
+                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
+                [self.dataArr addObject:mode];
+            }
+        }
+        [_table reloadData];
+        [_table.mj_footer endRefreshing];
+        [_table.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        [_table.mj_footer endRefreshing];
+        [_table.mj_header endRefreshing];
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
 }
 
 #pragma mark-tableview代理

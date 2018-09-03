@@ -39,15 +39,20 @@
     [change setTitle:@"修改资料" forState:UIControlStateNormal];
     [change setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [change addTarget:self action:@selector(toChange) forControlEvents:UIControlEventTouchUpInside];
-    change.backgroundColor = kColor_N(0, 104, 215);
+    [change setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+    [change setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
     change.layer.cornerRadius = 5;
     change.layer.masksToBounds = YES;
+    
+    
     
     UIButton *share = [[UIButton alloc] init];
     [self.view addSubview:share];
     [share setTitle:@"分享" forState:UIControlStateNormal];
     [share setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     share.backgroundColor = kColor_N(148, 160, 181);
+    [share setBackgroundImage:[UIImage createImageWithColor:kColor_N(148, 160, 181)] forState:UIControlStateNormal];
+    [share setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(148, 160, 181, 0.6)] forState:UIControlStateHighlighted];
     share.layer.cornerRadius = 5;
     share.layer.masksToBounds = YES;
     

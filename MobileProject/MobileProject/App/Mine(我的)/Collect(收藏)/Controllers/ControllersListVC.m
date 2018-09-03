@@ -56,19 +56,7 @@
     if (self.selectArray.count<1) {
         return;
     }
-    NSMutableArray *arr=[NSMutableArray array];
-    for (FMMainModel *model in self.selectArray) {
-        [arr addObject:[NSString stringWithFormat:@"%d",model.idid]];
-    }
-    NSString *str=[arr componentsJoinedByString:@","];
-    NSString *url=[NSString stringWithFormat:GETfavoritesDestroy,str,self.module_type,[User UserOb].token];
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        [self headerRefresh];
-    } failureBlock:^(NSError *error) {
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
+   
 }
 
 
@@ -105,29 +93,7 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url=[NSString stringWithFormat:GETfavoritesList,self.module_type,self.pageNum,[User UserOb].token];
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        NSArray *tpArray = responseObject[@"data"];
-        if (self.pageNum==1) {
-            [self.dataArr removeAllObjects];
-        }
-        if (tpArray) {
-            for (NSDictionary *dic in tpArray) {
-                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-                mode.module_type=self.module_type;
-                [self.dataArr addObject:mode];
-            }
-        }
-        [_table reloadData];
-        [_table.mj_footer endRefreshing];
-        [_table.mj_header endRefreshing];
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-        [_table.mj_footer endRefreshing];
-        [_table.mj_header endRefreshing];
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
+    
 }
 
 

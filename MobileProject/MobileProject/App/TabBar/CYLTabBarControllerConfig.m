@@ -10,7 +10,6 @@
 #import "FMBaseNavigationController.h"
 #import "FMMineVC.h"
 #import "UIImage+FMExtension.h"
-#import "HomeVC.h"
 #import "XLHomeVC.h"
 #import "StudentsVC.h"
 @implementation CYLTabBarControllerConfig

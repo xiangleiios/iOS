@@ -35,13 +35,7 @@
             sender.enabled = YES;
             if (kResponseObjectStatusCodeIsEqual(200)) {
                 [MBProgressHUD showAutoMessage:@"点赞取消!"];
-                sender.selected = NO;
-                [sender setTitle:[NSString stringWithFormat:@"%d",[sender.titleLabel.text integerValue] - 1] forState:UIControlStateNormal];
-                if (model.is_reply == 1 && model.is_answer == YES ) {
-                    [model.replies firstObject].likes -= 1;
-                }else {
-                    model.likes -= 1;
-                }
+               
             }
         } failureBlock:^(NSError *error) {
             sender.enabled = YES;
@@ -55,14 +49,7 @@
             sender.enabled = YES;
             if (kResponseObjectStatusCodeIsEqual(200)) {
                 [MBProgressHUD showAutoMessage:@"点赞成功!"];
-                sender.selected = YES;
-                [sender setTitle:[NSString stringWithFormat:@"%d",[sender.titleLabel.text integerValue] + 1] forState:UIControlStateNormal];
                 
-                if (model.is_reply == 1 && model.is_answer == YES ) {
-                    [model.replies firstObject].likes += 1;
-                }else {
-                    model.likes += 1;
-                }
             }
         } failureBlock:^(NSError *error) {
             sender.enabled = YES;

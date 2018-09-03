@@ -9,8 +9,6 @@
 #import "FMPayRequest.h"
 #import "FLPayManager.h"
 #import "FMWechatPayModel.h"
-#import "FMOutTicketVC.h"
-#import "PayComplete.h"
 @implementation FMPayRequest
 + (void)fm_payRequestWithOrder:(NSString *)order pushVc:(UIViewController *)pushVc isAlipay:(BOOL)isAlipay{
     if (isAlipay) { //支付宝支付
@@ -27,15 +25,15 @@
 //                        [MBProgressHUD showAutoMessage:errStr];
 //                    }
                     if (errCode == FLErrCodeSuccess) {
-                        PayComplete *vc = [[PayComplete alloc] init];
-                        vc.title = @"支付宝支付";
-                        vc.success = YES;
-                        [pushVc.navigationController pushViewController:vc animated:YES];
+//                        PayComplete *vc = [[PayComplete alloc] init];
+//                        vc.title = @"支付宝支付";
+//                        vc.success = YES;
+//                        [pushVc.navigationController pushViewController:vc animated:YES];
                     }else if (errCode == FLErrCodeFailure){
-                        PayComplete *vc = [[PayComplete alloc] init];
-                        vc.title = @"支付宝支付";
-                        vc.success = NO;
-                        [pushVc.navigationController pushViewController:vc animated:YES];
+//                        PayComplete *vc = [[PayComplete alloc] init];
+//                        vc.title = @"支付宝支付";
+//                        vc.success = NO;
+//                        [pushVc.navigationController pushViewController:vc animated:YES];
                     }
                 }];
             }else{
@@ -69,15 +67,15 @@
 //                        [MBProgressHUD showAutoMessage:errStr];
 //                    }
                     if (errCode == FLErrCodeSuccess) {
-                        PayComplete *vc = [[PayComplete alloc] init];
-                        vc.title = @"微信支付";
-                        vc.success = YES;
-                        [pushVc.navigationController pushViewController:vc animated:YES];
+//                        PayComplete *vc = [[PayComplete alloc] init];
+//                        vc.title = @"微信支付";
+//                        vc.success = YES;
+//                        [pushVc.navigationController pushViewController:vc animated:YES];
                     }else if (errCode == FLErrCodeFailure){
-                        PayComplete *vc = [[PayComplete alloc] init];
-                        vc.title = @"微信支付";
-                        vc.success = NO;
-                        [pushVc.navigationController pushViewController:vc animated:YES];
+//                        PayComplete *vc = [[PayComplete alloc] init];
+//                        vc.title = @"微信支付";
+//                        vc.success = NO;
+//                        [pushVc.navigationController pushViewController:vc animated:YES];
                     }
                 }];
             }else{

@@ -40,28 +40,8 @@ static NSString  *kcontentSize = @"contentSize";
     [self addTableView];
     
     [self loadweb];
-    if ([self.model.module_type isEqualToString:[FMSingle moduleTypeTopic]]){
-        /* 添加输入框*/
-        [self loadinput];
-    }else if ([self.model.module_type isEqualToString:[FMSingle moduleTypeTheatre]]) {
-      
-        {  /// 该{}创建一个 XLInputvc 利用 pushvc 强引用 self。然后 [self.view addSubview:tempVc.view];做互相强引用。 【TODO：要优化】
-            /** 防止web点击返回时 viewDidDisappear 中  [_webView reload]; 导致崩溃*/
-            XLInputvc *tempVc = [[XLInputvc alloc]init];
-            tempVc.view.hidden = YES;
-            tempVc.pushvc = self;
-            [self.view addSubview:tempVc.view];
-        }
-        /* 购票*/
-        [self loadTicket];
-    }else{
-        /* 添加工具栏*/
-        [self loadtoolbar];
-    }
-    if ([self.model.module_type isEqualToString:[FMSingle moduleTypeFilm]]) {
-        ///添加购票
-//        [self loadrightBarButtonItem];
-    }
+
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(begainFullScreen) name:UIWindowDidBecomeVisibleNotification object:nil];//进入全屏
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endFullScreen) name:UIWindowDidBecomeHiddenNotification object:nil];//退出全屏
@@ -77,23 +57,7 @@ static NSString  *kcontentSize = @"contentSize";
     self.navigationItem.rightBarButtonItem = barBut;
 }
 -(void)ticket{
-    NSString * url = [NSString stringWithFormat:GETtheatersListForFilms,self.model.idid,20,1];
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        NSArray *tpArray = responseObject[@"data"];
-        if (tpArray.count > 0) {
-            
-        }else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前没有可预定的场次了" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            }]];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -146,23 +110,7 @@ static NSString  *kcontentSize = @"contentSize";
 }
 
 - (void)toTicket{
-    NSString *url=[NSString stringWithFormat:GETFilmsListForTheatersessions,self.model.idid];
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        NSArray *tpArray = responseObject[@"data"];
-        if (tpArray.count > 0) {
-           
-        }else{
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前没有可预定的场次了" preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-            }]];
-            [self presentViewController:alert animated:YES completion:nil];
-        }
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
+    
     
 }
 #pragma mark - 输入框
@@ -288,25 +236,7 @@ static NSString  *kcontentSize = @"contentSize";
     
 }
 - (void)uploadDataReqWithIsRefresh{
-    NSString *url = [NSString stringWithFormat:GETcommentsList, self.model.idid,self.model.module_type,5,self.pageNum];;
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        if (kResponseObjectStatusCodeIsEqual(200)) {
-            NSArray *tpArray = responseObject[@"data"];
-            [self.dataArray removeAllObjects];
-            if (tpArray) {
-                for (NSDictionary *dic in tpArray) {
-                    FMMainModel *model = [FMMainModel mj_objectWithKeyValues:dic];
-                    [self.dataArray addObject:model];
-                }
-                [self.table reloadData];
-            }
-        }
-        [_table.mj_header endRefreshing];
-        [_table.mj_footer endRefreshing];
-    } failureBlock:^(NSError *error) {
-        [_table.mj_header endRefreshing];
-        [_table.mj_footer endRefreshing];
-    } progress:nil];
+    
 }
 
 

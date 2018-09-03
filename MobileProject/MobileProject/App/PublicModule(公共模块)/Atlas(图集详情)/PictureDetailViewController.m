@@ -171,7 +171,7 @@
     _sheetView.titleLabel.text = model.title;
     _sheetView.titleLabel.font=[UIFont systemFontOfSize:20];
     _sheetView.pageLabel.text = [NSString stringWithFormat:@"%ld/%ld",page+1,_dataArray.count];
-    _sheetView.contentLabel.text = self.model.summary;
+//    _sheetView.contentLabel.text = self.model.summary;
 }
 
 -(void)viewDidAppear:(BOOL)animated

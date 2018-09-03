@@ -109,7 +109,7 @@
     self.cordimg = [[UIImageView alloc] init];
     [backv addSubview:self.cordimg];
 
-    [self.cordimg setImage:[UIImage getQRWithString:@"www.baidu.com" size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
+    [self.cordimg setImage:[UIImage getQRWithString:@"https://blog.csdn.net/yyh3663477/article/details/48579247" size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
     [self.cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(backv);
         make.top.mas_equalTo(backv).mas_offset(KFit_H6S(50));
