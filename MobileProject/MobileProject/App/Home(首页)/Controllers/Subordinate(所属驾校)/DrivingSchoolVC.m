@@ -141,7 +141,7 @@
         [self.imgArr addObject:_model.contractUrl];
     }
     for (int i = 0; i<self.imgArr.count; i++) {
-        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(30+i * KFit_W6S(180), 0, KFit_W6S(150), KFit_W6S(150))];
+        UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(KFit_W6S(30)+i * KFit_W6S(180), 0, KFit_W6S(150), KFit_W6S(150))];
         [imgback addSubview:img];
         [img sd_setImageWithURL:[NSURL URLWithString:self.imgArr[i]] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
     }

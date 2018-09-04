@@ -134,7 +134,10 @@
 //    }
 //    
 //    [share umengShare:self.view];
+    
 }
+
+
 /*
 #pragma mark - Navigation
 

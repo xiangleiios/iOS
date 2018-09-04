@@ -9,7 +9,8 @@ inhibit_all_warnings!                   #消除所有第三方的警告
 pod 'CYLTabBarController', '~> 1.14.2'
 pod 'SDCycleScrollView', '~> 1.65'
 pod 'AFNetworking', '~> 3.1.0'
-pod 'ReactiveCocoa', '~> 2.5'
+#pod 'ReactiveCocoa', '~> 2.5'
+pod 'ReactiveObjC','~> 3.1.0'  #RAC
 pod 'SDWebImage', '~> 3.7.6'
 pod 'JSONModel', '~> 1.0.2'
 pod 'Masonry','~> 0.6.4'
@@ -50,5 +51,6 @@ pod 'DYSafeObject', '~> 0.1.1' #为了避免线上项目中的用到的数据而
 pod 'IQKeyboardManager','~> 6.1.1'    #键盘处理
 
 pod 'JXCategoryView'    #分页切换滚动视图
+
 
 end

@@ -88,6 +88,14 @@
         make.height.mas_equalTo(KFit_H6S(180));
     }];
     
+    UIImageView *img = [[UIImageView alloc] init];
+    [imgback addSubview:img];
+    [img sd_setImageWithURL:[NSURL URLWithString:_model.trafficInsurancePic] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(imgback.mas_top);
+        make.left.mas_equalTo(imgback.mas_left).mas_offset(KFit_W6S(30));
+        make.height.width.mas_equalTo(KFit_W6S(150));
+    }];
     
     UILabel *lbback = [[UILabel alloc] init];
     lbback.backgroundColor = kColor_N(240, 240, 240);
@@ -131,6 +139,24 @@
         make.top.mas_equalTo(vtwo.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(90));
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
+    }];
+    
+    
+    UIView *imgbacktwo = [[UIView alloc] init];
+    [self.backview addSubview:imgbacktwo];
+    [imgbacktwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.top.mas_equalTo(lbtwo.mas_bottom).mas_offset(KFit_H6S(30));
+        make.height.mas_equalTo(KFit_H6S(180));
+    }];
+    
+    UIImageView *imgtwo = [[UIImageView alloc] init];
+    [imgbacktwo addSubview:imgtwo];
+    [imgtwo sd_setImageWithURL:[NSURL URLWithString:_model.businessInsurancePic] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
+    [imgtwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(imgbacktwo.mas_top);
+        make.left.mas_equalTo(imgbacktwo.mas_left).mas_offset(KFit_W6S(30));
+        make.height.width.mas_equalTo(KFit_W6S(150));
     }];
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);

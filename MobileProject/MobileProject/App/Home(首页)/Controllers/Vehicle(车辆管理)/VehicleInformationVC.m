@@ -109,8 +109,10 @@
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
     }];
     
+    
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
+    
     
 }
 

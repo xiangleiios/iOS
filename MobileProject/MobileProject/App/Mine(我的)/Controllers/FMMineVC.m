@@ -11,6 +11,7 @@
 #import "AboutUs.h"
 #import "MyInfoVC.h"
 #import "XLMineCell.h"
+#import "FMClearCacheTool.h"
 #define HEADERHEI KFit_H6S(320)
 
 @interface FMMineVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -18,6 +19,7 @@
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSArray *imgarr;
 @property (nonatomic , strong)NSArray *titlerr;
+@property (nonatomic , strong)NSString *cacheSize;
 @end
 
 @implementation FMMineVC
@@ -130,7 +132,7 @@
     cell.title.text = self.titlerr[indexPath.row];
     [cell.img setImage:[UIImage imageNamed:self.imgarr[indexPath.row]]];
     if (indexPath.row == 2) {
-        cell.subtitle.text = @"0M";
+        cell.subtitle.text = [FMClearCacheTool fm_getCacheSizeWithFilePath:kCachePath];;
     }
     //    cell.model = self.dataArr[indexPath.row];
     return cell;
@@ -151,11 +153,25 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row == 2) {
-        
+        [self cleanUpcache];
     }
     
 }
 
+
+- (void)cleanUpcache{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"是否清除缓存" preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {}]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        [FMRegExpTool clearFile];
+        if ([FMClearCacheTool fm_clearCacheWithFilePath:kCachePath]) {
+            [MBProgressHUD showAutoMessage:@"已清除缓存"];
+        }
+        [self.table reloadData];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 - (void)theLoginStatusChange{
     
 }

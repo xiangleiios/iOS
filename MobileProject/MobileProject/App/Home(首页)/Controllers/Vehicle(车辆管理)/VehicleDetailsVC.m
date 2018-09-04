@@ -11,6 +11,7 @@
 #import "VehicleInformationVC.h"
 #import "RegistrationInformationVC.h"
 #import "InsuranceInformationVC.h"
+#import "OtherInformationVC.h"
 @interface VehicleDetailsVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -89,6 +90,13 @@
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];
     vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    
+    OtherInformationVC *vcfour = [[OtherInformationVC alloc] init];
+    vcfour.model = _model;
+    [self addChildViewController:vcfour];
+    [self.scrollView addSubview:vcfour.view];
+    vcfour.view.frame = CGRectMake(SCREEN_WIDTH * 3, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height);
+    
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

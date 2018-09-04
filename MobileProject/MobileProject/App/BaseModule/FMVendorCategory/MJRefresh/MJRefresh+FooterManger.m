@@ -8,7 +8,7 @@
 
 // MJRefresh+FooterManger.m
 #import "MJRefresh+FooterManger.h"
-#import <ReactiveCocoa.h>
+//#import <ReactiveCocoa.h>
 #define NO_MORE_DATA_TEXT @"没有更多数据了！"
 
 @implementation UITableView (MJAutoRefreshFooterManger)

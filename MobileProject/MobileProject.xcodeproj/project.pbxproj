@@ -83,6 +83,8 @@
 		A735A0B2212FF6800044E9BC /* LLSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0B1212FF6800044E9BC /* LLSearchResultViewController.m */; };
 		A735A0B5213000CD0044E9BC /* StudentsOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0B4213000CD0044E9BC /* StudentsOneCell.m */; };
 		A74D595621257899003099A3 /* XLHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D595521257899003099A3 /* XLHomeVC.m */; };
+		A74EB311213E204B00564BC6 /* OtherInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74EB310213E204B00564BC6 /* OtherInformationVC.m */; };
+		A74EB31B213E5A2E00564BC6 /* BusinessCardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74EB31A213E5A2E00564BC6 /* BusinessCardListVC.m */; };
 		A74FE4322126C83C008E159E /* XLColumnsV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4312126C83C008E159E /* XLColumnsV.m */; };
 		A74FE43A2126D951008E159E /* XLInformationV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4392126D951008E159E /* XLInformationV.m */; };
 		A75F9437212D1A1900384EB0 /* AddInformationOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9436212D1A1900384EB0 /* AddInformationOneVC.m */; };
@@ -729,6 +731,10 @@
 		A735A0B4213000CD0044E9BC /* StudentsOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsOneCell.m; sourceTree = "<group>"; };
 		A74D595421257899003099A3 /* XLHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLHomeVC.h; sourceTree = "<group>"; };
 		A74D595521257899003099A3 /* XLHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLHomeVC.m; sourceTree = "<group>"; };
+		A74EB30F213E204B00564BC6 /* OtherInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherInformationVC.h; sourceTree = "<group>"; };
+		A74EB310213E204B00564BC6 /* OtherInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherInformationVC.m; sourceTree = "<group>"; };
+		A74EB319213E5A2E00564BC6 /* BusinessCardListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessCardListVC.h; sourceTree = "<group>"; };
+		A74EB31A213E5A2E00564BC6 /* BusinessCardListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessCardListVC.m; sourceTree = "<group>"; };
 		A74FE4302126C83C008E159E /* XLColumnsV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLColumnsV.h; sourceTree = "<group>"; };
 		A74FE4312126C83C008E159E /* XLColumnsV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLColumnsV.m; sourceTree = "<group>"; };
 		A74FE4382126D951008E159E /* XLInformationV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLInformationV.h; sourceTree = "<group>"; };
@@ -2098,6 +2104,8 @@
 				A75F9445212D706600384EB0 /* BusinessCardVC.m */,
 				A7A213B9212E4F9300920678 /* ChangeCardVC.h */,
 				A7A213BA212E4F9300920678 /* ChangeCardVC.m */,
+				A74EB319213E5A2E00564BC6 /* BusinessCardListVC.h */,
+				A74EB31A213E5A2E00564BC6 /* BusinessCardListVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -2204,6 +2212,8 @@
 				A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */,
 				A7825C4A213D35750056FDA2 /* InsuranceInformationVC.h */,
 				A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */,
+				A74EB30F213E204B00564BC6 /* OtherInformationVC.h */,
+				A74EB310213E204B00564BC6 /* OtherInformationVC.m */,
 			);
 			path = "Vehicle(车辆管理)";
 			sourceTree = "<group>";
@@ -5056,6 +5066,7 @@
 				DA959E471F53BEE9002389F6 /* UIAlertController+ZFPlayerRotation.m in Sources */,
 				DA03464B1F509098008E7BE1 /* NSDictionary+SafeAccess.m in Sources */,
 				DA03463A1F509098008E7BE1 /* NSData+Encrypt.m in Sources */,
+				A74EB311213E204B00564BC6 /* OtherInformationVC.m in Sources */,
 				DA81E08C20439CAF00A9F622 /* MoreView.m in Sources */,
 				A75F943D212D4C0B00384EB0 /* AddInformationTwoVC.m in Sources */,
 				DA0346E01F509098008E7BE1 /* UISearchBar+Blocks.m in Sources */,
@@ -5221,6 +5232,7 @@
 				DA0346471F509098008E7BE1 /* NSDictionary+Block.m in Sources */,
 				A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */,
 				DA0347111F509098008E7BE1 /* UIWebView+Style.m in Sources */,
+				A74EB31B213E5A2E00564BC6 /* BusinessCardListVC.m in Sources */,
 				A75F943A212D329F00384EB0 /* FormsV.m in Sources */,
 				DA0346881F509098008E7BE1 /* MKMapView+BetterMaps.m in Sources */,
 				DA56B9F81FBC2123007F94DA /* FLPayManager.m in Sources */,

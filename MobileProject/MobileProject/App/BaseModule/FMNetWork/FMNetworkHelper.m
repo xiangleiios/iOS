@@ -112,6 +112,8 @@
         successBlock(responseObject);
     } failureBlock:^(NSError *error) {
         failureBlock(error);
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"网络错误" SuccessOrFailure:NO];
+        [alert showPrompt];
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         progress(bytesProgress,totalBytesProgress);
     }];

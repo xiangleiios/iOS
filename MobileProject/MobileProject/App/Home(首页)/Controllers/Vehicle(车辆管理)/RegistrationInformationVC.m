@@ -101,6 +101,16 @@
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
     }];
     
+    
+    UIImageView *img = [[UIImageView alloc] init];
+    [self.backview addSubview:img];
+    [img sd_setImageWithURL:[NSURL URLWithString:_model.ratingLevelPic] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(lb.mas_bottom);
+        make.left.mas_equalTo(self.backview.mas_left).mas_offset(KFit_W6S(30));
+        make.height.width.mas_equalTo(KFit_W6S(150));
+    }];
+    
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
     

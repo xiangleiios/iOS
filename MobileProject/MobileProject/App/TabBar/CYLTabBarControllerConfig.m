@@ -43,6 +43,7 @@
         [self customizeTabBarAppearance];
         
         _tabBarController = tabBarController;
+//        _tabBarController.tabBarHeight = kTabBarH;
         
     }
     
