@@ -52,6 +52,7 @@
     self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
+    _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };

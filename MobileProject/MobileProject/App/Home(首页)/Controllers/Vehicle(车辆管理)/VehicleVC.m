@@ -50,6 +50,7 @@
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+    _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
     _table.reloadBlock = ^{

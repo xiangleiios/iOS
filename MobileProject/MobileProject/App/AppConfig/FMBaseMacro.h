@@ -98,7 +98,8 @@
 #define Cbfbfbf  kRGBAColor(191,191,191,1)
 
 #define kDefaultUserIcon @"defaultUserIcon"
-#define kNavBarH 64.0f
+#define kNavBarH (SCREEN_HEIGHT == 812.0 ?88.0f : 64.0f)
+#define iPhoneX (SCREEN_HEIGHT == 812.0 ?34 : 0)
 #define kNavStateBarH 20.0f
 #define kTabBarH 49.0f
 
