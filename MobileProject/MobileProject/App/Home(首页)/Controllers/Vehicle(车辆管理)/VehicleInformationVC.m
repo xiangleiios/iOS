@@ -24,11 +24,16 @@
 @property (nonatomic , strong)XLInformationV *chejia;
 @property (nonatomic , strong)XLInformationV *fadongji;
 @property (nonatomic , strong)XLInformationV *beizhu;
-
+@property (nonatomic , strong)NSMutableArray *browseItemArray;
 @end
 
 @implementation VehicleInformationVC
-
+-(NSMutableArray *)browseItemArray{
+    if (_browseItemArray==nil) {
+        _browseItemArray=[NSMutableArray array];
+    }
+    return _browseItemArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kColor_N(240, 240, 240);

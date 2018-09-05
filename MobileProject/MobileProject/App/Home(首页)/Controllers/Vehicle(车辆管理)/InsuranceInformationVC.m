@@ -8,13 +8,20 @@
 
 #import "InsuranceInformationVC.h"
 #import "XLInformationV.h"
+#import "MSSBrowseNetworkViewController.h"
 @interface InsuranceInformationVC ()
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
+@property (nonatomic , strong)NSMutableArray *browseItemArray;
 @end
 
 @implementation InsuranceInformationVC
-
+-(NSMutableArray *)browseItemArray{
+    if (_browseItemArray==nil) {
+        _browseItemArray=[NSMutableArray array];
+    }
+    return _browseItemArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kColor_N(240, 240, 240);
@@ -96,6 +103,17 @@
         make.left.mas_equalTo(imgback.mas_left).mas_offset(KFit_W6S(30));
         make.height.width.mas_equalTo(KFit_W6S(150));
     }];
+    img.userInteractionEnabled = YES;
+    img.tag = 0;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapView:)];
+    [img addGestureRecognizer:tap];
+    
+    UIImageView *imageView = [self.view viewWithTag:0 + 100];
+    MSSBrowseModel *browseItem = [[MSSBrowseModel alloc]init];
+    browseItem.bigImageUrl = KURLIma(_model.ratingLevelPic);// 加载网络图片大图地址
+    browseItem.smallImageView = imageView;// 小图
+    [self.browseItemArray addObject:browseItem];
+    
     
     UILabel *lbback = [[UILabel alloc] init];
     lbback.backgroundColor = kColor_N(240, 240, 240);
@@ -158,11 +176,30 @@
         make.left.mas_equalTo(imgbacktwo.mas_left).mas_offset(KFit_W6S(30));
         make.height.width.mas_equalTo(KFit_W6S(150));
     }];
+    imgtwo.userInteractionEnabled = YES;
+    imgtwo.tag = 1;
+    UITapGestureRecognizer *taptwo = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapView:)];
+    [imgtwo addGestureRecognizer:taptwo];
+    
+    UIImageView *imageViewtwo = [self.view viewWithTag:1 + 100];
+    MSSBrowseModel *browseItemtwo = [[MSSBrowseModel alloc]init];
+    browseItemtwo.bigImageUrl = KURLIma(_model.ratingLevelPic);// 加载网络图片大图地址
+    browseItemtwo.smallImageView = imageViewtwo;// 小图
+    [self.browseItemArray addObject:browseItemtwo];
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
     
     
+}
+
+-(void)tapView:(UITapGestureRecognizer *)sender{
+    UIImageView *img=(UIImageView *)sender.view;
+    MSSBrowseNetworkViewController *bvc = [[MSSBrowseNetworkViewController alloc]initWithBrowseItemArray:self.browseItemArray currentIndex:img.tag];
+    
+    //             bvc.isEqualRatio = NO;// 大图小图不等比时需要设置这个属性（建议等比）
+    //    [bvc.navigationController fm_setStatusBarBackgroundColor:[UIColor clearColor]];
+    [bvc showBrowseViewController];
 }
 /*
 #pragma mark - Navigation

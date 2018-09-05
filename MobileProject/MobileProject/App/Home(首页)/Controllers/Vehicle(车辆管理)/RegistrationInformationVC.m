@@ -8,7 +8,7 @@
 
 #import "RegistrationInformationVC.h"
 #import "XLInformationV.h"
-
+#import "MSSBrowseNetworkViewController.h"
 
 @interface RegistrationInformationVC ()
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -19,10 +19,16 @@
 @property (nonatomic , strong)XLInformationV *xiaci_time;
 @property (nonatomic , strong)XLInformationV *jibie;
 @property (nonatomic , strong)XLInformationV *qixian;
+@property (nonatomic , strong)NSMutableArray *browseItemArray;
 @end
 
 @implementation RegistrationInformationVC
-
+-(NSMutableArray *)browseItemArray{
+    if (_browseItemArray==nil) {
+        _browseItemArray=[NSMutableArray array];
+    }
+    return _browseItemArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = kColor_N(240, 240, 240);
@@ -104,17 +110,36 @@
     
     UIImageView *img = [[UIImageView alloc] init];
     [self.backview addSubview:img];
+    img.userInteractionEnabled = YES;
+    img.tag = 0;
     [img sd_setImageWithURL:[NSURL URLWithString:_model.ratingLevelPic] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(lb.mas_bottom);
         make.left.mas_equalTo(self.backview.mas_left).mas_offset(KFit_W6S(30));
         make.height.width.mas_equalTo(KFit_W6S(150));
     }];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapView:)];
+    [img addGestureRecognizer:tap];
+    
+    UIImageView *imageView = [self.view viewWithTag:0 + 100];
+    MSSBrowseModel *browseItem = [[MSSBrowseModel alloc]init];
+    browseItem.bigImageUrl = KURLIma(_model.ratingLevelPic);// 加载网络图片大图地址
+    browseItem.smallImageView = imageView;// 小图
+    [self.browseItemArray addObject:browseItem];
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
     
     
+}
+
+-(void)tapView:(UITapGestureRecognizer *)sender{
+    UIImageView *img=(UIImageView *)sender.view;
+    MSSBrowseNetworkViewController *bvc = [[MSSBrowseNetworkViewController alloc]initWithBrowseItemArray:self.browseItemArray currentIndex:img.tag];
+    
+    //             bvc.isEqualRatio = NO;// 大图小图不等比时需要设置这个属性（建议等比）
+    //    [bvc.navigationController fm_setStatusBarBackgroundColor:[UIColor clearColor]];
+    [bvc showBrowseViewController];
 }
 /*
 #pragma mark - Navigation
