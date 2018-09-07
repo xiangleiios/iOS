@@ -9,5 +9,5 @@
 #import "FMBaseViewController.h"
 
 @interface StudentDetailsEditorVC : FMBaseViewController
-
+@property (nonatomic , strong)FMMainModel *model;
 @end

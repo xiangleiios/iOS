@@ -13,10 +13,18 @@
 #import "IDInfo.h"
 @interface AddInformationOneVC ()<AVCaptureViewControllerDelegate>
 @property (nonatomic , strong)FormsV *SFZforms;
+@property (nonatomic , strong)NSMutableDictionary *studentDic;
 @end
 
 @implementation AddInformationOneVC
 
+
+- (NSMutableDictionary *)studentDic{
+    if (_studentDic == nil) {
+        _studentDic = [NSMutableDictionary dictionary];
+    }
+    return _studentDic;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self laodNavigation];
@@ -133,7 +141,46 @@
 
 
 - (void)nextVC:(UIButton *)sender{
+    if (self.SFZforms.name.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写姓名"];
+        return;
+    }
+    if (self.SFZforms.gender.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择性别"];
+        return;
+    }
+    if (self.SFZforms.ethnic.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择民族"];
+        return;
+    }
+    if (self.SFZforms.birthday.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择出生年月日"];
+        return;
+    }
+    if (self.SFZforms.address.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写住址"];
+        return;
+    }
+    if (self.SFZforms.IdNumber.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写身份证号码"];
+        return;
+    }
+    [self.studentDic setValue:self.SFZforms.name.subfield.text forKey:@"studentName"];
+    [self.studentDic setValue:[NSString stringWithFormat:@"%ld",(long)self.SFZforms.gender.subfield.tag] forKey:@"sex"];
+    [self.studentDic setValue:[NSString stringWithFormat:@"%ld",(long)self.SFZforms.ethnic.subfield.tag] forKey:@"nation"];
+    
+    
+    
+//    [XLCommonUse dateConversionTimeStamp:self.SFZforms.birthday.subfield.text]
+    [self.studentDic setValue:[XLCommonUse dateConversionTimeStamp:self.SFZforms.birthday.subfield.text] forKey:@"birthday"];
+    [self.studentDic setValue:self.SFZforms.address.subfield.text forKey:@"idcardAddress"];
+    [self.studentDic setValue:self.SFZforms.IdNumber.subfield.text forKey:@"idcard"];
+    
+    
+    KKLog(@"%@",_studentDic);
+    
     AddInformationTwoVC *vc = [[AddInformationTwoVC alloc] init];
+    vc.studentDic = self.studentDic;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

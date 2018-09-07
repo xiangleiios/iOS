@@ -83,7 +83,53 @@
 }
 
 - (void)nextVC{
+    if (self.signUpForms.phone.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写手机号"];
+        return;
+    }
+    if (self.signUpForms.carType.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择车型"];
+        return;
+    }
+    if (self.signUpForms.school.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择驾校"];
+        return;
+    }
+    if (self.signUpForms.type.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择申请类型"];
+        return;
+    }
+    if (self.otherForms.state.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择报考状态"];
+        return;
+    }
     
+    [self.studentDic setObject:self.signUpForms.phone.subfield.text forKey:@"studentPhone"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpForms.carType.subfield.tag] forKey:@"carType"];
+    [self.studentDic setObject:self.signUpForms.price.subfield.text forKey:@"signupPrice"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpForms.school.subfield.tag] forKey:@"teamCode"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpForms.type.subfield.tag] forKey:@"applicationType"];
+    [self.studentDic setObject:self.otherForms.referees.subfield.text forKey:@"recommender"];
+    [self.studentDic setObject:self.otherForms.note.subfield.text forKey:@"remark"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.otherForms.state.subfield.tag] forKey:@"isPay"];
+    
+    
+    KKLog(@"%@",self.studentDic);
+    NSString *url = POSTStudenteamAdd;
+    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在提交" ToView:self.view];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.studentDic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+       [hud hide:YES];
+        KKLog(@"%@",responseObject);
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        [hud hide:YES];
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 /*
 #pragma mark - Navigation

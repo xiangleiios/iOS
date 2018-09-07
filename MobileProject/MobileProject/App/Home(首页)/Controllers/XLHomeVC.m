@@ -15,9 +15,10 @@
 #import "XLButton.h"
 #import "PagingButtonView.h"
 #import "MyNewsVC.h"
-#import "BusinessCardVC.h"
+
 #import "SubordinateVC.h"
 #import "VehicleVC.h"
+#import "BusinessCardListVC.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -140,7 +141,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     };
     card.senterBlock = ^{
-        BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+        BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     };
     NSArray *toolarr = @[add,card];

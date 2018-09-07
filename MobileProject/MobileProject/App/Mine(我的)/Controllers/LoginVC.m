@@ -14,6 +14,7 @@
 #import "MineWebVC.h"
 #import "RegisteredVC.h"
 #import "CYLTabBarControllerConfig.h"
+#import "XLCache.h"
 @interface LoginVC ()<UITextFieldDelegate>
 @property (nonatomic , strong)TKPhoneTextField *pho;
 @property (nonatomic , strong)UITextField *password;
@@ -297,8 +298,9 @@
     
     //    appDelegate.tab = TabBarControllerConfig
     NSString *url=[NSString stringWithFormat:GETmembersLogin,phone,password];
+
     MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在登陆" ToView:self.view];
-    
+
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         [hud hide:YES];
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -307,8 +309,9 @@
             User *user=[User UserOb];
             user.accounttype=[NSNumber numberWithInteger:accountTypePhone];
             [user UserSave:responseObject];
+            [[XLCache singleton] cacheWhitValue:responseObject[@"schoolList"] AndKey:SchoolList];
             [UIWebView fm_setTokenToUIWebViewCookie]; //存token到域名cookie
-            
+            [self laodCacheData];
             CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];            
             [self presentViewController:TabBarControllerConfig.tabBarController animated:YES completion:^{
 
@@ -370,6 +373,25 @@
     return YES;
 }
 
+
+#pragma mark -登录成功之后去获取各种缓存数据
+
+- (void)laodCacheData{
+    NSString *url = POSTAppDictList;
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject){
+        if ([responseObject[@"code"] integerValue] == 200) {
+            [[XLCache singleton] cacheWhitValue:responseObject[@"data"] AndKey:ALLDATA];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
+}
 /*
 #pragma mark - Navigation
 

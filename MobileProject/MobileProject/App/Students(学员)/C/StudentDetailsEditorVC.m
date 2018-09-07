@@ -10,6 +10,7 @@
 #import "XLInformationV.h"
 #import "FormsV.h"
 #import "CGXPickerView.h"
+#import "XLCache.h"
 @interface StudentDetailsEditorVC ()
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -19,9 +20,17 @@
 @property (nonatomic , strong)XLInformationV *start_time;
 @property (nonatomic , strong)XLInformationV *end_time;
 @property (nonatomic , strong)OtherFormsV *otherForms;
+@property (nonatomic , strong)NSMutableDictionary *studentDic;
 @end
 
 @implementation StudentDetailsEditorVC
+
+- (NSMutableDictionary *)studentDic{
+    if (_studentDic == nil) {
+        _studentDic = [NSMutableDictionary dictionary];
+    }
+    return _studentDic;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -79,7 +88,117 @@
     }];
     
 }
+#pragma mark - 保存修改信息
 - (void)nextVC{
+    if (self.SFZforms.name.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写姓名"];
+        return;
+    }
+    if (self.SFZforms.gender.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择性别"];
+        return;
+    }
+    if (self.SFZforms.ethnic.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择民族"];
+        return;
+    }
+    if (self.SFZforms.birthday.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择出生年月日"];
+        return;
+    }
+    if (self.SFZforms.address.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写住址"];
+        return;
+    }
+    if (self.SFZforms.IdNumber.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写身份证号码"];
+        return;
+    }
+    
+    if (self.start_time.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择有效期开始时间"];
+        return;
+    }
+    if (self.end_time.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择有效期结束时间"];
+        return;
+    }
+    
+    if (self.signUpTwo.phone.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请填写手机号"];
+        return;
+    }
+    if (self.signUpTwo.carType.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择车型"];
+        return;
+    }
+    if (self.signUpTwo.school.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择驾校"];
+        return;
+    }
+    if (self.signUpTwo.type.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择申请类型"];
+        return;
+    }
+    if (self.signUpTwo.hukou.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择本/外地户口"];
+        return;
+    }
+    if (self.otherForms.state.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择报考状态"];
+        return;
+    }
+    
+    
+    [self.studentDic setObject:self.signUpTwo.phone.subfield.text forKey:@"studentPhone"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.carType.subfield.tag] forKey:@"carType"];
+    [self.studentDic setObject:self.signUpTwo.price.subfield.text forKey:@"signupPrice"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.school.subfield.tag] forKey:@"teamCode"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.type.subfield.tag] forKey:@"applicationType"];
+    [self.studentDic setObject:self.otherForms.referees.subfield.text forKey:@"recommender"];
+    [self.studentDic setObject:self.otherForms.note.subfield.text forKey:@"remark"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.otherForms.state.subfield.tag] forKey:@"isPay"];
+    
+    
+    
+    [self.studentDic setObject:[XLCommonUse dateConversionTimeStamp:self.start_time.subfield.text] forKey:@"idcardStartDate"];
+    [self.studentDic setObject:self.end_time.subfield.text forKey:@"idcardEndDate"];
+    
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.hukou.subfield.tag] forKey:@"enterType"];
+    
+    
+    
+    
+    
+    
+    
+    [self.studentDic setValue:self.SFZforms.name.subfield.text forKey:@"studentName"];
+    [self.studentDic setValue:[NSString stringWithFormat:@"%ld",(long)self.SFZforms.gender.subfield.tag] forKey:@"sex"];
+    [self.studentDic setValue:[NSString stringWithFormat:@"%ld",(long)self.SFZforms.ethnic.subfield.tag] forKey:@"nation"];
+    
+    
+    [self.studentDic setValue:[XLCommonUse dateConversionTimeStamp:self.SFZforms.birthday.subfield.text] forKey:@"birthday"];
+    [self.studentDic setValue:self.SFZforms.address.subfield.text forKey:@"idcardAddress"];
+    [self.studentDic setValue:self.SFZforms.IdNumber.subfield.text forKey:@"idcard"];
+    [self.studentDic setValue:self.model.idid forKey:@"id"];
+    KKLog(@"%@",self.studentDic);
+    NSString *url = POSTStudenteamEdit;
+    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在保存" ToView:self.view];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.studentDic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        [hud hide:YES];
+        KKLog(@"%@",responseObject);
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        [hud hide:YES];
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
+    
     
     
 }
@@ -101,12 +220,25 @@
     }];
     
     self.SFZforms = [[FormsV alloc] init];
-    [self.view addSubview:self.SFZforms];
+    [self.backview addSubview:self.SFZforms];
     [self.SFZforms mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(lbback.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(540));
     }];
+    
+    
+    XLCache *cache = [XLCache singleton];
+    [cache.sys_user_sex_value indexOfObject:_model.sex];
+    self.SFZforms.name.subfield.text = _model.studentName;
+    self.SFZforms.gender.subfield.text = cache.sys_user_sex_title[[cache.sys_user_sex_value indexOfObject:_model.sex]];
+    self.SFZforms.gender.subfield.tag = [_model.sex integerValue];
+    self.SFZforms.ethnic.subfield.text = cache.ethnicTitleArr[[cache.ethnicValueArr indexOfObject:_model.nation]];
+    self.SFZforms.ethnic.subfield.tag = [_model.nation integerValue];
+    self.SFZforms.birthday.subfield.text = [XLCommonUse datetimestampToString:_model.birthday];
+    self.SFZforms.address.subfield.text = _model.idcardAddress;
+    self.SFZforms.IdNumber.subfield.text = _model.idcard;
+    
     
     XLInformationV *lbbacktwo = [[XLInformationV alloc] informationWithTitle:@"身份证反面信息"];
     [self.backview addSubview:lbbacktwo];
@@ -118,6 +250,7 @@
     
     kWeakSelf(self)
     self.start_time = [[XLInformationV alloc] informationWithTitle:@"有效期起始" SubTitle:@"" TSSubTitle:@"请选择日期" Must:YES Click:YES];
+    self.start_time.subfield.text = [XLCommonUse datetimestampToString:_model.idcardStartDate];
     self.start_time.senterBlock = ^{
         [CGXPickerView showDatePickerWithTitle:@"有效期起始" DateType:UIDatePickerModeDate DefaultSelValue:nil MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
             NSLog(@"%@",selectValue);
@@ -125,6 +258,7 @@
         }];
     };
     self.end_time = [[XLInformationV alloc] informationWithTitle:@"有效期结束" SubTitle:@"" TSSubTitle:@"请选择日期" Must:YES Click:YES];
+    self.end_time.subfield.text = _model.idcardEndDate;
     self.end_time.senterBlock = ^{
         [CGXPickerView showDatePickerWithTitle:@"有效期结束" DateType:UIDatePickerModeDate DefaultSelValue:nil MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
             NSLog(@"%@",selectValue);
@@ -161,6 +295,19 @@
         make.height.mas_equalTo(KFit_H6S(540));
     }];
     
+    self.signUpTwo.phone.subfield.text = _model.studentPhone;
+    self.signUpTwo.hukou.subfield.text = cache.student_is_enter_type_title[[cache.student_is_enter_type_value indexOfObject:_model.enterType]];
+    self.signUpTwo.hukou.subfield.tag = [_model.enterType integerValue];
+    
+    self.signUpTwo.carType.subfield.text = cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.carType]];
+    self.signUpTwo.carType.subfield.tag = [_model.carType integerValue];
+    
+    self.signUpTwo.price.subfield.text = _model.signupPrice;
+    self.signUpTwo.school.subfield.text = cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]];
+    self.signUpTwo.school.subfield.tag = [_model.teamCode integerValue];
+    
+    self.signUpTwo.type.subfield.text = cache.student_apply_type_title[[cache.student_apply_type_value indexOfObject:_model.applicationType]];
+    self.signUpTwo.type.subfield.tag = [_model.applicationType integerValue];
     XLInformationV *baokao = [[XLInformationV alloc] informationWithTitle:@"请填写其他信息"];
     [self.backview addSubview:baokao];
     [baokao mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -176,11 +323,31 @@
         make.top.mas_equalTo(baokao.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(270));
     }];
+    self.otherForms.referees.subfield.text = _model.recommender;
+    self.otherForms.note.subfield.text =_model.remark;
+    ///1:未缴费 2：已缴费
+    if ([_model.isPay  isEqual: @"1"]) {
+        self.otherForms.state.subfield.text = @"未缴费";
+        self.otherForms.state.subfield.tag = 1;
+    }else{
+        self.otherForms.state.subfield.text = @"已缴费";
+        self.otherForms.state.subfield.tag = 2;
+    }
     
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
+
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    
+    
+    
+}
+
+
 /*
 #pragma mark - Navigation
 

@@ -12,5 +12,5 @@
 @property (nonatomic , strong)UILabel *title;
 @property (nonatomic , strong)UILabel *typeone;
 @property (nonatomic , strong)UIButton *dial;
-
+@property (nonatomic , strong)FMMainModel *model;
 @end

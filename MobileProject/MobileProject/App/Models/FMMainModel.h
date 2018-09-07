@@ -274,6 +274,46 @@
 @property (nonatomic , strong)NSString *schoolName;// 所属队别,
 @property (nonatomic , strong)NSString *queryRegisterTimeStart;// null,
 @property (nonatomic , strong)NSString *queryRegisterTimeEnd;// null
+
+@property (nonatomic , strong)NSString *applicationType;
+@property (nonatomic , strong)NSString *birthday;
+//@property (nonatomic , strong)NSString *carType;
+@property (nonatomic , strong)NSString *classType;
+@property (nonatomic , strong)NSString *day;
+@property (nonatomic , strong)NSString *delTag;
+@property (nonatomic , strong)NSString *enterType;
+//@property (nonatomic , strong)NSString *id;
+@property (nonatomic , strong)NSString *idType;
+@property (nonatomic , strong)NSString *idcard;
+@property (nonatomic , strong)NSString *idcardAddress;
+@property (nonatomic , strong)NSString *idcardBack;
+@property (nonatomic , strong)NSString *idcardEndDate;
+@property (nonatomic , strong)NSString *idcardFront;
+@property (nonatomic , strong)NSString *idcardStartDate;
+@property (nonatomic , strong)NSString *isComplete;
+@property (nonatomic , strong)NSString *isPay;
+@property (nonatomic , strong)NSString *month;
+@property (nonatomic , strong)NSString *nation;
+@property (nonatomic , strong)NSString *payMethod;
+//@property (nonatomic , strong)NSString *payType;
+@property (nonatomic , strong)NSString *recommender;
+@property (nonatomic , strong)NSString *relation;
+//@property (nonatomic , strong)NSString *remark;
+@property (nonatomic , strong)NSString *repaymentTime;
+//@property (nonatomic , strong)NSString *searchValue;
+@property (nonatomic , strong)NSString *sex;
+@property (nonatomic , strong)NSString *signupId;
+@property (nonatomic , strong)NSString *signupPrice;
+@property (nonatomic , strong)NSString *signupTime;
+@property (nonatomic , strong)NSString *source;
+@property (nonatomic , strong)NSString *studentHead;
+@property (nonatomic , strong)NSString *studentName;
+@property (nonatomic , strong)NSString *studentPhone;
+//@property (nonatomic , strong)NSString *teamCode;
+@property (nonatomic , strong)NSString *week;
+@property (nonatomic , strong)NSString *whichProduce;
+@property (nonatomic , strong)NSString *year;
+
 @end
 
 

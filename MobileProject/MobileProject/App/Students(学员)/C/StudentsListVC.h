@@ -15,4 +15,6 @@
 @property(nonatomic, assign) NSInteger pageNum;
 /** 列表page大小 */
 @property(nonatomic, assign) NSInteger pageSize;
+
+@property (nonatomic , strong)NSMutableDictionary *dic;
 @end

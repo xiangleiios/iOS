@@ -9,5 +9,5 @@
 #import "FMBaseViewController.h"
 
 @interface AddInformationThreeVC : FMBaseViewController
-
+@property (nonatomic , strong)NSMutableDictionary *studentDic;
 @end

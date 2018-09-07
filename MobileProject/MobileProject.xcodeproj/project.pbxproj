@@ -71,6 +71,8 @@
 		A71907A02130EED50072B8CF /* StudentsTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A719079F2130EED50072B8CF /* StudentsTwoCell.m */; };
 		A71907A4213106180072B8CF /* SubordinateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A3213106180072B8CF /* SubordinateVC.m */; };
 		A71907A721312B850072B8CF /* DrivingSchoolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A621312B850072B8CF /* DrivingSchoolVC.m */; };
+		A7322289213F7F6A007735CE /* BusinessCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7322288213F7F6A007735CE /* BusinessCardCell.m */; };
+		A732228D213FD2C0007735CE /* XLCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A732228C213FD2C0007735CE /* XLCache.m */; };
 		A733725421393574005CD384 /* DIN-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = A733725321393574005CD384 /* DIN-Medium.otf */; };
 		A733725B2139499A005CD384 /* XLImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A733725A2139499A005CD384 /* XLImageView.m */; };
 		A735A090212F9A540044E9BC /* TemplateV.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A08F212F9A540044E9BC /* TemplateV.m */; };
@@ -708,6 +710,10 @@
 		A71907A3213106180072B8CF /* SubordinateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubordinateVC.m; sourceTree = "<group>"; };
 		A71907A521312B850072B8CF /* DrivingSchoolVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrivingSchoolVC.h; sourceTree = "<group>"; };
 		A71907A621312B850072B8CF /* DrivingSchoolVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrivingSchoolVC.m; sourceTree = "<group>"; };
+		A7322287213F7F6A007735CE /* BusinessCardCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessCardCell.h; sourceTree = "<group>"; };
+		A7322288213F7F6A007735CE /* BusinessCardCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessCardCell.m; sourceTree = "<group>"; };
+		A732228B213FD2C0007735CE /* XLCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLCache.h; sourceTree = "<group>"; };
+		A732228C213FD2C0007735CE /* XLCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLCache.m; sourceTree = "<group>"; };
 		A733725321393574005CD384 /* DIN-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DIN-Medium.otf"; sourceTree = "<group>"; };
 		A73372592139499A005CD384 /* XLImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLImageView.h; sourceTree = "<group>"; };
 		A733725A2139499A005CD384 /* XLImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLImageView.m; sourceTree = "<group>"; };
@@ -2023,6 +2029,15 @@
 			path = "Subordinate(所属驾校)";
 			sourceTree = "<group>";
 		};
+		A732228A213FD283007735CE /* Cache(缓存数据) */ = {
+			isa = PBXGroup;
+			children = (
+				A732228B213FD2C0007735CE /* XLCache.h */,
+				A732228C213FD2C0007735CE /* XLCache.m */,
+			);
+			path = "Cache(缓存数据)";
+			sourceTree = "<group>";
+		};
 		A733725821394960005CD384 /* UIImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2119,6 +2134,8 @@
 				A7A213C0212EBB0F00920678 /* LicenseTayeV.m */,
 				A735A08E212F9A540044E9BC /* TemplateV.h */,
 				A735A08F212F9A540044E9BC /* TemplateV.m */,
+				A7322287213F7F6A007735CE /* BusinessCardCell.h */,
+				A7322288213F7F6A007735CE /* BusinessCardCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -4368,6 +4385,7 @@
 		DAE210D71EF2867A000EAB90 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A732228A213FD283007735CE /* Cache(缓存数据) */,
 				A733725821394960005CD384 /* UIImageView */,
 				4FA3BE092112EAA900EFCFB0 /* UITextField */,
 				4FFEBA8320DCFABC00FB095B /* UIlable */,
@@ -5133,6 +5151,7 @@
 				4FA3BE0C2112EADB00EFCFB0 /* UITextField+MicrometerLevelFormat.m in Sources */,
 				DA0347131F509098008E7BE1 /* WebView+Debug.m in Sources */,
 				A7AC816D212BC13E00C6AB6C /* ScrollInfinite.m in Sources */,
+				A7322289213F7F6A007735CE /* BusinessCardCell.m in Sources */,
 				4FF9265820C8CE0600AB3E43 /* NSDate+CGXPicker.m in Sources */,
 				DA0346721F509098008E7BE1 /* NSString+Matcher.m in Sources */,
 				DA03473C1F509098008E7BE1 /* FMShareMenuView.m in Sources */,
@@ -5268,6 +5287,7 @@
 				DA0346381F509098008E7BE1 /* NSData+APNSToken.m in Sources */,
 				DA0346BF1F509098008E7BE1 /* UIImage+Orientation.m in Sources */,
 				4FAF62D620E3689F00552D50 /* MyCouponVC.m in Sources */,
+				A732228D213FD2C0007735CE /* XLCache.m in Sources */,
 				DA03462C1F509098008E7BE1 /* NSManagedObjectContext+Extensions.m in Sources */,
 				DA0346531F509098008E7BE1 /* NSInvocation+Bb.m in Sources */,
 				DA0347201F509098008E7BE1 /* GVUserDefaults.m in Sources */,

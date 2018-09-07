@@ -12,10 +12,12 @@
 #import "AddInformationThreeVC.h"
 #import "JQAVCaptureViewController.h"
 #import "IDInfo.h"
+#import "XLCache.h"
 @interface AddInformationTwoVC ()<JQAVCaptureViewControllerDelegate>
 @property (nonatomic , strong)XLInformationV *start_time;
 @property (nonatomic , strong)XLInformationV *end_time;
 @property (nonatomic , strong)XLInformationV *hukou;
+
 @end
 
 @implementation AddInformationTwoVC
@@ -126,9 +128,10 @@
     self.hukou = [[XLInformationV alloc] informationWithTitle:@"本/外地" SubTitle:@"" TSSubTitle:@"" Must:YES Click:YES];
     self.hukou.senterBlock = ^{
         [weakself.view endEditing:YES];
-        [CGXPickerView showStringPickerWithTitle:@"本/外地" DataSource:@[@"本地",@"外地"] DefaultSelValue:@"本地" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+        [CGXPickerView showStringPickerWithTitle:@"本/外地" DataSource:[XLCache singleton].student_is_enter_type_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
             NSLog(@"%@",selectValue);
             weakself.hukou.subfield.text = selectValue;
+            weakself.hukou.subfield.tag = [[XLCache singleton].student_is_enter_type_value[[selectRow intValue]] intValue];
         }];
     };
     XLInformationV *lbback = [[XLInformationV alloc] informationWithTitle:@"请填写户口信息"];
@@ -194,7 +197,24 @@
 }
 
 - (void)nextVC{
+    if (self.start_time.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择有效期开始时间"];
+        return;
+    }
+    if (self.end_time.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择有效期结束时间"];
+        return;
+    }
+    if (self.hukou.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择本/外地户口"];
+        return;
+    }
+    [self.studentDic setObject:[XLCommonUse dateConversionTimeStamp:self.start_time.subfield.text] forKey:@"idcardStartDate"];
+    [self.studentDic setObject:self.end_time.subfield.text forKey:@"idcardEndDate"];
+    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.hukou.subfield.tag] forKey:@"enterType"];
+    
     AddInformationThreeVC *vc = [[AddInformationThreeVC alloc] init];
+    vc.studentDic = self.studentDic;
     [self.navigationController pushViewController:vc animated:YES];
 }
 /*

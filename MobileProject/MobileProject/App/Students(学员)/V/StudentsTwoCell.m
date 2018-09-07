@@ -50,12 +50,12 @@
     self.typeone = [[UILabel alloc] init];
     [self.contentView addSubview:self.typeone];
     self.typeone.layer.borderWidth = 0.3;
-    self.typeone.layer.borderColor = kColor_N(77, 213, 185).CGColor;
+    
     self.typeone.layer.cornerRadius = 3;
     self.typeone.textColor = kColor_N(77, 213, 185);
     self.typeone.font = [UIFont systemFontOfSize:kFit_Font6(13)];
     self.typeone.textAlignment = NSTextAlignmentCenter;
-    self.typeone.text = @"信息已完善";
+    
     [self.typeone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(img.mas_right).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
@@ -79,4 +79,21 @@
         make.height.mas_equalTo(1);
     }];
 }
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    self.title.text = [NSString stringWithFormat:@"%@  %@",model.studentName,model.studentPhone];
+    if ([model.isComplete  isEqual: @"1"]) {
+        self.typeone.text = @"信息未完善";
+        self.typeone.layer.borderColor = [UIColor redColor].CGColor;
+    }else{
+        self.typeone.text = @"信息已完善";
+        self.typeone.layer.borderColor = kColor_N(77, 213, 185).CGColor;
+    }
+}
+
+
+
+
+
 @end

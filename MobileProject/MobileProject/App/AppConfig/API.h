@@ -38,18 +38,43 @@
 #define CIDHomeJiangZuo  53 //讲座
 #define CIDHomeService 272 //文化服务
 
+/// 驾校名缓存
+#define SchoolList @"schoolList"
+/// 缓存所有字典数据
+#define ALLDATA @"AllData"
+
+/// 手动添加学员 申请类型
+#define DICTApply_type @"school_student_apply_type"
+/// 准驾车型
+#define DICTLicense_type @"school_student_license_type"
+/// 本外地
+#define DICTEnter_type @"school_student_is_enter_type"
+/// 性别
+#define DICTUser_sex @"sys_user_sex"
+/// 名族
+#define DICTEthnic @"sys_nation_type"
 
 
 #pragma mark 手机号登陆
 #define GETmembersLogin KURL(@"/app/login?mobile=%@&password=%@")
+
 #pragma mark 分校车辆管理
 #define POSTTeamCarLis KURL(@"/app/team/teamCar/teamCarList")
+
 #pragma mark 分校所属驾校管理
 #define POSTTeamSchoolList KURL(@"/app/team/teamSchool/teamSchoolList")
 
+#pragma mark 数据字典接口
+#define POSTAppDictList KURL(@"/system/dict/data/appDictList")
 
+#pragma mark -新增学员咨询接口
+#define POSTStudenteamAdd KURL(@"/app/studenteam/add")
 
+#pragma mark -学员咨询列表接口
+#define POSTStudenteamList KURL(@"/app/studenteam/list")
 
+#pragma mark -修改学员咨询接口
+#define POSTStudenteamEdit KURL(@"/app/studenteam/edit")
 
 #pragma mark 一下全部要删除掉
 #pragma mark -------订单

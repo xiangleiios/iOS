@@ -19,6 +19,11 @@
 + (NSString *)TimeToInterceptHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptMMddHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptYYYYMMddHHmm:(NSString *)time;
+
+/// 字符串转时间戳
++ (NSString *)dateConversionTimeStamp:(NSString *)date;
+/// 时间戳转字符串
++ (NSString *)datetimestampToString:(NSString *)timestamp;
 /// 根据颜色返回图片
 + (UIImage *)imageWithColor:(UIColor *)color;
 

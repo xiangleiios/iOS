@@ -17,6 +17,14 @@
 @end
 
 @implementation StudentsListVC
+- (NSMutableDictionary *)dic{
+    if (_dic == nil) {
+        _dic = [NSMutableDictionary dictionary];
+        [_dic setObject:@"20" forKey:@"pageSize"];
+    }
+    return _dic;
+}
+
 - (NSMutableArray *)dataArr{
     if (_dataArr==nil) {
         _dataArr=[NSMutableArray array];
@@ -78,38 +86,41 @@
 
 - (void)headerRefresh{
     self.pageNum=1;
-    
+    [self.dic setObject:[NSNumber numberWithInteger:self.pageNum] forKey:@"pageNum"];
     [self loadRefreshData];
 }
 - (void)footerRefresh{
     self.pageNum++;
+    [self.dic setObject:[NSNumber numberWithInteger:self.pageNum] forKey:@"pageNum"];
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-            [_table.mj_footer endRefreshing];
-            [_table.mj_header endRefreshing];
-//    NSString *url=[NSString stringWithFormat:GETordersList,self.pageNum,[User UserOb].token,self.orderType];
-//    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-//        NSArray *tpArray = responseObject[@"data"];
-//        if (self.pageNum==1) {
-//            [self.dataArr removeAllObjects];
-//        }
-//        if (tpArray) {
-//            for (NSDictionary *dic in tpArray) {
-//                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-//                [self.dataArr addObject:mode];
-//            }
-//        }
-//        [_table reloadData];
-//        [_table.mj_footer endRefreshing];
-//        [_table.mj_header endRefreshing];
-//    } failureBlock:^(NSError *error) {
-//        KKLog(@"%@", error);
-//        [_table.mj_footer endRefreshing];
-//        [_table.mj_header endRefreshing];
-//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-//
-//    }];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+//    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
+    [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:self.dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        NSDictionary *listDic = responseObject[@"list"];
+        NSArray *tpArray = listDic[@"rows"];
+        if (self.pageNum==1) {
+            [self.dataArr removeAllObjects];
+        }
+        if (tpArray) {
+            for (NSDictionary *dic in tpArray) {
+                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
+                [self.dataArr addObject:mode];
+            }
+        }
+        [_table reloadData];
+        [_table.mj_footer endRefreshing];
+        [_table.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        [_table.mj_footer endRefreshing];
+        [_table.mj_header endRefreshing];
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 
 #pragma mark-tableview代理
@@ -117,8 +128,7 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return self.dataArr.count;
-    return 3;
+    return self.dataArr.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -129,6 +139,7 @@
         if (!cell) {
             cell = [[StudentsOneCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
         }
+        cell.model = self.dataArr[indexPath.row];
         return cell;
     }else{
         NSString *cellID = [NSString stringWithFormat:@"StudentsTwoCell"];
@@ -136,6 +147,7 @@
         if (!cell) {
             cell = [[StudentsTwoCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
         }
+        cell.model = self.dataArr[indexPath.row];
         return cell;
     }
     
@@ -148,6 +160,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -110,18 +110,23 @@
     self.myCategoryView.contentScrollView = self.scrollView;
     
     StudentsListVC *vc = [[StudentsListVC alloc] init];
+    vc.url = POSTStudenteamList;
     vc.PayCost = NO;
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
 
     StudentsListVC *vctwo = [[StudentsListVC alloc] init];
+    vctwo.url = POSTStudenteamList;
+    [vctwo.dic setObject:@"1" forKey:@"isComplete"];
     vctwo.PayCost = NO;
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
     vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListVC *vcthree = [[StudentsListVC alloc] init];
+    vcthree.url = POSTStudenteamList;
+    [vcthree.dic setObject:@"2" forKey:@"isComplete"];
     vcthree.PayCost = NO;
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];

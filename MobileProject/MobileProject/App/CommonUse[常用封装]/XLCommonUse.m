@@ -215,4 +215,33 @@
     int val;
     return [scan scanInt:&val] && [scan isAtEnd];
 }
+
+
+
++ (NSString *)dateConversionTimeStamp:(NSString *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init]; //指定时间显示样式: HH表示24小时制 hh表示12小时制
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+//    NSString *lastTime = @"2017-01-23 17:22:00";
+    NSDate *lastDate = [formatter dateFromString:date]; //以 1970/01/01 GMT为基准，得到lastDate的时间戳
+    long firstStamp = [lastDate timeIntervalSince1970];
+    NSLog(@"firstStamp:%ld",firstStamp);
+    /// 转时间戳
+    NSString *timeSp = [NSString stringWithFormat:@"%ld", firstStamp*1000];
+    return timeSp;
+}
+
++ (NSString *)datetimestampToString:(NSString *)timestamp{
+    
+    NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:[timestamp longLongValue]/1000];
+    
+    NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
+    
+    [dateFormat setDateFormat:@"YYYY-MM-dd"];
+    
+    NSString* string=[dateFormat stringFromDate:confromTimesp];
+    
+    return string;
+    
+}
+
 @end
