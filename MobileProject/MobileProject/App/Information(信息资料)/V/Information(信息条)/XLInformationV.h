@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 typedef void(^SenterBlcok) ();
-@interface XLInformationV : UIView
+@interface XLInformationV : XLView
 @property (nonatomic , copy)SenterBlcok senterBlock;
 @property (nonatomic , strong)UITextField *subfield;
 /// 信息输入条 must:是否为必填 Click:是否可点击
@@ -18,6 +18,8 @@ typedef void(^SenterBlcok) ();
 /// 信息条 显示标题 副标题
 -(instancetype)informationWithTitle:(NSString *)title SubTitle:(NSString *)subtitle;
 
+/// 信息条 显示标题 副标题  副标题过长时自动换行
+-(instancetype)informationHeightWithTitle:(NSString *)title SubTitle:(NSString *)subtitle;
 
 /// 图片文字带点击的视图 标题，副标题上下分部
 -(instancetype)informationWithTitle:(NSString *)title SubTitle:(NSString *)subtitle ImageName:(NSString *)img;

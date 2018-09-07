@@ -16,4 +16,5 @@
 @property (nonatomic , strong)UILabel *typefour;
 
 @property (nonatomic , strong)UIButton *selelctBut;
+@property (nonatomic , strong)FMMainModel *model;
 @end

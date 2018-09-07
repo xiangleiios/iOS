@@ -7,7 +7,7 @@
 //
 
 #import "StudentsThreeCell.h"
-
+#import "XLCache.h"
 @implementation StudentsThreeCell
 
 - (void)awakeFromNib {
@@ -129,5 +129,42 @@
     }];
     
 }
+
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    
+    XLCache *cache = [XLCache singleton];
+    self.title.text = [NSString stringWithFormat:@"%@ %@",model.studentName,model.studentPhone];
+    self.typetwo.text = [NSString stringWithFormat:@"%@", cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]]];
+    self.typethree.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.carType]]];
+    //1 报名到总校，2、未报名到总校
+    if ([model.signupState  isEqual: @"1"]) {
+        // 1 未审核，2、审核通过、3、拒绝
+        if ([model.auditState  isEqual:@"1"]) {
+            self.typefour.backgroundColor = kColor_N(248, 167, 53);
+            self.typefour.text = @"审核中";
+            self.selelctBut.hidden = YES;
+        }else if ([model.auditState  isEqual:@"2"]){
+            self.typefour.backgroundColor = kColor_N(0, 194, 154);
+            self.typefour.text = @"通过";
+            self.selelctBut.hidden = YES;
+        }else if ([model.auditState  isEqual:@"3"]){
+            self.typefour.backgroundColor = kColor_N(148, 159, 181);
+            self.typefour.text = @"未通过";
+            self.selelctBut.hidden = NO;
+        }
+    }else{
+        self.typefour.backgroundColor = [UIColor redColor];
+        self.typefour.text = @"未提交";
+        self.selelctBut.hidden = NO;
+    }
+    
+    
+}
+
+
+
+
 
 @end

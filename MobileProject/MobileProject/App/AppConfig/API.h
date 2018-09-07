@@ -76,6 +76,9 @@
 #pragma mark -修改学员咨询接口
 #define POSTStudenteamEdit KURL(@"/app/studenteam/edit")
 
+#pragma mark -查询报名学员列表接口
+#define POSTStudentSignList KURL(@"/app/team/student/studentSignList")
+
 #pragma mark 一下全部要删除掉
 #pragma mark -------订单
 /// 创建订单

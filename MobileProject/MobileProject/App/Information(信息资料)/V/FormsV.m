@@ -166,6 +166,7 @@
         self.school = [[XLInformationV alloc] informationWithTitle:@"报考驾校" SubTitle:@"" TSSubTitle:@"请选择报考驾校" Must:YES Click:YES];
         self.school.senterBlock = ^{
             [weakself endEditing:YES];
+            KKLog(@"%@",[XLCache singleton].teamCode_title);
             [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.school.subfield.text = selectValue;
@@ -219,9 +220,10 @@
         self.state.senterBlock = ^{
             [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"报考状态" DataSource:@[@"未收费",@"已收费"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
-                NSLog(@"%@",selectValue);
+                
                 weakself.state.subfield.text = selectValue;
-                weakself.state.subfield.tag = [selectValue integerValue] + 1; ///1:未缴费 2：已缴费
+                weakself.state.subfield.tag = [selectRow integerValue] + 1; ///1:未缴费 2：已缴费
+                NSLog(@"%@  %ld",selectValue,weakself.state.subfield.tag);
             }];
         };
         [self addSubview:self.referees];

@@ -137,6 +137,7 @@
         [self addSubview:lb];
         lb.backgroundColor = kColor_N(240, 240, 240);
         [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(subLable.mas_bottom).mas_offset(KFit_H6S(30));
             make.bottom.left.right.mas_equalTo(self);
             make.height.mas_equalTo(1);
         }];
@@ -145,7 +146,46 @@
     return self;
 }
 
-
+-(instancetype)informationHeightWithTitle:(NSString *)title SubTitle:(NSString *)subtitle{
+    if(self == [super init]){
+        UILabel *titleLable = [[UILabel alloc] init];
+        [self addSubview:titleLable];
+        titleLable.text = title;
+        titleLable.font = [UIFont systemFontOfSize:FONT];
+        [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
+            make.top.mas_equalTo(self).mas_offset(KFit_H6S(25));
+            make.height.mas_equalTo(KFit_H6S(40));
+            make.width.mas_equalTo(KFit_W6S(280));
+        }];
+        
+        UILabel *subLable = [[UILabel alloc] init];
+        [self addSubview:subLable];
+        subLable.text = subtitle;
+        subLable.textColor = kColor_N(143, 155, 178);
+        subLable.textAlignment = NSTextAlignmentRight;
+        subLable.font = [UIFont systemFontOfSize:FONT];
+        subLable.numberOfLines = 0;
+        [subLable mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.mas_equalTo(self).mas_offset(-KFit_W6S(30));
+            make.top.mas_equalTo(titleLable);
+//            make.height.mas_equalTo(self);
+            make.left.mas_equalTo(titleLable.mas_right).mas_offset(KFit_W6S(20));
+        }];
+        
+        UILabel *lb = [[UILabel alloc] init];
+        [self addSubview:lb];
+        lb.backgroundColor = kColor_N(240, 240, 240);
+        [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self);
+            make.top.mas_equalTo(subLable.mas_bottom).mas_offset(KFit_H6S(25));
+            make.height.mas_equalTo(1);
+        }];
+        
+    }
+    return self;
+    
+}
 
 
 -(instancetype)informationWithTitle:(NSString *)title SubTitle:(NSString *)subtitle ImageName:(NSString *)img{

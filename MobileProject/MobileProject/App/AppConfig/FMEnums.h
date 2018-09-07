@@ -13,8 +13,9 @@
 
 
 typedef NS_ENUM(NSInteger, CellType) {
-    CellTypeSuoShuJiaXiao = 0,
-    CellTypeCheLiangGuanLi = 1
+    CellTypeSuoShuJiaXiao = 0,  // 所属驾校cell
+    CellTypeCheLiangGuanLi = 1,  //  车辆管理cell
+    CellTypeBaoMinXueYuan = 2   //   报名学员Cell
 };
 
 

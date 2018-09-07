@@ -113,28 +113,38 @@
     self.myCategoryView.contentScrollView = self.scrollView;
     
     StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
+    vc.url = POSTStudentSignList;
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListTwoVC *vctwo = [[StudentsListTwoVC alloc] init];
+    vctwo.url = POSTStudentSignList;
+    [vctwo.dic setObject:@"2" forKey:@"signupState"];
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
     vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListVC *vcthree = [[StudentsListVC alloc] init];
+    vcthree.url = POSTStudentSignList;
+    [vcthree.dic setObject:@"1" forKey:@"signupState"];
+    [vcthree.dic setObject:@"1" forKey:@"auditState"];
     vcthree.PayCost = YES;
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];
     vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListVC *vcfour = [[StudentsListVC alloc] init];
+    vcfour.url = POSTStudentSignList;
+    [vcfour.dic setObject:@"2" forKey:@"auditState"];
     vcfour.PayCost = YES;
     [self addChildViewController:vcfour];
     [self.scrollView addSubview:vcfour.view];
     vcfour.view.frame = CGRectMake(SCREEN_WIDTH * 3,0 , self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListTwoVC *vcfive = [[StudentsListTwoVC alloc] init];
+    vcfive.url = POSTStudentSignList;
+    [vcfive.dic setObject:@"3" forKey:@"auditState"];
     [self addChildViewController:vcfive];
     [self.scrollView addSubview:vcfive.view];
     vcfive.view.frame = CGRectMake(SCREEN_WIDTH * 4, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);

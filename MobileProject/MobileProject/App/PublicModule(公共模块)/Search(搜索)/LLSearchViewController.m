@@ -151,7 +151,7 @@
 {
     self.searchBar.text = str;
     LLSearchResultViewController *searchResultVC = [[LLSearchResultViewController alloc] init];
-    searchResultVC.searchStr = str;
+    searchResultVC.searchStr = str; //  搜索词
     searchResultVC.hotArray = _hotArray;
     searchResultVC.historyArray = _historyArray;
     [self.navigationController pushViewController:searchResultVC animated:YES];
@@ -193,14 +193,14 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
 {
-    if (searchBar.text == nil || [searchBar.text length] <= 0) {
-        _searchSuggestVC.view.hidden = YES;
-        [self.view bringSubviewToFront:_searchView];
-    } else {
-        _searchSuggestVC.view.hidden = NO;
-        [self.view bringSubviewToFront:_searchSuggestVC.view];
-        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
-    }
+//    if (searchBar.text == nil || [searchBar.text length] <= 0) {
+//        _searchSuggestVC.view.hidden = YES;
+//        [self.view bringSubviewToFront:_searchView];
+//    } else {
+//        _searchSuggestVC.view.hidden = NO;
+//        [self.view bringSubviewToFront:_searchSuggestVC.view];
+//        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
+//    }
 }
 
 - (void)didReceiveMemoryWarning

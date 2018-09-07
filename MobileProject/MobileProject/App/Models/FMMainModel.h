@@ -313,7 +313,8 @@
 @property (nonatomic , strong)NSString *week;
 @property (nonatomic , strong)NSString *whichProduce;
 @property (nonatomic , strong)NSString *year;
-
+@property (nonatomic , strong)NSString *signupState;  /// 1 报名到总校，2、未报名到总校
+@property (nonatomic , strong)NSString *auditState;  /// 默认1 未审核，2、审核通过、3、拒绝
 @end
 
 

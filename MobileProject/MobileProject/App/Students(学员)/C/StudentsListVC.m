@@ -11,6 +11,7 @@
 #import "StudentsOneCell.h"
 #import "StudentsTwoCell.h"
 #import "StudentDetailsEditorVC.h"
+#import "StudentDetailsVC.h"
 @interface StudentsListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -77,6 +78,7 @@
         [weakSelf.table.mj_header beginRefreshing];
     };
     [self headerRefresh];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -100,8 +102,14 @@
 //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
     [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:self.dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSDictionary *listDic = responseObject[@"list"];
-        NSArray *tpArray = listDic[@"rows"];
+        
+        NSArray *tpArray;
+        if (self.PayCost) {
+            tpArray =responseObject[@"list"];
+        }else{
+            NSDictionary *listDic = responseObject[@"list"];
+            tpArray = listDic[@"rows"];
+        }
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -139,6 +147,7 @@
         if (!cell) {
             cell = [[StudentsOneCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
         }
+        cell.type = CellTypeBaoMinXueYuan;
         cell.model = self.dataArr[indexPath.row];
         return cell;
     }else{
@@ -147,6 +156,7 @@
         if (!cell) {
             cell = [[StudentsTwoCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
         }
+        
         cell.model = self.dataArr[indexPath.row];
         return cell;
     }
@@ -159,9 +169,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
-    vc.model = self.dataArr[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    FMMainModel *model = self.dataArr[indexPath.row];
+    //1 报名到总校，2、未报名到总校
+    if ([model.signupState  isEqual: @"1"]) {
+        // 1 未审核，2、审核通过、3、拒绝
+        if ([model.auditState  isEqual:@"1"]) {
+            StudentDetailsVC *vc = [[StudentDetailsVC alloc] init];
+            vc.model = self.dataArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([model.auditState  isEqual:@"2"]){
+            StudentDetailsVC *vc = [[StudentDetailsVC alloc] init];
+            vc.model = self.dataArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([model.auditState  isEqual:@"3"]){
+            StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+            vc.model = self.dataArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+        vc.model = self.dataArr[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
 }
 
 /*

@@ -116,16 +116,22 @@
     
     KKLog(@"%@",self.studentDic);
     NSString *url = POSTStudenteamAdd;
-    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在提交" ToView:self.view];
+    [MBProgressHUD showLoadingHUD:@"正在提交"];
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.studentDic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-       [hud hide:YES];
-        KKLog(@"%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if ([responseObject[@"code"] integerValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"添加学员成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
     } failureBlock:^(NSError *error) {
         KKLog(@"%@", error);
-        [hud hide:YES];
+        [MBProgressHUD hideLoadingHUD];
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         

@@ -183,16 +183,23 @@
     [self.studentDic setValue:self.model.idid forKey:@"id"];
     KKLog(@"%@",self.studentDic);
     NSString *url = POSTStudenteamEdit;
-    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在保存" ToView:self.view];
+    [MBProgressHUD showLoadingHUD:@"正在保存"];
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.studentDic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        [hud hide:YES];
+        [MBProgressHUD hideLoadingHUD];
+        if ([responseObject[@"code"] integerValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"修改成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
         KKLog(@"%@",responseObject);
     } failureBlock:^(NSError *error) {
         KKLog(@"%@", error);
-        [hud hide:YES];
+        [MBProgressHUD hideLoadingHUD];
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         

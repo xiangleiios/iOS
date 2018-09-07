@@ -124,7 +124,7 @@
 //    [self.veribut addTarget:self action:@selector(getVerificationCode) forControlEvents:UIControlEventTouchUpInside];
 //    self.veribut.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(12)];
     
-    
+    //15658458745   18810395609
 #ifdef DEBUG
     self.pho.text = @"18810395609";
     self.password.text = @"123456";
@@ -299,10 +299,10 @@
     //    appDelegate.tab = TabBarControllerConfig
     NSString *url=[NSString stringWithFormat:GETmembersLogin,phone,password];
 
-    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在登陆" ToView:self.view];
+    [MBProgressHUD showLoadingHUD:@"正在登陆"];
 
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        [hud hide:YES];
+        [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
             XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"登录成功" SuccessOrFailure:YES];
             [alert showPrompt];
@@ -318,10 +318,10 @@
             }];
 
         }else{
-            
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }
     } failureBlock:^(NSError *error) {
-        [hud hide:YES];
+        [MBProgressHUD hideLoadingHUD];
         KKLog(@"error :%@",error);
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {

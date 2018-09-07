@@ -68,6 +68,7 @@
 		4FFEBA8620DCFC2900FB095B /* UILabel+XLlable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FFEBA8520DCFC2900FB095B /* UILabel+XLlable.m */; };
 		9530D3F41E8B4B29000AE7BE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9530D3F31E8B4B29000AE7BE /* MediaPlayer.framework */; };
 		9581ACC61E9B68B80090C525 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34919F7B1D98EAB0004B7307 /* JavaScriptCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A7153CE021426164004D4441 /* StudentDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7153CDF21426164004D4441 /* StudentDetailsVC.m */; };
 		A71907A02130EED50072B8CF /* StudentsTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A719079F2130EED50072B8CF /* StudentsTwoCell.m */; };
 		A71907A4213106180072B8CF /* SubordinateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A3213106180072B8CF /* SubordinateVC.m */; };
 		A71907A721312B850072B8CF /* DrivingSchoolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A621312B850072B8CF /* DrivingSchoolVC.m */; };
@@ -704,6 +705,8 @@
 		947E29699A126B10EB862AB4 /* Pods-MobileProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MobileProject/Pods-MobileProject.debug.xcconfig"; sourceTree = "<group>"; };
 		9530D3F31E8B4B29000AE7BE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		99731655615396F5ED3C0BDD /* libPods-MobileProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MobileProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7153CDE21426164004D4441 /* StudentDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentDetailsVC.h; sourceTree = "<group>"; };
+		A7153CDF21426164004D4441 /* StudentDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentDetailsVC.m; sourceTree = "<group>"; };
 		A719079E2130EED50072B8CF /* StudentsTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsTwoCell.h; sourceTree = "<group>"; };
 		A719079F2130EED50072B8CF /* StudentsTwoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsTwoCell.m; sourceTree = "<group>"; };
 		A71907A2213106180072B8CF /* SubordinateVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubordinateVC.h; sourceTree = "<group>"; };
@@ -2185,6 +2188,8 @@
 				A778F86E2134EEDA008A8948 /* QrCodeVC.m */,
 				A7E979D4213535CB00EA6F14 /* CodeShareV.h */,
 				A7E979D5213535CB00EA6F14 /* CodeShareV.m */,
+				A7153CDE21426164004D4441 /* StudentDetailsVC.h */,
+				A7153CDF21426164004D4441 /* StudentDetailsVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -5309,6 +5314,7 @@
 				DA0346BD1F509098008E7BE1 /* UIImage+GIF.m in Sources */,
 				DA959E161F5093D6002389F6 /* FMCountDownButton.m in Sources */,
 				DA0346801F509098008E7BE1 /* NSTimer+Blocks.m in Sources */,
+				A7153CE021426164004D4441 /* StudentDetailsVC.m in Sources */,
 				DA4FA4CC1FDF7B7300C7C1F1 /* PublicModel.m in Sources */,
 				DA03466C1F509098008E7BE1 /* NSString+Emoji.m in Sources */,
 				DA0346B11F509098008E7BE1 /* UIFont+DynamicFontControl.m in Sources */,
