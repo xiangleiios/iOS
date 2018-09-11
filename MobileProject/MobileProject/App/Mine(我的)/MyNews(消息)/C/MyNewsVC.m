@@ -37,9 +37,9 @@
 //    kWeakSelf(self)
     [self.navigationView setTitle:@"消息"];
     //添加一个带图片的按钮，如果这个按钮只有点击事件，可以这样写，更加简洁。
-    
+    kWeakSelf(self)
     UIButton *but =  [self.navigationView addRightButtonWithTitle:@"全部标记已读" clickCallBack:^(UIView *view) {
-        
+        [weakself allRead];
     }];
     [but setTitleColor:kColor_N(15, 115, 238) forState:UIControlStateNormal];
     
@@ -61,7 +61,7 @@
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+//    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
     _table.reloadBlock = ^{
@@ -85,30 +85,32 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-            [_table.mj_footer endRefreshing];
-            [_table.mj_header endRefreshing];
-//    NSString *url=[NSString stringWithFormat:GETordersList,self.pageNum,[User UserOb].token,self.orderType];
-//    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-//        NSArray *tpArray = responseObject[@"data"];
-//        if (self.pageNum==1) {
-//            [self.dataArr removeAllObjects];
-//        }
-//        if (tpArray) {
-//            for (NSDictionary *dic in tpArray) {
-//                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-//                [self.dataArr addObject:mode];
-//            }
-//        }
-//        [_table reloadData];
-//        [_table.mj_footer endRefreshing];
-//        [_table.mj_header endRefreshing];
-//    } failureBlock:^(NSError *error) {
-//        KKLog(@"%@", error);
-//        [_table.mj_footer endRefreshing];
-//        [_table.mj_header endRefreshing];
-//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-//
-//    }];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTFirstList;
+    //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        NSArray *tpArray = responseObject[@"list"][@"rows"];
+        if (self.pageNum==1) {
+            [self.dataArr removeAllObjects];
+        }
+        if (tpArray) {
+            for (NSDictionary *dic in tpArray) {
+                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
+                [self.dataArr addObject:mode];
+            }
+        }
+        [_table reloadData];
+        [_table.mj_footer endRefreshing];
+        [_table.mj_header endRefreshing];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        [_table.mj_footer endRefreshing];
+        [_table.mj_header endRefreshing];
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 
 #pragma mark-tableview代理
@@ -116,8 +118,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return self.dataArr.count;
-    return 4;
+    return self.dataArr.count;
+//    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -126,7 +128,7 @@
     if (!cell) {
         cell = [[MyNewsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
-//    cell.model = self.dataArr[indexPath.row];
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 
@@ -138,9 +140,45 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self getMessageInfo:indexPath.row];
     
 }
 
+- (void)getMessageInfo:(NSInteger)index{
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    FMMainModel *model = self.dataArr[index];
+    //    NSString *url = POSTgGetEnrollInfoInfo;
+    NSString *url1 = [NSString stringWithFormat:@"%@?id=%@",POSTGetMessageInfo,model.idid];
+    [FMNetworkHelper fm_request_getWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            model.isRead = 2;
+            [self.table reloadData];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+
+- (void)allRead{
+    NSString *url = POSTUpdateAllRead;
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        [self headerRefresh];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 /*
 #pragma mark - Navigation
 

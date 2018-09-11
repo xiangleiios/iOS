@@ -10,4 +10,6 @@
 
 @interface StudentDetailsEditorVC : FMBaseViewController
 @property (nonatomic , strong)FMMainModel *model;
+@property (nonatomic , strong)NSString *url;
+@property (nonatomic , assign)BOOL PayCost;
 @end

@@ -90,6 +90,7 @@
 		A74EB31B213E5A2E00564BC6 /* BusinessCardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74EB31A213E5A2E00564BC6 /* BusinessCardListVC.m */; };
 		A74FE4322126C83C008E159E /* XLColumnsV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4312126C83C008E159E /* XLColumnsV.m */; };
 		A74FE43A2126D951008E159E /* XLInformationV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4392126D951008E159E /* XLInformationV.m */; };
+		A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A754B7CA21476D280029CC04 /* XLNetwork.m */; };
 		A75F9437212D1A1900384EB0 /* AddInformationOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9436212D1A1900384EB0 /* AddInformationOneVC.m */; };
 		A75F943A212D329F00384EB0 /* FormsV.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9439212D329F00384EB0 /* FormsV.m */; };
 		A75F943D212D4C0B00384EB0 /* AddInformationTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943C212D4C0B00384EB0 /* AddInformationTwoVC.m */; };
@@ -748,6 +749,8 @@
 		A74FE4312126C83C008E159E /* XLColumnsV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLColumnsV.m; sourceTree = "<group>"; };
 		A74FE4382126D951008E159E /* XLInformationV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLInformationV.h; sourceTree = "<group>"; };
 		A74FE4392126D951008E159E /* XLInformationV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLInformationV.m; sourceTree = "<group>"; };
+		A754B7C921476D280029CC04 /* XLNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLNetwork.h; sourceTree = "<group>"; };
+		A754B7CA21476D280029CC04 /* XLNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLNetwork.m; sourceTree = "<group>"; };
 		A75F9435212D1A1900384EB0 /* AddInformationOneVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInformationOneVC.h; sourceTree = "<group>"; };
 		A75F9436212D1A1900384EB0 /* AddInformationOneVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInformationOneVC.m; sourceTree = "<group>"; };
 		A75F9438212D329F00384EB0 /* FormsV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormsV.h; sourceTree = "<group>"; };
@@ -3966,6 +3969,8 @@
 				DA78C2E81F5D41A3009BAA90 /* FMNetworkHelper.m */,
 				DA78C2E91F5D41A3009BAA90 /* NetWorkProtocol */,
 				DA78C2F01F5D41A3009BAA90 /* YTKNetwork */,
+				A754B7C921476D280029CC04 /* XLNetwork.h */,
+				A754B7CA21476D280029CC04 /* XLNetwork.m */,
 			);
 			path = FMNetWork;
 			sourceTree = "<group>";
@@ -4972,6 +4977,7 @@
 				DA911BEF1F3462830048E119 /* XLEwmVC.m in Sources */,
 				DA0346401F509098008E7BE1 /* NSDate+Formatter.m in Sources */,
 				DA0346311F509098008E7BE1 /* CLLocation+CH1903.m in Sources */,
+				A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */,
 				DA867D311F58F83900D4D011 /* NSMutableArray+JYSafe.m in Sources */,
 				DA0346D21F509098008E7BE1 /* UINavigationController+FMObjMethods.m in Sources */,
 				DA0346821F509098008E7BE1 /* NSURL+QueryDictionary.m in Sources */,

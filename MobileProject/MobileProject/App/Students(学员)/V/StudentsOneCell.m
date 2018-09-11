@@ -30,7 +30,7 @@
 - (void)loadSubview{
     _img = [[UIImageView alloc] init];
     [self.contentView addSubview:_img];
-    [_img setImage:[UIImage imageNamed:@"head_nor"]];
+//    [_img setImage:[UIImage imageNamed:@"head_nor"]];
     [_img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView);
@@ -121,6 +121,7 @@
     _model = model;
     
     if (_type == CellTypeSuoShuJiaXiao) {
+        [_img setImage:[UIImage imageNamed:@"jiaxiao"]];
         self.title.text = [NSString stringWithFormat:@"%@ %@",model.leader,model.phone];
         self.typeone.text = [NSString stringWithFormat:@"车辆%@", model.teamSchoolCarCount];
         self.typetwo.text = [NSString stringWithFormat:@"已报名%@", model.teamSchoolStudentCount];
@@ -132,12 +133,14 @@
             self.typefour.backgroundColor = kColor_N(238, 168, 58);
         }
     }else if (_type == CellTypeCheLiangGuanLi){
+        [_img setImage:[UIImage imageNamed:@"cheliang"]];
          self.title.text = [NSString stringWithFormat:@"%@",model.carName];
         self.typeone.text = [NSString stringWithFormat:@"%@", model.plateNumber];
         self.typetwo.hidden = YES;
         self.typethree.hidden = YES;
         self.typefour.hidden = YES;
     }else if (_type == CellTypeBaoMinXueYuan){
+        [_img setImage:[UIImage imageNamed:@"head_nor"]];
         XLCache *cache = [XLCache singleton];
         self.title.text = [NSString stringWithFormat:@"%@ %@",model.studentName,model.studentPhone];
         self.typetwo.text = [NSString stringWithFormat:@"%@", cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]]];
@@ -147,7 +150,7 @@
             // 1 未审核，2、审核通过、3、拒绝
             if ([model.auditState  isEqual:@"1"]) {
                 self.typefour.backgroundColor = kColor_N(248, 167, 53);
-                self.typefour.text = @"审核中";
+                self.typefour.text = @"待审核";
             }else if ([model.auditState  isEqual:@"2"]){
                 self.typefour.backgroundColor = kColor_N(0, 194, 154);
                 self.typefour.text = @"通过";

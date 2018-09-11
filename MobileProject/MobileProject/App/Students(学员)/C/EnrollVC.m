@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _titles = @[@"全部", @"未提交",@"审核中", @"通过",@"未通过"];
+    _titles = @[@"全部",@"待审核", @"通过",@"未通过"];
     [self loadSousuo];
     [self loadMyCategoryView];
     [self loadScroll];
@@ -83,6 +83,7 @@
 
 - (void)toSearech{
     LLSearchViewController *seachVC = [[LLSearchViewController alloc] init];
+    seachVC.PayCost = YES;
     [self.navigationController pushViewController:seachVC animated:YES];
 }
 
@@ -109,21 +110,22 @@
         make.top.mas_equalTo(self.myCategoryView.mas_bottom);
     }];
     self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 5, 0);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 4, 0);
     self.myCategoryView.contentScrollView = self.scrollView;
     
-    StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
+    StudentsListVC *vc = [[StudentsListVC alloc] init];
+    vc.PayCost = YES;
     vc.url = POSTStudentSignList;
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
-    StudentsListTwoVC *vctwo = [[StudentsListTwoVC alloc] init];
-    vctwo.url = POSTStudentSignList;
-    [vctwo.dic setObject:@"2" forKey:@"signupState"];
-    [self addChildViewController:vctwo];
-    [self.scrollView addSubview:vctwo.view];
-    vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+//    StudentsListTwoVC *vctwo = [[StudentsListTwoVC alloc] init];
+//    vctwo.url = POSTStudentSignList;
+//    [vctwo.dic setObject:@"2" forKey:@"signupState"];
+//    [self addChildViewController:vctwo];
+//    [self.scrollView addSubview:vctwo.view];
+//    vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListVC *vcthree = [[StudentsListVC alloc] init];
     vcthree.url = POSTStudentSignList;
@@ -132,7 +134,7 @@
     vcthree.PayCost = YES;
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];
-    vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+    vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 1, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListVC *vcfour = [[StudentsListVC alloc] init];
     vcfour.url = POSTStudentSignList;
@@ -140,14 +142,15 @@
     vcfour.PayCost = YES;
     [self addChildViewController:vcfour];
     [self.scrollView addSubview:vcfour.view];
-    vcfour.view.frame = CGRectMake(SCREEN_WIDTH * 3,0 , self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+    vcfour.view.frame = CGRectMake(SCREEN_WIDTH * 2,0 , self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
-    StudentsListTwoVC *vcfive = [[StudentsListTwoVC alloc] init];
+    StudentsListVC *vcfive = [[StudentsListVC alloc] init];
+    vcfive.PayCost = YES;
     vcfive.url = POSTStudentSignList;
     [vcfive.dic setObject:@"3" forKey:@"auditState"];
     [self addChildViewController:vcfive];
     [self.scrollView addSubview:vcfive.view];
-    vcfive.view.frame = CGRectMake(SCREEN_WIDTH * 4, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+    vcfive.view.frame = CGRectMake(SCREEN_WIDTH * 3, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

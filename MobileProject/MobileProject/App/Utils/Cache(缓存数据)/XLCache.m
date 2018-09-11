@@ -102,7 +102,9 @@ static XLCache *XLCachesingleton = nil;
 - (NSMutableArray *)teamCode_title{
     if (_teamCode_title == nil) {
         _teamCode_title = [NSMutableArray array];
-        NSArray *arr = (NSArray *)[self.cache objectForKey:SchoolList];
+        NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+        NSArray *arr = (NSArray *)[defaults objectForKey:SchoolList];
+//        [self.cache objectForKey:SchoolList];
         for (NSDictionary *dic in arr) {
             [_teamCode_title addObject:dic[@"schoolName"]];
         }
@@ -113,9 +115,11 @@ static XLCache *XLCachesingleton = nil;
 - (NSMutableArray *)teamCode_value{
     if (_teamCode_value == nil) {
         _teamCode_value = [NSMutableArray array];
-        NSArray *arr = (NSArray *)[self.cache objectForKey:SchoolList];
+        NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+        NSArray *arr = (NSArray *)[defaults objectForKey:SchoolList];
+//        NSArray *arr = (NSArray *)[self.cache objectForKey:SchoolList];
         for (NSDictionary *dic in arr) {
-            [_teamCode_value addObject:[NSString stringWithFormat:@"%@",dic[@"teamSchoolDeptId"]]];
+            [_teamCode_value addObject:[NSString stringWithFormat:@"%@",dic[@"schoolDeptId"]]];
         }
     }
     return _teamCode_value;
@@ -132,7 +136,10 @@ static XLCache *XLCachesingleton = nil;
 
 - (NSMutableArray *)loadethnicTitleWithKey:(NSString *)key{
     NSMutableArray *arr = [NSMutableArray array];
-    NSDictionary *dic = (NSDictionary *)[self.cache objectForKey:ALLDATA];
+    NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+    NSString *str = (NSString *)[defaults objectForKey:ALLDATA];
+    NSDictionary *dic  = [str mj_JSONObject];
+//    NSDictionary *dic = (NSDictionary *)[self.cache objectForKey:ALLDATA];
     NSArray *ethnicArr = dic[key];
     for (NSDictionary *dict in ethnicArr) {
         [arr addObject:dict[@"dictLabel"]];
@@ -144,7 +151,9 @@ static XLCache *XLCachesingleton = nil;
 
 - (NSMutableArray *)loadethnicValueWithKey:(NSString *)key{
     NSMutableArray *arr = [NSMutableArray array];
-    NSDictionary *dic = (NSDictionary *)[self.cache objectForKey:ALLDATA];
+    NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+    NSString *str = (NSString *)[defaults objectForKey:ALLDATA];
+    NSDictionary *dic  = [str mj_JSONObject];
     NSArray *ethnicArr = dic[key];
     for (NSDictionary *dict in ethnicArr) {
         [arr addObject:[NSString stringWithFormat:@"%@",dict[@"dictValue"]]];

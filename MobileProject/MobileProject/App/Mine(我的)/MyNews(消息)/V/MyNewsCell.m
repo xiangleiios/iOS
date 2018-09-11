@@ -36,6 +36,17 @@
         make.width.height.mas_equalTo(KFit_W6S(90));
     }];
     
+    self.read = [[UILabel alloc] init];
+    [self.img addSubview:self.read];
+    self.read.hidden = YES;
+    [self.read mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.mas_equalTo(self.img);
+        make.width.height.mas_equalTo(KFit_W6S(18));
+    }];
+    self.read.backgroundColor = [UIColor redColor];
+    self.read.layer.cornerRadius = KFit_W6S(9);
+    self.read.layer.masksToBounds = YES;
+    
     self.title = [[UILabel alloc] init];
     [self.contentView addSubview:self.title];
     self.title.text = @"一条消息";
@@ -82,7 +93,17 @@
     }];
 }
 
-
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    self.title.text = _model.title;
+    self.content.text = _model.content;
+    self.time.text = _model.createTime;
+    if (_model.isRead) {
+        self.read.height = YES;
+    }else{
+        self.read.height = NO;
+    }
+}
 
 
 

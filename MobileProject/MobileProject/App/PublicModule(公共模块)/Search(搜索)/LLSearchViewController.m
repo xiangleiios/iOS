@@ -154,6 +154,7 @@
     searchResultVC.searchStr = str; //  搜索词
     searchResultVC.hotArray = _hotArray;
     searchResultVC.historyArray = _historyArray;
+    searchResultVC.PayCost = self.PayCost;
     [self.navigationController pushViewController:searchResultVC animated:YES];
     [self setHistoryArrWithStr:str];
 }

@@ -78,7 +78,7 @@ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:info d
 #define kPushToVC(vc)  [self.navigationController pushViewController:vc animated:YES]
 #define kPushToVcNotAnimated(ObjectName)  [self.navigationController pushViewController:ObjectName animated:NO]
 #define kHudShowResponseObjectMessage [MBProgressHUD showAutoMessage:responseObject[@"message"]];
-#define kResponseObjectStatusCodeIsEqual(Num) [responseObject[@"status_code"] integerValue] == Num
+#define kResponseObjectStatusCodeIsEqual(Num) [responseObject[@"code"] integerValue] == Num
 #define kResponseObjectMessage responseObject[@"message"]
 
 

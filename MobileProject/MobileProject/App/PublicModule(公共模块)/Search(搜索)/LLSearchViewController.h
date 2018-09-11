@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface LLSearchViewController : UIViewController
-
+@property (nonatomic , assign)BOOL PayCost;
 @end

@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _titles = @[@"全部",@"未完善",@"已完善"];
+    _titles = @[@"全部",@"未收费",@"已收费"];
     [self loadSousuo];
     [self loadMyCategoryView];
     [self loadScroll];
@@ -80,6 +80,7 @@
 
 - (void)toSearech{
     LLSearchViewController *seachVC = [[LLSearchViewController alloc] init];
+    seachVC.PayCost = NO;
     [self.navigationController pushViewController:seachVC animated:YES];
 }
 
@@ -118,7 +119,7 @@
 
     StudentsListVC *vctwo = [[StudentsListVC alloc] init];
     vctwo.url = POSTStudenteamList;
-    [vctwo.dic setObject:@"1" forKey:@"isComplete"];
+    [vctwo.dic setObject:@"1" forKey:@"isPay"];
     vctwo.PayCost = NO;
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
@@ -126,7 +127,7 @@
     
     StudentsListVC *vcthree = [[StudentsListVC alloc] init];
     vcthree.url = POSTStudenteamList;
-    [vcthree.dic setObject:@"2" forKey:@"isComplete"];
+    [vcthree.dic setObject:@"2" forKey:@"isPay"];
     vcthree.PayCost = NO;
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];

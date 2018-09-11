@@ -124,10 +124,10 @@
 //    [self.veribut addTarget:self action:@selector(getVerificationCode) forControlEvents:UIControlEventTouchUpInside];
 //    self.veribut.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(12)];
     
-    //15658458745   18810395609
+    //15658458745   18810395609  13154898589
 #ifdef DEBUG
-    self.pho.text = @"18810395609";
-    self.password.text = @"123456";
+    self.pho.text = @"13154898589";
+    self.password.text = @"12345678";
 #else
     
 #endif
@@ -309,7 +309,10 @@
             User *user=[User UserOb];
             user.accounttype=[NSNumber numberWithInteger:accountTypePhone];
             [user UserSave:responseObject];
-            [[XLCache singleton] cacheWhitValue:responseObject[@"schoolList"] AndKey:SchoolList];
+//            [[XLCache singleton] cacheWhitValue:responseObject[@"schoolList"] AndKey:SchoolList];
+            NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+            [defaults setObject:responseObject[@"schoolList"] forKey:SchoolList];
+            [defaults synchronize];
             [UIWebView fm_setTokenToUIWebViewCookie]; //存token到域名cookie
             [self laodCacheData];
             CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];            
@@ -382,7 +385,11 @@
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject){
         if ([responseObject[@"code"] integerValue] == 200) {
-            [[XLCache singleton] cacheWhitValue:responseObject[@"data"] AndKey:ALLDATA];
+            //把信息存起来
+            NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+            [defaults setObject:[responseObject[@"data"] mj_JSONString] forKey:@"AllData"];
+            [defaults synchronize];
+            
         }
     } failureBlock:^(NSError *error) {
         KKLog(@"%@", error);
@@ -392,6 +399,21 @@
     }];
     
 }
+
+//+ (NSString *)jsonStringWithDict:(NSDictionary *)dict {
+//    NSError *error; NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
+//    NSString *jsonString;
+//    if (!jsonData) {
+//        NSLog(@"%@",error);
+//
+//    }else{
+//        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
+//
+//    }
+//    return jsonString;
+//
+//}
+
 /*
 #pragma mark - Navigation
 

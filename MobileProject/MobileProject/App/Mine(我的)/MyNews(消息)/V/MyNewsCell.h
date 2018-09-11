@@ -13,4 +13,6 @@
 @property (nonatomic , strong)UILabel *title;
 @property (nonatomic , strong)UILabel *content;
 @property (nonatomic , strong)UILabel *time;
+@property (nonatomic , strong)FMMainModel *model;
+@property (nonatomic , strong)UILabel *read;
 @end

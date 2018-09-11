@@ -100,12 +100,13 @@
 
 @end
 
-
+typedef void(^SenterBlcokInt) (int tag);
 #pragma mark - 课程表单
 @interface CourseFormsV : XLView
-@property (nonatomic , strong)NSMutableArray *dataArr;
+@property (nonatomic , copy)SenterBlcokInt senterBlockInt;
+@property (nonatomic , strong)NSArray *dataArr;
 @property (nonatomic , strong)XLView *backview;
-- (instancetype)initWithDataArr:(NSMutableArray *)data;
+- (instancetype)initWithDataArr:(NSArray *)data;
 @end
 
 

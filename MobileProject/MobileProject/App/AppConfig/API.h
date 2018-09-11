@@ -76,8 +76,53 @@
 #pragma mark -修改学员咨询接口
 #define POSTStudenteamEdit KURL(@"/app/studenteam/edit")
 
+#pragma mark -学员报名-修改资料接口
+#define POSTUpdateStudent KURL(@"/app/team/student/updateStudent")
+
 #pragma mark -查询报名学员列表接口
 #define POSTStudentSignList KURL(@"/app/team/student/studentSignList")
+
+#pragma mark -查询招生名片列表接口
+#define POSTEnrollInfoList KURL(@"/app/enrollInfo/list")
+
+#pragma mark -学员咨询报名接口
+#define POSTSignStudent KURL(@"/app/studenteam/signStudent")
+
+#pragma mark -修改班型接口
+#define POSTClassTypeEdit KURL(@"/app/classType/edit")
+
+#pragma mark -app新增班型接口
+#define POSTClassTypeAdd KURL(@"/app/classType/add")
+
+#pragma mark -删除班型接口
+#define POSTClassTypeRemove KURL(@"/app/classType/remove")
+
+#pragma mark -获取招生名片信息接口
+#define POSTgGetEnrollInfoInfo KURL(@"/app/enrollInfo/getEnrollInfoInfo")
+
+
+#pragma mark -文件上传
+#define POSTUpLoadFile KURL(@"/system/file/upLoadFile")
+
+#pragma mark -修改招生名片接口
+#define POSTEnrollInfoEdit KURL(@"/app/enrollInfo/edit")
+
+
+#pragma mark -修改密码
+#define POSTEditPwd KURL(@"/app/team/teamUser/editPwd")
+
+#pragma mark -招生日报
+#define POSTCensusList KURL(@"/app/census/list")
+
+#pragma mark - 消息中心
+#define POSTFirstList KURL(@"/appMessage/first/list")
+
+#pragma mark - 获取消息详情
+#define POSTGetMessageInfo KURL(@"/appMessage/first/getMessageInfo")
+
+
+#pragma mark - 全部已读
+#define POSTUpdateAllRead KURL(@"/appMessage/first/updateAllRead")
 
 #pragma mark 一下全部要删除掉
 #pragma mark -------订单

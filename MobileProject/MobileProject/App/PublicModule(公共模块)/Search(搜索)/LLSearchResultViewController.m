@@ -10,7 +10,7 @@
 #import "LLSearchViewController.h"
 #import "LLSearchSuggestionVC.h"
 #import "LLSearchView.h"
-
+#import "StudentsListVC.h"
 @interface LLSearchResultViewController ()<UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *searchArray;
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UIBarButtonItem *rightItem;
 @property (nonatomic, strong) LLSearchSuggestionVC *searchSuggestVC;
 @property (nonatomic, strong) LLSearchView *searchView;
-
+@property (nonatomic, strong) StudentsListVC *student;
 @end
 
 @implementation LLSearchResultViewController
@@ -71,6 +71,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self setBarButtonItem];
     [self.view addSubview:self.searchSuggestVC.view];
+    [self loadSearchView];
 }
 
 - (void)setBarButtonItem
@@ -225,8 +226,11 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"searchBarSearchButtonClicked");
-    [_searchView removeFromSuperview];
-    [self setSearchResultWithStr:searchBar.text];
+//    [_searchView removeFromSuperview];
+//    [self setSearchResultWithStr:searchBar.text];
+    [self.student.dic removeAllObjects];
+    [self.student.dic setObject:searchBar.text forKey:@"searchValue"];
+    [self.student headerRefresh];
 }
 
 
@@ -236,6 +240,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)loadSearchView{
+    StudentsListVC *vc = [[StudentsListVC alloc] init];
+    self.student = vc;
+    vc.PayCost = self.PayCost;
+    if (self.PayCost) {
+        vc.url = POSTStudentSignList;
+    }else{
+        vc.url = POSTStudenteamList;
+    }
+    [vc.dic setObject:self.searchStr forKey:@"searchValue"];
+    [self.view addSubview:vc.view];
+    [self addChildViewController:vc];
+    [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+    }];
+}
 
 /*
 #pragma mark - Navigation

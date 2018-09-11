@@ -121,6 +121,58 @@
     return sessionTask;
 }
 
+
++ (void)fm_request_postWithUrlString:(NSString *)urlString
+                                                isNeedCache:(BOOL)isNeedCache
+                                                 parameters:(NSDictionary *)parameters
+                                               successBlock:(FMRequestSuccess)successBlock
+                                               failureBlock:(FMRequestFailure)failureBlock{
+    /* Configure session, choose between:
+     * defaultSessionConfiguration
+     * ephemeralSessionConfiguration
+     * backgroundSessionConfigurationWithIdentifier:
+     And set session-wide properties, such as: HTTPAdditionalHeaders,
+     HTTPCookieAcceptPolicy, requestCachePolicy or timeoutIntervalForRequest.
+     */
+    NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
+    /* Create session, and optionally set a NSURLSessionDelegate. */
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+    
+    /* Create the Request:
+     Request (POST https://echo.paw.cloud/)
+     */
+    
+    NSURL* URL = [NSURL URLWithString:urlString];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+    request.HTTPMethod = @"POST";
+    // Headers
+//    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+//    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [request addValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [request addValue:[User UserOb].token forHTTPHeaderField:@"token"];
+    [request addValue:@"Mobile" forHTTPHeaderField:@"loginType"];
+    // JSON Body
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:parameters options:kNilOptions error:NULL];
+    
+    /* Start a new Task */
+    NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            // Success
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+            KKLog(@"%@",dict);
+            NSLog(@"URL Session Task Succeeded: HTTP %ld", ((NSHTTPURLResponse*)response).statusCode);
+            successBlock(response);
+        }
+        else {
+            // Failure
+            NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+        }
+    }];
+    [task resume];
+    [session finishTasksAndInvalidate];
+    
+}
 /**
  网络请求的实例方法 put
  

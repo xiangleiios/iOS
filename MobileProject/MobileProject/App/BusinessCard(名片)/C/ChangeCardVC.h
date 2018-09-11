@@ -9,5 +9,7 @@
 #import "FMBaseViewController.h"
 
 @interface ChangeCardVC : FMBaseViewController
-
+@property (nonatomic , strong)FMMainModel *model;
+@property (nonatomic , strong)NSString *idid;
+- (void)refreshData;
 @end

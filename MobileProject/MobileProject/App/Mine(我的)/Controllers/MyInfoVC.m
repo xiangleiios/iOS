@@ -26,7 +26,7 @@
 }
 
 - (void)loadSubView{
-    XLInformationV *name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:@"13333333333"];
+    XLInformationV *name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile];
     [self.view addSubview:name];
     [name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(60));

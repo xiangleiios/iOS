@@ -11,7 +11,7 @@
 #import "XLInformationV.h"
 #import "CourseV.h"
 #import "TemplateV.h"
-
+#import "XLCache.h"
 #define BUT_W KFit_W6S(150)
 @interface ChangeCardVC ()<UIImagePickerControllerDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -26,6 +26,8 @@
 @property (nonatomic ,strong)NSMutableArray *imgarr;
 @property (nonatomic , strong)UIButton *UpAttachment;
 @property (nonatomic ,strong)NSMutableArray *butarr;
+@property (nonatomic ,strong)XLInformationV *keCheng;
+@property (nonatomic ,strong)NSString *scanPhotoIp;  //图片头
 @end
 
 @implementation ChangeCardVC
@@ -46,8 +48,6 @@
 - (NSMutableArray *)couresArr{
     if (_couresArr == nil) {
         _couresArr = [NSMutableArray array];
-        [_couresArr addObject:@"1"];  // ceshi
-        [_couresArr addObject:@"2"];
     }
     return _couresArr;
 }
@@ -69,8 +69,9 @@
 #pragma mark - 导航相关
 - (void)laodNavigation{
     [self.navigationView setTitle:@"修改资料"];
+    kWeakSelf(self)
     UIButton *but =  [self.navigationView addRightButtonWithTitle:@"保存" clickCallBack:^(UIView *view) {
-        
+        [weakself nextVC];
     }];
     [but setTitleColor:kColor_N(15, 115, 238) forState:UIControlStateNormal];
 }
@@ -153,7 +154,7 @@
     }];
     self.headImg.layer.cornerRadius = KFit_W6S(60);
     self.headImg.layer.masksToBounds = YES;
-    [self.headImg setImage:[UIImage imageNamed:@"pacture_nor"]];
+   
     
     self.admissions = [[AdmissionsFormsV alloc] init];
     [self.backview addSubview:self.admissions];
@@ -164,26 +165,34 @@
         make.height.mas_equalTo(KFit_H6S(720));
     }];
     
-    
-    XLInformationV *keCheng = [[XLInformationV alloc] informationWithTitle:@"培训课程" ButTile:@"创建课程" ButImg:@"add_cj"];
-    [self.backview addSubview:keCheng];
-    keCheng.senterBlock = ^{
+    kWeakSelf(self)
+    _keCheng = [[XLInformationV alloc] informationWithTitle:@"培训课程" ButTile:@"创建课程" ButImg:@"add_cj"];
+    [self.backview addSubview:_keCheng];
+    _keCheng.senterBlock = ^{
         CourseV *v = [[CourseV alloc] init];
+        v.vc = weakself;
+        v.idid = weakself.model.idid;
         [v show];
     };
-    [keCheng mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_keCheng mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.admissions.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
-    
-    self.course = [[CourseFormsV alloc] initWithDataArr:self.couresArr];
+    self.course = [[CourseFormsV alloc] initWithDataArr:_model.classList];
+    self.course.senterBlockInt = ^(int tag) {
+        CourseV *v = [[CourseV alloc] initWithDictionary:_model.classList[tag]];
+        v.vc = weakself;
+        v.idid = weakself.model.idid;
+        [v show];
+    };
+//    KKLog(@"kecheng ::::%@",_model.classList);
     [self.backview addSubview:self.course];
     [self.course mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(keCheng.mas_bottom).mas_offset(1);
+        make.top.mas_equalTo(_keCheng.mas_bottom).mas_offset(1);
         make.left.right.mas_equalTo(self.backview);
-        make.height.mas_equalTo(KFit_H6S(140) * self.couresArr.count);
+        make.height.mas_equalTo(KFit_H6S(140) * _model.classList.count);
     }];
     
     
@@ -258,12 +267,16 @@
 - (void)loadimgview{
     int j=0;
     for (int i=0; i<self.imgarr.count; i++) {
-        UIImageView *imgv=self.imgarr[i];
-        imgv.frame=CGRectMake(i%3*(KFit_W6S(20)+BUT_W),i/3*(KFit_W6S(20)+BUT_W), BUT_W, BUT_W);;
+        UIImageView *imgv= [[UIImageView alloc] init];
+        NSString *str = [NSString stringWithFormat:@"%@%@",self.scanPhotoIp,self.imgarr[i]];
+        KKLog(@"tupian dizhi : %@",str);
+        [imgv sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
+        imgv.frame=CGRectMake(i%3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30),i/3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30), BUT_W, BUT_W);;
         [self.imgBackView addSubview:imgv];
         
         /*删除按钮 */
         UIButton *but=[[UIButton alloc]init];
+        [self.backview addSubview:but];
         [but mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(imgv).mas_offset(-KFit_H6S(15));
             make.left.mas_equalTo(imgv.mas_right).mas_offset(-KFit_H6S(15));
@@ -271,12 +284,11 @@
         }];
         [but setImage:[UIImage imageNamed:@"icon_delet"] forState:UIControlStateNormal];
         but.tag=i;
-        [self.backview addSubview:but];
         [but addTarget:self action:@selector(deleteimgdata:) forControlEvents:UIControlEventTouchUpInside];
         [self.butarr addObject:but];
         j++;
     }
-    self.UpAttachment.frame=CGRectMake(j%3*(KFit_W6S(20)+BUT_W),j/3*(KFit_W6S(20)+BUT_W), BUT_W, BUT_W);
+    self.UpAttachment.frame=CGRectMake(j%3*(KFit_W6S(20)+BUT_W) + KFit_W6S(30),j/3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30), BUT_W, BUT_W);
     self.UpAttachment.hidden=NO;
     
 }
@@ -307,19 +319,26 @@
 - (void)uploadPictures:(UIImage *)image{
     [MBProgressHUD showLoadingHUD:@"正在上传图片"];
     
-    NSString *url=[NSString stringWithFormat:POSTFileUpload,[User UserOb].token];
+//    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+//    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTUpLoadFile;
+    
     
     
     AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:[User UserOb].token forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:@"Mobile" forHTTPHeaderField:@"loginType"];
     [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"image_file" fileName:@"tupian.png" mimeType:@"image/png"];
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"file" fileName:@"tupian.png" mimeType:@"image/png"];
     } progress:^(NSProgress * _Nonnull uploadProgress) {
         
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"成功返货=============%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if (kResponseObjectStatusCodeIsEqual(200)) {
-            [self.imgarr addObject:responseObject[@"data"]];
+            NSDictionary *dic =responseObject[@"data"][@"data"];
+            [self.imgarr addObject:dic[@"url"]];
+//            [self.imgarr addObject:dic[@"img"]];
             [self loadimgview];
            
         }else{
@@ -339,8 +358,129 @@
 - (void)laodCoutesView{
     
 }
-- (void)nextVC{
+
+
+- (void)refreshData{
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+//    NSString *url = POSTgGetEnrollInfoInfo;
+    NSString *url1 = [NSString stringWithFormat:@"%@?id=%@&operaType=1",POSTgGetEnrollInfoInfo,self.idid];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:self.idid forKey:@"id"];
+    [dic setObject:@"1" forKey:@"operaType"];
     
+    [FMNetworkHelper fm_request_getWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        self.scanPhotoIp = responseObject[@"scanPhotoIp"];
+        self.model = [FMMainModel mj_objectWithKeyValues:responseObject[@"enrollInfo"]];
+        
+    } failureBlock:^(NSError *error) {
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self refreshData];
+}
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:_model.headImg] placeholderImage:[UIImage imageNamed:@"pacture_nor"]];
+    XLCache *cache = [XLCache singleton];
+    self.admissions.name.subfield.text = _model.name;
+    
+    self.admissions.gender.subfield.text = cache.sys_user_sex_title[[cache.sys_user_sex_value indexOfObject:_model.sex]];
+    self.admissions.gender.subfield.tag = [_model.sex integerValue];
+    
+    KKLog(@"%@",_model.schoolDeptId);
+    self.admissions.school.subfield.text = cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.schoolDeptId]];
+    self.admissions.school.subfield.tag = [_model.schoolDeptId integerValue];
+    
+    self.admissions.seniority.subfield.text = _model.coachAge;
+    
+    self.admissions.phone.subfield.text = _model.enrollPhone;
+    
+    self.admissions.names.subfield.text = _model.deptName;
+    
+    self.admissions.address.subfield.text = _model.deptAddress;
+    self.textView.text = _model.introduce;
+    self.course.dataArr = _model.classList;
+    if (_model.url1) {
+        [self.imgarr addObject:_model.url1];
+    }
+    if (_model.url2) {
+        [self.imgarr addObject:_model.url2];
+    }
+    if (_model.url3) {
+        [self.imgarr addObject:_model.url4];
+    }
+    if (_model.url4) {
+        [self.imgarr addObject:_model.url4];
+    }
+    if (_model.url5) {
+        [self.imgarr addObject:_model.url5];
+    }
+    if (_model.url6) {
+        [self.imgarr addObject:_model.url6];
+    }
+    if (_model.url7) {
+        [self.imgarr addObject:_model.url7];
+    }
+    if (_model.url8) {
+        [self.imgarr addObject:_model.url8];
+    }
+    if (_model.url9) {
+        [self.imgarr addObject:_model.url9];
+    }
+    [self.course mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(_keCheng.mas_bottom).mas_offset(1);
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(140) * _model.classList.count);
+    }];
+    [self loadimgview];
+    self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
+    self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
+}
+- (void)nextVC{
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTEnrollInfoEdit;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:self.model.idid forKey:@"id"];
+    [dic setObject:self.admissions.name.subfield.text forKey:@"name"];
+    [dic setObject:[NSString stringWithFormat:@"%ld",self.admissions.gender.subfield.tag] forKey:@"sex"];
+    [dic setObject:[NSString stringWithFormat:@"%ld",self.admissions.school.subfield.tag] forKey:@"schoolDeptId"];
+    [dic setObject:self.admissions.seniority.subfield.text forKey:@"coachAge"];
+    [dic setObject:self.admissions.phone.subfield.text forKey:@"enrollPhone"];
+    [dic setObject:self.admissions.names.subfield.text forKey:@"deptName"];
+    [dic setObject:self.admissions.address.subfield.text forKey:@"deptAddress"];
+    [dic setObject:self.textView.text forKey:@"introduce"];
+    for (int i = 0; i <self.imgarr.count; i++) {
+        NSString *key = [NSString stringWithFormat:@"url%d",(i + 1)];
+        [dic setObject:_imgarr[i] forKey:key];
+    }
+    [MBProgressHUD showLoadingHUD:@"正在提交保存"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"11111%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if ([responseObject[@"code"] intValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"保存成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD hideLoadingHUD];
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+//    [dic setObject:<#(nonnull id)#> forKey:@"name"];
 }
 /*
 #pragma mark - Navigation

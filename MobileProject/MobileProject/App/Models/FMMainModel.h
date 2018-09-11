@@ -315,6 +315,30 @@
 @property (nonatomic , strong)NSString *year;
 @property (nonatomic , strong)NSString *signupState;  /// 1 报名到总校，2、未报名到总校
 @property (nonatomic , strong)NSString *auditState;  /// 默认1 未审核，2、审核通过、3、拒绝
+
+@property (nonatomic , strong)NSString *deptName; ///分队名称
+@property (nonatomic , strong)NSString *enrollPhone;  ///招生电话
+@property (nonatomic , strong)NSString *isShow;  //是否展示（1：默认展示 2：不展示）
+@property (nonatomic , strong)NSString *headImg; //头像
+@property (nonatomic , strong)NSString *schoolDeptId;  //驾校部门id
+@property (nonatomic , strong)NSString *coachAge; //教龄
+
+@property (nonatomic , strong)NSString *deptAddress; //分队地址
+@property (nonatomic , strong)NSArray *classList; // 班型信息
+@property (nonatomic , strong)NSString *introduce; // 自我介绍
+@property (nonatomic , strong)NSString *url1; //风景图
+@property (nonatomic , strong)NSString *url2;
+@property (nonatomic , strong)NSString *url3;
+@property (nonatomic , strong)NSString *url4;
+@property (nonatomic , strong)NSString *url5;
+@property (nonatomic , strong)NSString *url6;
+@property (nonatomic , strong)NSString *url7;
+@property (nonatomic , strong)NSString *url8;
+@property (nonatomic , strong)NSString *url9;
+@property (nonatomic , strong)NSString *scanPhotoIp; // 图片链接前缀
+@property (nonatomic , strong)NSString *title; //消息标题
+@property (nonatomic , strong)NSString *content; //消息类容
+@property (nonatomic ,assign)int isRead;//是否已读
 @end
 
 

@@ -71,6 +71,7 @@ static User *user  =  nil;
     self.points = dic[@"points"];
     self.token = dic[@"token"];
     self.uid = dic[@"uid"];
+    self.userId = dic[@"userId"];
     //把信息存起来
     NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.name forKey:@"name"];
@@ -84,6 +85,7 @@ static User *user  =  nil;
     [defaults setObject:self.token forKey:@"token"];
     [defaults setObject:self.uid forKey:@"uid"];
     [defaults setObject:self.accounttype forKey:@"accounttype"];
+    [defaults setObject:self.userId forKey:@"userId"];
     //登录状态
     [defaults setBool:YES forKey:@"log"];
     [defaults synchronize];
@@ -106,6 +108,7 @@ static User *user  =  nil;
     self.points = @"";
     self.token = @"";
     self.uid = @"";
+    self.userId = @"";
     self.accounttype = nil;
     //把信息存起来
     NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
@@ -120,6 +123,7 @@ static User *user  =  nil;
     [defaults setObject:self.token forKey:@"token"];
     [defaults setObject:self.uid forKey:@"uid"];
     [defaults setObject:self.accounttype forKey:@"accounttype"];
+    [defaults setObject:self.userId forKey:@"userId"];
     //登录状态
     [defaults setBool:NO forKey:@"log"];
     [defaults synchronize];

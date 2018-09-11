@@ -61,6 +61,7 @@
         self.subfield.placeholder = tssubtitle;
         self.subfield.textAlignment = NSTextAlignmentRight;
         self.subfield.font = [UIFont systemFontOfSize:FONT];
+        self.subfield.text = subtitle;
         
         if (click) {
             UIImageView *imgtwo = [[UIImageView alloc] init];

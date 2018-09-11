@@ -71,7 +71,7 @@
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+//    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
     _table.reloadBlock = ^{
@@ -89,6 +89,7 @@
 - (void)headerRefresh{
     self.pageNum=1;
     [self.dic setObject:[NSNumber numberWithInteger:self.pageNum] forKey:@"pageNum"];
+    [_dic setObject:@"20" forKey:@"pageSize"];
     [self loadRefreshData];
 }
 - (void)footerRefresh{
@@ -157,6 +158,7 @@
             cell = [[StudentsTwoCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
         }
         
+        [cell.selelctBut addTarget:self action:@selector(choose:) forControlEvents:UIControlEventTouchUpInside];
         cell.model = self.dataArr[indexPath.row];
         return cell;
     }
@@ -183,11 +185,13 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if ([model.auditState  isEqual:@"3"]){
             StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+            vc.PayCost = self.PayCost;
             vc.model = self.dataArr[indexPath.row];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else{
         StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+        vc.PayCost = self.PayCost;
         vc.model = self.dataArr[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -195,6 +199,15 @@
     
 }
 
+- (void)choose:(UIButton *)senter{
+    senter.selected = !senter.selected;
+    KKLog(@"%ld",(long)senter.tag);
+    if (senter.selected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsSubmit" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsDelete" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+    }
+}
 /*
 #pragma mark - Navigation
 

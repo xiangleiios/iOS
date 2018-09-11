@@ -35,5 +35,5 @@
 #define keyShareSDKAppSecret @"89313e51b9f6701685a18f898a7dad86"
 
 //友盟
-#define keyUMengAppkey @"5b39de75f43e4819310001b1"
+#define keyUMengAppkey @"59b8dc10aed1794fab00001d"
 #endif /* ThirdPartKeys_h */

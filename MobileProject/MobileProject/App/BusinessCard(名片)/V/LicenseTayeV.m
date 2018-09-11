@@ -7,7 +7,7 @@
 //
 
 #import "LicenseTayeV.h"
-
+#import "XLCache.h"
 @implementation LicenseTayeV
 
 /*
@@ -47,12 +47,15 @@
         //                make.width.mas_equalTo(KFit_W6S(280));
     }];
     
-    NSArray *arrone = @[@"C1",@"C2",@"C3",@"A1",@"A2",@"A3",@"B1",@"B2"];
+//    NSArray *arrone = @[@"C1",@"C2",@"C3",@"A1",@"A2",@"A3",@"B1",@"B2"];
+    NSArray *arrone = [XLCache singleton].student_license_type_title;
+    NSArray *arrtwo = [XLCache singleton].student_license_type_value;
     float w = KFit_W6S(100);
     float h = KFit_H6S(60);
     for (int i = 0; i < arrone.count; i++) {
         UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(KFit_W6S(30) + (w + KFit_W6S(50))* (i % 4), KFit_H6S(80) + h *(i/4), w, h)];
         [self addSubview:but];
+        but.tag = [arrtwo[i] integerValue];
         [but setTitle:arrone[i] forState:UIControlStateNormal];
         [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         but.titleEdgeInsets = UIEdgeInsetsMake(0, KFit_W6S(15), 0, 0);
@@ -76,7 +79,7 @@
     self.selectebut.selected = NO;
     senter.selected = YES;
     self.selectebut = senter;
-    self.textBlock(senter.titleLabel.text);
+    self.textBlock([NSString stringWithFormat:@"%ld",(long)senter.tag]);
 }
 
 

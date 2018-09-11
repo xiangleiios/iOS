@@ -13,5 +13,5 @@
 @property (nonatomic, copy) NSString *searchStr;
 @property (nonatomic, strong) NSMutableArray *hotArray;
 @property (nonatomic, strong) NSMutableArray *historyArray;
-
+@property (nonatomic , assign)BOOL PayCost;
 @end

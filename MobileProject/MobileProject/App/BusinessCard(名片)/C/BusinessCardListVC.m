@@ -27,6 +27,15 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"招生名片"];
     [self loadtable];
+    
+    UIButton *but = [[UIButton alloc] init];
+    [self.view addSubview:but];
+    [but mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+        make.width.height.mas_equalTo(KFit_W6S(158));
+    }];
+    [but setImage:[UIImage imageNamed:@"tuiguang"] forState:UIControlStateNormal];
     // Do any additional setup after loading the view.
 }
 
@@ -46,12 +55,11 @@
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
-    self.table.scrollEnabled = NO;
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+//    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
     _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
@@ -69,14 +77,14 @@
     self.pageNum=1;
     [_table.mj_footer endRefreshing];
     [_table.mj_header endRefreshing];
-//    [self loadRefreshData];
+    [self loadRefreshData];
 }
 - (void)footerRefresh{
     self.pageNum++;
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolList;
+    NSString *url = POSTEnrollInfoList;
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
@@ -110,8 +118,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return self.dataArr.count;
-    return 2;
+    return self.dataArr.count;
+//    return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -120,16 +128,18 @@
     if (!cell) {
         cell = [[BusinessCardCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return KFit_H6S(210);
+    return KFit_H6S(200);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

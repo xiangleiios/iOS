@@ -31,6 +31,7 @@
  "updated_at": "2017-02-24 11:36:37"
  */
 @property (nonatomic , strong)NSString *idid;
+@property (nonatomic , strong)NSString *userId;
 @property (nonatomic , strong)NSString *name;
 @property (nonatomic , strong)NSString *password;
 @property (nonatomic , strong)NSString *nick_name;

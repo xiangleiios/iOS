@@ -17,4 +17,5 @@
 @property(nonatomic, assign) NSInteger pageSize;
 
 @property (nonatomic , strong)NSMutableDictionary *dic;
+- (void)headerRefresh;
 @end

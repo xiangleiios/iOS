@@ -29,11 +29,22 @@
 
 
 - (void)loadSubview{
+    
+    self.selelctBut = [[UIButton alloc] init];
+    [self.contentView addSubview:self.selelctBut];
+    [self.selelctBut setImage:[UIImage imageNamed:@"nor_button"] forState:UIControlStateNormal];
+    [self.selelctBut setImage:[UIImage imageNamed:@"down_button"] forState:UIControlStateSelected];
+    [self.selelctBut mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(27));
+        make.centerY.mas_equalTo(self.contentView);
+        make.width.height.mas_equalTo(KFit_W6S(56));
+    }];
+    
     UIImageView * img = [[UIImageView alloc] init];
     [self.contentView addSubview:img];
     [img setImage:[UIImage imageNamed:@"head_nor"]];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(self.selelctBut.mas_right).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView);
         make.width.height.mas_equalTo(KFit_W6S(80));
     }];
@@ -62,6 +73,22 @@
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(160), KFit_H6S(40)));
     }];
     
+    self.typetwo = [[UILabel alloc] init];
+    [self.contentView addSubview:self.typetwo];
+    self.typetwo.layer.borderWidth = 0.3;
+    
+    self.typetwo.layer.cornerRadius = 3;
+    self.typetwo.textColor = kColor_N(77, 213, 185);
+    self.typetwo.font = [UIFont systemFontOfSize:kFit_Font6(13)];
+    self.typetwo.textAlignment = NSTextAlignmentCenter;
+    
+    [self.typetwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.typeone.mas_right).mas_offset(KFit_W6S(10));
+        make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
+    }];
+    
+    
     self.dial = [[UIButton alloc] init];
     [self.contentView addSubview:self.dial];
     [self.dial setImage:[UIImage imageNamed:@"phone_icon"] forState:UIControlStateNormal];
@@ -82,13 +109,33 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
+    self.selelctBut.tag = [_model.idid integerValue];
+    XLSingleton *single = [XLSingleton singleton];
+    if ([single.dateArr containsObject:[NSNumber numberWithInteger:[_model.idid integerValue]]]) {
+        self.selelctBut.selected = YES;
+    }else{
+        self.selelctBut.selected = NO;
+    }
+    
     self.title.text = [NSString stringWithFormat:@"%@  %@",model.studentName,model.studentPhone];
     if ([model.isComplete  isEqual: @"1"]) {
         self.typeone.text = @"信息未完善";
         self.typeone.layer.borderColor = [UIColor redColor].CGColor;
+        self.typeone.textColor = [UIColor redColor];
     }else{
         self.typeone.text = @"信息已完善";
         self.typeone.layer.borderColor = kColor_N(77, 213, 185).CGColor;
+        self.typeone.textColor = kColor_N(77, 213, 185);
+    }
+    //1:未缴费 2：已缴费
+    if ([model.isPay intValue] == 1) {
+        self.typetwo.text = @"未收费";
+        self.typetwo.layer.borderColor = [UIColor redColor].CGColor;
+        self.typetwo.textColor = [UIColor redColor];
+    }else{
+        self.typetwo.text = @"已收费";
+        self.typetwo.layer.borderColor = kColor_N(77, 213, 185).CGColor;
+        self.typetwo.textColor = kColor_N(77, 213, 185);
     }
 }
 

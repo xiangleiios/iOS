@@ -48,7 +48,7 @@
 //    UIImageView *imgpho=[[UIImageView alloc]initWithFrame:CGRectMake(0, imgY, KFit_W6S(32), KFit_H6S(45))];
 //    [imgpho setImage:[UIImage imageNamed:@"password2"]];
 //    [v addSubview:imgpho];
-    self.odlpassword=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), 0, KFit_W6S(400), viewHight)];
+    self.odlpassword=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), 0, KFit_W6S(650), viewHight)];
     self.odlpassword.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.odlpassword];
     self.odlpassword.placeholder=@"请输入旧密码";
@@ -69,7 +69,7 @@
 //    UIImageView *imgpass=[[UIImageView alloc]initWithFrame:CGRectMake(0, imgY + viewHight *2, KFit_W6S(32), KFit_H6S(45))];
 //    [imgpass setImage:[UIImage imageNamed:@"password2"]];
 //    [v addSubview:imgpass];
-    self.passwordtwo=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), viewHight * 2, KFit_W6S(450), viewHight)];
+    self.passwordtwo=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), viewHight * 2, KFit_W6S(650), viewHight)];
     self.passwordtwo.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.passwordtwo];
     self.passwordtwo.placeholder=@"请再次输入密码";
@@ -148,22 +148,43 @@
         return;
     }
     
-    NSString *url=[NSString stringWithFormat:GETmembersPasswordChange,[User UserOb].token,odl,passwordo];
-    MBProgressHUD *hud=[MBProgressHUD showMessage:@"正在修改" ToView:self.view];
-    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        [hud hide:YES];
-        if ([responseObject[@"status_code"] intValue]==200) {
-            [MBProgressHUD showAutoMessage:@"修改成功"];
+    NSString *url=[NSString stringWithFormat:@"%@?userId=%@&password=%@&newPass=%@",POSTEditPwd,[User UserOb].userId,odl,passwordo];
+    [MBProgressHUD showLoadingHUD:@"正在修改"];
+    
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        [MBProgressHUD hideLoadingHUD];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"修改成功" SuccessOrFailure:YES];
+            [alert showPrompt];
             [self.navigationController popViewControllerAnimated:YES];
-            
         }else{
-            [MBProgressHUD showAutoMessage:responseObject[@"message"]];
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }
-        KKLog(@"登录返回的成功信息--------->%@", responseObject);
+        KKLog(@"%@",responseObject);
     } failureBlock:^(NSError *error) {
-        [hud hide:YES];
-
-    } progress:nil];
+        [MBProgressHUD hideLoadingHUD];
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
+    
+//    [FMNetworkHelper fm_request_getWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+//        [hud hide:YES];
+//        if ([responseObject[@"status_code"] intValue]==200) {
+//            [MBProgressHUD showAutoMessage:@"修改成功"];
+//            [self.navigationController popViewControllerAnimated:YES];
+//
+//        }else{
+//            [MBProgressHUD showAutoMessage:responseObject[@"message"]];
+//        }
+//        KKLog(@"登录返回的成功信息--------->%@", responseObject);
+//    } failureBlock:^(NSError *error) {
+//        [hud hide:YES];
+//
+//    } progress:nil];
 
 }
 

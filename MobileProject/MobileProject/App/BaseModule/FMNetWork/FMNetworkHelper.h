@@ -65,6 +65,15 @@ typedef void( ^ FMDownloadProgress)(int64_t bytesProgress,
                                                failureBlock:(FMRequestFailure)failureBlock
                                                    progress:(FMDownloadProgress)progress;
 
+
++ (void)fm_request_postWithUrlString:(NSString *)urlString
+                                                isNeedCache:(BOOL)isNeedCache
+                                                 parameters:(NSDictionary *)parameters
+                                               successBlock:(FMRequestSuccess)successBlock
+                                               failureBlock:(FMRequestFailure)failureBlock;
+
+
+
 #pragma mark - 网络请求的类方法 --- put
 /**
  网络请求的实例方法 put

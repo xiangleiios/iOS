@@ -258,17 +258,20 @@
         self.gender = [[XLInformationV alloc] informationWithTitle:@"性别" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
         self.gender.senterBlock = ^{
             [weakself endEditing:YES];
-            [CGXPickerView showStringPickerWithTitle:@"性别" DataSource:@[@"男",@"女"] DefaultSelValue:@"男" IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+            [CGXPickerView showStringPickerWithTitle:@"性别" DataSource:[XLCache singleton].sys_user_sex_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.gender.subfield.text = selectValue;
+                weakself.gender.subfield.tag = [[XLCache singleton].sys_user_sex_value[[selectRow intValue]] intValue];
             }];
         };
         self.school = [[XLInformationV alloc] informationWithTitle:@"驾校" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
         self.school.senterBlock = ^{
             [weakself endEditing:YES];
-            [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:@[@"报考驾校1",@"报考驾校2"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+            [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.school.subfield.text = selectValue;
+                weakself.school.subfield.tag = [[XLCache singleton].teamCode_value[[selectRow intValue]] intValue];
+                NSLog(@"%@",[XLCache singleton].teamCode_value[[selectRow intValue]]);
             }];
         };
         XLInformationV *peixun = [[XLInformationV alloc] informationWithTitle:@"招生培训资料"];
@@ -307,7 +310,7 @@
 
 @implementation CourseFormsV
 
-- (instancetype)initWithDataArr:(NSMutableArray *)data{
+- (instancetype)initWithDataArr:(NSArray *)data{
     self = [super init];
     if (self) {
         self.dataArr = data;
@@ -315,7 +318,7 @@
     return self;
 }
 
-- (void)setDataArr:(NSMutableArray *)dataArr{
+- (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
     [_backview removeFromSuperview];
     _backview = [[XLView alloc] init];
@@ -323,13 +326,18 @@
     [_backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.left.right.mas_equalTo(self);
     }];
+    XLCache *cache = [XLCache singleton];
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < dataArr.count; i++) {
-        XLInformationV *v = [[XLInformationV alloc] informationWithTitle:@"普通课程" CarType:@"C1" SubTitle:@"随到随学" Price:@"2880"];
+        NSDictionary *dic = dataArr[i];
+        NSString *str =  cache.student_license_type_title[[cache.student_license_type_value indexOfObject:dic[@"licenseType"]]];
+        XLInformationV *v = [[XLInformationV alloc] informationWithTitle:dic[@"courseName"] CarType:str SubTitle:dic[@"courseIntroduce"] Price:dic[@"coursePrice"]];
         v.tag = i;
-        kWeakSelf(v)
+        kWeakSelf(self)
         v.senterBlock = ^{
-            KKLog(@"%ld",(long)weakv.tag);
+            
+            weakself.senterBlockInt(v.tag);
+
         };
         [_backview addSubview:v];
         [arr addObject:v];

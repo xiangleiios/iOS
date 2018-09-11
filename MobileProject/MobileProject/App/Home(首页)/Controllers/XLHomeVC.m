@@ -170,17 +170,17 @@
     }];
     
     _one = [[HomeControlsV alloc] init];
-    _one.title.text = @"25";
+    _one.title.text = @"0";
     _one.subtitle.text = @"今日询价";
     [self.backview addSubview:_one];
     
     _two = [[HomeControlsV alloc] init];
-    _two.title.text = @"9";
+    _two.title.text = @"0";
     _two.subtitle.text = @"今日报名";
     [self.backview addSubview:_two];
     
     _three = [[HomeControlsV alloc] init];
-    _three.title.text = @"146";
+    _three.title.text = @"0";
     _three.subtitle.text = @"近一月报名";
     [self.backview addSubview:_three];
     
@@ -274,6 +274,29 @@
 
 - (void)askZhengView:(FMAskZhengView *)askZhengView tagIndex:(NSInteger)index {
     KKLog(@"%ld",(long)index);
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loaddata];
+}
+- (void)loaddata{
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTCensusList;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            _one.title.text = [NSString stringWithFormat:@"%@",responseObject[@"consultCount"]];
+            _two.title.text = [NSString stringWithFormat:@"%@",responseObject[@"signCount"]];
+            _three.title.text = [NSString stringWithFormat:@"%@",responseObject[@"monthSignCount"]];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 /*
 #pragma mark - Navigation

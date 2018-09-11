@@ -182,7 +182,12 @@
     [self.studentDic setValue:self.SFZforms.IdNumber.subfield.text forKey:@"idcard"];
     [self.studentDic setValue:self.model.idid forKey:@"id"];
     KKLog(@"%@",self.studentDic);
-    NSString *url = POSTStudenteamEdit;
+    NSString *url;
+    if (self.PayCost) {
+        url = POSTUpdateStudent;
+    }else{
+        url = POSTStudenteamEdit;
+    }
     [MBProgressHUD showLoadingHUD:@"正在保存"];
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
@@ -349,7 +354,6 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
-    
     
     
 }

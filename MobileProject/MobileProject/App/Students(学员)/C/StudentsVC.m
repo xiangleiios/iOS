@@ -39,18 +39,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(studentsDelete:) name:@"NotificationStudentsDelete" object:nil];
     // Do any additional setup after loading the view.
 }
-- (void)studentsSubmit:(NSNotification *)idid{
-    NSString *str = [idid object];
-    [self.dataArr addObject:str];
-    KKLog(@"%@",self.dataArr);
-}
 
-- (void)studentsDelete:(NSNotification *)idid{
-    NSString *str = [idid object];
-    [self.dataArr removeObject:str];
-    KKLog(@"%@",self.dataArr);
-    
-}
 -(void)dealloc{
     //移除观察者，Observer不能为nil
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -124,7 +113,7 @@
     [self.navigationView setTitle:@"学员"];
     kWeakSelf(self)
     self.choose = [self.navigationView addRightButtonWithTitle:@"提交资料" clickCallBack:^(UIView *view) {
-        
+        [weakself discloseTheTnformation];
         
     }];
     [self.choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
@@ -137,11 +126,66 @@
     self.navigationController.interactivePopGestureRecognizer.enabled = (self.myCategoryView.selectedIndex == 0);
 }
 - (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
+    if (index) {
+        self.choose.hidden = YES;
+    }else{
+        self.choose.hidden = NO;
+    }
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.bounds.size.width*index, 0) animated:YES];
     //侧滑手势处理
 //    self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
 }
 
+
+#pragma mark - 提交资料
+- (void)studentsSubmit:(NSNotification *)idid{
+    NSString *s = [idid object];
+    NSNumber *str = [NSNumber numberWithInteger:[s integerValue]];
+    XLSingleton *single = [XLSingleton singleton];
+    [single.dateArr addObject:str];
+    KKLog(@"%@",single.dateArr);
+}
+
+- (void)studentsDelete:(NSNotification *)idid{
+    NSString *s = [idid object];
+    NSNumber *str = [NSNumber numberWithInteger:[s integerValue]];
+    
+    XLSingleton *single = [XLSingleton singleton];
+    [single.dateArr removeObject:str];
+    KKLog(@"%@",single.dateArr);
+    
+}
+
+- (void)discloseTheTnformation{
+    [MBProgressHUD showLoadingHUD:@"正在提交"];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+//    NSString *url = POSTSignStudent;
+    if ([XLSingleton singleton].dateArr.count <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择学员"];
+        return;
+    }
+    NSString *url = [NSString stringWithFormat:@"%@?ids=%@",POSTSignStudent,[[XLSingleton singleton].dateArr componentsJoinedByString:@","]];
+    NSDictionary *dic = [NSDictionary dictionaryWithObject:[[XLSingleton singleton].dateArr componentsJoinedByString:@","] forKey:@"ids"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if ([responseObject[@"code"] integerValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+            [[XLSingleton singleton].dateArr removeAllObjects];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+            [[XLSingleton singleton].dateArr removeAllObjects];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+       
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 /*
 #pragma mark - Navigation
 

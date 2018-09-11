@@ -75,8 +75,9 @@
         make.centerY.mas_equalTo(biaoTi);
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(40), KFit_W6S(40)));
     }];
+    KKLog(@"%@",self.dic[@"courseName"]);
     
-    self.name = [[XLInformationV alloc] informationWithTitle:@"课程名称" SubTitle:@"" TSSubTitle:@"例如：普通班/VIP班" Must:YES Click:NO];
+    self.name = [[XLInformationV alloc] informationWithTitle:@"课程名称" SubTitle:[NSString stringWithFormat:@"%@",self.dic[@"courseName"]?self.dic[@"courseName"]:@""] TSSubTitle:@"例如：普通班/VIP班" Must:YES Click:NO];
     [bacview addSubview:self.name];
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(biaoTi.mas_bottom);
@@ -86,9 +87,10 @@
     
     LicenseTayeV *license = [[LicenseTayeV alloc] init];
     [bacview addSubview:license];
+    kWeakSelf(self)
     license.textBlock = ^(NSString *text) {
         KKLog(@"%@",text);
-        
+        weakself.type = text;
     };
     [license mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.name.mas_bottom);
@@ -96,7 +98,7 @@
         make.height.mas_equalTo(KFit_H6S(225));
     }];
     
-    self.price = [[XLInformationV alloc] informationWithTitle:@"课程价格" SubTitle:@"" TSSubTitle:@"请输入课程价格" Must:YES Click:NO];
+    self.price = [[XLInformationV alloc] informationWithTitle:@"课程价格" SubTitle:[NSString stringWithFormat:@"%@",self.dic[@"coursePrice"]?self.dic[@"coursePrice"]:@""] TSSubTitle:@"请输入课程价格" Must:YES Click:NO];
     [bacview addSubview:self.price];
     [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(license.mas_bottom);
@@ -130,6 +132,7 @@
     self.textView.backgroundColor = [UIColor clearColor];
     self.textView.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     self.textView.placeholder = @"请填写课程介绍，例如：周一至周日，随到随学";
+    self.textView.text = _dic[@"courseIntroduce"];
     [bacview addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(box).mas_offset(KFit_W6S(20));
@@ -150,6 +153,7 @@
         [bacview addSubview:share];
         [share setTitle:@"删除" forState:UIControlStateNormal];
         [share setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [share addTarget:self action:@selector(deleteCoures) forControlEvents:UIControlEventTouchUpInside];
         share.backgroundColor = kColor_N(148, 160, 181);
         share.layer.cornerRadius = 5;
         share.layer.masksToBounds = YES;
@@ -181,16 +185,94 @@
 
 #pragma mark - 删除
 - (void)deleteCoures{
+    [MBProgressHUD showLoadingHUD:@"正在删除"];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+//    NSString *url = POSTClassTypeRemove;
+    NSString *url1 = [NSString stringWithFormat:@"%@?ids=%@",POSTClassTypeRemove,self.dic[@"id"]];
+    [FMNetworkHelper fm_request_getWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"11111%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if ([responseObject[@"code"] intValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"删除成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+            [self.vc refreshData];
+            [self shutDown];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD hideLoadingHUD];
+        KKLog(@"%@", error);
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
     
 }
 
 #pragma mark - 修改
 - (void)toChange{
-    
+    [MBProgressHUD showLoadingHUD:@"正在修改"];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTClassTypeEdit;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:self.dic[@"id"] forKey:@"id"];
+    [dic setObject:self.idid forKey:@"enrollId"];
+    [dic setObject:self.name.subfield.text forKey:@"courseName"];
+    [dic setObject:self.type forKey:@"licenseType"];
+    [dic setObject:self.price.subfield.text forKey:@"coursePrice"];
+    [dic setObject:self.textView.text forKey:@"courseIntroduce"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"11111%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if ([responseObject[@"code"] intValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"修改成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+            [self.vc refreshData];
+            [self shutDown];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD hideLoadingHUD];
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 #pragma mark - 创建
 - (void)create{
-    
+    [MBProgressHUD showLoadingHUD:@"正在创建课程"];
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTClassTypeAdd;
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    [dic setObject:self.dic[@"id"] forKey:@"id"];
+    [dic setObject:self.idid forKey:@"enrollId"];
+    [dic setObject:self.name.subfield.text forKey:@"courseName"];
+    [dic setObject:self.type forKey:@"licenseType"];
+    [dic setObject:self.price.subfield.text forKey:@"coursePrice"];
+    [dic setObject:self.textView.text forKey:@"courseIntroduce"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"11111%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if ([responseObject[@"code"] intValue] == 200) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"创建成功" SuccessOrFailure:YES];
+            [alert showPrompt];
+            [self.vc refreshData];
+            [self shutDown];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD hideLoadingHUD];
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 
 

@@ -11,7 +11,6 @@
 @interface XLSingleton : NSObject
 //获取单例对象
 +(XLSingleton *)singleton;
-@property (nonatomic , strong)NSMutableDictionary *tagsDic;
-@property (nonatomic , strong)NSArray *typeArr;
-@property (nonatomic , strong)NSArray *dateArr;
+@property (nonatomic , strong)NSMutableArray *dateArr;
+@property (nonatomic , strong)NSMutableArray *courseArr;
 @end

@@ -11,6 +11,8 @@
 @interface StudentsTwoCell : UITableViewCell
 @property (nonatomic , strong)UILabel *title;
 @property (nonatomic , strong)UILabel *typeone;
+@property (nonatomic , strong)UILabel *typetwo;
 @property (nonatomic , strong)UIButton *dial;
 @property (nonatomic , strong)FMMainModel *model;
+@property (nonatomic , strong)UIButton *selelctBut;
 @end

@@ -12,6 +12,7 @@
 #import "StudentsTwoCell.h"
 #import "StudentsThreeCell.h"
 #import "StudentDetailsEditorVC.h"
+#import "StudentDetailsVC.h"
 @interface StudentsListTwoVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -156,9 +157,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
-    vc.model = self.dataArr[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    FMMainModel *model = self.dataArr[indexPath.row];
+    //1 报名到总校，2、未报名到总校
+    if ([model.signupState  isEqual: @"1"]) {
+        // 1 未审核，2、审核通过、3、拒绝
+        if ([model.auditState  isEqual:@"1"]) {
+            StudentDetailsVC *vc = [[StudentDetailsVC alloc] init];
+            vc.model = self.dataArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([model.auditState  isEqual:@"2"]){
+            StudentDetailsVC *vc = [[StudentDetailsVC alloc] init];
+            vc.model = self.dataArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([model.auditState  isEqual:@"3"]){
+            StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+            vc.PayCost = YES;
+            vc.model = self.dataArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }else{
+        StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
+        vc.PayCost = YES;
+        vc.model = self.dataArr[indexPath.row];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 
