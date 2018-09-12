@@ -111,7 +111,7 @@
     if (!isFirst) {
         [[NSUserDefaults standardUserDefaults] setBool:@1 forKey:key];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [[GuideViewManager sharedInstance] showGuideViewWithGuideImages:@[@"guidece_1",@"guidece_2",@"guidece_3",@"guidece_4"] withSkipButtonTitle:@"" withExperienceButtonImage:[UIImage imageNamed:@"experienceImage"]];
+        [[GuideViewManager sharedInstance] showGuideViewWithGuideImages:@[@"1",@"2",@"3"] withSkipButtonTitle:@"" withExperienceButtonImage:[UIImage imageNamed:@"experienceImage"]];
        
     }
     [[UIApplication sharedApplication] setStatusBarHidden:NO];

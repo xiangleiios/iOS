@@ -132,10 +132,16 @@
         self.typetwo.text = @"未收费";
         self.typetwo.layer.borderColor = [UIColor redColor].CGColor;
         self.typetwo.textColor = [UIColor redColor];
+        
     }else{
         self.typetwo.text = @"已收费";
         self.typetwo.layer.borderColor = kColor_N(77, 213, 185).CGColor;
         self.typetwo.textColor = kColor_N(77, 213, 185);
+    }
+    if ([model.isPay intValue] == 1 || [model.isComplete  isEqual: @"1"]) {
+        self.selelctBut.hidden = YES;
+    }else{
+        self.selelctBut.hidden = NO;
     }
 }
 

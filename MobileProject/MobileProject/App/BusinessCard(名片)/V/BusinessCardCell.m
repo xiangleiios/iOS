@@ -84,7 +84,7 @@
         make.top.mas_equalTo(self.name.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.mas_equalTo(_img.mas_right).mas_offset(KFit_W6S(20));
         make.height.mas_equalTo(KFit_H6S(30));
-        make.width.mas_equalTo(KFit_W6S(140));
+        make.width.mas_equalTo(KFit_W6S(180));
         
     }];
     

@@ -73,7 +73,13 @@
     
     UIButton *next = [[UIButton alloc] init];
     [self.view addSubview:next];
-    [next setTitle:@"保存" forState:UIControlStateNormal];
+    //1 报名到总校，2、未报名到总校
+    if ([_model.signupState  isEqual: @"1"]) {
+        [next setTitle:@"保存并提交" forState:UIControlStateNormal];
+    }else{
+        [next setTitle:@"保存" forState:UIControlStateNormal];
+    }
+    
     [next addTarget:self action:@selector(nextVC) forControlEvents:UIControlEventTouchUpInside];
     [next setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
     [next setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];

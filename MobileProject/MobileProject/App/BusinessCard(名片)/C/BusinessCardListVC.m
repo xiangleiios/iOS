@@ -10,6 +10,7 @@
 #import "BusinessCardCell.h"
 #import "UITableView+FMPlaceholder.h"
 #import "BusinessCardVC.h"
+#import "BusinessShowV.h"
 @interface BusinessCardListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -36,10 +37,20 @@
         make.width.height.mas_equalTo(KFit_W6S(158));
     }];
     [but setImage:[UIImage imageNamed:@"tuiguang"] forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(businessShow) forControlEvents:UIControlEventTouchUpInside];
     // Do any additional setup after loading the view.
 }
 
-
+- (void)businessShow{
+    if (self.dataArr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"暂无可推广的名片"];
+        return;
+    }
+    BusinessShowV *v = [[BusinessShowV alloc] init];
+    v.vc = self;
+    v.dataArr = self.dataArr;
+    [v show];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -75,8 +86,6 @@
 }
 - (void)headerRefresh{
     self.pageNum=1;
-    [_table.mj_footer endRefreshing];
-    [_table.mj_header endRefreshing];
     [self loadRefreshData];
 }
 - (void)footerRefresh{

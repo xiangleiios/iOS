@@ -140,6 +140,20 @@
     [inqutview addSubview:lbback];
     [inqutview addSubview:self.hukou];
     
+    NSString *dizhi = self.studentDic[@"idcardAddress"];
+    if([dizhi rangeOfString:@"武汉"].location !=NSNotFound)//_roaldSearchText
+    {
+        NSLog(@"yes");
+        self.hukou.subfield.text = [[XLCache singleton].student_is_enter_type_title firstObject];
+        self.hukou.subfield.tag = [[[XLCache singleton].student_is_enter_type_value firstObject] integerValue];
+    }
+    else
+    {
+        NSLog(@"no");
+        self.hukou.subfield.text = [[XLCache singleton].student_is_enter_type_title lastObject];
+        self.hukou.subfield.tag = [[[XLCache singleton].student_is_enter_type_value lastObject] integerValue];
+    }
+    
     
     NSArray *arr = @[self.start_time,self.end_time,lbback,self.hukou];
     [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];

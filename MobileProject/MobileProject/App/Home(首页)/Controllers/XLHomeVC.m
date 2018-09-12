@@ -28,13 +28,21 @@
 @property (nonatomic , strong)HomeControlsV *three;
 @property (nonatomic, strong) FMAskZhengView *yfAskZhengView; ///最新消息
 @property (nonatomic, strong) PagingButtonView *pagingScr;
+@property (nonatomic , strong)NSMutableArray *newsArr;
 @end
 
 @implementation XLHomeVC
+- (NSMutableArray *)newsArr{
+    if (_newsArr == nil) {
+        _newsArr = [NSMutableArray array];
+    }
+    return _newsArr;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self loadnews];
     //加载导航
     [self laodNavigation];
     
@@ -217,8 +225,8 @@
         make.height.mas_equalTo(KFit_H6S(150));
     }];
     
-    NSArray *imgarr = @[@"drive_card",@"car_card",@"drill_card",@"drill_card"];
-    NSArray *titlearr = @[@"所属驾校",@"车辆管理",@"教练管理",@"所属驾校"];
+    NSArray *imgarr = @[@"drive_card",@"car_card"];
+    NSArray *titlearr = @[@"所属驾校",@"车辆管理"];
     self.pagingScr = [[PagingButtonView alloc] init];
     _pagingScr.pageControlStyle = PageControlStyleHiden;
     _pagingScr.pagingRow = 1; //设置行，不设置默认2行
@@ -265,7 +273,7 @@
 //    titleLb.text = @"最新消息";
     
     self.yfAskZhengView = [[FMAskZhengView alloc] initWithFrame:CGRectMake(KFit_W6S(30),kNavBarH + KFit_H6S(270), kScreenW - KFit_W6S(60), KFit_H6S(50))];
-    self.yfAskZhengView.dataArr = @[@"11111111111111111111111",@"2222222222222222222222",@"3333333333333333333333"];
+    self.yfAskZhengView.dataArr = self.newsArr;
     self.yfAskZhengView.delegate = self;
     [self.view addSubview:self.yfAskZhengView];
     
@@ -295,6 +303,35 @@
         KKLog(@"%@", error);
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+- (void)loadnews{
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTFirstList;
+    //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        NSArray *tpArray = responseObject[@"list"][@"rows"];
+        if (tpArray) {
+            for (int i = 0; i <tpArray.count; i++) {
+                NSDictionary *dic = tpArray[i];
+                [self.newsArr addObject:dic[@"title"]];
+                if (i>= 3) {
+                    break;
+                }
+            }
+            
+        }
+        self.yfAskZhengView.dataArr = self.newsArr;
+        
+        
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+            } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
     }];
 }

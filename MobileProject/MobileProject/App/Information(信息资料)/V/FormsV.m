@@ -88,6 +88,8 @@
                 weakself.carType.subfield.tag = [[XLCache singleton].student_license_type_value[[selectRow intValue]] intValue];
             }];
         };
+        self.carType.subfield.text = [[XLCache singleton].student_license_type_title firstObject];
+        self.carType.subfield.tag = [[[XLCache singleton].student_license_type_value firstObject] integerValue];
         
         self.price = [[XLInformationV alloc] informationWithTitle:@"报考价格" SubTitle:@"" TSSubTitle:@"请输入报名金额" Must:NO Click:NO];
         self.school = [[XLInformationV alloc] informationWithTitle:@"报考驾校" SubTitle:@"" TSSubTitle:@"请选择报考驾校" Must:YES Click:YES];
@@ -99,6 +101,8 @@
                 weakself.school.subfield.tag = [[XLCache singleton].teamCode_value[[selectRow intValue]] intValue];
             }];
         };
+        self.school.subfield.text = [[XLCache singleton].teamCode_title firstObject];
+        self.school.subfield.tag = [[[XLCache singleton].teamCode_value firstObject] integerValue];
         
         self.type = [[XLInformationV alloc] informationWithTitle:@"申请类型" SubTitle:@"" TSSubTitle:@"请选择申请类型" Must:YES Click:YES];
         self.type.senterBlock = ^{
@@ -109,6 +113,9 @@
                 weakself.type.subfield.tag = [[XLCache singleton].student_apply_type_value[[selectRow intValue]] intValue];
             }];
         };
+        self.type.subfield.text = [[XLCache singleton].student_apply_type_title firstObject];
+        self.type.subfield.tag = [[[XLCache singleton].student_apply_type_value firstObject] integerValue];
+        
         [self addSubview:self.phone];
         [self addSubview:self.carType];
         [self addSubview:self.price];
@@ -270,7 +277,7 @@
             [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 NSLog(@"%@",selectValue);
                 weakself.school.subfield.text = selectValue;
-                weakself.school.subfield.tag = [[XLCache singleton].teamCode_value[[selectRow intValue]] intValue];
+                weakself.school.subfield.tag = [[XLCache singleton].schoolDeptId[[selectRow intValue]] intValue];
                 NSLog(@"%@",[XLCache singleton].teamCode_value[[selectRow intValue]]);
             }];
         };

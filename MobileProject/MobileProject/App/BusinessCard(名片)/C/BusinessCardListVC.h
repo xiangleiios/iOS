@@ -9,5 +9,5 @@
 #import "FMBaseViewController.h"
 
 @interface BusinessCardListVC : FMBaseViewController
-
+- (void)headerRefresh;
 @end

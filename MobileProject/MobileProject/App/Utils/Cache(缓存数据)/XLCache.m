@@ -119,13 +119,24 @@ static XLCache *XLCachesingleton = nil;
         NSArray *arr = (NSArray *)[defaults objectForKey:SchoolList];
 //        NSArray *arr = (NSArray *)[self.cache objectForKey:SchoolList];
         for (NSDictionary *dic in arr) {
-            [_teamCode_value addObject:[NSString stringWithFormat:@"%@",dic[@"schoolDeptId"]]];
+            [_teamCode_value addObject:[NSString stringWithFormat:@"%@",dic[@"teanSchoolId"]]];
         }
     }
     return _teamCode_value;
 }
 
-
+- (NSMutableArray *)schoolDeptId{
+    if (_schoolDeptId == nil) {
+        _schoolDeptId = [NSMutableArray array];
+        NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+        NSArray *arr = (NSArray *)[defaults objectForKey:SchoolList];
+        //        NSArray *arr = (NSArray *)[self.cache objectForKey:SchoolList];
+        for (NSDictionary *dic in arr) {
+            [_schoolDeptId addObject:[NSString stringWithFormat:@"%@",dic[@"schoolDeptId"]]];
+        }
+    }
+    return _schoolDeptId;
+}
 
 
 

@@ -18,6 +18,16 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"关于我们"];
     
+    UIImageView *img=[[UIImageView alloc]init];
+//    self.logimg=img;
+    [self.view addSubview:img];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(150)+kNavBarH);
+        make.centerX.mas_equalTo(self.view);
+        make.height.width.mas_equalTo(KFit_W6S(200));
+    }];
+    [img setImage:[UIImage imageNamed:@"logo_icon"]];
+    
 }
 
 - (void)didReceiveMemoryWarning {

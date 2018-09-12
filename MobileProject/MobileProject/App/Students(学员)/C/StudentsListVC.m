@@ -83,6 +83,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self headerRefresh];
     //    [self.table.mj_header beginRefreshing];
 }
 

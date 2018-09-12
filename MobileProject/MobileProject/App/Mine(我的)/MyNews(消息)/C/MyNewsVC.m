@@ -84,6 +84,7 @@
     self.pageNum++;
     [self loadRefreshData];
 }
+
 - (void)loadRefreshData{
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];

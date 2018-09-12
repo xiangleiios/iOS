@@ -98,7 +98,7 @@
     self.pageControl.numberOfPages = guideImages.count;
     self.window = [UIApplication sharedApplication].keyWindow;
     [self.window addSubview:self.view];
-    [self.window addSubview:self.pageControl];
+//    [self.window addSubview:self.pageControl];
     
     [userDefaults setBool:YES forKey:[NSString stringWithFormat:@"version_%@", version]];
     [userDefaults synchronize];

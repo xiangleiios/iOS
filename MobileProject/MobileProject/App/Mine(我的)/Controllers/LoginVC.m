@@ -73,7 +73,7 @@
     self.logimg=img;
     [self.view addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(150));
+        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(120));
         make.centerX.mas_equalTo(self.view);
         make.height.width.mas_equalTo(KFit_W6S(200));
     }];
@@ -106,7 +106,7 @@
     self.password=[[UITextField alloc]initWithFrame:CGRectMake(0, KFit_H6S(110), KFit_W6S(450), KFit_H6S(110))];
     self.password.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.password];
-    self.password.placeholder=@"请输入密码（6-20位字母与数字组合）";
+    self.password.placeholder=@"请输入密码";
     self.password.secureTextEntry=YES;
     
     
@@ -124,10 +124,10 @@
 //    [self.veribut addTarget:self action:@selector(getVerificationCode) forControlEvents:UIControlEventTouchUpInside];
 //    self.veribut.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(12)];
     
-    //15658458745   18810395609  13154898589
+    //15658458745   18810395609  13154898589  15512341234
 #ifdef DEBUG
-    self.pho.text = @"13154898589";
-    self.password.text = @"12345678";
+    self.pho.text = @"18810395609";
+    self.password.text = @"123456";
 #else
     
 #endif

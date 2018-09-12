@@ -27,7 +27,9 @@
 @property (nonatomic , strong)UIButton *UpAttachment;
 @property (nonatomic ,strong)NSMutableArray *butarr;
 @property (nonatomic ,strong)XLInformationV *keCheng;
+@property (nonatomic ,strong)XLInformationV *environment;
 @property (nonatomic ,strong)NSString *scanPhotoIp;  //图片头
+@property (nonatomic , strong)NSMutableArray *imageviewArr;
 @end
 
 @implementation ChangeCardVC
@@ -45,6 +47,12 @@
     }
     return _imgarr;
 }
+- (NSMutableArray *)imageviewArr{
+    if (_imageviewArr==nil) {
+        _imageviewArr=[NSMutableArray array];
+    }
+    return _imageviewArr;
+}
 - (NSMutableArray *)couresArr{
     if (_couresArr == nil) {
         _couresArr = [NSMutableArray array];
@@ -59,6 +67,7 @@
     [self laodScroll];
     
     [self loadSubview];
+    [self refreshData];
     // Do any additional setup after loading the view.
 }
 
@@ -234,9 +243,9 @@
         make.right.bottom.mas_equalTo(inqutBack).mas_offset(-KFit_W6S(50));
     }];
     
-    XLInformationV *environment = [[XLInformationV alloc] informationWithTitle:@"教学环境图" ButTile:nil ButImg:nil];
-    [self.backview addSubview:environment];
-    [environment mas_makeConstraints:^(MASConstraintMaker *make) {
+    _environment = [[XLInformationV alloc] informationWithTitle:@"教学环境图" ButTile:nil ButImg:nil];
+    [self.backview addSubview:_environment];
+    [_environment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(inqutBack.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(90));
@@ -255,7 +264,7 @@
     
     [self.imgBackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.backview);
-        make.top.mas_equalTo(environment.mas_bottom).mas_offset(1);
+        make.top.mas_equalTo(_environment.mas_bottom).mas_offset(1);
         make.height.mas_equalTo([self.imgBackView getLayoutCellHeightWithFlex:KFit_H6S(30)]);
     }];
     
@@ -263,17 +272,15 @@
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
+
 #pragma mark - 要上传的图片显示；
 - (void)loadimgview{
+    
     int j=0;
-    for (int i=0; i<self.imgarr.count; i++) {
-        UIImageView *imgv= [[UIImageView alloc] init];
-        NSString *str = [NSString stringWithFormat:@"%@%@",self.scanPhotoIp,self.imgarr[i]];
-        KKLog(@"tupian dizhi : %@",str);
-        [imgv sd_setImageWithURL:[NSURL URLWithString:str] placeholderImage:[UIImage imageNamed:@"lb-jiazaitu"]];
+    for (int i=0; i<self.imageviewArr.count; i++) {
+        UIImageView *imgv= self.imageviewArr[i];
         imgv.frame=CGRectMake(i%3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30),i/3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30), BUT_W, BUT_W);;
         [self.imgBackView addSubview:imgv];
-        
         /*删除按钮 */
         UIButton *but=[[UIButton alloc]init];
         [self.backview addSubview:but];
@@ -283,18 +290,39 @@
             make.width.height.mas_equalTo(KFit_H6S(30));
         }];
         [but setImage:[UIImage imageNamed:@"icon_delet"] forState:UIControlStateNormal];
+        but.backgroundColor = [UIColor redColor];
         but.tag=i;
         [but addTarget:self action:@selector(deleteimgdata:) forControlEvents:UIControlEventTouchUpInside];
         [self.butarr addObject:but];
         j++;
     }
-    self.UpAttachment.frame=CGRectMake(j%3*(KFit_W6S(20)+BUT_W) + KFit_W6S(30),j/3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30), BUT_W, BUT_W);
-    self.UpAttachment.hidden=NO;
     
+    if (j >= 9) {
+        self.UpAttachment.hidden = YES;
+    }else{
+        self.UpAttachment.hidden = NO;
+        self.UpAttachment.frame=CGRectMake(j%3*(KFit_W6S(20)+BUT_W) + KFit_W6S(30),j/3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30), BUT_W, BUT_W);
+    }
+    
+    [self.imgBackView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.top.mas_equalTo(_environment.mas_bottom).mas_offset(1);
+        make.height.mas_equalTo([self.imgBackView getLayoutCellHeightWithFlex:KFit_H6S(30)]);
+    }];
+    
+    self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
+    self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
 #pragma mark -删除图片和数据
 - (void)deleteimgdata:(UIButton *)sender{
+    for (UIImageView *imgv in self.imageviewArr) {
+        [imgv removeFromSuperview];
+    }
+    for (UIButton *but in self.butarr) {
+        [but removeFromSuperview];
+    }
     [self.imgarr removeObjectAtIndex:sender.tag];
+    [self.imageviewArr removeObjectAtIndex:sender.tag];
     [self loadimgview];
 }
 
@@ -338,7 +366,15 @@
         if (kResponseObjectStatusCodeIsEqual(200)) {
             NSDictionary *dic =responseObject[@"data"][@"data"];
             [self.imgarr addObject:dic[@"url"]];
-//            [self.imgarr addObject:dic[@"img"]];
+            UIImageView *img = [[UIImageView alloc] init];
+            [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,dic[@"url"]]]];
+            [self.imageviewArr addObject:img];
+            for (UIImageView *imgv in self.imageviewArr) {
+                [imgv removeFromSuperview];
+            }
+            for (UIButton *but in self.butarr) {
+                [but removeFromSuperview];
+            }
             [self loadimgview];
            
         }else{
@@ -384,7 +420,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self refreshData];
+    
 }
 
 - (void)setModel:(FMMainModel *)model{
@@ -397,7 +433,7 @@
     self.admissions.gender.subfield.tag = [_model.sex integerValue];
     
     KKLog(@"%@",_model.schoolDeptId);
-    self.admissions.school.subfield.text = cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.schoolDeptId]];
+    self.admissions.school.subfield.text = cache.teamCode_title[[cache.schoolDeptId indexOfObject:_model.schoolDeptId]];
     self.admissions.school.subfield.tag = [_model.schoolDeptId integerValue];
     
     self.admissions.seniority.subfield.text = _model.coachAge;
@@ -409,32 +445,59 @@
     self.admissions.address.subfield.text = _model.deptAddress;
     self.textView.text = _model.introduce;
     self.course.dataArr = _model.classList;
-    if (_model.url1) {
+    if (_model.url1 && ![_model.url1  isEqual: @""] && ![self.imgarr containsObject:_model.url1]) {
         [self.imgarr addObject:_model.url1];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url1]]];
+        [self.imageviewArr addObject:img];
     }
-    if (_model.url2) {
+    if (_model.url2&& ![_model.url2  isEqual: @""] && ![self.imgarr containsObject:_model.url2]) {
         [self.imgarr addObject:_model.url2];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url2]]];
+        [self.imageviewArr addObject:img];
     }
-    if (_model.url3) {
+    if (_model.url3&& ![_model.url3  isEqual: @""] && ![self.imgarr containsObject:_model.url3]) {
+        [self.imgarr addObject:_model.url3];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url3]]];
+        [self.imageviewArr addObject:img];
+    }
+    if (_model.url4 && ![_model.url4  isEqual: @""] && ![self.imgarr containsObject:_model.url4]) {
         [self.imgarr addObject:_model.url4];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url4]]];
+        [self.imageviewArr addObject:img];
     }
-    if (_model.url4) {
-        [self.imgarr addObject:_model.url4];
-    }
-    if (_model.url5) {
+    if (_model.url5&& ![_model.url5  isEqual: @""] && ![self.imgarr containsObject:_model.url5]) {
         [self.imgarr addObject:_model.url5];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url5]]];
+        [self.imageviewArr addObject:img];
     }
-    if (_model.url6) {
+    if (_model.url6&& ![_model.url6  isEqual: @""] && ![self.imgarr containsObject:_model.url6]) {
         [self.imgarr addObject:_model.url6];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url6]]];
+        [self.imageviewArr addObject:img];
     }
-    if (_model.url7) {
+    if (_model.url7&& ![_model.url7  isEqual: @""] && ![self.imgarr containsObject:_model.url7]) {
         [self.imgarr addObject:_model.url7];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url7]]];
+        [self.imageviewArr addObject:img];
     }
-    if (_model.url8) {
+    if (_model.url8&& ![_model.url8  isEqual: @""] && ![self.imgarr containsObject:_model.url8]) {
         [self.imgarr addObject:_model.url8];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url8]]];
+        [self.imageviewArr addObject:img];
     }
-    if (_model.url9) {
+    if (_model.url9&& ![_model.url9  isEqual: @""] && ![self.imgarr containsObject:_model.url9]) {
         [self.imgarr addObject:_model.url9];
+        UIImageView *img = [[UIImageView alloc] init];
+        [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,_model.url9]]];
+        [self.imageviewArr addObject:img];
     }
     [self.course mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_keCheng.mas_bottom).mas_offset(1);
@@ -442,8 +505,7 @@
         make.height.mas_equalTo(KFit_H6S(140) * _model.classList.count);
     }];
     [self loadimgview];
-    self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
-    self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
+    
 }
 - (void)nextVC{
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
@@ -459,10 +521,21 @@
     [dic setObject:self.admissions.names.subfield.text forKey:@"deptName"];
     [dic setObject:self.admissions.address.subfield.text forKey:@"deptAddress"];
     [dic setObject:self.textView.text forKey:@"introduce"];
+    [dic setObject:@"" forKey:@"url1"];
+    [dic setObject:@"" forKey:@"url2"];
+    [dic setObject:@"" forKey:@"url3"];
+    [dic setObject:@"" forKey:@"url4"];
+    [dic setObject:@"" forKey:@"url5"];
+    [dic setObject:@"" forKey:@"url6"];
+    [dic setObject:@"" forKey:@"url7"];
+    [dic setObject:@"" forKey:@"url8"];
+    [dic setObject:@"" forKey:@"url9"];
+    
     for (int i = 0; i <self.imgarr.count; i++) {
         NSString *key = [NSString stringWithFormat:@"url%d",(i + 1)];
         [dic setObject:_imgarr[i] forKey:key];
     }
+    
     [MBProgressHUD showLoadingHUD:@"正在提交保存"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"11111%@",responseObject);

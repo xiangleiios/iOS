@@ -37,7 +37,7 @@
     UIButton *experienceButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     experienceButton.hidden = YES;
-    [experienceButton setFrame:CGRectMake(0, 0, KFit_W6S(700), 45)];
+    [experienceButton setFrame:CGRectMake(0, 0, KFit_W6S(600), 45)];
     [experienceButton setImage:[UIImage imageNamed:@"experienceImage"] forState:UIControlStateNormal];
     [experienceButton setImage:[UIImage imageNamed:@"experienceImage"] forState:UIControlStateHighlighted];
     
@@ -58,7 +58,7 @@
     [self.contentView addSubview:self.skipButton];
     [self.contentView addSubview:self.experienceButton];
     
-    [self.experienceButton setCenter:CGPointMake(kScreenViewBounds.size.width / 2, kScreenViewBounds.size.height - KFit_H6S(215))];
+    [self.experienceButton setCenter:CGPointMake(kScreenViewBounds.size.width / 2, kScreenViewBounds.size.height - KFit_H6S(150))];
     [self.skipButton setCenter:CGPointMake(kScreenViewBounds.size.width - 60, 40)];
 }
 

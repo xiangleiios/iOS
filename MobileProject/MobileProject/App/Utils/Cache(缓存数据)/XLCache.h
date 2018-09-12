@@ -34,8 +34,11 @@
 @property (nonatomic , strong)NSMutableArray *sys_user_sex_value;
 /// 驾校名
 @property (nonatomic , strong)NSMutableArray *teamCode_title;
-/// 驾校名value数组
+/// 驾校名value数组 学员中使用
 @property (nonatomic , strong)NSMutableArray *teamCode_value;
+
+///驾校名value数组 招生名片中使用
+@property (nonatomic , strong)NSMutableArray *schoolDeptId;
 
 ///将数据存入缓存
 - (void)cacheWhitValue:(id)value AndKey:(NSString *)key;
