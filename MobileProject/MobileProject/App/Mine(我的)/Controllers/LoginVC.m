@@ -93,7 +93,7 @@
 //    UIImageView *imgpho=[[UIImageView alloc]initWithFrame:CGRectMake(0, KFit_H6S(30), KFit_W6S(32), KFit_H6S(50))];
 //    [imgpho setImage:[UIImage imageNamed:@"tel"]];
 //    [v addSubview:imgpho];
-    self.pho=[[TKPhoneTextField alloc]initWithFrame:CGRectMake(0, 0, KFit_W6S(350), KFit_H6S(110))];
+    self.pho=[[TKPhoneTextField alloc]initWithFrame:CGRectMake(0, 0, KFit_W6S(550), KFit_H6S(110))];
     self.pho.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.pho];
     self.pho.placeholder=@"请输入账号";
@@ -103,7 +103,7 @@
 //    UIImageView *imgpass=[[UIImageView alloc]initWithFrame:CGRectMake(0, KFit_H6S(140), KFit_W6S(32), KFit_H6S(45))];
 //    [imgpass setImage:[UIImage imageNamed:@"password"]];
 //    [v addSubview:imgpass];
-    self.password=[[UITextField alloc]initWithFrame:CGRectMake(0, KFit_H6S(110), KFit_W6S(450), KFit_H6S(110))];
+    self.password=[[UITextField alloc]initWithFrame:CGRectMake(0, KFit_H6S(110), KFit_W6S(550), KFit_H6S(110))];
     self.password.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.password];
     self.password.placeholder=@"请输入密码";

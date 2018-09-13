@@ -1,23 +1,23 @@
 //
-//  StudentsListVC.m
+//  SearchListVC.m
 //  MobileProject
 //
-//  Created by 向蕾 on 2018/8/24.
+//  Created by 向蕾 on 2018/9/13.
 //  Copyright © 2018年 ZSGY. All rights reserved.
 //
 
-#import "StudentsListVC.h"
+#import "SearchListVC.h"
 #import "UITableView+FMPlaceholder.h"
 #import "StudentsOneCell.h"
 #import "StudentsTwoCell.h"
 #import "StudentDetailsEditorVC.h"
 #import "StudentDetailsVC.h"
-@interface StudentsListVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface SearchListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
 @end
 
-@implementation StudentsListVC
+@implementation SearchListVC
 - (NSMutableDictionary *)dic{
     if (_dic == nil) {
         _dic = [NSMutableDictionary dictionary];
@@ -71,7 +71,7 @@
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-//    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+    //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
     _table.reloadBlock = ^{
@@ -101,7 +101,7 @@
 - (void)loadRefreshData{
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
-//    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
+    //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
     [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:self.dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         
@@ -115,11 +115,17 @@
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
-        if (tpArray) {
+        if (tpArray.count > 0) {
+            
             for (NSDictionary *dic in tpArray) {
                 FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
                 [self.dataArr addObject:mode];
             }
+            
+        }else{
+            
+            [MBProgressHUD showMsgHUD:@"暂无搜索结果"];
+            
         }
         [_table reloadData];
         [_table.mj_footer endRefreshing];
@@ -212,13 +218,13 @@
     }
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

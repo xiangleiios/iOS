@@ -46,7 +46,7 @@
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(baokao.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(450));
-    }];
+    }]; 
     
     XLInformationV *qita = [[XLInformationV alloc] informationWithTitle:@"请填写其他信息"];
     [self.view addSubview:qita];

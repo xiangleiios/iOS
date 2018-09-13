@@ -11,6 +11,7 @@
 #import "AddInformationTwoVC.h"
 #import "AVCaptureViewController.h"
 #import "IDInfo.h"
+#import "XLCache.h"
 @interface AddInformationOneVC ()<AVCaptureViewControllerDelegate>
 @property (nonatomic , strong)FormsV *SFZforms;
 @property (nonatomic , strong)NSMutableDictionary *studentDic;
@@ -129,9 +130,19 @@
 }
 
 - (void)cardInformationScanning:(IDInfo *)info{
+    XLCache *cache = [XLCache singleton];
     self.SFZforms.name.subfield.text = info.name;
     self.SFZforms.gender.subfield.text = info.gender;
-    self.SFZforms.ethnic.subfield.text = info.nation;
+    
+    NSString *ethnic = [NSString stringWithFormat:@"%@族",info.nation];
+    
+    self.SFZforms.ethnic.subfield.text = ethnic;
+    
+    
+    self.SFZforms.gender.subfield.tag = [cache.sys_user_sex_value[[cache.sys_user_sex_title indexOfObject:info.gender]] integerValue];
+    
+    self.SFZforms.ethnic.subfield.tag = [cache.ethnicValueArr [[cache.ethnicTitleArr indexOfObject:ethnic]] integerValue];
+    
     self.SFZforms.address.subfield.text = info.address;
     self.SFZforms.IdNumber.subfield.text = info.num;
     self.SFZforms.birthday.subfield.text = [self birthdayStrFromIdentityCard:info.num];

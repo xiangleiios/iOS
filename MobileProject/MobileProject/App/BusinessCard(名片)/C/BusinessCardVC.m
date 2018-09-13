@@ -9,7 +9,7 @@
 #import "BusinessCardVC.h"
 #import "ChangeCardVC.h"
 @interface BusinessCardVC ()
-
+@property (nonatomic , strong)UIWebView *webView;
 @end
 
 @implementation BusinessCardVC
@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     [self laodNavigation];
-    
+    [self loadWebview];
     [self loadSubview];
     // Do any additional setup after loading the view.
 }
@@ -31,6 +31,20 @@
 - (void)laodNavigation{
     [self.navigationView setTitle:@"招生名片"];
     
+}
+
+- (void)loadWebview{
+    UIWebView *web = [[UIWebView alloc] init];
+    self.webView = web;
+    [self.view addSubview:web];
+    [web mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
+    }];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.0.133:8080/#/?id=1&type=app"]];
+    //        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
+    [self.webView loadRequest:request];
 }
 
 - (void)loadSubview{

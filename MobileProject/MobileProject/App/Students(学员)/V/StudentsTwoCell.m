@@ -92,6 +92,7 @@
     self.dial = [[UIButton alloc] init];
     [self.contentView addSubview:self.dial];
     [self.dial setImage:[UIImage imageNamed:@"phone_icon"] forState:UIControlStateNormal];
+    [self.dial addTarget:self action:@selector(dianhua) forControlEvents:UIControlEventTouchUpInside];
     [self.dial mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView);
@@ -117,7 +118,7 @@
         self.selelctBut.selected = NO;
     }
     
-    self.title.text = [NSString stringWithFormat:@"%@  %@",model.studentName,model.studentPhone];
+    self.title.text = [NSString stringWithFormat:@"%@  %@",model.studentName,model.studentPhone?model.studentPhone:@""];
     if ([model.isComplete  isEqual: @"1"]) {
         self.typeone.text = @"信息未完善";
         self.typeone.layer.borderColor = [UIColor redColor].CGColor;
@@ -147,6 +148,10 @@
 
 
 
-
+- (void)dianhua{
+    if (_model.studentPhone) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",_model.studentPhone]]];
+    }
+}
 
 @end

@@ -42,11 +42,13 @@
     v.backgroundColor = kColor_N(240, 240, 240);
     [self.view addSubview:v];
     
-    UILabel *lb = [[UILabel alloc] init];
+    UIButton *lb = [[UIButton alloc] init];
     [v addSubview:lb];
-    lb.text = @"搜索";
-    lb.font = [UIFont systemFontOfSize:kFit_Font6(15)];
-    lb.textAlignment = NSTextAlignmentRight;
+    [lb setTitle:@"搜索" forState:UIControlStateNormal];
+    lb.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+    lb.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [lb setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [lb addTarget:self action:@selector(toSearech) forControlEvents:UIControlEventTouchUpInside];
     [lb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(v).mas_offset(-KFit_W6S(30));
         make.top.mas_equalTo(v).mas_offset(KFit_H6S(20));

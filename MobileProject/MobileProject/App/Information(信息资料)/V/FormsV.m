@@ -338,7 +338,7 @@
     for (int i = 0; i < dataArr.count; i++) {
         NSDictionary *dic = dataArr[i];
         NSString *str =  cache.student_license_type_title[[cache.student_license_type_value indexOfObject:dic[@"licenseType"]]];
-        XLInformationV *v = [[XLInformationV alloc] informationWithTitle:dic[@"courseName"] CarType:str SubTitle:dic[@"courseIntroduce"] Price:dic[@"coursePrice"]];
+        XLInformationV *v = [[XLInformationV alloc] informationWithTitle:dic[@"courseName"] CarType:str SubTitle:dic[@"courseIntroduce"]?dic[@"courseIntroduce"]:@"" Price:dic[@"coursePrice"]?dic[@"coursePrice"]:@""];
         v.tag = i;
         kWeakSelf(self)
         v.senterBlock = ^{

@@ -142,7 +142,7 @@
     }else if (_type == CellTypeBaoMinXueYuan){
         [_img setImage:[UIImage imageNamed:@"head_nor"]];
         XLCache *cache = [XLCache singleton];
-        self.title.text = [NSString stringWithFormat:@"%@ %@",model.studentName,model.studentPhone];
+        self.title.text = [NSString stringWithFormat:@"%@ %@",model.studentName,model.studentPhone?model.studentPhone:@""];
         self.typetwo.text = [NSString stringWithFormat:@"%@", cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]]];
         self.typethree.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.carType]]];
         //1 报名到总校，2、未报名到总校

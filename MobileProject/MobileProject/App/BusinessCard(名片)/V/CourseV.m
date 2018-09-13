@@ -9,6 +9,9 @@
 #import "CourseV.h"
 #import "LicenseTayeV.h"
 #import "UITextView+ZWPlaceHolder.h"
+
+
+
 @implementation CourseV
 
 /*
@@ -43,12 +46,12 @@
 //    UIScrollView *scr = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 //    [self addSubview:scr];
     
-    UIView *bacview = [[UIView alloc] init];
-    [self addSubview:bacview];
-    bacview.layer.cornerRadius = 5;
-    bacview.layer.masksToBounds = YES;
-    bacview.backgroundColor = [UIColor whiteColor];
-    [bacview mas_makeConstraints:^(MASConstraintMaker *make) {
+    _backview = [[UIView alloc] init];
+    [self addSubview:_backview];
+    _backview.layer.cornerRadius = 5;
+    _backview.layer.masksToBounds = YES;
+    _backview.backgroundColor = [UIColor whiteColor];
+    [_backview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.mas_equalTo(self);
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(640), KFit_H6S(910)));
     }];
@@ -59,9 +62,9 @@
     }else{
         biaoTi = [[XLInformationV alloc] informationWithTitle:@"创建课程"];
     }
-    [bacview addSubview:biaoTi];
+    [_backview addSubview:biaoTi];
     [biaoTi mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.mas_equalTo(bacview);
+        make.top.left.right.mas_equalTo(_backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
@@ -71,22 +74,22 @@
     [down addTarget:self action:@selector(shutDown) forControlEvents:UIControlEventTouchUpInside];
     [down setImage:[UIImage imageNamed:@"deletez"] forState:UIControlStateNormal];
     [down mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(bacview).mas_offset(-KFit_W6S(40));
+        make.right.mas_equalTo(_backview).mas_offset(-KFit_W6S(40));
         make.centerY.mas_equalTo(biaoTi);
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(40), KFit_W6S(40)));
     }];
     KKLog(@"%@",self.dic[@"courseName"]);
     
     self.name = [[XLInformationV alloc] informationWithTitle:@"课程名称" SubTitle:[NSString stringWithFormat:@"%@",self.dic[@"courseName"]?self.dic[@"courseName"]:@""] TSSubTitle:@"例如：普通班/VIP班" Must:YES Click:NO];
-    [bacview addSubview:self.name];
+    [_backview addSubview:self.name];
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(biaoTi.mas_bottom);
-        make.left.right.mas_equalTo(bacview);
+        make.left.right.mas_equalTo(_backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
     LicenseTayeV *license = [[LicenseTayeV alloc] init];
-    [bacview addSubview:license];
+    [_backview addSubview:license];
     kWeakSelf(self)
     license.textBlock = ^(NSString *text) {
         KKLog(@"%@",text);
@@ -94,46 +97,47 @@
     };
     [license mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.name.mas_bottom);
-        make.left.right.mas_equalTo(bacview);
+        make.left.right.mas_equalTo(_backview);
         make.height.mas_equalTo(KFit_H6S(225));
     }];
     
     self.price = [[XLInformationV alloc] informationWithTitle:@"课程价格" SubTitle:[NSString stringWithFormat:@"%@",self.dic[@"coursePrice"]?self.dic[@"coursePrice"]:@""] TSSubTitle:@"请输入课程价格" Must:YES Click:NO];
-    [bacview addSubview:self.price];
+    [_backview addSubview:self.price];
     [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(license.mas_bottom);
-        make.left.right.mas_equalTo(bacview);
+        make.left.right.mas_equalTo(_backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
     UILabel *jieshao = [[UILabel alloc] init];
     jieshao.text = @"课程介绍";
-    [bacview addSubview:jieshao];
+    [_backview addSubview:jieshao];
     [jieshao mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.price.mas_bottom);
-        make.left.mas_equalTo(bacview).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(_backview).mas_offset(KFit_W6S(30));
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
     
     UIImageView *box = [[UIImageView alloc] init];
     [box setImage:[UIImage imageNamed:@"box"]];
-    [bacview addSubview:box];
+    [_backview addSubview:box];
     [box mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(jieshao.mas_bottom);
-        make.left.mas_equalTo(bacview).mas_offset(KFit_W6S(30));
-        make.right.mas_equalTo(bacview).mas_offset(-KFit_W6S(30));
+        make.left.mas_equalTo(_backview).mas_offset(KFit_W6S(30));
+        make.right.mas_equalTo(_backview).mas_offset(-KFit_W6S(30));
         make.height.mas_equalTo(KFit_H6S(180));
         
     }];
     
     
     self.textView = [[UITextView alloc] init];
+    self.textView.delegate = self;
     self.textView.backgroundColor = [UIColor clearColor];
     self.textView.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     self.textView.placeholder = @"请填写课程介绍，例如：周一至周日，随到随学";
     self.textView.text = _dic[@"courseIntroduce"];
-    [bacview addSubview:self.textView];
+    [_backview addSubview:self.textView];
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.mas_equalTo(box).mas_offset(KFit_W6S(20));
         make.right.bottom.mas_equalTo(box).mas_offset(-KFit_W6S(20));
@@ -141,7 +145,7 @@
     
     if (self.dic) {
         UIButton *change = [[UIButton alloc] init];
-        [bacview addSubview:change];
+        [_backview addSubview:change];
         [change setTitle:@"修改" forState:UIControlStateNormal];
         [change setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [change addTarget:self action:@selector(toChange) forControlEvents:UIControlEventTouchUpInside];
@@ -150,7 +154,7 @@
         change.layer.masksToBounds = YES;
         
         UIButton *share = [[UIButton alloc] init];
-        [bacview addSubview:share];
+        [_backview addSubview:share];
         [share setTitle:@"删除" forState:UIControlStateNormal];
         [share setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [share addTarget:self action:@selector(deleteCoures) forControlEvents:UIControlEventTouchUpInside];
@@ -161,12 +165,12 @@
         NSArray *arr = @[change,share];
         [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:KFit_W6S(30) leadSpacing:KFit_W6S(30) tailSpacing:KFit_W6S(30)];
         [arr mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_equalTo(bacview).mas_offset(-KFit_H6S(30));
+            make.bottom.mas_equalTo(_backview).mas_offset(-KFit_H6S(30));
             make.height.mas_equalTo(KFit_H6S(90));
         }];
     }else{
         UIButton *next = [[UIButton alloc] init];
-        [bacview addSubview:next];
+        [_backview addSubview:next];
         [next setTitle:@"创建" forState:UIControlStateNormal];
         [next addTarget:self action:@selector(create) forControlEvents:UIControlEventTouchUpInside];
         next.backgroundColor = kColor_N(0, 112, 234);
@@ -174,9 +178,9 @@
         next.layer.cornerRadius = 5;
         next.layer.masksToBounds = YES;
         [next mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(bacview).mas_offset(KFit_W6S(30));
-            make.right.mas_equalTo(bacview).mas_offset(-KFit_W6S(30));
-            make.bottom.mas_equalTo(bacview).mas_offset(-KFit_W6S(30));
+            make.left.mas_equalTo(_backview).mas_offset(KFit_W6S(30));
+            make.right.mas_equalTo(_backview).mas_offset(-KFit_W6S(30));
+            make.bottom.mas_equalTo(_backview).mas_offset(-KFit_W6S(30));
             make.height.mas_equalTo(KFit_H6S(90));
         }];
     }
@@ -212,6 +216,18 @@
 
 #pragma mark - 修改
 - (void)toChange{
+    if (self.name.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请输入课程名"];
+        return;
+    }
+    if (self.price.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请输入课程价格"];
+        return;
+    }
+    if (self.type.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择驾照类型"];
+        return;
+    }
     [MBProgressHUD showLoadingHUD:@"正在修改"];
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
@@ -244,6 +260,18 @@
 }
 #pragma mark - 创建
 - (void)create{
+    if (self.name.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请输入课程名"];
+        return;
+    }
+    if (self.price.subfield.text.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请输入课程价格"];
+        return;
+    }
+    if (self.type.length <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择驾照类型"];
+        return;
+    }
     [MBProgressHUD showLoadingHUD:@"正在创建课程"];
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
@@ -285,5 +313,26 @@
     UIWindow *rootWindow = [UIApplication sharedApplication].keyWindow;
     [rootWindow addSubview:self];
     //    [self creatShowAnimation];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    [UIView animateWithDuration:0.5 animations:^{
+        [_backview mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(self);
+            make.centerY.mas_equalTo(self).mas_offset(-KFit_H6S(200));
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(640), KFit_H6S(910)));
+        }];
+    }];
+    
+    
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    [UIView animateWithDuration:0.5 animations:^{
+        [_backview mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(self);
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(640), KFit_H6S(910)));
+        }];
+    }];
 }
 @end

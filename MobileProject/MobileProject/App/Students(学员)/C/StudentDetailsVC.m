@@ -206,7 +206,8 @@
     
     UILabel *subLabletwo = [[UILabel alloc] init];
     [self.backview addSubview:subLabletwo];
-    subLabletwo.text = _model.remark;
+
+    subLabletwo.text = _model.remark?_model.remark:@" ";
     subLabletwo.textColor = kColor_N(143, 155, 178);
     subLabletwo.textAlignment = NSTextAlignmentRight;
     subLabletwo.font = [UIFont systemFontOfSize:FONT];

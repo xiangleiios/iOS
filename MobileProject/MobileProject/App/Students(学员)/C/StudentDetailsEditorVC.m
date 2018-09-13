@@ -11,7 +11,10 @@
 #import "FormsV.h"
 #import "CGXPickerView.h"
 #import "XLCache.h"
-@interface StudentDetailsEditorVC ()
+#import "AVCaptureViewController.h"
+#import "JQAVCaptureViewController.h"
+#import "IDInfo.h"
+@interface StudentDetailsEditorVC ()<AVCaptureViewControllerDelegate,JQAVCaptureViewControllerDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
 
@@ -237,6 +240,21 @@
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
+    UIButton *shibieZM = [[UIButton alloc] init];
+    [lbback addSubview:shibieZM];
+    [shibieZM setTitle:@"拍照识别" forState:UIControlStateNormal];
+    [shibieZM setImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
+    shibieZM.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+    shibieZM.imageEdgeInsets = UIEdgeInsetsMake(0, KFit_W6S(140), 0, 0);
+    shibieZM.titleEdgeInsets = UIEdgeInsetsMake(0, -KFit_W6S(80), 0, 0);
+    [shibieZM setTitleColor:kColor_N(120, 126, 125) forState:UIControlStateNormal];
+    [shibieZM addTarget:self action:@selector(paizhaoZM) forControlEvents:UIControlEventTouchUpInside];
+    [shibieZM mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(180), KFit_H6S(40)));
+        make.bottom.mas_equalTo(lbback).mas_offset(-KFit_H6S(18));
+    }];
+    
     self.SFZforms = [[FormsV alloc] init];
     [self.backview addSubview:self.SFZforms];
     [self.SFZforms mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -264,6 +282,22 @@
         make.left.right.mas_equalTo(self.backview);
         make.top.mas_equalTo(self.SFZforms.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(90));
+    }];
+    
+    
+    UIButton *shibieFM = [[UIButton alloc] init];
+    [lbbacktwo addSubview:shibieFM];
+    [shibieFM setTitle:@"拍照识别" forState:UIControlStateNormal];
+    [shibieFM setImage:[UIImage imageNamed:@"camera"] forState:UIControlStateNormal];
+    shibieFM.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+    shibieFM.imageEdgeInsets = UIEdgeInsetsMake(0, KFit_W6S(140), 0, 0);
+    shibieFM.titleEdgeInsets = UIEdgeInsetsMake(0, -KFit_W6S(80), 0, 0);
+    [shibieFM setTitleColor:kColor_N(120, 126, 125) forState:UIControlStateNormal];
+    [shibieFM addTarget:self action:@selector(paizhaoFM) forControlEvents:UIControlEventTouchUpInside];
+    [shibieFM mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(180), KFit_H6S(40)));
+        make.bottom.mas_equalTo(lbbacktwo).mas_offset(-KFit_H6S(18));
     }];
     
     kWeakSelf(self)
@@ -345,10 +379,10 @@
     self.otherForms.note.subfield.text =_model.remark;
     ///1:未缴费 2：已缴费
     if ([_model.isPay  isEqual: @"1"]) {
-        self.otherForms.state.subfield.text = @"未缴费";
+        self.otherForms.state.subfield.text = @"未收费";
         self.otherForms.state.subfield.tag = 1;
     }else{
-        self.otherForms.state.subfield.text = @"已缴费";
+        self.otherForms.state.subfield.text = @"已收费";
         self.otherForms.state.subfield.tag = 2;
     }
     
@@ -364,7 +398,185 @@
     
 }
 
+- (void)paizhaoZM{
+    AVCaptureViewController *AVCaptureVC = [[AVCaptureViewController alloc] init];
+    AVCaptureVC.delegate = self;
+    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+}
 
+- (void)cardInformationScanning:(IDInfo *)info{
+    XLCache *cache = [XLCache singleton];
+    self.SFZforms.name.subfield.text = info.name;
+    
+    self.SFZforms.gender.subfield.text = info.gender;
+    self.SFZforms.gender.subfield.tag = [cache.sys_user_sex_value[[cache.sys_user_sex_title indexOfObject:info.gender]] integerValue];
+    
+    NSString *ethnic = [NSString stringWithFormat:@"%@族",info.nation];
+    self.SFZforms.ethnic.subfield.text = ethnic;
+    self.SFZforms.ethnic.subfield.tag = [cache.ethnicValueArr [[cache.ethnicTitleArr indexOfObject:ethnic]] integerValue];
+    self.SFZforms.address.subfield.text = info.address;
+    self.SFZforms.IdNumber.subfield.text = info.num;
+    self.SFZforms.birthday.subfield.text = [self birthdayStrFromIdentityCard:info.num];
+}
+-(void)paizhaoFM{
+    JQAVCaptureViewController *AVCaptureVC = [[JQAVCaptureViewController alloc] init];
+    AVCaptureVC.delegate = self;
+    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+}
+
+
+- (void)cardInformationScanningFM:(IDInfo *)info{
+    NSArray *arr = [info.valid componentsSeparatedByString:@"-"];
+    if (arr.count == 2) {
+        NSString *stat = [arr firstObject];
+        if (stat.length == 8) {
+            NSString * year = [[arr firstObject] substringWithRange:NSMakeRange(0, 4)];
+            NSString * month = [[arr firstObject] substringWithRange:NSMakeRange(4, 2)];
+            NSString * day = [[arr firstObject] substringWithRange:NSMakeRange(6,2)];
+            NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+            self.start_time.subfield.text = y;
+        }
+        NSString *end = [arr lastObject];
+        if (end.length == 8) {
+            NSString * year = [end substringWithRange:NSMakeRange(0, 4)];
+            NSString * month = [end substringWithRange:NSMakeRange(4, 2)];
+            NSString * day = [end substringWithRange:NSMakeRange(6,2)];
+            NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+            self.end_time.subfield.text = y;
+        }
+        
+    }
+    //    self.start_time.subfield.text = info.
+}
+
+- (NSString *)birthdayStrFromIdentityCard:(NSString *)numberStr{
+    
+    NSMutableString *result = [NSMutableString stringWithCapacity:0];
+    
+    NSString *year = nil;
+    
+    NSString *month = nil;
+    
+    
+    BOOL isAllNumber = YES;
+    
+    NSString *day = nil;
+    
+    if([numberStr length]<14)
+        
+        return result;
+    
+    if (numberStr.length == 18) {
+        
+        //**截取前14位
+        
+        NSString *fontNumer = [numberStr substringWithRange:NSMakeRange(0, 13)];
+        
+        
+        
+        //**检测前14位否全都是数字;
+        
+        const char *str = [fontNumer UTF8String];
+        
+        const char *p = str;
+        
+        while (*p!='\0') {
+            
+            if(!(*p>='0'&&*p<='9'))
+                
+                isAllNumber = NO;
+            
+            p++;
+            
+        }
+        
+        
+        
+        if(!isAllNumber)
+            
+            return result;
+        
+        
+        
+        year = [numberStr substringWithRange:NSMakeRange(6, 4)];
+        
+        month = [numberStr substringWithRange:NSMakeRange(10, 2)];
+        
+        day = [numberStr substringWithRange:NSMakeRange(12,2)];
+        
+        
+        
+        [result appendString:year];
+        
+        [result appendString:@"-"];
+        
+        [result appendString:month];
+        
+        [result appendString:@"-"];
+        
+        [result appendString:day];
+        
+        return result;
+        
+        
+    }else{
+        
+        NSString *fontNumer = [numberStr substringWithRange:NSMakeRange(0, 11)];
+        
+        
+        
+        //**检测前14位否全都是数字;
+        
+        const char *str = [fontNumer UTF8String];
+        
+        const char *p = str;
+        
+        while (*p!='\0') {
+            
+            if(!(*p>='0'&&*p<='9'))
+                
+                isAllNumber = NO;
+            
+            p++;
+            
+        }
+        
+        
+        
+        if(!isAllNumber)
+            
+            return result;
+        
+        
+        
+        year = [numberStr substringWithRange:NSMakeRange(6, 2)];
+        
+        month = [numberStr substringWithRange:NSMakeRange(8, 2)];
+        
+        day = [numberStr substringWithRange:NSMakeRange(10,2)];
+        
+        
+        
+        //        [result appendString:year];
+        
+        //        [result appendString:@"-"];
+        
+        //        [result appendString:month];
+        
+        //        [result appendString:@"-"];
+        
+        //        [result appendString:day];
+        
+        NSString* resultAll = [NSString stringWithFormat:@"19%@-%@-%@",year,month,day];
+        
+        return resultAll;
+        
+        
+    }
+    
+    
+    
+}
 /*
 #pragma mark - Navigation
 

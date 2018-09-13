@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XLInformationV.h"
 #import "ChangeCardVC.h"
-@interface CourseV : UIView
+@interface CourseV : UIView <UITextViewDelegate>
 @property (nonatomic , strong)NSString *idid;
 @property (nonatomic , strong)XLInformationV *name;
 @property (nonatomic , strong)XLInformationV *price;
@@ -17,6 +17,7 @@
 @property (nonatomic , strong)UITextView *textView;
 @property (nonatomic , strong)NSString *type; // 驾照类型
 @property (nonatomic , strong)ChangeCardVC *vc;
+@property (nonatomic , strong)UIView *backview;
 - (instancetype)initWithDictionary:(NSDictionary *)dic;
 - (void)show;
 @end

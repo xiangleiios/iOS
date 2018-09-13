@@ -110,7 +110,7 @@
     
     UIImageView *imageView = [self.view viewWithTag:0 + 100];
     MSSBrowseModel *browseItem = [[MSSBrowseModel alloc]init];
-    browseItem.bigImageUrl = KURLIma(_model.ratingLevelPic);// 加载网络图片大图地址
+    browseItem.bigImageUrl = KURLIma(_model.trafficInsurancePic);// 加载网络图片大图地址
     browseItem.smallImageView = imageView;// 小图
     [self.browseItemArray addObject:browseItem];
     
@@ -183,7 +183,7 @@
     
     UIImageView *imageViewtwo = [self.view viewWithTag:1 + 100];
     MSSBrowseModel *browseItemtwo = [[MSSBrowseModel alloc]init];
-    browseItemtwo.bigImageUrl = KURLIma(_model.ratingLevelPic);// 加载网络图片大图地址
+    browseItemtwo.bigImageUrl = KURLIma(_model.businessInsurancePic);// 加载网络图片大图地址
     browseItemtwo.smallImageView = imageViewtwo;// 小图
     [self.browseItemArray addObject:browseItemtwo];
     

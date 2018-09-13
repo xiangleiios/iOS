@@ -66,7 +66,7 @@
         make.height.mas_equalTo(KFit_H6S(450));
     }];
     
-    NSString *str = [_model.isRating  isEqual: @"1"]?@"是":@"否";
+    NSString *str = [_model.isRating  isEqual: @"1"]?@"否":@"是";
     
     self.dengji = [[XLInformationV alloc] informationWithTitle:@"是否进行登记评定" SubTitle:str];
     self.pingding_time = [[XLInformationV alloc] informationWithTitle:@"登记评定日期" SubTitle:_model.ratingTime];

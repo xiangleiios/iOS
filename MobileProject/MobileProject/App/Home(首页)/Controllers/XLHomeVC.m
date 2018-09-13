@@ -15,7 +15,7 @@
 #import "XLButton.h"
 #import "PagingButtonView.h"
 #import "MyNewsVC.h"
-
+#import "InstructionsVC.h"
 #import "SubordinateVC.h"
 #import "VehicleVC.h"
 #import "BusinessCardListVC.h"
@@ -177,9 +177,19 @@
         make.height.mas_equalTo(KFit_H6S(24));
     }];
     
+    UIButton *zhaosheng = [[UIButton alloc] init];
+    [zhaosheng setImage:[UIImage imageNamed:@"question_mark"] forState:UIControlStateNormal];
+    [self.view addSubview:zhaosheng];
+    [zhaosheng addTarget:self action:@selector(tozhaosheng) forControlEvents:UIControlEventTouchUpInside];
+    [zhaosheng mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(admissions);
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+        make.width.height.mas_equalTo(KFit_W6S(60));
+    }];
+    
     _one = [[HomeControlsV alloc] init];
     _one.title.text = @"0";
-    _one.subtitle.text = @"今日询价";
+    _one.subtitle.text = @"今日咨询";
     [self.backview addSubview:_one];
     
     _two = [[HomeControlsV alloc] init];
@@ -189,7 +199,7 @@
     
     _three = [[HomeControlsV alloc] init];
     _three.title.text = @"0";
-    _three.subtitle.text = @"近一月报名";
+    _three.subtitle.text = @"本月报名";
     [self.backview addSubview:_three];
     
     NSArray *arr = @[_one,_two,_three];
@@ -334,6 +344,12 @@
             } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
     }];
+}
+
+
+- (void)tozhaosheng{
+    InstructionsVC *VC = [[InstructionsVC alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
 }
 /*
 #pragma mark - Navigation

@@ -10,7 +10,7 @@
 #import "LLSearchViewController.h"
 #import "LLSearchSuggestionVC.h"
 #import "LLSearchView.h"
-#import "StudentsListVC.h"
+#import "SearchListVC.h"
 @interface LLSearchResultViewController ()<UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *searchArray;
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) UIBarButtonItem *rightItem;
 @property (nonatomic, strong) LLSearchSuggestionVC *searchSuggestVC;
 @property (nonatomic, strong) LLSearchView *searchView;
-@property (nonatomic, strong) StudentsListVC *student;
+@property (nonatomic, strong) SearchListVC *student;
 @end
 
 @implementation LLSearchResultViewController
@@ -241,7 +241,7 @@
 }
 
 - (void)loadSearchView{
-    StudentsListVC *vc = [[StudentsListVC alloc] init];
+    SearchListVC *vc = [[SearchListVC alloc] init];
     self.student = vc;
     vc.PayCost = self.PayCost;
     if (self.PayCost) {
