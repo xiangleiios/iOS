@@ -21,7 +21,8 @@ typedef void(^AlertInput)(NSString * text);
 - (instancetype)initWithButTitle:(NSString *)titleOne ButImg:(NSString *)imgOne titleTwo:(NSString *)titleTwo ButimgTwo:(NSString *)imgTwo;
 ///网络 成功失败 提示
 - (instancetype)initWithMessage:(NSString *)message SuccessOrFailure:(BOOL)bol;
-
+/// 文字提示
+- (instancetype)initWithMessage:(NSString *)message;
 /// 弹出输入框
 - (instancetype)initWithInputboxTitle:(NSString *)title;
 

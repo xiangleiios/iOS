@@ -9,7 +9,7 @@
 #import "XLAlertView.h"
 
 ///alertView  宽
-#define AlertW KFit_W6S(450)
+#define AlertW KFit_W6S(560)
 ///各个栏目之间的距离
 #define XLSpace KFit_W6S(20)
 
@@ -43,7 +43,7 @@
         self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.6];
         self.alertView = [[UIView alloc] init];
         self.alertView.backgroundColor = [UIColor whiteColor];
-        self.alertView.layer.cornerRadius = 20.0;
+        self.alertView.layer.cornerRadius = 10.0;
         self.alertView.layer.masksToBounds = YES;
         self.alertView.frame = CGRectMake(0, 0, AlertW, 100);
         self.alertView.layer.position = self.center;
@@ -72,23 +72,7 @@
             CGFloat msgH = self.msgLbl.bounds.size.height;
             
             self.msgLbl.frame = self.titleLbl?CGRectMake((AlertW-msgW)/2, CGRectGetMaxY(self.titleLbl.frame)+XLSpace, msgW, msgH):CGRectMake((AlertW-msgW)/2, 2*XLSpace, msgW, msgH);
-            if([message rangeOfString:@"首付款优能币退回你的账户，但平台将收取100优能币作为服务费！"].location !=NSNotFound)//_roaldSearchText
-            {
-                NSLog(@"yes");
-                // 创建Attributed
-                NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc] initWithString:message];
-                // 需要改变的第一个文字的位置
-                NSUInteger firstLoc = [[noteStr string] rangeOfString:@"首"].location;
-                // 需要改变的最后一个文字的位置
-                NSUInteger secondLoc = [[noteStr string] rangeOfString:@"！"].location + 1;
-                // 需要改变的区间
-                NSRange range = NSMakeRange(firstLoc, secondLoc - firstLoc);
-                // 改变颜色
-                [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor redColor] range:range];
-                // 改变字体大小及类型
-//                [noteStr addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"Helvetica-BoldOblique" size:kFit_Font6(22)] range:range];
-                [self.msgLbl setAttributedText:noteStr];
-            }
+            
         }
         
         self.lineView = [[UIView alloc] init];
@@ -128,7 +112,7 @@
         if(sureTitle && cancleTitle){
             
             self.sureBtn = [[UIButton alloc] init];
-            [self.sureBtn setTitleColor:kColor_N(40, 174, 104) forState:UIControlStateNormal];
+            [self.sureBtn setTitleColor:kColor_N(33, 130, 237) forState:UIControlStateNormal];
             self.sureBtn.frame = CGRectMake(CGRectGetMaxX(self.verLineView.frame), CGRectGetMaxY(self.lineView.frame), (AlertW-1)/2+1, 40);
             [self.sureBtn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.2]] forState:UIControlStateNormal];
             [self.sureBtn setBackgroundImage:[self imageWithColor:[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:0.2]] forState:UIControlStateSelected];
@@ -355,6 +339,57 @@
     return self;
     
 }
+
+
+
+- (instancetype)initWithMessage:(NSString *)message{
+    if (self == [super init]) {
+        self.frame = [UIScreen mainScreen].bounds;
+        self.backgroundColor = kRGBAColor(5, 5, 5, 0.6);
+        self.alertView = [[UIView alloc] init];
+        self.alertView.backgroundColor = [UIColor whiteColor];
+        self.alertView.layer.cornerRadius = 8;
+        [self addSubview:self.alertView];
+        [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.center.mas_equalTo(self);
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(560), KFit_H6S(220)));
+        }];
+        
+        UILabel *title = [[UILabel alloc] init];
+        [self.alertView addSubview:title];
+        title.font = [UIFont systemFontOfSize:kFit_Font6(18)];
+        title.textAlignment = NSTextAlignmentCenter;
+        title.textColor = kColor_N(148, 160, 182);
+        title.text = @"提示";
+        [title mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.alertView).mas_offset(KFit_W6S(25));
+            make.right.mas_equalTo(self.alertView).mas_offset(-KFit_W6S(25));
+            make.top.mas_equalTo(self.alertView).mas_offset(KFit_H6S(60));
+            make.height.mas_equalTo(KFit_H6S(40));
+        }];
+        
+        
+        UILabel *ts = [[UILabel alloc] init];
+//        ts.numberOfLines = 0;
+        ts.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+        ts.textAlignment = NSTextAlignmentCenter;
+        ts.text = message;
+        ts.numberOfLines = 2;
+        [self.alertView addSubview:ts];
+        [ts mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.alertView).mas_offset(KFit_W6S(25));
+            make.right.mas_equalTo(self.alertView).mas_offset(-KFit_W6S(25));
+            make.top.mas_equalTo(title.mas_bottom).mas_offset(KFit_H6S(20));
+            make.height.mas_equalTo(KFit_H6S(80));
+        }];
+        
+        //        UITapGestureRecognizer *dianji=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(quit)];
+        //        [self addGestureRecognizer:dianji];
+    }
+    return self;
+}
+
+
 -(void)quit{
     [self removeFromSuperview];
 }

@@ -326,6 +326,7 @@
     if(self == [super init]){
         self.backgroundColor = kColor_N(240, 240, 240);
         UILabel *lb = [[UILabel alloc] init];
+        self.titlelb = lb;
         [self addSubview:lb];
         [lb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.mas_equalTo(self).mas_offset(KFit_W6S(30));

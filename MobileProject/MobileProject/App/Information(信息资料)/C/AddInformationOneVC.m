@@ -156,6 +156,11 @@
         [MBProgressHUD showMsgHUD:@"请填写姓名"];
         return;
     }
+    if (self.SFZforms.name.subfield.text.length >= 6) {
+        [MBProgressHUD showMsgHUD:@"请填写正确的姓名"];
+        return;
+    }
+    
     if (self.SFZforms.gender.subfield.text.length <= 0) {
         [MBProgressHUD showMsgHUD:@"请选择性别"];
         return;
@@ -176,6 +181,12 @@
         [MBProgressHUD showMsgHUD:@"请填写身份证号码"];
         return;
     }
+    if (self.SFZforms.IdNumber.subfield.text.length != 18) {
+        [MBProgressHUD showMsgHUD:@"请填写正确的身份证号码"];
+        return;
+    }
+    
+    
     [self.studentDic setValue:self.SFZforms.name.subfield.text forKey:@"studentName"];
     [self.studentDic setValue:[NSString stringWithFormat:@"%ld",(long)self.SFZforms.gender.subfield.tag] forKey:@"sex"];
     [self.studentDic setValue:[NSString stringWithFormat:@"%ld",(long)self.SFZforms.ethnic.subfield.tag] forKey:@"nation"];

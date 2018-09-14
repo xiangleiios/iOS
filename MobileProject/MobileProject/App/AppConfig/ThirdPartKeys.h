@@ -21,12 +21,12 @@
  **APP ID：wx3f1b00c2f242cac2  原：wxb7f6309efe090c44 南宁头条：wxf6f13fd1a1dd675b
  **App Secret : 0e86ce1380a91656291aa87e3398f622
  */
-#define keyWeChatAppID @"wx1f66d0c7268f3d59" //微信第三方应用
-#define keyWeChatAppSecret @"ac177e5a55b4d7453acaea096c2c4447"
+#define keyWeChatAppID @"wxdfcf42b9cf73e2c6" //微信第三方应用
+#define keyWeChatAppSecret @"1ae56a608d02dc66a76278a792a72026"
 
 // QQ 腾讯
-#define keyQQAPPID @"1106448357"
-#define keyQQAPPKEY @"3AkIyNEehmEmvTxo"
+#define keyQQAPPID @"101499825"
+#define keyQQAPPKEY @"a83a6d156c83503df60fdea00c29e2dd"
 
 // mob Share
 #define keyMobAppID @"1fd107eb20bd2"    //mob的key

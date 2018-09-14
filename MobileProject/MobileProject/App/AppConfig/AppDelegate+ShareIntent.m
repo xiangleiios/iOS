@@ -35,10 +35,10 @@
     //设置微信的appId和appKey
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:FMShareConfigManagerInstance.fmSocialPlatConfigType_Wechat_AppKey appSecret:FMShareConfigManagerInstance.fmSocialPlatConfigType_Wechat_AppSecret redirectURL:FMShareConfigManagerInstance.fmSocialPlatConfigType_Wechat_RedirectURL];
 
-//    [FMShareConfigManagerInstance setPlaform:FMSocialPlatConfigType_Tencent appKey:keyQQAPPID appSecret:keyQQAPPKEY redirectURL:@"http://mobile.umeng.com/social"];
-//    NSLog(@"分享-腾讯平台已经配置");
-//    //设置分享到QQ互联的appId和appKey
-//    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:FMShareConfigManagerInstance.fmSocialPlatConfigType_Tencent_AppKey  appSecret:FMShareConfigManagerInstance.fmSocialPlatConfigType_Tencent_AppSecret redirectURL:FMShareConfigManagerInstance.fmSocialPlatConfigType_Tencent_RedirectURL];
+    [FMShareConfigManagerInstance setPlaform:FMSocialPlatConfigType_Tencent appKey:keyQQAPPID appSecret:keyQQAPPKEY redirectURL:@"http://mobile.umeng.com/social"];
+    NSLog(@"分享-腾讯平台已经配置");
+    //设置分享到QQ互联的appId和appKey
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:FMShareConfigManagerInstance.fmSocialPlatConfigType_Tencent_AppKey  appSecret:FMShareConfigManagerInstance.fmSocialPlatConfigType_Tencent_AppSecret redirectURL:FMShareConfigManagerInstance.fmSocialPlatConfigType_Tencent_RedirectURL];
 
 //    [FMShareConfigManagerInstance setPlaform:FMSocialPlatConfigType_Sina appKey:@"4000871590" appSecret:@"67c963a59dc8dfcae5b76eff6769bb2f" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
 //    NSLog(@"分享-新浪平台已经配置");

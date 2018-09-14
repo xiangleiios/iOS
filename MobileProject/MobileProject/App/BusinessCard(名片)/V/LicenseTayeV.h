@@ -11,4 +11,7 @@ typedef void(^SenterBlcokText) (NSString *text);
 @interface LicenseTayeV : UIView
 @property (nonatomic , strong)UIButton *selectebut;
 @property (nonatomic , copy)SenterBlcokText textBlock;
+@property (nonatomic , strong)NSDictionary *dic;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dic;
 @end

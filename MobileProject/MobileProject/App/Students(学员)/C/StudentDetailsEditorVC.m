@@ -100,61 +100,112 @@
 #pragma mark - 保存修改信息
 - (void)nextVC{
     if (self.SFZforms.name.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请填写姓名"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写姓名"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@""];
+        return;
+    }
+    if (self.SFZforms.name.subfield.text.length <= 0) {
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写正确的姓名"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请填写正确的姓名"];
         return;
     }
     if (self.SFZforms.gender.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择性别"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择性别"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择性别"];
         return;
     }
     if (self.SFZforms.ethnic.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择民族"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择民族"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择民族"];
         return;
     }
     if (self.SFZforms.birthday.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择出生年月日"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择出生年月日"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择出生年月日"];
         return;
     }
     if (self.SFZforms.address.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请填写住址"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写住址"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请填写住址"];
         return;
     }
     if (self.SFZforms.IdNumber.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请填写身份证号码"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写身份证号码"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请填写身份证号码"];
         return;
     }
-    
+    if (self.SFZforms.IdNumber.subfield.text.length != 18) {
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写正确的身份证号码"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请填写正确的身份证号码"];
+        return;
+    }
     if (self.start_time.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择有效期开始时间"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择有效期开始时间"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择有效期开始时间"];
         return;
     }
     if (self.end_time.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择有效期结束时间"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择有效期结束时间"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择有效期结束时间"];
+        return;
+    }
+    if (![XLCommonUse compareOneDay:self.start_time.subfield.text withAnotherDay:self.end_time.subfield.text]) {
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"有效期结束时间必须大于开始时间"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"有效期结束时间必须大于开始时间"];
         return;
     }
     
     if (self.signUpTwo.phone.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请填写手机号"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写手机号"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请填写手机号"];
+        return;
+    }
+    if (self.signUpTwo.phone.subfield.text.length != 11) {
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写正确的手机号"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请填写正确的手机号"];
         return;
     }
     if (self.signUpTwo.carType.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择车型"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择车型"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择车型"];
         return;
     }
     if (self.signUpTwo.school.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择驾校"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择驾校"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择驾校"];
         return;
     }
     if (self.signUpTwo.type.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择申请类型"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择申请类型"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择申请类型"];
         return;
     }
     if (self.signUpTwo.hukou.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择本/外地户口"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择本/外地户口"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择本/外地户口"];
         return;
     }
     if (self.otherForms.state.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择报考状态"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择学员的报名状态再保存"];
+        [alert showPrompt];
+//        [MBProgressHUD showMsgHUD:@"请选择学员的报名状态再保存"];
         return;
     }
     
@@ -204,7 +255,7 @@
         KKLog(@"%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"修改成功" SuccessOrFailure:YES];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"信息保存成功！"];
             [alert showPrompt];
             [self.navigationController popViewControllerAnimated:YES];
         }else{

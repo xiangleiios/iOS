@@ -124,6 +124,10 @@
 #pragma mark - 全部已读
 #define POSTUpdateAllRead KURL(@"/appMessage/first/updateAllRead")
 
+
+#pragma mark -添加消息
+#define POSTReplyAdd KURL(@"/app/reply/add")
+
 #pragma mark 一下全部要删除掉
 #pragma mark -------订单
 /// 创建订单

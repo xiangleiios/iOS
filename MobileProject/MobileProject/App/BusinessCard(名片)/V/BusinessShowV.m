@@ -188,6 +188,17 @@
 }
 
 - (void)queding{
+    int i = 0;
+    for (UIButton *but in self.butArr) {
+        if (but.selected) {
+            i = 1;
+        }
+    }
+    if (!i) {
+        [MBProgressHUD showMsgHUD:@"请选择驾校名称在中天驾考学员端展示"];
+        return;
+    }
+    
     for (UIButton *but in self.butArr) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:[NSString stringWithFormat:@"%ld",(long)but.tag] forKey:@"id"];

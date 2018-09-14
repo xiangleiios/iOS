@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "XLInformationV.h"
+#import "ChangeCardVC.h"
 @interface TemplateV : UIView
 @property (nonatomic , strong)UITextView *textView;
+@property (nonatomic , strong)NSMutableArray *dataArr;
+@property (nonatomic , strong)XLInformationV * biaoTi;
+@property (nonatomic , assign)int index;
+@property (nonatomic , strong)ChangeCardVC *vc;
 - (void)show;
 @end

@@ -83,6 +83,8 @@
 		A74FE4322126C83C008E159E /* XLColumnsV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4312126C83C008E159E /* XLColumnsV.m */; };
 		A74FE43A2126D951008E159E /* XLInformationV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4392126D951008E159E /* XLInformationV.m */; };
 		A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A754B7CA21476D280029CC04 /* XLNetwork.m */; };
+		A75D2CD6214BB5620065FD7F /* shareimg.png in Resources */ = {isa = PBXBuildFile; fileRef = A75D2CD5214BB5620065FD7F /* shareimg.png */; };
+		A75D2CD9214BC01D0065FD7F /* FMJS.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D2CD8214BC01D0065FD7F /* FMJS.m */; };
 		A75F9437212D1A1900384EB0 /* AddInformationOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9436212D1A1900384EB0 /* AddInformationOneVC.m */; };
 		A75F943A212D329F00384EB0 /* FormsV.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9439212D329F00384EB0 /* FormsV.m */; };
 		A75F943D212D4C0B00384EB0 /* AddInformationTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943C212D4C0B00384EB0 /* AddInformationTwoVC.m */; };
@@ -738,6 +740,9 @@
 		A74FE4392126D951008E159E /* XLInformationV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLInformationV.m; sourceTree = "<group>"; };
 		A754B7C921476D280029CC04 /* XLNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLNetwork.h; sourceTree = "<group>"; };
 		A754B7CA21476D280029CC04 /* XLNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLNetwork.m; sourceTree = "<group>"; };
+		A75D2CD5214BB5620065FD7F /* shareimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareimg.png; sourceTree = "<group>"; };
+		A75D2CD7214BC01D0065FD7F /* FMJS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMJS.h; sourceTree = "<group>"; };
+		A75D2CD8214BC01D0065FD7F /* FMJS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMJS.m; sourceTree = "<group>"; };
 		A75F9435212D1A1900384EB0 /* AddInformationOneVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInformationOneVC.h; sourceTree = "<group>"; };
 		A75F9436212D1A1900384EB0 /* AddInformationOneVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInformationOneVC.m; sourceTree = "<group>"; };
 		A75F9438212D329F00384EB0 /* FormsV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FormsV.h; sourceTree = "<group>"; };
@@ -2114,6 +2119,8 @@
 				A7A213BA212E4F9300920678 /* ChangeCardVC.m */,
 				A74EB319213E5A2E00564BC6 /* BusinessCardListVC.h */,
 				A74EB31A213E5A2E00564BC6 /* BusinessCardListVC.m */,
+				A75D2CD7214BC01D0065FD7F /* FMJS.h */,
+				A75D2CD8214BC01D0065FD7F /* FMJS.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -4428,6 +4435,7 @@
 		DAE210F81EF2867A000EAB90 /* UMShareCustom(友盟分享封装) */ = {
 			isa = PBXGroup;
 			children = (
+				A75D2CD5214BB5620065FD7F /* shareimg.png */,
 				DAE210F91EF2867A000EAB90 /* XLshare.h */,
 				DAE210FA1EF2867A000EAB90 /* XLshare.m */,
 			);
@@ -4711,6 +4719,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAE2125D1EF2867B000EAB90 /* FMApp.xcassets in Resources */,
+				A75D2CD6214BB5620065FD7F /* shareimg.png in Resources */,
 				A733725421393574005CD384 /* DIN-Medium.otf in Resources */,
 				DA0346451F509098008E7BE1 /* NSDateTimeAgo.bundle in Resources */,
 				DA56B9F61FBC2123007F94DA /* AlipaySDK.bundle in Resources */,
@@ -4921,6 +4930,7 @@
 				DA0346A31F509098008E7BE1 /* UIButton+MiddleAligning.m in Sources */,
 				DA0346981F509098008E7BE1 /* UIBezierPath+Length.m in Sources */,
 				DA959E441F53BEE9002389F6 /* README.md in Sources */,
+				A75D2CD9214BC01D0065FD7F /* FMJS.m in Sources */,
 				DA0346B61F509098008E7BE1 /* UIImage+BetterFace.m in Sources */,
 				DA03464C1F509098008E7BE1 /* NSDictionary+URL.m in Sources */,
 				A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */,

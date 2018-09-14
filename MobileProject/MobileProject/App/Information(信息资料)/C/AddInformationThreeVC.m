@@ -87,6 +87,10 @@
         [MBProgressHUD showMsgHUD:@"请填写手机号"];
         return;
     }
+    if (self.signUpForms.phone.subfield.text.length != 11) {
+        [MBProgressHUD showMsgHUD:@"请填写正确的手机号"];
+        return;
+    }
     if (self.signUpForms.carType.subfield.text.length <= 0) {
         [MBProgressHUD showMsgHUD:@"请选择车型"];
         return;
@@ -123,8 +127,9 @@
         KKLog(@"%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"添加学员成功" SuccessOrFailure:YES];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交成功！请在报名学员中查看"];
             [alert showPrompt];
+            
             [self.navigationController popToRootViewControllerAnimated:YES];
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];

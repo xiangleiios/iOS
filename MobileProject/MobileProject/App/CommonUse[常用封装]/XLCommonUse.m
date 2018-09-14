@@ -244,4 +244,36 @@
     
 }
 
+
++(BOOL)compareOneDay:(NSString *)oneDay withAnotherDay:(NSString *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+//    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+//    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDay];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDay];
+    NSComparisonResult result = [dateA compare:dateB];
+    NSLog(@"date1 : %@, date2 : %@", oneDay, anotherDay);
+    if (result == NSOrderedDescending) {
+        //NSLog(@"Date1  is in the future");
+        return NO;
+    }
+    else if (result == NSOrderedAscending){
+        //NSLog(@"Date1 is in the past");
+        return YES;
+    }
+    //NSLog(@"Both dates are the same");
+    return NO;
+    
+}
+/** 判断一个字符串是纯数字 */
+- (BOOL)isPureNum:(NSString *)text {
+    if (!text) {
+        return NO;
+    }
+    NSScanner *scan = [NSScanner scannerWithString:text];
+    int val;
+    return [scan scanInt:&val] && [scan isAtEnd];
+}
 @end

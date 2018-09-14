@@ -11,6 +11,7 @@
 #import "AddInformationOneVC.h"
 #import "QrCodeVC.h"
 #import "AddStudentCell.h"
+#import "BusinessCardListVC.h"
 @interface AddStudentVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSArray *imgarr;
@@ -22,7 +23,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titlerr = @[@"手动添加学员",@"手动录入学员报名信息"];
+    self.titlerr = @[@"手动添加学员",@"面对面扫码"];
     self.imgarr = @[@"add_student_icon",@"facetoface_icon"];
     self.subtitlearr = @[@"手动录入学员报名信息",@"学员扫描二维码自行填写报名信息"];
     [self laodNavigation];
@@ -66,8 +67,10 @@
     [backview addSubview:automatic];
     automatic.senterBlock = ^{
         KKLog(@"dianji111");
-        QrCodeVC *vc = [[QrCodeVC alloc] init];
+        BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+//        QrCodeVC *vc = [[QrCodeVC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
     };
     NSArray *arr = @[manual,automatic];
     [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:1 leadSpacing:1 tailSpacing:1];
@@ -135,6 +138,8 @@
     if (indexPath.row == 1) {
         QrCodeVC *vc = [[QrCodeVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+//      BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
+//      [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row == 2) {
         

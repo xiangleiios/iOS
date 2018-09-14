@@ -10,25 +10,33 @@
 #import "CodeShareV.h"
 #import "UIImage+FMQrcodeBarcode.h"
 @interface QrCodeVC ()
-@property (nonatomic , strong)UIImageView *headimg;
-@property (nonatomic , strong)UILabel *titlelb;
-@property (nonatomic , strong)UILabel *subtitle;
-
-@property (nonatomic , strong)UIImageView *cordimg;
+//@property (nonatomic , strong)UIImageView *headimg;
+//@property (nonatomic , strong)UILabel *titlelb;
+//@property (nonatomic , strong)UILabel *subtitle;
+@property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
+//@property (nonatomic , strong)UIImageView *cordimg;
+@property (nonatomic , strong)UIScrollView *scroll;
 @end
 
 @implementation QrCodeVC
 
+- (NSMutableArray *)dataArr{
+    if (_dataArr==nil) {
+        _dataArr=[NSMutableArray array];
+    }
+    return _dataArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"中天驾考"];
     kWeakSelf(self)
-    [self.navigationView addRightButtonWithImage:kImage(@"share_icon") hightImage:kImage(@"share_icon_down") clickCallBack:^(UIView *view) {
-        [weakself share];
-    }];
+//    [self.navigationView addRightButtonWithImage:kImage(@"share_icon") hightImage:kImage(@"share_icon_down") clickCallBack:^(UIView *view) {
+//        [weakself share];
+//    }];
     self.view.backgroundColor = kColor_N(240, 240, 240);
+    [self loadScrollview];
+    [self loadRefreshData];
     
-    [self loadSubview];
     // Do any additional setup after loading the view.
 }
 
@@ -37,61 +45,83 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loadSubview{
+- (void)loadScrollview{
+    self.scroll = [[UIScrollView alloc] init];
+    [self.view addSubview:self.scroll];
+    [self.scroll mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+    }];
+    
+}
+
+
+- (UIView *)loadSubviewWith:(FMMainModel *)model{
+    UIView *backview = [[UIView alloc] init];
+    backview.backgroundColor = kColor_N(240, 240, 240);
+    
+    
+//    [_img sd_setImageWithURL:[NSURL URLWithString:_model.headImg] placeholderImage:[UIImage imageNamed:@"pacture_nor"]];
+//    self.title.text = _model.schoolName;
+//    self.name.text = [NSString stringWithFormat:@"%@  %@",_model.name,_model.enrollPhone];
+//    self.titleSub.text = [NSString stringWithFormat:@"(%@)",_model.deptName];
+    
+    
     UIView *v = [[UIView alloc] init];
-    [self.view addSubview:v];
+    [backview addSubview:v];
     v.backgroundColor = [UIColor whiteColor];
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).mas_offset(KFit_H6S(60));
-        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(60)+kNavBarH);
-        make.right.mas_equalTo(self.view).mas_offset(-KFit_H6S(60));
+        make.left.mas_equalTo(backview).mas_offset(KFit_H6S(60));
+        make.top.mas_equalTo(backview).mas_offset(KFit_H6S(60));
+        make.right.mas_equalTo(backview).mas_offset(-KFit_H6S(60));
         make.height.mas_equalTo(KFit_H6S(310));
     }];
     
-    self.headimg = [[UIImageView alloc] init];
-    [v addSubview:self.headimg];
-    [self.headimg setImage:[UIImage imageNamed:@"pacture_nor"]];
-    self.headimg.layer.cornerRadius = KFit_W6S(70);
-    self.headimg.layer.masksToBounds = YES;
-    [self.headimg mas_makeConstraints:^(MASConstraintMaker *make) {
+    UIImageView *img = [[UIImageView alloc] init];
+    [v addSubview:img];
+//    [img setImage:[UIImage imageNamed:@"pacture_nor"]];
+    [img sd_setImageWithURL:[NSURL URLWithString:model.headImg] placeholderImage:[UIImage imageNamed:@"pacture_nor"]];
+    img.layer.cornerRadius = KFit_W6S(70);
+    img.layer.masksToBounds = YES;
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(v);
         make.top.mas_equalTo(v).mas_offset(KFit_H6S(30));
         make.height.width.mas_equalTo(KFit_W6S(140));
     }];
     
-    self.titlelb = [[UILabel alloc] init];
-    [v addSubview:self.titlelb];
-    self.titlelb.text = @"向蕾";
-    self.titlelb.font = [UIFont systemFontOfSize:kFit_Font6(19) weight:0.5];
-    self.titlelb.textAlignment = NSTextAlignmentCenter;
-    [self.titlelb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.headimg.mas_bottom).mas_offset(KFit_H6S(20));
-        make.centerX.mas_equalTo(self.headimg);
+    UILabel *name = [[UILabel alloc] init];
+    [v addSubview:name];
+    name.text = model.name;
+    name.font = [UIFont systemFontOfSize:kFit_Font6(19) weight:0.5];
+    name.textAlignment = NSTextAlignmentCenter;
+    [name mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(img.mas_bottom).mas_offset(KFit_H6S(20));
+        make.centerX.mas_equalTo(img);
         make.width.mas_equalTo(KFit_W6S(400));
         make.height.mas_equalTo(KFit_H6S(40));
     }];
     
-    self.subtitle = [[UILabel alloc] init];
-    [v addSubview:self.subtitle];
-    self.subtitle.text = @"明安驾校（光谷校区）";
-    self.subtitle.font = [UIFont systemFontOfSize:kFit_Font6(15)];
-    self.subtitle.textColor = kColor_N(147, 151, 163);
-    self.subtitle.textAlignment = NSTextAlignmentCenter;
-    [self.subtitle mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titlelb.mas_bottom).mas_offset(KFit_H6S(10));
-        make.centerX.mas_equalTo(self.headimg);
+    UILabel *jiaxiao = [[UILabel alloc] init];
+    [v addSubview:jiaxiao];
+    jiaxiao.text = [NSString stringWithFormat:@"%@ (%@)",model.schoolName,model.deptName];
+    jiaxiao.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+    jiaxiao.textColor = kColor_N(147, 151, 163);
+    jiaxiao.textAlignment = NSTextAlignmentCenter;
+    [jiaxiao mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(name.mas_bottom).mas_offset(KFit_H6S(10));
+        make.centerX.mas_equalTo(img);
         make.width.mas_equalTo(KFit_W6S(400));
         make.height.mas_equalTo(KFit_H6S(40));
     }];
     
     
     UIView *backv = [[UIView alloc] init];
-    [self.view addSubview:backv];
+    [backview addSubview:backv];
     backv.backgroundColor = [UIColor whiteColor];
     [backv mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(v.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.right.mas_equalTo(v);
-        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(60));
+        make.bottom.mas_equalTo(backview).mas_offset(-KFit_H6S(60));
     }];
     
     UILabel *ts = [[UILabel alloc] init];
@@ -106,38 +136,59 @@
         
     }];
     
-    self.cordimg = [[UIImageView alloc] init];
-    [backv addSubview:self.cordimg];
+    UIImageView *cordimg = [[UIImageView alloc] init];
+    [backv addSubview:cordimg];
 
-    [self.cordimg setImage:[UIImage getQRWithString:@"https://blog.csdn.net/yyh3663477/article/details/48579247" size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
-    [self.cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
+    [cordimg setImage:[UIImage getQRWithString:@"https://blog.csdn.net/yyh3663477/article/details/48579247" size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
+    [cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(backv);
         make.top.mas_equalTo(backv).mas_offset(KFit_H6S(50));
         make.width.height.mas_equalTo(KFit_W6S(400));
     }];
     
+    
+    return backview;
 }
 
 - (void)share{
-    
     CodeShareV *v = [[CodeShareV alloc] init];
     [v show];
     
-//    XLshare *share = [[XLshare alloc]init];
-//    share.title = @"淘电宝，您身边的售电专家";
-//    share.image_url = @"http://tdb.asia-cloud.com/uploads/images/2018/0702/20180702105337108.png";
-//    share.subTitle = @"邀请您使用淘电宝APP，欢迎下载使用，注册有礼哦~~";
-//    if ([User UserOb].UserLogin) {
-//        share.url = [NSString stringWithFormat:URLMemberInviteUID,[User UserOb].idid];
-//    }else{
-//        share.url = URLMemberInvite;
-//    }
-//    
-//    [share umengShare:self.view];
-    
+}
+
+- (void)loadRefreshData{
+    NSString *url = POSTEnrollInfoList;
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        NSArray *tpArray = responseObject[@"list"];
+        
+        if (tpArray) {
+            for (NSDictionary *dic in tpArray) {
+                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
+                [self.dataArr addObject:mode];
+            }
+        }
+        [self loadsub];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    //    POSTTeamSchoolList
 }
 
 
+- (void)loadsub{
+    for (int i = 0; i < self.dataArr.count; i++) {
+        UIView *v = [self loadSubviewWith:self.dataArr[i]];
+        v.frame = CGRectMake(i *SCREEN_WIDTH, 0, SCREEN_WIDTH, self.scroll.size.height);
+        [self.scroll addSubview:v];
+    }
+    self.scroll.contentSize = CGSizeMake(self.dataArr.count * SCREEN_WIDTH, 0);
+}
 /*
 #pragma mark - Navigation
 

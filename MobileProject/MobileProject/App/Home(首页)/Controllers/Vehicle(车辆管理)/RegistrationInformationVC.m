@@ -68,9 +68,9 @@
     
     NSString *str = [_model.isRating  isEqual: @"1"]?@"否":@"是";
     
-    self.dengji = [[XLInformationV alloc] informationWithTitle:@"是否进行登记评定" SubTitle:str];
-    self.pingding_time = [[XLInformationV alloc] informationWithTitle:@"登记评定日期" SubTitle:_model.ratingTime];
-    self.xiaci_time = [[XLInformationV alloc] informationWithTitle:@"下次登记评定日期" SubTitle:_model.ratingNextCheckTime];
+    self.dengji = [[XLInformationV alloc] informationWithTitle:@"是否进行等级评定" SubTitle:str];
+    self.pingding_time = [[XLInformationV alloc] informationWithTitle:@"等级评定日期" SubTitle:_model.ratingTime];
+    self.xiaci_time = [[XLInformationV alloc] informationWithTitle:@"下次等级评定日期" SubTitle:_model.ratingNextCheckTime];
     
     NSString *str1;
     if ([_model.ratingLevel  isEqual: @"1"]) {
@@ -80,8 +80,8 @@
     }else {
         str1 = @"三级";
     }
-    self.jibie = [[XLInformationV alloc] informationWithTitle:@"登记评定级别" SubTitle:str1];
-    self.qixian = [[XLInformationV alloc] informationWithTitle:@"登记评定有限期限" SubTitle:_model.ratingExpireTime];
+    self.jibie = [[XLInformationV alloc] informationWithTitle:@"等级评定级别" SubTitle:str1];
+    self.qixian = [[XLInformationV alloc] informationWithTitle:@"等级评定有限期限" SubTitle:_model.ratingExpireTime];
     
     [v addSubview:self.dengji];
     [v addSubview:self.pingding_time];
@@ -98,7 +98,7 @@
     
     UILabel *lb = [[UILabel alloc] init];
     [self.backview addSubview:lb];
-    lb.text = @"登记评定扫描照片";
+    lb.text = @"等级评定扫描照片";
     lb.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [lb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.backview).mas_offset(KFit_W6S(30));

@@ -21,7 +21,7 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"账户信息"];
     [self loadSubView];
-    [self loadfunctionbut];
+//    [self loadfunctionbut];
     // Do any additional setup after loading the view.
 }
 

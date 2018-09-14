@@ -42,46 +42,47 @@
     bacview.backgroundColor = [UIColor whiteColor];
     [bacview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self);
-        make.top.mas_equalTo(self).mas_offset(KFit_H6S(240));
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(540), KFit_H6S(790)));
+        make.top.mas_equalTo(self).mas_offset(KFit_H6S(440));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(540), KFit_H6S(460)));
     }];
-    UIImageView *img = [[UIImageView alloc] init];
-    [bacview addSubview:img];
-    [img setImage:[UIImage imageNamed:@"erweima"]];
-    [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(bacview);
-        make.top.mas_equalTo(bacview).mas_offset(KFit_H6S(60));
-        make.width.height.mas_equalTo(KFit_W6S(158));
-    }];
+//    UIImageView *img = [[UIImageView alloc] init];
+//    [bacview addSubview:img];
+//    [img setImage:[UIImage imageNamed:@"erweima"]];
+//    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(bacview);
+//        make.top.mas_equalTo(bacview).mas_offset(KFit_H6S(60));
+//        make.width.height.mas_equalTo(KFit_W6S(158));
+//    }];
+//
+//    UILabel *lb = [[UILabel alloc] init];
+//    [bacview addSubview:lb];
+//    lb.text = @"分享报名二维码";
+//    lb.textColor = kColor_N(73, 85, 114);
+//    lb.textAlignment = NSTextAlignmentCenter;
+//    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(bacview);
+//        make.top.mas_equalTo(img.mas_bottom).mas_offset(KFit_H6S(30));
+//        make.height.mas_equalTo(KFit_H6S(30));
+//    }];
+//
+//    UILabel *lbt = [[UILabel alloc] init];
+//    [bacview addSubview:lbt];
+//    lbt.backgroundColor = kColor_N(240, 240, 240);
+//    [lbt mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(bacview);
+//        make.top.mas_equalTo(lb.mas_bottom).mas_offset(KFit_H6S(50));
+//        make.height.mas_equalTo(1);
+//    }];
     
-    UILabel *lb = [[UILabel alloc] init];
-    [bacview addSubview:lb];
-    lb.text = @"分享报名二维码";
-    lb.textColor = kColor_N(73, 85, 114);
-    lb.textAlignment = NSTextAlignmentCenter;
-    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(bacview);
-        make.top.mas_equalTo(img.mas_bottom).mas_offset(KFit_H6S(30));
-        make.height.mas_equalTo(KFit_H6S(30));
-    }];
-    
-    UILabel *lbt = [[UILabel alloc] init];
-    [bacview addSubview:lbt];
-    lbt.backgroundColor = kColor_N(240, 240, 240);
-    [lbt mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(bacview);
-        make.top.mas_equalTo(lb.mas_bottom).mas_offset(KFit_H6S(50));
-        make.height.mas_equalTo(1);
-    }];
-    
-    
-    NSArray *imgarr = @[@"enjoy_pengyouq",@"enjoy_weixin",@"enjoy_kongq",@"enjoy_qq",@"enjoy_weib"];
-    NSArray *titlearr = @[@"朋友圈",@"微信好友",@"QQ空间",@"QQ好友",@"微博"];
+//    ,@"enjoy_weib"
+//    ,@"微博"
+    NSArray *imgarr = @[@"enjoy_pengyouq",@"enjoy_weixin",@"enjoy_kongq",@"enjoy_qq"];
+    NSArray *titlearr = @[@"朋友圈",@"微信好友",@"QQ空间",@"QQ好友"];
     self.pagingScr = [[PagingButtonView alloc] init];
     _pagingScr.pageControlStyle = PageControlStyleHiden;
     _pagingScr.pagingRow = 2; //设置行，不设置默认2行
     _pagingScr.pagingColumn = 3; //设置列 不设置默认4列
-    [_pagingScr yfm_createPagingButtonViewWithFrame:CGRectMake(0, KFit_H6S(360),KFit_W6S(540),KFit_H6S(370))  showToSuperView:bacview delegate:self iconUrlsOrNamesArr:imgarr buttonTextColorArrOrOneColor:nil buttonTitleArray:titlearr];
+    [_pagingScr yfm_createPagingButtonViewWithFrame:CGRectMake(0, KFit_H6S(50),KFit_W6S(540),KFit_H6S(370))  showToSuperView:bacview delegate:self iconUrlsOrNamesArr:imgarr buttonTextColorArrOrOneColor:nil buttonTitleArray:titlearr];
     
     UIButton *but = [[UIButton alloc] init];
     [self addSubview:but];
@@ -94,34 +95,35 @@
     }];
 }
 - (void)PagingButtonView:(PagingButtonView *)actionView clickButtonWithIndex:(NSInteger)index {
-    XLshare *share = [[XLshare alloc]init];
-    share.title = @"淘电宝，您身边的售电专家";
-    share.image_url = @"http://tdb.asia-cloud.com/uploads/images/2018/0702/20180702105337108.png";
-    share.subTitle = @"邀请您使用淘电宝APP，欢迎下载使用，注册有礼哦~~";
-    share.url = [NSString stringWithFormat:URLMemberInviteUID,[User UserOb].idid];
+    
+//    XLshare *share = [[XLshare alloc]init];
+//    share.title = @"淘电宝，您身边的售电专家";
+//    share.image_url = @"http://tdb.asia-cloud.com/uploads/images/2018/0702/20180702105337108.png";
+//    share.subTitle = @"邀请您使用淘电宝APP，欢迎下载使用，注册有礼哦~~";
+//    share.url = [NSString stringWithFormat:URLMemberInviteUID,[User UserOb].idid];
 
     switch (index) {
         case 0:{
             //朋友圈
-            [share shareWebPageToPlatformType:UMSocialPlatformType_WechatTimeLine];
+            [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatTimeLine];
             [self shutDown];
             return;
         }
             break;
         case 1:{
-            [share shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
+            [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
             [self shutDown];
             return;
         }
             break;
         case 2:{
-            [share shareWebPageToPlatformType:UMSocialPlatformType_Qzone];
+            [self.share shareWebPageToPlatformType:UMSocialPlatformType_Qzone];
             [self shutDown];
             return;
         }
             break;
         case 3:{
-            [share shareWebPageToPlatformType:UMSocialPlatformType_QQ];
+            [self.share shareWebPageToPlatformType:UMSocialPlatformType_QQ];
             [self shutDown];
             return;
         }

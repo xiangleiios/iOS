@@ -90,11 +90,13 @@
     
     LicenseTayeV *license = [[LicenseTayeV alloc] init];
     [_backview addSubview:license];
+    
     kWeakSelf(self)
     license.textBlock = ^(NSString *text) {
         KKLog(@"%@",text);
         weakself.type = text;
     };
+    license.dic = self.dic;
     [license mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.name.mas_bottom);
         make.left.right.mas_equalTo(_backview);
@@ -198,7 +200,7 @@
         KKLog(@"11111%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] intValue] == 200) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"删除成功" SuccessOrFailure:YES];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"课程删除成功"];
             [alert showPrompt];
             [self.vc refreshData];
             [self shutDown];
@@ -243,7 +245,7 @@
         KKLog(@"11111%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] intValue] == 200) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"修改成功" SuccessOrFailure:YES];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"课程修改成功"];
             [alert showPrompt];
             [self.vc refreshData];
             [self shutDown];
@@ -264,8 +266,16 @@
         [MBProgressHUD showMsgHUD:@"请输入课程名"];
         return;
     }
+    if (self.name.subfield.text.length >= 11) {
+        [MBProgressHUD showMsgHUD:@"课程名最多不能超过10个"];
+        return;
+    }
     if (self.price.subfield.text.length <= 0) {
         [MBProgressHUD showMsgHUD:@"请输入课程价格"];
+        return;
+    }
+    if ([XLCommonUse isPureNum:self.price.subfield.text]) {
+        [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
         return;
     }
     if (self.type.length <= 0) {
@@ -287,7 +297,7 @@
         KKLog(@"11111%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] intValue] == 200) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"创建成功" SuccessOrFailure:YES];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"课程创建成功"];
             [alert showPrompt];
             [self.vc refreshData];
             [self shutDown];

@@ -32,7 +32,7 @@
     _img = [[UIImageView alloc] init];
     [self.contentView addSubview:_img];
 //    [_img setImage:[UIImage imageNamed:@"head_nor"]];
-    [_img sd_setImageWithURL:[NSURL URLWithString:_model.headImg] placeholderImage:[UIImage imageNamed:@"pacture_nor"]];
+    
     
     [_img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
@@ -100,6 +100,7 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
+    [_img sd_setImageWithURL:[NSURL URLWithString:_model.headImg] placeholderImage:[UIImage imageNamed:@"pacture_nor"]];
     self.title.text = _model.schoolName;
     self.name.text = [NSString stringWithFormat:@"%@  %@",_model.name,_model.enrollPhone];
     self.titleSub.text = [NSString stringWithFormat:@"(%@)",_model.deptName];

@@ -8,12 +8,21 @@
 
 #import "BusinessCardVC.h"
 #import "ChangeCardVC.h"
-@interface BusinessCardVC ()
+#import "CodeShareV.h"
+
+#import "FMJS.h"
+@interface BusinessCardVC ()<UIWebViewDelegate,AppJSObjectDelegate>
 @property (nonatomic , strong)UIWebView *webView;
+@property (nonatomic , strong)NSMutableArray *dataArr;
 @end
 
 @implementation BusinessCardVC
-
+- (NSMutableArray *)dataArr{
+    if (_dataArr==nil) {
+        _dataArr=[NSMutableArray array];
+    }
+    return _dataArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -42,11 +51,25 @@
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
         make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
     }];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.0.133:8080/#/?id=1&type=app"]];
+//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.254:8111/#/?id=%@&type=app&token=%@",self.model.idid,[User UserOb].token];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.0.254:8111/plat/#/?type=app&id=1"]];
     //        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
-    [self.webView loadRequest:request];
+    self.webView.delegate = self;
+//    [self.webView loadRequest:request];
 }
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.134:8080/dist/#/?type=app&id=%@",self.model.idid];
+//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.134:8080/dist/#/?type=app&id=1"];
+    [self load];
+}
+
+- (void)load{
+    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.254:8111/plat/#/?type=app&id=1"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    [self.webView loadRequest:request];
+}
 - (void)loadSubview{
     UIButton *change = [[UIButton alloc] init];
     [self.view addSubview:change];
@@ -64,6 +87,7 @@
     [self.view addSubview:share];
     [share setTitle:@"分享" forState:UIControlStateNormal];
     [share setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [share addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
     share.backgroundColor = kColor_N(148, 160, 181);
     [share setBackgroundImage:[UIImage createImageWithColor:kColor_N(148, 160, 181)] forState:UIControlStateNormal];
     [share setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(148, 160, 181, 0.6)] forState:UIControlStateHighlighted];
@@ -85,6 +109,75 @@
     vc.idid = self.model.idid;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)share{
+    CodeShareV *v = [[CodeShareV alloc] init];
+    XLshare *share = [[XLshare alloc]init];
+    share.title = [NSString stringWithFormat:@"我是%@的%@,邀您来学车！",self.model.schoolName,self.model.name];
+//    share.image_url = @"http://tdb.asia-cloud.com/uploads/images/2018/0702/20180702105337108.png";
+    share.subTitle = _model.introduce;
+    share.url = [NSString stringWithFormat:@"http://192.168.0.254:8111/plat/#/?id=%@",self.model.idid];
+    v.share = share;
+    [v show];
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    
+    FMJS *jsObject = [FMJS new];
+    jsObject.delegate = self;
+    context[@"jsObject"] = jsObject;
+    
+//    context.exceptionHandler = ^(JSContext *context, JSValue *exceptionValue) {
+//        context.exception = exceptionValue;
+//        NSLog(@"jsContext异常信息：%@", exceptionValue);
+//    };
+//    context[@"jsObject"] = self;
+    //定义好JS要调用的方法, share就是调用的share方法名
+    context[@"jsObject"][@"submit"] = ^() {
+        NSLog(@"+++++++Begin Log+++++++");
+        NSArray *args = [JSContext currentArguments];
+        for (JSValue *jsVal in args) {
+            NSLog(@"%@", jsVal.toString);
+            [self.dataArr addObject:jsVal.toString];
+        }
+        [self loadRefreshData];
+        NSLog(@"-------End Log-------");
+    };
+}
+
+
+-(void)submit:(NSString *)message ID:(NSString *)idid{
+    
+    KKLog(@"wwwwwww    %@",message);
+}
+#pragma mark - UIWebViewDelegate
+
+- (void)loadRefreshData{
+    NSString *url = POSTReplyAdd;
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    if (self.dataArr.count < 2) {
+        [MBProgressHUD showMsgHUD:@"请填写回复内容"];
+        return;
+    }
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:[self.dataArr firstObject] forKey:@"id"];
+    [dic setObject:[self.dataArr lastObject] forKey:@"content"];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        [self load];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    //    POSTTeamSchoolList
+}
+
+
 /*
 #pragma mark - Navigation
 

@@ -35,8 +35,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadtable];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(headerRefresh) name:@"NotificationStudentsListHeaderRefresh" object:nil];
     // Do any additional setup after loading the view.
 }
+
+-(void)dealloc{
+    //移除观察者，Observer不能为nil
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
 - (NSInteger)pageNum {
     
     if (_pageNum < 1) {
@@ -205,10 +213,17 @@
 - (void)choose:(UIButton *)senter{
     senter.selected = !senter.selected;
     KKLog(@"%ld",(long)senter.tag);
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (FMMainModel *model in self.dataArr) {
+        if ([model.idid integerValue] == senter.tag) {
+            [dic setValue:model.studentName forKey:@"name"];
+            [dic setValue:model.idid forKey:@"idid"];
+        }
+    }
     if (senter.selected) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsSubmit" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsSubmit" object:dic];
     }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsDelete" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsDelete" object:dic];
     }
 }
 /*

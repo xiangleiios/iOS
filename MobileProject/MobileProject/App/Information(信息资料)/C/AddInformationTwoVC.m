@@ -223,6 +223,12 @@
         [MBProgressHUD showMsgHUD:@"请选择本/外地户口"];
         return;
     }
+    if (![XLCommonUse compareOneDay:self.start_time.subfield.text withAnotherDay:self.end_time.subfield.text]) {
+        [MBProgressHUD showMsgHUD:@"有效期结束时间必须大于开始时间"];
+        return;
+    }
+    
+    
     [self.studentDic setObject:[XLCommonUse dateConversionTimeStamp:self.start_time.subfield.text] forKey:@"idcardStartDate"];
     [self.studentDic setObject:self.end_time.subfield.text forKey:@"idcardEndDate"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.hukou.subfield.tag] forKey:@"enterType"];

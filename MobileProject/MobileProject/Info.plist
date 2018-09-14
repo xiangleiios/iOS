@@ -29,7 +29,7 @@
 			<string>weixin</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx1f66d0c7268f3d59</string>
+				<string>wxdfcf42b9cf73e2c6</string>
 			</array>
 		</dict>
 		<dict>
@@ -39,7 +39,7 @@
 			<string>qq</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>QQ41F30FE5</string>
+				<string>QQ60CC3B1</string>
 			</array>
 		</dict>
 		<dict>
@@ -49,7 +49,7 @@
 			<string>tencent</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tencent1106448357</string>
+				<string>tencent101499825</string>
 			</array>
 		</dict>
 		<dict>
@@ -69,7 +69,7 @@
 			<string>weixinPay</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>wx1f66d0c7268f3d59</string>
+				<string>wxdfcf42b9cf73e2c6</string>
 			</array>
 		</dict>
 		<dict>
@@ -77,7 +77,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>tdb</string>
+				<string>ZTJK</string>
 			</array>
 		</dict>
 	</array>

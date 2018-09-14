@@ -113,7 +113,7 @@
     [self.navigationView setTitle:@"学员"];
     kWeakSelf(self)
     self.choose = [self.navigationView addRightButtonWithTitle:@"提交资料" clickCallBack:^(UIView *view) {
-        [weakself discloseTheTnformation];
+        [weakself ts];
         
     }];
     [self.choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
@@ -139,39 +139,62 @@
 
 #pragma mark - 提交资料
 - (void)studentsSubmit:(NSNotification *)idid{
-    NSString *s = [idid object];
-    NSNumber *str = [NSNumber numberWithInteger:[s integerValue]];
+    NSDictionary *dic = [idid object];
+    
+    
     XLSingleton *single = [XLSingleton singleton];
-    [single.dateArr addObject:str];
+    [single.dateArr addObject:dic];
     KKLog(@"%@",single.dateArr);
 }
 
 - (void)studentsDelete:(NSNotification *)idid{
-    NSString *s = [idid object];
-    NSNumber *str = [NSNumber numberWithInteger:[s integerValue]];
-    
+    NSDictionary *dic = [idid object];
     XLSingleton *single = [XLSingleton singleton];
-    [single.dateArr removeObject:str];
+    [single.dateArr removeObject:dic];
     KKLog(@"%@",single.dateArr);
     
 }
 
+- (void)ts{
+    if ([XLSingleton singleton].dateArr.count <= 0) {
+        [MBProgressHUD showMsgHUD:@"请选择学员在提交至总校"];
+        return;
+    }
+    
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSDictionary *dic in [XLSingleton singleton].dateArr) {
+        [arr addObject:dic[@"name"]];
+    }
+    NSString *title = [NSString stringWithFormat:@"本次提交%lu名学员资料至总校报名",(unsigned long)arr.count];
+    NSString *mes = [arr componentsJoinedByString:@","];
+    XLAlertView *alert = [[XLAlertView alloc] initWithTitle:title message:mes sureBtn:@"确定" cancleBtn:@"取消"];
+    [alert showXLAlertView];
+    alert.resultIndex = ^(NSInteger index) {
+        if (index == 2) {
+            [self discloseTheTnformation];
+        }
+    };
+}
+
+
 - (void)discloseTheTnformation{
-    [MBProgressHUD showLoadingHUD:@"正在提交"];
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
 //    NSString *url = POSTSignStudent;
-    if ([XLSingleton singleton].dateArr.count <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择学员"];
-        return;
+    
+    [MBProgressHUD showLoadingHUD:@"正在提交"];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSDictionary *dic in [XLSingleton singleton].dateArr) {
+        [arr addObject:dic[@"idid"]];
     }
-    NSString *url = [NSString stringWithFormat:@"%@?ids=%@",POSTSignStudent,[[XLSingleton singleton].dateArr componentsJoinedByString:@","]];
-    NSDictionary *dic = [NSDictionary dictionaryWithObject:[[XLSingleton singleton].dateArr componentsJoinedByString:@","] forKey:@"ids"];
+    NSString *url = [NSString stringWithFormat:@"%@?ids=%@",POSTSignStudent,[arr componentsJoinedByString:@","]];
+//    NSDictionary *dic = [NSDictionary dictionaryWithObject:[[XLSingleton singleton].dateArr componentsJoinedByString:@","] forKey:@"ids"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交成功" SuccessOrFailure:YES];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsListHeaderRefresh" object:nil];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交资料成功，请在报名学员中查看"];
             [alert showPrompt];
             [[XLSingleton singleton].dateArr removeAllObjects];
         }else{

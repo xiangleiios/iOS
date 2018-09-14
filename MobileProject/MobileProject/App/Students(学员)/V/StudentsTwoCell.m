@@ -111,8 +111,12 @@
 - (void)setModel:(FMMainModel *)model{
     _model = model;
     self.selelctBut.tag = [_model.idid integerValue];
-    XLSingleton *single = [XLSingleton singleton];
-    if ([single.dateArr containsObject:[NSNumber numberWithInteger:[_model.idid integerValue]]]) {
+//    XLSingleton *single = [XLSingleton singleton];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSDictionary *dic in [XLSingleton singleton].dateArr) {
+        [arr addObject:dic[@"idid"]];
+    }
+    if ([arr containsObject:_model.idid]) {
         self.selelctBut.selected = YES;
     }else{
         self.selelctBut.selected = NO;

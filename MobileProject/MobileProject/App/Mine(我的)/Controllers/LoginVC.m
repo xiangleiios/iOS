@@ -37,6 +37,8 @@
     /* 登录注册按钮*/
     [self loadTheFunctionButton];
     
+    
+    
     /*目前没有第三方登录 */
 //    [self DSFlogin];
     // Do any additional setup after loading the view.
@@ -126,7 +128,7 @@
     
     //15658458745   18810395609  13154898589  15512341234
 #ifdef DEBUG
-    self.pho.text = @"18810395609";
+    self.pho.text = @"13100704041";
     self.password.text = @"123456";
 #else
     

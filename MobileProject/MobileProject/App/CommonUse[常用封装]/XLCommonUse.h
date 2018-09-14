@@ -19,7 +19,8 @@
 + (NSString *)TimeToInterceptHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptMMddHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptYYYYMMddHHmm:(NSString *)time;
-
+/// 比较2个时间大小
++(BOOL)compareOneDay:(NSString *)oneDay withAnotherDay:(NSString *)anotherDay;
 /// 字符串转时间戳
 + (NSString *)dateConversionTimeStamp:(NSString *)date;
 /// 时间戳转字符串
@@ -38,4 +39,7 @@
 
 /// 浮点形判断(整形/浮点型等数字均会返回YES,其他为no):
 + (BOOL)isPureFloat:(NSString *)string;
+
+/// 判断一个字符串是纯数字
++ (BOOL)isPureNum:(NSString *)text;
 @end

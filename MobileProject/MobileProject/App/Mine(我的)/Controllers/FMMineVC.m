@@ -32,6 +32,8 @@
     
     [self loadtable];
     
+    
+    [self loadfunctionbut];
 //    [self laodSubview];
 }
 
@@ -174,5 +176,32 @@
 }
 - (void)theLoginStatusChange{
     
+}
+
+
+- (void)loadfunctionbut{
+    UIButton *next = [[UIButton alloc] init];
+    [self.view addSubview:next];
+    [next setTitle:@"退出登录" forState:UIControlStateNormal];
+    [next addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
+    next.backgroundColor = kColor_N(0, 112, 234);
+    [next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    next.layer.cornerRadius = 5;
+    next.layer.masksToBounds = YES;
+    [next mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(70));
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(70));
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(40));
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+}
+- (void)logOut:(UIButton *)sender{
+    [[User UserOb] UserQuit];
+    LoginVC *Loginvc = [[LoginVC alloc] init];
+    AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+    UIViewController *vc = delegete.window.rootViewController;
+    delegete.window.rootViewController = Loginvc;
+    vc = nil;
+    [self presentViewController:Loginvc animated:YES completion:NULL];
 }
 @end

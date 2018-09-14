@@ -25,7 +25,13 @@
     }
     return self;
 }
-
+- (instancetype)initWithDictionary:(NSDictionary *)dic{
+    self = [super init];
+    if (self) {
+        self.dic = dic;
+    }
+    return self;
+}
 - (void)loadSubview{
     UILabel *redlb = [[UILabel alloc] init];
     [self addSubview:redlb];
@@ -48,6 +54,7 @@
     }];
     
 //    NSArray *arrone = @[@"C1",@"C2",@"C3",@"A1",@"A2",@"A3",@"B1",@"B2"];
+    
     NSArray *arrone = [XLCache singleton].student_license_type_title;
     NSArray *arrtwo = [XLCache singleton].student_license_type_value;
     float w = KFit_W6S(100);
@@ -56,6 +63,9 @@
         UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(KFit_W6S(30) + (w + KFit_W6S(50))* (i % 4), KFit_H6S(80) + h *(i/4), w, h)];
         [self addSubview:but];
         but.tag = [arrtwo[i] integerValue];
+        if ([self.dic[@"licenseType"] integerValue] == but.tag) {
+            [self selectBut:but];
+        }
         [but setTitle:arrone[i] forState:UIControlStateNormal];
         [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         but.titleEdgeInsets = UIEdgeInsetsMake(0, KFit_W6S(15), 0, 0);
@@ -82,7 +92,10 @@
     self.textBlock([NSString stringWithFormat:@"%ld",(long)senter.tag]);
 }
 
-
+- (void)setDic:(NSDictionary *)dic{
+    _dic = dic;
+    [self loadSubview];
+}
 
 
 @end

@@ -92,7 +92,8 @@
     self.end_time = [[XLInformationV alloc] informationWithTitle:@"合同结束时间" SubTitle:_model.contractTimeEnd];
     self.fuzeren = [[XLInformationV alloc] informationWithTitle:@"负责人" SubTitle:_model.leader];
     self.pho = [[XLInformationV alloc] informationWithTitle:@"联系电话" SubTitle:_model.phone];
-    self.shenfenz = [[XLInformationV alloc] informationWithTitle:@"负责人身份证号" SubTitle:_model.leaderIdCard];
+    NSString *card = [NSString stringWithFormat:@"%@******%@", [_model.leaderIdCard substringToIndex:4], [_model.leaderIdCard substringFromIndex:14]];
+    self.shenfenz = [[XLInformationV alloc] informationWithTitle:@"负责人身份证号" SubTitle:card];
     self.shangxian = [[XLInformationV alloc] informationWithTitle:@"报名上限" SubTitle:_model.upperLimitNumber];
     self.address = [[XLInformationV alloc] informationWithTitle:@"地址" SubTitle:_model.address];
     self.beizhu = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:_model.remark];

@@ -20,7 +20,7 @@
 @property (nonatomic , strong)AdmissionsFormsV *admissions;
 @property (nonatomic , strong)CourseFormsV *course;
 @property (nonatomic , strong)NSMutableArray *couresArr;
-@property (nonatomic , strong)UITextView *textView;
+
 @property (nonatomic , strong)XLView *imgBackView;
 @property (nonatomic , strong)UIButton *add_photo;
 @property (nonatomic ,strong)NSMutableArray *imgarr;
@@ -209,6 +209,7 @@
     [self.backview addSubview:introduce];
     introduce.senterBlock = ^{
         TemplateV *v = [[TemplateV alloc] init];
+        v.vc = weakself;
         [v show];
     };
     [introduce mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -285,12 +286,12 @@
         UIButton *but=[[UIButton alloc]init];
         [self.backview addSubview:but];
         [but mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(imgv).mas_offset(-KFit_H6S(15));
-            make.left.mas_equalTo(imgv.mas_right).mas_offset(-KFit_H6S(15));
-            make.width.height.mas_equalTo(KFit_H6S(30));
+            make.top.mas_equalTo(imgv).mas_offset(-KFit_H6S(35));
+            make.left.mas_equalTo(imgv.mas_right).mas_offset(-KFit_H6S(35));
+            make.width.height.mas_equalTo(KFit_H6S(80));
         }];
-        [but setImage:[UIImage imageNamed:@"icon_delet"] forState:UIControlStateNormal];
-        but.backgroundColor = [UIColor redColor];
+        [but setImage:[UIImage imageNamed:@"delete_red_icon"] forState:UIControlStateNormal];
+//        but.backgroundColor = [UIColor redColor];
         but.tag=i;
         [but addTarget:self action:@selector(deleteimgdata:) forControlEvents:UIControlEventTouchUpInside];
         [self.butarr addObject:but];
@@ -441,7 +442,7 @@
     self.admissions.phone.subfield.text = _model.enrollPhone;
     
     self.admissions.names.subfield.text = _model.deptName;
-    
+    KKLog(@"%@",_model.deptAddress);
     self.admissions.address.subfield.text = _model.deptAddress;
     self.textView.text = _model.introduce;
     self.course.dataArr = _model.classList;

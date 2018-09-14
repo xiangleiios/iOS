@@ -11,5 +11,6 @@
 @interface ChangeCardVC : FMBaseViewController
 @property (nonatomic , strong)FMMainModel *model;
 @property (nonatomic , strong)NSString *idid;
+@property (nonatomic , strong)UITextView *textView;
 - (void)refreshData;
 @end

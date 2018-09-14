@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PagingButtonView.h"
 @interface CodeShareV : UIView
-
+@property (nonatomic , strong)XLshare *share;
 @property (nonatomic, strong) PagingButtonView *pagingScr;
 - (void)show;
 @end
