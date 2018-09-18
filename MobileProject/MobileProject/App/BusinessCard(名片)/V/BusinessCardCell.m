@@ -105,10 +105,10 @@
     self.name.text = [NSString stringWithFormat:@"%@  %@",_model.name,_model.enrollPhone];
     self.titleSub.text = [NSString stringWithFormat:@"(%@)",_model.deptName];
     if ([_model.isShow intValue] == 1) {
-//        是否展示（1：默认展示 2：不展示）"
-        self.typeone.hidden = NO;
-    }else{
+//        是否展示（2：默认展示 1：不展示）"
         self.typeone.hidden = YES;
+    }else{
+        self.typeone.hidden = NO;
     }
 }
 

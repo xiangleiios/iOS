@@ -111,7 +111,8 @@
         }
             break;
         case 1:{
-            [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
+//            [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
+            [self.share shareMiniProgramToPlatformType:UMSocialPlatformType_WechatSession];
             [self shutDown];
             return;
         }

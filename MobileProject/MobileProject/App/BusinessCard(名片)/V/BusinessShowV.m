@@ -155,10 +155,10 @@
     [but setImage:[UIImage imageNamed:@"down_button"] forState:UIControlStateSelected];
     [but addTarget:self action:@selector(selectBut:) forControlEvents:UIControlEventTouchUpInside];
     if ([model.isShow intValue] == 1) {
-        //        是否展示（1：默认展示 2：不展示）"
-        but.selected = YES;
-    }else{
+        //        是否展示（2：默认展示 1：不展示）"
         but.selected = NO;
+    }else{
+        but.selected = YES;
     }
     but.tag = [model.idid intValue];
     [self.butArr addObject:but];
@@ -202,7 +202,7 @@
     for (UIButton *but in self.butArr) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:[NSString stringWithFormat:@"%ld",(long)but.tag] forKey:@"id"];
-        [dic setObject:but.selected?@"1":@"2" forKey:@"isShow"];
+        [dic setObject:but.selected?@"2":@"1" forKey:@"isShow"];
         [self updatawithdic:dic];
     }
     [_vc headerRefresh];

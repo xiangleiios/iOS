@@ -57,10 +57,11 @@
 }
 
 - (void)loadScroll{
-    ScrollInfinite *scroll=[[ScrollInfinite alloc]initWithFrame:CGRectMake(KFit_W6S(48), 0, self.frame.size.width - KFit_W6S(48), self.frame.size.height)];
-    [_back addSubview:scroll];
-    scroll.titleArr=self.dataArr;
-    scroll.delegate=self;
+    [self.scroll removeFromSuperview];
+    self.scroll=[[ScrollInfinite alloc]initWithFrame:CGRectMake(KFit_W6S(48), 0, self.frame.size.width - KFit_W6S(48), self.frame.size.height)];
+    [_back addSubview:self.scroll];
+    self.scroll.titleArr=self.dataArr;
+    self.scroll.delegate=self;
     
 }
 - (void)ScrollInfiniteButten:(UIButton *)sender tagIndex:(NSInteger)index{

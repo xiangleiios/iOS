@@ -7,12 +7,12 @@
 //
 
 #import "MyInfoVC.h"
-#import "XLMyNewsFunction.h"
+
 #import "XLInformationV.h"
 #import "ChangePasswordVC.h"
 #import <CommonCrypto/CommonDigest.h>//MD5加密导入框架
 @interface MyInfoVC ()<UIImagePickerControllerDelegate>
-@property (nonatomic , strong)XLMyNewsFunction *headerview;
+//@property (nonatomic , strong)XLMyNewsFunction *headerview;
 @end
 
 @implementation MyInfoVC
@@ -155,8 +155,7 @@
         //关闭相册界面
         [picker dismissModalViewControllerAnimated:YES];
         
-        // 上传头像
-        [self uploadUserHeadWithImageData:image];
+        
         
     }
 }
@@ -197,43 +196,8 @@
 #pragma mark -头像上传
 
 
-// 上传头像
-- (void)uploadUserHeadWithImageData:(UIImage*)headerIma {
-    User* bean = [User UserOb];
-//    NSString *jm=[NSString stringWithFormat:@"qINgyunnnTv@5890%@",bean.uid];
-//    NSString *key=[self md5HexDigest:jm];
-//    NSMutableDictionary *dic=[NSMutableDictionary dictionary];
-//    [dic setValue:key forKey:@"key"];
-//    [dic setValue:bean.uid forKey:@"uid"];
-    NSString *url=[NSString stringWithFormat:userHeaderImage,bean.token];
-    [FMNetworkHelper fm_uploadImagesWithUrlString:url parameters:nil name:@"avatar_file" images:[NSArray arrayWithObject:headerIma] fileNames:[NSArray arrayWithObject:@"avatar_file"] imageScale:1.0 imageType:@"image/png" progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        NSLog(@"bytesProgress:%.2f----totalBytesProgress:%.2f",bytesProgress,totalBytesProgress);
-        
-    } success:^(id responseObject) {
-        NSDictionary *dic=responseObject[@"data"];
-        bean.avatar_url=dic[@"data"];
-        [[SDImageCache sharedImageCache]removeImageForKey:bean.avatar_url]; //先清除SD缓存的本地原来头像。因为SD检查到相同地址本地有缓存就不会再去下载。
-        [self.headerview.img sd_setImageWithURL:[NSURL URLWithString:bean.avatar_url]];
-        [self.delegate headerImageOrNikeNameChange:0];
-        [self.navigationController popViewControllerAnimated:YES];
-    } failure:^(NSError *error) {
-        
-    }];
-}
 
-//加密
-- (NSString *)md5HexDigest:(NSString*)input
-{
-    const char* str = [input UTF8String];
-    unsigned char result[CC_MD5_DIGEST_LENGTH];
-    CC_MD5(str, strlen(str), result);
-    NSMutableString *ret = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH*2];//
-    
-    for(int i = 0; i<CC_MD5_DIGEST_LENGTH; i++) {
-        [ret appendFormat:@"%02x",result[i]];
-    }
-    return ret;
-}
+
 #pragma mark -修改昵称
 - (void)promptedToChangeTheNickname{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"昵称修改" message:@"请输入新的昵称" preferredStyle:UIAlertControllerStyleAlert];

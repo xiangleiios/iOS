@@ -88,4 +88,49 @@
 
 }
 
+
+/// 分享微信小程序
+- (void)shareMiniProgramToPlatformType:(UMSocialPlatformType)platformType
+{
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    UMShareMiniProgramObject *shareObject = [UMShareMiniProgramObject shareObjectWithTitle:self.title descr:self.subTitle thumImage:[UIImage imageNamed:@"shareimg"]];
+//    shareObject.webpageUrl = @"兼容微信低版本网页地址";
+    shareObject.webpageUrl = self.url;
+//    shareObject.userName = @"小程序username，如 gh_3ac2059ac66f";
+    shareObject.userName = @"gh_b63eb5f5c4e3";
+//    shareObject.path = @"pages/index/index";
+    shareObject.path = self.xcxurl;
+    messageObject.shareObject = shareObject;
+    UIImage *img = [UIImage imageNamed:@"weixin_photo"];
+    shareObject.hdImageData = UIImagePNGRepresentation(img);
+//    shareObject.hdImageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"shareimg" ofType:@"png"]];
+    shareObject.miniProgramType = UShareWXMiniProgramTypeRelease; // 可选体验版和开发板
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+        KKLog(@" error :   %@",error);
+//        [self alertWithError:error];
+    }];
+    
+//    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
+//        if (error) {
+//            NSLog(@"************Share fail with error %@*********",error);
+//        }else{
+//            NSLog(@"response data is %@",data);
+//        }
+//    }];
+}
 @end

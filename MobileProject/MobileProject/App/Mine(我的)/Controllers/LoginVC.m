@@ -8,13 +8,10 @@
 
 #import "LoginVC.h"
 #import "XLPartyLoginV.h"
-#import "RegisteredVC.h"
 #import "ForgotPasswordVC.h"
 #import "UIWebView+FMSetTonkenToCookie.h"
-#import "MineWebVC.h"
-#import "RegisteredVC.h"
-#import "CYLTabBarControllerConfig.h"
 #import "XLCache.h"
+#import "CYLTabBarControllerConfig.h"
 @interface LoginVC ()<UITextFieldDelegate>
 @property (nonatomic , strong)TKPhoneTextField *pho;
 @property (nonatomic , strong)UITextField *password;
@@ -28,7 +25,7 @@
     [super viewDidLoad];
     self.title=@"手机快捷登录";
     self.view.backgroundColor=[UIColor whiteColor];
-//    [self loadNavigation];
+
     
     /*图标*/
     [self loadingIcon];
@@ -44,18 +41,7 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)loadNavigation{
-    kWeakSelf(self)
-    [self.navigationView setTitle:@"登录淘电宝"];
-    UIButton *rigutBut = [self.navigationView addRightButtonWithTitle:@"注册" clickCallBack:^(UIView *view) {
-        RegisteredVC *vc = [[RegisteredVC alloc] init];
-        [weakself.navigationController pushViewController:vc animated:YES];
-    }];
-    //是否开启 手势侧滑返回
-    self.customBackGestureEnabel = YES ;
-    //侧滑距离左边最大的距离,
-    self.customBackGestureEdge = SCREEN_WIDTH / 2.0 ;
-}
+
 
 
 
@@ -126,9 +112,9 @@
 //    [self.veribut addTarget:self action:@selector(getVerificationCode) forControlEvents:UIControlEventTouchUpInside];
 //    self.veribut.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(12)];
     
-    //15658458745   18810395609  13154898589  15512341234  15007125433               
+    //15658458745   18810395609  13154898589  15512341234  15007125433
 #ifdef DEBUG
-    self.pho.text = @"18810395609";
+    self.pho.text = @"17764076879";
     self.password.text = @"123456";
 #else
     
@@ -182,37 +168,7 @@
 
 
 - (void)loadTheFunctionButton{
-//    UIButton *registered=[[UIButton alloc]init];
-//    [self.view addSubview:registered];
-//    [registered setTitle:@"立即注册" forState:UIControlStateNormal];
-//    [registered setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    registered.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(18)];
-//    [registered addTarget:self action:@selector(Registered) forControlEvents:UIControlEventTouchUpInside];
-//    UILabel *lb=[[UILabel alloc]init];
-//    [self.view addSubview:lb];
-//    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-//         make.top.mas_equalTo(self.password.mas_bottom).mas_offset(KFit_H6S(20));
-//        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(50));
-//        make.height.mas_equalTo(KFit_H6S(30));
-//        make.width.mas_equalTo(KFit_W6S(215));
-//    }];
-//    lb.font=[UIFont systemFontOfSize:kFit_Font6(13)];
-//    lb.textColor=[UIColor lightGrayColor];
-//    lb.text=@"登录即代表您同意";
-//
-//
-//    UIButton *but=[[UIButton alloc]init];
-//    [self.view addSubview:but];
-//    [but mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.height.mas_equalTo(lb);
-//        make.left.mas_equalTo(lb.mas_right);
-//        make.width.mas_equalTo(KFit_W6S(280));
-//    }];
-//    [but setTitle:@"《文化南宁用户协议》" forState:UIControlStateNormal];
-//    [but setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//    but.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(13)];
-//    [but addTarget:self action:@selector(toProtocol) forControlEvents:UIControlEventTouchUpInside];
-    
+
     UIButton *login=[[UIButton alloc]init];
     [self.view addSubview:login];
     login.backgroundColor=kRGBColor(0, 112, 234 );
@@ -227,55 +183,9 @@
     }];
     login.layer.cornerRadius = 5;
     
-    
-    
-//    UIButton *but = [[UIButton alloc] init];
-//    [but setTitle:@"忘记密码" forState:UIControlStateNormal];
-//    [but setTitleColor:appcoloer forState:UIControlStateNormal];
-//    but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
-//    [but addTarget:self action:@selector(forgotpassword) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:but];
-//    [but mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_equalTo(login);
-//        make.top.mas_equalTo(login.mas_bottom).mas_offset(20);
-//        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(20)));
-//    }];
-//    NSArray *arr=[NSArray arrayWithObjects:registered,login, nil];
-//    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:KFit_W6S(20)  leadSpacing:KFit_W6S(120) tailSpacing:KFit_W6S(120)];
-//    [arr mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(self.password.mas_bottom).mas_offset(KFit_H6S(80));
-//        make.height.mas_equalTo(KFit_H6S(80));
-//    }];
-    
-    
-//    registered.layer.cornerRadius=KFit_H6S(40);
-//    registered.layer.borderWidth=0.5;
-//    registered.layer.borderColor=[UIColor lightGrayColor].CGColor;
-//
-    
-//    UIButton *forgot=[[UIButton alloc]init];
-//    [self.view addSubview:forgot];
-//    [forgot setTitle:@"忘记密码" forState:UIControlStateNormal];
-//    [forgot setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-//    forgot.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(13)];
-//    [forgot addTarget:self action:@selector(forgotpassword) forControlEvents:UIControlEventTouchUpInside];
-//    [forgot mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(login.mas_bottom).mas_offset(KFit_H6S(25));
-//        make.right.mas_equalTo(login).mas_offset(-KFit_W6S(30));
-//        make.height.mas_equalTo(KFit_H6S(30));
-//        make.width.mas_equalTo(KFit_W6S(120));
-//    }];
-    
 }
 
 
-
-- (void)toProtocol{
-    MineWebVC *vc=[[MineWebVC alloc]init];
-    vc.title=@"用户协议";
-    vc.url=HTKLprotocol;
-    [self.navigationController pushViewController:vc animated:YES];
-}
 - (void)loging{
     [self.view endEditing:YES];
     NSString *p = [self.pho.text stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -336,10 +246,7 @@
 }
 
 
-- (void)Registered{
-    RegisteredVC *vc=[[RegisteredVC alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
+
 
 - (void)DSFlogin{
     XLPartyLoginV *v=[[XLPartyLoginV alloc]initWithFrame:CGRectMake(0, KFit_H6S(780), kScreenW, KFit_H6S(200))];
@@ -402,19 +309,7 @@
     
 }
 
-//+ (NSString *)jsonStringWithDict:(NSDictionary *)dict {
-//    NSError *error; NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dict options:NSJSONWritingPrettyPrinted error:&error];
-//    NSString *jsonString;
-//    if (!jsonData) {
-//        NSLog(@"%@",error);
-//
-//    }else{
-//        jsonString = [[NSString alloc]initWithData:jsonData encoding:NSUTF8StringEncoding];
-//
-//    }
-//    return jsonString;
-//
-//}
+
 
 /*
 #pragma mark - Navigation

@@ -18,25 +18,7 @@
 /////////////////// 新接口 按照 pragma mark写入对应 mark中。然后清除旧接口。
 #define APIappInfo KURL(@"/api/apps/info?app_id=2")
 
-#pragma mark - category_ids
-#define CIDparentInformation 21 //资讯父级主ID
-#define CIDHotInformation 22    //热点资讯
-#define CIDparentShequ 28  //社区父级主ID
-#define CIDparentShouye 33  //首页父级主ID
-#define CIDparentShangpin 35  // 商品父级主ID
-#define CIDparentHuodong 38  // 活动父级主ID
-#define CIDparentScenic 39  // 景点父级主ID 
-#define CIDScenicRecommend 40 //景点推荐 博物馆
-#define CIDHomeBanner 36 //首页轮播图
-#define CIDHomeReDian  22 //文化热点
-#define CIDHomeJianShang  23 //文化鉴赏
-#define CIDNewBookSpread 24 //新书速递
-#define CIDcollectionSelected 25 //典藏精选
-#define CIDHomeQinZi  26 //亲子
-#define CIDHomePeiXun  27 //培训
-#define CIDHomeZhanLan  41 //展览
-#define CIDHomeJiangZuo  53 //讲座
-#define CIDHomeService 272 //文化服务
+
 
 /// 驾校名缓存
 #define SchoolList @"schoolList"
@@ -129,26 +111,11 @@
 #pragma mark -添加消息
 #define POSTReplyAdd KURL(@"/app/reply/add")
 
+
+#pragma mark - 名片H5
+#define HTMLMINGPIAN KURL(@"/plat/#/?type=app&id=%@")
+#define HTMLMINGPIANFENXIANG KURL(@"/plat/#/?id=%@")
 #pragma mark 一下全部要删除掉
-#pragma mark -------订单
-/// 创建订单
-#define POSTOrdersCreate KURL(@"/api/orders/create?title=%@&num=%@&voltage=%@&max_price=%@&province=%@&start_date=%@&end_date=%@&yesteryear_total=%@&before_last_total=%@&industry=%@&area=%@&time_slot=%@&allow=1&token=%@")
-/// /api/orders/create?title=%@&num=%@&voltage=%@&max_price=%@&province=%@&start_date=%@&end_date=%@&yesteryear_total=%@&before_last_total=%@&industry=%@&area=%@&time_slot=%@&allow=1&token=%@
-
-/// 我的订单列表
-#define GETordersList KURL(@"/api/orders/owns?site_id=2&page_size=20&page=%d&token=%@&state=%d")
-
-/// 订单详情
-#define GETOrdersInfo KURL(@"/api/orders/info?id=%d&token=%@")
-///取消订单
-#define GETOrdersCancel KURL(@"/api/orders/cancel?id=%d&token=%@")
-///修改订单状态
-#define GETOrdersState KURL (@"/api/orders/state?id=%d&token=%@")
-///核实订单明细
-#define GETOrdersVerify KURL(@"/api/orders/verify?id=%d&token=%@")
-
-/// 订单明细创建
-#define GETOrdersItemsCreate KURL(@"/api/orders/items/create?type=%d&title=%@&id=%d&discount=%d&token=%@")
 
 #pragma mark --------首页
 #define GETMembersIndexInfo KURL(@"/api/members/index/info?province=%@")

@@ -203,8 +203,12 @@
             [alert showPrompt];
             [[XLSingleton singleton].dateArr removeAllObjects];
         }else{
-            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
-            [[XLSingleton singleton].dateArr removeAllObjects];
+            NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithData:[responseObject[@"message"] dataUsingEncoding: NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+//            self.articelContent.text = [attrStr string];
+            
+            
+            [MBProgressHUD showMsgHUD:[attrStr string]];
+//            [[XLSingleton singleton].dateArr removeAllObjects];
         }
         
     } failureBlock:^(NSError *error) {

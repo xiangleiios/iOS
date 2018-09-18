@@ -165,7 +165,8 @@
     UIImageView *cordimg = [[UIImageView alloc] init];
     [backv addSubview:cordimg];
 
-    [cordimg setImage:[UIImage getQRWithString:@"https://blog.csdn.net/yyh3663477/article/details/48579247" size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
+    NSString *str = [NSString stringWithFormat:@"https://jk.ztjwsoft.com/wechart/pages/index/detail/detail?id=%@",model.idid];
+    [cordimg setImage:[UIImage getQRWithString:str size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
     [cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(backv);
         make.top.mas_equalTo(backv).mas_offset(KFit_H6S(50));

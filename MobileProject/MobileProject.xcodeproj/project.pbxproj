@@ -18,7 +18,6 @@
 		4F0944A61F3AEDA800BA80E5 /* FileUploadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0944A41F3AEDA800BA80E5 /* FileUploadViewController.m */; };
 		4F0944AA1F3AF3A700BA80E5 /* UIImage+Adaptation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0944A91F3AF3A700BA80E5 /* UIImage+Adaptation.m */; };
 		4F0944AD1F3AF3D900BA80E5 /* UIDevice+Adaptation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F0944AC1F3AF3D900BA80E5 /* UIDevice+Adaptation.m */; };
-		4F1C801B20F6F07B005A4306 /* libPaymentControl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F1C801A20F6F07B005A4306 /* libPaymentControl.a */; };
 		4F44E98420C66668008330EF /* XLMineCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F44E98320C66668008330EF /* XLMineCell.m */; };
 		4F5577E120BBA0CF00182B25 /* PickerViewOne.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F5577E020BBA0CF00182B25 /* PickerViewOne.m */; };
 		4F5577E320BBA33200182B25 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F5577E220BBA33200182B25 /* Address.plist */; };
@@ -33,7 +32,6 @@
 		4FB0F37220F5D57F0047BF7B /* GuideViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FB0F36720F5D57F0047BF7B /* GuideViewManager.m */; };
 		4FD0717A1FB428BA003497AD /* PictureDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD071791FB428BA003497AD /* PictureDetailViewController.m */; };
 		4FD071801FB432AD003497AD /* SheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FD0717F1FB432AC003497AD /* SheetView.m */; };
-		4FD35F6220F74DC400027E6C /* XLUPPay.mm in Sources */ = {isa = PBXBuildFile; fileRef = 4FD35F6120F74DC400027E6C /* XLUPPay.mm */; };
 		4FE3378F1F31C3FE00760778 /* XLTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE3378E1F31C3FE00760778 /* XLTextField.m */; };
 		4FEBE2D320CE53AC00893117 /* WZSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBE2D220CE53AB00893117 /* WZSwitch.m */; };
 		4FEBE2E220D1147200893117 /* XLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FEBE2E120D1147200893117 /* XLView.m */; };
@@ -89,6 +87,7 @@
 		A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */; };
 		A79276FE212A525D00B4D65D /* AddStudentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79276FD212A525D00B4D65D /* AddStudentVC.m */; };
 		A7927701212A900200B4D65D /* StudentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7927700212A900200B4D65D /* StudentsVC.m */; };
+		A79D080F2150F08D00FD1D58 /* MyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79D080D2150F08D00FD1D58 /* MyInfoVC.m */; };
 		A79DD8382137DFE800665245 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */; };
 		A7A213BB212E4F9300920678 /* ChangeCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213BA212E4F9300920678 /* ChangeCardVC.m */; };
 		A7A213BE212EA98600920678 /* CourseV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213BD212EA98600920678 /* CourseV.m */; };
@@ -396,29 +395,17 @@
 		DA4C99731FAB351A0031ACDA /* UIColor+HcdCustom.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4C99701FAB35190031ACDA /* UIColor+HcdCustom.m */; };
 		DA4FA4BD1FDF7B7300C7C1F1 /* AboutUs.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4881FDF7B7200C7C1F1 /* AboutUs.m */; };
 		DA4FA4BE1FDF7B7300C7C1F1 /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA48A1FDF7B7200C7C1F1 /* ChangePasswordVC.m */; };
-		DA4FA4BF1FDF7B7300C7C1F1 /* Feedback.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA48C1FDF7B7200C7C1F1 /* Feedback.m */; };
 		DA4FA4C01FDF7B7300C7C1F1 /* FMMineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA48E1FDF7B7200C7C1F1 /* FMMineVC.m */; };
 		DA4FA4C11FDF7B7300C7C1F1 /* ForgotPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4901FDF7B7200C7C1F1 /* ForgotPasswordVC.m */; };
 		DA4FA4C21FDF7B7300C7C1F1 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4921FDF7B7200C7C1F1 /* LoginVC.m */; };
-		DA4FA4C31FDF7B7300C7C1F1 /* MineWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4941FDF7B7200C7C1F1 /* MineWebVC.m */; };
-		DA4FA4C41FDF7B7300C7C1F1 /* MyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4961FDF7B7200C7C1F1 /* MyInfoVC.m */; };
 		DA4FA4C51FDF7B7300C7C1F1 /* MyProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4981FDF7B7200C7C1F1 /* MyProfileVC.m */; };
-		DA4FA4C61FDF7B7300C7C1F1 /* PerfectInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA49A1FDF7B7200C7C1F1 /* PerfectInformation.m */; };
-		DA4FA4C71FDF7B7300C7C1F1 /* RegisteredVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA49C1FDF7B7200C7C1F1 /* RegisteredVC.m */; };
 		DA4FA4C81FDF7B7300C7C1F1 /* SetUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA49E1FDF7B7200C7C1F1 /* SetUpVC.m */; };
 		DA4FA4CA1FDF7B7300C7C1F1 /* MynewsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4A31FDF7B7200C7C1F1 /* MynewsModel.m */; };
 		DA4FA4CD1FDF7B7300C7C1F1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4A91FDF7B7200C7C1F1 /* User.m */; };
 		DA4FA4D11FDF7B7300C7C1F1 /* XLMyFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4B61FDF7B7200C7C1F1 /* XLMyFunction.m */; };
-		DA4FA4D21FDF7B7300C7C1F1 /* XLMyNewsFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4B81FDF7B7200C7C1F1 /* XLMyNewsFunction.m */; };
 		DA4FA4D31FDF7B7300C7C1F1 /* XLPartyLoginV.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4BA1FDF7B7200C7C1F1 /* XLPartyLoginV.m */; };
 		DA4FA4EB1FE2757800C7C1F1 /* LMWebProgressLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4E81FE2757600C7C1F1 /* LMWebProgressLayer.m */; };
 		DA4FA4EC1FE2757800C7C1F1 /* NSTimer+Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = DA4FA4EA1FE2757600C7C1F1 /* NSTimer+Addition.m */; };
-		DA56B9F61FBC2123007F94DA /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = DA56B9EA1FBC2123007F94DA /* AlipaySDK.bundle */; };
-		DA56B9F71FBC2123007F94DA /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA56B9EB1FBC2123007F94DA /* AlipaySDK.framework */; };
-		DA56B9F81FBC2123007F94DA /* FLPayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA56B9ED1FBC2123007F94DA /* FLPayManager.m */; };
-		DA56B9F91FBC2123007F94DA /* FMWechatPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DA56B9EF1FBC2123007F94DA /* FMWechatPayModel.m */; };
-		DA56B9FA1FBC2123007F94DA /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DA56B9F11FBC2123007F94DA /* libWeChatSDK.a */; };
-		DA56B9FB1FBC2123007F94DA /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = DA56B9F21FBC2123007F94DA /* README.txt */; };
 		DA607E851FBBDFF800E35DDC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA607E841FBBDFF700E35DDC /* libsqlite3.0.tbd */; };
 		DA607E871FBBE00B00E35DDC /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DA607E861FBBE00B00E35DDC /* libc++.tbd */; };
 		DA6730511FB08033002B6894 /* mss_browseLoading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = DA6730361FB08032002B6894 /* mss_browseLoading@2x.png */; };
@@ -515,7 +502,6 @@
 		DACEAB551E6701BB00D8820C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DACEAB541E6701BB00D8820C /* libz.tbd */; };
 		DACEAB571E6701C500D8820C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACEAB561E6701C500D8820C /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DACEAB591E6701D000D8820C /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = DACEAB581E6701D000D8820C /* libresolv.tbd */; };
-		DADCDAA11FCBAA71007A05CA /* FMPayRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = DADCDAA01FCBAA71007A05CA /* FMPayRequest.m */; };
 		DAE2123F1EF2867B000EAB90 /* CommentController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE2102D1EF2867A000EAB90 /* CommentController.m */; };
 		DAE212401EF2867B000EAB90 /* CommentsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE210301EF2867A000EAB90 /* CommentsModel.m */; };
 		DAE212411EF2867B000EAB90 /* XLCommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE210341EF2867A000EAB90 /* XLCommentCell.m */; };
@@ -599,10 +585,6 @@
 		4F0944A91F3AF3A700BA80E5 /* UIImage+Adaptation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Adaptation.m"; sourceTree = "<group>"; };
 		4F0944AB1F3AF3D900BA80E5 /* UIDevice+Adaptation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Adaptation.h"; sourceTree = "<group>"; };
 		4F0944AC1F3AF3D900BA80E5 /* UIDevice+Adaptation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Adaptation.m"; sourceTree = "<group>"; };
-		4F1C801620F6F07B005A4306 /* UPPaymentControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPaymentControl.h; sourceTree = "<group>"; };
-		4F1C801720F6F07B005A4306 /* UPAPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPlugin.h; sourceTree = "<group>"; };
-		4F1C801820F6F07B005A4306 /* UPAPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPluginDelegate.h; sourceTree = "<group>"; };
-		4F1C801A20F6F07B005A4306 /* libPaymentControl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libPaymentControl.a; sourceTree = "<group>"; };
 		4F44E98220C66668008330EF /* XLMineCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLMineCell.h; sourceTree = "<group>"; };
 		4F44E98320C66668008330EF /* XLMineCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLMineCell.m; sourceTree = "<group>"; };
 		4F5577DF20BBA0CF00182B25 /* PickerViewOne.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PickerViewOne.h; sourceTree = "<group>"; };
@@ -631,8 +613,6 @@
 		4FD071791FB428BA003497AD /* PictureDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureDetailViewController.m; sourceTree = "<group>"; };
 		4FD0717E1FB432AC003497AD /* SheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SheetView.h; sourceTree = "<group>"; };
 		4FD0717F1FB432AC003497AD /* SheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SheetView.m; sourceTree = "<group>"; };
-		4FD35F6020F74DC400027E6C /* XLUPPay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLUPPay.h; sourceTree = "<group>"; };
-		4FD35F6120F74DC400027E6C /* XLUPPay.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = XLUPPay.mm; sourceTree = "<group>"; };
 		4FE3378D1F31C3FE00760778 /* XLTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLTextField.h; sourceTree = "<group>"; };
 		4FE3378E1F31C3FE00760778 /* XLTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLTextField.m; sourceTree = "<group>"; };
 		4FEBE2D120CE53AB00893117 /* WZSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZSwitch.h; sourceTree = "<group>"; };
@@ -738,6 +718,8 @@
 		A79276FD212A525D00B4D65D /* AddStudentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentVC.m; sourceTree = "<group>"; };
 		A79276FF212A900200B4D65D /* StudentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsVC.h; sourceTree = "<group>"; };
 		A7927700212A900200B4D65D /* StudentsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsVC.m; sourceTree = "<group>"; };
+		A79D080D2150F08D00FD1D58 /* MyInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoVC.m; sourceTree = "<group>"; };
+		A79D080E2150F08D00FD1D58 /* MyInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoVC.h; sourceTree = "<group>"; };
 		A79DD8362137DFE700665245 /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
 		A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
 		A7A213B9212E4F9300920678 /* ChangeCardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCardVC.h; sourceTree = "<group>"; };
@@ -1351,24 +1333,14 @@
 		DA4FA4881FDF7B7200C7C1F1 /* AboutUs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUs.m; sourceTree = "<group>"; };
 		DA4FA4891FDF7B7200C7C1F1 /* ChangePasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePasswordVC.h; sourceTree = "<group>"; };
 		DA4FA48A1FDF7B7200C7C1F1 /* ChangePasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePasswordVC.m; sourceTree = "<group>"; };
-		DA4FA48B1FDF7B7200C7C1F1 /* Feedback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Feedback.h; sourceTree = "<group>"; };
-		DA4FA48C1FDF7B7200C7C1F1 /* Feedback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Feedback.m; sourceTree = "<group>"; };
 		DA4FA48D1FDF7B7200C7C1F1 /* FMMineVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMMineVC.h; sourceTree = "<group>"; };
 		DA4FA48E1FDF7B7200C7C1F1 /* FMMineVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMMineVC.m; sourceTree = "<group>"; };
 		DA4FA48F1FDF7B7200C7C1F1 /* ForgotPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordVC.h; sourceTree = "<group>"; };
 		DA4FA4901FDF7B7200C7C1F1 /* ForgotPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordVC.m; sourceTree = "<group>"; };
 		DA4FA4911FDF7B7200C7C1F1 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		DA4FA4921FDF7B7200C7C1F1 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
-		DA4FA4931FDF7B7200C7C1F1 /* MineWebVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineWebVC.h; sourceTree = "<group>"; };
-		DA4FA4941FDF7B7200C7C1F1 /* MineWebVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineWebVC.m; sourceTree = "<group>"; };
-		DA4FA4951FDF7B7200C7C1F1 /* MyInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyInfoVC.h; sourceTree = "<group>"; };
-		DA4FA4961FDF7B7200C7C1F1 /* MyInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoVC.m; sourceTree = "<group>"; };
 		DA4FA4971FDF7B7200C7C1F1 /* MyProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileVC.h; sourceTree = "<group>"; };
 		DA4FA4981FDF7B7200C7C1F1 /* MyProfileVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileVC.m; sourceTree = "<group>"; };
-		DA4FA4991FDF7B7200C7C1F1 /* PerfectInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerfectInformation.h; sourceTree = "<group>"; };
-		DA4FA49A1FDF7B7200C7C1F1 /* PerfectInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfectInformation.m; sourceTree = "<group>"; };
-		DA4FA49B1FDF7B7200C7C1F1 /* RegisteredVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisteredVC.h; sourceTree = "<group>"; };
-		DA4FA49C1FDF7B7200C7C1F1 /* RegisteredVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisteredVC.m; sourceTree = "<group>"; };
 		DA4FA49D1FDF7B7200C7C1F1 /* SetUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetUpVC.h; sourceTree = "<group>"; };
 		DA4FA49E1FDF7B7200C7C1F1 /* SetUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetUpVC.m; sourceTree = "<group>"; };
 		DA4FA4A21FDF7B7200C7C1F1 /* MynewsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MynewsModel.h; sourceTree = "<group>"; };
@@ -1377,25 +1349,12 @@
 		DA4FA4A91FDF7B7200C7C1F1 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		DA4FA4B51FDF7B7200C7C1F1 /* XLMyFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLMyFunction.h; sourceTree = "<group>"; };
 		DA4FA4B61FDF7B7200C7C1F1 /* XLMyFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLMyFunction.m; sourceTree = "<group>"; };
-		DA4FA4B71FDF7B7200C7C1F1 /* XLMyNewsFunction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLMyNewsFunction.h; sourceTree = "<group>"; };
-		DA4FA4B81FDF7B7200C7C1F1 /* XLMyNewsFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLMyNewsFunction.m; sourceTree = "<group>"; };
 		DA4FA4B91FDF7B7200C7C1F1 /* XLPartyLoginV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLPartyLoginV.h; sourceTree = "<group>"; };
 		DA4FA4BA1FDF7B7200C7C1F1 /* XLPartyLoginV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLPartyLoginV.m; sourceTree = "<group>"; };
 		DA4FA4E71FE2757600C7C1F1 /* LMWebProgressLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMWebProgressLayer.h; sourceTree = "<group>"; };
 		DA4FA4E81FE2757600C7C1F1 /* LMWebProgressLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMWebProgressLayer.m; sourceTree = "<group>"; };
 		DA4FA4E91FE2757600C7C1F1 /* NSTimer+Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Addition.h"; sourceTree = "<group>"; };
 		DA4FA4EA1FE2757600C7C1F1 /* NSTimer+Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Addition.m"; sourceTree = "<group>"; };
-		DA56B9EA1FBC2123007F94DA /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AlipaySDK.bundle; sourceTree = "<group>"; };
-		DA56B9EB1FBC2123007F94DA /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AlipaySDK.framework; sourceTree = "<group>"; };
-		DA56B9EC1FBC2123007F94DA /* FLPayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPayManager.h; sourceTree = "<group>"; };
-		DA56B9ED1FBC2123007F94DA /* FLPayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPayManager.m; sourceTree = "<group>"; };
-		DA56B9EE1FBC2123007F94DA /* FMWechatPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMWechatPayModel.h; sourceTree = "<group>"; };
-		DA56B9EF1FBC2123007F94DA /* FMWechatPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMWechatPayModel.m; sourceTree = "<group>"; };
-		DA56B9F11FBC2123007F94DA /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		DA56B9F21FBC2123007F94DA /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		DA56B9F31FBC2123007F94DA /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		DA56B9F41FBC2123007F94DA /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		DA56B9F51FBC2123007F94DA /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		DA607E811FBBDF8300E35DDC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		DA607E821FBBDF9100E35DDC /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DA607E831FBBDF9C00E35DDC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -1578,8 +1537,6 @@
 		DACEAB541E6701BB00D8820C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		DACEAB561E6701C500D8820C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		DACEAB581E6701D000D8820C /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
-		DADCDA9F1FCBAA71007A05CA /* FMPayRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMPayRequest.h; sourceTree = "<group>"; };
-		DADCDAA01FCBAA71007A05CA /* FMPayRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMPayRequest.m; sourceTree = "<group>"; };
 		DAE2102C1EF2867A000EAB90 /* CommentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentController.h; sourceTree = "<group>"; };
 		DAE2102D1EF2867A000EAB90 /* CommentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentController.m; sourceTree = "<group>"; };
 		DAE2102F1EF2867A000EAB90 /* CommentsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentsModel.h; sourceTree = "<group>"; };
@@ -1677,14 +1634,11 @@
 				DAE212841EF2867B000EAB90 /* libBaiduMobStat.a in Frameworks */,
 				9530D3F41E8B4B29000AE7BE /* MediaPlayer.framework in Frameworks */,
 				DACEAB591E6701D000D8820C /* libresolv.tbd in Frameworks */,
-				DA56B9FA1FBC2123007F94DA /* libWeChatSDK.a in Frameworks */,
 				DACEAB571E6701C500D8820C /* UserNotifications.framework in Frameworks */,
 				A7E979F021354B3300EA6F14 /* libexidcardios.a in Frameworks */,
 				DACEAB511E6701A900D8820C /* UIKit.framework in Frameworks */,
 				DACEAB4F1E6701A200D8820C /* Foundation.framework in Frameworks */,
 				DACEAB481E67017A00D8820C /* CoreFoundation.framework in Frameworks */,
-				DA56B9F71FBC2123007F94DA /* AlipaySDK.framework in Frameworks */,
-				4F1C801B20F6F07B005A4306 /* libPaymentControl.a in Frameworks */,
 				17D37870607B5ACFED314790 /* libPods-MobileProject.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1827,41 +1781,6 @@
 			);
 			name = "FileUpload(文件上传)";
 			path = FileUpload;
-			sourceTree = "<group>";
-		};
-		4F1C801320F6EF31005A4306 /* UPPay(银联支付) */ = {
-			isa = PBXGroup;
-			children = (
-				4F1C801420F6F07B005A4306 /* paymentcontrol */,
-			);
-			path = "UPPay(银联支付)";
-			sourceTree = "<group>";
-		};
-		4F1C801420F6F07B005A4306 /* paymentcontrol */ = {
-			isa = PBXGroup;
-			children = (
-				4F1C801520F6F07B005A4306 /* inc */,
-				4F1C801920F6F07B005A4306 /* libs */,
-			);
-			path = paymentcontrol;
-			sourceTree = "<group>";
-		};
-		4F1C801520F6F07B005A4306 /* inc */ = {
-			isa = PBXGroup;
-			children = (
-				4F1C801620F6F07B005A4306 /* UPPaymentControl.h */,
-				4F1C801720F6F07B005A4306 /* UPAPayPlugin.h */,
-				4F1C801820F6F07B005A4306 /* UPAPayPluginDelegate.h */,
-			);
-			path = inc;
-			sourceTree = "<group>";
-		};
-		4F1C801920F6F07B005A4306 /* libs */ = {
-			isa = PBXGroup;
-			children = (
-				4F1C801A20F6F07B005A4306 /* libPaymentControl.a */,
-			);
-			path = libs;
 			sourceTree = "<group>";
 		};
 		4F6F9CF5202161E800D571DA /* singleton(单例) */ = {
@@ -3703,7 +3622,6 @@
 				A7AC8171212C2A1100C6AB6C /* MyNews(消息) */,
 				DA4FA4861FDF7B7200C7C1F1 /* Controllers */,
 				DA4FA49F1FDF7B7200C7C1F1 /* Models */,
-				DA4FA4B31FDF7B7200C7C1F1 /* Resources */,
 				DA4FA4B41FDF7B7200C7C1F1 /* Views */,
 			);
 			path = "Mine(我的)";
@@ -3712,28 +3630,20 @@
 		DA4FA4861FDF7B7200C7C1F1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A79D080E2150F08D00FD1D58 /* MyInfoVC.h */,
+				A79D080D2150F08D00FD1D58 /* MyInfoVC.m */,
 				DA4FA4871FDF7B7200C7C1F1 /* AboutUs.h */,
 				DA4FA4881FDF7B7200C7C1F1 /* AboutUs.m */,
 				DA4FA4891FDF7B7200C7C1F1 /* ChangePasswordVC.h */,
 				DA4FA48A1FDF7B7200C7C1F1 /* ChangePasswordVC.m */,
-				DA4FA48B1FDF7B7200C7C1F1 /* Feedback.h */,
-				DA4FA48C1FDF7B7200C7C1F1 /* Feedback.m */,
 				DA4FA48D1FDF7B7200C7C1F1 /* FMMineVC.h */,
 				DA4FA48E1FDF7B7200C7C1F1 /* FMMineVC.m */,
 				DA4FA48F1FDF7B7200C7C1F1 /* ForgotPasswordVC.h */,
 				DA4FA4901FDF7B7200C7C1F1 /* ForgotPasswordVC.m */,
 				DA4FA4911FDF7B7200C7C1F1 /* LoginVC.h */,
 				DA4FA4921FDF7B7200C7C1F1 /* LoginVC.m */,
-				DA4FA4931FDF7B7200C7C1F1 /* MineWebVC.h */,
-				DA4FA4941FDF7B7200C7C1F1 /* MineWebVC.m */,
-				DA4FA4951FDF7B7200C7C1F1 /* MyInfoVC.h */,
-				DA4FA4961FDF7B7200C7C1F1 /* MyInfoVC.m */,
 				DA4FA4971FDF7B7200C7C1F1 /* MyProfileVC.h */,
 				DA4FA4981FDF7B7200C7C1F1 /* MyProfileVC.m */,
-				DA4FA4991FDF7B7200C7C1F1 /* PerfectInformation.h */,
-				DA4FA49A1FDF7B7200C7C1F1 /* PerfectInformation.m */,
-				DA4FA49B1FDF7B7200C7C1F1 /* RegisteredVC.h */,
-				DA4FA49C1FDF7B7200C7C1F1 /* RegisteredVC.m */,
 				DA4FA49D1FDF7B7200C7C1F1 /* SetUpVC.h */,
 				DA4FA49E1FDF7B7200C7C1F1 /* SetUpVC.m */,
 			);
@@ -3751,20 +3661,11 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		DA4FA4B31FDF7B7200C7C1F1 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		DA4FA4B41FDF7B7200C7C1F1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				DA4FA4B51FDF7B7200C7C1F1 /* XLMyFunction.h */,
 				DA4FA4B61FDF7B7200C7C1F1 /* XLMyFunction.m */,
-				DA4FA4B71FDF7B7200C7C1F1 /* XLMyNewsFunction.h */,
-				DA4FA4B81FDF7B7200C7C1F1 /* XLMyNewsFunction.m */,
 				DA4FA4B91FDF7B7200C7C1F1 /* XLPartyLoginV.h */,
 				DA4FA4BA1FDF7B7200C7C1F1 /* XLPartyLoginV.m */,
 				4F44E98220C66668008330EF /* XLMineCell.h */,
@@ -3782,45 +3683,6 @@
 				DA4FA4EA1FE2757600C7C1F1 /* NSTimer+Addition.m */,
 			);
 			path = LMWebProgress;
-			sourceTree = "<group>";
-		};
-		DA56B9E81FBC2123007F94DA /* AlipayWechatPay */ = {
-			isa = PBXGroup;
-			children = (
-				4FD35F6020F74DC400027E6C /* XLUPPay.h */,
-				4FD35F6120F74DC400027E6C /* XLUPPay.mm */,
-				4F1C801320F6EF31005A4306 /* UPPay(银联支付) */,
-				DA56B9E91FBC2123007F94DA /* Alipay */,
-				DA56B9F01FBC2123007F94DA /* WechatPay */,
-				DADCDA9F1FCBAA71007A05CA /* FMPayRequest.h */,
-				DADCDAA01FCBAA71007A05CA /* FMPayRequest.m */,
-				DA56B9EC1FBC2123007F94DA /* FLPayManager.h */,
-				DA56B9ED1FBC2123007F94DA /* FLPayManager.m */,
-				DA56B9EE1FBC2123007F94DA /* FMWechatPayModel.h */,
-				DA56B9EF1FBC2123007F94DA /* FMWechatPayModel.m */,
-			);
-			path = AlipayWechatPay;
-			sourceTree = "<group>";
-		};
-		DA56B9E91FBC2123007F94DA /* Alipay */ = {
-			isa = PBXGroup;
-			children = (
-				DA56B9EA1FBC2123007F94DA /* AlipaySDK.bundle */,
-				DA56B9EB1FBC2123007F94DA /* AlipaySDK.framework */,
-			);
-			path = Alipay;
-			sourceTree = "<group>";
-		};
-		DA56B9F01FBC2123007F94DA /* WechatPay */ = {
-			isa = PBXGroup;
-			children = (
-				DA56B9F11FBC2123007F94DA /* libWeChatSDK.a */,
-				DA56B9F21FBC2123007F94DA /* README.txt */,
-				DA56B9F31FBC2123007F94DA /* WechatAuthSDK.h */,
-				DA56B9F41FBC2123007F94DA /* WXApi.h */,
-				DA56B9F51FBC2123007F94DA /* WXApiObject.h */,
-			);
-			path = WechatPay;
 			sourceTree = "<group>";
 		};
 		DA611C8E1F25DF0700FDDE13 /* Controllers */ = {
@@ -4169,7 +4031,6 @@
 			children = (
 				DAE2102B1EF2867A000EAB90 /* Controllers */,
 				DAE2102E1EF2867A000EAB90 /* Models */,
-				DAE210311EF2867A000EAB90 /* Resources */,
 				DAE210321EF2867A000EAB90 /* Views */,
 			);
 			path = "CommentDetails(评论详情)";
@@ -4191,13 +4052,6 @@
 				DAE210301EF2867A000EAB90 /* CommentsModel.m */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		DAE210311EF2867A000EAB90 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		DAE210321EF2867A000EAB90 /* Views */ = {
@@ -4272,7 +4126,6 @@
 			children = (
 				A7E979E021354A7100EA6F14 /* IdentificationCard */,
 				4FF9264320C8CE0600AB3E43 /* CGXPickerView(选择器) */,
-				DA56B9E81FBC2123007F94DA /* AlipayWechatPay */,
 				DAE210CE1EF2867A000EAB90 /* BaiduMobStat */,
 				DAE210D11EF2867A000EAB90 /* DHGuidePageHUD(广告图) */,
 			);
@@ -4633,7 +4486,6 @@
 				A75D2CD6214BB5620065FD7F /* shareimg.png in Resources */,
 				A733725421393574005CD384 /* DIN-Medium.otf in Resources */,
 				DA0346451F509098008E7BE1 /* NSDateTimeAgo.bundle in Resources */,
-				DA56B9F61FBC2123007F94DA /* AlipaySDK.bundle in Resources */,
 				DA03437F1F508221008E7BE1 /* test.html in Resources */,
 				DA959E501F53BEE9002389F6 /* ZFPlayer.bundle in Resources */,
 				DA6730521FB08033002B6894 /* mss_browseLoading@3x.png in Resources */,
@@ -4641,7 +4493,6 @@
 				DAE212991EF2867B000EAB90 /* LaunchScreen.storyboard in Resources */,
 				4F5577E320BBA33200182B25 /* Address.plist in Resources */,
 				DA78C3071F5D41A3009BAA90 /* LocalNetworkProtocol.plist in Resources */,
-				DA56B9FB1FBC2123007F94DA /* README.txt in Resources */,
 				4FF9265D20C8CE0600AB3E43 /* CGXBasicInfoPicker.plist in Resources */,
 				DA78C3061F5D41A3009BAA90 /* DebugNetworkProtocol.plist in Resources */,
 				DA911BEE1F3462830048E119 /* sound.caf in Resources */,
@@ -4819,7 +4670,6 @@
 				DA959E4F1F53BEE9002389F6 /* ZFBrightnessView.m in Sources */,
 				DA78C30A1F5D41A3009BAA90 /* YTKBaseRequest.m in Sources */,
 				DA0347061F509098008E7BE1 /* UIViewController+FMExtenion.m in Sources */,
-				DA4FA4C71FDF7B7300C7C1F1 /* RegisteredVC.m in Sources */,
 				DA959E531F53BEE9002389F6 /* ZFPlayerView.m in Sources */,
 				DA0346A81F509098008E7BE1 /* UIColor+HEX.m in Sources */,
 				A74FE4322126C83C008E159E /* XLColumnsV.m in Sources */,
@@ -4864,6 +4714,7 @@
 				DA0347041F509098008E7BE1 /* UIViewController+BlockSegue.m in Sources */,
 				DA03467C1F509098008E7BE1 /* NSString+UrlEncode.m in Sources */,
 				DA03464A1F509098008E7BE1 /* NSDictionary+Merge.m in Sources */,
+				A79D080F2150F08D00FD1D58 /* MyInfoVC.m in Sources */,
 				DA03473A1F509098008E7BE1 /* FMShareConfigManager.m in Sources */,
 				DA03468A1F509098008E7BE1 /* MKMapView+ZoomLevel.m in Sources */,
 				A7E979D6213535CB00EA6F14 /* CodeShareV.m in Sources */,
@@ -4888,7 +4739,6 @@
 				DA03471D1F509098008E7BE1 /* NSObject+Swizzling.m in Sources */,
 				DA0347081F509098008E7BE1 /* UIViewController+StoreKit.m in Sources */,
 				DA03462B1F509098008E7BE1 /* NSManagedObject+Extensions.m in Sources */,
-				DA4FA4C41FDF7B7300C7C1F1 /* MyInfoVC.m in Sources */,
 				4FAF62D320E0BC1600552D50 /* BasePickerView.m in Sources */,
 				A7AC8170212BE12A00C6AB6C /* XLButton.m in Sources */,
 				DABD1A951F1F489B003A170A /* CYLTabBarControllerConfig.m in Sources */,
@@ -4909,7 +4759,6 @@
 				DA0347411F509098008E7BE1 /* MBProgressHUD+MP.m in Sources */,
 				DA03470E1F509098008E7BE1 /* UIWebView+JS.m in Sources */,
 				DA0346671F509098008E7BE1 /* NSSet+Block.m in Sources */,
-				DA4FA4C31FDF7B7300C7C1F1 /* MineWebVC.m in Sources */,
 				DA0347101F509098008E7BE1 /* UIWebView+MetaParser.m in Sources */,
 				DA0346891F509098008E7BE1 /* MKMapView+MoveLogo.m in Sources */,
 				DA0346331F509098008E7BE1 /* Foundation+Log.m in Sources */,
@@ -4945,7 +4794,6 @@
 				DA0346651F509098008E7BE1 /* NSObject+Runtime.m in Sources */,
 				DA0346841F509098008E7BE1 /* NSMutableURLRequest+Upload.m in Sources */,
 				A71907A721312B850072B8CF /* DrivingSchoolVC.m in Sources */,
-				DA4FA4D21FDF7B7300C7C1F1 /* XLMyNewsFunction.m in Sources */,
 				DA03465A1F509098008E7BE1 /* NSNumber+Round.m in Sources */,
 				DA0347011F509098008E7BE1 /* UIViewController+BackButtonHandler.m in Sources */,
 				4FD0717A1FB428BA003497AD /* PictureDetailViewController.m in Sources */,
@@ -4954,7 +4802,6 @@
 				DA959E4D1F53BEE9002389F6 /* UIWindow+CurrentViewController.m in Sources */,
 				DA0346731F509098008E7BE1 /* NSString+MIME.m in Sources */,
 				DA0346E61F509098008E7BE1 /* UITextField+FMExtenion.m in Sources */,
-				DA56B9F91FBC2123007F94DA /* FMWechatPayModel.m in Sources */,
 				4FF9266220C8D93700AB3E43 /* HomeControlsV.m in Sources */,
 				A71907A02130EED50072B8CF /* StudentsTwoCell.m in Sources */,
 				DA867D381F58F88800D4D011 /* NSDate+JYHandle.m in Sources */,
@@ -5042,7 +4889,6 @@
 				A71907A4213106180072B8CF /* SubordinateVC.m in Sources */,
 				DA0346D01F509098008E7BE1 /* UILabel+SuggestSize.m in Sources */,
 				DA0346FB1F509098008E7BE1 /* UIView+Screenshot.m in Sources */,
-				4FD35F6220F74DC400027E6C /* XLUPPay.mm in Sources */,
 				DA03468C1F509098008E7BE1 /* CAAnimation+EasingEquations.m in Sources */,
 				DA78C3051F5D41A3009BAA90 /* FMNetworkHelper.m in Sources */,
 				4F0944991F39A83200BA80E5 /* FMCommentCell.m in Sources */,
@@ -5069,7 +4915,6 @@
 				DA03468E1F509098008E7BE1 /* CAMediaTimingFunction+AdditionalEquations.m in Sources */,
 				4F44E98420C66668008330EF /* XLMineCell.m in Sources */,
 				DA0347271F509098008E7BE1 /* FMSearchBar.m in Sources */,
-				DADCDAA11FCBAA71007A05CA /* FMPayRequest.m in Sources */,
 				A7C311EF214A085B006A96EA /* SearchListVC.m in Sources */,
 				DA0346A91F509098008E7BE1 /* UIColor+Modify.m in Sources */,
 				DA0346D41F509098008E7BE1 /* UINavigationItem+Lock.m in Sources */,
@@ -5099,7 +4944,6 @@
 				4FF9265E20C8CE0600AB3E43 /* CGXStringPickerView.m in Sources */,
 				DA867D581F5904EF00D4D011 /* JYOnceRun.m in Sources */,
 				DA03467A1F509098008E7BE1 /* NSString+Size.m in Sources */,
-				DA4FA4C61FDF7B7300C7C1F1 /* PerfectInformation.m in Sources */,
 				DAE212AF1EF2867B000EAB90 /* Target_User.m in Sources */,
 				DA0346911F509098008E7BE1 /* UIAlertView+Block.m in Sources */,
 				DA0346C51F509098008E7BE1 /* UIImageView+Addition.m in Sources */,
@@ -5159,7 +5003,6 @@
 				A74EB31B213E5A2E00564BC6 /* BusinessCardListVC.m in Sources */,
 				A75F943A212D329F00384EB0 /* FormsV.m in Sources */,
 				DA0346881F509098008E7BE1 /* MKMapView+BetterMaps.m in Sources */,
-				DA56B9F81FBC2123007F94DA /* FLPayManager.m in Sources */,
 				DA03468D1F509098008E7BE1 /* CALayer+UIColor.m in Sources */,
 				DA0346B51F509098008E7BE1 /* UIImage+animatedGIF.m in Sources */,
 				DA0346EF1F509098008E7BE1 /* UIView+Animation.m in Sources */,
@@ -5167,7 +5010,6 @@
 				A74FE43A2126D951008E159E /* XLInformationV.m in Sources */,
 				DA0346CA1F509098008E7BE1 /* UIImageView+Letters.m in Sources */,
 				DA4FA4C01FDF7B7300C7C1F1 /* FMMineVC.m in Sources */,
-				DA4FA4BF1FDF7B7300C7C1F1 /* Feedback.m in Sources */,
 				DAE212411EF2867B000EAB90 /* XLCommentCell.m in Sources */,
 				DA0346D71F509098008E7BE1 /* UIResponder+Chain.m in Sources */,
 				DA959E451F53BEE9002389F6 /* ASValuePopUpView.m in Sources */,

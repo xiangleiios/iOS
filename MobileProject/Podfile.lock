@@ -52,25 +52,25 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
-  - UMengUShare/Core (6.4.7):
+  - UMengUShare/Core (6.4.8.2):
     - UMengUShare/Network
-  - UMengUShare/Network (6.4.7)
-  - UMengUShare/Social/QQ (6.4.7):
+  - UMengUShare/Network (6.4.8.2)
+  - UMengUShare/Social/QQ (6.4.8.2):
     - UMengUShare/Core
     - UMengUShare/Social/ReducedQQ
-  - UMengUShare/Social/ReducedQQ (6.4.7):
+  - UMengUShare/Social/ReducedQQ (6.4.8.2):
     - UMengUShare/Core
-  - UMengUShare/Social/ReducedSina (6.4.7):
+  - UMengUShare/Social/ReducedSina (6.4.8.2):
     - UMengUShare/Core
-  - UMengUShare/Social/ReducedWeChat (6.4.7):
+  - UMengUShare/Social/ReducedWeChat (6.4.8.2):
     - UMengUShare/Core
-  - UMengUShare/Social/Sina (6.4.7):
+  - UMengUShare/Social/Sina (6.4.8.2):
     - UMengUShare/Core
     - UMengUShare/Social/ReducedSina
-  - UMengUShare/Social/WeChat (6.4.7):
+  - UMengUShare/Social/WeChat (6.4.8.2):
     - UMengUShare/Core
     - UMengUShare/Social/ReducedWeChat
-  - UMengUShare/UI (6.4.7):
+  - UMengUShare/UI (6.4.8.2):
     - UMengUShare/Core
   - XAspect (1.0.5):
     - XAspect/Core (= 1.0.5)
@@ -164,7 +164,7 @@ SPEC CHECKSUMS:
   RealReachability: a8c483900986a0f3305733961effbfbb00637a02
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  UMengUShare: 5055d0e01c844379e173bdca0840fc9fa9297d88
+  UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
   XAspect: db50bf487f92dbb8557a7a5365556966c8493af8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 

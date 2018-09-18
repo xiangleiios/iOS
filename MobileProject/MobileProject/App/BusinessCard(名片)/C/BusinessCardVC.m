@@ -51,24 +51,18 @@
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
         make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
     }];
-//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.254:8111/#/?id=%@&type=app&token=%@",self.model.idid,[User UserOb].token];
-//    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.0.254:8111/plat/#/?type=app&id=1"]];
-    //        NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60];
     self.webView.delegate = self;
-//    [self.webView loadRequest:request];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.134:8080/dist/#/?type=app&id=%@",self.model.idid];
-//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.134:8080/dist/#/?type=app&id=1"];
     [self load];
 }
 
 - (void)load{
-    NSString *url =  [NSString stringWithFormat:@"https://jk.ztjwsoft.com:20000/plat/#/?type=app&id=%@",self.model.idid];
-//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.254:8111/plat/#/?type=app&id=1"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSString *urls =  [NSString stringWithFormat:HTMLMINGPIAN,self.model.idid];
+    KKLog(@"url :%@",urls);
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urls]];
     [self.webView loadRequest:request];
 }
 - (void)loadSubview{
@@ -115,9 +109,9 @@
     CodeShareV *v = [[CodeShareV alloc] init];
     XLshare *share = [[XLshare alloc]init];
     share.title = [NSString stringWithFormat:@"我是%@的%@,邀您来学车！",self.model.schoolName,self.model.name];
-//    share.image_url = @"http://tdb.asia-cloud.com/uploads/images/2018/0702/20180702105337108.png";
     share.subTitle = _model.introduce;
-    share.url = [NSString stringWithFormat:@"https://jk.ztjwsoft.com:20000/plat/#/?id=%@",self.model.idid];
+    share.url = [NSString stringWithFormat:HTMLMINGPIANFENXIANG,self.model.idid];
+    share.xcxurl = [NSString stringWithFormat:@"pages/index/detail/detail?id=%@",self.model.idid];
     v.share = share;
     [v show];
 }

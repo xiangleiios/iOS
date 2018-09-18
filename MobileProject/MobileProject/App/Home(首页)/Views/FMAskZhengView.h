@@ -24,4 +24,6 @@
 @property (nonatomic, strong) UIImageView *yfAskZhengHeadlinesIma;
 
 @property (nonatomic, strong)NSArray *dataArr;
+
+@property (nonatomic, strong)ScrollInfinite *scroll;
 @end

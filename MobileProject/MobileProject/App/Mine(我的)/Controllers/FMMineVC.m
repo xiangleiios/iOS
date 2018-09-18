@@ -196,12 +196,21 @@
     }];
 }
 - (void)logOut:(UIButton *)sender{
-    [[User UserOb] UserQuit];
-    LoginVC *Loginvc = [[LoginVC alloc] init];
-    AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
-    UIViewController *vc = delegete.window.rootViewController;
-    delegete.window.rootViewController = Loginvc;
-    vc = nil;
-    [self presentViewController:Loginvc animated:YES completion:NULL];
+    XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"是否退出登录" sureBtn:@"确定" cancleBtn:@"取消"];
+    [alert showXLAlertView];
+    alert.resultIndex = ^(NSInteger index) {
+        KKLog(@"%ld",(long)index);
+        if (index == 2) {
+            [[User UserOb] UserQuit];
+            LoginVC *Loginvc = [[LoginVC alloc] init];
+            AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+            UIViewController *vc = delegete.window.rootViewController;
+            delegete.window.rootViewController = Loginvc;
+            vc = nil;
+            [self presentViewController:Loginvc animated:YES completion:NULL];
+        }
+    };
+    
+    
 }
 @end

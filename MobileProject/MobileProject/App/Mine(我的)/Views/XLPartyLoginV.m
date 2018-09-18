@@ -7,13 +7,13 @@
 //
 
 #import "XLPartyLoginV.h"
-#import "WeiboSDK.h"
+//#import "WeiboSDK.h"
 #import "WXApi.h"
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "FMPlatformHelper.h"
 #import "FMShare.h"
 #import "JPUSHService.h"
-#import "PerfectInformation.h"
+//#import "PerfectInformation.h"
 #import "UIWebView+FMSetTonkenToCookie.h"
 
 @implementation XLPartyLoginV
@@ -202,9 +202,7 @@
             user.accounttype = [NSNumber numberWithInteger:type];
             NSDictionary *dic = responseObject[@"data"];
             if ([dic[@"mobile"] isEqual:@""]) {
-                PerfectInformation *vcon = [[PerfectInformation alloc]init];
-                vcon.dic = dic;
-                [self.vc.navigationController pushViewController:vcon animated:YES];
+                
             }else{
                 [user UserSave:dic];
                 [self.vc.navigationController popViewControllerAnimated:YES];

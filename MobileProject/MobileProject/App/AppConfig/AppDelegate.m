@@ -24,7 +24,7 @@
 #import <UserNotifications/UserNotifications.h> // iOS10注册APNs所需头 件
 #endif
 
-#import "FLPayManager.h" //支付封装
+//#import "FLPayManager.h" //支付封装
 //首页
 #import "PDNavigationController.h"
 
@@ -34,7 +34,7 @@
 
 #import "GuideView.h"
 
-#import "XLUPPay.h"
+//#import "XLUPPay.h"
 
 #import "LoginVC.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
@@ -57,7 +57,7 @@
     
     
     [AppDelegate registeredUMSocialSDKtoApp];
-    [FLPAYMANAGER fl_registerApp];  //支付配置
+//    [FLPAYMANAGER fl_registerApp];  //支付配置
     [FMCheckVersion fm_getAppsInfoAndCheckUpdata]; //版本跟新
     [self setKeyboardManager];
 
@@ -218,7 +218,7 @@
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
     if (!result) {
-        return [FLPAYMANAGER fl_handleUrl:url];
+//        return [FLPAYMANAGER fl_handleUrl:url];
     }
     return result;
 }
@@ -227,7 +227,7 @@
     
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
     if (!result) {
-         return [FLPAYMANAGER fl_handleUrl:url];
+//         return [FLPAYMANAGER fl_handleUrl:url];
     }
     NSLog(@"url=====%@ \n  sourceApplication=======%@ \n  annotation======%@", url, sourceApplication, annotation);
     NSString *str=[NSString stringWithFormat:@"%@",url];
@@ -242,12 +242,12 @@
     
     /// 判断返回链接是否是银联的返回
     if([str rangeOfString:@"uppayresult"].location != NSNotFound){
-        [XLUPPay uppay_handleUrl:url];
+//        [XLUPPay uppay_handleUrl:url];
         return result;
     }
    
     if (!result) {
-        return [FLPAYMANAGER fl_handleUrl:url];
+//        return [FLPAYMANAGER fl_handleUrl:url];
     }
     
     return result;

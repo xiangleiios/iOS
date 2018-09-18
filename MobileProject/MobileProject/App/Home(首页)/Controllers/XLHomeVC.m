@@ -312,7 +312,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self loaddata];
-    [self loadnewsnumb];
+    [self loadnews];
 }
 - (void)loaddata{
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
@@ -342,6 +342,7 @@
     //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
+        [self.newsArr removeAllObjects];
         NSArray *tpArray = responseObject[@"list"][@"rows"];
         if (tpArray) {
             for (int i = 0; i <tpArray.count; i++) {
@@ -354,7 +355,7 @@
             
         }
         self.yfAskZhengView.dataArr = self.newsArr;
-        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"list"][@"total"]] ;
+        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"list"][@"unReadNum"]] ;
         if ([self.xiaoxi.text intValue] == 0) {
             self.xiaoxi.hidden = YES;
         }else{
@@ -368,25 +369,25 @@
         
     }];
 }
-- (void)loadnewsnumb{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
-    NSString *url = POSTFirstList;
-    //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        KKLog(@"%@",responseObject);
-        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"unReadNum"]] ;
-        if ([self.xiaoxi.text intValue] == 0) {
-            self.xiaoxi.hidden = YES;
-        }else{
-            self.xiaoxi.hidden = NO;
-        }
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
-}
+//- (void)loadnewsnumb{
+//    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+//    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+//    NSString *url = POSTFirstList;
+//    //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
+//    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+//        KKLog(@"%@",responseObject);
+//        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"unReadNum"]] ;
+//        if ([self.xiaoxi.text intValue] == 0) {
+//            self.xiaoxi.hidden = YES;
+//        }else{
+//            self.xiaoxi.hidden = NO;
+//        }
+//    } failureBlock:^(NSError *error) {
+//        KKLog(@"%@", error);
+//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+//        
+//    }];
+//}
 
 - (void)tozhaosheng{
     InstructionsVC *VC = [[InstructionsVC alloc] init];

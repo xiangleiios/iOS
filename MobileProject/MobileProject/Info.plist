@@ -298,9 +298,9 @@
 	<key>NSMotionUsageDescription</key>
 	<string>需要您的同意,才能访问运动与健身</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>需要访问您的相册</string>
+	<string>上传图片需要访问您的相册</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>需要访问您的相册</string>
+	<string>上传图片需要访问您的相册</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>DIN-Medium.otf</string>
