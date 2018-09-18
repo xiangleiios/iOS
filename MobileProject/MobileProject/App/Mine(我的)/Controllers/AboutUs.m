@@ -28,6 +28,18 @@
     }];
     [img setImage:[UIImage imageNamed:@"logo_icon"]];
     
+    
+    UILabel *lb = [[UILabel alloc] init];
+    [self.view addSubview:lb];
+    lb.textAlignment = NSTextAlignmentCenter;
+    lb.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary]; 
+    lb.text = [NSString stringWithFormat:@"iOS v%@",[infoDictionary objectForKey:@"CFBundleShortVersionString"]];
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(img.mas_bottom).mas_offset(KFit_H6S(50));
+        make.left.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(KFit_H6S(50));
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

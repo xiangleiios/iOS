@@ -8,7 +8,7 @@
 
 #import "XLUPPay.h"
 #import "UPPaymentControl.h"
-#import "PDSlideViewController.h"
+
 @implementation XLUPPay
 + (void)upPayRequestWithOrder:(NSString *)order pushVc:(UIViewController *)pushVc;{
     NSString *url=[NSString stringWithFormat:GETUnionPay,[User UserOb].token,order];

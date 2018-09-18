@@ -104,10 +104,13 @@
         return;
     }
     if (self.otherForms.state.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择报考状态"];
+        [MBProgressHUD showMsgHUD:@"请选择收费状态"];
         return;
     }
-    
+    if (![XLCommonUse isPureNum:self.signUpForms.price.subfield.text]) {
+        [MBProgressHUD showMsgHUD:@"请报名价格必须为数字"];
+        return;
+    }
     [self.studentDic setObject:self.signUpForms.phone.subfield.text forKey:@"studentPhone"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpForms.carType.subfield.tag] forKey:@"carType"];
     [self.studentDic setObject:self.signUpForms.price.subfield.text forKey:@"signupPrice"];
@@ -127,7 +130,7 @@
         KKLog(@"%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交成功！请在报名学员中查看"];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交成功！在咨询学员中查看"];
             [alert showPrompt];
             
             [self.navigationController popToRootViewControllerAnimated:YES];

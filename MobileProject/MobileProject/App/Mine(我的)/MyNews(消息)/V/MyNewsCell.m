@@ -38,7 +38,7 @@
     
     self.read = [[UILabel alloc] init];
     [self.img addSubview:self.read];
-    self.read.hidden = YES;
+//    self.read.hidden = YES;
     [self.read mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.mas_equalTo(self.img);
         make.width.height.mas_equalTo(KFit_W6S(18));
@@ -93,15 +93,16 @@
     }];
 }
 
+
 - (void)setModel:(FMMainModel *)model{
     _model = model;
     self.title.text = _model.title;
     self.content.text = _model.content;
-    self.time.text = _model.createTime;
+    self.time.text = [XLCommonUse TimeToInterceptMMddHHmm:_model.createTime];
     if (_model.isRead) {
-        self.read.height = YES;
+        self.read.hidden = YES;
     }else{
-        self.read.height = NO;
+        self.read.hidden = NO;
     }
 }
 

@@ -29,6 +29,7 @@
 @property (nonatomic, strong) FMAskZhengView *yfAskZhengView; ///最新消息
 @property (nonatomic, strong) PagingButtonView *pagingScr;
 @property (nonatomic , strong)NSMutableArray *newsArr;
+@property (nonatomic , strong)UILabel *xiaoxi;
 @end
 
 @implementation XLHomeVC
@@ -64,10 +65,24 @@
     kWeakSelf(self)
     [self.navigationView setTitle:@"中天驾校"];
     //添加一个带图片的按钮，如果这个按钮只有点击事件，可以这样写，更加简洁。
-    [self.navigationView addRightButtonWithImage:kImage(@"news_nor") hightImage:kImage(@"news_down") clickCallBack:^(UIView *view) {
+    UIButton *new = [self.navigationView addRightButtonWithImage:kImage(@"news_nor") hightImage:kImage(@"news_down") clickCallBack:^(UIView *view) {
         MyNewsVC *vc = [[MyNewsVC alloc] init];
         [weakself.navigationController pushViewController:vc animated:YES];
     }];
+    self.xiaoxi = [[UILabel alloc] init];
+    [new addSubview:self.xiaoxi];
+    [self.xiaoxi mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.right.mas_equalTo(new);
+        make.height.width.mas_equalTo(KFit_W6S(30));
+    }];
+    self.xiaoxi.backgroundColor = [UIColor redColor];
+    self.xiaoxi.textColor = [UIColor whiteColor];
+    self.xiaoxi.font = [UIFont systemFontOfSize:kFit_Font6(12)];
+//    self.xiaoxi.text = @"1";
+    self.xiaoxi.hidden = YES;
+    self.xiaoxi.layer.cornerRadius = KFit_W6S(15);
+    self.xiaoxi.layer.masksToBounds = YES;
+    self.xiaoxi.textAlignment = NSTextAlignmentCenter;
 }
 
 #pragma mark - 添加一个滚动的背景
@@ -297,6 +312,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self loaddata];
+    [self loadnewsnumb];
 }
 - (void)loaddata{
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
@@ -317,6 +333,8 @@
     }];
 }
 
+
+
 - (void)loadnews{
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
@@ -328,7 +346,7 @@
         if (tpArray) {
             for (int i = 0; i <tpArray.count; i++) {
                 NSDictionary *dic = tpArray[i];
-                [self.newsArr addObject:dic[@"title"]];
+                [self.newsArr addObject:dic[@"content"]];
                 if (i>= 3) {
                     break;
                 }
@@ -336,7 +354,12 @@
             
         }
         self.yfAskZhengView.dataArr = self.newsArr;
-        
+        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"list"][@"total"]] ;
+        if ([self.xiaoxi.text intValue] == 0) {
+            self.xiaoxi.hidden = YES;
+        }else{
+            self.xiaoxi.hidden = NO;
+        }
         
         
     } failureBlock:^(NSError *error) {
@@ -345,7 +368,25 @@
         
     }];
 }
-
+- (void)loadnewsnumb{
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    NSString *url = POSTFirstList;
+    //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"unReadNum"]] ;
+        if ([self.xiaoxi.text intValue] == 0) {
+            self.xiaoxi.hidden = YES;
+        }else{
+            self.xiaoxi.hidden = NO;
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 
 - (void)tozhaosheng{
     InstructionsVC *VC = [[InstructionsVC alloc] init];

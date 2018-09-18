@@ -42,4 +42,6 @@
 
 /// 判断一个字符串是纯数字
 + (BOOL)isPureNum:(NSString *)text;
+/// 身份证判断
++(BOOL)checkUserID:(NSString *)userID;
 @end

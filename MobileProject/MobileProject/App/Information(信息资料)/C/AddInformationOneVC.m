@@ -181,7 +181,7 @@
         [MBProgressHUD showMsgHUD:@"请填写身份证号码"];
         return;
     }
-    if (self.SFZforms.IdNumber.subfield.text.length != 18) {
+    if (![XLCommonUse checkUserID:self.SFZforms.IdNumber.subfield.text]) {
         [MBProgressHUD showMsgHUD:@"请填写正确的身份证号码"];
         return;
     }

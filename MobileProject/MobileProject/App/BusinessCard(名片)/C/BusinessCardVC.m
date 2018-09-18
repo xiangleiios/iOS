@@ -66,7 +66,8 @@
 }
 
 - (void)load{
-    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.254:8111/plat/#/?type=app&id=1"];
+    NSString *url =  [NSString stringWithFormat:@"https://jk.ztjwsoft.com:20000/plat/#/?type=app&id=%@",self.model.idid];
+//    NSString *url =  [NSString stringWithFormat:@"http://192.168.0.254:8111/plat/#/?type=app&id=1"];
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     [self.webView loadRequest:request];
 }
@@ -116,7 +117,7 @@
     share.title = [NSString stringWithFormat:@"我是%@的%@,邀您来学车！",self.model.schoolName,self.model.name];
 //    share.image_url = @"http://tdb.asia-cloud.com/uploads/images/2018/0702/20180702105337108.png";
     share.subTitle = _model.introduce;
-    share.url = [NSString stringWithFormat:@"http://192.168.0.254:8111/plat/#/?id=%@",self.model.idid];
+    share.url = [NSString stringWithFormat:@"https://jk.ztjwsoft.com:20000/plat/#/?id=%@",self.model.idid];
     v.share = share;
     [v show];
 }
@@ -163,7 +164,7 @@
         return;
     }
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:[self.dataArr firstObject] forKey:@"id"];
+    [dic setObject:[self.dataArr firstObject] forKey:@"appraiseId"];
     [dic setObject:[self.dataArr lastObject] forKey:@"content"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);

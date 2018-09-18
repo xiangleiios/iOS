@@ -53,16 +53,16 @@
         make.height.mas_equalTo(KFit_H6S(90));
         make.right.mas_equalTo(v).mas_offset(-KFit_W6S(30));
     }];
-    if (_model.invoicePic) {
-        [self.imgArr addObject:_model.invoicePic];
-    }
-    if (_model.purchaseTaxPic) {
+    if (![_model.purchaseTaxPic  isEqual: @""]) {
         [self.imgArr addObject:_model.purchaseTaxPic];
     }
-    if (_model.otherPic) {
+    if (![_model.invoicePic  isEqual:@""]) {
+        [self.imgArr addObject:_model.invoicePic];
+    }
+    if (![_model.otherPic  isEqual:@""]) {
         [self.imgArr addObject:_model.otherPic];
     }
-    if (_model.carPic) {
+    if (![_model.carPic  isEqual: @""]) {
         [self.imgArr addObject:_model.carPic];
     }
     for (int i = 0; i<self.imgArr.count; i++) {

@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"车辆管理"];
-    _titles = @[@"基本信息",@"登记评定证信息",@"保险信息",@"其他信息"];
+    _titles = @[@"基本信息",@"等级评定证信息",@"保险信息",@"其它信息"];
     [self loadMyCategoryView];
     [self loadScroll];
     // Do any additional setup after loading the view.

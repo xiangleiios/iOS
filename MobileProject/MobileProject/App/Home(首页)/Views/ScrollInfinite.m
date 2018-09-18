@@ -74,7 +74,8 @@ static NSInteger page = 1;
     CGFloat h=CGRectGetHeight(self.frame)/PAGESIZE;
     for (NSInteger i=0; i<titleArr.count; i++) {
         UIButton *butt = [[UIButton alloc]initWithFrame:CGRectMake(0, i%PAGESIZE*h, CGRectGetWidth(self.frame), h)];
-        butt.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(16)];
+        butt.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(15)];
+        
         butt.titleLabel.textAlignment = NSTextAlignmentLeft;
         butt.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         butt.tag = i;
@@ -84,13 +85,15 @@ static NSInteger page = 1;
         [butt addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
         NSString *str = i <= titleArr.count ? titleArr[i] : nil;
         [butt setTitle:str forState:UIControlStateNormal];
+        butt.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         NSInteger view_i=i/PAGESIZE;
         UIView *v=self.subViewArr[view_i];
         [v addSubview:butt];
         if (i<PAGESIZE) {
             UIButton *but = [[UIButton alloc]initWithFrame:CGRectMake(0, i%PAGESIZE*h, CGRectGetWidth(self.frame), h)];
             [but setImage:[UIImage imageNamed:@"wz-yuan"] forState:UIControlStateNormal];
-            but.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(18)];
+            but.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(15)];
+            
             but.titleLabel.textAlignment = NSTextAlignmentLeft;
             but.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             but.tag = i;
@@ -99,6 +102,7 @@ static NSInteger page = 1;
             [but addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
             NSString *str = i <= titleArr.count ? titleArr[i] : nil;
             [but setTitle:str forState:UIControlStateNormal];
+            but.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
             [belowView addSubview:but];
         }
         

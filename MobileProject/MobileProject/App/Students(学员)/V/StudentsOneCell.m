@@ -38,13 +38,13 @@
     }];
     
     self.title = [[UILabel alloc] init];
-    self.title.text = @"丽丽  13333333333";
+//    self.title.text = @"丽丽  13333333333";
     self.title.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [self.contentView addSubview:self.title];
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_img.mas_right).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(-KFit_H6S(25));
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(350), KFit_H6S(40)));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(400), KFit_H6S(40)));
     }];
     
     self.typeone = [[UILabel alloc] init];
@@ -122,7 +122,7 @@
     
     if (_type == CellTypeSuoShuJiaXiao) {
         [_img setImage:[UIImage imageNamed:@"jiaxiao"]];
-        self.title.text = [NSString stringWithFormat:@"%@ %@",model.leader,model.phone];
+        self.title.text = [NSString stringWithFormat:@"%@ (%@) ",model.deptFatherName,model.name];
         self.typeone.text = [NSString stringWithFormat:@"车辆%@", model.teamSchoolCarCount];
         self.typetwo.text = [NSString stringWithFormat:@"已报名%@", model.teamSchoolStudentCount];
         self.typethree.hidden = YES;

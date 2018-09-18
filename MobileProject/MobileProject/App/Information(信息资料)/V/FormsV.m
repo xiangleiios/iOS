@@ -223,10 +223,10 @@
         kWeakSelf(self)
         self.referees = [[XLInformationV alloc] informationWithTitle:@"推荐人" SubTitle:@"" TSSubTitle:@"请输入推荐人" Must:NO Click:NO];
         self.note = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:@"" TSSubTitle:@"请输入备注" Must:NO Click:NO];
-        self.state = [[XLInformationV alloc] informationWithTitle:@"报考状态" SubTitle:@"" TSSubTitle:@"请选择报考状态" Must:YES Click:YES];
+        self.state = [[XLInformationV alloc] informationWithTitle:@"收费状态" SubTitle:@"" TSSubTitle:@"请选择收费状态" Must:YES Click:YES];
         self.state.senterBlock = ^{
             [weakself endEditing:YES];
-            [CGXPickerView showStringPickerWithTitle:@"报考状态" DataSource:@[@"未收费",@"已收费"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+            [CGXPickerView showStringPickerWithTitle:@"收费状态" DataSource:@[@"未收费",@"已收费"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
                 
                 weakself.state.subfield.text = selectValue;
                 weakself.state.subfield.tag = [selectRow integerValue] + 1; ///1:未缴费 2：已缴费
@@ -337,7 +337,13 @@
     NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < dataArr.count; i++) {
         NSDictionary *dic = dataArr[i];
-        NSString *str =  cache.student_license_type_title[[cache.student_license_type_value indexOfObject:dic[@"licenseType"]]];
+        NSString *str;
+        if (!dic[@"licenseType"] || ![dic[@"licenseType"]  isEqual:@""]) {
+            str =  cache.student_license_type_title[[cache.student_license_type_value indexOfObject:dic[@"licenseType"]]];
+        }else{
+            str = @"";
+        }
+//        str =  cache.student_license_type_title[[cache.student_license_type_value indexOfObject:dic[@"licenseType"]]];
         XLInformationV *v = [[XLInformationV alloc] informationWithTitle:dic[@"courseName"] CarType:str SubTitle:dic[@"courseIntroduce"]?dic[@"courseIntroduce"]:@"" Price:dic[@"coursePrice"]?dic[@"coursePrice"]:@""];
         v.tag = i;
         kWeakSelf(self)

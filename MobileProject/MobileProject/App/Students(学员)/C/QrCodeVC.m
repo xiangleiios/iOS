@@ -9,13 +9,16 @@
 #import "QrCodeVC.h"
 #import "CodeShareV.h"
 #import "UIImage+FMQrcodeBarcode.h"
-@interface QrCodeVC ()
+@interface QrCodeVC ()<UIScrollViewDelegate>
 //@property (nonatomic , strong)UIImageView *headimg;
 //@property (nonatomic , strong)UILabel *titlelb;
 //@property (nonatomic , strong)UILabel *subtitle;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
 //@property (nonatomic , strong)UIImageView *cordimg;
 @property (nonatomic , strong)UIScrollView *scroll;
+@property (nonatomic , strong)UIButton *left;
+@property (nonatomic , strong)UIButton *ret;
+@property (nonatomic ,assign) int index;
 @end
 
 @implementation QrCodeVC
@@ -28,6 +31,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.index = 0;
     [self.navigationView setTitle:@"中天驾考"];
     kWeakSelf(self)
 //    [self.navigationView addRightButtonWithImage:kImage(@"share_icon") hightImage:kImage(@"share_icon_down") clickCallBack:^(UIView *view) {
@@ -36,7 +40,7 @@
     self.view.backgroundColor = kColor_N(240, 240, 240);
     [self loadScrollview];
     [self loadRefreshData];
-    
+    [self loadBut];
     // Do any additional setup after loading the view.
 }
 
@@ -48,13 +52,35 @@
 - (void)loadScrollview{
     self.scroll = [[UIScrollView alloc] init];
     [self.view addSubview:self.scroll];
+    self.scroll.bounces=NO;
+    self.scroll.pagingEnabled=YES;
+    self.scroll.delegate=self;
     [self.scroll mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
     }];
     
 }
-
+- (void)loadBut{
+    self.ret = [[UIButton alloc] init];
+    [self.view addSubview:self.ret];
+    [self.ret setImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
+    [self.ret addTarget:self action:@selector(right:) forControlEvents:UIControlEventTouchUpInside];
+    [self.ret mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.centerY.mas_equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(40), KFit_H6S(100)));
+    }];
+    
+    self.left = [[UIButton alloc] init];
+    [self.view addSubview:self.left];
+    [self.left setImage:[UIImage imageNamed:@"left"] forState:UIControlStateNormal];
+    [self.left addTarget:self action:@selector(left:) forControlEvents:UIControlEventTouchUpInside];
+    [self.left mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.centerY.mas_equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(40), KFit_H6S(100)));
+    }];
+    
+}
 
 - (UIView *)loadSubviewWith:(FMMainModel *)model{
     UIView *backview = [[UIView alloc] init];
@@ -189,6 +215,31 @@
     }
     self.scroll.contentSize = CGSizeMake(self.dataArr.count * SCREEN_WIDTH, 0);
 }
+
+#pragma mark-滚动视图代理
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    int i = scrollView.contentOffset.x/SCREEN_WIDTH;
+    self.index = i;
+    KKLog(@"%d",i);
+}
+
+- (void)left:(UIButton *)senter{
+    if (self.index == 0) {
+        return;
+    }
+    self.scroll.contentOffset =CGPointMake((self.index - 1) *SCREEN_WIDTH, 0) ;
+    self.index --;
+}
+- (void)right:(UIButton *)senter{
+    if (self.index >= (self.dataArr.count - 1)) {
+        return;
+    }
+    self.scroll.contentOffset =CGPointMake((self.index + 1) *SCREEN_WIDTH, 0) ;
+    self.index ++;
+}
+//- (void)hidbut:(int)num{
+//
+//}
 /*
 #pragma mark - Navigation
 

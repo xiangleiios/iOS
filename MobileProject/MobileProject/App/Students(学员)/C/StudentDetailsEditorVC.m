@@ -141,10 +141,9 @@
 //        [MBProgressHUD showMsgHUD:@"请填写身份证号码"];
         return;
     }
-    if (self.SFZforms.IdNumber.subfield.text.length != 18) {
+    if (![XLCommonUse checkUserID:self.SFZforms.IdNumber.subfield.text]) {
         XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请填写正确的身份证号码"];
         [alert showPrompt];
-//        [MBProgressHUD showMsgHUD:@"请填写正确的身份证号码"];
         return;
     }
     if (self.start_time.subfield.text.length <= 0) {
@@ -203,12 +202,17 @@
         return;
     }
     if (self.otherForms.state.subfield.text.length <= 0) {
-        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择学员的报名状态再保存"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择学员的收费状态再保存"];
         [alert showPrompt];
 //        [MBProgressHUD showMsgHUD:@"请选择学员的报名状态再保存"];
         return;
     }
-    
+    if (![XLCommonUse isPureNum:self.signUpTwo.price.subfield.text]) {
+//        [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
+        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"报名价格必须为数字"];
+        [alert showPrompt];
+        return;
+    }
     
     [self.studentDic setObject:self.signUpTwo.phone.subfield.text forKey:@"studentPhone"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.carType.subfield.tag] forKey:@"carType"];

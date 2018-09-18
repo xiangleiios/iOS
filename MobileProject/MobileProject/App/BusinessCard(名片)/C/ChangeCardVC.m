@@ -258,7 +258,7 @@
     
     self.UpAttachment=[[UIButton alloc]initWithFrame:CGRectMake(KFit_W6S(30), KFit_W6S(30), BUT_W, BUT_W)];
     [self.UpAttachment setImage:[UIImage imageNamed:@"add_photo"] forState:UIControlStateNormal];
-    [self.UpAttachment addTarget:self action:@selector(PhotoLibrary) forControlEvents:UIControlEventTouchUpInside];
+    [self.UpAttachment addTarget:self action:@selector(changeUp) forControlEvents:UIControlEventTouchUpInside];
     [self.imgBackView addSubview:self.UpAttachment];
     
 //    se
@@ -327,7 +327,53 @@
     [self loadimgview];
 }
 
+- (void)changeUp{
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"请选择添加途径" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //默认只有标题 没有操作的按钮:添加操作的按钮 UIAlertAction
+    
+    UIAlertAction *cancelBtn = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//        NSLog(@"取消");
+        [self PhotoLibrary];
+    }];
+    
+    UIAlertAction *cancelBtXJ = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self xiangji];
+        NSLog(@"取消");
 
+    }];
+    //添加确定
+    UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"确定");
+        
+    }];
+    //设置`确定`按钮的颜色
+//    [sureBtn setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    //将action添加到控制器
+    [alertVc addAction:cancelBtn];
+    [alertVc addAction:cancelBtXJ];
+    [alertVc addAction :sureBtn];
+    //展示
+    [self presentViewController:alertVc animated:YES completion:nil];
+    
+   
+}
+
+
+///
+- (void)xiangji{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView * alerr = [[UIAlertView alloc]initWithTitle:@"警告!" message:@"未找到该硬件设备或设备已损坏" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
+        [alerr show];
+    }else{
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    //利用模态进行调用系统框架
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
+    
+}
 //照片库
 - (void)PhotoLibrary{
     UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];

@@ -230,6 +230,10 @@
         [MBProgressHUD showMsgHUD:@"请选择驾照类型"];
         return;
     }
+    if (![XLCommonUse isPureNum:self.price.subfield.text]) {
+        [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
+        return;
+    }
     [MBProgressHUD showLoadingHUD:@"正在修改"];
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
@@ -274,7 +278,7 @@
         [MBProgressHUD showMsgHUD:@"请输入课程价格"];
         return;
     }
-    if ([XLCommonUse isPureNum:self.price.subfield.text]) {
+    if (![XLCommonUse isPureNum:self.price.subfield.text]) {
         [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
         return;
     }

@@ -139,13 +139,13 @@
         make.height.mas_equalTo(KFit_H6S(150));
     }];
     
-    if (_model.idCardFrontUrl) {
+    if (![_model.idCardFrontUrl  isEqual: @""] ) {
         [self.imgArr addObject:_model.idCardFrontUrl];
     }
-    if (_model.idCardBackUrl) {
+    if (![_model.idCardBackUrl  isEqual:@""]) {
         [self.imgArr addObject:_model.idCardBackUrl];
     }
-    if (_model.contractUrl) {
+    if (![_model.contractUrl  isEqual:@""]) {
         [self.imgArr addObject:_model.contractUrl];
     }
     for (int i = 0; i<self.imgArr.count; i++) {

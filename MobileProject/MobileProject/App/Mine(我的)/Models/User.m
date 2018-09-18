@@ -9,27 +9,8 @@
 #import "User.h"
 #import "UIWebView+FMSetTonkenToCookie.h"
 #import "JPUSHService.h"
-/*
- *    "id": 3,
- "name": "13720187713",
- "password": "",
- "nick_name": "13720187713",
- "mobile": "13720187713",
- "avatar_url": "http://zsnc.nctv.net.cn/images/avatar_default.png",
- "salt": "",
- "points": 0,
- "ip": "101.226.221.47",
- "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjMsImlzcyI6Imh0dHA6XC9cL3pzbmMubmN0di5uZXQuY25cL2FwaVwvbWVtYmVyc1wvbG9naW4iLCJpYXQiOjE0ODc5MDczOTcsImV4cCI6MTgwMzI2NzM5NywibmJmIjoxNDg3OTA3Mzk3LCJqdGkiOiI1ZDkwNDZkMjRmMGQwZGI0MGFkODJhODEwZmVlNDE5NSJ9.qqGIltkwDXMvsJAcBCqMYHXlEXIjjU6R-ezZUWy3SCw",
- "type": 1,
- "source": "",
- "uid": 0,
- "vip_start": "0000-00-00 00:00:00",
- "vip_end": "0000-00-00 00:00:00",
- "state": 1,
- "signed_at": null,
- "created_at": "2017-02-24 11:33:24",
- "updated_at": "2017-02-24 11:36:37"
- */
+#import "XLCache.h"
+
 @implementation User
 static User *user  =  nil;
 + (User *)UserOb
@@ -127,6 +108,21 @@ static User *user  =  nil;
     //登录状态
     [defaults setBool:NO forKey:@"log"];
     [defaults synchronize];
+    XLCache *sinle = [XLCache singleton];
+    sinle.ethnicTitleArr = nil;
+    sinle.ethnicValueArr = nil;
+    sinle.student_apply_type_title = nil;
+    sinle.student_apply_type_value = nil;
+    sinle.student_license_type_title = nil;
+    sinle.student_license_type_value = nil;
+    sinle.student_is_enter_type_title = nil;
+    sinle.student_is_enter_type_value = nil;
+    sinle.sys_user_sex_title = nil;
+    sinle.sys_user_sex_value = nil;
+    sinle.teamCode_title = nil;
+    sinle.teamCode_value = nil;
+    sinle.schoolDeptId = nil;
+//    sinle.sys_user_sex_value = nil;
     
     //清除cookies
     NSHTTPCookie *cookie;

@@ -15,7 +15,6 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - Aspects (1.4.1)
-  - BaiduMapKit (3.4.2)
   - BANetManager (2.2.2):
     - AFNetworking
     - YYCache
@@ -53,7 +52,6 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
-  - UMengAnalytics-NO-IDFA (4.2.5)
   - UMengUShare/Core (6.4.7):
     - UMengUShare/Network
   - UMengUShare/Network (6.4.7)
@@ -85,7 +83,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
   - Aspects (~> 1.4.1)
-  - BaiduMapKit (~> 3.4.0)
   - BANetManager (~> 2.2.2)
   - CYLTabBarController (~> 1.14.2)
   - DYSafeObject (~> 0.1.1)
@@ -105,7 +102,6 @@ DEPENDENCIES:
   - RealReachability (~> 1.1.9)
   - SDCycleScrollView (~> 1.65)
   - SDWebImage (~> 3.7.6)
-  - UMengAnalytics-NO-IDFA
   - UMengUShare/Social/QQ
   - UMengUShare/Social/Sina
   - UMengUShare/Social/WeChat
@@ -117,7 +113,6 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - Aspects
-    - BaiduMapKit
     - BANetManager
     - CYLTabBarController
     - DACircularProgress
@@ -140,7 +135,6 @@ SPEC REPOS:
     - RealReachability
     - SDCycleScrollView
     - SDWebImage
-    - UMengAnalytics-NO-IDFA
     - UMengUShare
     - XAspect
     - YYCache
@@ -148,7 +142,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
-  BaiduMapKit: f61b19ecf07a3f2deede72b221b366bf698739ed
   BANetManager: bd2e6d0bcb5fc7397f3098b90c3bcf25a04127b5
   CYLTabBarController: 5eac1940e20aa934a609ecec38837da63a41dcfe
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
@@ -171,11 +164,10 @@ SPEC CHECKSUMS:
   RealReachability: a8c483900986a0f3305733961effbfbb00637a02
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
-  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   UMengUShare: 5055d0e01c844379e173bdca0840fc9fa9297d88
   XAspect: db50bf487f92dbb8557a7a5365556966c8493af8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 7affacb6fb1d97d24c702755339ff812eec2de5b
+PODFILE CHECKSUM: 03738b1eeb723d24b74e8362475224de5cddd7de
 
 COCOAPODS: 1.5.3

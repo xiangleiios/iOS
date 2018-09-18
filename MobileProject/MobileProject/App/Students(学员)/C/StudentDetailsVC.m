@@ -235,7 +235,7 @@
         str =  @"已缴费";
        
     }
-    self.state = [[XLInformationV alloc] informationWithTitle:@"报名状态" SubTitle:str];
+    self.state = [[XLInformationV alloc] informationWithTitle:@"收费状态" SubTitle:str];
     [self.backview addSubview:self.state];
     [self.state mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.backview);

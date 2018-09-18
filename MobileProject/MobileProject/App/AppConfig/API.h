@@ -48,7 +48,8 @@
 /// 准驾车型
 #define DICTLicense_type @"school_student_license_type"
 /// 本外地
-#define DICTEnter_type @"school_student_is_enter_type"
+//#define DICTEnter_type @"school_student_is_enter_type"
+#define DICTEnter_type @"team_school_student_enter_type"
 /// 性别
 #define DICTUser_sex @"sys_user_sex"
 /// 名族

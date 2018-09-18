@@ -27,8 +27,7 @@
 #import "FLPayManager.h" //支付封装
 //首页
 #import "PDNavigationController.h"
-#import "PDSlideViewController.h"
-#import "MyLeftVC.h"
+
 
 
 #import "BaiduMapHeader.h"
@@ -41,7 +40,7 @@
 #import <IQKeyboardManager/IQKeyboardManager.h>
 // 如果需要使 idfa功能所需要引 的头 件(可选) #import <AdSupport/AdSupport.h>
 @interface AppDelegate ()<JPUSHRegisterDelegate,UITabBarControllerDelegate, CYLTabBarControllerDelegate>
-@property (nonatomic, strong)BMKMapManager* mapManager;
+//@property (nonatomic, strong)BMKMapManager* mapManager;
 @property (nonatomic , strong)CYLTabBarControllerConfig *tab;
 @end
 
@@ -52,7 +51,11 @@
     [self initBaseDataFrist];
     [self initJPushAfterFinishLaunchingWithOptions:launchOptions];
     [self initTabbar]; // TabBar初始化
-    [self initBaiduMapSDK];
+    
+    ///百度地图取消
+//    [self initBaiduMapSDK];
+    
+    
     [AppDelegate registeredUMSocialSDKtoApp];
     [FLPAYMANAGER fl_registerApp];  //支付配置
     [FMCheckVersion fm_getAppsInfoAndCheckUpdata]; //版本跟新
@@ -435,14 +438,14 @@
 }
 
 #pragma mark-百度地图
-- (void)initBaiduMapSDK {
-    // 要使用百度地图，请先启动BaiduMapManager
-    _mapManager = [[BMKMapManager alloc]init];
-    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
-    BOOL ret = [_mapManager start:keyBaiduMap  generalDelegate:nil];
-    if (!ret) {
-        NSLog(@"BMKMapManager start failed!");
-    }
-}
+//- (void)initBaiduMapSDK {
+//    // 要使用百度地图，请先启动BaiduMapManager
+//    _mapManager = [[BMKMapManager alloc]init];
+//    // 如果要关注网络及授权验证事件，请设定     generalDelegate参数
+//    BOOL ret = [_mapManager start:keyBaiduMap  generalDelegate:nil];
+//    if (!ret) {
+//        NSLog(@"BMKMapManager start failed!");
+//    }
+//}
 
 @end

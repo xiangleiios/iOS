@@ -103,16 +103,16 @@
     }];
     
     
-    UILabel *lb = [[UILabel alloc] init];
-    [self.backview addSubview:lb];
-    lb.text = @"图片";
-    lb.font = [UIFont systemFontOfSize:kFit_Font6(16)];
-    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.backview).mas_offset(KFit_W6S(30));
-        make.top.mas_equalTo(v.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(90));
-        make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
-    }];
+//    UILabel *lb = [[UILabel alloc] init];
+//    [self.backview addSubview:lb];
+//    lb.text = @"图片";
+//    lb.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+//    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self.backview).mas_offset(KFit_W6S(30));
+//        make.top.mas_equalTo(v.mas_bottom);
+//        make.height.mas_equalTo(KFit_H6S(90));
+//        make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
+//    }];
     
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);

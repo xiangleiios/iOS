@@ -6,7 +6,7 @@
 //  Copyright © 2016年 袁凤鸣. All rights reserved.
 
 #import "FMAnalyticsHelper.h"
-#import "UMMobClick/MobClick.h"
+//#import "UMMobClick/MobClick.h"
 #import "FMAnalyticsConfigManager.h"
 #import "Aspects.h"
 
@@ -35,37 +35,37 @@
     });
 }
 
-+ (void)beginLogPageView:(__unsafe_unretained Class)pageView {
-    [MobClick beginLogPageView:NSStringFromClass(pageView)];
-    return;
-}
-
-+ (void)endLogPageView:(__unsafe_unretained Class)pageView {
-    [MobClick endLogPageView:NSStringFromClass(pageView)];
-    return;
-}
-
-+(void)beginLogPageViewName:(NSString *)pageViewName
-{
-    [MobClick beginLogPageView:pageViewName];
-    return;
-}
-
-+(void)endLogPageViewName:(NSString *)pageViewName
-{
-    [MobClick endLogPageView:pageViewName];
-    return;
-}
-
-+(void)logEvent:(NSString*)eventId
-{
-    [MobClick event:eventId];
-}
-
-+(void)logEvent:(NSString*)eventId attributes:(NSDictionary *)attributes
-{
-    [MobClick event:eventId attributes:attributes];
-}
+//+ (void)beginLogPageView:(__unsafe_unretained Class)pageView {
+//    [MobClick beginLogPageView:NSStringFromClass(pageView)];
+//    return;
+//}
+//
+//+ (void)endLogPageView:(__unsafe_unretained Class)pageView {
+//    [MobClick endLogPageView:NSStringFromClass(pageView)];
+//    return;
+//}
+//
+//+(void)beginLogPageViewName:(NSString *)pageViewName
+//{
+//    [MobClick beginLogPageView:pageViewName];
+//    return;
+//}
+//
+//+(void)endLogPageViewName:(NSString *)pageViewName
+//{
+//    [MobClick endLogPageView:pageViewName];
+//    return;
+//}
+//
+//+(void)logEvent:(NSString*)eventId
+//{
+//    [MobClick event:eventId];
+//}
+//
+//+(void)logEvent:(NSString*)eventId attributes:(NSDictionary *)attributes
+//{
+//    [MobClick event:eventId attributes:attributes];
+//}
 
 #pragma mark 自定义代码区
 

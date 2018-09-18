@@ -77,7 +77,7 @@
         str1 = @"一级";
     }else if ([_model.ratingLevel  isEqual: @"2"]){
         str1 = @"二级";
-    }else {
+    }else if ([_model.ratingLevel  isEqual: @"3"]){
         str1 = @"三级";
     }
     self.jibie = [[XLInformationV alloc] informationWithTitle:@"等级评定级别" SubTitle:str1];
@@ -107,6 +107,8 @@
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
     }];
     
+    if (![_model.ratingLevelPic  isEqual:@""] && ![_model.isRating  isEqual: @"1"]) {
+        
     
     UIImageView *img = [[UIImageView alloc] init];
     [self.backview addSubview:img];
@@ -126,6 +128,8 @@
     browseItem.bigImageUrl = KURLIma(_model.ratingLevelPic);// 加载网络图片大图地址
     browseItem.smallImageView = imageView;// 小图
     [self.browseItemArray addObject:browseItem];
+        
+    }
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));

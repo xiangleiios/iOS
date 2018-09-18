@@ -31,8 +31,8 @@
 
 - (NSDictionary *)customMadeDic{
     if (!_customMadeDic) {
-//        NSString *path = [[NSBundle mainBundle] pathForResource:@"ReleaseNetworkProtocol" ofType:@"plist"];
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"DebugNetworkProtocol" ofType:@"plist"];
+        NSString *path = [[NSBundle mainBundle] pathForResource:@"ReleaseNetworkProtocol" ofType:@"plist"];
+//        NSString *path = [[NSBundle mainBundle] pathForResource:@"DebugNetworkProtocol" ofType:@"plist"];
 
         _customMadeDic = [NSDictionary dictionaryWithContentsOfFile:path];
     }

@@ -142,7 +142,12 @@
     NSDictionary *dic = [idid object];
     
     
+    
     XLSingleton *single = [XLSingleton singleton];
+    if ([single.dateArr containsObject: dic]) {
+        return;
+    }
+//    ;
     [single.dateArr addObject:dic];
     KKLog(@"%@",single.dateArr);
 }
