@@ -67,6 +67,10 @@
 		A735A0AF212FEC3B0044E9BC /* StudentsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0AE212FEC3B0044E9BC /* StudentsListVC.m */; };
 		A735A0B2212FF6800044E9BC /* LLSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0B1212FF6800044E9BC /* LLSearchResultViewController.m */; };
 		A735A0B5213000CD0044E9BC /* StudentsOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0B4213000CD0044E9BC /* StudentsOneCell.m */; };
+		A73E7F28215B221A007849EE /* UIImage+LXQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E7F27215B221A007849EE /* UIImage+LXQRCode.m */; };
+		A73E7F59215B2284007849EE /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E7F49215B2284007849EE /* UIView+Frame.m */; };
+		A73E7F5E215B2397007849EE /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E7F5B215B2396007849EE /* UIColor+Expanded.m */; };
+		A73E7F5F215B2397007849EE /* UIImage+colorImage.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E7F5C215B2396007849EE /* UIImage+colorImage.m */; };
 		A74D595621257899003099A3 /* XLHomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74D595521257899003099A3 /* XLHomeVC.m */; };
 		A74EB311213E204B00564BC6 /* OtherInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74EB310213E204B00564BC6 /* OtherInformationVC.m */; };
 		A74EB31B213E5A2E00564BC6 /* BusinessCardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74EB31A213E5A2E00564BC6 /* BusinessCardListVC.m */; };
@@ -679,6 +683,14 @@
 		A735A0B1212FF6800044E9BC /* LLSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSearchResultViewController.m; sourceTree = "<group>"; };
 		A735A0B3213000CD0044E9BC /* StudentsOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsOneCell.h; sourceTree = "<group>"; };
 		A735A0B4213000CD0044E9BC /* StudentsOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsOneCell.m; sourceTree = "<group>"; };
+		A73E7F26215B221A007849EE /* UIImage+LXQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LXQRCode.h"; sourceTree = "<group>"; };
+		A73E7F27215B221A007849EE /* UIImage+LXQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LXQRCode.m"; sourceTree = "<group>"; };
+		A73E7F48215B2284007849EE /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
+		A73E7F49215B2284007849EE /* UIView+Frame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Frame.m"; sourceTree = "<group>"; };
+		A73E7F5A215B2396007849EE /* UIImage+colorImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+colorImage.h"; sourceTree = "<group>"; };
+		A73E7F5B215B2396007849EE /* UIColor+Expanded.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Expanded.m"; sourceTree = "<group>"; };
+		A73E7F5C215B2396007849EE /* UIImage+colorImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+colorImage.m"; sourceTree = "<group>"; };
+		A73E7F5D215B2396007849EE /* UIColor+Expanded.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Expanded.h"; sourceTree = "<group>"; };
 		A74D595421257899003099A3 /* XLHomeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLHomeVC.h; sourceTree = "<group>"; };
 		A74D595521257899003099A3 /* XLHomeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLHomeVC.m; sourceTree = "<group>"; };
 		A74EB30F213E204B00564BC6 /* OtherInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherInformationVC.h; sourceTree = "<group>"; };
@@ -1906,6 +1918,9 @@
 		A733725821394960005CD384 /* UIImageView */ = {
 			isa = PBXGroup;
 			children = (
+				A73E7F29215B2284007849EE /* Category */,
+				A73E7F26215B221A007849EE /* UIImage+LXQRCode.h */,
+				A73E7F27215B221A007849EE /* UIImage+LXQRCode.m */,
 				A73372592139499A005CD384 /* XLImageView.h */,
 				A733725A2139499A005CD384 /* XLImageView.m */,
 			);
@@ -1927,6 +1942,19 @@
 				A7C311EE214A085A006A96EA /* SearchListVC.m */,
 			);
 			path = "Search(搜索)";
+			sourceTree = "<group>";
+		};
+		A73E7F29215B2284007849EE /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				A73E7F48215B2284007849EE /* UIView+Frame.h */,
+				A73E7F49215B2284007849EE /* UIView+Frame.m */,
+				A73E7F5D215B2396007849EE /* UIColor+Expanded.h */,
+				A73E7F5B215B2396007849EE /* UIColor+Expanded.m */,
+				A73E7F5A215B2396007849EE /* UIImage+colorImage.h */,
+				A73E7F5C215B2396007849EE /* UIImage+colorImage.m */,
+			);
+			path = Category;
 			sourceTree = "<group>";
 		};
 		A74FE4372126D8C9008E159E /* Information(信息条) */ = {
@@ -4603,6 +4631,7 @@
 				DA0346A71F509098008E7BE1 /* UIColor+Gradient.m in Sources */,
 				DA03469B1F509098008E7BE1 /* UIBezierPath+Symbol.m in Sources */,
 				DA959E4E1F53BEE9002389F6 /* MMMaterialDesignSpinner.m in Sources */,
+				A73E7F28215B221A007849EE /* UIImage+LXQRCode.m in Sources */,
 				DA0346761F509098008E7BE1 /* NSString+RegexCategory.m in Sources */,
 				4FF9265F20C8CE0600AB3E43 /* CGXPickerView.m in Sources */,
 				DA0346361F509098008E7BE1 /* NSArray+SafeAccess.m in Sources */,
@@ -4637,6 +4666,7 @@
 				DA03469A1F509098008E7BE1 /* UIBezierPath+SVG.m in Sources */,
 				A74D595621257899003099A3 /* XLHomeVC.m in Sources */,
 				DA03466E1F509098008E7BE1 /* NSString+FMDate.m in Sources */,
+				A73E7F59215B2284007849EE /* UIView+Frame.m in Sources */,
 				A7C311F2214A6004006A96EA /* InstructionsVC.m in Sources */,
 				DA725FED1F5FF09000F96FDA /* FMHelperKeyboard.m in Sources */,
 				DA03464D1F509098008E7BE1 /* NSDictionary+XML.m in Sources */,
@@ -4760,6 +4790,7 @@
 				DA03470E1F509098008E7BE1 /* UIWebView+JS.m in Sources */,
 				DA0346671F509098008E7BE1 /* NSSet+Block.m in Sources */,
 				DA0347101F509098008E7BE1 /* UIWebView+MetaParser.m in Sources */,
+				A73E7F5E215B2397007849EE /* UIColor+Expanded.m in Sources */,
 				DA0346891F509098008E7BE1 /* MKMapView+MoveLogo.m in Sources */,
 				DA0346331F509098008E7BE1 /* Foundation+Log.m in Sources */,
 				DA959E561F53FCF2002389F6 /* UIWebView+FMSetTonkenToCookie.m in Sources */,
@@ -4785,6 +4816,7 @@
 				DAE212761EF2867B000EAB90 /* ModelGuaideIma.m in Sources */,
 				DA867D561F5904EF00D4D011 /* JYDelayRun.m in Sources */,
 				DA03469D1F509098008E7BE1 /* UIButton+Block.m in Sources */,
+				A73E7F5F215B2397007849EE /* UIImage+colorImage.m in Sources */,
 				DAE212961EF2867B000EAB90 /* XLxqbut.m in Sources */,
 				DA0346901F509098008E7BE1 /* CATransaction+AnimateWithDuration.m in Sources */,
 				DA0346B21F509098008E7BE1 /* UIFont+WDCustomLoader.m in Sources */,

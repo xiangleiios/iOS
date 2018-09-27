@@ -115,6 +115,12 @@
 #pragma mark - 名片H5
 #define HTMLMINGPIAN KURL(@"/plat/#/?type=app&id=%@")
 #define HTMLMINGPIANFENXIANG KURL(@"/plat/#/?id=%@")
+
+#pragma mark - 二维码
+#define XIAOCHENGXUEWM KURL(@"/wechart/pages/index/detail/detail?id=%@")
+
+
+
 #pragma mark 一下全部要删除掉
 
 #pragma mark --------首页

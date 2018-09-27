@@ -90,15 +90,12 @@
     self.scroll = [[UIScrollView alloc] init];
     [self.view addSubview:self.scroll];
     [self.scroll mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.right.bottom.mas_equalTo(self.view);
-    }];
-    self.backview = [[XLView alloc] init];
-    [self.scroll addSubview:self.backview];
-    [self.backview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.bottom.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
-        make.height.mas_equalTo(SCREEN_HEIGHT);
     }];
+    self.backview = [[XLView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.scroll addSubview:self.backview];
+
 }
 #pragma mark - 轮播图
 - (void)addBannerScroll {
@@ -194,7 +191,7 @@
     
     UIButton *zhaosheng = [[UIButton alloc] init];
     [zhaosheng setImage:[UIImage imageNamed:@"question_mark"] forState:UIControlStateNormal];
-    [self.view addSubview:zhaosheng];
+    [self.backview addSubview:zhaosheng];
     [zhaosheng addTarget:self action:@selector(tozhaosheng) forControlEvents:UIControlEventTouchUpInside];
     [zhaosheng mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(admissions);
@@ -258,6 +255,10 @@
     _pagingScr.pagingColumn = 4; //设置列 不设置默认4列
     [_pagingScr yfm_createPagingButtonViewWithFrame:CGRectMake(0, 0,kScreenW,KFit_H6S(150))  showToSuperView:v delegate:self iconUrlsOrNamesArr:imgarr buttonTextColorArrOrOneColor:nil buttonTitleArray:titlearr];
     
+    
+    self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(30)]);
+    self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
+    
 }
 - (void)PagingButtonView:(PagingButtonView *)actionView clickButtonWithIndex:(NSInteger)index {
     switch (index) {
@@ -297,10 +298,10 @@
 //    titleLb.textColor = [UIColor redColor];
 //    titleLb.text = @"最新消息";
     
-    self.yfAskZhengView = [[FMAskZhengView alloc] initWithFrame:CGRectMake(KFit_W6S(30),kNavBarH + KFit_H6S(270), kScreenW - KFit_W6S(60), KFit_H6S(50))];
+    self.yfAskZhengView = [[FMAskZhengView alloc] initWithFrame:CGRectMake(KFit_W6S(30),KFit_H6S(270), kScreenW - KFit_W6S(60), KFit_H6S(50))];
     self.yfAskZhengView.dataArr = self.newsArr;
     self.yfAskZhengView.delegate = self;
-    [self.view addSubview:self.yfAskZhengView];
+    [self.backview addSubview:self.yfAskZhengView];
     
     
 }

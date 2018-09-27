@@ -41,8 +41,6 @@ typedef NS_ENUM(NSInteger, JYPrefsType) {
 // 拨打电话
 + (void)goToTelephone:(NSString *)telephone;
 
-// 跳转系统设置中相关功能的设置
-+ (void)goToSettingWith:(JYPrefsType)prefsType;
 
 
 @end

@@ -9,6 +9,7 @@
 #import "QrCodeVC.h"
 #import "CodeShareV.h"
 #import "UIImage+FMQrcodeBarcode.h"
+#import "UIImage+LXQRCode.h"
 @interface QrCodeVC ()<UIScrollViewDelegate>
 //@property (nonatomic , strong)UIImageView *headimg;
 //@property (nonatomic , strong)UILabel *titlelb;
@@ -62,6 +63,10 @@
     
 }
 - (void)loadBut{
+    if (self.dataArr.count <= 1) {
+        return;
+    }
+    
     self.ret = [[UIButton alloc] init];
     [self.view addSubview:self.ret];
     [self.ret setImage:[UIImage imageNamed:@"right"] forState:UIControlStateNormal];
@@ -165,15 +170,15 @@
     UIImageView *cordimg = [[UIImageView alloc] init];
     [backv addSubview:cordimg];
 
-    NSString *str = [NSString stringWithFormat:@"https://jk.ztjwsoft.com/wechart/pages/index/detail/detail?id=%@",model.idid];
-    [cordimg setImage:[UIImage getQRWithString:str size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
+    NSString *str = [NSString stringWithFormat:XIAOCHENGXUEWM,model.idid];
+//    [cordimg setImage:[UIImage getQRWithString:str size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
     [cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(backv);
         make.top.mas_equalTo(backv).mas_offset(KFit_H6S(50));
         make.width.height.mas_equalTo(KFit_W6S(400));
     }];
-    
-    
+    UIImage *logImage =[UIImage LX_ImageOfQRFromURL:str codeSize:cordimg.width logoName:@"erwim_ewm" radius:KFit_W6S(40) borderWidth:3 borderColor:[UIColor whiteColor]];
+    cordimg.image = logImage;
     return backview;
 }
 
