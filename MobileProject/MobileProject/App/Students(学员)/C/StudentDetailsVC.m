@@ -117,7 +117,7 @@
     
     UILabel *subLable = [[UILabel alloc] init];
     [self.backview addSubview:subLable];
-    subLable.text = _model.idcardAddress;
+    subLable.text = _model.idcardAddress?_model.idcardAddress:@" ";
     subLable.textColor = kColor_N(143, 155, 178);
     subLable.textAlignment = NSTextAlignmentRight;
     subLable.font = [UIFont systemFontOfSize:FONT];

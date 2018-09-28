@@ -104,8 +104,8 @@
                                       successBlock:(FMRequestSuccess)successBlock
                                       failureBlock:(FMRequestFailure)failureBlock
                                           progress:(FMDownloadProgress)progress {
-//    BANetManager *manager = [BANetManager sharedBANetManager];
-//    manager.requestSerializer = BAHttpRequestSerializerHTTP;
+    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
+    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     NSURLSessionTask *sessionTask = [BANetManager ba_request_POSTWithUrlString:urlString isNeedCache:isNeedCache parameters:parameters successBlock:^(id responseObject) {
         if (kResponseObjectStatusCodeIsEqual(404)) {
             [self fm_request404ShowLogin:responseObject];

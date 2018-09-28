@@ -290,8 +290,6 @@
 
 - (void)laodCacheData{
     NSString *url = POSTAppDictList;
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject){
         if ([responseObject[@"code"] integerValue] == 200) {
             //把信息存起来

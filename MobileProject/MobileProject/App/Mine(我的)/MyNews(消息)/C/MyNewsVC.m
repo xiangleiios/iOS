@@ -86,8 +86,6 @@
 }
 
 - (void)loadRefreshData{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     NSString *url = POSTFirstList;
     //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
@@ -146,8 +144,6 @@
 }
 
 - (void)getMessageInfo:(NSInteger)index{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     FMMainModel *model = self.dataArr[index];
     //    NSString *url = POSTgGetEnrollInfoInfo;
     NSString *url1 = [NSString stringWithFormat:@"%@?id=%@",POSTGetMessageInfo,model.idid];
@@ -168,8 +164,6 @@
 
 - (void)allRead{
     NSString *url = POSTUpdateAllRead;
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         [self headerRefresh];

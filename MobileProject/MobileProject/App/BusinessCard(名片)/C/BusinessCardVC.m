@@ -151,8 +151,6 @@
 
 - (void)loadRefreshData{
     NSString *url = POSTReplyAdd;
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     if (self.dataArr.count < 2) {
         [MBProgressHUD showMsgHUD:@"请填写回复内容"];
         return;

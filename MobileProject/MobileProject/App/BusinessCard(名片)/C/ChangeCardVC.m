@@ -394,8 +394,7 @@
 - (void)uploadPictures:(UIImage *)image{
     [MBProgressHUD showLoadingHUD:@"正在上传图片"];
     
-//    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-//    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+
     NSString *url = POSTUpLoadFile;
     
     
@@ -444,8 +443,7 @@
 
 
 - (void)refreshData{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+
 //    NSString *url = POSTgGetEnrollInfoInfo;
     NSString *url1 = [NSString stringWithFormat:@"%@?id=%@&operaType=1",POSTgGetEnrollInfoInfo,self.idid];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -555,8 +553,7 @@
     
 }
 - (void)nextVC{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+
     NSString *url = POSTEnrollInfoEdit;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.model.idid forKey:@"id"];

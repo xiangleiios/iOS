@@ -183,8 +183,6 @@
 
 
 - (void)discloseTheTnformation{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
 //    NSString *url = POSTSignStudent;
     
     [MBProgressHUD showLoadingHUD:@"正在提交"];

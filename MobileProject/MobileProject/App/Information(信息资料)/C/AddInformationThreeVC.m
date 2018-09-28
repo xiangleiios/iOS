@@ -124,8 +124,6 @@
     KKLog(@"%@",self.studentDic);
     NSString *url = POSTStudenteamAdd;
     [MBProgressHUD showLoadingHUD:@"正在提交"];
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.studentDic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         [MBProgressHUD hideLoadingHUD];

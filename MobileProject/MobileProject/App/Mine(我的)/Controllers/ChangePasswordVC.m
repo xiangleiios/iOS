@@ -151,8 +151,6 @@
     NSString *url=[NSString stringWithFormat:@"%@?userId=%@&password=%@&newPass=%@",POSTEditPwd,[User UserOb].userId,odl,passwordo];
     [MBProgressHUD showLoadingHUD:@"正在修改"];
     
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         [MBProgressHUD hideLoadingHUD];
         if (kResponseObjectStatusCodeIsEqual(200)) {

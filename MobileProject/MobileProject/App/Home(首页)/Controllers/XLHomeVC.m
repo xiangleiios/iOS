@@ -316,8 +316,7 @@
     [self loadnews];
 }
 - (void)loaddata{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+    
     NSString *url = POSTCensusList;
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
@@ -337,8 +336,7 @@
 
 
 - (void)loadnews{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
+
     NSString *url = POSTFirstList;
     //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
@@ -370,25 +368,7 @@
         
     }];
 }
-//- (void)loadnewsnumb{
-//    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-//    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
-//    NSString *url = POSTFirstList;
-//    //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
-//    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-//        KKLog(@"%@",responseObject);
-//        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"unReadNum"]] ;
-//        if ([self.xiaoxi.text intValue] == 0) {
-//            self.xiaoxi.hidden = YES;
-//        }else{
-//            self.xiaoxi.hidden = NO;
-//        }
-//    } failureBlock:^(NSError *error) {
-//        KKLog(@"%@", error);
-//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-//        
-//    }];
-//}
+
 
 - (void)tozhaosheng{
     InstructionsVC *VC = [[InstructionsVC alloc] init];

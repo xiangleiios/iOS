@@ -210,8 +210,6 @@
 }
 
 - (void)updatawithdic:(NSDictionary *)dic{
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     NSString *url = POSTEnrollInfoEdit;
     
     [MBProgressHUD showLoadingHUD:@"正在提交"];

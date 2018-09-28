@@ -192,8 +192,6 @@
 #pragma mark - 删除
 - (void)deleteCoures{
     [MBProgressHUD showLoadingHUD:@"正在删除"];
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
 //    NSString *url = POSTClassTypeRemove;
     NSString *url1 = [NSString stringWithFormat:@"%@?ids=%@",POSTClassTypeRemove,self.dic[@"id"]];
     [FMNetworkHelper fm_request_getWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
@@ -235,8 +233,6 @@
         return;
     }
     [MBProgressHUD showLoadingHUD:@"正在修改"];
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     NSString *url = POSTClassTypeEdit;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.dic[@"id"] forKey:@"id"];
@@ -287,8 +283,6 @@
         return;
     }
     [MBProgressHUD showLoadingHUD:@"正在创建课程"];
-    [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
-    [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     NSString *url = POSTClassTypeAdd;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
 //    [dic setObject:self.dic[@"id"] forKey:@"id"];
