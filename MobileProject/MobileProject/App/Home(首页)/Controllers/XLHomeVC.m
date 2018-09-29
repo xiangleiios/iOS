@@ -244,7 +244,7 @@
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(management.mas_bottom).mas_offset(KFit_H6S(10));
         make.left.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(KFit_H6S(150));
+        make.height.mas_equalTo(KFit_H6S(200));
     }];
     
     NSArray *imgarr = @[@"drive_card",@"car_card"];
@@ -253,7 +253,7 @@
     _pagingScr.pageControlStyle = PageControlStyleHiden;
     _pagingScr.pagingRow = 1; //设置行，不设置默认2行
     _pagingScr.pagingColumn = 4; //设置列 不设置默认4列
-    [_pagingScr yfm_createPagingButtonViewWithFrame:CGRectMake(0, 0,kScreenW,KFit_H6S(150))  showToSuperView:v delegate:self iconUrlsOrNamesArr:imgarr buttonTextColorArrOrOneColor:nil buttonTitleArray:titlearr];
+    [_pagingScr yfm_createPagingButtonViewWithFrame:CGRectMake(0, 0,kScreenW,KFit_H6S(200))  showToSuperView:v delegate:self iconUrlsOrNamesArr:imgarr buttonTextColorArrOrOneColor:nil buttonTitleArray:titlearr];
     
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(30)]);

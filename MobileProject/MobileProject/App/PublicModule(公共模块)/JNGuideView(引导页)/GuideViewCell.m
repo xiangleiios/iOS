@@ -37,7 +37,7 @@
     UIButton *experienceButton = [UIButton buttonWithType:UIButtonTypeCustom];
     
     experienceButton.hidden = YES;
-    [experienceButton setFrame:CGRectMake(0, 0, KFit_W6S(600), 45)];
+    [experienceButton setFrame:CGRectMake(0, 0, KFit_W6S(600), KFit_H6S(300))];
     [experienceButton setImage:[UIImage imageNamed:@"experienceImage"] forState:UIControlStateNormal];
     [experienceButton setImage:[UIImage imageNamed:@"experienceImage"] forState:UIControlStateHighlighted];
     

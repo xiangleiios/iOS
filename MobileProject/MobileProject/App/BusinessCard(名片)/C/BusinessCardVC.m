@@ -56,9 +56,13 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [self load];
+    
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self load];
+}
 - (void)load{
     NSString *urls =  [NSString stringWithFormat:HTMLMINGPIAN,self.model.idid];
     KKLog(@"url :%@",urls);
