@@ -8,6 +8,7 @@
 
 #import "PicturePosterListVC.h"
 #import "PicturePosterCell.h"
+#import "PicturePosterVC.h"
 @interface PicturePosterListVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
 @end
@@ -106,11 +107,12 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.dataArr.count;
+    return 9;
+//    return self.dataArr.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PicturePosterCell *cell = (PicturePosterCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
-    cell.model = self.dataArr[indexPath.row];
+//    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 
@@ -138,8 +140,10 @@
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 //    MyCollectionViewCell *cell = (MyCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-//    NSString *msg = cell.botlabel.text;
-    NSLog(@"%d",indexPath.row);
+    FMMainModel *model = self.dataArr[indexPath.row];
+    PicturePosterVC *vc = [[PicturePosterVC alloc] init];
+//    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

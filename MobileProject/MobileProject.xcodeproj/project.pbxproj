@@ -77,6 +77,7 @@
 		A74FE4322126C83C008E159E /* XLColumnsV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4312126C83C008E159E /* XLColumnsV.m */; };
 		A74FE43A2126D951008E159E /* XLInformationV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4392126D951008E159E /* XLInformationV.m */; };
 		A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A754B7CA21476D280029CC04 /* XLNetwork.m */; };
+		A75ACC932160A5EE00E5467C /* PicturePosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75ACC922160A5EE00E5467C /* PicturePosterVC.m */; };
 		A75D2CD6214BB5620065FD7F /* shareimg.png in Resources */ = {isa = PBXBuildFile; fileRef = A75D2CD5214BB5620065FD7F /* shareimg.png */; };
 		A75D2CD9214BC01D0065FD7F /* FMJS.m in Sources */ = {isa = PBXBuildFile; fileRef = A75D2CD8214BC01D0065FD7F /* FMJS.m */; };
 		A75F9437212D1A1900384EB0 /* AddInformationOneVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9436212D1A1900384EB0 /* AddInformationOneVC.m */; };
@@ -728,6 +729,8 @@
 		A74FE4392126D951008E159E /* XLInformationV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLInformationV.m; sourceTree = "<group>"; };
 		A754B7C921476D280029CC04 /* XLNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLNetwork.h; sourceTree = "<group>"; };
 		A754B7CA21476D280029CC04 /* XLNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLNetwork.m; sourceTree = "<group>"; };
+		A75ACC912160A5EE00E5467C /* PicturePosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturePosterVC.h; sourceTree = "<group>"; };
+		A75ACC922160A5EE00E5467C /* PicturePosterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicturePosterVC.m; sourceTree = "<group>"; };
 		A75D2CD5214BB5620065FD7F /* shareimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareimg.png; sourceTree = "<group>"; };
 		A75D2CD7214BC01D0065FD7F /* FMJS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMJS.h; sourceTree = "<group>"; };
 		A75D2CD8214BC01D0065FD7F /* FMJS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMJS.m; sourceTree = "<group>"; };
@@ -2211,6 +2214,8 @@
 				A7BA6F4D215F61BD00A5FA0D /* PicturePosterListVC.m */,
 				A7BA6F4F215F6AC400A5FA0D /* PosterListVC.h */,
 				A7BA6F50215F6AC400A5FA0D /* PosterListVC.m */,
+				A75ACC912160A5EE00E5467C /* PicturePosterVC.h */,
+				A75ACC922160A5EE00E5467C /* PicturePosterVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -5180,6 +5185,7 @@
 				DA0346C71F509098008E7BE1 /* UIImageView+FaceAwareFill.m in Sources */,
 				4FF9265A20C8CE0600AB3E43 /* CGXDatePickerView.m in Sources */,
 				DA4C99721FAB351A0031ACDA /* MXSCycleScrollView.m in Sources */,
+				A75ACC932160A5EE00E5467C /* PicturePosterVC.m in Sources */,
 				DA959E521F53BEE9002389F6 /* ZFPlayerModel.m in Sources */,
 				DA0346AC1F509098008E7BE1 /* UIControl+ActionBlocks.m in Sources */,
 				DA0346D51F509098008E7BE1 /* UINavigationItem+Margin.m in Sources */,

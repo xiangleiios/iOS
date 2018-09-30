@@ -147,9 +147,15 @@
 
 #pragma mark - 截取view生成一张图片
 + (UIImage *)fm_shotWithView:(UIView *)view {
-    UIGraphicsBeginImageContext(view.bounds.size);
+//    UIGraphicsBeginImageContext(view.bounds.size);
+//    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+//    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return image;
+    CGSize s = view.bounds.size;
+    UIGraphicsBeginImageContextWithOptions(s,NO, [UIScreen mainScreen].scale);
     [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
 }
