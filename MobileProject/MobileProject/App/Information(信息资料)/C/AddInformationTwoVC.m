@@ -13,21 +13,28 @@
 #import "JQAVCaptureViewController.h"
 #import "IDInfo.h"
 #import "XLCache.h"
-@interface AddInformationTwoVC ()<JQAVCaptureViewControllerDelegate>
+#import <AipOcrSdk/AipOcrSdk.h>
+@interface AddInformationTwoVC ()<JQAVCaptureViewControllerDelegate,UIAlertViewDelegate>
 @property (nonatomic , strong)XLInformationV *start_time;
 @property (nonatomic , strong)XLInformationV *end_time;
 @property (nonatomic , strong)XLInformationV *hukou;
-
+@property (nonatomic , strong)UIViewController *AIVC;
 @end
 
 @implementation AddInformationTwoVC
-
+{
+    // 默认的识别成功的回调
+    void (^_successHandler)(id);
+    // 默认的识别失败的回调
+    void (^_failHandler)(NSError *);
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [[AipOcrService shardService] authWithAK:@"iY6mYTyvN2Wn4GedChGMMSdf" andSK:@"HM6ZrPzN7ebTI1gcPOO0rEdsDQANrmkS"];
     [self laodNavigation];
     
     [self loadSubview];
+    [self configCallback];
     // Do any additional setup after loading the view.
 }
 
@@ -181,11 +188,55 @@
 
 
 - (void)IdentificationCrdFM{
-    JQAVCaptureViewController *AVCaptureVC = [[JQAVCaptureViewController alloc] init];
-    AVCaptureVC.delegate = self;
-    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+    self.AIVC =
+    [AipCaptureCardVC ViewControllerWithCardType:CardTypeIdCardBack
+                                 andImageHandler:^(UIImage *image) {
+                                     
+                                     [[AipOcrService shardService] detectIdCardBackFromImage:image
+                                                                                 withOptions:nil
+                                                                              successHandler:_successHandler
+                                                                                 failHandler:_failHandler];
+                                 }];
+    [self presentViewController:self.AIVC animated:YES completion:nil];
 }
-
+- (void)configCallback {
+    __weak typeof(self) weakSelf = self;
+    
+    // 这是默认的识别成功的回调
+    _successHandler = ^(id result){
+        NSLog(@"%@", result);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // code here
+            NSDictionary *dic = result[@"words_result"];
+            NSString *stat = dic[@"签发日期"][@"words"];
+            if (stat.length == 8) {
+                NSString * year = [stat substringWithRange:NSMakeRange(0, 4)];
+                NSString * month = [stat substringWithRange:NSMakeRange(4, 2)];
+                NSString * day = [stat substringWithRange:NSMakeRange(6,2)];
+                NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+                weakSelf.start_time.subfield.text = y;
+            }
+            NSString *end = dic[@"失效日期"][@"words"];
+            if (end.length == 8) {
+                NSString * year = [end substringWithRange:NSMakeRange(0, 4)];
+                NSString * month = [end substringWithRange:NSMakeRange(4, 2)];
+                NSString * day = [end substringWithRange:NSMakeRange(6,2)];
+                NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+                weakSelf.end_time.subfield.text = y;
+            }
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+    };
+    
+    _failHandler = ^(NSError *error){
+        NSLog(@"%@", error);
+        NSString *msg = [NSString stringWithFormat:@"%li:%@", (long)[error code], [error localizedDescription]];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [[[UIAlertView alloc] initWithTitle:@"识别失败" message:msg delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+        }];
+    };
+}
 - (void)cardInformationScanningFM:(IDInfo *)info{
     NSArray *arr = [info.valid componentsSeparatedByString:@"-"];
     if (arr.count == 2) {
@@ -246,5 +297,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

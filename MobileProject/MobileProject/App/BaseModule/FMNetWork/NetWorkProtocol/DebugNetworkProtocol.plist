@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>NetWorkProtocol_BaseURL</key>
-	<string>https://test.ztjwsoft.com</string>
+	<string>http://192.168.0.233:8080</string>
 </dict>
 </plist>

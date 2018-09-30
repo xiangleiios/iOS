@@ -33,18 +33,11 @@
 - (instancetype)initWithTitle:(NSString *)title Color:(UIColor *)color{
     self = [super init];
     if (self) {
-        UILabel *lb = [[UILabel alloc] init];
-        [self addSubview:lb];
-        lb.backgroundColor = color;
-        [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.centerY.height.mas_equalTo(self);
-            make.width.mas_equalTo(KFit_W6S(8));
-        }];
-        
+    
         self.title = [[UILabel alloc] init];
         [self addSubview:self.title];
         self.title.text = title;
-        self.title.font = [UIFont systemFontOfSize:kFit_Font6(12)];
+        self.title.font = [UIFont systemFontOfSize:kFit_Font6(18) weight:0.5];
 //        self.title.textColor = kColor_N(135, 135, 135);
         [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.top.bottom.mas_equalTo(self);

@@ -12,6 +12,7 @@
 #import "UIImage+FMExtension.h"
 #import "XLHomeVC.h"
 #import "StudentsVC.h"
+#import "AdmissionsVC.h"
 @implementation CYLTabBarControllerConfig
 
 - (CYLTabBarController *)tabBarController {
@@ -24,8 +25,10 @@
 //        [firstNavigationController.navigationBar setTintColor:kWhiteColor];
         self.homePushVc = firstViewController;
 
-        //活动
-
+        //招生
+        AdmissionsVC * secondViewController = [[AdmissionsVC alloc] init];
+        EasyNavigationController * secondNavigationController = [[EasyNavigationController alloc]initWithRootViewController:secondViewController];
+        
         StudentsVC * secondViewController01 = [[StudentsVC alloc] init];
         EasyNavigationController * secondNavigationController01 = [[EasyNavigationController alloc]initWithRootViewController:secondViewController01];
         
@@ -35,7 +38,7 @@
         EasyNavigationController * fourthNavigationController = [[EasyNavigationController alloc]initWithRootViewController:fourthViewController];
         
         NSArray * tabBarItemsAttributes = [self tabBarItemsAttributes];
-        NSArray * viewControllers = @[firstNavigationController,secondNavigationController01,fourthNavigationController];
+        NSArray * viewControllers = @[firstNavigationController,secondNavigationController,secondNavigationController01,fourthNavigationController];
         
         CYLTabBarController * tabBarController = [[CYLTabBarController alloc] init];
         tabBarController.tabBarItemsAttributes = tabBarItemsAttributes;
@@ -58,6 +61,11 @@
                                             CYLTabBarItemSelectedImage : @"home_down"
                                             };
     NSDictionary * tabBarItemAttribute02 = @{
+                                             CYLTabBarItemTitle : @"招生",
+                                             CYLTabBarItemImage : @"student_nor",
+                                             CYLTabBarItemSelectedImage : @"student_down"
+                                             };
+    NSDictionary * tabBarItemAttribute03 = @{
                                              CYLTabBarItemTitle : @"学员",
                                              CYLTabBarItemImage : @"student_nor",
                                              CYLTabBarItemSelectedImage : @"student_down"
@@ -67,7 +75,7 @@
                                              CYLTabBarItemImage : @"my_nor",
                                              CYLTabBarItemSelectedImage : @"my_down"
                                              };
-     NSArray * tarBarItemsAttrbutes = @[tabBarItem1Attribute01,tabBarItemAttribute02,tabBarItemAttribute05];
+     NSArray * tarBarItemsAttrbutes = @[tabBarItem1Attribute01,tabBarItemAttribute02,tabBarItemAttribute03,tabBarItemAttribute05];
     
     return tarBarItemsAttrbutes;
 }

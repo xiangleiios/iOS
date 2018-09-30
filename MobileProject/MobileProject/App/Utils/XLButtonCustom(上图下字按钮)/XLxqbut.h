@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define ImageHeightRadio 0.6
+#define ImageHeightRadio 0.8
 #define titleGap 10
 @interface XLxqbut : UIButton
 @end

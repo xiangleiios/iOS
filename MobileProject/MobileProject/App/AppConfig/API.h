@@ -119,7 +119,11 @@
 #pragma mark - 二维码
 #define XIAOCHENGXUEWM KURL(@"/wechart/pages/index/detail/detail?id=%@")
 
+#pragma mark - 今日咨询学员
+#define POSTCensiusList KURL(@"/app/census/censiusList")
 
+#pragma mark - 海报模板列表
+#define POSTSysList KURL(@"/app/post/sys/list")
 
 #pragma mark 一下全部要删除掉
 

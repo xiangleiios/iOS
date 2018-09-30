@@ -339,6 +339,9 @@
 @property (nonatomic , strong)NSString *title; //消息标题
 @property (nonatomic , strong)NSString *content; //消息类容
 @property (nonatomic ,assign)int isRead;//是否已读
+@property (nonatomic , assign)int useNum;
+@property (nonatomic , strong)NSString *tittle;//标题
+@property (nonatomic , strong)NSString *imgUrl;
 @end
 
 

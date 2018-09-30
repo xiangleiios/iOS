@@ -22,10 +22,10 @@
             make.left.right.top.bottom.mas_equalTo(self);
         }];
         
-        self.yfAskZhengHeadlinesIma = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"news_blue"]];
+        self.yfAskZhengHeadlinesIma = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"shouy_new"]];
         [_back addSubview:_yfAskZhengHeadlinesIma];
         [_yfAskZhengHeadlinesIma mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(KFit_W6S(28), KFit_W6S(28)));
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(100), KFit_W6S(36)));
             make.centerY.mas_equalTo(_back);
             make.left.mas_equalTo(_back);
         }];
@@ -58,7 +58,7 @@
 
 - (void)loadScroll{
     [self.scroll removeFromSuperview];
-    self.scroll=[[ScrollInfinite alloc]initWithFrame:CGRectMake(KFit_W6S(48), 0, self.frame.size.width - KFit_W6S(48), self.frame.size.height)];
+    self.scroll=[[ScrollInfinite alloc]initWithFrame:CGRectMake(KFit_W6S(100), 0, self.frame.size.width - KFit_W6S(100), self.frame.size.height)];
     [_back addSubview:self.scroll];
     self.scroll.titleArr=self.dataArr;
     self.scroll.delegate=self;

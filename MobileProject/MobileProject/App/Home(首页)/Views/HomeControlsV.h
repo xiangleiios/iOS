@@ -11,4 +11,5 @@
 @interface HomeControlsV : UIView
 @property (nonatomic , strong)UILabel *title;
 @property (nonatomic , strong)UILabel *subtitle;
+@property (nonatomic , strong)UIButton *but;
 @end

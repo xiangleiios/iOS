@@ -89,6 +89,11 @@
 		A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86E2134EEDA008A8948 /* QrCodeVC.m */; };
 		A7825C49213CD29D0056FDA2 /* AddStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C48213CD29D0056FDA2 /* AddStudentCell.m */; };
 		A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */; };
+		A787E179215DFB0900EF01F2 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; };
+		A787E17C215DFB3600EF01F2 /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E177215DFB0900EF01F2 /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A787E17F215DFB3700EF01F2 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A787E180215DFB3C00EF01F2 /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; };
+		A787E181215DFB3C00EF01F2 /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A79276FE212A525D00B4D65D /* AddStudentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79276FD212A525D00B4D65D /* AddStudentVC.m */; };
 		A7927701212A900200B4D65D /* StudentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7927700212A900200B4D65D /* StudentsVC.m */; };
 		A79D080F2150F08D00FD1D58 /* MyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79D080D2150F08D00FD1D58 /* MyInfoVC.m */; };
@@ -106,6 +111,10 @@
 		A7B5A1072133A9F100BC197B /* VehicleInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1062133A9F100BC197B /* VehicleInformationVC.m */; };
 		A7B5A10A2133C86800BC197B /* RegistrationInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */; };
 		A7B5A10D2133CF8200BC197B /* StudentDetailsEditorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */; };
+		A7BA6F4B215F613C00A5FA0D /* AdmissionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA6F4A215F613C00A5FA0D /* AdmissionsVC.m */; };
+		A7BA6F4E215F61BD00A5FA0D /* PicturePosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA6F4D215F61BD00A5FA0D /* PicturePosterListVC.m */; };
+		A7BA6F51215F6AC400A5FA0D /* PosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA6F50215F6AC400A5FA0D /* PosterListVC.m */; };
+		A7BA6F54215F6C3B00A5FA0D /* PicturePosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA6F53215F6C3B00A5FA0D /* PicturePosterCell.m */; };
 		A7C311EF214A085B006A96EA /* SearchListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C311EE214A085A006A96EA /* SearchListVC.m */; };
 		A7C311F2214A6004006A96EA /* InstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C311F1214A6004006A96EA /* InstructionsVC.m */; };
 		A7C59F1E2148E24800948074 /* BusinessShowV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C59F1D2148E24800948074 /* BusinessShowV.m */; };
@@ -562,6 +571,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		A787E17D215DFB3600EF01F2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A787E17C215DFB3600EF01F2 /* AipBase.framework in Embed Frameworks */,
+				A787E17F215DFB3700EF01F2 /* AipOcrSdk.framework in Embed Frameworks */,
+				A787E181215DFB3C00EF01F2 /* IdcardQuality.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0F45313E55A23BCBCD944B1C /* Pods-MobileProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-MobileProject/Pods-MobileProject.release.xcconfig"; sourceTree = "<group>"; };
 		3471536C1D8F9E4700BDB632 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -726,6 +751,9 @@
 		A7825C48213CD29D0056FDA2 /* AddStudentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentCell.m; sourceTree = "<group>"; };
 		A7825C4A213D35750056FDA2 /* InsuranceInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsuranceInformationVC.h; sourceTree = "<group>"; };
 		A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsuranceInformationVC.m; sourceTree = "<group>"; };
+		A787E175215DFB0800EF01F2 /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
+		A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
+		A787E177215DFB0900EF01F2 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
 		A79276FC212A525D00B4D65D /* AddStudentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddStudentVC.h; sourceTree = "<group>"; };
 		A79276FD212A525D00B4D65D /* AddStudentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentVC.m; sourceTree = "<group>"; };
 		A79276FF212A900200B4D65D /* StudentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsVC.h; sourceTree = "<group>"; };
@@ -760,6 +788,14 @@
 		A7B5A1092133C86800BC197B /* RegistrationInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RegistrationInformationVC.m; sourceTree = "<group>"; };
 		A7B5A10B2133CF8200BC197B /* StudentDetailsEditorVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentDetailsEditorVC.h; sourceTree = "<group>"; };
 		A7B5A10C2133CF8200BC197B /* StudentDetailsEditorVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentDetailsEditorVC.m; sourceTree = "<group>"; };
+		A7BA6F49215F613C00A5FA0D /* AdmissionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdmissionsVC.h; sourceTree = "<group>"; };
+		A7BA6F4A215F613C00A5FA0D /* AdmissionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AdmissionsVC.m; sourceTree = "<group>"; };
+		A7BA6F4C215F61BD00A5FA0D /* PicturePosterListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturePosterListVC.h; sourceTree = "<group>"; };
+		A7BA6F4D215F61BD00A5FA0D /* PicturePosterListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicturePosterListVC.m; sourceTree = "<group>"; };
+		A7BA6F4F215F6AC400A5FA0D /* PosterListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosterListVC.h; sourceTree = "<group>"; };
+		A7BA6F50215F6AC400A5FA0D /* PosterListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosterListVC.m; sourceTree = "<group>"; };
+		A7BA6F52215F6C3B00A5FA0D /* PicturePosterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturePosterCell.h; sourceTree = "<group>"; };
+		A7BA6F53215F6C3B00A5FA0D /* PicturePosterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicturePosterCell.m; sourceTree = "<group>"; };
 		A7C311ED214A085A006A96EA /* SearchListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchListVC.h; sourceTree = "<group>"; };
 		A7C311EE214A085A006A96EA /* SearchListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchListVC.m; sourceTree = "<group>"; };
 		A7C311F0214A6004006A96EA /* InstructionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstructionsVC.h; sourceTree = "<group>"; };
@@ -1643,8 +1679,10 @@
 				DACEAB461E67017400D8820C /* CFNetwork.framework in Frameworks */,
 				DACEAB4D1E67019700D8820C /* CoreGraphics.framework in Frameworks */,
 				9581ACC61E9B68B80090C525 /* JavaScriptCore.framework in Frameworks */,
+				A787E180215DFB3C00EF01F2 /* IdcardQuality.framework in Frameworks */,
 				DAE212841EF2867B000EAB90 /* libBaiduMobStat.a in Frameworks */,
 				9530D3F41E8B4B29000AE7BE /* MediaPlayer.framework in Frameworks */,
+				A787E179215DFB0900EF01F2 /* AipOcrSdk.framework in Frameworks */,
 				DACEAB591E6701D000D8820C /* libresolv.tbd in Frameworks */,
 				DACEAB571E6701C500D8820C /* UserNotifications.framework in Frameworks */,
 				A7E979F021354B3300EA6F14 /* libexidcardios.a in Frameworks */,
@@ -2039,6 +2077,16 @@
 			path = V;
 			sourceTree = "<group>";
 		};
+		A787E174215DF93E00EF01F2 /* BaiduAI */ = {
+			isa = PBXGroup;
+			children = (
+				A787E177215DFB0900EF01F2 /* AipBase.framework */,
+				A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */,
+				A787E175215DFB0800EF01F2 /* IdcardQuality.framework */,
+			);
+			path = BaiduAI;
+			sourceTree = "<group>";
+		};
 		A79276F9212A518600B4D65D /* Students(学员) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2134,6 +2182,37 @@
 				A74EB310213E204B00564BC6 /* OtherInformationVC.m */,
 			);
 			path = "Vehicle(车辆管理)";
+			sourceTree = "<group>";
+		};
+		A7BA6F46215F609500A5FA0D /* admissions(招生) */ = {
+			isa = PBXGroup;
+			children = (
+				A7BA6F48215F60D000A5FA0D /* C */,
+				A7BA6F47215F60C100A5FA0D /* V */,
+			);
+			path = "admissions(招生)";
+			sourceTree = "<group>";
+		};
+		A7BA6F47215F60C100A5FA0D /* V */ = {
+			isa = PBXGroup;
+			children = (
+				A7BA6F52215F6C3B00A5FA0D /* PicturePosterCell.h */,
+				A7BA6F53215F6C3B00A5FA0D /* PicturePosterCell.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		A7BA6F48215F60D000A5FA0D /* C */ = {
+			isa = PBXGroup;
+			children = (
+				A7BA6F49215F613C00A5FA0D /* AdmissionsVC.h */,
+				A7BA6F4A215F613C00A5FA0D /* AdmissionsVC.m */,
+				A7BA6F4C215F61BD00A5FA0D /* PicturePosterListVC.h */,
+				A7BA6F4D215F61BD00A5FA0D /* PicturePosterListVC.m */,
+				A7BA6F4F215F6AC400A5FA0D /* PosterListVC.h */,
+				A7BA6F50215F6AC400A5FA0D /* PosterListVC.m */,
+			);
+			path = C;
 			sourceTree = "<group>";
 		};
 		A7E979E021354A7100EA6F14 /* IdentificationCard */ = {
@@ -4033,6 +4112,7 @@
 				DAAAEE7B1F18A9EF001D06DF /* PublicModule(公共模块) */,
 				DAE210421EF2867A000EAB90 /* Home(首页) */,
 				DA4FA47F1FDF7B7200C7C1F1 /* Mine(我的) */,
+				A7BA6F46215F609500A5FA0D /* admissions(招生) */,
 				A79276F9212A518600B4D65D /* Students(学员) */,
 				A75F9441212D6FE600384EB0 /* BusinessCard(名片) */,
 				A75F9432212D190000384EB0 /* Information(信息资料) */,
@@ -4152,6 +4232,7 @@
 		DAE210CD1EF2867A000EAB90 /* ThirdPart */ = {
 			isa = PBXGroup;
 			children = (
+				A787E174215DF93E00EF01F2 /* BaiduAI */,
 				A7E979E021354A7100EA6F14 /* IdentificationCard */,
 				4FF9264320C8CE0600AB3E43 /* CGXPickerView(选择器) */,
 				DAE210CE1EF2867A000EAB90 /* BaiduMobStat */,
@@ -4406,6 +4487,7 @@
 				347BAF9A1D87E30200D12F0B /* Frameworks */,
 				347BAF9B1D87E30200D12F0B /* Resources */,
 				B8195D87253DBFB54A33EE7B /* [CP] Copy Pods Resources */,
+				A787E17D215DFB3600EF01F2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -4781,6 +4863,7 @@
 				DA0347171F509098008E7BE1 /* FMClearCacheTool.m in Sources */,
 				DA03467B1F509098008E7BE1 /* NSString+Trims.m in Sources */,
 				DA03473E1F509098008E7BE1 /* FMWebShareHelper.m in Sources */,
+				A7BA6F51215F6AC400A5FA0D /* PosterListVC.m in Sources */,
 				A7AC816A212BBC5A00C6AB6C /* FMAskZhengView.m in Sources */,
 				4F6091791FE1129C00029A7E /* XLAlertView.m in Sources */,
 				DA0346EC1F509098008E7BE1 /* UITextView+PinchZoom.m in Sources */,
@@ -4808,6 +4891,7 @@
 				DA0346601F509098008E7BE1 /* NSObject+EasyCopy.m in Sources */,
 				DA03464E1F509098008E7BE1 /* NSException+Trace.m in Sources */,
 				DA78C30C1F5D41A3009BAA90 /* YTKBatchRequestAgent.m in Sources */,
+				A7BA6F4B215F613C00A5FA0D /* AdmissionsVC.m in Sources */,
 				DA867D221F58F01300D4D011 /* NSFileManager+JYPath.m in Sources */,
 				DA67305B1FB08033002B6894 /* MSSBrowseRemindView.m in Sources */,
 				DAE212401EF2867B000EAB90 /* CommentsModel.m in Sources */,
@@ -4849,6 +4933,7 @@
 				DA0347031F509098008E7BE1 /* UIViewController+BackButtonTouched.m in Sources */,
 				DA0346441F509098008E7BE1 /* NSDate+Utilities.m in Sources */,
 				DA0346D81F509098008E7BE1 /* UIResponder+FirstResponder.m in Sources */,
+				A7BA6F4E215F61BD00A5FA0D /* PicturePosterListVC.m in Sources */,
 				DAE212A31EF2867B000EAB90 /* main.m in Sources */,
 				4FEBE2E220D1147200893117 /* XLView.m in Sources */,
 				DA0346C31F509098008E7BE1 /* UIImage+RoundedCorner.m in Sources */,
@@ -4929,6 +5014,7 @@
 				DA0346631F509098008E7BE1 /* NSObject+MKBlockTimer.m in Sources */,
 				DA0346951F509098008E7BE1 /* UIApplication+Permissions.m in Sources */,
 				DA9AEF501FB59FE900341137 /* JKCountDownLable.m in Sources */,
+				A7BA6F54215F6C3B00A5FA0D /* PicturePosterCell.m in Sources */,
 				DA4FA4CA1FDF7B7300C7C1F1 /* MynewsModel.m in Sources */,
 				DA4FA4C11FDF7B7300C7C1F1 /* ForgotPasswordVC.m in Sources */,
 				A7B5A1042133A3A400BC197B /* VehicleDetailsVC.m in Sources */,
@@ -5261,6 +5347,7 @@
 					"$(PROJECT_DIR)/MobileProject/BaseModule/JiaShare/UMSocialSDK",
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/Alipay",
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/AlipayWechatPay/Alipay",
+					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/BaiduAI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MobileProject/App/AppConfig/AppPrefixHeader.pch";
@@ -5313,6 +5400,7 @@
 					"$(PROJECT_DIR)/MobileProject/BaseModule/JiaShare/UMSocialSDK",
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/Alipay",
 					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/AlipayWechatPay/Alipay",
+					"$(PROJECT_DIR)/MobileProject/App/ThirdPart/BaiduAI",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MobileProject/App/AppConfig/AppPrefixHeader.pch";

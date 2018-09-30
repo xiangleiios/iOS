@@ -12,13 +12,19 @@
 #import "AVCaptureViewController.h"
 #import "IDInfo.h"
 #import "XLCache.h"
-@interface AddInformationOneVC ()<AVCaptureViewControllerDelegate>
+#import <AipOcrSdk/AipOcrSdk.h>
+@interface AddInformationOneVC ()<AVCaptureViewControllerDelegate,UIAlertViewDelegate>
 @property (nonatomic , strong)FormsV *SFZforms;
 @property (nonatomic , strong)NSMutableDictionary *studentDic;
+@property (nonatomic , strong)UIViewController *AIVC;
 @end
-
 @implementation AddInformationOneVC
-
+{
+    // 默认的识别成功的回调
+    void (^_successHandler)(id);
+    // 默认的识别失败的回调
+    void (^_failHandler)(NSError *);
+}
 
 - (NSMutableDictionary *)studentDic{
     if (_studentDic == nil) {
@@ -28,8 +34,12 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[AipOcrService shardService] authWithAK:@"iY6mYTyvN2Wn4GedChGMMSdf" andSK:@"HM6ZrPzN7ebTI1gcPOO0rEdsDQANrmkS"];
+    
     [self laodNavigation];
     [self loadSubview];
+    [self configCallback];
     // Do any additional setup after loading the view.
 }
 
@@ -124,9 +134,56 @@
     }];
 }
 - (void)IdentificationCrdZM{
-    AVCaptureViewController *AVCaptureVC = [[AVCaptureViewController alloc] init];
-    AVCaptureVC.delegate = self;
-    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+    self.AIVC =
+    [AipCaptureCardVC ViewControllerWithCardType:CardTypeIdCardFont
+                                 andImageHandler:^(UIImage *image) {
+                                     
+                                     [[AipOcrService shardService] detectIdCardFrontFromImage:image
+                                                                                  withOptions:nil
+                                                                               successHandler:_successHandler
+                                                                                  failHandler:_failHandler];
+                                 }];
+    
+    [self presentViewController:self.AIVC animated:YES completion:nil];
+}
+- (void)configCallback {
+    __weak typeof(self) weakSelf = self;
+    
+    // 这是默认的识别成功的回调
+    _successHandler = ^(id result){
+        NSLog(@"%@", result);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // code here
+            NSDictionary *dic = result[@"words_result"];
+            XLCache *cache = [XLCache singleton];
+            weakSelf.SFZforms.name.subfield.text = dic[@"姓名"][@"words"];
+            weakSelf.SFZforms.gender.subfield.text = dic[@"性别"][@"words"];
+            if (dic[@"民族"][@"words"]) {
+                NSString *ethnic = [NSString stringWithFormat:@"%@族",dic[@"民族"][@"words"]];
+                weakSelf.SFZforms.ethnic.subfield.text = ethnic;
+                weakSelf.SFZforms.ethnic.subfield.tag = [cache.ethnicValueArr [[cache.ethnicTitleArr indexOfObject:ethnic]] integerValue];
+            }
+            
+            
+            
+            weakSelf.SFZforms.gender.subfield.tag = [cache.sys_user_sex_value[[cache.sys_user_sex_title indexOfObject:dic[@"性别"][@"words"]]] integerValue];
+            
+            
+            weakSelf.SFZforms.address.subfield.text = dic[@"住址"][@"words"];
+            weakSelf.SFZforms.IdNumber.subfield.text = dic[@"公民身份号码"][@"words"];
+            weakSelf.SFZforms.birthday.subfield.text = [weakSelf birthdayStrFromIdentityCard:dic[@"公民身份号码"][@"words"]];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        });
+        
+    };
+    
+    _failHandler = ^(NSError *error){
+        NSLog(@"%@", error);
+        NSString *msg = [NSString stringWithFormat:@"%li:%@", (long)[error code], [error localizedDescription]];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [[[UIAlertView alloc] initWithTitle:@"识别失败" message:msg delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+        }];
+    };
 }
 
 - (void)cardInformationScanning:(IDInfo *)info{
@@ -344,5 +401,8 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end

@@ -11,10 +11,9 @@
 #import "FormsV.h"
 #import "CGXPickerView.h"
 #import "XLCache.h"
-#import "AVCaptureViewController.h"
-#import "JQAVCaptureViewController.h"
 #import "IDInfo.h"
-@interface StudentDetailsEditorVC ()<AVCaptureViewControllerDelegate,JQAVCaptureViewControllerDelegate>
+#import <AipOcrSdk/AipOcrSdk.h>
+@interface StudentDetailsEditorVC ()<UIAlertViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
 
@@ -27,7 +26,12 @@
 @end
 
 @implementation StudentDetailsEditorVC
-
+{
+    // 默认的识别成功的回调
+    void (^_successHandler)(id);
+    // 默认的识别失败的回调
+    void (^_failHandler)(NSError *);
+}
 - (NSMutableDictionary *)studentDic{
     if (_studentDic == nil) {
         _studentDic = [NSMutableDictionary dictionary];
@@ -38,10 +42,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"学员详情"];
-    
+    [[AipOcrService shardService] authWithAK:@"iY6mYTyvN2Wn4GedChGMMSdf" andSK:@"HM6ZrPzN7ebTI1gcPOO0rEdsDQANrmkS"];
     [self laodScroll];
     
     [self loadDataview];
+    [self configCallback];
     // Do any additional setup after loading the view.
 }
 
@@ -447,60 +452,93 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
-    
-    
 }
 
 - (void)paizhaoZM{
-    AVCaptureViewController *AVCaptureVC = [[AVCaptureViewController alloc] init];
-    AVCaptureVC.delegate = self;
-    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+    UIViewController *vc =
+    [AipCaptureCardVC ViewControllerWithCardType:CardTypeIdCardFont
+                                 andImageHandler:^(UIImage *image) {
+                                     
+                                     [[AipOcrService shardService] detectIdCardFrontFromImage:image
+                                                                                  withOptions:nil
+                                                                               successHandler:_successHandler
+                                                                                  failHandler:_failHandler];
+                                 }];
+    
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
-- (void)cardInformationScanning:(IDInfo *)info{
-    XLCache *cache = [XLCache singleton];
-    self.SFZforms.name.subfield.text = info.name;
-    
-    self.SFZforms.gender.subfield.text = info.gender;
-    self.SFZforms.gender.subfield.tag = [cache.sys_user_sex_value[[cache.sys_user_sex_title indexOfObject:info.gender]] integerValue];
-    
-    NSString *ethnic = [NSString stringWithFormat:@"%@族",info.nation];
-    self.SFZforms.ethnic.subfield.text = ethnic;
-    self.SFZforms.ethnic.subfield.tag = [cache.ethnicValueArr [[cache.ethnicTitleArr indexOfObject:ethnic]] integerValue];
-    self.SFZforms.address.subfield.text = info.address;
-    self.SFZforms.IdNumber.subfield.text = info.num;
-    self.SFZforms.birthday.subfield.text = [self birthdayStrFromIdentityCard:info.num];
-}
+
 -(void)paizhaoFM{
-    JQAVCaptureViewController *AVCaptureVC = [[JQAVCaptureViewController alloc] init];
-    AVCaptureVC.delegate = self;
-    [self.navigationController pushViewController:AVCaptureVC animated:YES];
+    UIViewController *vc =
+    [AipCaptureCardVC ViewControllerWithCardType:CardTypeIdCardBack
+                                 andImageHandler:^(UIImage *image) {
+                                     
+                                     [[AipOcrService shardService] detectIdCardBackFromImage:image
+                                                                                 withOptions:nil
+                                                                              successHandler:_successHandler
+                                                                                 failHandler:_failHandler];
+                                 }];
+    [self presentViewController:vc animated:YES completion:nil];
 }
-
-
-- (void)cardInformationScanningFM:(IDInfo *)info{
-    NSArray *arr = [info.valid componentsSeparatedByString:@"-"];
-    if (arr.count == 2) {
-        NSString *stat = [arr firstObject];
-        if (stat.length == 8) {
-            NSString * year = [[arr firstObject] substringWithRange:NSMakeRange(0, 4)];
-            NSString * month = [[arr firstObject] substringWithRange:NSMakeRange(4, 2)];
-            NSString * day = [[arr firstObject] substringWithRange:NSMakeRange(6,2)];
-            NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
-            self.start_time.subfield.text = y;
-        }
-        NSString *end = [arr lastObject];
-        if (end.length == 8) {
-            NSString * year = [end substringWithRange:NSMakeRange(0, 4)];
-            NSString * month = [end substringWithRange:NSMakeRange(4, 2)];
-            NSString * day = [end substringWithRange:NSMakeRange(6,2)];
-            NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
-            self.end_time.subfield.text = y;
-        }
+- (void)configCallback {
+    __weak typeof(self) weakSelf = self;
+    
+    // 这是默认的识别成功的回调
+    _successHandler = ^(id result){
+        NSLog(@"%@", result);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            // code here
+            NSDictionary *dic = result[@"words_result"];
+            XLCache *cache = [XLCache singleton];
+            if ([result[@"words_result_num"] intValue] == 3) {
+                NSString *stat = dic[@"签发日期"][@"words"];
+                if (stat.length == 8) {
+                    NSString * year = [stat substringWithRange:NSMakeRange(0, 4)];
+                    NSString * month = [stat substringWithRange:NSMakeRange(4, 2)];
+                    NSString * day = [stat substringWithRange:NSMakeRange(6,2)];
+                    NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+                    weakSelf.start_time.subfield.text = y;
+                }
+                NSString *end = dic[@"失效日期"][@"words"];
+                if (end.length == 8) {
+                    NSString * year = [end substringWithRange:NSMakeRange(0, 4)];
+                    NSString * month = [end substringWithRange:NSMakeRange(4, 2)];
+                    NSString * day = [end substringWithRange:NSMakeRange(6,2)];
+                    NSString *y = [NSString stringWithFormat:@"%@-%@-%@",year,month,day];
+                    weakSelf.end_time.subfield.text = y;
+                }
+            }else{
+                
+                weakSelf.SFZforms.name.subfield.text = dic[@"姓名"][@"words"];
+                weakSelf.SFZforms.gender.subfield.text = dic[@"性别"][@"words"];
+                if (dic[@"民族"][@"words"]) {
+                    NSString *ethnic = [NSString stringWithFormat:@"%@族",dic[@"民族"][@"words"]];
+                    weakSelf.SFZforms.ethnic.subfield.text = ethnic;
+                    weakSelf.SFZforms.ethnic.subfield.tag = [cache.ethnicValueArr [[cache.ethnicTitleArr indexOfObject:ethnic]] integerValue];
+                }
+                weakSelf.SFZforms.gender.subfield.tag = [cache.sys_user_sex_value[[cache.sys_user_sex_title indexOfObject:dic[@"性别"][@"words"]]] integerValue];
+                weakSelf.SFZforms.address.subfield.text = dic[@"住址"][@"words"];
+                weakSelf.SFZforms.IdNumber.subfield.text = dic[@"公民身份号码"][@"words"];
+                weakSelf.SFZforms.birthday.subfield.text = [weakSelf birthdayStrFromIdentityCard:dic[@"公民身份号码"][@"words"]];
+                
+                
+            }
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        });
         
-    }
-    //    self.start_time.subfield.text = info.
+    };
+    
+    _failHandler = ^(NSError *error){
+        NSLog(@"%@", error);
+        NSString *msg = [NSString stringWithFormat:@"%li:%@", (long)[error code], [error localizedDescription]];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            [[[UIAlertView alloc] initWithTitle:@"识别失败" message:msg delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles:nil] show];
+        }];
+    };
 }
+
+
 
 - (NSString *)birthdayStrFromIdentityCard:(NSString *)numberStr{
     
@@ -629,6 +667,12 @@
     
     
     
+}
+
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 /*
 #pragma mark - Navigation

@@ -10,7 +10,7 @@
 #import "FMSingle.h"
 #import "SQLfmdb.h"
 #import "DetailsVC.h"
-
+#import "CYLTabBarControllerConfig.h"
 
 @interface AppDelegate : UIResponder<UIApplicationDelegate>
 
@@ -22,6 +22,7 @@
 /** 数据库对象 */
 @property (nonatomic, strong) SQLfmdb *fmdb;
 
+@property (nonatomic , strong)CYLTabBarControllerConfig *tab;
 //@property (assign, nonatomic) NSInteger allowRotate;
 @end
 

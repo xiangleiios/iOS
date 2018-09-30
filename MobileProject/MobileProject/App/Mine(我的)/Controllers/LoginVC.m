@@ -227,7 +227,9 @@
             [defaults synchronize];
             [UIWebView fm_setTokenToUIWebViewCookie]; //存token到域名cookie
             [self laodCacheData];
-            CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];            
+            CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
+            AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+            appDelegate.tab = TabBarControllerConfig;
             [self presentViewController:TabBarControllerConfig.tabBarController animated:YES completion:^{
 
             }];

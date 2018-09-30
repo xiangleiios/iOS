@@ -19,6 +19,9 @@
 #import "SubordinateVC.h"
 #import "VehicleVC.h"
 #import "BusinessCardListVC.h"
+#import "StudentsListTwoVC.h"
+#import "XLxqbut.h"
+#import "CYLTabBarControllerConfig.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -50,8 +53,7 @@
     [self loadscroll];
     
     [self addBannerScroll];
-    
-    [self addAskZhengView];
+
     [self loadBut];
     // Do any additional setup after loading the view.
 }
@@ -104,10 +106,10 @@
     }
     
     
-    self.banner = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0,0, kScreenW,KFit_H6S(250) ) delegate:self placeholderImage:[UIImage imageNamed:@"pacture"]];
+    self.banner = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(KFit_W6S(30),KFit_W6S(30), kScreenW - KFit_W6S(60),KFit_H6S(310) ) delegate:self placeholderImage:[UIImage imageNamed:@"banner"]];
     _banner.autoScrollTimeInterval = 3.0;// 自动滚动时间间隔
     _banner.pageControlStyle = SDCycleScrollViewPageContolStyleNone; //无pagecontrol
-    _banner.placeholderImage = [UIImage imageNamed:@"pacture"];
+    _banner.placeholderImage = [UIImage imageNamed:@"banner"];
     _banner.bannerImageViewContentMode = UIViewContentModeScaleAspectFill;
     _banner.clipsToBounds = YES;
     _banner.backgroundColor = kWhiteColor;
@@ -133,60 +135,71 @@
 }
 
 - (void)loadBut{
+    XLxqbut *butone = [[XLxqbut alloc] init];
+    [butone addTarget:self action:@selector(toZhaosheng) forControlEvents:UIControlEventTouchUpInside];
+    [butone setImage:[UIImage imageNamed:@"zshb"] forState:UIControlStateNormal];
+    [butone setTitle:@"招生海报" forState:UIControlStateNormal];
+    [butone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
-    UILabel *lbline = [[UILabel alloc] init];
-    [self.backview addSubview:lbline];
-    lbline.backgroundColor = kColor_N(240, 240, 240);
-    [lbline mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.yfAskZhengView.mas_bottom).mas_offset(KFit_W6S(20));
+    XLxqbut *buttwo = [[XLxqbut alloc] init];
+    [buttwo addTarget:self action:@selector(toMingpan) forControlEvents:UIControlEventTouchUpInside];
+    [buttwo setImage:[UIImage imageNamed:@"jlmp"] forState:UIControlStateNormal];
+    [buttwo setTitle:@"教练名片" forState:UIControlStateNormal];
+    [buttwo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    XLxqbut *butthree = [[XLxqbut alloc] init];
+    [butthree addTarget:self action:@selector(toAddStudent) forControlEvents:UIControlEventTouchUpInside];
+    [butthree setImage:[UIImage imageNamed:@"tjxy"] forState:UIControlStateNormal];
+    [butthree setTitle:@"添加学员" forState:UIControlStateNormal];
+    [butthree setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
+    [self.backview addSubview:butone];
+    [self.backview addSubview:buttwo];
+    [self.backview addSubview:butthree];
+//    XLButton *add = [[XLButton alloc] initWithTitle:@"添加学员" SubTitle:@"学员信息录入" BackgroundImg:@"student_card" highlightedImg:@"student_card_down"];
+//    XLButton *card = [[XLButton alloc] initWithTitle:@"招生名片" SubTitle:@"招生信息编辑" BackgroundImg:@"buss_card" highlightedImg:@"buss_card_down"];
+//    [self.backview addSubview:add];
+//    [self.backview addSubview:card];
+//    add.senterBlock = ^{
+//        AddStudentVC *vc = [[AddStudentVC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    };
+//    card.senterBlock = ^{
+//        BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//    };
+    NSArray *toolarr = @[butone,buttwo,butthree];
+    [toolarr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:KFit_W6S(140) leadSpacing:KFit_W6S(40) tailSpacing:KFit_W6S(40)];
+    [toolarr mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.banner.mas_bottom).mas_offset(KFit_H6S(40));
+        make.height.mas_equalTo(KFit_W6S(180));
+    }];
+    
+    
+    UIImageView *img = [[UIImageView alloc] init];
+    [self.backview addSubview:img];
+    img.userInteractionEnabled = YES;
+    [img setImage:[UIImage imageNamed:@"bg_white"]];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(butone.mas_bottom).mas_offset(KFit_H6S(40));
         make.left.mas_equalTo(self.backview).mas_offset(KFit_W6S(30));
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
-        make.height.mas_equalTo(kFit_Font6(1));
+        make.height.mas_equalTo(KFit_H6S(116));
     }];
     
-    XLColumnsV *tool = [[XLColumnsV alloc] initWithTitle:@"招生工具" Color:kColor_N(64, 75, 105)];
-    [self.backview addSubview:tool];
-    [tool mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(lbline.mas_bottom).mas_offset(KFit_H6S(30));
-        make.left.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(KFit_H6S(24));
-    }];
-    
-    XLButton *add = [[XLButton alloc] initWithTitle:@"添加学员" SubTitle:@"学员信息录入" BackgroundImg:@"student_card" highlightedImg:@"student_card_down"];
-    XLButton *card = [[XLButton alloc] initWithTitle:@"招生名片" SubTitle:@"招生信息编辑" BackgroundImg:@"buss_card" highlightedImg:@"buss_card_down"];
-    [self.backview addSubview:add];
-    [self.backview addSubview:card];
-    add.senterBlock = ^{
-        AddStudentVC *vc = [[AddStudentVC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    };
-    card.senterBlock = ^{
-        BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    };
-    NSArray *toolarr = @[add,card];
-    [toolarr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:kFit_Font6(11) leadSpacing:KFit_W6S(30) tailSpacing:KFit_W6S(30)];
-    [toolarr mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(tool.mas_bottom).mas_offset(KFit_H6S(20));
-        make.height.mas_equalTo(KFit_W6S(160));
-    }];
+    self.yfAskZhengView = [[FMAskZhengView alloc] initWithFrame:CGRectMake(KFit_W6S(5),KFit_H6S(20), kScreenW - KFit_W6S(70), KFit_H6S(76))];
+    self.yfAskZhengView.dataArr = self.newsArr;
+    self.yfAskZhengView.delegate = self;
+    [img addSubview:self.yfAskZhengView];
     
     
-    UILabel *backlb = [[UILabel alloc] init];
-    backlb.backgroundColor = kColor_N(240, 240, 240);
-    [self.backview addSubview:backlb];
-    [backlb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(add.mas_bottom).mas_offset(KFit_H6S(30));
-        make.left.right.mas_equalTo(self.backview);
-        make.height.mas_equalTo(KFit_H6S(20));
-    }];
     
-    XLColumnsV *admissions = [[XLColumnsV alloc] initWithTitle:@"招生日报" Color:kColor_N(64, 75, 105)];
+    XLColumnsV *admissions = [[XLColumnsV alloc] initWithTitle:@"招生日报" Color:[UIColor blackColor]];
     [self.backview addSubview:admissions];
     [admissions mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(backlb.mas_bottom).mas_offset(KFit_H6S(30));
+        make.top.mas_equalTo(img.mas_bottom).mas_offset(KFit_H6S(50));
         make.left.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(KFit_H6S(24));
+        make.height.mas_equalTo(KFit_H6S(40));
     }];
     
     UIButton *zhaosheng = [[UIButton alloc] init];
@@ -202,109 +215,110 @@
     _one = [[HomeControlsV alloc] init];
     _one.title.text = @"0";
     _one.subtitle.text = @"今日咨询";
+    _one.but.tag = 1;
+    [_one.but addTarget:self action:@selector(statistical:) forControlEvents:UIControlEventTouchUpInside];
     [self.backview addSubview:_one];
     
     _two = [[HomeControlsV alloc] init];
     _two.title.text = @"0";
     _two.subtitle.text = @"今日报名";
+    _two.but.tag = 2;
+    [_two.but addTarget:self action:@selector(statistical:) forControlEvents:UIControlEventTouchUpInside];
     [self.backview addSubview:_two];
     
     _three = [[HomeControlsV alloc] init];
     _three.title.text = @"0";
     _three.subtitle.text = @"本月报名";
+    _three.but.tag = 3;
+    [_three.but addTarget:self action:@selector(statistical:) forControlEvents:UIControlEventTouchUpInside];
     [self.backview addSubview:_three];
     
     NSArray *arr = @[_one,_two,_three];
     
-    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:kFit_Font6(1) leadSpacing:KFit_W6S(30) tailSpacing:KFit_W6S(30)];
+    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:KFit_W6S(236) leadSpacing:KFit_W6S(30) tailSpacing:KFit_W6S(30)];
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(admissions.mas_bottom).mas_offset(KFit_H6S(30));
-        make.height.mas_equalTo(KFit_W6S(90));
+        make.height.mas_equalTo(KFit_W6S(236));
     }];
     
-    UILabel *backlbtwo = [[UILabel alloc] init];
-    backlbtwo.backgroundColor = kColor_N(240, 240, 240);
-    [self.backview addSubview:backlbtwo];
-    [backlbtwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_one.mas_bottom).mas_offset(KFit_H6S(30));
-        make.left.right.mas_equalTo(self.backview);
-        make.height.mas_equalTo(KFit_H6S(20));
-    }];
     
     XLColumnsV *management = [[XLColumnsV alloc] initWithTitle:@"分校管理" Color:kColor_N(64, 75, 105)];
     [self.backview addSubview:management];
     [management mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(backlbtwo.mas_bottom).mas_offset(KFit_H6S(30));
+        make.top.mas_equalTo(_one.mas_bottom).mas_offset(KFit_H6S(50));
         make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(KFit_H6S(24));
     }];
     
-    UIView *v = [[UIView alloc] init];
-    [self.backview addSubview:v];
-    [v mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(management.mas_bottom).mas_offset(KFit_H6S(10));
-        make.left.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(KFit_H6S(200));
+    UIButton *jiaxiao = [[UIButton alloc] init];
+    [jiaxiao addTarget:self action:@selector(toJiaxiao) forControlEvents:UIControlEventTouchUpInside];
+    [self.backview addSubview:jiaxiao];
+    [jiaxiao setImage:[UIImage imageNamed:@"suosujiax"] forState:UIControlStateNormal];
+    
+    UIButton *cehliang = [[UIButton alloc] init];
+    [cehliang addTarget:self action:@selector(toCheliang) forControlEvents:UIControlEventTouchUpInside];
+    [self.backview addSubview:cehliang];
+    [cehliang setImage:[UIImage imageNamed:@"cheliangguanl"] forState:UIControlStateNormal];
+    
+    NSArray *arrtwo = @[jiaxiao,cehliang];
+    [arrtwo mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:KFit_W6S(362) leadSpacing:KFit_W6S(20) tailSpacing:KFit_W6S(20)];
+    [arrtwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(management.mas_bottom).mas_offset(KFit_H6S(30));
+        make.height.mas_equalTo(KFit_W6S(146));
     }];
     
-    NSArray *imgarr = @[@"drive_card",@"car_card"];
-    NSArray *titlearr = @[@"所属驾校",@"车辆管理"];
-    self.pagingScr = [[PagingButtonView alloc] init];
-    _pagingScr.pageControlStyle = PageControlStyleHiden;
-    _pagingScr.pagingRow = 1; //设置行，不设置默认2行
-    _pagingScr.pagingColumn = 4; //设置列 不设置默认4列
-    [_pagingScr yfm_createPagingButtonViewWithFrame:CGRectMake(0, 0,kScreenW,KFit_H6S(200))  showToSuperView:v delegate:self iconUrlsOrNamesArr:imgarr buttonTextColorArrOrOneColor:nil buttonTitleArray:titlearr];
     
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(30)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
     
 }
-- (void)PagingButtonView:(PagingButtonView *)actionView clickButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:{
-            SubordinateVC *vc =[[SubordinateVC alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-            return;
-        }
-            break;
-        case 1:{
-            VehicleVC *vc =[[VehicleVC alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 2:{
-            
-        }
-            break;
-        case 3:{
-            
-        }
-            break;
-            
-        default:
-            break;
-    }
+- (void)toJiaxiao{
+    SubordinateVC *vc =[[SubordinateVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)toCheliang{
+    VehicleVC *vc =[[VehicleVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)toZhaosheng{
+    AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    appDelegate.tab.tabBarController.selectedIndex = 1;
+}
+
+
+- (void)toMingpan{
+    BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)toAddStudent{
+    AddStudentVC *vc = [[AddStudentVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)statistical:(UIButton *)senter{
+    KKLog(@"1111");
+    
+    if (senter.tag == 1) {
+        StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
+        vc.url = POSTCensiusList;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (senter.tag == 2){
+        
+    }else if (senter.tag == 3){
+        
+    }
+
+}
+
+
 - (void)jumpMethod:(UIButton *)senter{
     
 }
 
-
-#pragma mark -最新消息
-- (void)addAskZhengView{
-//    UILabel *titleLb = [[UILabel alloc] initWithFrame:CGRectMake(KFit_W6S(30),kNavBarH + KFit_H6S(280), KFit_W6S(200), KFit_H6S(30))];
-//    [self.view addSubview:titleLb];
-//    titleLb.textColor = [UIColor redColor];
-//    titleLb.text = @"最新消息";
-    
-    self.yfAskZhengView = [[FMAskZhengView alloc] initWithFrame:CGRectMake(KFit_W6S(30),KFit_H6S(270), kScreenW - KFit_W6S(60), KFit_H6S(50))];
-    self.yfAskZhengView.dataArr = self.newsArr;
-    self.yfAskZhengView.delegate = self;
-    [self.backview addSubview:self.yfAskZhengView];
-    
-    
-}
 
 - (void)askZhengView:(FMAskZhengView *)askZhengView tagIndex:(NSInteger)index {
     KKLog(@"%ld",(long)index);

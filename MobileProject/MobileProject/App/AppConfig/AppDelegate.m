@@ -16,7 +16,7 @@
 #import "UIViewController+FMExtenion.h"
 #import "UIViewController+Swizzled.h"
 #import "FMBaseNavigationController.h"
-#import "CYLTabBarControllerConfig.h"
+
 #import <UMSocialCore/UMSocialCore.h>
 #import "DHGuidePageHUD.h"
 #import "JPUSHService.h"    // JPush功能所需头文件
@@ -41,7 +41,7 @@
 // 如果需要使 idfa功能所需要引 的头 件(可选) #import <AdSupport/AdSupport.h>
 @interface AppDelegate ()<JPUSHRegisterDelegate,UITabBarControllerDelegate, CYLTabBarControllerDelegate>
 //@property (nonatomic, strong)BMKMapManager* mapManager;
-@property (nonatomic , strong)CYLTabBarControllerConfig *tab;
+
 @end
 
 @implementation AppDelegate
@@ -93,6 +93,8 @@
 
     if ([User UserOb].UserLogin) {
         CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
+        self.tab = TabBarControllerConfig;
+        TabBarControllerConfig.tabBarController.delegate=self;
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.rootViewController  = TabBarControllerConfig.tabBarController ;
     }else{
@@ -105,7 +107,7 @@
 
 
 
-//    TabBarControllerConfig.tabBarController.delegate=self;
+    
     self.window.backgroundColor=[UIColor whiteColor];
     [self.window makeKeyAndVisible];
     /** App判断第一次启动的方法 */
@@ -297,24 +299,7 @@
 - (void)yfGotoPage:(NSDictionary *)userInfo {
     NSString *idid = userInfo[@"id"];
     [self loadordersInfo:[idid integerValue]];
-//    UINavigationController *nav;
-//    AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
-//    UIViewController *currentVc = delegete.window.rootViewController;
-//
-//    if ([currentVc isKindOfClass:[CYLTabBarController class]]) {
-//        CYLTabBarController *tabVC = [self fm_ifIsCYLTabBarControllerSoReturn];
-//        [tabVC.view endEditing:YES];
-//        nav = tabVC.selectedViewController;
-//
-//    } else if ([currentVc isKindOfClass:[UINavigationController class]]) {
-//        nav = (UINavigationController*)currentVc;
-//    }
-//    FMMainModel *model = [FMMainModel mj_objectWithKeyValues:userInfo];
-//
-//    DetailsVC *vc = [[DetailsVC alloc]init];
-//    model.module_type = model.type; //推送格type 对应  module_type
-//    vc.model = model;
-//    [nav pushViewController:vc animated:YES];
+
 }
 
 #pragma mark - 获取推送过来的订单详情
@@ -337,31 +322,10 @@
 }
 
 #pragma mark - 监控tabbar的点击
-//- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
-//    [[self cyl_tabBarController] updateSelectionStatusIfNeededForTabBarController:tabBarController shouldSelectViewController:viewController];
-//    FMBaseNavigationController *nav=(FMBaseNavigationController *)viewController;
-//
-//    if ([viewController.tabBarItem.title isEqualToString:@"文化商城"] &&[tabBarController.selectedViewController.tabBarItem.title isEqualToString:@"文化商城"]) {
-//        FMWebViewVC *vc=(FMWebViewVC *)nav.visibleViewController;
-//        [vc.webView reload];
-//
-//    }else if ([viewController.tabBarItem.title isEqualToString:@"首页"] &&[tabBarController.selectedViewController.tabBarItem.title isEqualToString:@"首页"]) {
-//        FMHomeVC *vc=(FMHomeVC *)nav.visibleViewController;
-//        [vc.table.mj_header beginRefreshing];
-//        [vc headerRefresh];
-//
-//    }else if ([viewController.tabBarItem.title isEqualToString:@"社区"] &&[tabBarController.selectedViewController.tabBarItem.title isEqualToString:@"社区"]) {
-//
-//        FMCommunityVC *vc=(FMCommunityVC *)nav.visibleViewController;
-//        [vc.topicList.table.mj_header beginRefreshing];
-//        [vc.topicList headerRefresh];
-//    }else if ([viewController.tabBarItem.title isEqualToString:@"活动"] &&[tabBarController.selectedViewController.tabBarItem.title isEqualToString:@"活动"]) {
-//
-//        FMActivityVC *vc=(FMActivityVC *)nav.visibleViewController;
-//        [vc headerRefresh];
-//    }
-//    return YES;
-//}
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController {
+    [[self cyl_tabBarController] updateSelectionStatusIfNeededForTabBarController:tabBarController shouldSelectViewController:viewController];
+    return YES;
+}
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectControl:(UIControl *)control {
   
 }
