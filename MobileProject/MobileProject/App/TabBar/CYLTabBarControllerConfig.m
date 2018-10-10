@@ -62,8 +62,8 @@
                                             };
     NSDictionary * tabBarItemAttribute02 = @{
                                              CYLTabBarItemTitle : @"招生",
-                                             CYLTabBarItemImage : @"student_nor",
-                                             CYLTabBarItemSelectedImage : @"student_down"
+                                             CYLTabBarItemImage : @"students_nor",
+                                             CYLTabBarItemSelectedImage : @"students_down"
                                              };
     NSDictionary * tabBarItemAttribute03 = @{
                                              CYLTabBarItemTitle : @"学员",

@@ -11,5 +11,6 @@
 @interface CodeShareV : UIView
 @property (nonatomic , strong)XLshare *share;
 @property (nonatomic, strong) PagingButtonView *pagingScr;
+@property (nonatomic , assign)ShareType type;
 - (void)show;
 @end

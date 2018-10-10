@@ -204,7 +204,6 @@
 @property (nonatomic , strong)NSString *idCardBackUrl;// 身份证反面,
 @property (nonatomic , strong)NSString *contractUrl;// 合同图片,
 //@property (nonatomic , strong)NSString *createBy;//
-//@property (nonatomic , strong)NSString *createTime;//
 //@property (nonatomic , strong)NSString *updateBy;//
 //@property (nonatomic , strong)NSString *updateTime;//
 @property (nonatomic , strong)NSString *deptIds;//
@@ -342,6 +341,10 @@
 @property (nonatomic , assign)int useNum;
 @property (nonatomic , strong)NSString *tittle;//标题
 @property (nonatomic , strong)NSString *imgUrl;
+@property (nonatomic , strong)NSArray *imgArrary;//
+@property (nonatomic , strong)NSString *moduleCode;//模板编号
+@property (nonatomic , strong)NSString *memo;//
+@property (nonatomic , strong)NSString *resource;
 @end
 
 

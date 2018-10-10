@@ -13,7 +13,7 @@
 
 #define KURL(urlstr) [NSString stringWithFormat:@"%@%@",FMBaseURL,urlstr]
 
-#define KURLIma(urlstr)  (([urlstr containsString:@"http"] )?  urlstr : ([NSString stringWithFormat:@"%@%@",FMBaseURL,urlstr]))
+#define KURLIma(urlstr)  (([urlstr containsString:@"http"] )?  urlstr : ([NSString stringWithFormat:@"%@%@",[XLSingleton singleton].scanPhotoIp,urlstr]))
 
 /////////////////// 新接口 按照 pragma mark写入对应 mark中。然后清除旧接口。
 #define APIappInfo KURL(@"/api/apps/info?app_id=2")
@@ -39,109 +39,125 @@
 
 
 #pragma mark 手机号登陆
-#define GETmembersLogin KURL(@"/app/login?mobile=%@&password=%@")
+#define GETmembersLogin KURL(@"app/login?mobile=%@&password=%@")
 
 #pragma mark 分校车辆管理
-#define POSTTeamCarLis KURL(@"/app/team/teamCar/teamCarList")
+#define POSTTeamCarLis KURL(@"app/team/teamCar/teamCarList")
 
 #pragma mark 分校所属驾校管理
-#define POSTTeamSchoolList KURL(@"/app/team/teamSchool/teamSchoolList")
+#define POSTTeamSchoolList KURL(@"app/team/teamSchool/teamSchoolList")
 
 #pragma mark 数据字典接口
-#define POSTAppDictList KURL(@"/system/dict/data/appDictList")
+#define POSTAppDictList KURL(@"system/dict/data/appDictList")
 
 #pragma mark -新增学员咨询接口
-#define POSTStudenteamAdd KURL(@"/app/studenteam/add")
+#define POSTStudenteamAdd KURL(@"app/studenteam/add")
 
 #pragma mark -学员咨询列表接口
-#define POSTStudenteamList KURL(@"/app/studenteam/list")
+#define POSTStudenteamList KURL(@"app/studenteam/list")
 
 #pragma mark -修改学员咨询接口
-#define POSTStudenteamEdit KURL(@"/app/studenteam/edit")
+#define POSTStudenteamEdit KURL(@"app/studenteam/edit")
 
 #pragma mark -学员报名-修改资料接口
-#define POSTUpdateStudent KURL(@"/app/team/student/updateStudent")
+#define POSTUpdateStudent KURL(@"app/team/student/updateStudent")
 
 #pragma mark -查询报名学员列表接口
-#define POSTStudentSignList KURL(@"/app/team/student/studentSignList")
+#define POSTStudentSignList KURL(@"app/team/student/studentSignList")
 
 #pragma mark -查询招生名片列表接口
-#define POSTEnrollInfoList KURL(@"/app/enrollInfo/list")
+#define POSTEnrollInfoList KURL(@"app/enrollInfo/list")
 
 #pragma mark -学员咨询报名接口
-#define POSTSignStudent KURL(@"/app/studenteam/signStudent")
+#define POSTSignStudent KURL(@"app/studenteam/signStudent")
 
 #pragma mark -修改班型接口
-#define POSTClassTypeEdit KURL(@"/app/classType/edit")
+#define POSTClassTypeEdit KURL(@"app/classType/edit")
 
 #pragma mark -app新增班型接口
-#define POSTClassTypeAdd KURL(@"/app/classType/add")
+#define POSTClassTypeAdd KURL(@"app/classType/add")
 
 #pragma mark -删除班型接口
-#define POSTClassTypeRemove KURL(@"/app/classType/remove")
+#define POSTClassTypeRemove KURL(@"app/classType/remove")
 
 #pragma mark -获取招生名片信息接口
-#define POSTgGetEnrollInfoInfo KURL(@"/app/enrollInfo/getEnrollInfoInfo")
+#define POSTgGetEnrollInfoInfo KURL(@"app/enrollInfo/getEnrollInfoInfo")
 
 
 #pragma mark -文件上传
-#define POSTUpLoadFile KURL(@"/system/file/upLoadFile")
+#define POSTUpLoadFile KURL(@"system/file/upLoadFile")
 
 #pragma mark -修改招生名片接口
-#define POSTEnrollInfoEdit KURL(@"/app/enrollInfo/edit")
+#define POSTEnrollInfoEdit KURL(@"app/enrollInfo/edit")
 
 
 #pragma mark -修改密码
-#define POSTEditPwd KURL(@"/app/team/teamUser/editPwd")
+#define POSTEditPwd KURL(@"app/team/teamUser/editPwd")
 
 #pragma mark -招生日报
-#define POSTCensusList KURL(@"/app/census/list")
+#define POSTCensusList KURL(@"app/census/list")
 
 #pragma mark - 消息中心
-#define POSTFirstList KURL(@"/appMessage/first/list")
+#define POSTFirstList KURL(@"appMessage/first/list")
 
 #pragma mark - 获取消息详情
-#define POSTGetMessageInfo KURL(@"/appMessage/first/getMessageInfo")
+#define POSTGetMessageInfo KURL(@"appMessage/first/getMessageInfo")
 
 
 #pragma mark - 全部已读
-#define POSTUpdateAllRead KURL(@"/appMessage/first/updateAllRead")
+#define POSTUpdateAllRead KURL(@"appMessage/first/updateAllRead")
 
 
 #pragma mark -添加消息
-#define POSTReplyAdd KURL(@"/app/reply/add")
+#define POSTReplyAdd KURL(@"app/reply/add")
 
 
 #pragma mark - 名片H5
-#define HTMLMINGPIAN KURL(@"/plat/#/?type=app&id=%@")
-#define HTMLMINGPIANFENXIANG KURL(@"/plat/#/?id=%@")
+#define HTMLMINGPIAN KURL(@"plat/#/?type=app&id=%@")
+#define HTMLMINGPIANFENXIANG KURL(@"plat/#/?id=%@")
 
 #pragma mark - 二维码
-#define XIAOCHENGXUEWM KURL(@"/wechart/pages/index/detail/detail?id=%@")
+#define XIAOCHENGXUEWM KURL(@"wechart/pages/index/detail/detail?id=%@")
 
 #pragma mark - 今日咨询学员
-#define POSTCensiusList KURL(@"/app/census/censiusList")
+#define POSTCensiusList KURL(@"app/census/censiusList")
 
 #pragma mark - 海报模板列表
-#define POSTSysList KURL(@"/app/post/sys/list")
+#define POSTSysList KURL(@"app/post/sys/list")
+
+#pragma mark - 我的海报
+#define POSTUserList KURL(@"app/post/user/list")
+
+#pragma MARK - 获取系统海报模版信息详情接口
+#define POSTSysDetail KURL(@"app/post/sys/detail")
+
+#pragma mark - 获取个人海报模版信息详情接口
+#define POSTUserDetail KURL(@"app/post/user/detail");
+#pragma mark - 新增用户海报接口
+#define POSTPostAdd KURL(@"app/post/add")
+
+#pragma mark - h图文海报H5
+#define HTMLHAIBAO KURL(@"plat/#/poster/index?id=%@&type=%@")
+//plat/#/poster/index?type=app&id=
+//--------------------------------------------------------------------------------------------------
 
 #pragma mark 一下全部要删除掉
 
 #pragma mark --------首页
-#define GETMembersIndexInfo KURL(@"/api/members/index/info?province=%@")
-#define GETMembersIndexInfoLOGIN KURL(@"/api/members/index/info?province=%@&token=%@")
+#define GETMembersIndexInfo KURL(@"api/members/index/info?province=%@")
+#define GETMembersIndexInfoLOGIN KURL(@"api/members/index/info?province=%@&token=%@")
 
 #pragma mark --------我的
 //我的账户
-#define GETMembersAccountInfo KURL(@"/api/members/account/info?token=%@")
+#define GETMembersAccountInfo KURL(@"api/members/account/info?token=%@")
 //上传凭证发起支付
-#define POSTMembersAccountRecharge KURL(@"/api/members/account/recharge?token=%@&money=%@&type=%ld&image=%@")
+#define POSTMembersAccountRecharge KURL(@"api/members/account/recharge?token=%@&money=%@&type=%ld&image=%@")
 
 /// 邀请链接
-#define URLMemberInvite KURL(@"/member/invite")
-#define URLMemberInviteUID KURL(@"/member/invite?uid=%@")
+#define URLMemberInvite KURL(@"member/invite")
+#define URLMemberInviteUID KURL(@"member/invite?uid=%@")
 /// 银联支付
-#define GETUnionPay KURL(@"/api/union/UnionPay?token=%@&site_id=1&order_id=%@")
+#define GETUnionPay KURL(@"api/union/UnionPay?token=%@&site_id=1&order_id=%@")
 //#define POSTMembersAccountDetail KURL(@"/api/members/account/detail?token=%@")
 //上传文件
 #define POSTFileUpload KURL(@"/api/files/upload?token=%@")

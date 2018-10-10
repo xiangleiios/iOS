@@ -95,44 +95,72 @@
     }];
 }
 - (void)PagingButtonView:(PagingButtonView *)actionView clickButtonWithIndex:(NSInteger)index {
-    
-//    XLshare *share = [[XLshare alloc]init];
-//    share.title = @"淘电宝，您身边的售电专家";
-//    share.image_url = @"http://tdb.asia-cloud.com/uploads/images/2018/0702/20180702105337108.png";
-//    share.subTitle = @"邀请您使用淘电宝APP，欢迎下载使用，注册有礼哦~~";
-//    share.url = [NSString stringWithFormat:URLMemberInviteUID,[User UserOb].idid];
-
-    switch (index) {
-        case 0:{
-            //朋友圈
-            [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatTimeLine];
-            [self shutDown];
-            return;
+    if (self.type == ShareTypeText) {
+        switch (index) {
+            case 0:{
+                //朋友圈
+                [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatTimeLine];
+                [self shutDown];
+                return;
+            }
+                break;
+            case 1:{
+                //小程序
+                [self.share shareMiniProgramToPlatformType:UMSocialPlatformType_WechatSession];
+                [self shutDown];
+                return;
+            }
+                break;
+            case 2:{
+                [self.share shareWebPageToPlatformType:UMSocialPlatformType_Qzone];
+                [self shutDown];
+                return;
+            }
+                break;
+            case 3:{
+                [self.share shareWebPageToPlatformType:UMSocialPlatformType_QQ];
+                [self shutDown];
+                return;
+            }
+                break;
+                
+            default:
+                break;
         }
-            break;
-        case 1:{
-//            [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
-            [self.share shareMiniProgramToPlatformType:UMSocialPlatformType_WechatSession];
-            [self shutDown];
-            return;
+    }else if (self.type == ShareTypeImage){
+        switch (index) {
+            case 0:{
+                //朋友圈
+                [self.share shareImageToPlatformType:UMSocialPlatformType_WechatTimeLine];
+                [self shutDown];
+                return;
+            }
+                break;
+            case 1:{
+                //小程序
+                [self.share shareImageToPlatformType:UMSocialPlatformType_WechatSession];
+                [self shutDown];
+                return;
+            }
+                break;
+            case 2:{
+                [self.share shareImageToPlatformType:UMSocialPlatformType_Qzone];
+                [self shutDown];
+                return;
+            }
+                break;
+            case 3:{
+                [self.share shareImageToPlatformType:UMSocialPlatformType_QQ];
+                [self shutDown];
+                return;
+            }
+                break;
+                
+            default:
+                break;
         }
-            break;
-        case 2:{
-            [self.share shareWebPageToPlatformType:UMSocialPlatformType_Qzone];
-            [self shutDown];
-            return;
-        }
-            break;
-        case 3:{
-            [self.share shareWebPageToPlatformType:UMSocialPlatformType_QQ];
-            [self shutDown];
-            return;
-        }
-            break;
-            
-        default:
-            break;
     }
+    
 }
 #pragma mark - 退出
 - (void)shutDown{

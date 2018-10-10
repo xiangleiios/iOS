@@ -20,6 +20,8 @@
 @property (nonatomic , strong)NSArray *imgarr;
 @property (nonatomic , strong)NSArray *titlerr;
 @property (nonatomic , strong)NSString *cacheSize;
+@property (nonatomic , strong)UIImageView *HeadPortrait;
+@property (nonatomic , strong)UILabel *pho;
 @end
 
 @implementation FMMineVC
@@ -96,18 +98,10 @@
     self.table.delegate=self;
     self.table.dataSource=self;
     self.table.scrollEnabled = NO;
-    //设置可编辑
-    //    self.table.allowsMultipleSelectionDuringEditing = YES;
     _table.tableFooterView = [UIView new];
+    _table.tableHeaderView = [self headerview];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-//    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
-//    _table.needPlaceholderView = YES;
-//    __weak __typeof(self)weakSelf = self;
-//    _table.reloadBlock = ^{
-//        [weakSelf.table.mj_header beginRefreshing];
-//    };
-//    [self headerRefresh];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -115,7 +109,36 @@
     //    [self.table.mj_header beginRefreshing];
 }
 
-
+- (UIView *)headerview{
+    UIView *head = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(320))];
+    UIImageView *img = [[UIImageView alloc] init];
+    [head addSubview:img];
+    [img setImage:[UIImage imageNamed:@"my_white_bg"]];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.mas_equalTo(head).mas_offset(KFit_W6S(30));
+        make.right.mas_equalTo(head).mas_offset(-KFit_W6S(30));
+        make.height.mas_equalTo(KFit_H6S(284));
+    }];
+    
+    self.HeadPortrait = [[UIImageView alloc] init];
+    [head addSubview:self.HeadPortrait];
+    [self.HeadPortrait mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(img);
+        make.left.mas_equalTo(img).mas_offset(KFit_W6S(30));
+        make.width.height.mas_equalTo(KFit_W6S(100));
+    }];
+    [self.HeadPortrait fm_setCircleHeader:@"head_nor"];
+    
+    self.pho = [[UILabel alloc] init];
+    [head addSubview:self.pho];
+    [self.pho mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(img);
+        make.left.mas_equalTo(self.HeadPortrait.mas_right).mas_offset(KFit_W6S(25));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(300), KFit_H6S(40)));
+    }];
+    self.pho.text = [User UserOb].mobile;
+    return head;
+}
 
 #pragma mark-tableview代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{

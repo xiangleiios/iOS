@@ -19,7 +19,15 @@ typedef NS_ENUM(NSInteger, CellType) {
 };
 
 
+typedef NS_ENUM(NSInteger, ShareType) {
+    ShareTypeText = 1, // 分享图文
+    ShareTypeImage = 2 // 分享图片
+};
 
+typedef NS_ENUM(NSInteger, PostersListType) {
+    PostersListTypeAll = 1, // 公共海报列表
+    PostersListTypeMy = 2 // 我的海报列表
+};
 
 
 

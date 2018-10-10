@@ -14,7 +14,13 @@
 @property (nonatomic , strong)NSString *url;
 @property (nonatomic , strong)NSString *subTitle;
 @property (nonatomic , strong)NSString *xcxurl;
+@property (nonatomic , strong)UIImage *shareImg;
+@property (nonatomic , strong)NSString *shareImgUrl;
 - (void)umengShare:(UIView*)view;
+
 - (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType;
+/// 小程序分享
 - (void)shareMiniProgramToPlatformType:(UMSocialPlatformType)platformType;
+/// 图片分享
+- (void)shareImageToPlatformType:(UMSocialPlatformType)platformType;
 @end

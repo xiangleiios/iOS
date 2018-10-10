@@ -33,7 +33,7 @@
     if (!_customMadeDic) {
 //        NSString *path = [[NSBundle mainBundle] pathForResource:@"ReleaseNetworkProtocol" ofType:@"plist"];
         NSString *path = [[NSBundle mainBundle] pathForResource:@"DebugNetworkProtocol" ofType:@"plist"];
-//        https://test.ztjwsoft.com   http://192.168.0.233:8080
+//        https://test.ztjwsoft.com   http://192.168.0.233:8080   https://test.ztjwsoft.com/dsmp/#/
 
         _customMadeDic = [NSDictionary dictionaryWithContentsOfFile:path];
     }

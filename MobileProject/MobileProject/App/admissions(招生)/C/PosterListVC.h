@@ -11,7 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PosterListVC : UIViewController
-
+@property (nonatomic , strong)NSMutableDictionary *dic;
+@property (nonatomic , strong)NSString *url;
+@property (nonatomic , assign)PostersListType type;
 @end
 
 NS_ASSUME_NONNULL_END

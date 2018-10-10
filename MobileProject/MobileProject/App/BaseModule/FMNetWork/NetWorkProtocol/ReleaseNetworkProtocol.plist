@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>NetWorkProtocol_BaseURL</key>
-	<string>https://jk.ztjwsoft.com</string>
+	<string>https://jk.ztjwsoft.com/</string>
 </dict>
 </plist>

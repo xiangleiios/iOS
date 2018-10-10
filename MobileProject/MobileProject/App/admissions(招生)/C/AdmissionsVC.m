@@ -9,7 +9,8 @@
 #import "AdmissionsVC.h"
 
 #import "PicturePosterListVC.h"
-
+#import "PosterListVC.h"
+#import "MyAdmissionsVC.h"
 @interface AdmissionsVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -73,22 +74,28 @@
     self.myCategoryView.contentScrollView = self.scrollView;
     
     PicturePosterListVC *vc = [[PicturePosterListVC alloc] init];
+    vc.type = PostersListTypeAll;
     vc.url = POSTSysList;
+    [vc.dic setValue:@"1" forKey:@"type"];
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
-    PicturePosterListVC *vct = [[PicturePosterListVC alloc] init];
+    PosterListVC *vct = [[PosterListVC alloc] init];
+    vct.type = PostersListTypeAll;
+    vct.url = POSTSysList;
+    [vct.dic setValue:@"2" forKey:@"type"];
     [self addChildViewController:vct];
     [self.scrollView addSubview:vct.view];
     vct.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
 }
 #pragma mark - 导航相关
 - (void)laodNavigation{
-    [self.navigationView setTitle:@"招生"];
+    [self.navigationView setTitle:@"招生海报"];
     kWeakSelf(self)
     self.choose = [self.navigationView addRightButtonWithTitle:@"我的海报" clickCallBack:^(UIView *view) {
-        
+        MyAdmissionsVC *vc = [[MyAdmissionsVC alloc] init];
+        [weakself.navigationController pushViewController:vc animated:YES];
         
     }];
     [self.choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];

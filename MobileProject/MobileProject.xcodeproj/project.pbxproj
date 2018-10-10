@@ -85,6 +85,13 @@
 		A75F943D212D4C0B00384EB0 /* AddInformationTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943C212D4C0B00384EB0 /* AddInformationTwoVC.m */; };
 		A75F9440212D57F900384EB0 /* AddInformationThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943F212D57F900384EB0 /* AddInformationThreeVC.m */; };
 		A75F9446212D706600384EB0 /* BusinessCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9445212D706600384EB0 /* BusinessCardVC.m */; };
+		A76CA208216C46300097798D /* pictureV.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA207216C46300097798D /* pictureV.m */; };
+		A76CA20B216CA0740097798D /* MyPicturePosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA20A216CA0740097798D /* MyPicturePosterListVC.m */; };
+		A76CA20E216CA0920097798D /* MyPosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA20D216CA0920097798D /* MyPosterListVC.m */; };
+		A76CA211216CA2540097798D /* MyPicturePosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA210216CA2540097798D /* MyPicturePosterCell.m */; };
+		A76CA214216CA2C30097798D /* MyPictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA213216CA2C30097798D /* MyPictureCell.m */; };
+		A76CA217216CB3000097798D /* MyPicturePosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA216216CB3000097798D /* MyPicturePosterVC.m */; };
+		A76CA21A216CBCA00097798D /* MyPosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA219216CBCA00097798D /* MyPosterVC.m */; };
 		A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F8682134DF0B008A8948 /* StudentsListTwoVC.m */; };
 		A778F86C2134E004008A8948 /* StudentsThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86B2134E004008A8948 /* StudentsThreeCell.m */; };
 		A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86E2134EEDA008A8948 /* QrCodeVC.m */; };
@@ -95,6 +102,9 @@
 		A787E17F215DFB3700EF01F2 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A787E180215DFB3C00EF01F2 /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; };
 		A787E181215DFB3C00EF01F2 /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A78E2DD3216AF37200CBAED1 /* PictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD2216AF37200CBAED1 /* PictureCell.m */; };
+		A78E2DD6216B36C400CBAED1 /* PosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD5216B36C400CBAED1 /* PosterVC.m */; };
+		A78E2DD9216B5FA900CBAED1 /* MyAdmissionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD8216B5FA900CBAED1 /* MyAdmissionsVC.m */; };
 		A79276FE212A525D00B4D65D /* AddStudentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79276FD212A525D00B4D65D /* AddStudentVC.m */; };
 		A7927701212A900200B4D65D /* StudentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7927700212A900200B4D65D /* StudentsVC.m */; };
 		A79D080F2150F08D00FD1D58 /* MyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79D080D2150F08D00FD1D58 /* MyInfoVC.m */; };
@@ -134,6 +144,7 @@
 		A7E97A1221354B4500EA6F14 /* LHSIDCardScaningView.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E97A0421354B4500EA6F14 /* LHSIDCardScaningView.m */; };
 		A7E97A1321354B4500EA6F14 /* UIAlertController+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E97A0721354B4500EA6F14 /* UIAlertController+Extend.m */; };
 		A7E97A1421354B4500EA6F14 /* UIImage+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E97A0921354B4500EA6F14 /* UIImage+Extend.m */; };
+		A7FC64AB216DCECD002DE137 /* AddInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7FC64AA216DCECD002DE137 /* AddInformationVC.m */; };
 		DA03437F1F508221008E7BE1 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = DA03437E1F508221008E7BE1 /* test.html */; };
 		DA0343831F508F30008E7BE1 /* FMTokenStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0343821F508F30008E7BE1 /* FMTokenStatus.m */; };
 		DA0346261F509098008E7BE1 /* FMAnalyticsConfigManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA0343881F509097008E7BE1 /* FMAnalyticsConfigManager.m */; };
@@ -744,6 +755,20 @@
 		A75F943F212D57F900384EB0 /* AddInformationThreeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInformationThreeVC.m; sourceTree = "<group>"; };
 		A75F9444212D706600384EB0 /* BusinessCardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessCardVC.h; sourceTree = "<group>"; };
 		A75F9445212D706600384EB0 /* BusinessCardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessCardVC.m; sourceTree = "<group>"; };
+		A76CA206216C46300097798D /* pictureV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pictureV.h; sourceTree = "<group>"; };
+		A76CA207216C46300097798D /* pictureV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pictureV.m; sourceTree = "<group>"; };
+		A76CA209216CA0740097798D /* MyPicturePosterListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPicturePosterListVC.h; sourceTree = "<group>"; };
+		A76CA20A216CA0740097798D /* MyPicturePosterListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPicturePosterListVC.m; sourceTree = "<group>"; };
+		A76CA20C216CA0920097798D /* MyPosterListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPosterListVC.h; sourceTree = "<group>"; };
+		A76CA20D216CA0920097798D /* MyPosterListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPosterListVC.m; sourceTree = "<group>"; };
+		A76CA20F216CA2540097798D /* MyPicturePosterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPicturePosterCell.h; sourceTree = "<group>"; };
+		A76CA210216CA2540097798D /* MyPicturePosterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPicturePosterCell.m; sourceTree = "<group>"; };
+		A76CA212216CA2C30097798D /* MyPictureCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPictureCell.h; sourceTree = "<group>"; };
+		A76CA213216CA2C30097798D /* MyPictureCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPictureCell.m; sourceTree = "<group>"; };
+		A76CA215216CB3000097798D /* MyPicturePosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPicturePosterVC.h; sourceTree = "<group>"; };
+		A76CA216216CB3000097798D /* MyPicturePosterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPicturePosterVC.m; sourceTree = "<group>"; };
+		A76CA218216CBCA00097798D /* MyPosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPosterVC.h; sourceTree = "<group>"; };
+		A76CA219216CBCA00097798D /* MyPosterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyPosterVC.m; sourceTree = "<group>"; };
 		A778F8672134DF0B008A8948 /* StudentsListTwoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsListTwoVC.h; sourceTree = "<group>"; };
 		A778F8682134DF0B008A8948 /* StudentsListTwoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsListTwoVC.m; sourceTree = "<group>"; };
 		A778F86A2134E004008A8948 /* StudentsThreeCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsThreeCell.h; sourceTree = "<group>"; };
@@ -757,6 +782,12 @@
 		A787E175215DFB0800EF01F2 /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
 		A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		A787E177215DFB0900EF01F2 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
+		A78E2DD1216AF37200CBAED1 /* PictureCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureCell.h; sourceTree = "<group>"; };
+		A78E2DD2216AF37200CBAED1 /* PictureCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureCell.m; sourceTree = "<group>"; };
+		A78E2DD4216B36C400CBAED1 /* PosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosterVC.h; sourceTree = "<group>"; };
+		A78E2DD5216B36C400CBAED1 /* PosterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosterVC.m; sourceTree = "<group>"; };
+		A78E2DD7216B5FA900CBAED1 /* MyAdmissionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyAdmissionsVC.h; sourceTree = "<group>"; };
+		A78E2DD8216B5FA900CBAED1 /* MyAdmissionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyAdmissionsVC.m; sourceTree = "<group>"; };
 		A79276FC212A525D00B4D65D /* AddStudentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddStudentVC.h; sourceTree = "<group>"; };
 		A79276FD212A525D00B4D65D /* AddStudentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentVC.m; sourceTree = "<group>"; };
 		A79276FF212A900200B4D65D /* StudentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsVC.h; sourceTree = "<group>"; };
@@ -833,6 +864,8 @@
 		A7E97A0721354B4500EA6F14 /* UIAlertController+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+Extend.m"; sourceTree = "<group>"; };
 		A7E97A0821354B4500EA6F14 /* UIImage+Extend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Extend.h"; sourceTree = "<group>"; };
 		A7E97A0921354B4500EA6F14 /* UIImage+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extend.m"; sourceTree = "<group>"; };
+		A7FC64A9216DCECD002DE137 /* AddInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddInformationVC.h; sourceTree = "<group>"; };
+		A7FC64AA216DCECD002DE137 /* AddInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInformationVC.m; sourceTree = "<group>"; };
 		DA03437E1F508221008E7BE1 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		DA0343811F508F30008E7BE1 /* FMTokenStatus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMTokenStatus.h; sourceTree = "<group>"; };
 		DA0343821F508F30008E7BE1 /* FMTokenStatus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMTokenStatus.m; sourceTree = "<group>"; };
@@ -2025,6 +2058,8 @@
 				A75F943C212D4C0B00384EB0 /* AddInformationTwoVC.m */,
 				A75F943E212D57F900384EB0 /* AddInformationThreeVC.h */,
 				A75F943F212D57F900384EB0 /* AddInformationThreeVC.m */,
+				A7FC64A9216DCECD002DE137 /* AddInformationVC.h */,
+				A7FC64AA216DCECD002DE137 /* AddInformationVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -2133,8 +2168,6 @@
 				A778F8682134DF0B008A8948 /* StudentsListTwoVC.m */,
 				A778F86D2134EEDA008A8948 /* QrCodeVC.h */,
 				A778F86E2134EEDA008A8948 /* QrCodeVC.m */,
-				A7E979D4213535CB00EA6F14 /* CodeShareV.h */,
-				A7E979D5213535CB00EA6F14 /* CodeShareV.m */,
 				A7153CDE21426164004D4441 /* StudentDetailsVC.h */,
 				A7153CDF21426164004D4441 /* StudentDetailsVC.m */,
 			);
@@ -2201,6 +2234,14 @@
 			children = (
 				A7BA6F52215F6C3B00A5FA0D /* PicturePosterCell.h */,
 				A7BA6F53215F6C3B00A5FA0D /* PicturePosterCell.m */,
+				A78E2DD1216AF37200CBAED1 /* PictureCell.h */,
+				A78E2DD2216AF37200CBAED1 /* PictureCell.m */,
+				A76CA206216C46300097798D /* pictureV.h */,
+				A76CA207216C46300097798D /* pictureV.m */,
+				A76CA20F216CA2540097798D /* MyPicturePosterCell.h */,
+				A76CA210216CA2540097798D /* MyPicturePosterCell.m */,
+				A76CA212216CA2C30097798D /* MyPictureCell.h */,
+				A76CA213216CA2C30097798D /* MyPictureCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2216,6 +2257,18 @@
 				A7BA6F50215F6AC400A5FA0D /* PosterListVC.m */,
 				A75ACC912160A5EE00E5467C /* PicturePosterVC.h */,
 				A75ACC922160A5EE00E5467C /* PicturePosterVC.m */,
+				A78E2DD4216B36C400CBAED1 /* PosterVC.h */,
+				A78E2DD5216B36C400CBAED1 /* PosterVC.m */,
+				A78E2DD7216B5FA900CBAED1 /* MyAdmissionsVC.h */,
+				A78E2DD8216B5FA900CBAED1 /* MyAdmissionsVC.m */,
+				A76CA209216CA0740097798D /* MyPicturePosterListVC.h */,
+				A76CA20A216CA0740097798D /* MyPicturePosterListVC.m */,
+				A76CA20C216CA0920097798D /* MyPosterListVC.h */,
+				A76CA20D216CA0920097798D /* MyPosterListVC.m */,
+				A76CA215216CB3000097798D /* MyPicturePosterVC.h */,
+				A76CA216216CB3000097798D /* MyPicturePosterVC.m */,
+				A76CA218216CBCA00097798D /* MyPosterVC.h */,
+				A76CA219216CBCA00097798D /* MyPosterVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -4316,6 +4369,8 @@
 				A75D2CD5214BB5620065FD7F /* shareimg.png */,
 				DAE210F91EF2867A000EAB90 /* XLshare.h */,
 				DAE210FA1EF2867A000EAB90 /* XLshare.m */,
+				A7E979D4213535CB00EA6F14 /* CodeShareV.h */,
+				A7E979D5213535CB00EA6F14 /* CodeShareV.m */,
 			);
 			path = "UMShareCustom(友盟分享封装)";
 			sourceTree = "<group>";
@@ -4730,6 +4785,7 @@
 				4F09449A1F39A83200BA80E5 /* ToolbarVC.m in Sources */,
 				DA0346571F509098008E7BE1 /* NSDecimalNumber+Extensions.m in Sources */,
 				DA0347241F509098008E7BE1 /* FMHelper.m in Sources */,
+				A76CA20B216CA0740097798D /* MyPicturePosterListVC.m in Sources */,
 				A7B5A10A2133C86800BC197B /* RegistrationInformationVC.m in Sources */,
 				DA867D351F58F86B00D4D011 /* NSError+JYHandle.m in Sources */,
 				DAE212801EF2867B000EAB90 /* FMSearchBarViewController.m in Sources */,
@@ -4762,6 +4818,7 @@
 				DA867D251F58F29800D4D011 /* NSDictionary+JYSafe.m in Sources */,
 				A7A213BE212EA98600920678 /* CourseV.m in Sources */,
 				DA0346781F509098008E7BE1 /* NSString+Ruby.m in Sources */,
+				A76CA217216CB3000097798D /* MyPicturePosterVC.m in Sources */,
 				DA6730571FB08033002B6894 /* MSSBrowseLoadingImageView.m in Sources */,
 				DA0346771F509098008E7BE1 /* NSString+RemoveEmoji.m in Sources */,
 				DA03467F1F509098008E7BE1 /* NSTimer+Addition.m in Sources */,
@@ -4790,6 +4847,7 @@
 				DA959E531F53BEE9002389F6 /* ZFPlayerView.m in Sources */,
 				DA0346A81F509098008E7BE1 /* UIColor+HEX.m in Sources */,
 				A74FE4322126C83C008E159E /* XLColumnsV.m in Sources */,
+				A76CA21A216CBCA00097798D /* MyPosterVC.m in Sources */,
 				DA0346FC1F509098008E7BE1 /* UIView+Shake.m in Sources */,
 				A75F9437212D1A1900384EB0 /* AddInformationOneVC.m in Sources */,
 				4FB0F37220F5D57F0047BF7B /* GuideViewManager.m in Sources */,
@@ -4808,6 +4866,7 @@
 				DA959E441F53BEE9002389F6 /* README.md in Sources */,
 				A75D2CD9214BC01D0065FD7F /* FMJS.m in Sources */,
 				DA0346B61F509098008E7BE1 /* UIImage+BetterFace.m in Sources */,
+				A78E2DD6216B36C400CBAED1 /* PosterVC.m in Sources */,
 				DA03464C1F509098008E7BE1 /* NSDictionary+URL.m in Sources */,
 				A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */,
 				DA03470B1F509098008E7BE1 /* UIWebView+Alert.m in Sources */,
@@ -4823,6 +4882,7 @@
 				DA0346561F509098008E7BE1 /* NSDecimalNumber+CalculatingByString.m in Sources */,
 				DA08F8E21FA08BDC000A63BD /* FMMainModel.m in Sources */,
 				DA03465C1F509098008E7BE1 /* NSObject+AppInfo.m in Sources */,
+				A7FC64AB216DCECD002DE137 /* AddInformationVC.m in Sources */,
 				DA0346811F509098008E7BE1 /* NSURL+Param.m in Sources */,
 				DA0346E41F509098008E7BE1 /* UITableViewCell+TS_delaysContentTouches.m in Sources */,
 				DA78C3081F5D41A3009BAA90 /* NetworkProtocolOBJ.m in Sources */,
@@ -4868,6 +4928,7 @@
 				DA0347171F509098008E7BE1 /* FMClearCacheTool.m in Sources */,
 				DA03467B1F509098008E7BE1 /* NSString+Trims.m in Sources */,
 				DA03473E1F509098008E7BE1 /* FMWebShareHelper.m in Sources */,
+				A78E2DD9216B5FA900CBAED1 /* MyAdmissionsVC.m in Sources */,
 				A7BA6F51215F6AC400A5FA0D /* PosterListVC.m in Sources */,
 				A7AC816A212BBC5A00C6AB6C /* FMAskZhengView.m in Sources */,
 				4F6091791FE1129C00029A7E /* XLAlertView.m in Sources */,
@@ -4998,6 +5059,7 @@
 				4FAF62D020E08AB500552D50 /* TKPhoneTextField.m in Sources */,
 				A7E97A0A21354B4500EA6F14 /* AVCaptureViewController.m in Sources */,
 				DA867D5B1F59620200D4D011 /* MBProgressHUD+Additions.m in Sources */,
+				A76CA211216CA2540097798D /* MyPicturePosterCell.m in Sources */,
 				DA0347091F509098008E7BE1 /* UIViewController+TopBarMessage.m in Sources */,
 				DA67305A1FB08033002B6894 /* MSSBrowseNetworkViewController.m in Sources */,
 				DA0346E31F509098008E7BE1 /* UITableViewCell+NIB.m in Sources */,
@@ -5045,6 +5107,7 @@
 				DA0346831F509098008E7BE1 /* NSURLConnection+SelfSigned.m in Sources */,
 				A7E97A1021354B4500EA6F14 /* IDInfo.m in Sources */,
 				4FF9264220C7BD4600AB3E43 /* HomeChooseCell.m in Sources */,
+				A76CA20E216CA0920097798D /* MyPosterListVC.m in Sources */,
 				DAE212421EF2867B000EAB90 /* CommentBtn.m in Sources */,
 				DA0347191F509098008E7BE1 /* FMNavSegmentVC.m in Sources */,
 				A7825C49213CD29D0056FDA2 /* AddStudentCell.m in Sources */,
@@ -5110,6 +5173,7 @@
 				4F6F9CF82021620E00D571DA /* XLSingleton.m in Sources */,
 				DA03462E1F509098008E7BE1 /* NSManagedObjectContext+FetchRequestsConstructors.m in Sources */,
 				DA0346B91F509098008E7BE1 /* UIImage+Color.m in Sources */,
+				A76CA214216CA2C30097798D /* MyPictureCell.m in Sources */,
 				DA03470C1F509098008E7BE1 /* UIWebView+Blocks.m in Sources */,
 				DA0346961F509098008E7BE1 /* UIBarButtonItem+Action.m in Sources */,
 				DA0346CB1F509098008E7BE1 /* UIImageView+Reflect.m in Sources */,
@@ -5122,6 +5186,7 @@
 				DA0346ED1F509098008E7BE1 /* UITextView+PlaceHolder.m in Sources */,
 				DA0346471F509098008E7BE1 /* NSDictionary+Block.m in Sources */,
 				A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */,
+				A76CA208216C46300097798D /* pictureV.m in Sources */,
 				DA0347111F509098008E7BE1 /* UIWebView+Style.m in Sources */,
 				A74EB31B213E5A2E00564BC6 /* BusinessCardListVC.m in Sources */,
 				A75F943A212D329F00384EB0 /* FormsV.m in Sources */,
@@ -5190,6 +5255,7 @@
 				DA0346AC1F509098008E7BE1 /* UIControl+ActionBlocks.m in Sources */,
 				DA0346D51F509098008E7BE1 /* UINavigationItem+Margin.m in Sources */,
 				DA0346CC1F509098008E7BE1 /* UILabel+AutomaticWriting.m in Sources */,
+				A78E2DD3216AF37200CBAED1 /* PictureCell.m in Sources */,
 				DA0346341F509098008E7BE1 /* NSArray+Block.m in Sources */,
 				DA0346DD1F509098008E7BE1 /* UIScrollView+EmptyDataSet.m in Sources */,
 				DA78C30F1F5D41A3009BAA90 /* YTKNetworkAgent.m in Sources */,

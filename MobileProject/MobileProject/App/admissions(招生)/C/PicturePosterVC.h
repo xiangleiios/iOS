@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface PicturePosterVC : FMBaseViewController
 @property (nonatomic , strong)FMMainModel *model;
+@property (nonatomic , strong)NSString *url;
+@property (nonatomic , assign)PostersListType type;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -81,6 +81,7 @@
             if (self.pageNum==1) {
                 [self.dataArr removeAllObjects];
             }
+            [XLSingleton singleton].scanPhotoIp =responseObject[@"data"][@"scanPhotoIp"];
             NSArray *arr = responseObject[@"data"][@"list"][@"rows"];
             for (NSDictionary *dic in arr) {
                 FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
@@ -107,12 +108,12 @@
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 9;
-//    return self.dataArr.count;
+//    return 9;
+    return self.dataArr.count;
 }
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     PicturePosterCell *cell = (PicturePosterCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
-//    cell.model = self.dataArr[indexPath.row];
+    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 
@@ -142,7 +143,9 @@
 //    MyCollectionViewCell *cell = (MyCollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     FMMainModel *model = self.dataArr[indexPath.row];
     PicturePosterVC *vc = [[PicturePosterVC alloc] init];
-//    vc.model = model;
+    vc.type = PostersListTypeAll;
+    vc.url = POSTSysDetail;
+    vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UICollectionView *table;
 @property (nonatomic , strong)NSMutableDictionary *dic;
 @property (nonatomic , strong)NSString *url;
+@property (nonatomic , assign)PostersListType type;
 @end
 
 NS_ASSUME_NONNULL_END

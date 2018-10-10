@@ -12,6 +12,7 @@
 #import "QrCodeVC.h"
 #import "AddStudentCell.h"
 #import "BusinessCardListVC.h"
+#import "AddInformationVC.h"
 @interface AddStudentVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSArray *imgarr;

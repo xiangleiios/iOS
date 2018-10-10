@@ -13,4 +13,5 @@
 +(XLSingleton *)singleton;
 @property (nonatomic , strong)NSMutableArray *dateArr;
 @property (nonatomic , strong)NSMutableArray *courseArr;
+@property (nonatomic , strong)NSString *scanPhotoIp;
 @end

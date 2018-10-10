@@ -25,7 +25,6 @@
         make.top.left.right.mas_equalTo(self.contentView);
         make.height.mas_equalTo(KFit_H6S(400));
     }];
-    self.img.backgroundColor = [UIColor redColor];
     
     self.title = [[UILabel alloc] init];
     [self.contentView addSubview:self.title];
@@ -63,6 +62,6 @@
     _model = model;
     self.title.text = [NSString stringWithFormat:@"        %@",model.tittle];
     self.sub.text = [NSString stringWithFormat:@"%d人制作",model.useNum];
-    [self.img sd_setImageWithURL:[NSURL URLWithString:model.imgUrl]];
+    [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(model.imgUrl)]];
 }
 @end
