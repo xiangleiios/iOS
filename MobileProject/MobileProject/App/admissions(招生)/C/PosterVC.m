@@ -133,7 +133,9 @@
         if (kResponseObjectStatusCodeIsEqual(200)) {
             [MBProgressHUD showMsgHUD:@"保存成功"];
             MyPosterVC *vc = [[MyPosterVC alloc] init];
-            vc.idid = responseObject[@"data"];
+            vc.idid = [NSString stringWithFormat:@"%@",responseObject[@"data"]];
+            vc.shareTitle = self.model.tittle;
+            vc.shareContent = self.content.text;
             [self.navigationController pushViewController:vc animated:YES];
         }
         

@@ -79,7 +79,7 @@
     [self.contentView addSubview:self.content];
     self.content.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     self.content.lineBreakMode = NSLineBreakByWordWrapping;
-    self.content.numberOfLines = 6;
+    self.content.numberOfLines = 0;
     
 }
 
@@ -122,7 +122,7 @@
                 make.height.mas_equalTo(textHeight+1);
             }];
         }else{
-            self.content.numberOfLines = 6;
+            self.content.numberOfLines = 0;
             [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
                 make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(30));
@@ -231,9 +231,11 @@
 
 - (void)toShare{
     CodeShareV *v = [[CodeShareV alloc] init];
-    v.type = ShareTypeImage;
+    v.type = ShareTypeText;
     XLshare *share = [[XLshare alloc]init];
-    share.shareImgUrl = KURLIma(_model.memo);
+    share.title = self.model.tittle;
+    share.subTitle = self.model.content;
+    share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share"];
     v.share = share;
     [v show];
 }

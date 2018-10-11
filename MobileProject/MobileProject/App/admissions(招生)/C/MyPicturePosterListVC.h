@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)NSMutableDictionary *dic;
 @property (nonatomic , strong)NSString *url;
 @property (nonatomic , assign)PostersListType type;
+- (void)headerRefresh;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -146,6 +146,7 @@
     FMMainModel *model = self.dataArr[indexPath.row];
     MyPicturePosterVC *vc = [[MyPicturePosterVC alloc] init];
 //    vc.url = POSTSysDetail;
+    vc.vc = self;
     vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
     

@@ -25,11 +25,11 @@
 @property (nonatomic , strong)XLInformationV *hukou;
 @property (nonatomic , strong)XLInformationV *carType;
 @property (nonatomic , strong)XLInformationV *type;
-@property (nonatomic , strong)XLInformationV *price;
+//@property (nonatomic , strong)XLInformationV *price;
 @property (nonatomic , strong)XLInformationV *school;
 @property (nonatomic , strong)XLInformationV *referees;
 @property (nonatomic , strong)XLInformationV *note;
-@property (nonatomic , strong)XLInformationV *state;
+//@property (nonatomic , strong)XLInformationV *state;
 
 @end
 
@@ -145,7 +145,7 @@
     [vtwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.backview);
         make.top.mas_equalTo(lb.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(1170));
+        make.height.mas_equalTo(KFit_H6S(1080));
     }];
     
     self.IdNumber = [[XLInformationV alloc] informationWithTitle:@"身份证号" SubTitle:_model.idcard];
@@ -161,7 +161,7 @@
     
     self.carType = [[XLInformationV alloc] informationWithTitle:@"车型" SubTitle:cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.carType]]];
     
-    self.price = [[XLInformationV alloc] informationWithTitle:@"报考价格" SubTitle:_model.signupPrice];
+//    self.price = [[XLInformationV alloc] informationWithTitle:@"报考价格" SubTitle:_model.signupPrice];
     self.school = [[XLInformationV alloc] informationWithTitle:@"报考驾校" SubTitle:cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]]];
     
     self.type = [[XLInformationV alloc] informationWithTitle:@"申请类型" SubTitle:cache.student_apply_type_title[[cache.student_apply_type_value indexOfObject:_model.applicationType]]];
@@ -178,14 +178,14 @@
     [vtwo addSubview:self.pho];
     [vtwo addSubview:self.hukou];
     [vtwo addSubview:self.carType];
-    [vtwo addSubview:self.price];
+//    [vtwo addSubview:self.price];
     [vtwo addSubview:self.school];
     [vtwo addSubview:self.type];
     [vtwo addSubview:oter];
     [vtwo addSubview:self.referees];
     
     
-    NSArray *arrtwo = @[self.IdNumber,SFZFM,self.start_time,self.enf_time,baomin,self.pho,self.hukou,self.carType,self.price,self.school,self.type,oter,self.referees];
+    NSArray *arrtwo = @[self.IdNumber,SFZFM,self.start_time,self.enf_time,baomin,self.pho,self.hukou,self.carType,self.school,self.type,oter,self.referees];
     [arrtwo mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
     [arrtwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(vone);
@@ -227,21 +227,21 @@
         make.top.mas_equalTo(subLabletwo.mas_bottom).mas_offset(KFit_H6S(25));
         make.height.mas_equalTo(1);
     }];
-    NSString *str;
-    if ([_model.isPay  isEqual: @"1"]) {
-        str = @"未缴费";
-        
-    }else{
-        str =  @"已缴费";
-       
-    }
-    self.state = [[XLInformationV alloc] informationWithTitle:@"收费状态" SubTitle:str];
-    [self.backview addSubview:self.state];
-    [self.state mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.backview);
-        make.top.mas_equalTo(lbtwo.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(90));
-    }];
+//    NSString *str;
+//    if ([_model.isPay  isEqual: @"1"]) {
+//        str = @"未缴费";
+//
+//    }else{
+//        str =  @"已缴费";
+//
+//    }
+//    self.state = [[XLInformationV alloc] informationWithTitle:@"收费状态" SubTitle:str];
+//    [self.backview addSubview:self.state];
+//    [self.state mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(self.backview);
+//        make.top.mas_equalTo(lbtwo.mas_bottom);
+//        make.height.mas_equalTo(KFit_H6S(90));
+//    }];
 //
 //    self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:_model.studentName];
 //    self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:_model.studentName];

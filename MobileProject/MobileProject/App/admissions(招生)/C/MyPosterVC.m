@@ -20,7 +20,21 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"图文海报"];
     
-    
+    kWeakSelf(self)
+    UIButton *but = [self.navigationView addRightButtonWithTitle:@"删除" clickCallBack:^(UIView *view) {
+        XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除" sureBtn:@"确定" cancleBtn:@"取消"];
+        alert.resultIndex = ^(NSInteger index) {
+            if (index == 2) {
+                [weakself removeMyPoster];
+            }
+        };
+        [alert showXLAlertView];
+        
+        
+        
+    }];
+    [but setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+    but.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     
     [self loadWebview];
     // Do any additional setup after loading the view.
@@ -56,12 +70,28 @@
 }
 #pragma mark -调用分享
 - (void)toShare{
-//    CodeShareV *v = [[CodeShareV alloc] init];
-//    v.type = ShareTypeText;
-//    XLshare *share = [[XLshare alloc]init];
-//    share.shareImgUrl = self.model.memo;
-//    v.share = share;
-//    [v show];
+    CodeShareV *v = [[CodeShareV alloc] init];
+    v.type = ShareTypeText;
+    XLshare *share = [[XLshare alloc]init];
+    if (self.shareTitle.length > 0) {
+        share.title = self.shareTitle;
+    }else{
+        share.title = self.model.tittle;
+    }
+    
+    if (self.shareContent.length > 0) {
+        share.subTitle = self.shareContent;
+    }else{
+        share.subTitle = self.model.content;
+    }
+    if (self.idid.length > 0) {
+        share.url = [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"share"];
+    }else{
+        share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share"];
+    }
+//    share.url = [NSString stringWithFormat:HTMLMINGPIANFENXIANG,self.model.idid];
+    v.share = share;
+    [v show];
     
     
 }
@@ -92,7 +122,22 @@
     [self.webView loadRequest:request];
 }
 
-
+- (void)removeMyPoster{
+    [FMNetworkHelper fm_request_postWithUrlString:[NSString stringWithFormat:POSTPostRemove,_model.idid] isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"删除成功"];
+            [self.vc headerRefresh];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 /*
 #pragma mark - Navigation
 

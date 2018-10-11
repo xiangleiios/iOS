@@ -345,6 +345,7 @@
 @property (nonatomic , strong)NSString *moduleCode;//模板编号
 @property (nonatomic , strong)NSString *memo;//
 @property (nonatomic , strong)NSString *resource;
+@property (nonatomic , strong)NSString *tags;//标签
 @end
 
 

@@ -45,7 +45,7 @@
     [self.signUpForms mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(baokao.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(450));
+        make.height.mas_equalTo(KFit_H6S(360));
     }]; 
     
     XLInformationV *qita = [[XLInformationV alloc] informationWithTitle:@"请填写其他信息"];
@@ -61,7 +61,7 @@
     [self.otherForms mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(qita.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(270));
+        make.height.mas_equalTo(KFit_H6S(180));
     }];
     
     UIButton *next = [[UIButton alloc] init];
@@ -83,14 +83,6 @@
 }
 
 - (void)nextVC{
-    if (self.signUpForms.phone.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请填写手机号"];
-        return;
-    }
-    if (self.signUpForms.phone.subfield.text.length != 11) {
-        [MBProgressHUD showMsgHUD:@"请填写正确的手机号"];
-        return;
-    }
     if (self.signUpForms.carType.subfield.text.length <= 0) {
         [MBProgressHUD showMsgHUD:@"请选择车型"];
         return;
@@ -103,22 +95,19 @@
         [MBProgressHUD showMsgHUD:@"请选择申请类型"];
         return;
     }
-    if (self.otherForms.state.subfield.text.length <= 0) {
-        [MBProgressHUD showMsgHUD:@"请选择收费状态"];
-        return;
-    }
-    if (![XLCommonUse isPureNum:self.signUpForms.price.subfield.text]) {
-        [MBProgressHUD showMsgHUD:@"请报名价格必须为数字"];
-        return;
-    }
-    [self.studentDic setObject:self.signUpForms.phone.subfield.text forKey:@"studentPhone"];
+//    if (self.otherForms.state.subfield.text.length <= 0) {
+//        [MBProgressHUD showMsgHUD:@"请选择收费状态"];
+//        return;
+//    }
+
+//    [self.studentDic setObject:self.signUpForms.phone.subfield.text forKey:@"studentPhone"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpForms.carType.subfield.tag] forKey:@"carType"];
-    [self.studentDic setObject:self.signUpForms.price.subfield.text forKey:@"signupPrice"];
+//    [self.studentDic setObject:self.signUpForms.price.subfield.text forKey:@"signupPrice"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpForms.school.subfield.tag] forKey:@"teamCode"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpForms.type.subfield.tag] forKey:@"applicationType"];
     [self.studentDic setObject:self.otherForms.referees.subfield.text forKey:@"recommender"];
     [self.studentDic setObject:self.otherForms.note.subfield.text forKey:@"remark"];
-    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.otherForms.state.subfield.tag] forKey:@"isPay"];
+//    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.otherForms.state.subfield.tag] forKey:@"isPay"];
     
     
     KKLog(@"%@",self.studentDic);

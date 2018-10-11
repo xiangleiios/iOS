@@ -12,6 +12,7 @@ typedef void(^SenterBlcok) ();
 @property (nonatomic , copy)SenterBlcok senterBlock;
 @property (nonatomic , strong)UITextField *subfield;
 @property (nonatomic , strong)UILabel *titlelb;
+@property (nonatomic , strong)UILabel *red;
 /// 信息输入条 must:是否为必填 Click:是否可点击
 -(instancetype)informationWithTitle:(NSString *)title SubTitle:(NSString *)subtitle TSSubTitle:(NSString *)tssubtitle Must:(BOOL)must Click:(BOOL)click;
 

@@ -11,7 +11,7 @@
 #import "JXCategoryTitleView.h"
 #import "ConsultingVC.h"
 #import "EnrollVC.h"
-#import "AddInformationOneVC.h"
+#import "AddInformationVC.h"
 @interface StudentsVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -61,7 +61,7 @@
 }
 
 - (void)toAddStudents{
-    AddInformationOneVC *vc = [[AddInformationOneVC alloc] init];
+    AddInformationVC *vc = [[AddInformationVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

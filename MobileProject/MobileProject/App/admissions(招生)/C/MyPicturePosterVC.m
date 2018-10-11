@@ -25,6 +25,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:_model.tittle];
+    
+    kWeakSelf(self)
+    UIButton *but = [self.navigationView addRightButtonWithTitle:@"删除" clickCallBack:^(UIView *view) {
+        XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"是否确定删除" sureBtn:@"确定" cancleBtn:@"取消"];
+        alert.resultIndex = ^(NSInteger index) {
+            if (index == 2) {
+                [weakself removeMyPoster];
+            }
+        };
+        [alert showXLAlertView];
+        
+        
+        
+    }];
+    [but setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+    but.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    
     [self loadsubview];
     
     [self laodShourAndSave];
@@ -116,7 +133,7 @@
     CodeShareV *v = [[CodeShareV alloc] init];
     v.type = ShareTypeImage;
     XLshare *share = [[XLshare alloc]init];
-    share.shareImgUrl = self.model.memo;
+    share.shareImg = self.img.image;
     v.share = share;
     [v show];
 }
@@ -135,5 +152,22 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"保存图片" message:msg delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
     [alert show];
     
+}
+
+- (void)removeMyPoster{
+    [FMNetworkHelper fm_request_postWithUrlString:[NSString stringWithFormat:POSTPostRemove,_model.idid] isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"删除成功"];
+            [self.vc headerRefresh];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 @end

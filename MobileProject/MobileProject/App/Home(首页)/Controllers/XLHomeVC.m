@@ -303,9 +303,9 @@
     KKLog(@"1111");
     
     if (senter.tag == 1) {
-        StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
-        vc.url = POSTCensiusList;
-        [self.navigationController pushViewController:vc animated:YES];
+//        StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
+//        vc.url = POSTCensiusList;
+//        [self.navigationController pushViewController:vc animated:YES];
     }else if (senter.tag == 2){
         
     }else if (senter.tag == 3){

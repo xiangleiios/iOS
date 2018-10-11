@@ -7,12 +7,15 @@
 //
 
 #import "FMBaseViewController.h"
-
+#import "MyPosterListVC.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MyPosterVC : FMBaseViewController
 @property (nonatomic , strong)FMMainModel *model;
 @property (nonatomic , strong)NSString *idid;
+@property (nonatomic , strong)NSString *shareTitle;
+@property (nonatomic , strong)NSString *shareContent;
+@property (nonatomic , strong)MyPosterListVC *vc;
 @end
 
 NS_ASSUME_NONNULL_END

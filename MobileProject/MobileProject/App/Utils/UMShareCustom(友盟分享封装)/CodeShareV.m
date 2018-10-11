@@ -106,7 +106,12 @@
                 break;
             case 1:{
                 //小程序
-                [self.share shareMiniProgramToPlatformType:UMSocialPlatformType_WechatSession];
+                if (self.share.xcxurl.length > 0) {
+                    [self.share shareMiniProgramToPlatformType:UMSocialPlatformType_WechatSession];
+                }else{
+                    [self.share shareWebPageToPlatformType:UMSocialPlatformType_WechatSession];
+                }
+                
                 [self shutDown];
                 return;
             }

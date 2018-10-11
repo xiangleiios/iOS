@@ -138,6 +138,9 @@
 
 #pragma mark - h图文海报H5
 #define HTMLHAIBAO KURL(@"plat/#/poster/index?id=%@&type=%@")
+
+#pragma mark - 删除海报
+#define POSTPostRemove KURL(@"app/post/remove?id=%@")
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------
 

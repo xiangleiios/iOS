@@ -32,12 +32,14 @@
         if (must) {
             UILabel *redlb = [[UILabel alloc] init];
             [self addSubview:redlb];
+            self.red = redlb;
             redlb.text = @"*";
             redlb.textColor = [UIColor redColor];
             [redlb mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
                 make.centerY.mas_equalTo(self);
-                make.width.height.mas_equalTo(KFit_W6S(20));
+                make.width.mas_equalTo(KFit_W6S(20));
+                make.height.mas_equalTo(KFit_H6S(25));
             }];
             
             [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {

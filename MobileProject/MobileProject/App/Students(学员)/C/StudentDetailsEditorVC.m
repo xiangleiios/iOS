@@ -206,27 +206,27 @@
 //        [MBProgressHUD showMsgHUD:@"请选择本/外地户口"];
         return;
     }
-    if (self.otherForms.state.subfield.text.length <= 0) {
-        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择学员的收费状态再保存"];
-        [alert showPrompt];
-//        [MBProgressHUD showMsgHUD:@"请选择学员的报名状态再保存"];
-        return;
-    }
-    if (![XLCommonUse isPureNum:self.signUpTwo.price.subfield.text]) {
-//        [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
-        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"报名价格必须为数字"];
-        [alert showPrompt];
-        return;
-    }
+//    if (self.otherForms.state.subfield.text.length <= 0) {
+//        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"请选择学员的收费状态再保存"];
+//        [alert showPrompt];
+////        [MBProgressHUD showMsgHUD:@"请选择学员的报名状态再保存"];
+//        return;
+//    }
+//    if (![XLCommonUse isPureNum:self.signUpTwo.price.subfield.text]) {
+////        [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
+//        XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"报名价格必须为数字"];
+//        [alert showPrompt];
+//        return;
+//    }
     
     [self.studentDic setObject:self.signUpTwo.phone.subfield.text forKey:@"studentPhone"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.carType.subfield.tag] forKey:@"carType"];
-    [self.studentDic setObject:self.signUpTwo.price.subfield.text forKey:@"signupPrice"];
+//    [self.studentDic setObject:self.signUpTwo.price.subfield.text forKey:@"signupPrice"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.school.subfield.tag] forKey:@"teamCode"];
     [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.signUpTwo.type.subfield.tag] forKey:@"applicationType"];
     [self.studentDic setObject:self.otherForms.referees.subfield.text forKey:@"recommender"];
     [self.studentDic setObject:self.otherForms.note.subfield.text forKey:@"remark"];
-    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.otherForms.state.subfield.tag] forKey:@"isPay"];
+//    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.otherForms.state.subfield.tag] forKey:@"isPay"];
     
     
     
@@ -402,7 +402,7 @@
     [self.signUpTwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(lbbackthree.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(540));
+        make.height.mas_equalTo(KFit_H6S(450));
     }];
     
     self.signUpTwo.phone.subfield.text = _model.studentPhone;
@@ -412,7 +412,7 @@
     self.signUpTwo.carType.subfield.text = cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.carType]];
     self.signUpTwo.carType.subfield.tag = [_model.carType integerValue];
     
-    self.signUpTwo.price.subfield.text = _model.signupPrice;
+//    self.signUpTwo.price.subfield.text = _model.signupPrice;
     self.signUpTwo.school.subfield.text = cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]];
     self.signUpTwo.school.subfield.tag = [_model.teamCode integerValue];
     
@@ -431,18 +431,18 @@
     [self.otherForms mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(baokao.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(270));
+        make.height.mas_equalTo(KFit_H6S(180));
     }];
     self.otherForms.referees.subfield.text = _model.recommender;
     self.otherForms.note.subfield.text =_model.remark;
-    ///1:未缴费 2：已缴费
-    if ([_model.isPay  isEqual: @"1"]) {
-        self.otherForms.state.subfield.text = @"未收费";
-        self.otherForms.state.subfield.tag = 1;
-    }else{
-        self.otherForms.state.subfield.text = @"已收费";
-        self.otherForms.state.subfield.tag = 2;
-    }
+//    ///1:未缴费 2：已缴费
+//    if ([_model.isPay  isEqual: @"1"]) {
+//        self.otherForms.state.subfield.text = @"未收费";
+//        self.otherForms.state.subfield.tag = 1;
+//    }else{
+//        self.otherForms.state.subfield.text = @"已收费";
+//        self.otherForms.state.subfield.tag = 2;
+//    }
     
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
@@ -481,6 +481,10 @@
                                  }];
     [self presentViewController:vc animated:YES completion:nil];
 }
+
+
+
+
 - (void)configCallback {
     __weak typeof(self) weakSelf = self;
     

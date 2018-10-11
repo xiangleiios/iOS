@@ -13,7 +13,7 @@
 #import "pictureV.h"
 #import "CodeShareV.h"
 #define FONT kFit_Font6(14)
-@interface PicturePosterVC ()
+@interface PicturePosterVC ()<UITextFieldDelegate>
 @property (nonatomic , strong)UIView *imgback;
 @property (nonatomic , strong)UIImageView *img;
 @property (nonatomic , strong)UILabel *name;
@@ -181,6 +181,8 @@
     self.price = [[UITextField alloc] init];
     self.price.textColor = [UIColor blackColor];
     self.price.text = @"3000";
+    self.price.delegate = self;
+    self.price.keyboardType = UIKeyboardTypeNumberPad;
     self.price.font = [UIFont systemFontOfSize:FONT];
     [self.imgback addSubview:self.price];
     [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -418,6 +420,7 @@
 //    [dic setValue:@"" forKey:@"userImg"];
     [dic setValue:self.deptIdArr[i] forKey:@"userSign"];
     [dic setValue:self.nameArr[i] forKey:@"userName"];
+    [dic setValue:self.model.imgUrl forKey:@"imgUrl"];
     [dic setValue:@"1" forKey:@"userType"];
     [FMNetworkHelper fm_request_postWithUrlString:POSTPostAdd isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
@@ -511,6 +514,33 @@
         
     }];
 }
+//设置文本框只能输入数字
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    //如果是限制只能输入数字的文本框
+    return [self validateNumber:string];
+    
+}
+
+
+- (BOOL)validateNumber:(NSString*)number {
+    
+    BOOL res =YES;
+    
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    
+    int i =0;
+    
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i,1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length ==0) {
+            res =NO;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
 
 @end

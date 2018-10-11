@@ -171,19 +171,7 @@
         }];
     }
     
-    UILabel *lbtwo = [[UILabel alloc] init];
-    [self.contentView addSubview:lbtwo];
-    lbtwo.text = @"专治招生没话题";
-    lbtwo.textColor = kColor_N(0, 112, 234);
-    lbtwo.layer.borderWidth = 0.5;
-    lbtwo.layer.borderColor = kColor_N(0, 112, 234).CGColor;
-    lbtwo.textAlignment = NSTextAlignmentCenter;
-    lbtwo.font = [UIFont systemFontOfSize:kFit_Font6(13)];
-    [lbtwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.imgbavk.mas_bottom).mas_offset(KFit_H6S(20));
-        make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(220), KFit_H6S(45)));
-    }];
+    
     
     self.num = [[UILabel alloc] init];
     [self.contentView addSubview:self.num];
@@ -201,7 +189,7 @@
     [self.contentView addSubview:lb];
     lb.backgroundColor = kColor_N(240, 240, 240);
     [lb mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(lbtwo.mas_bottom).mas_offset(KFit_H6S(30));
+        make.top.mas_equalTo(self.num.mas_bottom).mas_offset(KFit_H6S(30));
         make.right.left.mas_equalTo(self.contentView);
         make.height.mas_equalTo(1);
     }];
@@ -225,6 +213,51 @@
         make.top.mas_equalTo(self.content.mas_bottom).mas_offset(KFit_H6S(20));
         make.height.mas_equalTo([self.imgbavk getLayoutCellHeight]);
     }];
+    NSArray *arr = [model.tags componentsSeparatedByString:@","];
+    if (arr.count == 1) {
+        UILabel *lbtwo = [[UILabel alloc] init];
+        [self.contentView addSubview:lbtwo];
+        
+        lbtwo.text = [NSString stringWithFormat:@"%@     ",[arr firstObject]];
+        lbtwo.textColor = kColor_N(0, 112, 234);
+        lbtwo.layer.borderWidth = 0.5;
+        lbtwo.layer.borderColor = kColor_N(0, 112, 234).CGColor;
+        lbtwo.textAlignment = NSTextAlignmentCenter;
+        lbtwo.font = [UIFont systemFontOfSize:kFit_Font6(13)];
+        [lbtwo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.imgbavk.mas_bottom).mas_offset(KFit_H6S(20));
+            make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
+            make.height.mas_equalTo(KFit_H6S(45));
+        }];
+    }else if (arr.count > 1){
+        UILabel *lbone = [[UILabel alloc] init];
+        [self.contentView addSubview:lbone];
+        lbone.text = [NSString stringWithFormat:@"%@     ",[arr firstObject]];
+        lbone.textColor = kColor_N(0, 112, 234);
+        lbone.layer.borderWidth = 0.5;
+        lbone.layer.borderColor = kColor_N(0, 112, 234).CGColor;
+        lbone.textAlignment = NSTextAlignmentCenter;
+        lbone.font = [UIFont systemFontOfSize:kFit_Font6(13)];
+        [lbone mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.imgbavk.mas_bottom).mas_offset(KFit_H6S(20));
+            make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
+            make.height.mas_equalTo(KFit_H6S(45));
+        }];
+        
+        UILabel *lbtwo = [[UILabel alloc] init];
+        [self.contentView addSubview:lbtwo];
+        lbtwo.text = [NSString stringWithFormat:@"%@     ",arr[1]];
+        lbtwo.textColor = kColor_N(0, 112, 234);
+        lbtwo.layer.borderWidth = 0.5;
+        lbtwo.layer.borderColor = kColor_N(0, 112, 234).CGColor;
+        lbtwo.textAlignment = NSTextAlignmentCenter;
+        lbtwo.font = [UIFont systemFontOfSize:kFit_Font6(13)];
+        [lbtwo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.imgbavk.mas_bottom).mas_offset(KFit_H6S(20));
+            make.left.mas_equalTo(lbone.mas_right).mas_offset(KFit_W6S(30));
+            make.height.mas_equalTo(KFit_H6S(45));
+        }];
+    }
     
 }
 @end

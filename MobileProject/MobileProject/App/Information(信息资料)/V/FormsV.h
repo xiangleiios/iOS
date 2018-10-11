@@ -9,7 +9,7 @@
 #import "XLView.h"
 #import "XLInformationV.h"
 
-#pragma mark - 身份证正面表单
+#pragma mark - 身份证正面表单 已提交的详情使用
 @interface FormsV : XLView
 /// 姓名
 @property (nonatomic , strong)XLInformationV *name;
@@ -26,14 +26,31 @@
 
 @end
 
-#pragma mark - 报考信息表单
+#pragma mark - 身份证正面表单 添加学员中显示
+@interface FormsAddV : XLView
+/// 姓名
+//@property (nonatomic , strong)XLInformationV *name;
+/// 性别
+@property (nonatomic , strong)XLInformationV *gender;
+/// 名族
+@property (nonatomic , strong)XLInformationV *ethnic;
+/// 生日
+@property (nonatomic , strong)XLInformationV *birthday;
+/// 地址
+@property (nonatomic , strong)XLInformationV *address;
+/// 身份证号
+@property (nonatomic , strong)XLInformationV *IdNumber;
+
+@end
+
+#pragma mark - 报考信息表单 添加学员中显示
 @interface SignUpFormsV : XLView
 /// 手机号
-@property (nonatomic , strong)XLInformationV *phone;
+@property (nonatomic , strong)XLInformationV *hukou;
 /// 车型
 @property (nonatomic , strong)XLInformationV *carType;
 /// 报考价格
-@property (nonatomic , strong)XLInformationV *price;
+//@property (nonatomic , strong)XLInformationV *price;
 /// 报考驾校
 @property (nonatomic , strong)XLInformationV *school;
 /// 是否报名驾考中心
@@ -44,7 +61,7 @@
 @end
 
 
-#pragma mark - 报考信息表单2
+#pragma mark - 报考信息表单2 详情中显示
 @interface SignUpTwoFormsV : XLView
 /// 手机号
 @property (nonatomic , strong)XLInformationV *phone;
@@ -53,7 +70,7 @@
 /// 车型
 @property (nonatomic , strong)XLInformationV *carType;
 /// 报考价格
-@property (nonatomic , strong)XLInformationV *price;
+//@property (nonatomic , strong)XLInformationV *price;
 /// 报考驾校
 @property (nonatomic , strong)XLInformationV *school;
 /// 是否报名驾考中心
@@ -75,7 +92,7 @@
 /// 备注
 @property (nonatomic , strong)XLInformationV *note;
 /// 报名状态
-@property (nonatomic , strong)XLInformationV *state;
+//@property (nonatomic , strong)XLInformationV *state;   //不要了
 
 
 @end

@@ -127,7 +127,7 @@
     MyPictureCell *cell = [[MyPictureCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     //    }
     FMMainModel *model = self.dataArr[indexPath.row];
-    [cell setCellContent:model.content andIsShow:[[self.cellIsShowAll objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] boolValue]  andCellIndexPath:indexPath];
+    [cell setCellContent:model.content andIsShow:YES  andCellIndexPath:indexPath];
     cell.model = model;
     cell.delegate = self;
     return cell;
@@ -143,6 +143,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     MyPosterVC *vc = [[MyPosterVC alloc] init];
     FMMainModel *model = self.dataArr[indexPath.row];
+    vc.vc = self;
     vc.idid = model.idid;
     vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
