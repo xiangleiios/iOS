@@ -114,7 +114,8 @@
 
 - (void)erweima{
     NSString *str = [NSString stringWithFormat:XIAOCHENGXUEWM,[NSString stringWithFormat:@"%ld",(long)self.jiaxiao.tag]];
-    UIImage *logImage = [UIImage LX_ImageOfQRFromURL:str codeSize:KFit_W6S(400)];
+    UIImage *logImage =[UIImage LX_ImageOfQRFromURL:str codeSize:KFit_W6S(400) logoName:@"erwim_ewm" radius:KFit_W6S(40) borderWidth:3 borderColor:[UIColor whiteColor]];
+//    UIImage *logImage = [UIImage LX_ImageOfQRFromURL:str codeSize:KFit_W6S(400)];
     [self uploadEWMPictures:logImage];
 }
 #pragma mark -调用保存接口

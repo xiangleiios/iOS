@@ -445,7 +445,8 @@
     self.mobanChoose.hidden = YES;
     self.jiaxiaoChoose.hidden = YES;
     NSString *str = [NSString stringWithFormat:XIAOCHENGXUEWM,[NSString stringWithFormat:@"%ld",(long)self.jiaxia.tag]];
-    UIImage *logImage = [UIImage LX_ImageOfQRFromURL:str codeSize:KFit_W6S(120)];
+//    UIImage *logImage = [UIImage LX_ImageOfQRFromURL:str codeSize:KFit_W6S(120)];
+    UIImage *logImage =[UIImage LX_ImageOfQRFromURL:str codeSize:self.QrCode.width logoName:@"erwim_ewm" radius:KFit_W6S(40) borderWidth:3 borderColor:[UIColor whiteColor]];
     [self.QrCode setImage:logImage];
     
     UIImage *img = [UIImage fm_shotWithView:self.imgback];
@@ -518,6 +519,8 @@
             self.jiaxia.text = [NSString stringWithFormat:@"%@ (%@)",[self.titleArr firstObject],[self.teamNameArr firstObject]];
             self.jiaxia.tag =  [[self.idArr firstObject] intValue];
             self.name.text = [self.nameArr firstObject];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }
         
     } failureBlock:^(NSError *error) {
