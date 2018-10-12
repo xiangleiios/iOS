@@ -16,4 +16,5 @@
 @property(nonatomic, assign) NSInteger pageSize;
 
 @property (nonatomic , strong)NSMutableDictionary *dic;
+@property (nonatomic , assign)BOOL PayCost;
 @end

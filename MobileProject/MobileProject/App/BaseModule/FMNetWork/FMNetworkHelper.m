@@ -107,8 +107,8 @@
     [FMNetworkHelper fm_setValue:[User UserOb].token forHTTPHeaderKey:@"token"];
     [FMNetworkHelper fm_setValue:@"Mobile" forHTTPHeaderKey:@"loginType"];
     NSURLSessionTask *sessionTask = [BANetManager ba_request_POSTWithUrlString:urlString isNeedCache:isNeedCache parameters:parameters successBlock:^(id responseObject) {
-        if (kResponseObjectStatusCodeIsEqual(404)) {
-            [self fm_request404ShowLogin:responseObject];
+        if (kResponseObjectStatusCodeIsEqual(401)) {
+            [MBProgressHUD showMsgHUD:@"登录失效，请重新登录"];
         }
         successBlock(responseObject);
     } failureBlock:^(NSError *error) {

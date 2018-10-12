@@ -35,7 +35,7 @@
     [self addSubview:imgone];
 //    [imgone setImage:[UIImage imageNamed:img]];
     [imgone mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self).mas_offset(KFit_W6S(20));
+        make.left.mas_equalTo(self).mas_offset(KFit_W6S(50));
         make.centerY.mas_equalTo(self);
         make.height.width.mas_equalTo(KFit_H6S(100));
     }];

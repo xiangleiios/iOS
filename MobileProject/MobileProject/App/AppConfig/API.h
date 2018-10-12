@@ -141,6 +141,20 @@
 
 #pragma mark - 删除海报
 #define POSTPostRemove KURL(@"app/post/remove?id=%@")
+
+
+#pragma mark - 日咨询学员列表接口
+#define POSTCensiusList KURL(@"app/census/censiusList")
+
+#pragma mark - 今日报名学员列表接口
+#define POSTSignList KURL(@"app/census/signList")
+
+#pragma mark - 本月报名学员列表接口
+#define POSTMonthSignList KURL(@"app/census/monthSignList")
+
+#pragma mark -上传用户头像
+#define POSTUpdateTeamUserHeadImg KURL(@"app/team/teamUser/updateTeamUserHeadImg?teamUserHeadImg=%@")
+
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------
 

@@ -197,6 +197,7 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
+    self.num.text = [NSString stringWithFormat:@"%d人制作",model.useNum];
     NSArray  *array = [model.imgUrl componentsSeparatedByString:@","];
     for (int i = 0; i < array.count; i++) {
         float w = KFit_W6S(150);

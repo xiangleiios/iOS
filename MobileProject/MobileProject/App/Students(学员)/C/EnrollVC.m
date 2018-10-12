@@ -9,7 +9,6 @@
 #import "EnrollVC.h"
 #import "JXCategoryTitleView.h"
 #import "LLSearchViewController.h"
-#import "StudentsListTwoVC.h"
 #import "StudentsListVC.h"
 @interface EnrollVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
@@ -122,12 +121,6 @@
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
-//    StudentsListTwoVC *vctwo = [[StudentsListTwoVC alloc] init];
-//    vctwo.url = POSTStudentSignList;
-//    [vctwo.dic setObject:@"2" forKey:@"signupState"];
-//    [self addChildViewController:vctwo];
-//    [self.scrollView addSubview:vctwo.view];
-//    vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     StudentsListVC *vcthree = [[StudentsListVC alloc] init];
     vcthree.url = POSTStudentSignList;

@@ -470,7 +470,7 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
-    [self.headImg sd_setImageWithURL:[NSURL URLWithString:_model.headImg] placeholderImage:[UIImage imageNamed:@"pacture_nor"]];
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:_model.headImg] placeholderImage:[UIImage imageNamed:@"head_nor"]];
     XLCache *cache = [XLCache singleton];
     self.admissions.name.subfield.text = _model.name;
     

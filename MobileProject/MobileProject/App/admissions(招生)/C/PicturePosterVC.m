@@ -457,19 +457,32 @@
 }
 
 
-- (void)chooseMB{
-    
-}
+//- (void)chooseMB{
+//    
+//}
 - (void)chooseJX{
     [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:self.titleArr DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
         NSLog(@"%@",selectValue);
-        self.jiaxia.text = selectValue;
+//        self.jiaxia.text = selectValue;
         self.jiaxia.text = [NSString stringWithFormat:@"%@ (%@)",self.titleArr[[selectRow intValue]],self.teamNameArr[[selectRow intValue]]];
         self.jiaxia.tag = [self.idArr[[selectRow intValue]] intValue];
         self.name.text = self.nameArr[[selectRow intValue]];
         NSLog(@"%@",self.idArr[[selectRow intValue]]);
     }];
 }
+
+- (void)chooseMB{
+    NSArray *arr = @[@"一次性收费，车接车送，精心指导",@"教学耐心细致，严格保证训练时间",@"通过率高，随到随学，一人一车",@"周一至周日，随到随学",@"介绍新学员报名有奖励哦",@"免费试学，报名60天拿证",@"老带新报名立减200元",@"拼团报名价格更低哦",@"准驾车型，教练帮您约课",@"45天拿证，含补考费，通过率高"];
+    [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:arr DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+        NSLog(@"%@",selectValue);
+        self.template.text = selectValue;
+//        self.jiaxia.text = [NSString stringWithFormat:@"%@ (%@)",self.titleArr[[selectRow intValue]],self.teamNameArr[[selectRow intValue]]];
+//        self.jiaxia.tag = [self.idArr[[selectRow intValue]] intValue];
+//        self.name.text = self.nameArr[[selectRow intValue]];
+        NSLog(@"%@",self.idArr[[selectRow intValue]]);
+    }];
+}
+
 //保存到相册
 
 

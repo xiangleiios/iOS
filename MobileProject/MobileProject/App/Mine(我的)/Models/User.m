@@ -34,6 +34,7 @@ static User *user  =  nil;
                 user.token = [defaults objectForKey:@"token"];
                 user.uid = [defaults objectForKey:@"uid"];
                 user.accounttype = [defaults objectForKey:@"accounttype"];
+                user.teamUserHead = [defaults objectForKey:@"teamUserHead"];
             }
         }
         
@@ -53,6 +54,7 @@ static User *user  =  nil;
     self.token = dic[@"token"];
     self.uid = dic[@"uid"];
     self.userId = dic[@"userId"];
+    self.teamUserHead = dic[@"teamUserHead"];
     //把信息存起来
     NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
     [defaults setObject:self.name forKey:@"name"];
@@ -67,6 +69,9 @@ static User *user  =  nil;
     [defaults setObject:self.uid forKey:@"uid"];
     [defaults setObject:self.accounttype forKey:@"accounttype"];
     [defaults setObject:self.userId forKey:@"userId"];
+    NSString *str = [NSString stringWithFormat:@"%@",self.teamUserHead?self.teamUserHead:@""];
+    
+    [defaults setObject:KURLIma(str) forKey:@"teamUserHead"];
     //登录状态
     [defaults setBool:YES forKey:@"log"];
     [defaults synchronize];
@@ -90,6 +95,7 @@ static User *user  =  nil;
     self.token = @"";
     self.uid = @"";
     self.userId = @"";
+    self.teamUserHead = @"";
     self.accounttype = nil;
     //把信息存起来
     NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
@@ -105,6 +111,7 @@ static User *user  =  nil;
     [defaults setObject:self.uid forKey:@"uid"];
     [defaults setObject:self.accounttype forKey:@"accounttype"];
     [defaults setObject:self.userId forKey:@"userId"];
+    [defaults setObject:self.teamUserHead forKey:@"teamUserHead"];
     //登录状态
     [defaults setBool:NO forKey:@"log"];
     [defaults synchronize];

@@ -67,6 +67,7 @@
 		A735A0AF212FEC3B0044E9BC /* StudentsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0AE212FEC3B0044E9BC /* StudentsListVC.m */; };
 		A735A0B2212FF6800044E9BC /* LLSearchResultViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0B1212FF6800044E9BC /* LLSearchResultViewController.m */; };
 		A735A0B5213000CD0044E9BC /* StudentsOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A735A0B4213000CD0044E9BC /* StudentsOneCell.m */; };
+		A73C5B7D216F27BA006262B5 /* ScreeningV.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C5B7C216F27BA006262B5 /* ScreeningV.m */; };
 		A73E7F28215B221A007849EE /* UIImage+LXQRCode.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E7F27215B221A007849EE /* UIImage+LXQRCode.m */; };
 		A73E7F59215B2284007849EE /* UIView+Frame.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E7F49215B2284007849EE /* UIView+Frame.m */; };
 		A73E7F5E215B2397007849EE /* UIColor+Expanded.m in Sources */ = {isa = PBXBuildFile; fileRef = A73E7F5B215B2396007849EE /* UIColor+Expanded.m */; };
@@ -720,6 +721,8 @@
 		A735A0B1212FF6800044E9BC /* LLSearchResultViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLSearchResultViewController.m; sourceTree = "<group>"; };
 		A735A0B3213000CD0044E9BC /* StudentsOneCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsOneCell.h; sourceTree = "<group>"; };
 		A735A0B4213000CD0044E9BC /* StudentsOneCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsOneCell.m; sourceTree = "<group>"; };
+		A73C5B7B216F27BA006262B5 /* ScreeningV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreeningV.h; sourceTree = "<group>"; };
+		A73C5B7C216F27BA006262B5 /* ScreeningV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScreeningV.m; sourceTree = "<group>"; };
 		A73E7F26215B221A007849EE /* UIImage+LXQRCode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LXQRCode.h"; sourceTree = "<group>"; };
 		A73E7F27215B221A007849EE /* UIImage+LXQRCode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LXQRCode.m"; sourceTree = "<group>"; };
 		A73E7F48215B2284007849EE /* UIView+Frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Frame.h"; sourceTree = "<group>"; };
@@ -2145,6 +2148,8 @@
 				A778F86B2134E004008A8948 /* StudentsThreeCell.m */,
 				A7825C47213CD29D0056FDA2 /* AddStudentCell.h */,
 				A7825C48213CD29D0056FDA2 /* AddStudentCell.m */,
+				A73C5B7B216F27BA006262B5 /* ScreeningV.h */,
+				A73C5B7C216F27BA006262B5 /* ScreeningV.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5259,6 +5264,7 @@
 				DA0346341F509098008E7BE1 /* NSArray+Block.m in Sources */,
 				DA0346DD1F509098008E7BE1 /* UIScrollView+EmptyDataSet.m in Sources */,
 				DA78C30F1F5D41A3009BAA90 /* YTKNetworkAgent.m in Sources */,
+				A73C5B7D216F27BA006262B5 /* ScreeningV.m in Sources */,
 				A7C59F1E2148E24800948074 /* BusinessShowV.m in Sources */,
 				DA867D4A1F59031C00D4D011 /* UIApplication+JYHandle.m in Sources */,
 			);

@@ -51,6 +51,7 @@
 @property (nonatomic , strong)NSString *created_at;
 @property (nonatomic , strong)NSString *updated_at;
 @property (nonatomic , strong)NSNumber *accounttype;
+@property (nonatomic , strong)NSString *teamUserHead;
 // accountType
 
 

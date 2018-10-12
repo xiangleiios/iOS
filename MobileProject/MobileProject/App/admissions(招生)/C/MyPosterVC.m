@@ -9,7 +9,7 @@
 #import "MyPosterVC.h"
 #import "CodeShareV.h"
 #import "PosterVC.h"
-@interface MyPosterVC ()
+@interface MyPosterVC ()<UIWebViewDelegate>
 @property (nonatomic , strong)UIWebView *webView;
 @property (nonatomic , strong)UIButton *share;
 @end
@@ -45,13 +45,14 @@
     
     
     self.webView = web;
+    self.webView.delegate = self;
     [self.view addSubview:web];
     [web mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
-        make.bottom.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
     }];
-//    self.webView.delegate = self;
+    self.webView.delegate = self;
     
     self.share = [[UIButton alloc] init];
     [self.view addSubview:self.share];
@@ -116,7 +117,7 @@
 - (void)load{
 //    NSString *urls =  [NSString stringWithFormat:HTMLMINGPIAN,self.model.idid];
     NSString *urls =  [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"app"];
-    
+//    NSString *urls = @"http://192.168.0.120:8080/#/poster/index?id=60&type=app";
     KKLog(@"url :%@",urls);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urls]];
     [self.webView loadRequest:request];
@@ -138,6 +139,21 @@
         
     }];
 }
+
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView{
+    JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
+    //定义好JS要调用的方法, share就是调用的share方法名
+    
+    context[@"jsObject"][@"share"] = ^() {
+        [self toShare];
+        NSLog(@"-------End Log-------");
+    };
+
+}
+
+
+
 /*
 #pragma mark - Navigation
 

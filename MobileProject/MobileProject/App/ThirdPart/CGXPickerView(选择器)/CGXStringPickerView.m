@@ -458,7 +458,7 @@
     UILabel* pickerLabel = (UILabel*)view;
     if (!pickerLabel)
     {
-        pickerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH - 30) / 3, 40)];
+        pickerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, (SCREEN_WIDTH - 30) , 40)];
         pickerLabel.adjustsFontSizeToFitWidth = YES;
         pickerLabel.textAlignment = NSTextAlignmentCenter;
         [pickerLabel setBackgroundColor:[UIColor clearColor]];

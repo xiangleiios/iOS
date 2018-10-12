@@ -218,6 +218,7 @@
         if ([responseObject[@"code"] integerValue] == 200) {
             XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"登录成功" SuccessOrFailure:YES];
             [alert showPrompt];
+            [XLSingleton singleton].scanPhotoIp =responseObject[@"urliIp"];
             User *user=[User UserOb];
             user.accounttype=[NSNumber numberWithInteger:accountTypePhone];
             [user UserSave:responseObject];

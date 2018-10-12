@@ -47,15 +47,15 @@
     self.sub.textColor = kColor_N(160, 170, 169);
     self.sub.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     
-    self.share = [[UIButton alloc] init];
-    [self.contentView addSubview:self.share];
-    [self.share setImage:[UIImage imageNamed:@"share_icon"] forState:UIControlStateNormal];
-    [self.share addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
-    [self.share mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.sub);
-        make.right.mas_equalTo(self.contentView);
-        make.width.height.mas_equalTo(KFit_H6S(48));
-    }];
+//    self.share = [[UIButton alloc] init];
+//    [self.contentView addSubview:self.share];
+//    [self.share setImage:[UIImage imageNamed:@"share_icon"] forState:UIControlStateNormal];
+//    [self.share addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
+//    [self.share mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(self.sub);
+//        make.right.mas_equalTo(self.contentView);
+//        make.width.height.mas_equalTo(KFit_H6S(48));
+//    }];
     
 }
 

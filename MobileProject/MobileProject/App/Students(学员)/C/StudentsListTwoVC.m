@@ -66,7 +66,8 @@
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(self.view);
+        make.left.right.bottom.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
@@ -76,7 +77,7 @@
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
+//    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
     _table.reloadBlock = ^{
@@ -104,7 +105,7 @@
     [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:self.dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         
-        NSArray *tpArray = responseObject[@"list"];
+        NSArray *tpArray = responseObject[@"list"][@"rows"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -136,17 +137,27 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *cellID = [NSString stringWithFormat:@"StudentsThreeCell"];
-    StudentsThreeCell *cell = (StudentsThreeCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
-    if (!cell) {
-        cell = [[StudentsThreeCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    if (self.PayCost) {
+        NSString *cellID = [NSString stringWithFormat:@"StudentsOneCell"];
+        StudentsOneCell *cell = (StudentsOneCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[StudentsOneCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+        }
+        cell.type = CellTypeBaoMinXueYuan;
+        cell.model = self.dataArr[indexPath.row];
+        return cell;
+    }else{
+        NSString *cellID = [NSString stringWithFormat:@"StudentsTwoCell"];
+        StudentsTwoCell *cell = (StudentsTwoCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (!cell) {
+            cell = [[StudentsTwoCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+        }
+        
+//        [cell.selelctBut addTarget:self action:@selector(choose:) forControlEvents:UIControlEventTouchUpInside];
+        cell.model = self.dataArr[indexPath.row];
+        cell.selelctBut.hidden = YES;
+        return cell;
     }
-    cell.model = self.dataArr[indexPath.row];
-    cell.selelctBut.tag = indexPath.row;
-    KKLog(@"........................%ld",(long)indexPath.row);
-    [cell.selelctBut addTarget:self action:@selector(choose:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -156,6 +167,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     FMMainModel *model = self.dataArr[indexPath.row];
+    
+    KKLog(@"----%@ ----------%@",model.signupState,model.auditState);
     //1 报名到总校，2、未报名到总校
     if ([model.signupState  isEqual: @"1"]) {
         // 1 未审核，2、审核通过、3、拒绝
@@ -169,13 +182,13 @@
             [self.navigationController pushViewController:vc animated:YES];
         }else if ([model.auditState  isEqual:@"3"]){
             StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
-            vc.PayCost = YES;
+            vc.PayCost = self.PayCost;
             vc.model = self.dataArr[indexPath.row];
             [self.navigationController pushViewController:vc animated:YES];
         }
     }else{
         StudentDetailsEditorVC *vc = [[StudentDetailsEditorVC alloc] init];
-        vc.PayCost = YES;
+        vc.PayCost = self.PayCost;
         vc.model = self.dataArr[indexPath.row];
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -183,15 +196,15 @@
 
 
 
-- (void)choose:(UIButton *)senter{
-    senter.selected = !senter.selected;
-    KKLog(@"%ld",(long)senter.tag);
-    if (senter.selected) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsSubmit" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
-    }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsDelete" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
-    }
-}
+//- (void)choose:(UIButton *)senter{
+//    senter.selected = !senter.selected;
+//    KKLog(@"%ld",(long)senter.tag);
+//    if (senter.selected) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsSubmit" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+//    }else{
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsDelete" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+//    }
+//}
 /*
 #pragma mark - Navigation
 

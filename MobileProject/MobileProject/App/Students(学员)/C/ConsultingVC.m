@@ -11,19 +11,35 @@
 #import "LLSearchViewController.h"
 
 #import "StudentsListVC.h"
+#import "ScreeningV.h"
 
 @interface ConsultingVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIButton *screeningOne;
+@property (nonatomic, strong) UIButton *screeningTwo;
+@property (nonatomic, strong) UIView *sousuoview;
+
+@property (nonatomic, strong) ScreeningV *information;
+@property (nonatomic, strong) ScreeningV *scholl;
+
+@property (nonatomic, strong) NSArray *informationArr;
+@property (nonatomic, strong) NSArray *schollArr;
 @end
 
 @implementation ConsultingVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _titles = @[@"全部",@"未收费",@"已收费"];
+    _titles = @[@"全部",@"未完善",@"已完善"];
+//    _informationArr = @[@"全部状态",@"信息已完善",@"信息未完善"];
     [self loadSousuo];
+//    [self loadScreningBut];
+    
+    
+    
+//    [self laodScreeningV];
     [self loadMyCategoryView];
     [self loadScroll];
     // Do any additional setup after loading the view.
@@ -33,12 +49,48 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)loadScreningBut{
+    self.screeningOne = [[UIButton alloc] init];
+    [self.screeningOne setTitle:@"信息状态  ▾" forState:UIControlStateNormal];
+    self.screeningOne.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    [self.screeningOne setTitleColor:kColor_N(64, 78, 108) forState:UIControlStateNormal];
+    [self.view addSubview:self.screeningOne];
+    self.screeningOne.layer.borderWidth = 0.3;
+    self.screeningOne.layer.borderColor = kColor_N(235, 235, 235).CGColor;
+    
+    self.screeningTwo = [[UIButton alloc] init];
+    [self.screeningTwo setTitle:@"报名驾校  ▾" forState:UIControlStateNormal];
+    self.screeningTwo.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    [self.screeningTwo setTitleColor:kColor_N(64, 78, 108) forState:UIControlStateNormal];
+    [self.view addSubview:self.screeningTwo];
+    self.screeningTwo.layer.borderWidth = 0.3;
+    self.screeningTwo.layer.borderColor = kColor_N(235, 235, 235).CGColor;
+    
+    
+    NSArray *arr = @[self.screeningOne,self.screeningTwo];
+    [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
+    [arr mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.sousuoview.mas_bottom);
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+}
+
+
+- (void)laodScreeningV{
+    self.information = [[ScreeningV alloc] init];
+    [self.view addSubview:self.information];
+    [self.information mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.screeningOne.mas_bottom);
+    }];
+    self.information.dataArr = _informationArr;
+}
 
 - (void)loadSousuo{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(100))];
     v.backgroundColor = kColor_N(240, 240, 240);
     [self.view addSubview:v];
-    
+    self.sousuoview = v;
     UIButton *lb = [[UIButton alloc] init];
     [v addSubview:lb];
     [lb setTitle:@"搜索" forState:UIControlStateNormal];
@@ -121,7 +173,7 @@
 
     StudentsListVC *vctwo = [[StudentsListVC alloc] init];
     vctwo.url = POSTStudenteamList;
-    [vctwo.dic setObject:@"1" forKey:@"isPay"];
+    [vctwo.dic setObject:@"1" forKey:@"isComplete"];
     vctwo.PayCost = NO;
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
@@ -129,7 +181,7 @@
     
     StudentsListVC *vcthree = [[StudentsListVC alloc] init];
     vcthree.url = POSTStudenteamList;
-    [vcthree.dic setObject:@"2" forKey:@"isPay"];
+    [vcthree.dic setObject:@"2" forKey:@"isComplete"];
     vcthree.PayCost = NO;
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];

@@ -10,6 +10,7 @@
 #import "CGXPickerView.h"
 #import "XLCache.h"
 #import "MyPosterVC.h"
+#import "UIImage+LXQRCode.h"
 #define BUT_W KFit_W6S(150)
 @interface PosterVC ()<UIImagePickerControllerDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -102,12 +103,19 @@
     [self.save setTitle:@"保存" forState:UIControlStateNormal];
     [self.save setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
     [self.save setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
-    [self.save addTarget:self action:@selector(laodSave) forControlEvents:UIControlEventTouchUpInside];
+    [self.save addTarget:self action:@selector(erweima  ) forControlEvents:UIControlEventTouchUpInside];
     [self.save mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(30));
         make.right.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
         make.height.mas_equalTo(KFit_H6S(90));
     }];
+}
+
+
+- (void)erweima{
+    NSString *str = [NSString stringWithFormat:XIAOCHENGXUEWM,[NSString stringWithFormat:@"%ld",(long)self.jiaxiao.tag]];
+    UIImage *logImage = [UIImage LX_ImageOfQRFromURL:str codeSize:KFit_W6S(400)];
+    [self uploadEWMPictures:logImage];
 }
 #pragma mark -调用保存接口
 - (void)laodSave{
@@ -126,7 +134,7 @@
     [dic setValue:self.nameArr[i] forKey:@"userName"];
     [dic setValue:@"1" forKey:@"userType"];
     [dic setValue:[self.imgarr componentsJoinedByString:@","] forKey:@"imgUrl"];
-    [MBProgressHUD showLoadingHUD:@"正在保存"];
+//    [MBProgressHUD showLoadingHUD:@"正在保存"];
     [FMNetworkHelper fm_request_postWithUrlString:POSTPostAdd isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         [MBProgressHUD hideLoadingHUD];
@@ -324,7 +332,7 @@
         j++;
     }
     
-    if (j >= 9) {
+    if (j >= 8) {
         self.UpAttachment.hidden = YES;
     }else{
         self.UpAttachment.hidden = NO;
@@ -457,6 +465,38 @@
     }];
 }
 
+
+
+#pragma mark - 上传二维码
+- (void)uploadEWMPictures:(UIImage *)image{
+    [MBProgressHUD showLoadingHUD:@"正在保存"];
+    
+    
+    NSString *url = POSTUpLoadFile;
+    
+    
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:[User UserOb].token forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:@"Mobile" forHTTPHeaderField:@"loginType"];
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"file" fileName:@"tupian.png" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"成功返货=============%@",responseObject);
+//        [MBProgressHUD hideLoadingHUD];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSDictionary *dic =responseObject[@"data"][@"data"];
+            [self.imgarr addObject:dic[@"url"]];
+            [self laodSave];
+        }else{
+            [MBProgressHUD showAutoMessage:responseObject[@"message"]];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBProgressHUD hideLoadingHUD];
+    }];
+}
 /*
 #pragma mark - Navigation
 

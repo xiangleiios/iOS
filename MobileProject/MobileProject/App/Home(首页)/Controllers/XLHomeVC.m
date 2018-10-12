@@ -303,13 +303,25 @@
     KKLog(@"1111");
     
     if (senter.tag == 1) {
-//        StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
-//        vc.url = POSTCensiusList;
-//        [self.navigationController pushViewController:vc animated:YES];
+        StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
+//        [vc.navigationView setTitle:@"今日咨询"];
+        vc.url = POSTCensiusList;
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc.navigationView setTitle:@"今日咨询"];
     }else if (senter.tag == 2){
-        
+        StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
+        //        [vc.navigationView setTitle:@"今日咨询"];
+        vc.url = POSTSignList;
+        [self.navigationController pushViewController:vc animated:YES];
+        vc.PayCost = YES;
+        [vc.navigationView setTitle:@"今日报名"];
     }else if (senter.tag == 3){
-        
+        StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
+        //        [vc.navigationView setTitle:@"今日咨询"];
+        vc.url = POSTMonthSignList;
+        vc.PayCost = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc.navigationView setTitle:@"本月报名"];
     }
 
 }

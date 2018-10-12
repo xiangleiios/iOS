@@ -111,7 +111,7 @@
     UIImageView *img = [[UIImageView alloc] init];
     [v addSubview:img];
 //    [img setImage:[UIImage imageNamed:@"pacture_nor"]];
-    [img sd_setImageWithURL:[NSURL URLWithString:model.headImg] placeholderImage:[UIImage imageNamed:@"pacture_nor"]];
+    [img sd_setImageWithURL:[NSURL URLWithString:model.headImg] placeholderImage:[UIImage imageNamed:@"head_nor"]];
     img.layer.cornerRadius = KFit_W6S(70);
     img.layer.masksToBounds = YES;
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
