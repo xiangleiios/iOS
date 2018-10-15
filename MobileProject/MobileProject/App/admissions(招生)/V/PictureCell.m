@@ -222,7 +222,8 @@
         }
         UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(KFit_W6S(30) + i%3*(w +KFit_W6S(30)), i/3*(w +KFit_W6S(30)), w, w)];
         [self.imgbavk addSubview:img];
-        [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])]];
+//        [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])]];
+        [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])] placeholderImage:[UIImage imageNamed:@"photo_nor"]];
         img.tag = i;
         img.userInteractionEnabled = YES;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapView:)];

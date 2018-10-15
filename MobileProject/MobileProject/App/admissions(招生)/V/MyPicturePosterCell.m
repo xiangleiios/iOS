@@ -64,7 +64,8 @@
     _model = model;
     self.title.text = [NSString stringWithFormat:@"%@",model.tittle];
     self.sub.text = [XLCommonUse TimeToIntercept:_model.createTime];
-    [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(model.memo)]];
+//    [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(model.memo)]];
+    [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(model.memo)] placeholderImage:[UIImage imageNamed:@"photo_nor"]];
 }
 
 

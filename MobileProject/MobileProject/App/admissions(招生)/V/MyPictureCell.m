@@ -136,28 +136,28 @@
                 make.height.mas_equalTo(KFit_H6S(240));
             }];
         }
-        self.show = [[UIButton alloc] init];
-        [self.contentView addSubview:self.show];
-        [self.show setTitle:@"全文" forState:UIControlStateNormal];
-        [self.show setTitle:@"收起" forState:UIControlStateSelected];
-        [self.show addTarget:self action:@selector(showbut) forControlEvents:UIControlEventTouchUpInside];
-        self.show.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(18)];
-        [self.show setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
-        self.show.selected = isShow;
-        [self.show mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(self.content);
-            make.top.mas_equalTo(self.content.mas_bottom).mas_offset(KFit_H6S(20));
-            make.size.mas_equalTo(CGSizeMake(KFit_W6S(80), KFit_H6S(40)));
-        }];
+//        self.show = [[UIButton alloc] init];
+//        [self.contentView addSubview:self.show];
+//        [self.show setTitle:@"全文" forState:UIControlStateNormal];
+//        [self.show setTitle:@"收起" forState:UIControlStateSelected];
+//        [self.show addTarget:self action:@selector(showbut) forControlEvents:UIControlEventTouchUpInside];
+//        self.show.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(18)];
+//        [self.show setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+//        self.show.selected = isShow;
+//        [self.show mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.mas_equalTo(self.content);
+//            make.top.mas_equalTo(self.content.mas_bottom).mas_offset(KFit_H6S(20));
+//            make.size.mas_equalTo(CGSizeMake(KFit_W6S(80), KFit_H6S(40)));
+//        }];
         
         
-        self.imgbavk = [[XLView alloc] init];
-        [self.contentView addSubview:self.imgbavk];
-        [self.imgbavk mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(self.contentView);
-            make.top.mas_equalTo(self.show.mas_bottom).mas_offset(KFit_H6S(20));
-            make.height.mas_equalTo(KFit_H6S(5));
-        }];
+//        self.imgbavk = [[XLView alloc] init];
+//        [self.contentView addSubview:self.imgbavk];
+//        [self.imgbavk mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.right.mas_equalTo(self.contentView);
+//            make.top.mas_equalTo(self.show.mas_bottom).mas_offset(KFit_H6S(20));
+//            make.height.mas_equalTo(KFit_H6S(5));
+//        }];
         
     }else{
         self.content.numberOfLines = 0;
@@ -167,15 +167,15 @@
             make.top.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
             make.height.mas_equalTo(textHeight+1);
         }];
-        self.imgbavk = [[XLView alloc] init];
-        [self.contentView addSubview:self.imgbavk];
-        [self.imgbavk mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.mas_equalTo(self.contentView);
-            make.top.mas_equalTo(self.content.mas_bottom).mas_offset(KFit_H6S(20));
-            make.height.mas_equalTo(KFit_H6S(5));
-        }];
     }
     
+    self.imgbavk = [[XLView alloc] init];
+    [self.contentView addSubview:self.imgbavk];
+    [self.imgbavk mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.contentView);
+        make.top.mas_equalTo(self.content.mas_bottom).mas_offset(KFit_H6S(20));
+        make.height.mas_equalTo(KFit_H6S(5));
+    }];
     UILabel *lbtwo = [[UILabel alloc] init];
     [self.contentView addSubview:lbtwo];
     self.time = lbtwo;
@@ -221,6 +221,7 @@
         UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(KFit_W6S(30) + i%3*(w +KFit_W6S(30)), i/3*(w +KFit_W6S(30)), w, w)];
         [self.imgbavk addSubview:img];
         [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])]];
+        [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])] placeholderImage:[UIImage imageNamed:@"photo_nor"]];
         //        KKLog(@"%@",KURLIma(array[i]));
         img.tag = i;
         img.userInteractionEnabled = YES;

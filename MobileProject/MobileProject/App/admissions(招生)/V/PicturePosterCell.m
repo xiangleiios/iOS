@@ -63,5 +63,6 @@
     self.title.text = [NSString stringWithFormat:@"        %@",model.tittle];
     self.sub.text = [NSString stringWithFormat:@"%d人制作",model.useNum];
     [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(model.imgUrl)]];
+    [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(model.imgUrl)] placeholderImage:[UIImage imageNamed:@"photo_nor"]];
 }
 @end

@@ -12,6 +12,7 @@
 @interface MyPosterVC ()<UIWebViewDelegate>
 @property (nonatomic , strong)UIWebView *webView;
 @property (nonatomic , strong)UIButton *share;
+@property (nonatomic , strong)UIButton *makebut;
 @end
 
 @implementation MyPosterVC
@@ -54,20 +55,66 @@
     }];
     self.webView.delegate = self;
     
-    self.share = [[UIButton alloc] init];
-    [self.view addSubview:self.share];
-    self.share.layer.cornerRadius = kFit_Font6(5);
-    self.share.layer.masksToBounds = YES;
-    [self.share setTitle:@"分享 " forState:UIControlStateNormal];
-    [self.share setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
-    [self.share setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
-    [self.share addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
-    [self.share mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(30));
-        make.right.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
-        make.height.mas_equalTo(KFit_H6S(90));
-    }];
     
+    if (self.model) {
+        self.makebut = [[UIButton alloc] init];
+        [self.view addSubview:self.makebut];
+        self.makebut.layer.cornerRadius = kFit_Font6(5);
+        self.makebut.layer.masksToBounds = YES;
+        self.makebut.layer.borderColor = kColor_N(220, 220, 220).CGColor;
+        self.makebut.layer.borderWidth = 0.5;
+        [self.makebut setTitle:@"再次制作" forState:UIControlStateNormal];
+        [self.makebut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.makebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(255, 255, 255)] forState:UIControlStateNormal];
+        [self.makebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(255, 255, 255, 0.6)] forState:UIControlStateHighlighted];
+        [self.makebut addTarget:self action:@selector(making) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+        self.share = [[UIButton alloc] init];
+        [self.view addSubview:self.share];
+        self.share.layer.cornerRadius = kFit_Font6(5);
+        self.share.layer.masksToBounds = YES;
+        [self.share setTitle:@"分享 " forState:UIControlStateNormal];
+        [self.share setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+        [self.share setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
+        [self.share addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
+        //    [self.share mas_makeConstraints:^(MASConstraintMaker *make) {
+        //        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(30));
+        //        make.right.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+        //        make.height.mas_equalTo(KFit_H6S(90));
+        //    }];
+        NSArray *arr = @[self.makebut,self.share];
+        [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:KFit_W6S(30) leadSpacing:KFit_W6S(30) tailSpacing:KFit_W6S(30)];
+        [arr mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+            make.height.mas_equalTo(KFit_H6S(90));
+        }];
+    }else{
+        self.share = [[UIButton alloc] init];
+        [self.view addSubview:self.share];
+        self.share.layer.cornerRadius = kFit_Font6(5);
+        self.share.layer.masksToBounds = YES;
+        [self.share setTitle:@"分享 " forState:UIControlStateNormal];
+        [self.share setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+        [self.share setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
+        [self.share addTarget:self action:@selector(toShare) forControlEvents:UIControlEventTouchUpInside];
+        [self.share mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(30));
+            make.right.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+            make.height.mas_equalTo(KFit_H6S(90));
+        }];
+    }
+    
+    
+}
+
+
+- (void)making{
+    PosterVC *vc = [[PosterVC alloc] init];
+    vc.url = POSTUserDetail;
+    vc.model = self.model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark -调用分享
 - (void)toShare{
