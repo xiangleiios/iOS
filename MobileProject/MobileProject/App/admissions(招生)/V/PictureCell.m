@@ -7,7 +7,7 @@
 //
 
 #import "PictureCell.h"
-
+#import "MSSBrowseNetworkViewController.h"
 @implementation PictureCell
 
 
@@ -30,6 +30,16 @@
     }
     return self;
 }
+
+
+-(NSMutableArray *)browseItemArray{
+    if (_browseItemArray==nil) {
+        _browseItemArray=[NSMutableArray array];
+    }
+    return _browseItemArray;
+}
+
+
 - (void)layoutUI{
     self.head = [[UIImageView alloc] init];
     [self.head setImage:[UIImage imageNamed:@"head_nor"]];
@@ -145,13 +155,12 @@
             make.size.mas_equalTo(CGSizeMake(KFit_W6S(80), KFit_H6S(40)));
         }];
         
-        
-        self.imgbavk = [[XLView alloc] init];
-        [self.contentView addSubview:self.imgbavk];
-        [self.imgbavk mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.lb = [[UILabel alloc] init];
+        [self.contentView addSubview:self.lb];
+        [self.lb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.contentView);
             make.top.mas_equalTo(self.show.mas_bottom).mas_offset(KFit_H6S(20));
-            make.height.mas_equalTo(KFit_H6S(5));
+            make.height.mas_equalTo(KFit_H6S(1));
         }];
         
     }else{
@@ -162,16 +171,23 @@
             make.top.mas_equalTo(self.head.mas_bottom).mas_offset(KFit_H6S(20));
             make.height.mas_equalTo(textHeight+1);
         }];
-        self.imgbavk = [[XLView alloc] init];
-        [self.contentView addSubview:self.imgbavk];
-        [self.imgbavk mas_makeConstraints:^(MASConstraintMaker *make) {
+        self.lb = [[UILabel alloc] init];
+        [self.contentView addSubview:self.lb];
+        [self.lb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self.contentView);
             make.top.mas_equalTo(self.content.mas_bottom).mas_offset(KFit_H6S(20));
-            make.height.mas_equalTo(KFit_H6S(5));
+            make.height.mas_equalTo(KFit_H6S(1));
         }];
+        
     }
     
-    
+    self.imgbavk = [[XLView alloc] init];
+    [self.contentView addSubview:self.imgbavk];
+    [self.imgbavk mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.contentView);
+        make.top.mas_equalTo(self.lb.mas_bottom);
+        make.height.mas_equalTo(KFit_H6S(5));
+    }];
     
     self.num = [[UILabel alloc] init];
     [self.contentView addSubview:self.num];
@@ -207,11 +223,22 @@
         UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(KFit_W6S(30) + i%3*(w +KFit_W6S(30)), i/3*(w +KFit_W6S(30)), w, w)];
         [self.imgbavk addSubview:img];
         [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])]];
+        img.tag = i;
+        img.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapView:)];
+        [img addGestureRecognizer:tap];
+        
+        UIImageView *imageView = [self.contentView viewWithTag:i + 100];
+        MSSBrowseModel *browseItem = [[MSSBrowseModel alloc]init];
+        browseItem.bigImageUrl = KURLIma(array[i]);// 加载网络图片大图地址
+        browseItem.smallImageView = imageView;// 小图
+        [self.browseItemArray addObject:browseItem];
+        
 //        KKLog(@"%@",KURLIma(array[i]));
     }
     [self.imgbavk mas_remakeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.contentView);
-        make.top.mas_equalTo(self.content.mas_bottom).mas_offset(KFit_H6S(20));
+        make.top.mas_equalTo(self.lb.mas_bottom);
         make.height.mas_equalTo([self.imgbavk getLayoutCellHeight]);
     }];
     NSArray *arr = [model.tags componentsSeparatedByString:@","];
@@ -261,4 +288,25 @@
     }
     
 }
+
+
+
+-(void)tapView:(UITapGestureRecognizer *)sender{
+    UIImageView *img=(UIImageView *)sender.view;
+    MSSBrowseNetworkViewController *bvc = [[MSSBrowseNetworkViewController alloc]initWithBrowseItemArray:self.browseItemArray currentIndex:img.tag];
+    
+    //             bvc.isEqualRatio = NO;// 大图小图不等比时需要设置这个属性（建议等比）
+    //    [bvc.navigationController fm_setStatusBarBackgroundColor:[UIColor clearColor]];
+    [bvc showBrowseViewController];
+}
+
+
+
+
+
+
+
+
+
+
 @end

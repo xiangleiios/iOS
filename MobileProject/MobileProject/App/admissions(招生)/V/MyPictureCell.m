@@ -8,13 +8,19 @@
 
 #import "MyPictureCell.h"
 #import "CodeShareV.h"
+#import "MSSBrowseNetworkViewController.h"
 @implementation MyPictureCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
+-(NSMutableArray *)browseItemArray{
+    if (_browseItemArray==nil) {
+        _browseItemArray=[NSMutableArray array];
+    }
+    return _browseItemArray;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
@@ -216,6 +222,16 @@
         [self.imgbavk addSubview:img];
         [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])]];
         //        KKLog(@"%@",KURLIma(array[i]));
+        img.tag = i;
+        img.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapView:)];
+        [img addGestureRecognizer:tap];
+        
+        UIImageView *imageView = [self.contentView viewWithTag:i + 100];
+        MSSBrowseModel *browseItem = [[MSSBrowseModel alloc]init];
+        browseItem.bigImageUrl = KURLIma(array[i]);// 加载网络图片大图地址
+        browseItem.smallImageView = imageView;// 小图
+        [self.browseItemArray addObject:browseItem];
     }
     if (array.count > 0) {
         [self.imgbavk mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -238,5 +254,15 @@
     share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share"];
     v.share = share;
     [v show];
+}
+
+
+-(void)tapView:(UITapGestureRecognizer *)sender{
+    UIImageView *img=(UIImageView *)sender.view;
+    MSSBrowseNetworkViewController *bvc = [[MSSBrowseNetworkViewController alloc]initWithBrowseItemArray:self.browseItemArray currentIndex:img.tag];
+    
+    //             bvc.isEqualRatio = NO;// 大图小图不等比时需要设置这个属性（建议等比）
+    //    [bvc.navigationController fm_setStatusBarBackgroundColor:[UIColor clearColor]];
+    [bvc showBrowseViewController];
 }
 @end

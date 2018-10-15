@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UIButton *num;
 @property (nonatomic , strong)UILabel *time;
 @property (nonatomic , strong)XLView *imgbavk;
+@property (nonatomic , strong)NSMutableArray *browseItemArray;
 - (void)setCellContent:(NSString *)contentStr andIsShow:(BOOL)isShow andCellIndexPath:(NSIndexPath *)indexPath;
 
 

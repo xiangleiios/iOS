@@ -112,9 +112,9 @@
 //    [self.veribut addTarget:self action:@selector(getVerificationCode) forControlEvents:UIControlEventTouchUpInside];
 //    self.veribut.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(12)];
     
-    //15658458745   18810395609  13154898589  15512341234  15007125433  17764076879
+    //15658458745   18810395609  13154898589  15512341234  15007125433  17764076879  13100704043
 #ifdef DEBUG
-    self.pho.text = @"13100704043";
+    self.pho.text = @"17764076879";
     self.password.text = @"123456";
 #else
     
@@ -231,9 +231,7 @@
             CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
             AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             appDelegate.tab = TabBarControllerConfig;
-            [self presentViewController:TabBarControllerConfig.tabBarController animated:YES completion:^{
-
-            }];
+            appDelegate.window.rootViewController = TabBarControllerConfig.tabBarController;
 
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];
