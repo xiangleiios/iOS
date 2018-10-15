@@ -350,23 +350,28 @@
                 weakself.gender.subfield.tag = [[XLCache singleton].sys_user_sex_value[[selectRow intValue]] intValue];
             }];
         };
-        self.school = [[XLInformationV alloc] informationWithTitle:@"驾校" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
-        self.school.senterBlock = ^{
-            [weakself endEditing:YES];
-            [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
-                NSLog(@"%@",selectValue);
-                weakself.school.subfield.text = selectValue;
-                weakself.school.subfield.tag = [[XLCache singleton].schoolDeptId[[selectRow intValue]] intValue];
-                NSLog(@"%@",[XLCache singleton].teamCode_value[[selectRow intValue]]);
-            }];
-        };
+        self.school = [[XLInformationV alloc] informationWithTitle:@"驾校" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.school.userInteractionEnabled = NO;
+        self.school.subfield.textColor = kColor_N(210, 210, 210);
+//        self.school.senterBlock = ^{
+//            [weakself endEditing:YES];
+//            [CGXPickerView showStringPickerWithTitle:@"报考驾校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+//                NSLog(@"%@",selectValue);
+//                weakself.school.subfield.text = selectValue;
+//                weakself.school.subfield.tag = [[XLCache singleton].schoolDeptId[[selectRow intValue]] intValue];
+//                NSLog(@"%@",[XLCache singleton].teamCode_value[[selectRow intValue]]);
+//            }];
+//        };
         XLInformationV *peixun = [[XLInformationV alloc] informationWithTitle:@"招生培训资料"];
         
         self.seniority = [[XLInformationV alloc] informationWithTitle:@"教龄" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.phone = [[XLInformationV alloc] informationWithTitle:@"招生电话" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.names = [[XLInformationV alloc] informationWithTitle:@"分校名称" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.names.userInteractionEnabled = NO;
+        self.names.subfield.textColor = kColor_N(210, 210, 210);
         self.address = [[XLInformationV alloc] informationWithTitle:@"分校地址" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
-        
+        self.address.userInteractionEnabled = NO;
+        self.address.subfield.textColor = kColor_N(210, 210, 210);
         [self addSubview:self.name];
         [self addSubview:self.gender];
         [self addSubview:self.school];
