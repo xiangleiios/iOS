@@ -7,6 +7,7 @@
 //
 
 #import "FMBaseViewController.h"
+#import "FMMineVC.h"
 @protocol MyInfoVCDelegate <NSObject>//协议
 
 - (void)headerImageOrNikeNameChange:(NSInteger)type;//协议方法 0/toux 1/name
@@ -14,4 +15,5 @@
 @end
 @interface MyInfoVC : FMBaseViewController
 @property (nonatomic , strong)id<MyInfoVCDelegate> delegate;
+@property (nonatomic , strong)FMMineVC *vc;
 @end

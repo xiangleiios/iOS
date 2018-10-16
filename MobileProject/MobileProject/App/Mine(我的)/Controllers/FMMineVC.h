@@ -10,4 +10,5 @@
 
 @interface FMMineVC : FMBaseViewController
 - (void)theLoginStatusChange;
+@property (nonatomic , strong)UIImageView *HeadPortrait;
 @end

@@ -109,6 +109,20 @@
     NSURLSessionTask *sessionTask = [BANetManager ba_request_POSTWithUrlString:urlString isNeedCache:isNeedCache parameters:parameters successBlock:^(id responseObject) {
         if (kResponseObjectStatusCodeIsEqual(401)) {
             [MBProgressHUD showMsgHUD:@"登录失效，请重新登录"];
+            XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"登录失效，请重新登录" sureBtn:@"确定" cancleBtn:nil];
+            [alert showXLAlertView];
+            alert.resultIndex = ^(NSInteger index) {
+                KKLog(@"%ld",(long)index);
+                if (index == 2) {
+                    [[User UserOb] UserQuit];
+                    LoginVC *Loginvc = [[LoginVC alloc] init];
+                    AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
+                    UIViewController *vc = delegete.window.rootViewController;
+                    delegete.window.rootViewController = Loginvc;
+                    vc = nil;
+//                    [self presentViewController:Loginvc animated:YES completion:NULL];
+                }
+            };
         }
         successBlock(responseObject);
     } failureBlock:^(NSError *error) {

@@ -20,7 +20,7 @@
 @property (nonatomic , strong)NSArray *imgarr;
 @property (nonatomic , strong)NSArray *titlerr;
 @property (nonatomic , strong)NSString *cacheSize;
-@property (nonatomic , strong)UIImageView *HeadPortrait;
+
 @property (nonatomic , strong)UILabel *pho;
 @end
 
@@ -56,12 +56,13 @@
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(40));
         make.height.mas_equalTo(KFit_H6S(450));
     }];
-    
+    kWeakSelf(self)
     XLInformationV *manual = [[XLInformationV alloc] informationLevelWithTitle:@"账户信息" SubTitle:@"" ImageName:@"my_news_icon"];
     [backview addSubview:manual];
     manual.senterBlock = ^{
         KKLog(@"dianji");
         MyInfoVC *VC = [[MyInfoVC alloc] init];
+        VC.vc = weakself;
         [self.navigationController pushViewController:VC animated:YES];
     };
     
@@ -184,6 +185,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
         MyInfoVC *VC = [[MyInfoVC alloc] init];
+        VC.vc = self;
         [self.navigationController pushViewController:VC animated:YES];
     }
     if (indexPath.row == 1) {
@@ -243,7 +245,7 @@
             UIViewController *vc = delegete.window.rootViewController;
             delegete.window.rootViewController = Loginvc;
             vc = nil;
-            [self presentViewController:Loginvc animated:YES completion:NULL];
+//            [self presentViewController:Loginvc animated:YES completion:NULL];
         }
     };
     

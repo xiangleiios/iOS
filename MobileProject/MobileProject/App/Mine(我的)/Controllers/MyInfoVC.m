@@ -13,6 +13,7 @@
 #import <CommonCrypto/CommonDigest.h>//MD5加密导入框架
 @interface MyInfoVC ()<UIImagePickerControllerDelegate>
 //@property (nonatomic , strong)XLMyNewsFunction *headerview;
+@property (nonatomic , strong)UIImageView *HeadPortrait;
 @end
 
 @implementation MyInfoVC
@@ -26,10 +27,47 @@
 }
 
 - (void)loadSubView{
+    
+    self.HeadPortrait = [[UIImageView alloc] init];
+    [self.view addSubview:self.HeadPortrait];
+    [self.HeadPortrait mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(20));
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
+        make.width.height.mas_equalTo(KFit_W6S(100));
+    }];
+    self.HeadPortrait.userInteractionEnabled = YES;
+    self.HeadPortrait.layer.cornerRadius = KFit_W6S(50);
+    self.HeadPortrait.layer.masksToBounds = YES;
+    [self.HeadPortrait sd_setImageWithURL:[NSURL URLWithString:KURLIma([User UserOb].teamUserHead)] placeholderImage:[UIImage imageNamed:@"touxiang_nor"]];
+    KKLog(@"%@",KURLIma([User UserOb].teamUserHead));
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeUp)];
+    // 允许用户交互
+    [self.HeadPortrait addGestureRecognizer:tap];
+    
+    
+    UILabel *lbone = [[UILabel alloc] init];
+    [self.view addSubview:lbone];
+    lbone.text = @"我的头像";
+    lbone.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    [lbone mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(30));
+        make.centerY.mas_equalTo(self.HeadPortrait);
+        make.height.mas_equalTo(KFit_H6S(30));
+    }];
+    
+    UILabel *lb = [[UILabel alloc] init];
+    [self.view addSubview:lb];
+    lb.backgroundColor = kColor_N(240, 240, 240);
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.HeadPortrait.mas_bottom).mas_offset(KFit_H6S(20));
+        make.height.mas_equalTo(1);
+    }];
+    
     XLInformationV *name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile];
     [self.view addSubview:name];
     [name mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(kNavBarH + KFit_H6S(60));
+        make.top.mas_equalTo(lb.mas_bottom);
         make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
@@ -82,177 +120,7 @@
 
 
 
-#pragma mark-图片选项提示；
-- (void)imageUpload{
-    UIAlertController * aler = [UIAlertController alertControllerWithTitle:@"请选择" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction * actionCamera = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            UIAlertView * alerr = [[UIAlertView alloc]initWithTitle:@"警告!" message:@"未找到该硬件设备或设备已损坏" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
-            [alerr show];
-        }else{
-            UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-            if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera])
-            {
-                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-                picker.delegate = self;
-                //设置拍照后的图片可被编辑
-                picker.allowsEditing = YES;
-                picker.sourceType = sourceType;
-                //利用模态进行调用系统框架
-                [self.navigationController presentViewController:picker animated:YES completion:nil];
-            }else
-            {
-                NSLog(@"模拟器中无法打开照相机,请在真机中使用");
-            }
-        }
-        
-        
-    }];
-    UIAlertAction * actionLibary = [UIAlertAction actionWithTitle:@"照片库" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        picker.delegate = self;
-        //设置选择后的图片可被编辑
-        picker.allowsEditing = YES;
-        [self.navigationController presentViewController:picker animated:YES completion:nil];;
-        
-    }];
-    
-    UIAlertAction * actionCancel = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-    }];
-    [aler addAction:actionCamera];
-    [aler addAction:actionLibary];
-    [aler addAction:actionCancel];
-    [self presentViewController:aler animated:YES completion:nil];
-    
-}
 
-
-#pragma mark- 相机，照片库图片代理
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
-    
-    //当选择的类型是图片
-    if ([type isEqualToString:@"public.image"])
-    {
-        //先把图片转成NSData
-        UIImage* image = [info objectForKey:@"UIImagePickerControllerEditedImage"]; /// UIImagePickerControllerOriginalImage
-        image = [self imageScale:image maxEdge:300];
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil)
-        {
-            data = UIImageJPEGRepresentation(image, 1.0);
-        }
-        else
-        {
-            data = UIImagePNGRepresentation(image);
-        }
-        
-        
-        //关闭相册界面
-        [picker dismissModalViewControllerAnimated:YES];
-        
-        
-        
-    }
-}
-- (UIImage *)imageScale:(UIImage *)image maxEdge:(float)maxEdge
-{
-    float w = image.size.width;
-    float h = image.size.height;
-    
-    float w1 = w;
-    float h1 = h;
-    if( w >= h )
-    {
-        if( w1 > maxEdge )
-            w1 = maxEdge;
-        
-        h1 = w1 * h / w;
-    }
-    else{
-        if( h1 > maxEdge )
-            h1 = maxEdge;
-        
-        w1 = w * h1 / h;
-    }
-    
-    
-    UIGraphicsBeginImageContext(CGSizeMake(w1, h1));
-    
-    [image drawInRect:CGRectMake(0, 0, w1, h1)];
-    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext ();
-    UIGraphicsEndImageContext();
-    return scaledImage;
-}
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissModalViewControllerAnimated:YES];
-}
-
-#pragma mark -头像上传
-
-
-
-
-#pragma mark -修改昵称
-- (void)promptedToChangeTheNickname{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"昵称修改" message:@"请输入新的昵称" preferredStyle:UIAlertControllerStyleAlert];
-    
-    // 添加按钮
-    __weak typeof(alert) weakAlert = alert;
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-        
-        //        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        NSString *encodingString =[ [weakAlert.textFields.firstObject text] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding ];
-        //        dic[@"nick_name"] = encodingString;
-        //        NSString *ster = [[DataModule sharedInstance] getLoginedUserInfo].token;
-        //        dic[@"token"] = ster;
-        if ([weakAlert.textFields.firstObject text].length > 16) {
-            //            [SVProgressHUD showErrorWithStatus:@"昵称仅限制16个字符以内"];
-            [MBProgressHUD showAutoMessage:@"昵称仅限制16个字符以内"];
-            [self presentViewController:alert animated:YES completion:nil];
-            return ;
-        }
-        [self changeNickRequest:encodingString];
-        
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-    }]];
-    
-    
-    // 添加文本框
-    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.textColor = [UIColor redColor];
-        textField.placeholder = @"昵称支持中英文以及数字";
-        [textField addTarget:self action:@selector(usernameDidChange:) forControlEvents:UIControlEventEditingDidEnd];
-    }];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-- (void)changeNickRequest:(NSString *)name{
-    NSString *url=[NSString stringWithFormat:POSTChangeTheNickname,[User UserOb].token,name];
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        if (kResponseObjectStatusCodeIsEqual(200)) {
-            [MBProgressHUD showAutoMessage:@"修改成功"];
-            User *use=[User UserOb];
-            use.nick_name=[name stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            [defaults setObject:use.nick_name forKey:@"nick_name"];
-            [defaults synchronize];
-            [self.delegate headerImageOrNikeNameChange:1];
-            [self.navigationController popViewControllerAnimated:YES];
-        }else{
-            [MBProgressHUD showAutoMessage:responseObject[@"message"]];
-        }
-    } failureBlock:^(NSError *error) {
-        
-    } progress:nil];
-}
 
 
 #pragma mark - 删除特殊字符
@@ -274,6 +142,123 @@
     return modifiedString;
 }
 
+- (void)changeUp{
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"请选择添加途径" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //默认只有标题 没有操作的按钮:添加操作的按钮 UIAlertAction
+    
+    UIAlertAction *cancelBtn = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //        NSLog(@"取消");
+        [self PhotoLibrary];
+    }];
+    
+    UIAlertAction *cancelBtXJ = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self xiangji];
+        NSLog(@"取消");
+        
+    }];
+    //添加确定
+    UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"确定");
+        
+    }];
+    //设置`确定`按钮的颜色
+    //    [sureBtn setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    //将action添加到控制器
+    [alertVc addAction:cancelBtn];
+    [alertVc addAction:cancelBtXJ];
+    [alertVc addAction :sureBtn];
+    //展示
+    [self presentViewController:alertVc animated:YES completion:nil];
+    
+    
+}
+
+
+///
+- (void)xiangji{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView * alerr = [[UIAlertView alloc]initWithTitle:@"警告!" message:@"未找到该硬件设备或设备已损坏" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
+        [alerr show];
+    }else{
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.allowsEditing = YES;
+    }
+    //利用模态进行调用系统框架
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
+    
+}
+//照片库
+- (void)PhotoLibrary{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.allowsEditing = YES;
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
+}
+
+#pragma mark -相册代理
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    KKLog(@"%@    ----- %@",picker,info);
+    [self uploadPictures:info[UIImagePickerControllerOriginalImage]];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (void)uploadPictures:(UIImage *)image{
+    [MBProgressHUD showLoadingHUD:@"正在上传图片"];
+    
+    
+    NSString *url = POSTUpLoadFile;
+    
+    
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:[User UserOb].token forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:@"Mobile" forHTTPHeaderField:@"loginType"];
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"file" fileName:@"tupian.png" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"成功返货=============%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSDictionary *dic =responseObject[@"data"][@"data"];
+            //            [self.imgarr addObject:dic[@"url"]];
+            [self chengHeader:dic[@"url"]];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBProgressHUD hideLoadingHUD];
+    }];
+}
+
+
+
+
+- (void)chengHeader:(NSString *)img{
+    [FMNetworkHelper fm_request_postWithUrlString:[NSString stringWithFormat:POSTUpdateTeamUserHeadImg,img] isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+            [defaults setObject:KURLIma(img) forKey:@"teamUserHead"];
+            [defaults synchronize];
+            [self.HeadPortrait sd_setImageWithURL:[NSURL URLWithString:KURLIma(img)] placeholderImage:[UIImage imageNamed:@"touxiang_nor"]];
+            [self.vc.HeadPortrait sd_setImageWithURL:[NSURL URLWithString:KURLIma(img)] placeholderImage:[UIImage imageNamed:@"touxiang_nor"]];
+            
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 
 /*
 #pragma mark - Navigation
