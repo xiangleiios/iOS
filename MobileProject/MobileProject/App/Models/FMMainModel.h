@@ -16,65 +16,17 @@
 @property (nonatomic, copy) NSString *subtitle;
 @end
 
-//"province": "string,省市",
-//"this_electric_sum": "string,今年总电量",
-//"next_electric_sum": "string,明年总电量",
-//"history_sum": "string,累计成交电量",
-//"buyer_later": "string,30天新增需求",
-//"seller_later": "string,30天新增供电",
-//"protocol_url": "string,淘电宝用户服务委托协议url连接",
-//"time": "string,统计时间",
-//"info_notice": "string,新消息小红点提醒  0 没有 1 有"
+
 @interface HomeModel : NSObject
-@property (nonatomic, copy) NSString *province;
-@property (nonatomic, copy) NSString *year;
-@property (nonatomic, copy) NSString *this_electric_sum;
-@property (nonatomic, copy) NSString *next_electric_sum;
-@property (nonatomic, copy) NSString *history_sum;
-@property (nonatomic, copy) NSString *buyer_later;
-@property (nonatomic, copy) NSString *seller_later;
-@property (nonatomic, copy) NSString *protocol_url;
-@property (nonatomic, copy) NSString *time;
-@property (nonatomic, assign)int info_notice;
+
 @end
-//"money_sum": "string,账户总金额",
-//"money_free": "string,可用金额",
-//"money_freeze": "string,冻结金额",
-//"freeze_orders": [
-//                  {
-//                      "order_num": "string,订单号",
-//                      "money": "string,冻结金额"
-//                  }
-//                  ],
-//"money_offline": "string,线下充值待确认金额"
-//"action": "string,0 线上充值成功 1 线下充值待审核 2 线下充值成功 3线下充值失败    6服务费首付款支付  7服务费余款支付 8服务费扣减  9订单签订失败服务费首付款退回  ",
-//"action_name": "string,0 线上充值成功 1 线下充值待审核 2 线下充值成功 3线下充值失败    6服务费首付款支付  7服务费余款支付 8服务费扣减  9订单签订失败服务费首付款退回  ",
-//"money": "string,变动金额",
-//"desc": "string,流水描述",
-//"datetime": "string,时间",
-//"order_num": "string,支付交易号 或 订单号",
-//"image": "string,action状态为1，2，3时凭证",
-//"option": "string,action状态为1，2，3时审核意见",
-//"upload_time": "string,凭证上传时间",
-//"pay_type": "string,支付类型 1支付宝  2微信 3银联 4 线下支付"
-@interface AccountModel : NSObject
-@property (nonatomic, assign) NSInteger money_sum;
-@property (nonatomic, assign) NSInteger money_free;
-@property (nonatomic, assign) NSInteger money_freeze;
-@property (nonatomic, copy) NSArray *freeze_orders;
-@property (nonatomic, assign) NSInteger money_offline;
-@property (nonatomic , strong)NSString *action;
-@property (nonatomic , strong)NSString *action_name;
-@property (nonatomic , assign)float money;
-@property (nonatomic , strong)NSString *desc;
-@property (nonatomic , strong)NSString *datetime;
-@property (nonatomic , strong)NSString *order_num;
-@property (nonatomic , strong)NSString *image;
-@property (nonatomic , strong)NSString *option;
-@property (nonatomic , strong)NSString *upload_time;
-@property (nonatomic , assign)NSInteger pay_type;
-@property (nonatomic , strong)NSString *pay_time;
+
+@interface TageModel : NSObject
+@property (nonatomic , assign)NSInteger tagId;
+@property (nonatomic , strong)NSString *tagTitle;
 @end
+
+
 @interface FMSubmodel : NSObject
 
 @property (nonatomic, assign) NSInteger idid;
@@ -125,51 +77,7 @@
 @end
 
 
-/**
- "teanSchoolId": ,
- "teamCode": ,
- "deptId": null,
- "deptFatherName": 所属驾校,
- "name": 分校名称,
- "leader":负责人 ,
- "leaderIdCard":负责人身份证号码 ,
- "phone": 联系电话,
- "businessStatus": ,
- "teamType": ,
- "payType": 0,
- "residencePermitCost": 0,
- "manageCost": 0,
- "physicalCost": 0,
- "subjectOneCost": 0,
- "subjectTwoCost": 0,
- "subjectThreeCost": 0,
- "ensureCost": 保证金,
- "signUpCost": 0,
- "contractTimeStart":合同起始时间,
- "contractTimeEnd": 合同结束时间,
- "upperLimitNumber": 报名上限,
- "address": 地址,
- "remark": 备注,
- "del": null,
- "idCardFrontUrl": 身份证正面,
- "idCardBackUrl": 身份证反面,
- "contractUrl": 合同图片,
- "createBy": null,
- "createTime": null,
- "updateBy": null,
- "updateTime": null,
- "deptIds": null,
- "contractTimeStartS": null,
- "contractTimeStartE": null,
- "contractTimeEndS": null,
- "contractTimeEndE": null,
- "unpaidPrice": 0,
- "signUpPrice": 0,
- "teamSchoolCarCount": 车辆数量,
- "teamSchoolStudentCount": 已报名学员数量,
- "typeName": 分队类型,
- "payName": 缴费类型
- */
+
 
 #pragma mark - FMMainModel
 @interface FMMainModel : NSObject
@@ -346,6 +254,10 @@
 @property (nonatomic , strong)NSString *memo;//
 @property (nonatomic , strong)NSString *resource;
 @property (nonatomic , strong)NSString *tags;//标签
+@property (nonatomic , strong)NSString *stuTags;
+@property (nonatomic , assign)int progress; ///科一  科二
+@property (nonatomic , assign)int failNum;
+@property (nonatomic , strong)NSDictionary *student;
 @end
 
 

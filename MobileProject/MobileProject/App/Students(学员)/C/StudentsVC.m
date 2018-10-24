@@ -8,10 +8,11 @@
 
 #import "StudentsVC.h"
 //#import <JXCategoryTitleView.h>
-#import "JXCategoryTitleView.h"
+
 #import "ConsultingVC.h"
 #import "EnrollVC.h"
 #import "AddInformationVC.h"
+#import "ExamStudentsVC.h"
 @interface StudentsVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -30,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self laodNavigation];
-    _titles = @[@"咨询学员", @"报名学员" ];
+    _titles = @[@"咨询学员", @"报名学员",@"考试学员"];
     [self loadMyCategoryView];
     [self loadScroll];
     [self loadAddBut];
@@ -70,20 +71,20 @@
     self.myCategoryView.delegate = self;
     self.myCategoryView.layer.cornerRadius = 2;
     self.myCategoryView.layer.masksToBounds = YES;
-    
+    self.myCategoryView.cellWidth = (SCREEN_WIDTH - KFit_W6S(140))/3;
     self.myCategoryView.layer.borderColor = kColor_N(0, 112, 234).CGColor;
     self.myCategoryView.layer.borderWidth = 1/[UIScreen mainScreen].scale;
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.cellSpacing = 0;
     self.myCategoryView.titleColor = kColor_N(0, 112, 234);
     self.myCategoryView.titleSelectedColor = [UIColor whiteColor];
-    self.myCategoryView.indicatorLineViewShowEnabled = NO;
-    self.myCategoryView.backgroundEllipseLayerShowEnabled = YES;
-    self.myCategoryView.backgroundEllipseLayerHeight = KFit_H6S(70);
-    self.myCategoryView.backgroundEllipseLayerCornerRadius = 2;
-    self.myCategoryView.backgroundEllipseLayerWidthIncrement = 0;
     self.myCategoryView.titleLabelMaskEnabled = YES;
-    self.myCategoryView.backgroundEllipseLayerColor = kColor_N(0, 112, 234);
+
+    JXCategoryIndicatorBackgroundView *backgroundView = [[JXCategoryIndicatorBackgroundView alloc] init];
+    backgroundView.backgroundViewColor = kColor_N(0, 112, 234);
+    backgroundView.backgroundViewWidth = JXCategoryViewAutomaticDimension;
+    backgroundView.backgroundViewCornerRadius = 2;
+    self.myCategoryView.indicators = @[backgroundView];
     [self.view addSubview:self.myCategoryView];
 }
 
@@ -95,7 +96,7 @@
         make.top.mas_equalTo(self.myCategoryView.mas_bottom).mas_offset(KFit_H6S(20));
     }];
     self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, 0);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
     self.myCategoryView.contentScrollView = self.scrollView;
     
     ConsultingVC *vc = [[ConsultingVC alloc] init];
@@ -107,6 +108,11 @@
     [self addChildViewController:vct];
     [self.scrollView addSubview:vct.view];
     vct.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+    
+    ExamStudentsVC *vcth = [[ExamStudentsVC alloc] init];
+    [self addChildViewController:vcth];
+    [self.scrollView addSubview:vcth.view];
+    vcth.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
 }
 #pragma mark - 导航相关
 - (void)laodNavigation{

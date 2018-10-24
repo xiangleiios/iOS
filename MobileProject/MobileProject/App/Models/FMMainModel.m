@@ -16,7 +16,7 @@
 @implementation HomeModel
 
 @end
-@implementation AccountModel
+@implementation TageModel
 
 @end
 @implementation FMMainModel

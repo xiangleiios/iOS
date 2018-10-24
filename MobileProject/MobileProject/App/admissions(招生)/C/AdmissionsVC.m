@@ -50,15 +50,18 @@
     self.myCategoryView.layer.borderWidth = 1/[UIScreen mainScreen].scale;
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.cellSpacing = 0;
+    self.myCategoryView.cellWidth = (SCREEN_WIDTH - KFit_W6S(140))/2;
     self.myCategoryView.titleColor = kColor_N(0, 112, 234);
     self.myCategoryView.titleSelectedColor = [UIColor whiteColor];
-    self.myCategoryView.indicatorLineViewShowEnabled = NO;
-    self.myCategoryView.backgroundEllipseLayerShowEnabled = YES;
-    self.myCategoryView.backgroundEllipseLayerHeight = KFit_H6S(70);
-    self.myCategoryView.backgroundEllipseLayerCornerRadius = 2;
-    self.myCategoryView.backgroundEllipseLayerWidthIncrement = 0;
     self.myCategoryView.titleLabelMaskEnabled = YES;
-    self.myCategoryView.backgroundEllipseLayerColor = kColor_N(0, 112, 234);
+    
+    JXCategoryIndicatorBackgroundView *backgroundView = [[JXCategoryIndicatorBackgroundView alloc] init];
+    backgroundView.backgroundViewColor = kColor_N(0, 112, 234);
+    backgroundView.backgroundViewWidth = JXCategoryViewAutomaticDimension;
+    backgroundView.backgroundViewCornerRadius = 2;
+    self.myCategoryView.indicators = @[backgroundView];
+    
+
     [self.view addSubview:self.myCategoryView];
 }
 

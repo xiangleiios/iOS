@@ -50,7 +50,7 @@ pod 'EasyNavigation','~>1.0' #导航
 pod 'DYSafeObject', '~> 0.1.1' #为了避免线上项目中的用到的数据而产生的Crash
 pod 'IQKeyboardManager','~> 6.1.1'    #键盘处理
 
-pod 'JXCategoryView'    #分页切换滚动视图
+#pod 'JXCategoryView'   #分页切换滚动视图
 
 
 end

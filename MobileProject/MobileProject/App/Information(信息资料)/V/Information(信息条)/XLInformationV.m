@@ -449,8 +449,46 @@
     }
     return self;
 }
+
+- (instancetype)informationStudentsWithTitle:(NSString *)title{
+    if(self == [super init]){
+        UILabel *lbone = [[UILabel alloc] init];
+        [self addSubview:lbone];
+        lbone.backgroundColor = kColor_N(0, 113, 235);
+        [lbone mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self);
+            make.left.mas_equalTo(self);
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(10), KFit_H6S(25)));
+        }];
+        
+        UILabel *lbtwo = [[UILabel alloc] init];
+        [self addSubview:lbtwo];
+        lbtwo.textColor = kColor_N(109, 118, 141);
+        lbtwo.text = title;
+        lbtwo.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+        [lbtwo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(lbone);
+            make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
+            make.height.mas_equalTo(KFit_H6S(30));
+        }];
+        
+        UILabel *lbthree = [[UILabel alloc] init];
+        [self addSubview:lbthree];
+        lbthree.backgroundColor = kColor_N(240, 240, 240);
+        [lbthree mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(self);
+            make.height.mas_equalTo(1);
+        }];
+    }
+    return self;
+    
+}
+
+
+
 - (void)butblock:(UIButton *)senter{
     
     self.senterBlock();
 }
+
 @end

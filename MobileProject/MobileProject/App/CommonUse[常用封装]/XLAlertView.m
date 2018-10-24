@@ -277,13 +277,13 @@
         self.backgroundColor = kRGBAColor(5, 5, 5, 0.6);
         self.alertView = [[UIView alloc] init];
         self.alertView.backgroundColor = [UIColor whiteColor];
-        self.alertView.layer.cornerRadius = 20;
+        self.alertView.layer.cornerRadius = 10;
         self.alertView.layer.masksToBounds = YES;
         [self addSubview:self.alertView];
         [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self);
             make.centerY.mas_equalTo(self).mas_offset(-KFit_H6S(100));
-            make.size.mas_equalTo(CGSizeMake(KFit_W6S(450), KFit_H6S(300)));
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(560), KFit_H6S(330)));
         }];
         
         
@@ -307,8 +307,8 @@
         field.layer.cornerRadius = 5;
         [field mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self.alertView);
-            make.top.mas_equalTo(ts.mas_bottom).mas_offset(KFit_H6S(30));
-            make.size.mas_equalTo(CGSizeMake(KFit_W6S(350), KFit_H6S(60)));
+            make.top.mas_equalTo(ts.mas_bottom).mas_offset(KFit_H6S(35));
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(450), KFit_H6S(60)));
         }];
         self.input = field;
         
@@ -321,19 +321,19 @@
         [qx addTarget:self action:@selector(quit) forControlEvents:UIControlEventTouchUpInside];
         [qx mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.bottom.mas_equalTo(self.alertView);
-            make.size.mas_equalTo(CGSizeMake(KFit_W6S(225), KFit_H6S(80)));
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(280), KFit_H6S(90)));
         }];
         
         UIButton *qd = [[UIButton alloc] init];
         [self.alertView addSubview:qd];
-        [qd setTitle:@"确定" forState:UIControlStateNormal];
-        [qd setTitleColor:kColor_N(0, 170, 90) forState:UIControlStateNormal];
+        [qd setTitle:@"保存" forState:UIControlStateNormal];
+        [qd setTitleColor:kColor_N(0, 120, 237) forState:UIControlStateNormal];
         [qd addTarget:self action:@selector(determineInput) forControlEvents:UIControlEventTouchUpInside];
         qd.layer.borderColor = appcoloer_line.CGColor;
         qd.layer.borderWidth = 0.7;
         [qd mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.bottom.mas_equalTo(self.alertView);
-            make.size.mas_equalTo(CGSizeMake(KFit_W6S(225), KFit_H6S(80)));
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(280), KFit_H6S(90)));
         }];
     }
     return self;

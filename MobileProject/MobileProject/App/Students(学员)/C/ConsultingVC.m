@@ -143,14 +143,15 @@
     self.myCategoryView.delegate = self;
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.titleColorGradientEnabled = YES;
-//    self.myCategoryView.indicatorLineViewShowEnabled = NO;
-    self.myCategoryView.indicatorLineViewShowEnabled = YES;
-//    self.myCategoryView.indicatorLineViewShowEnabled = YES;
     self.myCategoryView.titleColor = kColor_N(72, 82, 110);
     self.myCategoryView.titleSelectedColor = [UIColor blackColor];
-    self.myCategoryView.indicatorLineViewColor = [UIColor blackColor];
-    self.myCategoryView.indicatorLineWidth = KFit_W6S(40);
-    self.myCategoryView.lineStyle = JXCategoryLineStyle_JD;
+    
+    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
+    lineView.indicatorLineWidth = KFit_W6S(40);
+    lineView.indicatorLineViewHeight = 3;
+    lineView.indicatorLineViewColor = [UIColor blackColor];
+    lineView.lineStyle = JXCategoryIndicatorLineStyle_JD;
+    self.myCategoryView.indicators = @[lineView];
     [self.view addSubview:self.myCategoryView];
 }
 - (void)loadScroll{

@@ -26,21 +26,18 @@ typedef void(^SenterBlcok) ();
 /// 图片文字带点击的视图 标题，副标题上下分部
 -(instancetype)informationWithTitle:(NSString *)title SubTitle:(NSString *)subtitle ImageName:(NSString *)img;
 
-
 /// 图片文字带点击的视图 标题，副标题水平分部
 -(instancetype)informationLevelWithTitle:(NSString *)title SubTitle:(NSString *)subtitle ImageName:(NSString *)img;
-
 
 /// 信息头部标签
 -(instancetype)informationWithTitle:(NSString *)title;
 
-
 /// 白色信息头  可带按钮
 -(instancetype)informationWithTitle:(NSString *)title ButTile:(NSString *)butTitle ButImg:(NSString *)img;
-
 
 /// 课程信息
 -(instancetype)informationWithTitle:(NSString *)title CarType:(NSString *)cartype SubTitle:(NSString *)subtitle Price:(NSString *)price;
 
-
+/// 学员详情中的信息头
+-(instancetype)informationStudentsWithTitle:(NSString *)title;
 @end

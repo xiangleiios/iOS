@@ -14,17 +14,24 @@
 /// 动态计算高度
 + (float)LaberCalculateHeight:(NSString *)str andWidth:(CGFloat)w andFont:(CGFloat)f;
 #pragma mark -时间返回是否为同一天
+/// 时间返回是否为同一天
 + (BOOL)isSameDay:(NSString *)timeOne timeTwo:(NSString *)timeTwo;
 + (NSString *)TimeToIntercept:(NSString *)time;
 + (NSString *)TimeToInterceptHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptMMddHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptYYYYMMddHHmm:(NSString *)time;
++ (NSString *)TimeToInterceptMMdd:(NSDate *)time;
 /// 比较2个时间大小
 +(BOOL)compareOneDay:(NSString *)oneDay withAnotherDay:(NSString *)anotherDay;
 /// 字符串转时间戳
 + (NSString *)dateConversionTimeStamp:(NSString *)date;
 /// 时间戳转字符串
 + (NSString *)datetimestampToString:(NSString *)timestamp;
+/// 然后今天起让后多少天的数组
++ (NSArray *)dataWhithDay:(NSInteger)index;
+
+/// 根据日期返回星期
++ (NSString*)weekdayStringFromDate:(NSDate*)inputDate;
 /// 根据颜色返回图片
 + (UIImage *)imageWithColor:(UIColor *)color;
 

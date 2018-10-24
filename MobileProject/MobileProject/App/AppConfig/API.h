@@ -155,6 +155,29 @@
 #pragma mark -上传用户头像
 #define POSTUpdateTeamUserHeadImg KURL(@"app/team/teamUser/updateTeamUserHeadImg?teamUserHeadImg=%@")
 
+
+#pragma mark -考试学员
+#define POSTTeamStuStateList KURL(@"app/teamStuState/list")
+
+#pragma mark -修改考试学员
+#define POSTTeamStuStateEdit KURL(@"app/teamStuState/edit")
+
+#pragma mark -新增标签
+#define POSTTagAdd KURL(@"app/tag/add")
+
+#pragma mark -标签列表
+#define POSTTagList KURL(@"app/tag/list")
+
+#pragma mark -删除标签
+#define POSTTagRemove KURL(@"app/tag/remove?ids=%d")
+
+#pragma mark - 训练场列表
+#define POSTTeamtrainingList KURL(@"app/teamtraining/teamtrainingList")
+
+#pragma mark - 省
+#define POSTProvinceList KURL(@"system/province/list")
+#define POSTCityList KURL(@"system/city/list?provincecode=%@")
+#define POSTAreaList KURL(@"system/area/list?citycode=%@")
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------
 

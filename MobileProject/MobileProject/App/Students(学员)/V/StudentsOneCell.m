@@ -49,17 +49,17 @@
     
     self.typeone = [[UILabel alloc] init];
     [self.contentView addSubview:self.typeone];
-//    self.typeone.layer.borderWidth = 0.3;
-//    self.typeone.layer.borderColor = kColor_N(0, 110, 230).CGColor;
-//    self.typeone.layer.cornerRadius = 3;
-//    self.typeone.textColor = kColor_N(0, 110, 230);
-//    self.typeone.font = [UIFont systemFontOfSize:kFit_Font6(11)];
-//    self.typeone.textAlignment = NSTextAlignmentCenter;
+    self.typeone.layer.borderWidth = 0.3;
+    self.typeone.layer.borderColor = kColor_N(0, 110, 230).CGColor;
+    self.typeone.layer.cornerRadius = 3;
+    self.typeone.textColor = kColor_N(0, 110, 230);
+    self.typeone.font = [UIFont systemFontOfSize:kFit_Font6(11)];
+    self.typeone.textAlignment = NSTextAlignmentCenter;
 //    self.typeone.text = @"已收费";
     [self.typeone mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_img.mas_right).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(0.1), KFit_H6S(40)));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
     }];
     
     self.typetwo = [[UILabel alloc] init];
@@ -72,7 +72,7 @@
     self.typetwo.textAlignment = NSTextAlignmentCenter;
     self.typetwo.text = @"明安驾校";
     [self.typetwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.typeone.mas_right);
+        make.left.mas_equalTo(self.typeone.mas_right).mas_offset(KFit_W6S(10));
         make.centerY.mas_equalTo(self.typeone);
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
     }];
@@ -143,8 +143,9 @@
         [_img setImage:[UIImage imageNamed:@"head_nor"]];
         XLCache *cache = [XLCache singleton];
         self.title.text = [NSString stringWithFormat:@"%@ %@",model.studentName,model.studentPhone?model.studentPhone:@""];
-        self.typetwo.text = [NSString stringWithFormat:@"%@", cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]]];
-        self.typethree.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.carType]]];
+        self.typeone.text = [NSString stringWithFormat:@"%@", cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamCode]]];
+        self.typetwo.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.carType]]];
+        self.typethree.hidden = YES;
         //1 报名到总校，2、未报名到总校
         if ([model.signupState  isEqual: @"1"]) {
             // 1 未审核，2、审核通过、3、拒绝

@@ -80,7 +80,11 @@
     NSString *time1 = [formatter stringFromDate:date];
     return time1;
 }
-
++ (NSString *)TimeToInterceptMMdd:(NSDate *)time{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM-dd"];
+    return [formatter stringFromDate:time];
+}
 + (UIImage *)imageWithColor:(UIColor *)color{
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f); //宽高 1.0只要有值就够了
     UIGraphicsBeginImageContext(rect.size); //在这个范围内开启一段上下文
@@ -329,5 +333,28 @@
     
 }
     
-  
++ (NSArray *)dataWhithDay:(NSInteger)index{
+    NSMutableArray *arr = [NSMutableArray array];
+    NSDate*nowDate = [NSDate date];
+    [arr addObject:nowDate];
+    NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+    for (int i = 1; i < index; i ++) {
+        NSDate* theDate = [nowDate initWithTimeIntervalSinceNow: oneDay * i ];
+        [arr addObject:theDate];
+    }
+    return arr;
+}
+
++ (NSString*)weekdayStringFromDate:(NSDate*)inputDate{
+    NSArray *weekdays = [NSArray arrayWithObjects: [NSNull null], @"周日", @"周一", @"周二", @"周三", @"周四", @"周五", @"周六", nil];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierChinese];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+    [calendar setTimeZone: timeZone];
+    NSCalendarUnit calendarUnit = NSCalendarUnitWeekday;
+    NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
+    return [weekdays objectAtIndex:theComponents.weekday];
+    
+    
+}
+
 @end

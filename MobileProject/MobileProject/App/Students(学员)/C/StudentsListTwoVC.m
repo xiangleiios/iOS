@@ -83,11 +83,12 @@
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
-    [self headerRefresh];
+//    [self headerRefresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self headerRefresh];
     //    [self.table.mj_header beginRefreshing];
 }
 

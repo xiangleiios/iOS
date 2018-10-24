@@ -103,5 +103,5 @@
 #define kNavStateBarH 20.0f
 #define kTabBarH 49.0f
 
-
+#define ZTColor kColor_N(117, 127, 149)
 #endif /* FMBaseMacro_h */

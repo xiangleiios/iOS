@@ -22,6 +22,8 @@
 #import "StudentsListTwoVC.h"
 #import "XLxqbut.h"
 #import "CYLTabBarControllerConfig.h"
+#import "TrainingListVC.h"
+#import "PracticeCarListVC.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -153,22 +155,18 @@
     [butthree setTitle:@"添加学员" forState:UIControlStateNormal];
     [butthree setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
+    XLxqbut *butfour = [[XLxqbut alloc] init];
+    [butfour addTarget:self action:@selector(toPracticeCarListVC) forControlEvents:UIControlEventTouchUpInside];
+    [butfour setImage:[UIImage imageNamed:@"yycl"] forState:UIControlStateNormal];
+    [butfour setTitle:@"预约练车" forState:UIControlStateNormal];
+    [butfour setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    
     [self.backview addSubview:butone];
     [self.backview addSubview:buttwo];
     [self.backview addSubview:butthree];
-//    XLButton *add = [[XLButton alloc] initWithTitle:@"添加学员" SubTitle:@"学员信息录入" BackgroundImg:@"student_card" highlightedImg:@"student_card_down"];
-//    XLButton *card = [[XLButton alloc] initWithTitle:@"招生名片" SubTitle:@"招生信息编辑" BackgroundImg:@"buss_card" highlightedImg:@"buss_card_down"];
-//    [self.backview addSubview:add];
-//    [self.backview addSubview:card];
-//    add.senterBlock = ^{
-//        AddStudentVC *vc = [[AddStudentVC alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    };
-//    card.senterBlock = ^{
-//        BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//    };
-    NSArray *toolarr = @[butone,buttwo,butthree];
+    [self.backview addSubview:butfour];
+
+    NSArray *toolarr = @[butone,buttwo,butthree,butfour];
     [toolarr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:KFit_W6S(140) leadSpacing:KFit_W6S(40) tailSpacing:KFit_W6S(40)];
     [toolarr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.banner.mas_bottom).mas_offset(KFit_H6S(40));
@@ -267,7 +265,16 @@
         make.height.mas_equalTo(KFit_W6S(146));
     }];
     
+    UIButton *xunlianchang = [[UIButton alloc] init];
+    [xunlianchang addTarget:self action:@selector(toTrainingListVC) forControlEvents:UIControlEventTouchUpInside];
+    [self.backview addSubview:xunlianchang];
+    [xunlianchang setImage:[UIImage imageNamed:@"xlcgl"] forState:UIControlStateNormal];
     
+    [self.backview addSubview:xunlianchang];
+    [xunlianchang mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.height.mas_equalTo(jiaxiao);
+        make.top.mas_equalTo(jiaxiao.mas_bottom).mas_offset(KFit_H6S(5));
+    }];
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(30)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
@@ -298,7 +305,15 @@
     AddStudentVC *vc = [[AddStudentVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (void)toTrainingListVC{
+    TrainingListVC *vc = [[TrainingListVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
+- (void)toPracticeCarListVC{
+    PracticeCarListVC *vc = [[PracticeCarListVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)statistical:(UIButton *)senter{
     KKLog(@"1111");
     

@@ -9,6 +9,7 @@
 #import "MyAdmissionsVC.h"
 #import "MyPicturePosterListVC.h"
 #import "MyPosterListVC.h"
+
 @interface MyAdmissionsVC ()
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -48,13 +49,8 @@
     self.myCategoryView.cellSpacing = 0;
     self.myCategoryView.titleColor = kColor_N(0, 112, 234);
     self.myCategoryView.titleSelectedColor = [UIColor whiteColor];
-    self.myCategoryView.indicatorLineViewShowEnabled = NO;
-    self.myCategoryView.backgroundEllipseLayerShowEnabled = YES;
-    self.myCategoryView.backgroundEllipseLayerHeight = KFit_H6S(70);
-    self.myCategoryView.backgroundEllipseLayerCornerRadius = 2;
-    self.myCategoryView.backgroundEllipseLayerWidthIncrement = 0;
+    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
     self.myCategoryView.titleLabelMaskEnabled = YES;
-    self.myCategoryView.backgroundEllipseLayerColor = kColor_N(0, 112, 234);
     [self.view addSubview:self.myCategoryView];
 }
 
