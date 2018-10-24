@@ -174,10 +174,35 @@
 #pragma mark - 训练场列表
 #define POSTTeamtrainingList KURL(@"app/teamtraining/teamtrainingList")
 
-#pragma mark - 省
+#pragma mark - 省 市 区
 #define POSTProvinceList KURL(@"system/province/list")
 #define POSTCityList KURL(@"system/city/list?provincecode=%@")
 #define POSTAreaList KURL(@"system/area/list?citycode=%@")
+
+#pragma mark -添加训练场
+#define POSTAddTeamtraining KURL(@"app/teamtraining/addTeamtraining")
+#pragma mark -编辑训练场
+#define POSTEditTeamtraining KURL(@"app/teamtraining/editTeamtraining")
+#pragma mark -删除训练场
+#define POSTRemoveTeamtraining KURL(@"app/teamtraining/removeTeamtraining?teamTrainingId=%@")
+
+#pragma mark - 预约练车  训练场列表
+#define POSTTrainingRecordTrainingList KURL(@"app/trainingRecord/trainingList");
+#pragma mark - 查询训练场２周预约信息
+#define POSTTrainingRecordTwoWeekRecords KURL(@"app/trainingRecord/twoWeekRecords")
+
+
+#pragma mark - 查询训练场约车时段模板列表接口
+#define POSTTrainingModuleList KURL(@"app/trainingModule/list")
+
+#pragma mark - 新增训练场约车时段模板接口
+#define POSTTrainingModuleAdd KURL(@"app/trainingModule/add")
+
+#pragma mark - 修改训练场约车时段模板接口
+#define POSTTrainingModuleEdit KURL(@"app/trainingModule/edit")
+
+#pragma mark - 删除训练场约车时段模板接口
+#define POSTTrainingModuleRemove KURL(@"app/trainingModule/remove?id=%@")
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------
 

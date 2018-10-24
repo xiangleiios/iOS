@@ -74,6 +74,15 @@
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(v);
     }];
+    
+    if (self.model) {
+        XLCache *cache = [XLCache singleton];
+        self.state.subfield.text = [XLCommonUse TimeToInterceptHHmm:_model.startTime];
+        self.end.subfield.text = [XLCommonUse TimeToInterceptHHmm:_model.endTime];
+        self.subjects.subfield.text = _model.keMu;
+        self.type.subfield.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.licenseType]]];
+        self.type.subfield.tag = [_model.licenseType integerValue];
+    }
 }
 
 - (void)loadBut{
@@ -103,6 +112,57 @@
 }
 
 - (void)toSave{
+    if (self.state.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择开始时间"];
+        return;
+    }
+    if (self.end.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择结束时间"];
+        return;
+    }
+    if (self.subjects.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择练习科目"];
+        return;
+    }
+    if (self.type.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择驾照类型"];
+        return;
+    }
+    NSString *time = [XLCommonUse TimeToInterceptYYYYMMdd:[NSDate date]];
+//    NSArray *startArr = [self.state.subfield.text componentsSeparatedByString:@":"];
+//    NSArray *endArr = [self.end.subfield.text componentsSeparatedByString:@":"];
+    NSString *start = [NSString stringWithFormat:@"%@ %@:00",time,self.state.subfield.text];
+    NSString *end = [NSString stringWithFormat:@"%@ %@:00",time,self.end.subfield.text];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:self.groundId forKey:@"groundId"];
+    [dic setObject:start forKey:@"startTime"];
+    [dic setObject:end forKey:@"endTime"];
+    [dic setObject:self.subjects.subfield.text forKey:@"keMu"];
+    [dic setObject:[NSString stringWithFormat:@"%ld",(long)self.type.subfield.tag] forKey:@"licenseType"];
+    
+    NSString *url;
+    
+    if (self.editorType) {
+        url = POSTTrainingModuleAdd;
+    }else{
+        [dic setObject:_model.idid forKey:@"id"];
+        url = POSTTrainingModuleEdit;
+    }
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"保存成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
     
 }
 /*

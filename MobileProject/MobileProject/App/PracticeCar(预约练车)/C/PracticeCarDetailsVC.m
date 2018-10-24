@@ -11,11 +11,15 @@
 #import "PracticeCarDetailsCell.h"
 #import "PracticeCarHeaderV.h"
 @interface PracticeCarDetailsVC ()<UITableViewDelegate,UITableViewDataSource>
-@property (nonatomic , strong)UITableView *table;
-@property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
+//@property (nonatomic , strong)NSArray *studentArr;
+
 @end
 
 @implementation PracticeCarDetailsVC
+
+- (void)setDataArr:(NSArray *)dataArr{
+    _dataArr = [dataArr copy];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,18 +40,10 @@
     //    self.table.allowsMultipleSelectionDuringEditing = YES;
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     self.table.showsVerticalScrollIndicator = NO;
     self.table.showsHorizontalScrollIndicator = NO;
-    //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
-//    _table.needPlaceholderView = YES;
     self.table.backgroundColor = kColor_N(240, 240, 240);
-//    __weak __typeof(self)weakSelf = self;
     _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
-//    _table.reloadBlock = ^{
-//        [weakSelf.table.mj_header beginRefreshing];
-//    };
-    [self headerRefresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -55,60 +51,29 @@
     //    [self.table.mj_header beginRefreshing];
 }
 
-- (void)headerRefresh{
-    self.pageNum=1;
-    
-    [self loadRefreshData];
-}
-- (void)footerRefresh{
-    self.pageNum++;
-    [self loadRefreshData];
-}
-- (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolList;
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"list"];
-        if (self.pageNum==1) {
-            [self.dataArr removeAllObjects];
-        }
-        if (tpArray) {
-            for (NSDictionary *dic in tpArray) {
-                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-                [self.dataArr addObject:mode];
-            }
-        }
-        [_table reloadData];
-        [_table.mj_footer endRefreshing];
-        [_table.mj_header endRefreshing];
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-        [_table.mj_footer endRefreshing];
-        [_table.mj_header endRefreshing];
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
-    //    POSTTeamSchoolList
-}
+
+
 
 #pragma mark-tableview代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return self.dataArr.count;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    return self.dataArr.count;
-    if (section ==1) {
-        return 2;
-    }
-    return 0;
+    NSDictionary *dic = self.dataArr[section];
+    NSArray *arr = dic[@"trainingRecords"];
+    return arr.count;
     
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    NSDictionary *dic = self.dataArr[section];
     if (section == 0) {
         PracticeCarHeaderOneV *v = [[PracticeCarHeaderOneV alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(250))];
+        v.dic = dic;
+        [v.addBut addTarget:self action:@selector(toEditTimeVC) forControlEvents:UIControlEventTouchUpInside];
         return v;
     }else{
     PracticeCarHeaderV *v = [[PracticeCarHeaderV alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(160))];
+        v.dic = dic;
     return v;
     }
 }
@@ -139,10 +104,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    PracticeCarVC *vc = [[PracticeCarVC alloc] init];
-//    
-//    //    vc.model = self.dataArr[indexPath.row];
-//    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+- (void)toEditTimeVC{
     
 }
 /*

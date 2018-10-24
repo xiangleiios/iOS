@@ -258,6 +258,23 @@
 @property (nonatomic , assign)int progress; ///科一  科二
 @property (nonatomic , assign)int failNum;
 @property (nonatomic , strong)NSDictionary *student;
+@property (nonatomic , strong)NSString *teamTrainingName;///训练场名
+@property (nonatomic , strong)NSString *province;
+@property (nonatomic , strong)NSString *provinceStr;
+@property (nonatomic , strong)NSString *city;
+@property (nonatomic , strong)NSString *cityStr;
+@property (nonatomic , strong)NSString *area;
+@property (nonatomic , strong)NSString *areaStr;
+@property (nonatomic , strong)NSString *teamSchoolName;
+@property (nonatomic , strong)NSString *teamSchoolId;
+@property (nonatomic , strong)NSString *teamTrainingId;
+@property (nonatomic , strong)NSDictionary *teamTrainning;
+@property (nonatomic , strong)NSString *todayNum;
+@property (nonatomic , strong)NSString *startTime;
+@property (nonatomic , strong)NSString *endTime;
+@property (nonatomic , strong)NSString *keMu;
+@property (nonatomic , strong)NSString *licenseType;
+//@property (nonatomic , strong)NSString *
 @end
 
 

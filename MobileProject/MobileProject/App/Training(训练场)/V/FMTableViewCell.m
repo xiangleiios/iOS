@@ -79,4 +79,11 @@
         make.height.mas_equalTo(KFit_H6S(20));
     }];
 }
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    self.title.text = model.teamTrainingName;
+    self.address.text = model.address;
+    
+}
 @end

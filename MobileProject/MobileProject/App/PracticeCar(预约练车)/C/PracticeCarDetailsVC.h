@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PracticeCarDetailsVC : FMBaseViewController
-
+@property (nonatomic , strong)NSArray *dataArr;
+@property (nonatomic , strong)UITableView *table;
 @end
 
 NS_ASSUME_NONNULL_END

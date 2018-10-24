@@ -18,7 +18,12 @@
 @end
 
 @implementation TimeSetVC
-
+- (NSMutableArray *)dataArr{
+    if (_dataArr ==nil) {
+        _dataArr = [NSMutableArray array];
+    }
+    return _dataArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"设置"];
@@ -49,18 +54,19 @@
     _table.tableFooterView = [self footerview];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    _table.needPlaceholderView = YES;
+//    _table.needPlaceholderView = YES;
     self.table.backgroundColor = kColor_N(240, 240, 240);
-    __weak __typeof(self)weakSelf = self;
+//    __weak __typeof(self)weakSelf = self;
     _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
-    _table.reloadBlock = ^{
-        [weakSelf.table.mj_header beginRefreshing];
-    };
-    [self headerRefresh];
+//    _table.reloadBlock = ^{
+//        [weakSelf.table.mj_header beginRefreshing];
+//    };
+//    [self headerRefresh];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self headerRefresh];
     //    [self.table.mj_header beginRefreshing];
 }
 
@@ -74,8 +80,9 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolList;
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    NSString *url = POSTTrainingModuleList;
+    NSDictionary *dic = @{@"groundId":self.groundId};
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"list"];
         if (self.pageNum==1) {
@@ -152,8 +159,8 @@
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(270))];
     v.backgroundColor = [UIColor whiteColor];
     XLInformationV *ts = [[XLInformationV alloc] informationWithTitle:@"训练场信息"];
-    XLInformationV *name = [[XLInformationV alloc] informationWithTitle:@"训练场名称" SubTitle:@""];
-    XLInformationV *address = [[XLInformationV alloc] informationWithTitle:@"训练场地址" SubTitle:@""];
+    XLInformationV *name = [[XLInformationV alloc] informationWithTitle:@"训练场名称" SubTitle:_model.teamTrainning[@"teamSchoolName"]];
+    XLInformationV *address = [[XLInformationV alloc] informationWithTitle:@"训练场地址" SubTitle:_model.teamTrainning[@"address"]];
     
     [v addSubview:ts];
     [v addSubview:name];
@@ -168,6 +175,8 @@
 
 - (void)toEditTimeVC{
     EditTimeVC *vc = [[EditTimeVC alloc] init];
+    vc.groundId = self.groundId;
+    vc.editorType = 1;
     [self.navigationController pushViewController:vc animated:YES];
     [vc.navigationView setTitle:@"添加时段"];
 }
@@ -176,8 +185,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    return self.dataArr.count;
-    return 3;
+    return self.dataArr.count;
+//    return 3;
     
 }
 
@@ -188,11 +197,50 @@
         cell = [[TimeSetCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
     cell.model = self.dataArr[indexPath.row];
+    cell.deleteBut.tag = indexPath.row;
+    [cell.deleteBut addTarget:self action:@selector(deleteTime:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return KFit_H6S(120);
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    EditTimeVC *vc = [[EditTimeVC alloc] init];
+    vc.model = self.dataArr[indexPath.row];
+    vc.groundId = self.groundId;
+    vc.editorType = 0;
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc.navigationView setTitle:@"修改时段"];
+    
+}
+
+- (void)deleteTime:(UIButton *)senter{
+    XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"是否删除该默认时段" sureBtn:@"确定" cancleBtn:@"取消"];
+    [alert showXLAlertView];
+    alert.resultIndex = ^(NSInteger index) {
+        KKLog(@"%ld",(long)index);
+        if (index == 2) {
+            FMMainModel *model = self.dataArr[senter.tag];
+            NSString *url = [NSString stringWithFormat:POSTTrainingModuleRemove,model.idid];
+            [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+                KKLog(@"%@",responseObject);
+                if (kResponseObjectStatusCodeIsEqual(200)) {
+                    [MBProgressHUD showMsgHUD:@"删除成功"];
+                    [self loadRefreshData];
+                }
+                
+            } failureBlock:^(NSError *error) {
+                KKLog(@"%@", error);
+                
+            } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                
+            }];
+        }
+    };
+    
 }
 @end

@@ -81,11 +81,12 @@
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
-    [self headerRefresh];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self headerRefresh];
     //    [self.table.mj_header beginRefreshing];
 }
 
@@ -102,7 +103,7 @@
     NSString *url = POSTTeamtrainingList;
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"list"];
+        NSArray *tpArray = responseObject[@"data"][@"rows"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -112,6 +113,7 @@
                 [self.dataArr addObject:mode];
             }
         }
+        
         [_table reloadData];
         [_table.mj_footer endRefreshing];
         [_table.mj_header endRefreshing];
@@ -152,7 +154,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TrainingVC *vc = [[TrainingVC alloc] init];
-    
+    vc.type = 0;
     vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
     [vc.navigationView setTitle:@"训练场详情"];
@@ -161,6 +163,7 @@
 
 - (void)addAddress{
     TrainingVC *vc = [[TrainingVC alloc] init];
+    vc.type = 1;
     [self.navigationController pushViewController:vc animated:YES];
     [vc.navigationView setTitle:@"添加训练场"];
 }

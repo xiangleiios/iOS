@@ -32,7 +32,7 @@
 - (void)laodNavigation{
     kWeakSelf(self)
     self.choose = [self.navigationView addRightButtonWithTitle:@"删除" clickCallBack:^(UIView *view) {
-       
+        [weakself delectTrain];
     }];
     [self.choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
     self.choose.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
@@ -41,7 +41,7 @@
 - (void)loadBut{
     UIButton *next = [[UIButton alloc] init];
     [self.view addSubview:next];
-    [next setTitle:@"保存" forState:UIControlStateNormal];
+//    [next setTitle:@"保存" forState:UIControlStateNormal];
     [next addTarget:self action:@selector(toSave) forControlEvents:UIControlEventTouchUpInside];
     [next setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
     [next setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
@@ -54,6 +54,12 @@
         make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(40));
         make.height.mas_equalTo(KFit_H6S(90));
     }];
+    
+    if (self.type) {
+        [next setTitle:@"保存" forState:UIControlStateNormal];
+    }else{
+        [next setTitle:@"保存" forState:UIControlStateNormal];
+    }
 }
 
 
@@ -73,6 +79,7 @@
     self.school = [[XLInformationV alloc] informationWithTitle:@"所属总校" SubTitle:@"" TSSubTitle:@"请选择总校" Must:YES Click:YES];
     
     self.fenXiao = [[XLInformationV alloc] informationWithTitle:@"所属分校" SubTitle:@"" TSSubTitle:@"请选择分校" Must:YES Click:NO];
+    self.fenXiao.userInteractionEnabled = NO;
     self.fenXiao.subfield.text = arrname[0][@"teamName"];
     self.school.senterBlock = ^{
         [CGXPickerView showStringPickerWithTitle:@"总校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
@@ -92,8 +99,9 @@
     self.name = [[XLInformationV alloc] informationWithTitle:@"训练场名称" SubTitle:@"" TSSubTitle:@"请输入训练场名称" Must:YES Click:NO];
     self.area = [[XLInformationV alloc] informationWithTitle:@"训练场区域" SubTitle:@"" TSSubTitle:@"请选择区域" Must:YES Click:YES];
     self.area.senterBlock = ^{
+        [weakself.view endEditing:YES];
         AddressV *v = [[AddressV alloc] init];
-        v.vc = self;
+        v.vc = weakself;
         [v show];
     };
     self.address = [[XLInformationV alloc] informationWithTitle:@"详细地址" SubTitle:@"" TSSubTitle:@"请输入训练场详细地址" Must:YES Click:NO];
@@ -113,7 +121,27 @@
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(v);
     }];
-    
+    if (self.model) {
+        XLCache *cache = [XLCache singleton];
+        self.name.subfield.text = _model.teamTrainingName;
+        self.province = @{@"name":_model.provinceStr,@"code":_model.province};
+        self.city = @{@"name":_model.cityStr,@"code":_model.city};
+        self.areadic = @{@"name":_model.areaStr,@"code":_model.area};
+        self.address.subfield.text = _model.address;
+        
+        self.school.subfield.text = cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamSchoolId]];
+        self.school.subfield.tag = [_model.teamSchoolId integerValue];
+        self.fenXiao.subfield.text = _model.teamSchoolName;
+    }
+    if (self.type == 0) {
+        kWeakSelf(self)
+        UIButton * choose = [self.navigationView addRightButtonWithTitle:@"删除" clickCallBack:^(UIView *view) {
+            [weakself delectTrain];
+            
+        }];
+        [choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+        choose.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    }
 }
 
 -(void)setProvince:(NSDictionary *)province{
@@ -129,8 +157,65 @@
     self.area.subfield.text = [NSString stringWithFormat:@"%@-%@-%@",_province[@"name"],_city[@"name"],_areadic[@"name"]];
     KKLog(@"%@",_area);
 }
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    
+}
 - (void)toSave{
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setObject:self.province[@"code"] forKey:@"province"];
+    [dic setObject:self.city[@"code"] forKey:@"city"];
+    [dic setObject:self.areadic[@"code"] forKey:@"area"];
+    [dic setObject:[NSString stringWithFormat:@"%ld",(long)self.school.subfield.tag] forKey:@"teamSchoolId"];
+    [dic setObject:self.name.subfield.text forKey:@"teamTrainingName"];
+    [dic setObject:self.address.subfield.text forKey:@"address"];
+    NSString *url;
+    if (self.type) {
+        url =POSTAddTeamtraining;//新增
+    }else{
+        url =POSTEditTeamtraining;//编辑
+        [dic setObject:self.model.teamTrainingId forKey:@"teamTrainingId"];
+    }
+    [MBProgressHUD showLoadingHUD:@"正在保存"];
+    
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        [MBProgressHUD hideHUD];
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"保存成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+- (void)delectTrain{
+    XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"是否删除" sureBtn:@"确定" cancleBtn:@"取消"];
+    [alert showXLAlertView];
+    alert.resultIndex = ^(NSInteger index) {
+        KKLog(@"%ld",(long)index);
+        if (index == 2) {
+            NSString *url = [NSString stringWithFormat:POSTRemoveTeamtraining,_model.teamTrainingId];
+            [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+                [MBProgressHUD hideHUD];
+                KKLog(@"%@",responseObject);
+                if (kResponseObjectStatusCodeIsEqual(200)) {
+                    [MBProgressHUD showMsgHUD:@"删除成功"];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            } failureBlock:^(NSError *error) {
+                KKLog(@"%@", error);
+                
+            } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                
+            }];
+        }
+    };
     
 }
 /*

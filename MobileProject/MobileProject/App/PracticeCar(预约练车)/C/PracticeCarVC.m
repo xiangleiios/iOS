@@ -13,15 +13,26 @@
 #import "SwitchV.h"
 #import "ReservationRecordVC.h"
 #import "ChooseStudentsVC.h"
+#import "EmptyV.h"
 @interface PracticeCarVC ()<DataButDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)NSArray *dataArr;
 @property (nonatomic , strong)DataBut *selectBut;
 @property (nonatomic , strong)SwitchV *opne;
+@property (nonatomic , strong)EmptyV *empty;
+@property (nonatomic , strong)NSString *selectTime;
+@property (nonatomic , strong)NSMutableArray *butArr;
+@property (nonatomic , strong)PracticeCarDetailsVC *practiceCarDetailsVC;
 @end
 
 @implementation PracticeCarVC
 
+- (NSMutableArray *)butArr{
+    if (_butArr == nil) {
+        _butArr = [NSMutableArray array];
+    }
+    return _butArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -31,6 +42,9 @@
     [self loadBut];
     [self loadSwitchV];
     [self laodPracticeCarDetailsVC];
+    [self loadEmptyV];
+    self.selectTime = [XLCommonUse TimeToInterceptYYYYMMddHHMMSS:self.dataArr[0]];
+//    [self loadDataWithTime:self.selectTime];
     // Do any additional setup after loading the view.
     
 }
@@ -40,6 +54,8 @@
     kWeakSelf(self)
     UIButton *navBut = [self.navigationView addRightButtonWithTitle:@"设置" clickCallBack:^(UIView *view) {
         TimeSetVC *vc = [[TimeSetVC alloc] init];
+        vc.groundId = weakself.groundId;
+        vc.model = weakself.model;
         [weakself.navigationController pushViewController:vc animated:YES];
         
     }];
@@ -67,6 +83,7 @@
         but.data.text =  [XLCommonUse TimeToInterceptMMdd:self.dataArr[i]];
         but.num.text = @"已约0人";
         but.deleget = self;
+        but.tag = i;
         if (i < 3) {
             but.textColor = kColor_N(69, 138, 237);
             but.BKColor = kColor_N(206, 226, 251);
@@ -78,6 +95,7 @@
             self.selectBut = but;
             [but change:but.but];
         }
+        [self.butArr addObject:but];
     }
     self.scroll.contentSize = CGSizeMake(KFit_W6S(30)+self.dataArr.count * (w + KFit_W6S(15)), 0);
 }
@@ -114,6 +132,19 @@
         make.height.mas_equalTo(KFit_H6S(90));
     }];
 }
+
+- (void)loadEmptyV{
+    self.empty = [[EmptyV alloc] init];
+    self.empty.title.text = @"您还没有设置默认的预约练车时段哦~";
+    [self.view addSubview:self.empty];
+    [self.empty mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.scroll.mas_bottom);
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
+    }];
+    self.empty.hidden = YES;
+    [self.empty.but addTarget:self action:@selector(toTimeSetVC) forControlEvents:UIControlEventTouchUpInside];
+}
 - (void)loadSwitchV{
     self.opne = [[SwitchV alloc] init];
     [self.view addSubview:self.opne];
@@ -133,8 +164,14 @@
         make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(156));
     }];
     [self addChildViewController:vc];
+    self.practiceCarDetailsVC = vc;
 }
-
+- (void)toTimeSetVC{
+    TimeSetVC *vc = [[TimeSetVC alloc] init];
+    vc.groundId = self.groundId;
+    vc.model = self.model;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)toReservationRecordVC{
     ReservationRecordVC *vc = [[ReservationRecordVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -156,6 +193,46 @@
     }];
 //    }
     
+}
+
+- (void)loadDataWithTime:(NSString *)time{
+    NSDictionary *dic = @{@"groundId":self.groundId,@"startTime":time};
+//    NSString *url = [NSString stringWithFormat:POSTTrainingRecordTwoWeekRecords,self.groundId,time];
+    NSString *url = POSTTrainingRecordTwoWeekRecords;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSArray *arr = responseObject[@"towWeekList"];
+            self.dataArr = responseObject[@"trainingInfoList"];
+            self.practiceCarDetailsVC.dataArr = self.dataArr;
+            [self.practiceCarDetailsVC.table reloadData];
+            [self loadButWithArr:arr];
+            self.empty.hidden = YES;
+        }else if (kResponseObjectStatusCodeIsEqual(405)){
+            self.empty.hidden = NO;
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+- (void)loadButWithArr:(NSArray *)arr{
+    if (arr.count == self.butArr.count) {
+        for (int i = 0; i<self.butArr.count; i++) {
+            DataBut *but = self.butArr[i];
+            NSDictionary *dic = arr[i];
+            but.num.text = [NSString stringWithFormat:@"已约%@人",dic[@"count"]];
+        }
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadDataWithTime:self.selectTime];
 }
 /*
 #pragma mark - Navigation

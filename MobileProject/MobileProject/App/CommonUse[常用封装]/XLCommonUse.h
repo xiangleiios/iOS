@@ -21,6 +21,8 @@
 + (NSString *)TimeToInterceptMMddHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptYYYYMMddHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptMMdd:(NSDate *)time;
++ (NSString *)TimeToInterceptYYYYMMdd:(NSDate *)time;
++ (NSString *)TimeToInterceptYYYYMMddHHMMSS:(NSDate *)time;
 /// 比较2个时间大小
 +(BOOL)compareOneDay:(NSString *)oneDay withAnotherDay:(NSString *)anotherDay;
 /// 字符串转时间戳

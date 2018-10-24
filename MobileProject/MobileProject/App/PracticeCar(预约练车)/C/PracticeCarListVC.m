@@ -10,6 +10,7 @@
 #import "UITableView+FMPlaceholder.h"
 #import "PracticeCarCell.h"
 #import "PracticeCarVC.h"
+#import "TrainingVC.h"
 @interface PracticeCarListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -45,18 +46,20 @@
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
-    _table.needPlaceholderView = YES;
+    UIButton *but = [[UIButton alloc] init];
+    [but setTitle:@"立即添加" forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(toTrainingVC) forControlEvents:UIControlEventTouchUpInside];
+    [but setBackgroundImage:[UIImage imageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+    [self.table addEmptyViewWithImageName:@"placeholder" title:@"还没有添加训练场信息哦~" But:but];
+    _table.emptyView.hidden = YES;
     self.table.backgroundColor = kColor_N(240, 240, 240);
-    __weak __typeof(self)weakSelf = self;
     _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
-    _table.reloadBlock = ^{
-        [weakSelf.table.mj_header beginRefreshing];
-    };
-    [self headerRefresh];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self headerRefresh];
     //    [self.table.mj_header beginRefreshing];
 }
 
@@ -70,7 +73,7 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolList;
+    NSString *url = POSTTrainingRecordTrainingList;
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"list"];
@@ -82,6 +85,11 @@
                 FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
                 [self.dataArr addObject:mode];
             }
+        }
+        if (self.dataArr.count > 0) {
+            _table.emptyView.hidden = YES;
+        }else{
+            _table.emptyView.hidden = NO;
         }
         [_table reloadData];
         [_table.mj_footer endRefreshing];
@@ -101,8 +109,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    return self.dataArr.count;
-    return 3;
+    return self.dataArr.count;
+//    return 0;
     
 }
 
@@ -124,10 +132,18 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     PracticeCarVC *vc = [[PracticeCarVC alloc] init];
-
-    //    vc.model = self.dataArr[indexPath.row];
+    FMMainModel *model = self.dataArr[indexPath.row];
+    vc.groundId =model.teamTrainning[@"teamTrainingId"];
+    vc.model = model;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+- (void)toTrainingVC{
+    TrainingVC *vc = [[TrainingVC alloc] init];
+    vc.type = 1;
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc.navigationView setTitle:@"添加训练场"];
 }
 /*
 #pragma mark - Navigation

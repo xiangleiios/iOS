@@ -92,4 +92,12 @@
         make.height.mas_equalTo(1);
     }];
 }
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    XLCache *cache = [XLCache singleton];
+    self.time.text = [NSString stringWithFormat:@"%@-%@",[XLCommonUse TimeToInterceptHHmm:model.startTime],[XLCommonUse TimeToInterceptHHmm:model.endTime]];
+    self.typeOne.text = model.keMu;
+    self.typeTwo.text =[NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.licenseType]]];
+}
 @end

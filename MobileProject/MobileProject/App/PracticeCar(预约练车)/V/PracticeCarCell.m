@@ -102,4 +102,10 @@
     }];
 }
 
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    self.title.text = _model.teamTrainning[@"teamTrainingName"];
+    self.address.text = _model.teamTrainning[@"address"];
+    self.num.text = [NSString stringWithFormat:@"今日预约%@人",_model.todayNum];
+}
 @end

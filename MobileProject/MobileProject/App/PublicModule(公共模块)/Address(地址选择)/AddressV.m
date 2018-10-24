@@ -9,7 +9,9 @@
 #import "AddressV.h"
 #import "AddressCell.h"
 @interface AddressV ()<UITableViewDelegate,UITableViewDataSource>
-
+@property (nonatomic , strong)NSDictionary *province;
+@property (nonatomic , strong)NSDictionary *city;
+@property (nonatomic , strong)NSDictionary *areadic;
 @end
 @implementation AddressV
 
@@ -111,20 +113,22 @@
     NSDictionary *dic = self.dataArr[indexPath.row];
     switch (self.num) {
         case 1:
-            self.vc.province = dic;
+            self.province = dic;
 //            self.dic = @{@"provincecode":dic[@"code"]};
             self.url = [NSString stringWithFormat:POSTCityList,dic[@"code"]];
             self.num++;
             [self laodData];
             break;
         case 2:
-            self.vc.city = dic;;
+            self.city = dic;;
             self.dic = @{@"citycode":dic[@"code"]};
             self.url = [NSString stringWithFormat:POSTAreaList,dic[@"code"]];
             self.num++;
             [self laodData];
             break;
         case 3:
+            self.vc.province = self.province;
+            self.vc.city = self.city;
             self.vc.areadic = dic;
             [self quit];
             break;

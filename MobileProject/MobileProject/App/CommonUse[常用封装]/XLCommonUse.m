@@ -85,6 +85,16 @@
     [formatter setDateFormat:@"MM-dd"];
     return [formatter stringFromDate:time];
 }
++ (NSString *)TimeToInterceptYYYYMMdd:(NSDate *)time{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    return [formatter stringFromDate:time];
+}
++ (NSString *)TimeToInterceptYYYYMMddHHMMSS:(NSDate *)time{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    return [formatter stringFromDate:time];
+}
 + (UIImage *)imageWithColor:(UIColor *)color{
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f); //宽高 1.0只要有值就够了
     UIGraphicsBeginImageContext(rect.size); //在这个范围内开启一段上下文

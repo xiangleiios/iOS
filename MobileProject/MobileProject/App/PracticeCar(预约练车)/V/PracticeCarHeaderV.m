@@ -83,6 +83,17 @@
     }
     return self;
 }
+
+- (void)setDic:(NSDictionary *)dic{
+    XLCache *cache = [XLCache singleton];
+    _dic = dic;
+    self.time.text = [NSString stringWithFormat:@"%@-%@",dic[@"startDay"],dic[@"endDay"]];
+    self.typeOne.text = dic[@"keMu"];
+    self.typeTwo.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:[NSString stringWithFormat:@"%@",dic[@"licenseType"]]]]];
+    NSArray *arr =dic[@"trainingRecords"];
+    self.num.text = [NSString stringWithFormat:@"已约%lu",(unsigned long)arr.count];
+
+}
 @end
 
 
@@ -108,6 +119,7 @@
         }];
         
         UIButton *but = [[UIButton alloc] init];
+        self.addBut = but;
         [self addSubview:but];
         but.layer.cornerRadius = 3;
         but.layer.masksToBounds = YES;
@@ -116,7 +128,6 @@
         [but setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [but setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
         [but setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
-        [but addTarget:self action:@selector(toEditTimeVC) forControlEvents:UIControlEventTouchUpInside];
         [but mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self).mas_offset(-KFit_W6S(30));
             make.centerY.mas_equalTo(lb);
@@ -199,5 +210,16 @@
         }];
     }
     return self;
+}
+
+- (void)setDic:(NSDictionary *)dic{
+    XLCache *cache = [XLCache singleton];
+    _dic = dic;
+    self.time.text = [NSString stringWithFormat:@"%@-%@",dic[@"startDay"],dic[@"endDay"]];
+    self.typeOne.text = dic[@"keMu"];
+    self.typeTwo.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:[NSString stringWithFormat:@"%@",dic[@"licenseType"]]]]];
+    NSArray *arr =dic[@"trainingRecords"];
+    self.num.text = [NSString stringWithFormat:@"已约%lu",(unsigned long)arr.count];
+    
 }
 @end
