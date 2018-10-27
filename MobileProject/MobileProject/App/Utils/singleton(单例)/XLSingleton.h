@@ -11,7 +11,9 @@
 @interface XLSingleton : NSObject
 //获取单例对象
 +(XLSingleton *)singleton;
-@property (nonatomic , strong)NSMutableArray *dateArr;
+@property (nonatomic , strong)NSMutableArray *dateArr; /// 学员选择数组
+@property (nonatomic , strong)NSMutableArray *practiceArr; /// 练习学员数组
+@property (nonatomic , strong)NSMutableArray *timeArr;   ///预约时段
 @property (nonatomic , strong)NSMutableArray *courseArr;
 @property (nonatomic , strong)NSString *scanPhotoIp;
 @end

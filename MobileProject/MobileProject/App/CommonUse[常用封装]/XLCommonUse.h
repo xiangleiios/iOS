@@ -20,6 +20,7 @@
 + (NSString *)TimeToInterceptHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptMMddHHmm:(NSString *)time;
 + (NSString *)TimeToInterceptYYYYMMddHHmm:(NSString *)time;
++ (NSString *)TimeToInterceptYYYYMMddWithStr:(NSString *)time;
 + (NSString *)TimeToInterceptMMdd:(NSDate *)time;
 + (NSString *)TimeToInterceptYYYYMMdd:(NSDate *)time;
 + (NSString *)TimeToInterceptYYYYMMddHHMMSS:(NSDate *)time;

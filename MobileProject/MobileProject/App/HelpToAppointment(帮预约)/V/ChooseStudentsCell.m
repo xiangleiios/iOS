@@ -90,4 +90,27 @@
     }];
     
 }
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    self.but.tag = [_model.idid integerValue];
+    //    XLSingleton *single = [XLSingleton singleton];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSDictionary *dic in [XLSingleton singleton].practiceArr) {
+        [arr addObject:dic[@"idid"]];
+    }
+    if ([arr containsObject:_model.idid]) {
+        self.but.selected = YES;
+    }else{
+        self.but.selected = NO;
+    }
+    self.name.text = model.studentName;
+    if (model.trainingName) {
+        self.xunlianchang.text = [NSString stringWithFormat:@"上次预约：%@",model.trainingName];
+        self.xunlianchang.hidden = NO;
+    }else{
+        self.xunlianchang.hidden = YES;
+    }
+    
+}
 @end

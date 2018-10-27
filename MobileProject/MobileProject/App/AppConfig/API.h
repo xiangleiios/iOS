@@ -191,6 +191,9 @@
 #pragma mark - 查询训练场２周预约信息
 #define POSTTrainingRecordTwoWeekRecords KURL(@"app/trainingRecord/twoWeekRecords")
 
+#pragma mark - 学员约车列表接口
+#define POSTTrainStuslist KURL(@"app/teamStuState/trainStuslist")
+
 
 #pragma mark - 查询训练场约车时段模板列表接口
 #define POSTTrainingModuleList KURL(@"app/trainingModule/list")
@@ -203,6 +206,31 @@
 
 #pragma mark - 删除训练场约车时段模板接口
 #define POSTTrainingModuleRemove KURL(@"app/trainingModule/remove?id=%@")
+
+#pragma mark - 新增当日训练场约车时段模板接口
+#define POSTTrainingInfoAdd KURL(@"app/trainingInfo/add")
+
+
+
+#pragma mark - 帮学员约车
+#define POSTTrainingRecordAdd KURL(@"app/trainingRecord/add")
+
+#pragma mark - 取消预约
+#define POSTCancelById KURL(@"app/trainingRecord/cancelById")
+#pragma mark - 删除预约记录
+#define POSTTrainingRecordDelete KURL(@"app/trainingRecord/delete?id=%@")
+
+#pragma mark - 关闭或开启当天状态
+#define POSTToCloseOrOpen KURL(@"app/trainOpenStatus/toCloseOrOpen")
+
+#pragma mark - 获取约练车记录信息接口
+#define POSTGetTrainingRecordInfoList KURL(@"app/trainingRecord/getTrainingRecordInfoList?type=%d")
+
+#pragma mark - 获取约练车记录详情
+#define POSTGetTrainingRecordInfo KURL(@"app/trainingRecord/getTrainingRecordInfo?id=%@")
+
+
+
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------
 

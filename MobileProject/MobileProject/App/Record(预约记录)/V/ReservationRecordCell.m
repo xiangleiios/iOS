@@ -49,7 +49,7 @@
     
     self.typeOne = [[UILabel alloc] init];
     [self.contentView addSubview:self.typeOne];
-    self.typeOne.textColor = kColor_N(181, 188, 204);
+    self.typeOne.textColor = kColor_N(184, 191, 205);
     self.typeOne.text = @"等待练车";
     self.typeOne.textAlignment = NSTextAlignmentRight;
     [self.typeOne mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -100,7 +100,7 @@
     self.timeCar.font = [UIFont systemFontOfSize:kFit_Font6(14)];
     [self.contentView addSubview:self.timeCar];
     [self.timeCar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(img).mas_offset(KFit_H6S(20));
+        make.centerY.mas_equalTo(img).mas_offset(KFit_H6S(25));
         make.left.mas_equalTo(img.mas_right).mas_offset(20);
         make.height.mas_equalTo(KFit_H6S(30));
     }];
@@ -183,6 +183,7 @@
     self.butThree.layer.masksToBounds = YES;
     self.butThree.layer.borderColor = ZTColor.CGColor;
     self.butThree.layer.borderWidth = 0.5;
+    [self.butThree addTarget:self action:@selector(dianhua) forControlEvents:UIControlEventTouchUpInside];
     [self.butThree mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.butTwo.mas_left).mas_offset(-KFit_H6S(20));
         make.bottom.mas_equalTo(self.contentView).mas_offset(-KFit_H6S(20));
@@ -190,5 +191,64 @@
     }];
     
     
+}
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    XLCache *cache = [XLCache singleton];
+    self.name.text = model.studentName;
+    self.pho.text = model.studentPhone;
+    
+//    NSArray *arr = [model.trainingTime componentsSeparatedByString:@"-"];
+    self.timeCar.text = [model.trainingTime substringFromIndex:5];
+    
+    self.typeTwo.text = model.keMu;
+    self.typeThree.text =[NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:_model.licenseType]]];
+    switch ([model.type intValue]) {
+        case 0:
+            self.typeOne.text = @"等待练车";
+            self.typeOne.textColor = kColor_N(0, 189, 27);
+            [self laodButOne];
+            break;
+        case 1:
+            self.typeOne.text = @"练车中";
+            self.typeOne.textColor = kColor_N(0, 133, 237);
+            [self laodButOne];
+            break;
+        case 2:
+            self.typeOne.text = @"已完成";
+            self.typeOne.textColor = kColor_N(184, 191, 205);
+            [self laodButTwo];
+            break;
+        case 3:
+            self.typeOne.text = @"已取消";
+            self.typeOne.textColor = kColor_N(184, 191, 205);
+            [self laodButTwo];
+            break;
+            
+        default:
+            break;
+    }
+}
+- (void)laodButOne{
+    [self.butOne setTitle:@"取消预约" forState:UIControlStateNormal];
+    [self.butTwo setTitle:@"发短信" forState:UIControlStateNormal];
+    [self.butThree setTitle:@"打电话" forState:UIControlStateNormal];
+    self.butThree.hidden = NO;
+    [self.butOne addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)laodButTwo{
+    [self.butOne setTitle:@"查看详情" forState:UIControlStateNormal];
+    [self.butTwo setTitle:@"删除" forState:UIControlStateNormal];
+    self.butThree.hidden = YES;
+    self.butOne.userInteractionEnabled = NO;
+//    [self.butOne addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)dianhua{
+    if (_model.studentPhone) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",_model.studentPhone]]];
+    }
 }
 @end

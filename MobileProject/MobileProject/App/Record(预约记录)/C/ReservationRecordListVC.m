@@ -10,6 +10,7 @@
 #import "UITableView+FMPlaceholder.h"
 #import "ReservationRecordCell.h"
 #import "ReservationDetailsVC.h"
+#import "CGXPickerView.h"
 @interface ReservationRecordListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -32,8 +33,8 @@
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view).mas_offset(KFit_H6S(164));
+        make.left.right.top.bottom.mas_equalTo(self.view);
+//        make..mas_equalTo(self.view).mas_offset(KFit_H6S(164));
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
@@ -69,10 +70,10 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolList;
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+//    NSString *url = POSTGetTrainingRecordInfoList;
+    [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"list"];
+        NSArray *tpArray = responseObject[@"trainingRecords"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -100,8 +101,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    return self.dataArr.count;
-    return 3;
+    return self.dataArr.count;
+//    return 3;
     
 }
 
@@ -112,6 +113,10 @@
         cell = [[ReservationRecordCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
     cell.model = self.dataArr[indexPath.row];
+    [cell.butOne addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.butTwo addTarget:self action:@selector(deleteOrduanxing:) forControlEvents:UIControlEventTouchUpInside];
+    cell.butOne.tag = indexPath.row;
+    cell.butTwo.tag = indexPath.row;
     return cell;
     
 }
@@ -123,11 +128,87 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     ReservationDetailsVC *vc = [[ReservationDetailsVC alloc] init];
-    
-    //    vc.model = self.dataArr[indexPath.row];
+    vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
+#pragma mark - 删除预约
+- (void)deleteOrduanxing:(UIButton *)senter{
+    FMMainModel *model = self.dataArr[senter.tag];
+    if ([model.type intValue] == 0|| [model.type intValue] == 1) {
+        //发短信
+        
+    }else{
+        //删除
+        NSString *url = [NSString stringWithFormat:POSTTrainingRecordDelete,model.idid];
+        [self deleteWithURL:url];
+    }
+}
+
+- (void)deleteWithURL:(NSString *)url{
+    XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"删除后，无法查看该学员此次预约记录，是否确认删除" sureBtn:@"确定" cancleBtn:@"去想想"];
+    [alert showXLAlertView];
+    alert.resultIndex = ^(NSInteger index) {
+        if (index == 2) {
+            [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+                KKLog(@"%@",responseObject);
+                if (kResponseObjectStatusCodeIsEqual(200)) {
+                    [MBProgressHUD showMsgHUD:@"删除成功"];
+                    [self headerRefresh];
+                }
+            } failureBlock:^(NSError *error) {
+                KKLog(@"%@", error);
+                
+            } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                
+            }];
+        }
+    };
+    
+}
+
+#pragma mark - 取消预约
+- (void)cancel:(UIButton *)senter{
+    FMMainModel *model = self.dataArr[senter.tag];
+    [CGXPickerView showStringPickerWithTitle:@"取消预约" DataSource:@[@"临时有事",@"今日休息",@"预约错误",@"其他原因",] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+        NSLog(@"%@",selectValue);
+        int i = [selectRow intValue];
+        if (i == 3) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithInputboxTitle:@"请输入原因"];
+            [alert showXLAlertView];
+            alert.inputText = ^(NSString *text) {
+                if (text.length < 1) {
+                    [MBProgressHUD showMsgHUD:@"请输入原因"];
+                    return ;
+                }
+                NSDictionary *dic = @{@"memo":text,@"id":model.idid};
+                [self cancelByDic:dic];
+            };
+        }else{
+            NSDictionary *dic = @{@"memo":selectValue,@"id":model.idid};
+            [self cancelByDic:dic];
+        }
+    }];
+}
+
+
+- (void)cancelByDic:(NSDictionary *)dic{
+    NSString *url = POSTCancelById;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"取消预约成功"];
+            [self headerRefresh];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
 
 /*
 #pragma mark - Navigation

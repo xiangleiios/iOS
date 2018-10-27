@@ -19,10 +19,12 @@
 @property (nonatomic , strong)NSArray *dataArr;
 @property (nonatomic , strong)DataBut *selectBut;
 @property (nonatomic , strong)SwitchV *opne;
-@property (nonatomic , strong)EmptyV *empty;
-@property (nonatomic , strong)NSString *selectTime;
+@property (nonatomic , strong)EmptyV *empty; // 未设置默认时间的 默认页面
+@property (nonatomic , strong)EmptyV *emptytwo; // 休息的默认页面
+
 @property (nonatomic , strong)NSMutableArray *butArr;
-@property (nonatomic , strong)PracticeCarDetailsVC *practiceCarDetailsVC;
+@property (nonatomic , weak)PracticeCarDetailsVC *practiceCarDetailsVC;
+//@property (nonatomic , strong)
 @end
 
 @implementation PracticeCarVC
@@ -37,13 +39,14 @@
     [super viewDidLoad];
     
     [self laodNavigation];
-    self.dataArr = [XLCommonUse dataWhithDay:15];
+    self.dataArr = [XLCommonUse dataWhithDay:14];
+    self.selectTime = [XLCommonUse TimeToInterceptYYYYMMddHHMMSS:self.dataArr[0]];
     [self loadscroll];
     [self loadBut];
     [self loadSwitchV];
     [self laodPracticeCarDetailsVC];
     [self loadEmptyV];
-    self.selectTime = [XLCommonUse TimeToInterceptYYYYMMddHHMMSS:self.dataArr[0]];
+    [self loadEmptytwoV];
 //    [self loadDataWithTime:self.selectTime];
     // Do any additional setup after loading the view.
     
@@ -93,6 +96,7 @@
         }
         if (i == 0 ) {
             self.selectBut = but;
+            but.week.text = @"今天";
             [but change:but.but];
         }
         [self.butArr addObject:but];
@@ -145,6 +149,20 @@
     self.empty.hidden = YES;
     [self.empty.but addTarget:self action:@selector(toTimeSetVC) forControlEvents:UIControlEventTouchUpInside];
 }
+
+- (void)loadEmptytwoV{
+    self.emptytwo = [[EmptyV alloc] init];
+    self.emptytwo.title.text = @"今天休息，暂无安排";
+    [self.view addSubview:self.emptytwo];
+    [self.emptytwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.opne.mas_bottom);
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
+    }];
+    self.emptytwo.but.hidden = YES;
+    self.emptytwo.hidden = YES;
+}
+
 - (void)loadSwitchV{
     self.opne = [[SwitchV alloc] init];
     [self.view addSubview:self.opne];
@@ -153,6 +171,7 @@
         make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(KFit_H6S(170));
     }];
+    [self.opne.opne addTarget:self action:@selector(valueChanged:) forControlEvents:(UIControlEventValueChanged)];
 }
 
 - (void)laodPracticeCarDetailsVC{
@@ -164,6 +183,9 @@
         make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(156));
     }];
     [self addChildViewController:vc];
+    vc.groundId = self.groundId;
+    vc.selectTime = self.selectTime;
+    vc.vc = self;
     self.practiceCarDetailsVC = vc;
 }
 - (void)toTimeSetVC{
@@ -179,6 +201,8 @@
 
 - (void)toChooseStudentsVC{
     ChooseStudentsVC *vc = [[ChooseStudentsVC alloc] init];
+    vc.groundId = self.groundId;
+    vc.model = self.model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - 按钮代理
@@ -191,6 +215,9 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.scroll.contentOffset = CGPointMake(w, 0);
     }];
+    KKLog(@"%@",self.dataArr[but.tag]);
+    self.selectTime = [XLCommonUse TimeToInterceptYYYYMMddHHMMSS:self.dataArr[but.tag]];
+    [self loadDataWithTime:self.selectTime];
 //    }
     
 }
@@ -203,8 +230,9 @@
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
             NSArray *arr = responseObject[@"towWeekList"];
-            self.dataArr = responseObject[@"trainingInfoList"];
-            self.practiceCarDetailsVC.dataArr = self.dataArr;
+
+            self.practiceCarDetailsVC.dataArr = responseObject[@"trainingInfoList"];
+            self.practiceCarDetailsVC.selectTime = self.selectTime;
             [self.practiceCarDetailsVC.table reloadData];
             [self loadButWithArr:arr];
             self.empty.hidden = YES;
@@ -227,8 +255,65 @@
             NSDictionary *dic = arr[i];
             but.num.text = [NSString stringWithFormat:@"已约%@人",dic[@"count"]];
         }
+        NSDictionary *dic = arr[self.selectBut.tag];
+        BOOL b =[dic[@"isOpen"] boolValue];
+        if (b) {
+            /// 开启
+            self.emptytwo.hidden = YES;
+            self.opne.title.text = @"开启预约";
+            self.opne.subtitle.text = @"预约练车开启中，关闭后为休息日";
+            self.opne.opne.on = YES;
+        }else{
+            ///  关闭状态
+            self.emptytwo.hidden = NO;
+            self.opne.title.text = @"休息";
+            self.opne.subtitle.text = @"休息中，打开按钮，学员可预约练车";
+            self.opne.opne.on = NO;
+        }
+        
     }
 }
+
+
+
+- (void)valueChanged:(UISwitch *)op{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    
+    [dic setObject:self.groundId forKey:@"groundId"];
+    [dic setObject:[XLCommonUse TimeToInterceptYYYYMMddWithStr:self.selectTime] forKey:@"openTime"];
+    if (op.on) {
+        [dic setObject:@"2" forKey:@"isOpen"];
+    }else{
+        [dic setObject:@"1" forKey:@"isOpen"];
+    }
+    [self toCloseOrOpen:dic];
+}
+
+- (void)toCloseOrOpen:(NSDictionary *)dic{
+    NSString *url = POSTToCloseOrOpen;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+        }else{
+            XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:responseObject[@"message"] sureBtn:@"确定" cancleBtn:nil];
+            alert.resultIndex = ^(NSInteger index) {
+                
+            };
+            [alert showXLAlertView];
+        }
+        [self loadDataWithTime:self.selectTime];
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+
+
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];

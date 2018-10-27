@@ -16,7 +16,9 @@
 @property (nonatomic , strong)DataBut *selectBut;
 @property (nonatomic , strong)UILabel *people;
 @property (nonatomic , strong)UITableView *table;
+@property (nonatomic , strong)NSString *selectTime;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
+@property (nonatomic , strong)NSMutableArray *butArr;
 @end
 
 @implementation ChooseTimeVC
@@ -26,21 +28,35 @@
     }
     return _dataArr;
 }
+- (NSMutableArray *)butArr{
+    if (_butArr == nil) {
+        _butArr = [NSMutableArray array];
+    }
+    return _butArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"选择时间"];
-    self.timeArr = [XLCommonUse dataWhithDay:15];
+    self.timeArr = [XLCommonUse dataWhithDay:14];
+    self.selectTime = [XLCommonUse TimeToInterceptYYYYMMddHHMMSS:self.timeArr[0]];
     [self loadSub];
     [self loadscroll];
     
     [self loadtable];
     
     [self loadBut];
+    
+    [[XLSingleton singleton].timeArr removeAllObjects];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(studentsSubmit:) name:@"NotificationPracticeStudentsTimeSubmit" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(studentsDelete:) name:@"NotificationPracticeStudentsTimeDelete" object:nil];
+    
     // Do any additional setup after loading the view.
 }
 - (void)loadSub{
     self.people = [[UILabel alloc] init];
     [self.view addSubview:self.people];
+    self.people.textColor = ZTColor;
+    self.people.font = [UIFont systemFontOfSize:kFit_Font6(15)];
     self.people.textAlignment = NSTextAlignmentCenter;
     self.people.backgroundColor = kColor_N(240, 240, 240);
     [self.people mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -48,8 +64,22 @@
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
         make.height.mas_equalTo(KFit_H6S(80));
     }];
-    
-    
+    NSMutableString *str = [NSMutableString stringWithFormat:@"您已选择"];
+    XLSingleton *sing = [XLSingleton singleton];
+    for (int i = 0; i < sing.practiceArr.count; i ++) {
+        NSDictionary *dic = sing.practiceArr[i];
+        [str appendString:[NSString stringWithFormat:@"%@,",dic[@"name"]]];
+        if (i == 3 ) {
+            return;
+        }
+        
+    }
+    if (sing.practiceArr.count > 3) {
+        [str appendString:[NSString stringWithFormat:@"等%ld名学员",sing.practiceArr.count]];
+    }else{
+        [str appendString:[NSString stringWithFormat:@"%ld名学员",sing.practiceArr.count]];
+    }
+    self.people.text = str;
     
 }
 - (void)loadscroll{
@@ -71,6 +101,7 @@
         but.data.text =  [XLCommonUse TimeToInterceptMMdd:self.timeArr[i]];
         but.num.text = @"已约0人";
         but.deleget = self;
+        but.tag = i;
         if (i < 3) {
             but.textColor = kColor_N(69, 138, 237);
             but.BKColor = kColor_N(206, 226, 251);
@@ -81,7 +112,9 @@
         if (i == 0 ) {
             self.selectBut = but;
             [but change:but.but];
+            but.week.text = @"今天";
         }
+        [self.butArr addObject:but];
     }
     self.scroll.contentSize = CGSizeMake(KFit_W6S(30)+self.timeArr.count * (w + KFit_W6S(15)), 0);
 }
@@ -112,8 +145,6 @@
     //    self.table.allowsMultipleSelectionDuringEditing = YES;
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     self.table.backgroundColor = kColor_N(240, 240, 240);
     __weak __typeof(self)weakSelf = self;
@@ -121,7 +152,7 @@
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
-    [self headerRefresh];
+
 }
 
 
@@ -153,52 +184,19 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self loadDataWithTime:self.selectTime];
     //    [self.table.mj_header beginRefreshing];
 }
 
-- (void)headerRefresh{
-    self.pageNum=1;
-    
-    [self loadRefreshData];
-}
-- (void)footerRefresh{
-    self.pageNum++;
-    [self loadRefreshData];
-}
-- (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolList;
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"list"];
-        if (self.pageNum==1) {
-            [self.dataArr removeAllObjects];
-        }
-        if (tpArray) {
-            for (NSDictionary *dic in tpArray) {
-                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-                [self.dataArr addObject:mode];
-            }
-        }
-        [_table reloadData];
-        [_table.mj_footer endRefreshing];
-        [_table.mj_header endRefreshing];
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-        [_table.mj_footer endRefreshing];
-        [_table.mj_header endRefreshing];
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
-    //    POSTTeamSchoolList
-}
+
 
 #pragma mark-tableview代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    return self.dataArr.count;
-    return 3;
+    return self.dataArr.count;
+    
     
 }
 
@@ -208,6 +206,7 @@
     if (!cell) {
         cell = [[ChooseTimeCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
+    [cell.but addTarget:self action:@selector(choose:) forControlEvents:UIControlEventTouchUpInside];
     cell.model = self.dataArr[indexPath.row];
     return cell;
     
@@ -231,7 +230,7 @@
 
 
 - (void)next{
-    
+    [self trainingRecordAdd];
 }
 
 
@@ -248,6 +247,8 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.scroll.contentOffset = CGPointMake(w, 0);
     }];
+    self.selectTime = [XLCommonUse TimeToInterceptYYYYMMddHHMMSS:self.timeArr[but.tag]];
+    [self loadDataWithTime:self.selectTime];
     //    }
     
 }
@@ -260,5 +261,118 @@
     // Pass the selected object to the new view controller.
 }
 */
+- (void)loadDataWithTime:(NSString *)time{
+    NSDictionary *dic = @{@"groundId":self.groundId,@"startTime":time};
+    //    NSString *url = [NSString stringWithFormat:POSTTrainingRecordTwoWeekRecords,self.groundId,time];
+    NSString *url = POSTTrainingRecordTwoWeekRecords;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [self.dataArr removeAllObjects];
+            NSArray *week = responseObject[@"towWeekList"];
+            [self loadButWithArr:week];
+            NSArray *arr = responseObject[@"trainingInfoList"];
+            if (arr) {
+                for (NSDictionary *dic in arr) {
+                    FMMainModel *model = [FMMainModel mj_objectWithKeyValues:dic];
+                    [self.dataArr addObject:model];
+                }
+            }
+            [self.table reloadData];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 
+
+
+- (void)loadButWithArr:(NSArray *)arr{
+    if (arr.count == self.butArr.count) {
+        for (int i = 0; i<self.butArr.count; i++) {
+            DataBut *but = self.butArr[i];
+            NSDictionary *dic = arr[i];
+            but.num.text = [NSString stringWithFormat:@"已约%@人",dic[@"count"]];
+        }
+    }
+}
+-(void)dealloc{
+    //移除观察者，Observer不能为nil
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - 提交资料
+- (void)studentsSubmit:(NSNotification *)idid{
+    NSDictionary *dic = [idid object];
+    XLSingleton *single = [XLSingleton singleton];
+    if ([single.timeArr containsObject: dic]) {
+        return;
+    }
+    //    ;
+    [single.timeArr addObject:dic];
+    KKLog(@"%@",single.timeArr);
+}
+
+- (void)studentsDelete:(NSNotification *)idid{
+    NSDictionary *dic = [idid object];
+    XLSingleton *single = [XLSingleton singleton];
+    [single.timeArr removeObject:dic];
+    KKLog(@"%@",single.timeArr);
+    
+}
+
+- (void)choose:(UIButton *)senter{
+    senter.selected = !senter.selected;
+    KKLog(@"%ld",(long)senter.tag);
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (FMMainModel *model in self.dataArr) {
+        if ([model.idid integerValue] == senter.tag) {
+            [dic setValue:model.idid forKey:@"idid"];
+        }
+    }
+    if (senter.selected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationPracticeStudentsTimeSubmit" object:dic];
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationPracticeStudentsTimeDelete" object:dic];
+    }
+}
+
+
+
+- (void)trainingRecordAdd{
+    XLSingleton *sing = [XLSingleton singleton];
+    NSDictionary *dic = [NSMutableDictionary dictionary];
+    
+    NSMutableArray *codeArr = [NSMutableArray array];
+    for (NSDictionary *dic in sing.practiceArr) {
+        [codeArr addObject:dic[@"sysStudentCode"]];
+    }
+    NSMutableArray *idArr = [NSMutableArray array];
+    for (NSDictionary *dic in sing.timeArr) {
+        [idArr addObject:dic[@"idid"]];
+    }
+    [dic setValue:[codeArr componentsJoinedByString:@","] forKey:@"sysStudentCode"];
+    [dic setValue:[idArr componentsJoinedByString:@","] forKey:@"ids"];
+    [dic setValue:_model.teamTrainning[@"address"] forKey:@"groundAddress"];
+    [dic setValue:_model.teamTrainning[@"teamTrainingName"] forKey:@"groundName"];
+    [dic setValue:self.groundId forKey:@"groundId"];
+    [MBProgressHUD showLoadingHUD:@"正在提交"];
+    NSString *url = POSTTrainingRecordAdd;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        [MBProgressHUD hideHUD];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"提交成功"];
+        }
+    } failureBlock:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 @end

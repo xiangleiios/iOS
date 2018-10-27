@@ -18,6 +18,8 @@ static XLSingleton *xlsingleton = nil;
             xlsingleton = [[self alloc] init];
             xlsingleton.dateArr = [NSMutableArray array];
             xlsingleton.courseArr = [NSMutableArray array];
+            xlsingleton.practiceArr = [NSMutableArray array];
+            xlsingleton.timeArr = [NSMutableArray array];
         }
     });
     return xlsingleton;

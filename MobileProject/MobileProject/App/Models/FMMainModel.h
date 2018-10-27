@@ -274,7 +274,15 @@
 @property (nonatomic , strong)NSString *endTime;
 @property (nonatomic , strong)NSString *keMu;
 @property (nonatomic , strong)NSString *licenseType;
-//@property (nonatomic , strong)NSString *
+@property (nonatomic , strong)NSString *trainingName;
+@property (nonatomic , strong)NSString *sysStudentCode;
+@property (nonatomic , strong)NSString *endDay;
+@property (nonatomic , strong)NSString *startDay;
+@property (nonatomic , strong)NSArray *trainingRecords;
+@property (nonatomic , strong)NSString *trainingTime;
+@property (nonatomic , strong)NSString *type;
+@property (nonatomic , strong)NSString *trainingAddress;
+@property (nonatomic , strong)NSString *isCancel;
 @end
 
 

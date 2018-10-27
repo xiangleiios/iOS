@@ -245,7 +245,7 @@
     [management mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_one.mas_bottom).mas_offset(KFit_H6S(50));
         make.left.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(KFit_H6S(24));
+        make.height.mas_equalTo(KFit_H6S(30));
     }];
     
     UIButton *jiaxiao = [[UIButton alloc] init];

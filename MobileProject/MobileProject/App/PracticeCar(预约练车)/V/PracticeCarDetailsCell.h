@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "PracticeCarDetailsVC.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PracticeCarDetailsCell : UITableViewCell
 @property (nonatomic ,strong)FMMainModel *model;
 @property (nonatomic , strong)UILabel *name;
 @property (nonatomic , strong)UIButton *but;
+@property (nonatomic , strong)NSDictionary *dic;
+@property (nonatomic , weak)PracticeCarDetailsVC *vc;
 @end
 
 NS_ASSUME_NONNULL_END

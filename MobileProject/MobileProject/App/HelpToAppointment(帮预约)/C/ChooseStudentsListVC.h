@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChooseStudentsListVC : UIViewController
 @property (nonatomic ,assign)int pageNum;
+@property (nonatomic , strong)NSDictionary *dic;
 @end
 
 NS_ASSUME_NONNULL_END

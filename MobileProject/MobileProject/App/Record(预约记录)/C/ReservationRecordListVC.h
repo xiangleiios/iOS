@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ReservationRecordListVC : UIViewController
 @property (nonatomic ,assign)int pageNum;
+@property (nonatomic , strong)NSDictionary *dic;
+@property (nonatomic , strong)NSString *url;
 @end
 
 NS_ASSUME_NONNULL_END

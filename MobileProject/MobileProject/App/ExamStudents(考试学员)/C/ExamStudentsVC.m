@@ -19,11 +19,11 @@
 @implementation ExamStudentsVC
 - (NSMutableArray *)titles{
     if (_titles == nil) {
-        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"科一\n10" attributes:nil];
-        NSMutableAttributedString *two = [[NSMutableAttributedString alloc] initWithString:@"科二\n1000" attributes:nil];
-        NSMutableAttributedString *three = [[NSMutableAttributedString alloc] initWithString:@"科三\n10" attributes:nil];
-        NSMutableAttributedString *four= [[NSMutableAttributedString alloc] initWithString:@"科四\n10" attributes:nil];
-        NSMutableAttributedString *five = [[NSMutableAttributedString alloc] initWithString:@"结业\n10" attributes:nil];
+        NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:@"科一\n0" attributes:nil];
+        NSMutableAttributedString *two = [[NSMutableAttributedString alloc] initWithString:@"科二\n0" attributes:nil];
+        NSMutableAttributedString *three = [[NSMutableAttributedString alloc] initWithString:@"科三\n0" attributes:nil];
+        NSMutableAttributedString *four= [[NSMutableAttributedString alloc] initWithString:@"科四\n0" attributes:nil];
+        NSMutableAttributedString *five = [[NSMutableAttributedString alloc] initWithString:@"结业\n0" attributes:nil];
         _titles = [NSMutableArray arrayWithObjects:one,two,three,four,five, nil];
     }
     return _titles;
@@ -224,6 +224,37 @@
     [self.scrollView setContentOffset:CGPointMake(self.scrollView.bounds.size.width*index, 0) animated:YES];
     //侧滑手势处理
     //    self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self loadRefreshData];
+}
+
+- (void)loadRefreshData{
+    NSString *url = POSTTeamStuStateList;
+    NSDictionary *dic = @{@"progress":@"1"};
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [self.titles removeAllObjects];
+            NSMutableAttributedString *one = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"科一\n%@",responseObject[@"keMu1"]] attributes:nil];
+            NSMutableAttributedString *two = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"科二\n%@",responseObject[@"keMu2"]] attributes:nil];
+            NSMutableAttributedString *three = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"科三\n%@",responseObject[@"keMu3"]] attributes:nil];
+            NSMutableAttributedString *four= [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"科四\n%@",responseObject[@"keMu4"]] attributes:nil];
+            NSMutableAttributedString *five = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"结业\n%@",responseObject[@"keMu5"]] attributes:nil];
+            _titles = [NSMutableArray arrayWithObjects:one,two,three,four,five, nil];
+            self.myCategoryView.attributeTitles = _titles;
+            [self.myCategoryView reloadData];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    //    POSTTeamSchoolList
 }
 /*
 #pragma mark - Navigation

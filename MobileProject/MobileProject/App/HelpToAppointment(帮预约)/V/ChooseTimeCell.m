@@ -97,4 +97,26 @@
         make.height.mas_equalTo(1);
     }];
 }
+
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    self.but.tag = [_model.idid integerValue];
+    //    XLSingleton *single = [XLSingleton singleton];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (NSDictionary *dic in [XLSingleton singleton].timeArr) {
+        [arr addObject:dic[@"idid"]];
+    }
+    if ([arr containsObject:_model.idid]) {
+        self.but.selected = YES;
+    }else{
+        self.but.selected = NO;
+    }
+    
+    XLCache *cache = [XLCache singleton];
+    self.time.text = [NSString stringWithFormat:@"%@-%@",model.startDay,model.endDay];
+    self.typeOne.text = model.keMu;
+    self.typeTwo.text = [NSString stringWithFormat:@"%@",cache.student_license_type_title[[cache.student_license_type_value indexOfObject:[NSString stringWithFormat:@"%@",model.licenseType]]]];
+    self.num.text = [NSString stringWithFormat:@"已约%lu",model.trainingRecords.count];
+}
 @end

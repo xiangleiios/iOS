@@ -80,6 +80,14 @@
     NSString *time1 = [formatter stringFromDate:date];
     return time1;
 }
++ (NSString *)TimeToInterceptYYYYMMddWithStr:(NSString *)time{
+    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    NSDate* date = [formatter dateFromString:time];
+    [formatter setDateFormat:@"YYYY-MM-dd"];
+    NSString *time1 = [formatter stringFromDate:date];
+    return time1;
+}
 + (NSString *)TimeToInterceptMMdd:(NSDate *)time{
     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"MM-dd"];

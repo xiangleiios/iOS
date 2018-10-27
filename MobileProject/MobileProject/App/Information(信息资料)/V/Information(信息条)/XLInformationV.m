@@ -124,6 +124,7 @@
         }];
         
         UILabel *subLable = [[UILabel alloc] init];
+        self.titlelb = subLable;
         [self addSubview:subLable];
         subLable.text = subtitle;
         subLable.textColor = kColor_N(143, 155, 178);

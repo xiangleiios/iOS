@@ -50,11 +50,12 @@
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
-    [self headerRefresh];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self headerRefresh];
     //    [self.table.mj_header beginRefreshing];
 }
 
@@ -68,10 +69,10 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolList;
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    NSString *url = POSTTrainStuslist;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"list"];
+        NSArray *tpArray = responseObject[@"teamStuList"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -99,8 +100,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    //    return self.dataArr.count;
-    return 13;
+    return self.dataArr.count;
+//    return 13;
     
 }
 
@@ -110,6 +111,8 @@
     if (!cell) {
         cell = [[ChooseStudentsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
+//    cell.tag = indexPath.row;
+    [cell.but addTarget:self action:@selector(choose:) forControlEvents:UIControlEventTouchUpInside];
     cell.model = self.dataArr[indexPath.row];
     return cell;
     
@@ -127,14 +130,22 @@
 //    [self.navigationController pushViewController:vc animated:YES];
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)choose:(UIButton *)senter{
+    senter.selected = !senter.selected;
+    KKLog(@"%ld",(long)senter.tag);
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (FMMainModel *model in self.dataArr) {
+        if ([model.idid integerValue] == senter.tag) {
+            [dic setValue:model.studentName forKey:@"name"];
+            [dic setValue:model.idid forKey:@"idid"];
+            [dic setValue:model.sysStudentCode forKey:@"sysStudentCode"];
+        }
+    }
+    if (senter.selected) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationPracticeStudentsSubmit" object:dic];
+    }else{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationPracticeStudentsDelete" object:dic];
+    }
 }
-*/
-
 @end

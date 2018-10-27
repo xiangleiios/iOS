@@ -49,28 +49,26 @@
         make.top.mas_equalTo(self.myCategoryView.mas_bottom);
     }];
     self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 4, 0);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
     self.myCategoryView.contentScrollView = self.scrollView;
     
     ReservationRecordListVC *vc = [[ReservationRecordListVC alloc] init];
-//    vc.url = POSTStudenteamList;
-//    vc.PayCost = NO;
+//    vc.dic = @{@"type":@"1"};
+    vc.url = [NSString stringWithFormat:POSTGetTrainingRecordInfoList,1];
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ReservationRecordListVC *vctwo = [[ReservationRecordListVC alloc] init];
-//    vctwo.url = POSTStudenteamList;
-//    [vctwo.dic setObject:@"1" forKey:@"isComplete"];
-//    vctwo.PayCost = NO;
+//    vctwo.dic = @{@"type":@"2"};
+    vctwo.url = [NSString stringWithFormat:POSTGetTrainingRecordInfoList,2];
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
     vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ReservationRecordListVC *vcthree = [[ReservationRecordListVC alloc] init];
-//    vcthree.url = POSTStudenteamList;
-//    [vcthree.dic setObject:@"2" forKey:@"isComplete"];
-//    vcthree.PayCost = NO;
+//    vcthree.dic = @{@"type":@"3"};
+    vcthree.url = [NSString stringWithFormat:POSTGetTrainingRecordInfoList,3];
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];
     vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);

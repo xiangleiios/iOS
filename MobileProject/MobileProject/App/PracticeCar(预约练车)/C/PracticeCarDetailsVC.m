@@ -10,6 +10,7 @@
 //#import "UITableView+FMPlaceholder.h"
 #import "PracticeCarDetailsCell.h"
 #import "PracticeCarHeaderV.h"
+#import "EditTimeVC.h"
 @interface PracticeCarDetailsVC ()<UITableViewDelegate,UITableViewDataSource>
 //@property (nonatomic , strong)NSArray *studentArr;
 
@@ -93,7 +94,12 @@
     if (!cell) {
         cell = [[PracticeCarDetailsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
-    cell.model = self.dataArr[indexPath.row];
+    cell.vc = self;
+    NSDictionary *dic = self.dataArr[indexPath.section];
+    NSArray *arr = dic[@"trainingRecords"];
+    cell.dic = arr[indexPath.row];
+    
+    cell.but.tag = indexPath.row;
     return cell;
     
 }
@@ -108,8 +114,17 @@
 }
 
 - (void)toEditTimeVC{
-    
+    EditTimeVC *vc = [[EditTimeVC alloc] init];
+    vc.groundId = self.groundId;
+    vc.editorType = 2;
+    vc.selectTime = self.selectTime;
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc.navigationView setTitle:@"添加时段"];
 }
+
+
+
+
 /*
 #pragma mark - Navigation
 
