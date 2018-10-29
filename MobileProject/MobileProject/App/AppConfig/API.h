@@ -100,6 +100,9 @@
 #pragma mark - 消息中心
 #define POSTFirstList KURL(@"appMessage/first/list")
 
+#pragma mark - 通知公告
+#define POSTNoticetwoList KURL(@"app/noticetwo/list")
+
 #pragma mark - 获取消息详情
 #define POSTGetMessageInfo KURL(@"appMessage/first/getMessageInfo")
 
@@ -210,7 +213,8 @@
 #pragma mark - 新增当日训练场约车时段模板接口
 #define POSTTrainingInfoAdd KURL(@"app/trainingInfo/add")
 
-
+#pragma mark - 修改当日训练场约车时段模板接口
+#define POSTTrainingInfoAdd KURL(@"app/trainingInfo/edit")
 
 #pragma mark - 帮学员约车
 #define POSTTrainingRecordAdd KURL(@"app/trainingRecord/add")
@@ -225,6 +229,9 @@
 
 #pragma mark - 获取约练车记录信息接口
 #define POSTGetTrainingRecordInfoList KURL(@"app/trainingRecord/getTrainingRecordInfoList?type=%d")
+
+#pragma mark - 获取学员约练车记录信息接口
+#define POSTGetStuRecordsList KURL(@"app/trainingRecord/getStuRecordsList")
 
 #pragma mark - 获取约练车记录详情
 #define POSTGetTrainingRecordInfo KURL(@"app/trainingRecord/getTrainingRecordInfo?id=%@")

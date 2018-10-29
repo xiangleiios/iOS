@@ -38,7 +38,7 @@
     
     self.read = [[UILabel alloc] init];
     [self.img addSubview:self.read];
-//    self.read.hidden = YES;
+    self.read.hidden = YES;
     [self.read mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.right.mas_equalTo(self.img);
         make.width.height.mas_equalTo(KFit_W6S(18));

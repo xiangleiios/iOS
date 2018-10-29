@@ -24,6 +24,7 @@
 #import "CYLTabBarControllerConfig.h"
 #import "TrainingListVC.h"
 #import "PracticeCarListVC.h"
+#import "MyNewsRootVC.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -70,7 +71,7 @@
     [self.navigationView setTitle:@"中天驾校"];
     //添加一个带图片的按钮，如果这个按钮只有点击事件，可以这样写，更加简洁。
     UIButton *new = [self.navigationView addRightButtonWithImage:kImage(@"news_nor") hightImage:kImage(@"news_down") clickCallBack:^(UIView *view) {
-        MyNewsVC *vc = [[MyNewsVC alloc] init];
+        MyNewsRootVC *vc = [[MyNewsRootVC alloc] init];
         [weakself.navigationController pushViewController:vc animated:YES];
     }];
     self.xiaoxi = [[UILabel alloc] init];
@@ -395,7 +396,7 @@
             
         }
         self.yfAskZhengView.dataArr = self.newsArr;
-        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"list"][@"unReadNum"]] ;
+        self.xiaoxi.text =[NSString stringWithFormat:@"%@",responseObject[@"unReadNum"]] ;
         if ([self.xiaoxi.text intValue] == 0) {
             self.xiaoxi.hidden = YES;
         }else{

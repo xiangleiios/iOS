@@ -37,7 +37,17 @@
         make.width.height.mas_equalTo(KFit_W6S(90));
         
     }];
-    
+    self.redlb = [[UILabel alloc] init];
+    [self.contentView addSubview:self.redlb];
+    self.redlb.layer.cornerRadius = KFit_W6S(7);
+    self.redlb.layer.masksToBounds = YES;
+    self.redlb.hidden = YES;
+    self.redlb.backgroundColor = [UIColor redColor];
+    [self.redlb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(img);
+        make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(30));
+        make.width.height.mas_equalTo(KFit_W6S(14));
+    }];
     self.title = [[UILabel alloc] init];
     [self.contentView addSubview:self.title];
     self.title.text = @"训练场";
@@ -107,5 +117,10 @@
     self.title.text = _model.teamTrainning[@"teamTrainingName"];
     self.address.text = _model.teamTrainning[@"address"];
     self.num.text = [NSString stringWithFormat:@"今日预约%@人",_model.todayNum];
+    if (_model.falg) {
+        self.redlb.hidden = NO;
+    }else{
+        self.redlb.hidden = YES;
+    }
 }
 @end

@@ -11,6 +11,7 @@
 #import "PracticeCarDetailsCell.h"
 #import "PracticeCarHeaderV.h"
 #import "EditTimeVC.h"
+#import "ReservationDetailsVC.h"
 @interface PracticeCarDetailsVC ()<UITableViewDelegate,UITableViewDataSource>
 //@property (nonatomic , strong)NSArray *studentArr;
 
@@ -71,9 +72,13 @@
         PracticeCarHeaderOneV *v = [[PracticeCarHeaderOneV alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(250))];
         v.dic = dic;
         [v.addBut addTarget:self action:@selector(toEditTimeVC) forControlEvents:UIControlEventTouchUpInside];
+        v.modifyBut.tag =section;
+        [v.modifyBut addTarget:self action:@selector(xiugai:) forControlEvents:UIControlEventTouchUpInside];
         return v;
     }else{
     PracticeCarHeaderV *v = [[PracticeCarHeaderV alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(160))];
+        v.modifyBut.tag =section;
+        [v.modifyBut addTarget:self action:@selector(xiugai:) forControlEvents:UIControlEventTouchUpInside];
         v.dic = dic;
     return v;
     }
@@ -96,9 +101,10 @@
     }
     cell.vc = self;
     NSDictionary *dic = self.dataArr[indexPath.section];
+    KKLog(@"%@",dic);
     NSArray *arr = dic[@"trainingRecords"];
     cell.dic = arr[indexPath.row];
-    
+    cell.model = [FMMainModel mj_objectWithKeyValues:dic];
     cell.but.tag = indexPath.row;
     return cell;
     
@@ -110,7 +116,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    ReservationDetailsVC *vc = [[ReservationDetailsVC alloc] init];
+    NSDictionary *dic = self.dataArr[indexPath.section];
+    NSArray *arr = dic[@"trainingRecords"];
+    NSDictionary *dictwo = arr[indexPath.row];
+    FMMainModel *model = [FMMainModel mj_objectWithKeyValues:dictwo];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)toEditTimeVC{
@@ -123,7 +135,22 @@
 }
 
 
-
+- (void)xiugai:(UIButton *)senter{
+    NSDictionary *dic = self.dataArr[senter.tag];
+    
+    NSArray *arr = dic[@"trainingRecords"];
+    if (arr.count > 0) {
+        [MBProgressHUD showMsgHUD:@"当前时间有人预约，不可修改"];
+        return;
+    }
+    EditTimeVC *vc = [[EditTimeVC alloc] init];
+    vc.groundId = self.groundId;
+    vc.editorType = 3;
+    vc.selectTime = self.selectTime;
+    vc.model = [FMMainModel mj_objectWithKeyValues:dic];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc.navigationView setTitle:@"修改时段"];
+}
 
 /*
 #pragma mark - Navigation

@@ -69,13 +69,28 @@
     }];
     
     UIImageView *img = [[UIImageView alloc] init];
-    [img setImage:[UIImage imageNamed:@"head_nor"]];
+    self.tx = img;
+//    [img setImage:[UIImage imageNamed:@"head_nor"]];
+    img.layer.cornerRadius = KFit_H6S(40);
+    img.layer.masksToBounds = YES;
     [self.contentView addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.top.mas_equalTo(lineTwo.mas_bottom).mas_offset(KFit_H6S(30));
         make.width.height.mas_equalTo(KFit_W6S(80));
     }];
+    
+    self.redlb = [[UILabel alloc] init];
+    [self.contentView addSubview:self.redlb];
+    self.redlb.layer.cornerRadius = KFit_W6S(7);
+    self.redlb.layer.masksToBounds = YES;
+    self.redlb.hidden = YES;
+    self.redlb.backgroundColor = [UIColor redColor];
+    [self.redlb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.left.mas_equalTo(img);
+        make.width.height.mas_equalTo(KFit_W6S(14));
+    }];
+    
     
     self.name = [[UILabel alloc] init];
     self.name.text = @"向蕾";
@@ -196,9 +211,14 @@
 - (void)setModel:(FMMainModel *)model{
     _model = model;
     XLCache *cache = [XLCache singleton];
+    [self.tx sd_setImageWithURL:[NSURL URLWithString:model.wxHead] placeholderImage:[UIImage imageNamed:@"head_nor"]];
     self.name.text = model.studentName;
     self.pho.text = model.studentPhone;
-    
+    if (_model.cueForCoach == 1) {
+        self.redlb.hidden = YES;//一不提示
+    }else{
+        self.redlb.hidden = NO;//2 提示
+    }
 //    NSArray *arr = [model.trainingTime componentsSeparatedByString:@"-"];
     self.timeCar.text = [model.trainingTime substringFromIndex:5];
     
@@ -235,7 +255,7 @@
     [self.butTwo setTitle:@"发短信" forState:UIControlStateNormal];
     [self.butThree setTitle:@"打电话" forState:UIControlStateNormal];
     self.butThree.hidden = NO;
-    [self.butOne addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
+//    [self.butOne addTarget:self action:@selector(cancel) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)laodButTwo{

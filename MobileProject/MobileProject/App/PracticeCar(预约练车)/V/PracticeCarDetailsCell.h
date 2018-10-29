@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UIButton *but;
 @property (nonatomic , strong)NSDictionary *dic;
 @property (nonatomic , weak)PracticeCarDetailsVC *vc;
+@property (nonatomic ,strong)UIImageView *tx;
 @end
 
 NS_ASSUME_NONNULL_END

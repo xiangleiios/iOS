@@ -163,6 +163,18 @@
     
 }
 - (void)toSave{
+    if (self.name.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请填写训练场名称"];
+        return;
+    }
+    if (self.address.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请填写训练场详细地址"];
+        return;
+    }
+    if (self.area.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择训练场详区域"];
+        return;
+    }
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.province[@"code"] forKey:@"province"];
     [dic setObject:self.city[@"code"] forKey:@"city"];
@@ -173,6 +185,8 @@
     NSString *url;
     if (self.type) {
         url =POSTAddTeamtraining;//新增
+        [dic setObject:@"0" forKey:@"status"];
+//        status=0
     }else{
         url =POSTEditTeamtraining;//编辑
         [dic setObject:self.model.teamTrainingId forKey:@"teamTrainingId"];
@@ -185,10 +199,12 @@
         if (kResponseObjectStatusCodeIsEqual(200)) {
             [MBProgressHUD showMsgHUD:@"保存成功"];
             [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }
     } failureBlock:^(NSError *error) {
         KKLog(@"%@", error);
-        
+        [MBProgressHUD hideHUD];
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
     }];
@@ -207,10 +223,12 @@
                 if (kResponseObjectStatusCodeIsEqual(200)) {
                     [MBProgressHUD showMsgHUD:@"删除成功"];
                     [self.navigationController popViewControllerAnimated:YES];
+                }else{
+                    [MBProgressHUD showMsgHUD:responseObject[@"message"]];
                 }
             } failureBlock:^(NSError *error) {
                 KKLog(@"%@", error);
-                
+                [MBProgressHUD hideHUD];
             } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
                 
             }];

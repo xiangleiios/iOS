@@ -138,30 +138,35 @@
     self.myCategoryView.contentScrollView = self.scrollView;
     
     ExamStudentsListVC *vc = [[ExamStudentsListVC alloc] init];
+    vc.vc = self;
     [vc.dic setObject:@"1" forKey:@"progress"];
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ExamStudentsListVC *vctwo = [[ExamStudentsListVC alloc] init];
+    vctwo.vc = self;
     [vctwo.dic setObject:@"2" forKey:@"progress"];
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
     vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ExamStudentsListVC *vcthree = [[ExamStudentsListVC alloc] init];
+    vcthree.vc = self;
     [vcthree.dic setObject:@"3" forKey:@"progress"];
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];
     vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ExamStudentsListVC *vcfour = [[ExamStudentsListVC alloc] init];
+    vcfour.vc = self;
     [vcfour.dic setObject:@"4" forKey:@"progress"];
     [self addChildViewController:vcfour];
     [self.scrollView addSubview:vcfour.view];
     vcfour.view.frame = CGRectMake(SCREEN_WIDTH * 3, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ExamStudentsListVC *vcfive = [[ExamStudentsListVC alloc] init];
+    vcfive.vc = self;
     [vcfive.dic setObject:@"5" forKey:@"progress"];
     [self addChildViewController:vcfive];
     [self.scrollView addSubview:vcfive.view];

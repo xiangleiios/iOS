@@ -147,7 +147,11 @@
 - (void)setModel:(FMMainModel *)model{
     _model = model;
     self.title.text = model.student[@"studentName"];
-    NSArray *arr = [model.stuTags componentsSeparatedByString:@","];
+    NSArray *arr;
+    if (model.stuTags.length > 0) {
+        arr = [model.stuTags componentsSeparatedByString:@","];
+    }
+    
     KKLog(@"%d",_model.failNum);
     if (_model.failNum > 0) {
         self.typeFour.text = [NSString stringWithFormat:@"补考%d次",_model.failNum];

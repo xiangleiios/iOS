@@ -89,6 +89,8 @@
 		A74EB31B213E5A2E00564BC6 /* BusinessCardListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A74EB31A213E5A2E00564BC6 /* BusinessCardListVC.m */; };
 		A74FE4322126C83C008E159E /* XLColumnsV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4312126C83C008E159E /* XLColumnsV.m */; };
 		A74FE43A2126D951008E159E /* XLInformationV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4392126D951008E159E /* XLInformationV.m */; };
+		A75024982186A18100519552 /* PromptSuccessV.m in Sources */ = {isa = PBXBuildFile; fileRef = A75024972186A18100519552 /* PromptSuccessV.m */; };
+		A750249B2186E1F800519552 /* MyNewsRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A750249A2186E1F800519552 /* MyNewsRootVC.m */; };
 		A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A754B7CA21476D280029CC04 /* XLNetwork.m */; };
 		A75ACC932160A5EE00E5467C /* PicturePosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75ACC922160A5EE00E5467C /* PicturePosterVC.m */; };
 		A75D2CD6214BB5620065FD7F /* shareimg.png in Resources */ = {isa = PBXBuildFile; fileRef = A75D2CD5214BB5620065FD7F /* shareimg.png */; };
@@ -121,6 +123,7 @@
 		A787E17F215DFB3700EF01F2 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A787E180215DFB3C00EF01F2 /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; };
 		A787E181215DFB3C00EF01F2 /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A7890C2F21845181008AA62C /* ReservationRecordListMyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7890C2E21845181008AA62C /* ReservationRecordListMyVC.m */; };
 		A78E2DD3216AF37200CBAED1 /* PictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD2216AF37200CBAED1 /* PictureCell.m */; };
 		A78E2DD6216B36C400CBAED1 /* PosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD5216B36C400CBAED1 /* PosterVC.m */; };
 		A78E2DD9216B5FA900CBAED1 /* MyAdmissionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD8216B5FA900CBAED1 /* MyAdmissionsVC.m */; };
@@ -833,6 +836,10 @@
 		A74FE4312126C83C008E159E /* XLColumnsV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLColumnsV.m; sourceTree = "<group>"; };
 		A74FE4382126D951008E159E /* XLInformationV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLInformationV.h; sourceTree = "<group>"; };
 		A74FE4392126D951008E159E /* XLInformationV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLInformationV.m; sourceTree = "<group>"; };
+		A75024962186A18100519552 /* PromptSuccessV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PromptSuccessV.h; sourceTree = "<group>"; };
+		A75024972186A18100519552 /* PromptSuccessV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PromptSuccessV.m; sourceTree = "<group>"; };
+		A75024992186E1F800519552 /* MyNewsRootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNewsRootVC.h; sourceTree = "<group>"; };
+		A750249A2186E1F800519552 /* MyNewsRootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewsRootVC.m; sourceTree = "<group>"; };
 		A754B7C921476D280029CC04 /* XLNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLNetwork.h; sourceTree = "<group>"; };
 		A754B7CA21476D280029CC04 /* XLNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLNetwork.m; sourceTree = "<group>"; };
 		A75ACC912160A5EE00E5467C /* PicturePosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturePosterVC.h; sourceTree = "<group>"; };
@@ -889,6 +896,8 @@
 		A787E175215DFB0800EF01F2 /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
 		A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		A787E177215DFB0900EF01F2 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
+		A7890C2D21845181008AA62C /* ReservationRecordListMyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReservationRecordListMyVC.h; sourceTree = "<group>"; };
+		A7890C2E21845181008AA62C /* ReservationRecordListMyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReservationRecordListMyVC.m; sourceTree = "<group>"; };
 		A78E2DD1216AF37200CBAED1 /* PictureCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureCell.h; sourceTree = "<group>"; };
 		A78E2DD2216AF37200CBAED1 /* PictureCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureCell.m; sourceTree = "<group>"; };
 		A78E2DD4216B36C400CBAED1 /* PosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosterVC.h; sourceTree = "<group>"; };
@@ -2217,6 +2226,8 @@
 				A7282F07217D7AFD00117758 /* ReservationRecordListVC.m */,
 				A7282F0C217DA87700117758 /* ReservationDetailsVC.h */,
 				A7282F0D217DA87700117758 /* ReservationDetailsVC.m */,
+				A7890C2D21845181008AA62C /* ReservationRecordListMyVC.h */,
+				A7890C2E21845181008AA62C /* ReservationRecordListMyVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -2237,6 +2248,8 @@
 				A7282F19217DC11900117758 /* ChooseStudentsCell.m */,
 				A7282F1E217DD51D00117758 /* ChooseTimeCell.h */,
 				A7282F1F217DD51D00117758 /* ChooseTimeCell.m */,
+				A75024962186A18100519552 /* PromptSuccessV.h */,
+				A75024972186A18100519552 /* PromptSuccessV.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2533,6 +2546,8 @@
 			children = (
 				A7AC8174212C2AA700C6AB6C /* MyNewsVC.h */,
 				A7AC8175212C2AA700C6AB6C /* MyNewsVC.m */,
+				A75024992186E1F800519552 /* MyNewsRootVC.h */,
+				A750249A2186E1F800519552 /* MyNewsRootVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -4383,7 +4398,6 @@
 		DA4FA47F1FDF7B7200C7C1F1 /* Mine(我的) */ = {
 			isa = PBXGroup;
 			children = (
-				A7AC8171212C2A1100C6AB6C /* MyNews(消息) */,
 				DA4FA4861FDF7B7200C7C1F1 /* Controllers */,
 				DA4FA49F1FDF7B7200C7C1F1 /* Models */,
 				DA4FA4B41FDF7B7200C7C1F1 /* Views */,
@@ -4773,6 +4787,7 @@
 				A7EC17FB2176D8A4007793FC /* Training(训练场) */,
 				A71907A1213105B40072B8CF /* Subordinate(所属驾校) */,
 				A7B5A0FE2133A2BA00BC197B /* Vehicle(车辆管理) */,
+				A7AC8171212C2A1100C6AB6C /* MyNews(消息) */,
 				DA4FA47F1FDF7B7200C7C1F1 /* Mine(我的) */,
 				A7BA6F46215F609500A5FA0D /* admissions(招生) */,
 				A7EC180921770BF3007793FC /* ExamStudents(考试学员) */,
@@ -5455,6 +5470,7 @@
 				DAE2129E1EF2867B000EAB90 /* DesignerDetailModel.m in Sources */,
 				4F09449B1F39A83200BA80E5 /* DetailsVC.m in Sources */,
 				DA0346C21F509098008E7BE1 /* UIImage+Resize.m in Sources */,
+				A75024982186A18100519552 /* PromptSuccessV.m in Sources */,
 				A7EC187521773E29007793FC /* JXCategoryTitleView.m in Sources */,
 				DA0346DE1F509098008E7BE1 /* UIScrollView+FMTouch.m in Sources */,
 				DA0346A41F509098008E7BE1 /* UIButton+Submitting.m in Sources */,
@@ -5628,6 +5644,7 @@
 				DA4FA4EC1FE2757800C7C1F1 /* NSTimer+Addition.m in Sources */,
 				4F5577E120BBA0CF00182B25 /* PickerViewOne.m in Sources */,
 				A7EC186D21773E29007793FC /* JXCategoryIndicatorCell.m in Sources */,
+				A7890C2F21845181008AA62C /* ReservationRecordListMyVC.m in Sources */,
 				DA0346F81F509098008E7BE1 /* UIView+GestureCallback.m in Sources */,
 				DA0346641F509098008E7BE1 /* NSObject+Reflection.m in Sources */,
 				DA03466F1F509098008E7BE1 /* NSString+FMExtension.m in Sources */,
@@ -5719,6 +5736,7 @@
 				DA0346AB1F509098008E7BE1 /* UIColor+Web.m in Sources */,
 				A71907A4213106180072B8CF /* SubordinateVC.m in Sources */,
 				DA0346D01F509098008E7BE1 /* UILabel+SuggestSize.m in Sources */,
+				A750249B2186E1F800519552 /* MyNewsRootVC.m in Sources */,
 				DA0346FB1F509098008E7BE1 /* UIView+Screenshot.m in Sources */,
 				DA03468C1F509098008E7BE1 /* CAAnimation+EasingEquations.m in Sources */,
 				DA78C3051F5D41A3009BAA90 /* FMNetworkHelper.m in Sources */,

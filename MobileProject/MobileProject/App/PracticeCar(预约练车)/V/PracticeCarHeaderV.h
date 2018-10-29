@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UILabel *typeTwo;
 @property (nonatomic , strong)UILabel *num;
 @property (nonatomic , strong)NSDictionary *dic;
+@property (nonatomic , strong)UIButton *modifyBut;
 @end
 
 
@@ -29,5 +30,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UILabel *num;
 @property (nonatomic , strong)NSDictionary *dic;
 @property (nonatomic , strong)UIButton *addBut;
+@property (nonatomic , strong)UIButton *modifyBut;
 @end
 NS_ASSUME_NONNULL_END

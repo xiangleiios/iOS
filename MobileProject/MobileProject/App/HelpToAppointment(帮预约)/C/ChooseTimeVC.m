@@ -10,6 +10,8 @@
 #import "DataBut.h"
 #import "UITableView+FMPlaceholder.h"
 #import "ChooseTimeCell.h"
+#import "PromptSuccessV.h"
+#import "PracticeCarVC.h"
 @interface ChooseTimeVC ()<DataButDelegate,UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)NSArray *timeArr;
@@ -102,13 +104,13 @@
         but.num.text = @"已约0人";
         but.deleget = self;
         but.tag = i;
-        if (i < 3) {
-            but.textColor = kColor_N(69, 138, 237);
-            but.BKColor = kColor_N(206, 226, 251);
-        }else{
-            but.textColor = kColor_N(162, 172, 190);
-            but.BKColor = kColor_N(235, 238, 243);
-        }
+//        if (i < 3) {
+//            but.textColor = kColor_N(69, 138, 237);
+//            but.BKColor = kColor_N(206, 226, 251);
+//        }else{
+//            but.textColor = kColor_N(162, 172, 190);
+//            but.BKColor = kColor_N(235, 238, 243);
+//        }
         if (i == 0 ) {
             self.selectBut = but;
             [but change:but.but];
@@ -296,6 +298,17 @@
             DataBut *but = self.butArr[i];
             NSDictionary *dic = arr[i];
             but.num.text = [NSString stringWithFormat:@"已约%@人",dic[@"count"]];
+            BOOL b =[dic[@"isOpen"] boolValue];
+            if (self.selectBut == but) {
+                continue;
+            }
+            if (b) {
+                but.textColor = kColor_N(69, 138, 237);
+                but.BKColor = kColor_N(206, 226, 251);
+            }else{
+                but.textColor = kColor_N(162, 172, 190);
+                but.BKColor = kColor_N(235, 238, 243);
+            }
         }
     }
 }
@@ -331,6 +344,12 @@
     for (FMMainModel *model in self.dataArr) {
         if ([model.idid integerValue] == senter.tag) {
             [dic setValue:model.idid forKey:@"idid"];
+            
+            NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+            [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+            NSDate* date = [formatter dateFromString:model.startTime];
+            NSString *time = [NSString stringWithFormat:@"%@(%@)%@-%@",[XLCommonUse TimeToInterceptYYYYMMddWithStr:model.startTime],[XLCommonUse weekdayStringFromDate:date],model.startDay,model.endDay];
+            [dic setValue:time forKey:@"time"];
         }
     }
     if (senter.selected) {
@@ -343,16 +362,27 @@
 
 
 - (void)trainingRecordAdd{
+    
+    
+    
     XLSingleton *sing = [XLSingleton singleton];
+    if (sing.timeArr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"请至少选择一个时段"];
+        return;
+    }
     NSDictionary *dic = [NSMutableDictionary dictionary];
     
     NSMutableArray *codeArr = [NSMutableArray array];
+    NSMutableArray *studentPhoneArr = [NSMutableArray array];;
     for (NSDictionary *dic in sing.practiceArr) {
         [codeArr addObject:dic[@"sysStudentCode"]];
+        [studentPhoneArr addObject:dic[@"studentPhone"]];
     }
+    NSMutableArray *tiemArr = [NSMutableArray array];
     NSMutableArray *idArr = [NSMutableArray array];
     for (NSDictionary *dic in sing.timeArr) {
         [idArr addObject:dic[@"idid"]];
+        [tiemArr addObject:dic[@"time"]];
     }
     [dic setValue:[codeArr componentsJoinedByString:@","] forKey:@"sysStudentCode"];
     [dic setValue:[idArr componentsJoinedByString:@","] forKey:@"ids"];
@@ -366,6 +396,22 @@
         [MBProgressHUD hideHUD];
         if (kResponseObjectStatusCodeIsEqual(200)) {
             [MBProgressHUD showMsgHUD:@"提交成功"];
+            
+            PromptSuccessV * v = [[PromptSuccessV alloc] init];
+            v.groundName = _model.teamTrainning[@"teamTrainingName"];
+            v.groundAddress = _model.teamTrainning[@"address"];
+            v.studentPhoneArr = studentPhoneArr;
+            v.teamSchoolName = _model.teamTrainning[@"teamSchoolName"];
+            v.tiemArr = tiemArr;
+            v.vc = self;
+            [v show];
+            
+            
+            [sing.practiceArr removeAllObjects];
+            [sing.timeArr removeAllObjects];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+            [sing.timeArr removeAllObjects];
         }
     } failureBlock:^(NSError *error) {
         [MBProgressHUD hideHUD];

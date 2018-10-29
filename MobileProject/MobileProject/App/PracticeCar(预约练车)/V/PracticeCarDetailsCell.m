@@ -35,7 +35,10 @@
 - (void)loadSubview{
     UIImageView *img = [[UIImageView alloc] init];
     [self.contentView addSubview:img];
-    [img setImage:[UIImage imageNamed:@"head_nor"]];
+    self.tx = img;
+//    [img setImage:[UIImage imageNamed:@"head_nor"]];
+    img.layer.cornerRadius = KFit_H6S(30);
+    img.layer.masksToBounds = YES;
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView);
@@ -75,6 +78,9 @@
 - (void)setDic:(NSDictionary *)dic{
     _dic = dic;
     self.name.text = dic[@"studentName"];
+    [self.tx sd_setImageWithURL:[NSURL URLWithString:dic[@"wxHead"]] placeholderImage:[UIImage imageNamed:@"head_nor"]];
+    
+//    wxHead
 }
 - (void)chooseBut:(UIButton *)senter{
     
@@ -96,7 +102,7 @@
             MFMessageComposeViewController * controller = [[MFMessageComposeViewController alloc] init];
             controller.recipients = @[_dic[@"studentPhone"]];//发送短信的号码，数组形式入参
             controller.navigationBar.tintColor = [UIColor redColor];
-            controller.body = @""; //此处的body就是短信将要发生的内容
+            controller.body = [NSString stringWithFormat:@"学员您好，您已成功预约练车，训练场:%@（%@）,时间:%@,地址:%@,请准时练车",_dic[@"trainingName"],_dic[@"schoolName"],_dic[@"trainingTime"],_model.trainingAddress]; //此处的body就是短信将要发生的内容
             controller.messageComposeDelegate = self;
             [self.vc presentViewController:controller animated:YES completion:nil];
             [[[[controller viewControllers] lastObject] navigationItem] setTitle:@"短信"];//修改短信界面标题
@@ -137,11 +143,15 @@
         NSLog(@"%@",selectValue);
         int i = [selectRow intValue];
         if (i == 3) {
-            XLAlertView *alert = [[XLAlertView alloc] initWithInputboxTitle:@"请输入原因"];
+            XLAlertView *alert = [[XLAlertView alloc] initWithInputboxTitle:@"请输入原因(不能超过70个字符)"];
             [alert showXLAlertView];
             alert.inputText = ^(NSString *text) {
                 if (text.length < 1) {
                     [MBProgressHUD showMsgHUD:@"请输入原因"];
+                    return ;
+                }
+                if (text.length > 70) {
+                    [MBProgressHUD showMsgHUD:@"输入不得超过70个字符"];
                     return ;
                 }
                 NSDictionary *dic = @{@"memo":text,@"id":_dic[@"id"]};

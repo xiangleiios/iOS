@@ -24,6 +24,8 @@
 
 @property (nonatomic , strong)NSMutableArray *butArr;
 @property (nonatomic , weak)PracticeCarDetailsVC *practiceCarDetailsVC;
+
+@property (nonatomic , strong)UILabel *redlb;
 //@property (nonatomic , strong)
 @end
 
@@ -87,13 +89,8 @@
         but.num.text = @"已约0人";
         but.deleget = self;
         but.tag = i;
-        if (i < 3) {
-            but.textColor = kColor_N(69, 138, 237);
-            but.BKColor = kColor_N(206, 226, 251);
-        }else{
-            but.textColor = kColor_N(162, 172, 190);
-            but.BKColor = kColor_N(235, 238, 243);
-        }
+        but.textColor = kColor_N(69, 138, 237);
+        but.BKColor = kColor_N(206, 226, 251);
         if (i == 0 ) {
             self.selectBut = but;
             but.week.text = @"今天";
@@ -118,7 +115,16 @@
     [yuyue setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(255, 255, 255, 0.6)] forState:UIControlStateHighlighted];
     [yuyue addTarget:self action:@selector(toReservationRecordVC) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    self.redlb = [[UILabel alloc] init];
+    [yuyue addSubview:self.redlb];
+    self.redlb.layer.cornerRadius = KFit_W6S(7);
+    self.redlb.layer.masksToBounds = YES;
+    self.redlb.backgroundColor = [UIColor redColor];
+    [self.redlb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(yuyue);
+        make.right.mas_equalTo(yuyue).mas_offset(-KFit_W6S(60));
+        make.width.height.mas_equalTo(KFit_W6S(14));
+    }];
     
     UIButton *hlep = [[UIButton alloc] init];
     [self.view addSubview:hlep];
@@ -230,7 +236,12 @@
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
             NSArray *arr = responseObject[@"towWeekList"];
-
+            BOOL b = [responseObject[@"falg"] boolValue];
+            if (b) {
+                self.redlb.hidden = NO;
+            }else{
+                self.redlb.hidden = YES;
+            }
             self.practiceCarDetailsVC.dataArr = responseObject[@"trainingInfoList"];
             self.practiceCarDetailsVC.selectTime = self.selectTime;
             [self.practiceCarDetailsVC.table reloadData];
@@ -254,6 +265,18 @@
             DataBut *but = self.butArr[i];
             NSDictionary *dic = arr[i];
             but.num.text = [NSString stringWithFormat:@"已约%@人",dic[@"count"]];
+            BOOL b =[dic[@"isOpen"] boolValue];
+            if (self.selectBut == but) {
+                continue;
+            }
+            if (b) {
+                but.textColor = kColor_N(69, 138, 237);
+                but.BKColor = kColor_N(206, 226, 251);
+            }else{
+                but.textColor = kColor_N(162, 172, 190);
+                but.BKColor = kColor_N(235, 238, 243);
+            }
+
         }
         NSDictionary *dic = arr[self.selectBut.tag];
         BOOL b =[dic[@"isOpen"] boolValue];
@@ -263,6 +286,7 @@
             self.opne.title.text = @"开启预约";
             self.opne.subtitle.text = @"预约练车开启中，关闭后为休息日";
             self.opne.opne.on = YES;
+            
         }else{
             ///  关闭状态
             self.emptytwo.hidden = NO;

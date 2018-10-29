@@ -10,6 +10,7 @@
 #import "StudentsLabelV.h"
 #import "XLInformationV.h"
 #import "CGXPickerView.h"
+#import "StudentDetailsVC.h"
 #define MAX_LIMIT_NUMS   100
 @interface ExamStudentsDetailsVC ()<UITextViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -266,9 +267,28 @@
         make.top.mas_equalTo(linefive.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(85));
     }];
+    
+    
+    UIButton *chakan = [[UIButton alloc] init];
+    [self.backview addSubview:chakan];
+    [chakan setTitle:@"查看 >" forState:UIControlStateNormal];
+    [chakan addTarget:self action:@selector(toStudentDetailsVC) forControlEvents:UIControlEventTouchUpInside];
+    chakan.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+    [chakan setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [chakan mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
+        make.top.mas_equalTo(linefive.mas_bottom);
+        make.height.mas_equalTo(KFit_H6S(85));
+        make.width.mas_equalTo(KFit_W6S(110));
+    }];
 }
-
-
+- (void)toStudentDetailsVC{
+    StudentDetailsVC *vc = [[StudentDetailsVC alloc] init];
+    NSDictionary *dic = _model.student;
+    FMMainModel *model = [FMMainModel mj_objectWithKeyValues:dic];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 - (void)chooseKM{
     [CGXPickerView showStringPickerWithTitle:@"请y选择科目" DataSource:@[@"科目一",@"科目二",@"科目三",@"科目四",@"拿证",@"作废（补考五次挂科）"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
         NSLog(@"%@  %@",selectValue,selectRow);

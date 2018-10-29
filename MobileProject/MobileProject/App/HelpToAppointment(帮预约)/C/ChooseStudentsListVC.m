@@ -140,6 +140,7 @@
             [dic setValue:model.studentName forKey:@"name"];
             [dic setValue:model.idid forKey:@"idid"];
             [dic setValue:model.sysStudentCode forKey:@"sysStudentCode"];
+            [dic setValue:model.phone forKey:@"studentPhone"];
         }
     }
     if (senter.selected) {

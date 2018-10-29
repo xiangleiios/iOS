@@ -23,7 +23,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self laodNavigation];
+    
     [self loadtable];
     // Do any additional setup after loading the view.
 }
@@ -33,25 +33,14 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)laodNavigation{
-//    kWeakSelf(self)
-    [self.navigationView setTitle:@"消息"];
-    //添加一个带图片的按钮，如果这个按钮只有点击事件，可以这样写，更加简洁。
-    kWeakSelf(self)
-    UIButton *but =  [self.navigationView addRightButtonWithTitle:@"全部标记已读" clickCallBack:^(UIView *view) {
-        [weakself allRead];
-    }];
-    [but setTitleColor:kColor_N(15, 115, 238) forState:UIControlStateNormal];
-    
-    
-}
+
 
 - (void)loadtable{
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
-        make.left.right.bottom.mas_equalTo(self.view);
+//        make..mas_equalTo(self.view).mas_offset(kNavBarH);
+        make.top.left.right.bottom.mas_equalTo(self.view);
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
@@ -86,9 +75,9 @@
 }
 
 - (void)loadRefreshData{
-    NSString *url = POSTFirstList;
+//    NSString *url = POSTFirstList;
     //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"list"][@"rows"];
         if (self.pageNum==1) {
@@ -128,6 +117,9 @@
         cell = [[MyNewsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
     cell.model = self.dataArr[indexPath.row];
+    if (self.type == 0) {
+        cell.read.hidden = YES;
+    }
     return cell;
 }
 
@@ -139,7 +131,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self getMessageInfo:indexPath.row];
+    if (self.type) {
+        
+        [self getMessageInfo:indexPath.row];
+    }
     
 }
 
@@ -162,18 +157,7 @@
 }
 
 
-- (void)allRead{
-    NSString *url = POSTUpdateAllRead;
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
-        KKLog(@"%@",responseObject);
-        [self headerRefresh];
-    } failureBlock:^(NSError *error) {
-        KKLog(@"%@", error);
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
-}
+
 /*
 #pragma mark - Navigation
 

@@ -283,6 +283,9 @@
 @property (nonatomic , strong)NSString *type;
 @property (nonatomic , strong)NSString *trainingAddress;
 @property (nonatomic , strong)NSString *isCancel;
+@property (nonatomic , assign)BOOL falg;
+@property (nonatomic , assign)NSInteger cueForCoach;
+@property (nonatomic , strong)NSString *wxHead;
 @end
 
 

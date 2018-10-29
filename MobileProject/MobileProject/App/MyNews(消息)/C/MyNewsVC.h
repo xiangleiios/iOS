@@ -9,5 +9,7 @@
 #import "FMBaseViewController.h"
 
 @interface MyNewsVC : FMBaseViewController
-
+@property (nonatomic , strong)NSString *url;
+@property (nonatomic , assign)int type; //1 系统 0 通知
+- (void)headerRefresh;
 @end

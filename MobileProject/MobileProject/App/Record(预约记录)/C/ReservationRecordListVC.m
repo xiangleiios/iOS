@@ -11,7 +11,8 @@
 #import "ReservationRecordCell.h"
 #import "ReservationDetailsVC.h"
 #import "CGXPickerView.h"
-@interface ReservationRecordListVC ()<UITableViewDelegate,UITableViewDataSource>
+#import <MessageUI/MessageUI.h>
+@interface ReservationRecordListVC ()<UITableViewDelegate,UITableViewDataSource,MFMessageComposeViewControllerDelegate>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
 
@@ -127,8 +128,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    ReservationRecordCell * cell = (ReservationRecordCell *)[tableView cellForRowAtIndexPath:indexPath];
     ReservationDetailsVC *vc = [[ReservationDetailsVC alloc] init];
-    vc.model = self.dataArr[indexPath.row];
+    FMMainModel *model = self.dataArr[indexPath.row];
+    vc.model = model;
+    model.cueForCoach = 1;
+//    [self.table reloadData];
+    cell.redlb.hidden = YES;
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -138,7 +145,13 @@
     FMMainModel *model = self.dataArr[senter.tag];
     if ([model.type intValue] == 0|| [model.type intValue] == 1) {
         //发短信
-        
+        MFMessageComposeViewController * controller = [[MFMessageComposeViewController alloc] init];
+        controller.recipients = @[model.studentPhone];//发送短信的号码，数组形式入参
+        controller.navigationBar.tintColor = [UIColor redColor];
+        controller.body = [NSString stringWithFormat:@"学员您好，您已成功预约练车，训练场:%@（%@）,时间:%@,地址:%@,请准时练车",model.trainingName,model.schoolName,model.trainingTime,model.trainingAddress];; //此处的body就是短信将要发生的内容
+        controller.messageComposeDelegate = self;
+        [self presentViewController:controller animated:YES completion:nil];
+        [[[[controller viewControllers] lastObject] navigationItem] setTitle:@"短信"];//修改短信界面标题
     }else{
         //删除
         NSString *url = [NSString stringWithFormat:POSTTrainingRecordDelete,model.idid];
@@ -207,6 +220,25 @@
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
     }];
+}
+
+-(void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    switch (result) {
+        case MessageComposeResultSent:
+            //信息传送成功
+            break;
+        case MessageComposeResultFailed:
+            //信息传送失败
+            break;
+        case MessageComposeResultCancelled:
+            //信息被用户取消传送
+            break;
+        default:
+            break;
+            
+    }
+    
 }
 
 

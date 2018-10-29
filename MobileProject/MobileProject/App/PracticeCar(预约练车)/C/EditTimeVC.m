@@ -153,6 +153,13 @@
         [dic setObject:starttime forKey:@"startTime"];
         [dic setObject:endtime forKey:@"endTime"];
         url = POSTTrainingInfoAdd;
+    }else if (self.editorType == 3){
+        [dic setObject:_model.idid forKey:@"id"];
+        NSString *starttime = [NSString stringWithFormat:@"%@ %@:00",[XLCommonUse TimeToInterceptYYYYMMddWithStr:self.selectTime],self.state.subfield.text];
+        NSString *endtime = [NSString stringWithFormat:@"%@ %@:00",[XLCommonUse TimeToInterceptYYYYMMddWithStr:self.selectTime],self.end.subfield.text];
+        [dic setObject:starttime forKey:@"startTime"];
+        [dic setObject:endtime forKey:@"endTime"];
+        url = POSTTrainingInfoAdd;
     }
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);

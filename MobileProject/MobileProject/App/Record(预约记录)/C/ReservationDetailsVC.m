@@ -8,6 +8,7 @@
 
 #import "ReservationDetailsVC.h"
 #import "XLInformationV.h"
+#import "ReservationRecordListMyVC.h"
 @interface ReservationDetailsVC ()
 @property (nonatomic ,strong)XLInformationV *KE;
 @property (nonatomic ,strong)XLInformationV *KS;
@@ -155,7 +156,9 @@
     
     XLInformationV *tongji = [[XLInformationV alloc] informationWithTitle:@"练车统计" SubTitle:@"练车记录" TSSubTitle:@"" Must:NO Click:YES];
     tongji.senterBlock = ^{
-        
+        ReservationRecordListMyVC *vc = [[ReservationRecordListMyVC alloc] init];
+        vc.dic = @{@"type":@"2",@"sysStudentCode":_model.sysStudentCode};
+        [self.navigationController pushViewController:vc animated:YES];
     };
     XLInformationV *kemuer = [[XLInformationV alloc] informationWithTitle:@"科二练习" SubTitle:@"已预约0次/共0小时"];
     kemuer.titlelb.textColor = [UIColor blackColor];

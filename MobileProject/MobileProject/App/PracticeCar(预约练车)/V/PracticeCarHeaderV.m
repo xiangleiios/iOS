@@ -80,6 +80,12 @@
             make.left.right.bottom.mas_equalTo(self);
             make.height.mas_equalTo(1);
         }];
+        
+        self.modifyBut = [[UIButton alloc] init];
+        [self addSubview:self.modifyBut];
+        [self.modifyBut mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.mas_equalTo(self);
+        }];
     }
     return self;
 }
@@ -207,6 +213,12 @@
         [lblinet mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.bottom.mas_equalTo(self);
             make.height.mas_equalTo(1);
+        }];
+        self.modifyBut = [[UIButton alloc] init];
+        [self addSubview:self.modifyBut];
+        [self.modifyBut mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(self);
+            make.top.mas_equalTo(lbline);
         }];
     }
     return self;

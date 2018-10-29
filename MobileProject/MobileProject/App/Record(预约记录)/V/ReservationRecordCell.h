@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UIButton *butOne;
 @property (nonatomic , strong)UIButton *butTwo;
 @property (nonatomic , strong)UIButton *butThree;
+@property (nonatomic , strong)UILabel *redlb;
+@property (nonatomic ,strong)UIImageView *tx;
 @end
 
 NS_ASSUME_NONNULL_END
