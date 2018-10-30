@@ -72,7 +72,7 @@
 }
 - (void)loadRefreshData{
 //    NSString *url = POSTGetTrainingRecordInfoList;
-    [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    [FMNetworkHelper fm_request_postWithUrlString:_url isNeedCache:NO parameters:_dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"trainingRecords"];
         if (self.pageNum==1) {

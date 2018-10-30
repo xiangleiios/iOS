@@ -228,7 +228,7 @@
 #define POSTToCloseOrOpen KURL(@"app/trainOpenStatus/toCloseOrOpen")
 
 #pragma mark - 获取约练车记录信息接口
-#define POSTGetTrainingRecordInfoList KURL(@"app/trainingRecord/getTrainingRecordInfoList?type=%d")
+#define POSTGetTrainingRecordInfoList KURL(@"app/trainingRecord/getTrainingRecordInfoList")
 
 #pragma mark - 获取学员约练车记录信息接口
 #define POSTGetStuRecordsList KURL(@"app/trainingRecord/getStuRecordsList")

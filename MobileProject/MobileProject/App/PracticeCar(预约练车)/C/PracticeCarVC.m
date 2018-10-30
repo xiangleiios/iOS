@@ -202,6 +202,7 @@
 }
 - (void)toReservationRecordVC{
     ReservationRecordVC *vc = [[ReservationRecordVC alloc] init];
+    vc.groundId = self.groundId;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

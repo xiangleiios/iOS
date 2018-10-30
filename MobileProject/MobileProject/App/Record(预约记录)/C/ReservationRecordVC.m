@@ -53,22 +53,22 @@
     self.myCategoryView.contentScrollView = self.scrollView;
     
     ReservationRecordListVC *vc = [[ReservationRecordListVC alloc] init];
-//    vc.dic = @{@"type":@"1"};
-    vc.url = [NSString stringWithFormat:POSTGetTrainingRecordInfoList,1];
+    vc.dic = @{@"type":@"1",@"groundId":self.groundId};
+    vc.url = POSTGetTrainingRecordInfoList;
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ReservationRecordListVC *vctwo = [[ReservationRecordListVC alloc] init];
-//    vctwo.dic = @{@"type":@"2"};
-    vctwo.url = [NSString stringWithFormat:POSTGetTrainingRecordInfoList,2];
+    vctwo.dic = @{@"type":@"2",@"groundId":self.groundId};
+    vctwo.url = POSTGetTrainingRecordInfoList;
     [self addChildViewController:vctwo];
     [self.scrollView addSubview:vctwo.view];
     vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
     ReservationRecordListVC *vcthree = [[ReservationRecordListVC alloc] init];
-//    vcthree.dic = @{@"type":@"3"};
-    vcthree.url = [NSString stringWithFormat:POSTGetTrainingRecordInfoList,3];
+    vcthree.dic = @{@"type":@"3",@"groundId":self.groundId};
+    vcthree.url = POSTGetTrainingRecordInfoList;
     [self addChildViewController:vcthree];
     [self.scrollView addSubview:vcthree.view];
     vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);

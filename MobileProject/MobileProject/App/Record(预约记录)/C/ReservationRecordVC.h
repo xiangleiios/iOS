@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ReservationRecordVC : FMBaseViewController
-
+@property (nonatomic , strong)NSString * groundId;
 @end
 
 NS_ASSUME_NONNULL_END
