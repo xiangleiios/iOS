@@ -327,7 +327,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         [_backview mas_remakeConstraints:^(MASConstraintMaker *make) {
             make.centerX.mas_equalTo(self);
-            make.centerY.mas_equalTo(self).mas_offset(-KFit_H6S(200));
+            make.centerY.mas_equalTo(self).mas_offset(-KFit_H6S(260));
             make.size.mas_equalTo(CGSizeMake(KFit_W6S(640), KFit_H6S(910)));
         }];
     }];

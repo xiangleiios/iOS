@@ -119,6 +119,7 @@
     [yuyue addSubview:self.redlb];
     self.redlb.layer.cornerRadius = KFit_W6S(7);
     self.redlb.layer.masksToBounds = YES;
+    self.redlb.hidden = YES;
     self.redlb.backgroundColor = [UIColor redColor];
     [self.redlb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(yuyue);
@@ -319,6 +320,17 @@
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSString *str;
+            if ([dic[@"isOpen"]  isEqual: @"1"]) {
+                str = @"关闭预约成功，当天为休息时间，学员不可预约练车哦";
+            }else{
+                str = @"开启预约成功，学员可以预约练车";
+            }
+            XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:str sureBtn:@"确定" cancleBtn:nil];
+            alert.resultIndex = ^(NSInteger index) {
+                
+            };
+            [alert showXLAlertView];
         }else{
             XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:responseObject[@"message"] sureBtn:@"确定" cancleBtn:nil];
             alert.resultIndex = ^(NSInteger index) {

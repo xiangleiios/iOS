@@ -60,6 +60,9 @@
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
     _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
+    self.table.estimatedRowHeight = 0;
+    self.table.estimatedSectionHeaderHeight = 0;
+    self.table.estimatedSectionFooterHeight = 0;
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
