@@ -353,13 +353,22 @@
             make.left.centerY.mas_equalTo(self);
             make.size.mas_equalTo(CGSizeMake(KFit_W6S(10), KFit_H6S(20)));
         }];
+        UILabel *red = [[UILabel alloc] init];
+        [self addSubview:red];
+        red.text = @"*";
+        red.textColor = [UIColor redColor];
+        [red mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.mas_equalTo(self);
+            make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
+            make.width.mas_equalTo(KFit_W6S(25));
+        }];
         
         UILabel *titlelb = [[UILabel alloc] init];
         [self addSubview:titlelb];
         titlelb.text = title;
         [titlelb mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.bottom.mas_equalTo(self);
-            make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
+            make.left.mas_equalTo(red.mas_right).mas_offset(KFit_W6S(1));
             make.width.mas_equalTo(KFit_W6S(200));
         }];
         if (butTitle) {
@@ -382,6 +391,13 @@
             }];
             
         }
+        UILabel *lbthree = [[UILabel alloc] init];
+        [self addSubview:lbthree];
+        lbthree.backgroundColor = kColor_N(240, 240, 240);
+        [lbthree mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(self);
+            make.height.mas_equalTo(1);
+        }];
     }
     return self;
 }
@@ -485,7 +501,66 @@
     
 }
 
-
+-(instancetype)informationWithTitle:(NSString *)title Subtitle:(NSString *)subtitle Must:(BOOL)must{
+    if(self == [super init]){
+        self.backgroundColor = [UIColor whiteColor];
+        UILabel *yanse = [[UILabel alloc] init];
+        [self addSubview:yanse];
+        yanse.backgroundColor = kColor_N(0, 104, 234);
+        [yanse mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.centerY.mas_equalTo(self);
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(10), KFit_H6S(20)));
+        }];
+        UILabel *red = [[UILabel alloc] init];
+        [self addSubview:red];
+        if (must) {
+            red.text = @"*";
+            red.textColor = [UIColor redColor];
+            [red mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.bottom.mas_equalTo(self);
+                make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
+                make.width.mas_equalTo(KFit_W6S(25));
+            }];
+        }else{
+            [red mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.bottom.mas_equalTo(self);
+                make.left.mas_equalTo(self).mas_offset(KFit_W6S(28));
+                make.width.mas_equalTo(KFit_W6S(1));
+            }];
+        }
+        UILabel *titlelb = [[UILabel alloc] init];
+        titlelb.font = [UIFont systemFontOfSize:FONT];
+        [self addSubview:titlelb];
+        titlelb.text = title;
+        [titlelb mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.mas_equalTo(self);
+            make.left.mas_equalTo(red.mas_right).mas_offset(KFit_W6S(1));
+            make.width.mas_equalTo(KFit_W6S(200));
+        }];
+        
+        UILabel *sub = [[UILabel alloc] init];
+        [self addSubview:sub];
+        sub.text = subtitle;
+        sub.textAlignment = NSTextAlignmentRight;
+        sub.textColor = kColor_N(175, 183, 199);
+        sub.font = [UIFont systemFontOfSize:FONT];
+        [sub mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.mas_equalTo(self);
+            make.right.mas_equalTo(self).mas_offset(-KFit_W6S(30));
+            make.width.mas_equalTo(KFit_W6S(300));
+        }];
+        
+        UILabel *lbthree = [[UILabel alloc] init];
+        [self addSubview:lbthree];
+        lbthree.backgroundColor = kColor_N(240, 240, 240);
+        [lbthree mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(self);
+            make.height.mas_equalTo(1);
+        }];
+        
+    }
+    return self;
+}
 
 - (void)butblock:(UIButton *)senter{
     

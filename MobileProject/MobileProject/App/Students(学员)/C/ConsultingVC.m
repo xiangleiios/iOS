@@ -13,7 +13,7 @@
 #import "StudentsListVC.h"
 #import "ScreeningV.h"
 
-@interface ConsultingVC ()<JXCategoryViewDelegate>
+@interface ConsultingVC ()<JXCategoryViewDelegate,ScreeningVDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -26,22 +26,39 @@
 
 @property (nonatomic, strong) NSArray *informationArr;
 @property (nonatomic, strong) NSArray *schollArr;
+
+@property (nonatomic, strong) NSMutableDictionary *dic;
+@property (nonatomic, strong) StudentsListVC *studentsvc;
 @end
 
 @implementation ConsultingVC
 
+
+- (NSMutableDictionary *)dic{
+    if (_dic == nil) {
+        _dic = [NSMutableDictionary dictionary];
+    }
+    return _dic;
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    XLCache *coche = [XLCache singleton];
     _titles = @[@"全部",@"未完善",@"已完善"];
-//    _informationArr = @[@"全部状态",@"信息已完善",@"信息未完善"];
+    _informationArr = @[@"全部状态",@"信息已完善",@"信息未完善"];
+    NSMutableArray *arr = [NSMutableArray arrayWithObject:@"全部驾校"];
+    [arr addObjectsFromArray:coche.teamCode_title];
+    _schollArr = [NSArray arrayWithArray:arr];
     [self loadSousuo];
-//    [self loadScreningBut];
+    [self loadScreningBut];
     
     
     
-//    [self laodScreeningV];
-    [self loadMyCategoryView];
-    [self loadScroll];
+    [self laodScreeningV];
+    [self laodStudenListVC];
+//    [self loadMyCategoryView];
+//    [self loadScroll];
     // Do any additional setup after loading the view.
 }
 
@@ -57,6 +74,7 @@
     [self.view addSubview:self.screeningOne];
     self.screeningOne.layer.borderWidth = 0.3;
     self.screeningOne.layer.borderColor = kColor_N(235, 235, 235).CGColor;
+    [self.screeningOne addTarget:self action:@selector(xingXi:) forControlEvents:UIControlEventTouchUpInside];
     
     self.screeningTwo = [[UIButton alloc] init];
     [self.screeningTwo setTitle:@"报名驾校  ▾" forState:UIControlStateNormal];
@@ -65,7 +83,7 @@
     [self.view addSubview:self.screeningTwo];
     self.screeningTwo.layer.borderWidth = 0.3;
     self.screeningTwo.layer.borderColor = kColor_N(235, 235, 235).CGColor;
-    
+    [self.screeningTwo addTarget:self action:@selector(jiaXiao:) forControlEvents:UIControlEventTouchUpInside];
     
     NSArray *arr = @[self.screeningOne,self.screeningTwo];
     [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
@@ -78,14 +96,20 @@
 
 - (void)laodScreeningV{
     self.information = [[ScreeningV alloc] init];
-    [self.view addSubview:self.information];
-    [self.information mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.screeningOne.mas_bottom);
-    }];
     self.information.dataArr = _informationArr;
+    self.information.delegate =self;
+    
+    self.scholl = [[ScreeningV alloc] init];
+    self.scholl.dataArr = _schollArr;
+    self.scholl.delegate =self;
+//    [self.information show];
 }
-
+- (void)xingXi:(UIButton *)senter{
+    [self.information show];
+}
+- (void)jiaXiao:(UIButton *)senter{
+    [self.scholl show];
+}
 - (void)loadSousuo{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(100))];
     v.backgroundColor = kColor_N(240, 240, 240);
@@ -138,67 +162,87 @@
     [self.navigationController pushViewController:seachVC animated:YES];
 }
 
-- (void)loadMyCategoryView{
-    self.myCategoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0,KFit_H6S(100), SCREEN_WIDTH, KFit_H6S(90))];
-    self.myCategoryView.delegate = self;
-    self.myCategoryView.titles = self.titles;
-    self.myCategoryView.titleColorGradientEnabled = YES;
-    self.myCategoryView.titleColor = kColor_N(72, 82, 110);
-    self.myCategoryView.titleSelectedColor = [UIColor blackColor];
-    
-    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
-    lineView.indicatorLineWidth = KFit_W6S(40);
-    lineView.indicatorLineViewHeight = 3;
-    lineView.indicatorLineViewColor = [UIColor blackColor];
-    lineView.lineStyle = JXCategoryIndicatorLineStyle_JD;
-    self.myCategoryView.indicators = @[lineView];
-    [self.view addSubview:self.myCategoryView];
-}
-- (void)loadScroll{
-    self.scrollView = [[UIScrollView alloc] init];
-    [self.view addSubview:self.scrollView];
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.myCategoryView.mas_bottom);
-    }];
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
-    self.myCategoryView.contentScrollView = self.scrollView;
-    
-    StudentsListVC *vc = [[StudentsListVC alloc] init];
-    vc.url = POSTStudenteamList;
-    vc.PayCost = NO;
-    [self addChildViewController:vc];
-    [self.scrollView addSubview:vc.view];
-    vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
 
-    StudentsListVC *vctwo = [[StudentsListVC alloc] init];
-    vctwo.url = POSTStudenteamList;
-    [vctwo.dic setObject:@"1" forKey:@"isComplete"];
-    vctwo.PayCost = NO;
-    [self addChildViewController:vctwo];
-    [self.scrollView addSubview:vctwo.view];
-    vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
-    
-    StudentsListVC *vcthree = [[StudentsListVC alloc] init];
-    vcthree.url = POSTStudenteamList;
-    [vcthree.dic setObject:@"2" forKey:@"isComplete"];
-    vcthree.PayCost = NO;
-    [self addChildViewController:vcthree];
-    [self.scrollView addSubview:vcthree.view];
-    vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+- (void)laodStudenListVC{
+    self.studentsvc = [[StudentsListVC alloc] init];
+    self.studentsvc.url = POSTStudenteamList;
+    self.studentsvc.PayCost = NO;
+    [self.studentsvc.dic setObject:@"0" forKey:@"isComplete"];
+    [self addChildViewController:self.studentsvc];
+    [self.view addSubview:self.studentsvc.view];
+    [self.studentsvc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.screeningOne.mas_bottom);
+    }];
+}
+//- (void)loadMyCategoryView{
+//    self.myCategoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0,KFit_H6S(100), SCREEN_WIDTH, KFit_H6S(90))];
+//    self.myCategoryView.delegate = self;
+//    self.myCategoryView.titles = self.titles;
+//    self.myCategoryView.titleColorGradientEnabled = YES;
+//    self.myCategoryView.titleColor = kColor_N(72, 82, 110);
+//    self.myCategoryView.titleSelectedColor = [UIColor blackColor];
+//    
+//    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
+//    lineView.indicatorLineWidth = KFit_W6S(40);
+//    lineView.indicatorLineViewHeight = 3;
+//    lineView.indicatorLineViewColor = [UIColor blackColor];
+//    lineView.lineStyle = JXCategoryIndicatorLineStyle_JD;
+//    self.myCategoryView.indicators = @[lineView];
+//    [self.view addSubview:self.myCategoryView];
+//}
+//- (void)loadScroll{
+//    self.scrollView = [[UIScrollView alloc] init];
+//    [self.view addSubview:self.scrollView];
+//    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.bottom.mas_equalTo(self.view);
+//        make.top.mas_equalTo(self.myCategoryView.mas_bottom);
+//    }];
+//    self.scrollView.pagingEnabled = YES;
+//    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
+//    self.myCategoryView.contentScrollView = self.scrollView;
+//
+//    StudentsListVC *vc = [[StudentsListVC alloc] init];
+//    vc.url = POSTStudenteamList;
+//    vc.PayCost = NO;
+//    [self addChildViewController:vc];
+//    [self.scrollView addSubview:vc.view];
+//    vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+//
+//    StudentsListVC *vctwo = [[StudentsListVC alloc] init];
+//    vctwo.url = POSTStudenteamList;
+//    [vctwo.dic setObject:@"1" forKey:@"isComplete"];
+//    vctwo.PayCost = NO;
+//    [self addChildViewController:vctwo];
+//    [self.scrollView addSubview:vctwo.view];
+//    vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+//
+//    StudentsListVC *vcthree = [[StudentsListVC alloc] init];
+//    vcthree.url = POSTStudenteamList;
+//    [vcthree.dic setObject:@"2" forKey:@"isComplete"];
+//    vcthree.PayCost = NO;
+//    [self addChildViewController:vcthree];
+//    [self.scrollView addSubview:vcthree.view];
+//    vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+//
+//
+//}
+//- (void)viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    self.navigationController.interactivePopGestureRecognizer.enabled = (self.myCategoryView.selectedIndex == 0);
+//}
+//- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
+//    [self.scrollView setContentOffset:CGPointMake(self.scrollView.bounds.size.width*index, 0) animated:YES];
+//    //侧滑手势处理
+//    //    self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
+//}
+
+
+- (void)ScreeningVDelegat:(ScreeningV *)screnningv Index:(NSInteger)index{
     
     
 }
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    self.navigationController.interactivePopGestureRecognizer.enabled = (self.myCategoryView.selectedIndex == 0);
-}
-- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-    [self.scrollView setContentOffset:CGPointMake(self.scrollView.bounds.size.width*index, 0) animated:YES];
-    //侧滑手势处理
-    //    self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
-}
+
 /*
 #pragma mark - Navigation
 

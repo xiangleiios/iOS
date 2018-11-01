@@ -40,4 +40,7 @@ typedef void(^SenterBlcok) ();
 
 /// 学员详情中的信息头
 -(instancetype)informationStudentsWithTitle:(NSString *)title;
+
+/// 分校详情的招生头部信息条
+-(instancetype)informationWithTitle:(NSString *)title Subtitle:(NSString *)subtitle Must:(BOOL)must;
 @end

@@ -127,5 +127,23 @@ typedef void(^SenterBlcokInt) (int tag);
 @end
 
 
+#pragma mark - 分校详情基本资料表单
+@interface FXAdmissionsFormsV : XLView
+/// 姓名
+@property (nonatomic , strong)XLInformationV *name;
+/// 性别
+//@property (nonatomic , strong)XLInformationV *gender;
+/// 驾校
+@property (nonatomic , strong)XLInformationV *school;
+/// 工龄
+//@property (nonatomic , strong)XLInformationV *seniority;
+/// 招生电话
+@property (nonatomic , strong)XLInformationV *phone;
+/// 分校名称
+@property (nonatomic , strong)XLInformationV *names;
+/// 分校地址
+@property (nonatomic , strong)XLInformationV *address;
 
+
+@end
 

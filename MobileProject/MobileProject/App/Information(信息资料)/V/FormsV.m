@@ -459,6 +459,46 @@
 
 
 
+@implementation FXAdmissionsFormsV
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        kWeakSelf(self)
+        self.name = [[XLInformationV alloc] informationWithTitle:@"负责人姓名" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.school = [[XLInformationV alloc] informationWithTitle:@"所属驾校" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.school.userInteractionEnabled = NO;
+        self.school.subfield.textColor = kColor_N(210, 210, 210);
+        
+        
+        
+        self.phone = [[XLInformationV alloc] informationWithTitle:@"招生电话" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.names = [[XLInformationV alloc] informationWithTitle:@"分校名称" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.names.userInteractionEnabled = NO;
+        self.names.subfield.textColor = kColor_N(210, 210, 210);
+        self.address = [[XLInformationV alloc] informationWithTitle:@"分校地址" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.address.userInteractionEnabled = NO;
+        self.address.subfield.textColor = kColor_N(210, 210, 210);
+        
+        [self addSubview:self.name];
+        [self addSubview:self.school];
+        [self addSubview:self.phone];
+        [self addSubview:self.names];
+        [self addSubview:self.address];
+        
+        
+        NSArray *arr = @[self.school,self.names,self.address,self.name,self.phone];
+        [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
+        [arr mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self);
+        }];
+        
+    }
+    return self;
+}
+
+
+@end
 
 

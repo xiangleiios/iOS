@@ -9,7 +9,7 @@
 #import "BusinessCardVC.h"
 #import "ChangeCardVC.h"
 #import "CodeShareV.h"
-
+#import "ChangeCardHeadVC.h"
 #import "FMJS.h"
 @interface BusinessCardVC ()<UIWebViewDelegate,AppJSObjectDelegate>
 @property (nonatomic , strong)UIWebView *webView;
@@ -103,7 +103,7 @@
 }
 
 - (void)toChange{
-    ChangeCardVC *vc = [[ChangeCardVC alloc] init];
+    ChangeCardHeadVC *vc = [[ChangeCardHeadVC alloc] init];
 //    vc.model = self.model;
     vc.idid = self.model.idid;
     [self.navigationController pushViewController:vc animated:YES];

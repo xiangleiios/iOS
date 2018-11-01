@@ -25,6 +25,10 @@
 #import "TrainingListVC.h"
 #import "PracticeCarListVC.h"
 #import "MyNewsRootVC.h"
+#import "XLWKWebVC.h"
+
+#import "BranchSchoolListVC.h"
+
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -118,6 +122,7 @@
     _banner.backgroundColor = kWhiteColor;
     _banner.titleLabelTextFont = [UIFont systemFontOfSize:kFit_Font6(15)];
     _banner.titleLabelHeight = kFit_Font6(40);
+    _banner.localizationImageNamesGroup = @[@"banner",@"banner2"];
     [self.backview addSubview:_banner];
     
 }
@@ -125,7 +130,14 @@
 #pragma mark -轮播图回调 SDCycleScrollViewDelegate
 /** 点击图片回调 */
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
-   
+    KKLog(@"%d",index);
+    if (index == 0) {
+        AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        appDelegate.tab.tabBarController.selectedIndex = 1;
+    }else if(index == 1){
+        XLWKWebVC *vc = [[XLWKWebVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 /** 图片滚动回调 */
@@ -298,8 +310,10 @@
 
 
 - (void)toMingpan{
-    BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
+    BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+//    BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)toAddStudent{

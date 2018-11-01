@@ -286,6 +286,11 @@
 @property (nonatomic , assign)BOOL falg;
 @property (nonatomic , assign)NSInteger cueForCoach;
 @property (nonatomic , strong)NSString *wxHead;
+@property (nonatomic , assign)BOOL perfectStatus; //完善状态
+@property (nonatomic , strong)NSString *teamSchoolTags; /// 展示标签 多个用逗号分隔
+@property (nonatomic , strong)NSString *schoolAptitude; /// 驾校资质
+@property (nonatomic , strong)NSString *brandAuthentication; /// 驾校认证
+@property (nonatomic , strong)NSString *schoolHonor; /// 驾校荣誉
 @end
 
 

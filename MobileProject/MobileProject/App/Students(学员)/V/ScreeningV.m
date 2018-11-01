@@ -27,7 +27,11 @@
 }
 
 - (void)loadSub{
-    self.backgroundColor = kRGBAColor(0, 0, 0, 0.8);
+    self.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    UIView *back = [[UIView alloc] initWithFrame:CGRectMake(0, (kNavBarH + KFit_H6S(300)), SCREEN_WIDTH, SCREEN_HEIGHT - (kNavBarH + KFit_H6S(300)))];
+    self.backview = back;
+    [self addSubview:back];
+    back.backgroundColor = kRGBAColor(0, 0, 0, 0.8);
 }
 
 - (void)setDataArr:(NSArray *)dataArr{
@@ -36,16 +40,26 @@
     UIView *back = [[UIView alloc] init];
     [self addSubview:back];
     [back mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.top.mas_equalTo(self);
+        make.left.right.mas_equalTo(self);
+        make.top.mas_equalTo(self.backview);
         make.height.mas_equalTo(dataArr.count * KFit_H6S(90));
     }];
     for (int i = 0 ; i < dataArr.count; i++) {
         UIButton *but = [[UIButton alloc] init];
-        [but setTitle:arr[i] forState:UIControlStateNormal];
+        [but setTitle:dataArr[i] forState:UIControlStateNormal];
         [but setTitleColor:kColor_N(64, 78, 108) forState:UIControlStateNormal];
         [but setTitleColor:kColor_N(0, 109, 234) forState:UIControlStateSelected];
+        but.backgroundColor = [UIColor whiteColor];
+        but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
         but.tag = i;
+        but.layer.borderWidth = 0.3;
+        but.layer.borderColor = kColor_N(235, 235, 235).CGColor;
         [back addSubview:but];
+        [but addTarget:self action:@selector(selectionState:) forControlEvents:UIControlEventTouchUpInside];
+        if (i == 0) {
+            self.selectBut = but;
+            but.selected = YES;
+        }
         [arr addObject:but];
     }
     [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
@@ -54,4 +68,30 @@
     }];
     
 }
+
+
+- (void)selectionState:(UIButton *)senter{
+    self.selectBut.selected = NO;
+    senter.selected = YES;
+    self.selectBut = senter;
+    [self.delegate ScreeningVDelegat:self Index:senter.tag];
+    [self removeFromSuperview];
+    
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self removeFromSuperview];
+}
+
+#pragma mark - 弹出
+- (void)show{
+    UIWindow *rootWindow = [UIApplication sharedApplication].keyWindow;
+    [rootWindow addSubview:self];
+    //    [self creatShowAnimation];
+}
+#pragma mark - 退出
+- (void)shutDown{
+    [self removeFromSuperview];
+}
+
 @end

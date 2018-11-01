@@ -68,6 +68,10 @@
 #pragma mark -查询招生名片列表接口
 #define POSTEnrollInfoList KURL(@"app/enrollInfo/list")
 
+#pragma mark -查询所属分校列表接口
+#define POSTTeamSchoolTeamSchoolList KURL(@"app/v1_1/team/teamSchool/teamSchoolList")
+
+
 #pragma mark -学员咨询报名接口
 #define POSTSignStudent KURL(@"app/studenteam/signStudent")
 
@@ -83,6 +87,8 @@
 #pragma mark -获取招生名片信息接口
 #define POSTgGetEnrollInfoInfo KURL(@"app/enrollInfo/getEnrollInfoInfo")
 
+#pragma mark -查询所属分校招生名片信息接口
+#define POSTTeamSchoolEnrollInfo KURL(@"app/v1_1/team/teamSchool/teamSchoolEnrollInfo")
 
 #pragma mark -文件上传
 #define POSTUpLoadFile KURL(@"system/file/upLoadFile")
@@ -90,6 +96,9 @@
 #pragma mark -修改招生名片接口
 #define POSTEnrollInfoEdit KURL(@"app/enrollInfo/edit")
 
+
+#pragma mark -编辑所属分校招生名片信息接口
+#define POSTTeamSchoolEdit KURL(@"app/v1_1/team/teamSchool/teamSchoolEdit")
 
 #pragma mark -修改密码
 #define POSTEditPwd KURL(@"app/team/teamUser/editPwd")

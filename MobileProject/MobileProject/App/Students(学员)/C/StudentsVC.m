@@ -31,7 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self laodNavigation];
-    _titles = @[@"咨询学员", @"报名学员",@"考试学员"];
+//    _titles = @[@"咨询学员", @"报名学员",@"考试学员"];
+    _titles = @[@"咨询学员",@"考试学员"];
     [self loadMyCategoryView];
     [self loadScroll];
     [self loadAddBut];
@@ -71,7 +72,7 @@
     self.myCategoryView.delegate = self;
     self.myCategoryView.layer.cornerRadius = 2;
     self.myCategoryView.layer.masksToBounds = YES;
-    self.myCategoryView.cellWidth = (SCREEN_WIDTH - KFit_W6S(140))/3;
+    self.myCategoryView.cellWidth = (SCREEN_WIDTH - KFit_W6S(140))/2;
     self.myCategoryView.layer.borderColor = kColor_N(0, 112, 234).CGColor;
     self.myCategoryView.layer.borderWidth = 1/[UIScreen mainScreen].scale;
     self.myCategoryView.titles = self.titles;
@@ -96,7 +97,7 @@
         make.top.mas_equalTo(self.myCategoryView.mas_bottom).mas_offset(KFit_H6S(20));
     }];
     self.scrollView.pagingEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, 0);
     self.myCategoryView.contentScrollView = self.scrollView;
     
     ConsultingVC *vc = [[ConsultingVC alloc] init];
@@ -104,15 +105,15 @@
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
     
-    EnrollVC *vct = [[EnrollVC alloc] init];
-    [self addChildViewController:vct];
-    [self.scrollView addSubview:vct.view];
-    vct.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
-    
+//    EnrollVC *vct = [[EnrollVC alloc] init];
+//    [self addChildViewController:vct];
+//    [self.scrollView addSubview:vct.view];
+//    vct.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+//
     ExamStudentsVC *vcth = [[ExamStudentsVC alloc] init];
     [self addChildViewController:vcth];
     [self.scrollView addSubview:vcth.view];
-    vcth.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
+    vcth.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
 }
 #pragma mark - 导航相关
 - (void)laodNavigation{
