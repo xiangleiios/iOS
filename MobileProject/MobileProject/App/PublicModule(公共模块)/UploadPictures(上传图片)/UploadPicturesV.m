@@ -7,6 +7,7 @@
 //
 
 #import "UploadPicturesV.h"
+#import "TZImagePickerController.h"
 #define BUT_W KFit_W6S(150)
 
 @interface UploadPicturesV ()<UIImagePickerControllerDelegate>
@@ -167,11 +168,23 @@
 }
 //照片库
 - (void)PhotoLibrary{
-    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
-    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self.vc.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
+//    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+//    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+//    imagePickerController.delegate = self;
+//    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    [self.vc.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
+    int i = self.num - self.dataArr.count;
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:i delegate:self];
+    imagePickerVc.allowPickingVideo =  NO;
+    // You can get the photos by block, the same as by delegate.
+    // 你可以通过block或者代理，来得到用户选择的照片.
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        for (UIImage *img in photos) {
+            [self uploadPictures:img];
+        }
+    }];
+    [self.vc presentViewController:imagePickerVc animated:YES completion:nil];
+    
 }
 
 #pragma mark -相册代理

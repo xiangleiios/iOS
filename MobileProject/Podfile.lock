@@ -51,6 +51,7 @@ PODS:
   - SDWebImage (3.7.6):
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
+  - TZImagePickerController (3.0.9)
   - UMengUShare/Core (6.4.8.2):
     - UMengUShare/Network
   - UMengUShare/Network (6.4.8.2)
@@ -100,6 +101,7 @@ DEPENDENCIES:
   - RealReachability (~> 1.1.9)
   - SDCycleScrollView (~> 1.65)
   - SDWebImage (~> 3.7.6)
+  - TZImagePickerController
   - UMengUShare/Social/QQ
   - UMengUShare/Social/Sina
   - UMengUShare/Social/WeChat
@@ -132,6 +134,7 @@ SPEC REPOS:
     - RealReachability
     - SDCycleScrollView
     - SDWebImage
+    - TZImagePickerController
     - UMengUShare
     - XAspect
     - YYCache
@@ -160,10 +163,11 @@ SPEC CHECKSUMS:
   RealReachability: a8c483900986a0f3305733961effbfbb00637a02
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
+  TZImagePickerController: ea3e906af8caa7088f612ad673feb73cc6aa6bfc
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
   XAspect: db50bf487f92dbb8557a7a5365556966c8493af8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 3312db35d6e93c65f863b5ff6a3d2100212db334
+PODFILE CHECKSUM: df07add8585e9ef970aba970a0563a32af88538b
 
 COCOAPODS: 1.5.3
