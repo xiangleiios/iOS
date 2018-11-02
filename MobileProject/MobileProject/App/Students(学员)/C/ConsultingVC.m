@@ -168,6 +168,7 @@
     self.studentsvc.url = POSTStudenteamList;
     self.studentsvc.PayCost = NO;
     [self.studentsvc.dic setObject:@"0" forKey:@"isComplete"];
+    [self.studentsvc.dic setObject:@"" forKey:@"teamCode"];
     [self addChildViewController:self.studentsvc];
     [self.view addSubview:self.studentsvc.view];
     [self.studentsvc.view mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -175,71 +176,34 @@
         make.top.mas_equalTo(self.screeningOne.mas_bottom);
     }];
 }
-//- (void)loadMyCategoryView{
-//    self.myCategoryView = [[JXCategoryTitleView alloc] initWithFrame:CGRectMake(0,KFit_H6S(100), SCREEN_WIDTH, KFit_H6S(90))];
-//    self.myCategoryView.delegate = self;
-//    self.myCategoryView.titles = self.titles;
-//    self.myCategoryView.titleColorGradientEnabled = YES;
-//    self.myCategoryView.titleColor = kColor_N(72, 82, 110);
-//    self.myCategoryView.titleSelectedColor = [UIColor blackColor];
-//    
-//    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
-//    lineView.indicatorLineWidth = KFit_W6S(40);
-//    lineView.indicatorLineViewHeight = 3;
-//    lineView.indicatorLineViewColor = [UIColor blackColor];
-//    lineView.lineStyle = JXCategoryIndicatorLineStyle_JD;
-//    self.myCategoryView.indicators = @[lineView];
-//    [self.view addSubview:self.myCategoryView];
-//}
-//- (void)loadScroll{
-//    self.scrollView = [[UIScrollView alloc] init];
-//    [self.view addSubview:self.scrollView];
-//    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.right.bottom.mas_equalTo(self.view);
-//        make.top.mas_equalTo(self.myCategoryView.mas_bottom);
-//    }];
-//    self.scrollView.pagingEnabled = YES;
-//    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 3, 0);
-//    self.myCategoryView.contentScrollView = self.scrollView;
-//
-//    StudentsListVC *vc = [[StudentsListVC alloc] init];
-//    vc.url = POSTStudenteamList;
-//    vc.PayCost = NO;
-//    [self addChildViewController:vc];
-//    [self.scrollView addSubview:vc.view];
-//    vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
-//
-//    StudentsListVC *vctwo = [[StudentsListVC alloc] init];
-//    vctwo.url = POSTStudenteamList;
-//    [vctwo.dic setObject:@"1" forKey:@"isComplete"];
-//    vctwo.PayCost = NO;
-//    [self addChildViewController:vctwo];
-//    [self.scrollView addSubview:vctwo.view];
-//    vctwo.view.frame = CGRectMake(SCREEN_WIDTH, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
-//
-//    StudentsListVC *vcthree = [[StudentsListVC alloc] init];
-//    vcthree.url = POSTStudenteamList;
-//    [vcthree.dic setObject:@"2" forKey:@"isComplete"];
-//    vcthree.PayCost = NO;
-//    [self addChildViewController:vcthree];
-//    [self.scrollView addSubview:vcthree.view];
-//    vcthree.view.frame = CGRectMake(SCREEN_WIDTH * 2, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);
-//
-//
-//}
-//- (void)viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    self.navigationController.interactivePopGestureRecognizer.enabled = (self.myCategoryView.selectedIndex == 0);
-//}
-//- (void)categoryView:(JXCategoryBaseView *)categoryView didSelectedItemAtIndex:(NSInteger)index {
-//    [self.scrollView setContentOffset:CGPointMake(self.scrollView.bounds.size.width*index, 0) animated:YES];
-//    //侧滑手势处理
-//    //    self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
-//}
+
 
 
 - (void)ScreeningVDelegat:(ScreeningV *)screnningv Index:(NSInteger)index{
-    
+    if (screnningv == self.information) {
+        if (index == 0) {
+            [self.studentsvc.dic setObject:@"0" forKey:@"isComplete"];
+            [self.screeningOne setTitle:@"全部状态  ▾" forState:UIControlStateNormal];
+        }else if (index == 1){
+            [self.studentsvc.dic setObject:@"2" forKey:@"isComplete"];
+            [self.screeningOne setTitle:@"信息已完善  ▾" forState:UIControlStateNormal];
+        }else if (index == 2){
+            [self.studentsvc.dic setObject:@"1" forKey:@"isComplete"];
+            [self.screeningOne setTitle:@"信息未完善  ▾" forState:UIControlStateNormal];
+        }
+    }
+    if (screnningv == self.scholl) {
+        if (index == 0) {
+            [self.studentsvc.dic setObject:@"" forKey:@"teamCode"];
+            [self.screeningTwo setTitle:@"全部驾校  ▾" forState:UIControlStateNormal];
+        }else{
+            [self.screeningTwo setTitle:[NSString stringWithFormat:@"%@  ▾",_schollArr[index]] forState:UIControlStateNormal];
+            NSInteger i = (index - 1);
+            XLCache *coche = [XLCache singleton];
+            [self.studentsvc.dic setObject:coche.teamCode_value[i] forKey:@"teamCode"];
+        }
+    }
+    [self.studentsvc headerRefresh];
     
 }
 
