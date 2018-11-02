@@ -11,10 +11,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SchoolLable : XLView
-@property (nonatomic , strong)NSMutableArray *dataArr;
+@property (nonatomic , strong)NSArray *dataArr;
 @property (nonatomic , strong)XLInformationV *name;
-@property (nonatomic , strong)UIView *backview;
+@property (nonatomic , strong)UIScrollView *backview;
 @property (nonatomic , strong)UILabel *tslb;
+@property (nonatomic , strong)NSArray *titleArr;
+@property (nonatomic , strong)NSArray *imgArr;
 @end
 
 NS_ASSUME_NONNULL_END

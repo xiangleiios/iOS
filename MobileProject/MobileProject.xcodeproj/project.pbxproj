@@ -119,6 +119,7 @@
 		A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F8682134DF0B008A8948 /* StudentsListTwoVC.m */; };
 		A778F86C2134E004008A8948 /* StudentsThreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86B2134E004008A8948 /* StudentsThreeCell.m */; };
 		A778F86F2134EEDA008A8948 /* QrCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A778F86E2134EEDA008A8948 /* QrCodeVC.m */; };
+		A77EC4F5218BEBD2004CBDFB /* SelectLabelShow.m in Sources */ = {isa = PBXBuildFile; fileRef = A77EC4F4218BEBD2004CBDFB /* SelectLabelShow.m */; };
 		A7825C49213CD29D0056FDA2 /* AddStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C48213CD29D0056FDA2 /* AddStudentCell.m */; };
 		A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */; };
 		A787E179215DFB0900EF01F2 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; };
@@ -901,6 +902,8 @@
 		A778F86B2134E004008A8948 /* StudentsThreeCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsThreeCell.m; sourceTree = "<group>"; };
 		A778F86D2134EEDA008A8948 /* QrCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QrCodeVC.h; sourceTree = "<group>"; };
 		A778F86E2134EEDA008A8948 /* QrCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QrCodeVC.m; sourceTree = "<group>"; };
+		A77EC4F3218BEBD2004CBDFB /* SelectLabelShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectLabelShow.h; sourceTree = "<group>"; };
+		A77EC4F4218BEBD2004CBDFB /* SelectLabelShow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectLabelShow.m; sourceTree = "<group>"; };
 		A7825C47213CD29D0056FDA2 /* AddStudentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddStudentCell.h; sourceTree = "<group>"; };
 		A7825C48213CD29D0056FDA2 /* AddStudentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentCell.m; sourceTree = "<group>"; };
 		A7825C4A213D35750056FDA2 /* InsuranceInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsuranceInformationVC.h; sourceTree = "<group>"; };
@@ -2370,8 +2373,12 @@
 		A73A4A8C218A99E700A85EF6 /* V */ = {
 			isa = PBXGroup;
 			children = (
+				A7DC8F5B2189A6780058C654 /* SchoolLable.h */,
+				A7DC8F5C2189A6790058C654 /* SchoolLable.m */,
 				A73A4A90218AA3B500A85EF6 /* BranchSchoolCell.h */,
 				A73A4A91218AA3B500A85EF6 /* BranchSchoolCell.m */,
+				A77EC4F3218BEBD2004CBDFB /* SelectLabelShow.h */,
+				A77EC4F4218BEBD2004CBDFB /* SelectLabelShow.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2469,8 +2476,6 @@
 				A7322288213F7F6A007735CE /* BusinessCardCell.m */,
 				A7C59F1C2148E24800948074 /* BusinessShowV.h */,
 				A7C59F1D2148E24800948074 /* BusinessShowV.m */,
-				A7DC8F5B2189A6780058C654 /* SchoolLable.h */,
-				A7DC8F5C2189A6790058C654 /* SchoolLable.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5853,6 +5858,7 @@
 				A798CEB5217879FC00145440 /* PracticeCarListVC.m in Sources */,
 				A7825C49213CD29D0056FDA2 /* AddStudentCell.m in Sources */,
 				A735A093212FB72F0044E9BC /* ConsultingVC.m in Sources */,
+				A77EC4F5218BEBD2004CBDFB /* SelectLabelShow.m in Sources */,
 				A7EC187021773E29007793FC /* JXCategoryNumberCell.m in Sources */,
 				DA0346851F509098008E7BE1 /* NSURLRequest+ParamsFromDictionary.m in Sources */,
 				A798CEB821787BFD00145440 /* PracticeCarCell.m in Sources */,

@@ -223,7 +223,7 @@
 #define POSTTrainingInfoAdd KURL(@"app/trainingInfo/add")
 
 #pragma mark - 修改当日训练场约车时段模板接口
-#define POSTTrainingInfoAdd KURL(@"app/trainingInfo/edit")
+#define POSTTrainingInfoEdit KURL(@"app/trainingInfo/edit")
 
 #pragma mark - 帮学员约车
 #define POSTTrainingRecordAdd KURL(@"app/trainingRecord/add")

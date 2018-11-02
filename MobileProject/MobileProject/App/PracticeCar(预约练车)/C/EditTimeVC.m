@@ -159,7 +159,7 @@
         NSString *endtime = [NSString stringWithFormat:@"%@ %@:00",[XLCommonUse TimeToInterceptYYYYMMddWithStr:self.selectTime],self.end.subfield.text];
         [dic setObject:starttime forKey:@"startTime"];
         [dic setObject:endtime forKey:@"endTime"];
-        url = POSTTrainingInfoAdd;
+        url = POSTTrainingInfoEdit;
     }
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);

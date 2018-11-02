@@ -16,6 +16,8 @@
 
 #import "UploadPicturesV.h"
 #import "SchoolLable.h"
+
+
 #define BUT_W KFit_W6S(150)
 @interface ChangeCardHeadVC ()<UIImagePickerControllerDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -40,6 +42,9 @@
 @property (nonatomic , strong)UploadPicturesV *jiaoXuePingPai;
 @property (nonatomic , strong)UploadPicturesV *jiaoXueRongYu;
 @property (nonatomic , strong)SchoolLable *schoolLb;
+
+@property (nonatomic , strong)NSArray *teamSchoolTags; ///标签入口
+
 @end
 
 @implementation ChangeCardHeadVC
@@ -471,6 +476,10 @@
         [self.jiaoXueRongYu.dataArr addObjectsFromArray:[_model.schoolHonor componentsSeparatedByString:@","]];
         [self.jiaoXueRongYu relodData];
     }
+    if (_model.teamSchoolTags.length > 1) {
+        self.teamSchoolTags = [_model.teamSchoolTags componentsSeparatedByString:@","];
+        self.schoolLb.dataArr = self.teamSchoolTags;
+    }
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
@@ -494,6 +503,7 @@
     [dic setObject:[self.jiaoXueZiZhi.dataArr componentsJoinedByString:@","] forKey:@"schoolAptitude"];
     [dic setObject:[self.jiaoXuePingPai.dataArr componentsJoinedByString:@","] forKey:@"brandAuthentication"];
     [dic setObject:[self.jiaoXueRongYu.dataArr componentsJoinedByString:@","] forKey:@"schoolHonor"];
+    [dic setObject:[self.schoolLb.dataArr componentsJoinedByString:@","] forKey:@"teamSchoolTags"];
 //    [dic setObject:[self.jiaoXueZiZhi.dataArr componentsJoinedByString:@","] forKey:@""];
     
     [dic setObject:self.model.teamSchoolId forKey:@"teamSchoolId"];
