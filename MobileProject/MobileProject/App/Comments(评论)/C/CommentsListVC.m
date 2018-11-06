@@ -1,92 +1,83 @@
 //
-//  BranchSchoolListVC.m
+//  CommentsListVC.m
 //  MobileProject
 //
-//  Created by 向蕾 on 2018/11/1.
+//  Created by 向蕾 on 2018/11/5.
 //  Copyright © 2018年 ZSGY. All rights reserved.
 //
 
-#import "BranchSchoolListVC.h"
-
-#import "BranchSchoolCell.h"
+#import "CommentsListVC.h"
 #import "UITableView+FMPlaceholder.h"
-#import "BusinessCardVC.h"
-#import "BusinessShowV.h"
-
-#import "CommentsVC.h"
-@interface BranchSchoolListVC ()<UITableViewDelegate,UITableViewDataSource>
+#import "CommentsCell.h"
+@interface CommentsListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
-@property (nonatomic , strong)UIButton *publish;
+
 @end
 
-@implementation BranchSchoolListVC
+@implementation CommentsListVC
+- (NSMutableDictionary *)dic{
+    if (_dic == nil) {
+        _dic = [NSMutableDictionary dictionary];
+        [_dic setObject:@"20" forKey:@"pageSize"];
+    }
+    return _dic;
+}
+
 - (NSMutableArray *)dataArr{
     if (_dataArr==nil) {
         _dataArr=[NSMutableArray array];
     }
     return _dataArr;
 }
+
+- (NSInteger)pageNum {
+    
+    if (_pageNum < 1) {
+        _pageNum = 1;
+    }
+    
+    return _pageNum;
+}
+
+- (NSInteger)pageSize {
+    
+    if (_pageSize < 1) {
+        _pageSize = 20;
+    }
+    return _pageSize;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationView setTitle:@"招生名片"];
-    [self loadtable];
     
-    UIButton *but = [[UIButton alloc] init];
-    [self.view addSubview:but];
-    [but mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
-        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(30));
-        make.width.height.mas_equalTo(KFit_W6S(158));
-    }];
-    [but setImage:[UIImage imageNamed:@"tuiguang"] forState:UIControlStateNormal];
-    [but addTarget:self action:@selector(businessShow) forControlEvents:UIControlEventTouchUpInside];
+    [self loadtable];
     // Do any additional setup after loading the view.
-}
-
-- (void)businessShow{
-    if (self.dataArr.count < 1) {
-        [MBProgressHUD showMsgHUD:@"暂无可推广的名片"];
-        return;
-    }
-    BusinessShowV *v = [[BusinessShowV alloc] init];
-    v.vc = self;
-    v.dataArr = self.dataArr;
-    [v show];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)loadtable{
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
-        make.left.right.bottom.mas_equalTo(self.view);
+        make.top.left.right.bottom.mas_equalTo(self.view);
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
+    
+    //设置可编辑
+    //    self.table.allowsMultipleSelectionDuringEditing = YES;
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;
-    _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
     [self headerRefresh];
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    //    [self.table.mj_header beginRefreshing];
-}
 - (void)headerRefresh{
     self.pageNum=1;
     [self loadRefreshData];
@@ -96,16 +87,17 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamSchoolTeamSchoolList;
-    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+//    NSString *url = POSTTeamSchoolTeamSchoolList;
+    [FMNetworkHelper fm_request_postWithUrlString:self.url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"list"];
+        NSArray *tpArray = responseObject[@"list"][@"rows"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
         if (tpArray) {
             for (NSDictionary *dic in tpArray) {
                 FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
+                mode.deptId = self.deptId;
                 [self.dataArr addObject:mode];
             }
         }
@@ -129,32 +121,28 @@
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArr.count;
-    //    return 2;
+//        return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *cellID = [NSString stringWithFormat:@"BusinessCardCell"];
-    BranchSchoolCell *cell = (BranchSchoolCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    NSString *cellID = [NSString stringWithFormat:@"CommentsCell"];
+    CommentsCell *cell = (CommentsCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
     if (!cell) {
-        cell = [[BranchSchoolCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+        cell = [[CommentsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
     }
+    cell.type = self.type;
     cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return KFit_H6S(200);
+    CommentsCell *cell = (CommentsCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return [cell getLayoutCellHeight];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    BusinessCardVC *vc = [[BusinessCardVC alloc] init];
-//    vc.model = self.dataArr[indexPath.row];
-//    [self.navigationController pushViewController:vc animated:YES];
-//    CommentsVC
-    CommentsVC *vc = [[CommentsVC alloc] init];
-    vc.model = self.dataArr[indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 /*
 #pragma mark - Navigation

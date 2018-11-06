@@ -245,7 +245,11 @@
 #pragma mark - 获取约练车记录详情
 #define POSTGetTrainingRecordInfo KURL(@"app/trainingRecord/getTrainingRecordInfo?id=%@")
 
+#pragma mark - 查询所属分校学员评价列表接口
+#define POSTTeamSchoolTeamAppraise KURL(@"app/v1_1/team/teamSchool/teamAppraise")
 
+#pragma mark -点赞操作接口
+#define POSTTeamSchoolDoPraise KURL(@"app/v1_1/team/teamSchool/doPraise")
 
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------

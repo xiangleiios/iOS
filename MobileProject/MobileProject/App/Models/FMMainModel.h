@@ -291,6 +291,13 @@
 @property (nonatomic , strong)NSString *schoolAptitude; /// 驾校资质
 @property (nonatomic , strong)NSString *brandAuthentication; /// 驾校认证
 @property (nonatomic , strong)NSString *schoolHonor; /// 驾校荣誉
+@property (nonatomic , strong)NSString *enrollCode;
+@property (nonatomic , strong)NSString *stuHead;
+@property (nonatomic , strong)NSArray *replyList;
+@property (nonatomic , strong)NSString *praiseNum;
+@property (nonatomic , assign)float appraiseScore;
+@property (nonatomic , assign)int hasStart; /// 《null》 未点赞
+@property (nonatomic , strong)NSString *appraiseId;
 @end
 
 

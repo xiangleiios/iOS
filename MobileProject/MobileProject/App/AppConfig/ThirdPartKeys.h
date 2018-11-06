@@ -10,8 +10,8 @@
 #define ThirdPartKeys_h
 
 // 极光
-#define keyJPushAppKey @"01f763edae628f2e4befcb0d"
-#define keyJPushMasterSecret @"93dfb2c1ab10a44fa34f7513"
+#define keyJPushAppKey @"5c597a526806c7cf5f46abe0"
+#define keyJPushMasterSecret @"3213bdfecc789df40cc57b68"
 
 //百度统计 //百度地图
 #define keyBaiduMobStat @"52a98f243f"

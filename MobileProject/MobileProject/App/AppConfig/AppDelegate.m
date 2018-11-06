@@ -282,12 +282,12 @@
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         // app在前台给出alert
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收到推送" message:userInfo[@"title"] preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {}]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {}]];
         
-        [alert addAction:[UIAlertAction actionWithTitle:@"详情" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
-      
-            [self yfGotoPage:userInfo];
-        }]];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"详情" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+//
+//            [self yfGotoPage:userInfo];
+//        }]];
         
         [vc presentViewController:alert animated:YES completion:nil];
     }else { //不是在前台就执行这个 通知栏收到推送加了右边的是不是后台判断反而不行 //if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground
@@ -377,9 +377,7 @@
     
     User* bean = [User UserOb];
     if (bean.UserLogin) {
-        NSSet *set=[[NSSet alloc] initWithObjects:[NSString stringWithFormat:@"%@",bean.type], nil];
-        NSString *str=[NSString stringWithFormat:@"%@%@%@",bean.idid,bean.idid,bean.idid];
-        NSString *str1=[NSString stringWithFormat:@"%@",bean.idid];
+        NSString *str1=[NSString stringWithFormat:@"%@",bean.mobile];
         
 //        [JPUSHService setTags:set alias:str1 fetchCompletionHandle:^(int iResCode, NSSet *iTags, NSString *iAlias){
 //            KKLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, iTags, iAlias);

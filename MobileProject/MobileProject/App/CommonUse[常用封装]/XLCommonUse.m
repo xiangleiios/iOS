@@ -375,4 +375,10 @@
     
 }
 
++ (NSString*)removeFloatAllZeroByString:(float )num{
+    NSString *testNumber = [NSString stringWithFormat:@"%.4f",num];
+    NSString * outNumber = [NSString stringWithFormat:@"%@",@(testNumber.floatValue)];
+    return outNumber;
+}
+
 @end

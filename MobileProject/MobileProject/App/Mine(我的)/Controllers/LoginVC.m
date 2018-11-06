@@ -12,6 +12,7 @@
 #import "UIWebView+FMSetTonkenToCookie.h"
 #import "XLCache.h"
 #import "CYLTabBarControllerConfig.h"
+#import "JPUSHService.h"
 @interface LoginVC ()<UITextFieldDelegate>
 @property (nonatomic , strong)TKPhoneTextField *pho;
 @property (nonatomic , strong)UITextField *password;
@@ -23,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title=@"手机快捷登录";
+//    self.title=@"手机快捷登录";
     self.view.backgroundColor=[UIColor whiteColor];
 
     
@@ -232,7 +233,7 @@
             AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
             appDelegate.tab = TabBarControllerConfig;
             appDelegate.window.rootViewController = TabBarControllerConfig.tabBarController;
-
+            [self networkDidLogin];
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }
@@ -308,7 +309,18 @@
     
 }
 
-
+- (void)networkDidLogin{
+    
+    User* bean = [User UserOb];
+    if (bean.UserLogin) {
+//        NSSet *set=[[NSSet alloc] initWithObjects:[NSString stringWithFormat:@"%@",bean.type], nil];
+        NSString *str1=[NSString stringWithFormat:@"%@",bean.mobile];
+        [JPUSHService setAlias:str1 completion:^(NSInteger iResCode, NSString *iAlias, NSInteger seq) {
+            KKLog(@"rescode: %d,  \nalias: %@\n  seq:%d", iResCode, iAlias ,seq);
+        } seq:1];
+    }
+    
+}
 
 /*
 #pragma mark - Navigation

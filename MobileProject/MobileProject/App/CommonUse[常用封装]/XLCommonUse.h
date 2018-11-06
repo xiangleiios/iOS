@@ -54,4 +54,6 @@
 + (BOOL)isPureNum:(NSString *)text;
 /// 身份证判断
 +(BOOL)checkUserID:(NSString *)userID;
+/// 删除小数点后面的0；
++ (NSString*)removeFloatAllZeroByString:(float )num;
 @end

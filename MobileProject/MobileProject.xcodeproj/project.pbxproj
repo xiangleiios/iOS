@@ -163,6 +163,10 @@
 		A7BA6F4E215F61BD00A5FA0D /* PicturePosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA6F4D215F61BD00A5FA0D /* PicturePosterListVC.m */; };
 		A7BA6F51215F6AC400A5FA0D /* PosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA6F50215F6AC400A5FA0D /* PosterListVC.m */; };
 		A7BA6F54215F6C3B00A5FA0D /* PicturePosterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA6F53215F6C3B00A5FA0D /* PicturePosterCell.m */; };
+		A7BAB518218FD8F50018CA27 /* CommentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BAB517218FD8F50018CA27 /* CommentsVC.m */; };
+		A7BAB51B218FD9F50018CA27 /* CommentsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BAB51A218FD9F50018CA27 /* CommentsListVC.m */; };
+		A7BAB51E218FDBB50018CA27 /* CommentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BAB51D218FDBB50018CA27 /* CommentsCell.m */; };
+		A7BAB521218FEB2D0018CA27 /* CoachReplyV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BAB520218FEB2D0018CA27 /* CoachReplyV.m */; };
 		A7C311EF214A085B006A96EA /* SearchListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C311EE214A085A006A96EA /* SearchListVC.m */; };
 		A7C311F2214A6004006A96EA /* InstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C311F1214A6004006A96EA /* InstructionsVC.m */; };
 		A7C59F1E2148E24800948074 /* BusinessShowV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C59F1D2148E24800948074 /* BusinessShowV.m */; };
@@ -983,6 +987,14 @@
 		A7BA6F50215F6AC400A5FA0D /* PosterListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PosterListVC.m; sourceTree = "<group>"; };
 		A7BA6F52215F6C3B00A5FA0D /* PicturePosterCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturePosterCell.h; sourceTree = "<group>"; };
 		A7BA6F53215F6C3B00A5FA0D /* PicturePosterCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PicturePosterCell.m; sourceTree = "<group>"; };
+		A7BAB516218FD8F50018CA27 /* CommentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsVC.h; sourceTree = "<group>"; };
+		A7BAB517218FD8F50018CA27 /* CommentsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsVC.m; sourceTree = "<group>"; };
+		A7BAB519218FD9F50018CA27 /* CommentsListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsListVC.h; sourceTree = "<group>"; };
+		A7BAB51A218FD9F50018CA27 /* CommentsListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsListVC.m; sourceTree = "<group>"; };
+		A7BAB51C218FDBB50018CA27 /* CommentsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentsCell.h; sourceTree = "<group>"; };
+		A7BAB51D218FDBB50018CA27 /* CommentsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentsCell.m; sourceTree = "<group>"; };
+		A7BAB51F218FEB2D0018CA27 /* CoachReplyV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoachReplyV.h; sourceTree = "<group>"; };
+		A7BAB520218FEB2D0018CA27 /* CoachReplyV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoachReplyV.m; sourceTree = "<group>"; };
 		A7C311ED214A085A006A96EA /* SearchListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchListVC.h; sourceTree = "<group>"; };
 		A7C311EE214A085A006A96EA /* SearchListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchListVC.m; sourceTree = "<group>"; };
 		A7C311F0214A6004006A96EA /* InstructionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstructionsVC.h; sourceTree = "<group>"; };
@@ -2684,6 +2696,37 @@
 				A76CA216216CB3000097798D /* MyPicturePosterVC.m */,
 				A76CA218216CBCA00097798D /* MyPosterVC.h */,
 				A76CA219216CBCA00097798D /* MyPosterVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		A7BAB513218FD7DC0018CA27 /* Comments(评论) */ = {
+			isa = PBXGroup;
+			children = (
+				A7BAB515218FD8030018CA27 /* C */,
+				A7BAB514218FD7FC0018CA27 /* V */,
+			);
+			path = "Comments(评论)";
+			sourceTree = "<group>";
+		};
+		A7BAB514218FD7FC0018CA27 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				A7BAB51C218FDBB50018CA27 /* CommentsCell.h */,
+				A7BAB51D218FDBB50018CA27 /* CommentsCell.m */,
+				A7BAB51F218FEB2D0018CA27 /* CoachReplyV.h */,
+				A7BAB520218FEB2D0018CA27 /* CoachReplyV.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		A7BAB515218FD8030018CA27 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				A7BAB516218FD8F50018CA27 /* CommentsVC.h */,
+				A7BAB517218FD8F50018CA27 /* CommentsVC.m */,
+				A7BAB519218FD9F50018CA27 /* CommentsListVC.h */,
+				A7BAB51A218FD9F50018CA27 /* CommentsListVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -4862,6 +4905,7 @@
 				A7EC17FB2176D8A4007793FC /* Training(训练场) */,
 				A71907A1213105B40072B8CF /* Subordinate(所属驾校) */,
 				A7B5A0FE2133A2BA00BC197B /* Vehicle(车辆管理) */,
+				A7BAB513218FD7DC0018CA27 /* Comments(评论) */,
 				A7AC8171212C2A1100C6AB6C /* MyNews(消息) */,
 				DA4FA47F1FDF7B7200C7C1F1 /* Mine(我的) */,
 				A7BA6F46215F609500A5FA0D /* admissions(招生) */,
@@ -5646,6 +5690,7 @@
 				A7357A842180423D001F5E91 /* UITableView+WFEmpty.m in Sources */,
 				DA85972C1FF1F60F00111B28 /* PagingButtonView.m in Sources */,
 				A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */,
+				A7BAB518218FD8F50018CA27 /* CommentsVC.m in Sources */,
 				DAE2129D1EF2867B000EAB90 /* DesignerViewController.m in Sources */,
 				DA0346B71F509098008E7BE1 /* UIImage+Blur.m in Sources */,
 				DA0347211F509098008E7BE1 /* FMRegExpTool.m in Sources */,
@@ -5774,6 +5819,7 @@
 				DA0346BB1F509098008E7BE1 /* UIImage+FMExtension.m in Sources */,
 				A7EC187221773E29007793FC /* JXCategoryNumberView.m in Sources */,
 				DA0347051F509098008E7BE1 /* UIViewController+DDPopUpViewController.m in Sources */,
+				A7BAB521218FEB2D0018CA27 /* CoachReplyV.m in Sources */,
 				DA0346A11F509098008E7BE1 /* UIButton+Indicator.m in Sources */,
 				DA03468B1F509098008E7BE1 /* CAAnimation+Blocks.m in Sources */,
 				A7E97A0B21354B4500EA6F14 /* IDAuthViewController.m in Sources */,
@@ -5997,6 +6043,7 @@
 				DA0347201F509098008E7BE1 /* GVUserDefaults.m in Sources */,
 				A7DC8F5D2189A6790058C654 /* SchoolLable.m in Sources */,
 				DAE212B11EF2867B000EAB90 /* UserViewController.m in Sources */,
+				A7BAB51E218FDBB50018CA27 /* CommentsCell.m in Sources */,
 				4F0944AD1F3AF3D900BA80E5 /* UIDevice+Adaptation.m in Sources */,
 				DA0346431F509098008E7BE1 /* NSDate+TimeAgo.m in Sources */,
 				A7DC8F5621897B080058C654 /* ChangeCardHeadVC.m in Sources */,
@@ -6036,6 +6083,7 @@
 				DA0346DD1F509098008E7BE1 /* UIScrollView+EmptyDataSet.m in Sources */,
 				DA78C30F1F5D41A3009BAA90 /* YTKNetworkAgent.m in Sources */,
 				A798CEAF21785BE400145440 /* StudentsLabelV.m in Sources */,
+				A7BAB51B218FD9F50018CA27 /* CommentsListVC.m in Sources */,
 				A73C5B7D216F27BA006262B5 /* ScreeningV.m in Sources */,
 				A7C59F1E2148E24800948074 /* BusinessShowV.m in Sources */,
 				DA867D4A1F59031C00D4D011 /* UIApplication+JYHandle.m in Sources */,
