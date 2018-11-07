@@ -53,7 +53,7 @@
     _table.tableHeaderView = [self headview];
     _table.tableFooterView = [self footerview];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    self.table.mj_header=[XLHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
 //    _table.needPlaceholderView = YES;
     self.table.backgroundColor = kColor_N(240, 240, 240);
 //    __weak __typeof(self)weakSelf = self;

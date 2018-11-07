@@ -54,6 +54,7 @@
 		A71907A02130EED50072B8CF /* StudentsTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A719079F2130EED50072B8CF /* StudentsTwoCell.m */; };
 		A71907A4213106180072B8CF /* SubordinateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A3213106180072B8CF /* SubordinateVC.m */; };
 		A71907A721312B850072B8CF /* DrivingSchoolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A621312B850072B8CF /* DrivingSchoolVC.m */; };
+		A723A3FC219170EC00739AFF /* ReplyV.m in Sources */ = {isa = PBXBuildFile; fileRef = A723A3FB219170EC00739AFF /* ReplyV.m */; };
 		A7278E99218857C900118BC3 /* XLWKWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7278E98218857C900118BC3 /* XLWKWebVC.m */; };
 		A7282EFF217D698E00117758 /* SwitchV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7282EFE217D698E00117758 /* SwitchV.m */; };
 		A7282F05217D74C500117758 /* ReservationRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7282F04217D74C500117758 /* ReservationRecordVC.m */; };
@@ -778,6 +779,8 @@
 		A71907A3213106180072B8CF /* SubordinateVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubordinateVC.m; sourceTree = "<group>"; };
 		A71907A521312B850072B8CF /* DrivingSchoolVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DrivingSchoolVC.h; sourceTree = "<group>"; };
 		A71907A621312B850072B8CF /* DrivingSchoolVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrivingSchoolVC.m; sourceTree = "<group>"; };
+		A723A3FA219170EC00739AFF /* ReplyV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReplyV.h; sourceTree = "<group>"; };
+		A723A3FB219170EC00739AFF /* ReplyV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReplyV.m; sourceTree = "<group>"; };
 		A7278E97218857C900118BC3 /* XLWKWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLWKWebVC.h; sourceTree = "<group>"; };
 		A7278E98218857C900118BC3 /* XLWKWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLWKWebVC.m; sourceTree = "<group>"; };
 		A7282EFD217D698E00117758 /* SwitchV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchV.h; sourceTree = "<group>"; };
@@ -2716,6 +2719,8 @@
 				A7BAB51D218FDBB50018CA27 /* CommentsCell.m */,
 				A7BAB51F218FEB2D0018CA27 /* CoachReplyV.h */,
 				A7BAB520218FEB2D0018CA27 /* CoachReplyV.m */,
+				A723A3FA219170EC00739AFF /* ReplyV.h */,
+				A723A3FB219170EC00739AFF /* ReplyV.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5805,6 +5810,7 @@
 				DA0347431F509098008E7BE1 /* UILabel+YBAttributeTextTapAction.m in Sources */,
 				DA959E471F53BEE9002389F6 /* UIAlertController+ZFPlayerRotation.m in Sources */,
 				A79D3E1A217F213B008BAB2C /* AddressCell.m in Sources */,
+				A723A3FC219170EC00739AFF /* ReplyV.m in Sources */,
 				DA03464B1F509098008E7BE1 /* NSDictionary+SafeAccess.m in Sources */,
 				DA03463A1F509098008E7BE1 /* NSData+Encrypt.m in Sources */,
 				A74EB311213E204B00564BC6 /* OtherInformationVC.m in Sources */,

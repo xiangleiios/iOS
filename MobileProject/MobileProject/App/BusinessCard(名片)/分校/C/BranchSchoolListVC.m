@@ -51,6 +51,7 @@
     }
     BusinessShowV *v = [[BusinessShowV alloc] init];
     v.vc = self;
+    v.type = 1;
     v.dataArr = self.dataArr;
     [v show];
 }
@@ -72,7 +73,7 @@
     _table.tableFooterView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     
-    self.table.mj_header=[MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    self.table.mj_header=[XLHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     __weak __typeof(self)weakSelf = self;

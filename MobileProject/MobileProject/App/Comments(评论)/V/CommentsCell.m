@@ -7,7 +7,7 @@
 //
 
 #import "CommentsCell.h"
-
+#import "ReplyV.h"
 @implementation CommentsCell
 
 - (void)awakeFromNib {
@@ -104,6 +104,8 @@
     self.like = [[UIButton alloc] init];
     [self.contentView addSubview:self.like];
     [self.like addTarget:self action:@selector(giveLike:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     [self.like setTitleColor:kColor_N(177, 177, 177) forState:UIControlStateNormal];
     [self.like setTitleColor:kColor_N(255, 103, 111) forState:UIControlStateSelected];
     self.like.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
@@ -177,6 +179,7 @@
         self.reply = [[UIButton alloc] init];
         [self.contentView addSubview:self.reply];
         [self.reply setTitle:@"回复" forState:UIControlStateNormal];
+        [self.reply addTarget:self action:@selector(toReplyV) forControlEvents:UIControlEventTouchUpInside];
         [self.reply setBackgroundImage:[UIImage imageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
         [self.reply mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(30));
@@ -242,5 +245,11 @@
         
     }];
     
+}
+
+- (void)toReplyV{
+    ReplyV *v = [[ReplyV alloc] init];
+    v.idid = self.model.idid;
+    [v show];
 }
 @end

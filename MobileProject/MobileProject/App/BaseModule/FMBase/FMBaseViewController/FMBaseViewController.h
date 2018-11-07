@@ -57,4 +57,5 @@
 
 /** 让某个scrollView支持全局侧滑手势 【viewDidLoad方法中调用】*/
 - (void)fm_letScrollViewSupportGlobalSideslipGestures:(UIScrollView *)scrollView;
+- (void)headerRefresh;
 @end

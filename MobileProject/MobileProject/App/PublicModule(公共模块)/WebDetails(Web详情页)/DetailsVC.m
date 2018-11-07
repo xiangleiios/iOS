@@ -139,7 +139,7 @@ static NSString  *kcontentSize = @"contentSize";
     _progressLayer.frame = CGRectMake(0, self.navigationController.navigationBar.height - 2, kScreenW, 2);
     [self.navigationController.navigationBar.layer addSublayer:_progressLayer];
     
-    self.webView.scrollView.mj_header  =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(touchRefresh)];
+    self.webView.scrollView.mj_header  =  [XLHeader headerWithRefreshingTarget:self refreshingAction:@selector(touchRefresh)];
     [self performSelector:@selector(stopLoadingHud) withObject:nil afterDelay:15.0];
 
 //    [self.webView.scrollView.mj_header beginRefreshing];

@@ -12,6 +12,7 @@
 @property (nonatomic , strong)NSArray *dataArr;
 @property (nonatomic , strong)XLView *backview;
 @property (nonatomic , strong)NSMutableArray *butArr;
-@property (nonatomic , strong)BusinessCardListVC *vc;
+@property (nonatomic , strong)FMBaseViewController *vc;
+@property (nonatomic , assign)NSInteger type; /// 0 教练 1 驾校
 - (void)show;
 @end

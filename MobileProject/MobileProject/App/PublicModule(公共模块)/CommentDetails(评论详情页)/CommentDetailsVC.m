@@ -83,7 +83,7 @@
     [self.view addSubview:_table];
     
     [_table registerClass:[FMCommentCell class] forCellReuseIdentifier:@"FMCommentCell"];
-    _table.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
+    _table.mj_header = [XLHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     _table.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.footRefreshState = MJFooterRefreshStateNormal; //当数据木有一屏幕时隐藏上拉加载
     [_table.mj_header beginRefreshing];

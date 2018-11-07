@@ -39,7 +39,7 @@ pod 'FLEX', '~> 2.1.1' #应用内调试和探测工具集
 
 pod 'JPush','~> 3.0.6'  #极光推送
 pod 'GTSDK','~> 1.6.3.0' #个推推送
-#pod 'UMengAnalytics-NO-IDFA' #友盟分析统计
+pod 'UMengAnalytics-NO-IDFA' #友盟分析统计
 pod 'UMengUShare/UI'            # 友盟分享UI
 pod 'UMengUShare/Social/Sina'     # 集成新浪微博
 pod 'UMengUShare/Social/WeChat'   # 集成微信

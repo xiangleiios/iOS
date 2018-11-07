@@ -210,8 +210,12 @@
 }
 
 - (void)updatawithdic:(NSDictionary *)dic{
-    NSString *url = POSTEnrollInfoEdit;
-    
+    NSString *url;
+    if (self.type == 1) {
+        url = POSTTeamSchoolEdit;
+    }else{
+        url = POSTEnrollInfoEdit;
+    }
     [MBProgressHUD showLoadingHUD:@"正在提交"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"11111%@",responseObject);
