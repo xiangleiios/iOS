@@ -467,6 +467,8 @@
     if (self) {
         kWeakSelf(self)
         self.name = [[XLInformationV alloc] informationWithTitle:@"负责人姓名" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.name.userInteractionEnabled = NO;
+        self.name.subfield.textColor = kColor_N(210, 210, 210);
         self.school = [[XLInformationV alloc] informationWithTitle:@"所属驾校" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.school.userInteractionEnabled = NO;
         self.school.subfield.textColor = kColor_N(210, 210, 210);
@@ -474,6 +476,8 @@
         
         
         self.phone = [[XLInformationV alloc] informationWithTitle:@"招生电话" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.phone.userInteractionEnabled = NO;
+        self.phone.subfield.textColor = kColor_N(210, 210, 210);
         self.names = [[XLInformationV alloc] informationWithTitle:@"分校名称" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.names.userInteractionEnabled = NO;
         self.names.subfield.textColor = kColor_N(210, 210, 210);

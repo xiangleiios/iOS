@@ -107,6 +107,7 @@
         if (kResponseObjectStatusCodeIsEqual(200)) {
             
             [self shutDown];
+            [self.vc headerRefresh];
             [MBProgressHUD showMsgHUD:@"回复成功"];
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];

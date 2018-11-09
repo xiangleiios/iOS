@@ -117,23 +117,28 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
-//    [_img sd_setImageWithURL:[NSURL URLWithString:_model.headImg] placeholderImage:[UIImage imageNamed:@"head_nor"]];
+    if (_model.headImg.length >0) {
+        NSArray  *array = [_model.headImg componentsSeparatedByString:@","];
+        [_img sd_setImageWithURL:[NSURL URLWithString:KURLIma([array firstObject])] placeholderImage:[UIImage imageNamed:@"nor_fenxiao_photo"]];
+    }
     self.title.text = _model.schoolName;
     self.name.text = _model.name;
     self.titleSub.text = [NSString stringWithFormat:@"(%@)",_model.deptName];
     self.pho.text = _model.enrollPhone;
+    KKLog(@"%@",_model.isShow);
     if ([_model.isShow intValue] == 1) {
         //        是否展示（2：默认展示 1：不展示）"
         [self.typeOne setImage:[UIImage imageNamed:@"tag_gray"]];
-//        self.typeone.hidden = YES;
+
     }else{
         [self.typeOne setImage:[UIImage imageNamed:@"tag_blue"]];
-//        self.typeone.hidden = NO;
+
     }
     if (_model.perfectStatus) {
-        self.typeTwo.hidden = NO;
-    }else{
         self.typeTwo.hidden = YES;
+        
+    }else{
+        self.typeTwo.hidden = NO;
     }
 }
 

@@ -50,6 +50,7 @@
 		4FFEBA8620DCFC2900FB095B /* UILabel+XLlable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FFEBA8520DCFC2900FB095B /* UILabel+XLlable.m */; };
 		9530D3F41E8B4B29000AE7BE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9530D3F31E8B4B29000AE7BE /* MediaPlayer.framework */; };
 		9581ACC61E9B68B80090C525 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34919F7B1D98EAB0004B7307 /* JavaScriptCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A708A6FE21928A4600C8FE07 /* BranchSchoolWebVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A708A6FD21928A4600C8FE07 /* BranchSchoolWebVC.m */; };
 		A7153CE021426164004D4441 /* StudentDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7153CDF21426164004D4441 /* StudentDetailsVC.m */; };
 		A71907A02130EED50072B8CF /* StudentsTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A719079F2130EED50072B8CF /* StudentsTwoCell.m */; };
 		A71907A4213106180072B8CF /* SubordinateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907A3213106180072B8CF /* SubordinateVC.m */; };
@@ -771,6 +772,8 @@
 		947E29699A126B10EB862AB4 /* Pods-MobileProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MobileProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MobileProject/Pods-MobileProject.debug.xcconfig"; sourceTree = "<group>"; };
 		9530D3F31E8B4B29000AE7BE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		99731655615396F5ED3C0BDD /* libPods-MobileProject.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MobileProject.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A708A6FC21928A4600C8FE07 /* BranchSchoolWebVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BranchSchoolWebVC.h; sourceTree = "<group>"; };
+		A708A6FD21928A4600C8FE07 /* BranchSchoolWebVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BranchSchoolWebVC.m; sourceTree = "<group>"; };
 		A7153CDE21426164004D4441 /* StudentDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentDetailsVC.h; sourceTree = "<group>"; };
 		A7153CDF21426164004D4441 /* StudentDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentDetailsVC.m; sourceTree = "<group>"; };
 		A719079E2130EED50072B8CF /* StudentsTwoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsTwoCell.h; sourceTree = "<group>"; };
@@ -2381,6 +2384,8 @@
 				A73A4A8E218A9FB500A85EF6 /* BranchSchoolListVC.m */,
 				A7DC8F5421897B080058C654 /* ChangeCardHeadVC.h */,
 				A7DC8F5521897B080058C654 /* ChangeCardHeadVC.m */,
+				A708A6FC21928A4600C8FE07 /* BranchSchoolWebVC.h */,
+				A708A6FD21928A4600C8FE07 /* BranchSchoolWebVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -6075,6 +6080,7 @@
 				DA0346B11F509098008E7BE1 /* UIFont+DynamicFontControl.m in Sources */,
 				A7E97A1421354B4500EA6F14 /* UIImage+Extend.m in Sources */,
 				A7EC188921773EFE007793FC /* JXCategoryTitleAttributeView.m in Sources */,
+				A708A6FE21928A4600C8FE07 /* BranchSchoolWebVC.m in Sources */,
 				DA0346C71F509098008E7BE1 /* UIImageView+FaceAwareFill.m in Sources */,
 				4FF9265A20C8CE0600AB3E43 /* CGXDatePickerView.m in Sources */,
 				DA4C99721FAB351A0031ACDA /* MXSCycleScrollView.m in Sources */,

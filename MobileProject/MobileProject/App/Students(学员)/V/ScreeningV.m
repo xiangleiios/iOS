@@ -44,28 +44,49 @@
         make.top.mas_equalTo(self.backview);
         make.height.mas_equalTo(dataArr.count * KFit_H6S(90));
     }];
-    for (int i = 0 ; i < dataArr.count; i++) {
+    if (dataArr.count == 1) {
         UIButton *but = [[UIButton alloc] init];
-        [but setTitle:dataArr[i] forState:UIControlStateNormal];
+        [but setTitle:dataArr[0] forState:UIControlStateNormal];
         [but setTitleColor:kColor_N(64, 78, 108) forState:UIControlStateNormal];
         [but setTitleColor:kColor_N(0, 109, 234) forState:UIControlStateSelected];
         but.backgroundColor = [UIColor whiteColor];
         but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
-        but.tag = i;
+        but.tag = 0;
         but.layer.borderWidth = 0.3;
         but.layer.borderColor = kColor_N(235, 235, 235).CGColor;
         [back addSubview:but];
         [but addTarget:self action:@selector(selectionState:) forControlEvents:UIControlEventTouchUpInside];
-        if (i == 0) {
-            self.selectBut = but;
-            but.selected = YES;
+        
+        self.selectBut = but;
+        but.selected = YES;
+        [but mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.right.bottom.mas_equalTo(back);
+        }];
+    }else{
+        for (int i = 0 ; i < dataArr.count; i++) {
+            UIButton *but = [[UIButton alloc] init];
+            [but setTitle:dataArr[i] forState:UIControlStateNormal];
+            [but setTitleColor:kColor_N(64, 78, 108) forState:UIControlStateNormal];
+            [but setTitleColor:kColor_N(0, 109, 234) forState:UIControlStateSelected];
+            but.backgroundColor = [UIColor whiteColor];
+            but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+            but.tag = i;
+            but.layer.borderWidth = 0.3;
+            but.layer.borderColor = kColor_N(235, 235, 235).CGColor;
+            [back addSubview:but];
+            [but addTarget:self action:@selector(selectionState:) forControlEvents:UIControlEventTouchUpInside];
+            if (i == 0) {
+                self.selectBut = but;
+                but.selected = YES;
+            }
+            [arr addObject:but];
         }
-        [arr addObject:but];
+        [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
+        [arr mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(back);
+        }];
     }
-    [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
-    [arr mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(back);
-    }];
+    
     
 }
 

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)NSString *url;
 @property (nonatomic , assign)NSInteger type;
 @property (nonatomic , strong)NSString *deptId;
+- (void)headerRefresh;
 @end
 
 NS_ASSUME_NONNULL_END

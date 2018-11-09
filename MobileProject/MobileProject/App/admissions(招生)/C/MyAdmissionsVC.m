@@ -10,7 +10,7 @@
 #import "MyPicturePosterListVC.h"
 #import "MyPosterListVC.h"
 
-@interface MyAdmissionsVC ()
+@interface MyAdmissionsVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -47,10 +47,16 @@
     self.myCategoryView.layer.borderWidth = 1/[UIScreen mainScreen].scale;
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.cellSpacing = 0;
+    self.myCategoryView.cellWidth = (SCREEN_WIDTH - KFit_W6S(140))/2;
     self.myCategoryView.titleColor = kColor_N(0, 112, 234);
     self.myCategoryView.titleSelectedColor = [UIColor whiteColor];
-    JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
     self.myCategoryView.titleLabelMaskEnabled = YES;
+    
+    JXCategoryIndicatorBackgroundView *backgroundView = [[JXCategoryIndicatorBackgroundView alloc] init];
+    backgroundView.backgroundViewColor = kColor_N(0, 112, 234);
+    backgroundView.backgroundViewWidth = JXCategoryViewAutomaticDimension;
+    backgroundView.backgroundViewCornerRadius = 2;
+    self.myCategoryView.indicators = @[backgroundView];
     [self.view addSubview:self.myCategoryView];
 }
 

@@ -84,12 +84,13 @@
     
     UIButton *share = [[UIButton alloc] init];
     [self.view addSubview:share];
+    share.layer.cornerRadius = kFit_Font6(5);
+    share.layer.masksToBounds = YES;
+    share.layer.borderColor = kColor_N(0, 112, 234).CGColor;
+    share.layer.borderWidth = 0.5;
     [share setTitle:@"分享" forState:UIControlStateNormal];
-    [share setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [share setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
     [share addTarget:self action:@selector(share) forControlEvents:UIControlEventTouchUpInside];
-    share.backgroundColor = kColor_N(148, 160, 181);
-    [share setBackgroundImage:[UIImage createImageWithColor:kColor_N(148, 160, 181)] forState:UIControlStateNormal];
-    [share setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(148, 160, 181, 0.6)] forState:UIControlStateHighlighted];
     share.layer.cornerRadius = 5;
     share.layer.masksToBounds = YES;
     
@@ -103,7 +104,7 @@
 }
 
 - (void)toChange{
-    ChangeCardHeadVC *vc = [[ChangeCardHeadVC alloc] init];
+    ChangeCardVC *vc = [[ChangeCardVC alloc] init];
 //    vc.model = self.model;
     vc.idid = self.model.idid;
     [self.navigationController pushViewController:vc animated:YES];

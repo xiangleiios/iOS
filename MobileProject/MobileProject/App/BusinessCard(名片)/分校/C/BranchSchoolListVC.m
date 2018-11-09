@@ -12,7 +12,7 @@
 #import "UITableView+FMPlaceholder.h"
 #import "BusinessCardVC.h"
 #import "BusinessShowV.h"
-
+#import "BranchSchoolWebVC.h"
 #import "CommentsVC.h"
 @interface BranchSchoolListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
@@ -149,13 +149,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    BusinessCardVC *vc = [[BusinessCardVC alloc] init];
-//    vc.model = self.dataArr[indexPath.row];
-//    [self.navigationController pushViewController:vc animated:YES];
-//    CommentsVC
-    CommentsVC *vc = [[CommentsVC alloc] init];
+    BranchSchoolWebVC *vc = [[BranchSchoolWebVC alloc] init];
     vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 /*
 #pragma mark - Navigation

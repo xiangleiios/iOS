@@ -281,7 +281,7 @@
     UIViewController *vc = delegete.window.rootViewController;
     if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive) {
         // app在前台给出alert
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收到推送" message:userInfo[@"title"] preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"收到推送" message:userInfo[@"content"] preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {}]];
         
 //        [alert addAction:[UIAlertAction actionWithTitle:@"详情" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {

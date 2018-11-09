@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)NSString *idid;
 @property (nonatomic , strong)UITextView *textview;
 @property (nonatomic , strong)UIView *backview;
+@property (nonatomic , strong)FMBaseViewController *vc;
 - (void)show;
 @end
 

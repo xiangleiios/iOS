@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , assign)NSInteger type;
 @property (nonatomic , strong)UILabel *fen;
 @property (nonatomic , strong)UIImageView *xinImg;
+@property (nonatomic , strong)FMBaseViewController *vc;
 @end
 
 NS_ASSUME_NONNULL_END

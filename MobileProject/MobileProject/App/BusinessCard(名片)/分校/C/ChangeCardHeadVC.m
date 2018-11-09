@@ -487,7 +487,22 @@
     
 }
 - (void)nextVC{
-    
+    if (self.admissions.phone.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请填写手机号"];
+        return;
+    }
+    if (self.textView.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请填写驾校详情"];
+        return;
+    }
+    if (self.jiaoXueHuanJing.dataArr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"请上传教学环境图"];
+        return;
+    }
+    if (self.xuanChuan.dataArr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"请上传宣传图"];
+        return;
+    }
     NSString *url = POSTTeamSchoolEdit;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.model.idid forKey:@"id"];
@@ -499,6 +514,8 @@
     [dic setObject:self.admissions.names.subfield.text forKey:@"deptName"];
     [dic setObject:self.admissions.address.subfield.text forKey:@"deptAddress"];
     [dic setObject:self.textView.text forKey:@"introduce"];
+    [dic setObject:self.admissions.school.subfield.text forKey:@"schoolName"];
+//    [dic setObject:self.admissions.names.subfield.text forKey:@"deptName"];
     
     [dic setObject:[self.jiaoXueZiZhi.dataArr componentsJoinedByString:@","] forKey:@"schoolAptitude"];
     [dic setObject:[self.jiaoXuePingPai.dataArr componentsJoinedByString:@","] forKey:@"brandAuthentication"];
@@ -510,6 +527,7 @@
 //    if (self.xuanChuan.dataArr.count > 0 ) {
         [dic setObject:[self.xuanChuan.dataArr firstObject] forKey:@"headImg"];
 //    }
+    
     [dic setObject:@"" forKey:@"url1"];
     [dic setObject:@"" forKey:@"url2"];
     [dic setObject:@"" forKey:@"url3"];

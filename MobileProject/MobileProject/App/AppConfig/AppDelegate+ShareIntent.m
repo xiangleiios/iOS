@@ -14,7 +14,7 @@
 #import "ModelGuaideIma.h"
 #import "WXApi.h"
 #import "ThirdPartKeys.h"
-
+#import "UMMobClick/MobClick.h"
 // 引 JPush功能所需头 件
 #import "JPUSHService.h"
 
@@ -27,7 +27,10 @@
     }
         //设置友盟appkey
     [[UMSocialManager defaultManager] setUmSocialAppkey:keyUMengAppkey];
-    
+    UMConfigInstance.appKey = keyUMengAppkey;
+    UMConfigInstance.channelId = @"App Store";
+//    UMConfigInstance.eSType = E_UM_GAME; //仅适用于游戏场景，应用统计不用设置
+    [MobClick startWithConfigure:UMConfigInstance];//配置以上参数后调用此方法初始化SDK！
     //各平台的详细配置
     [WXApi registerApp:keyWeChatAppID];
     [FMShareConfigManagerInstance setPlaform:FMSocialPlatConfigType_Wechat appKey:keyWeChatAppID appSecret:keyWeChatAppSecret redirectURL:@"http://mobile.umeng.com/social"];

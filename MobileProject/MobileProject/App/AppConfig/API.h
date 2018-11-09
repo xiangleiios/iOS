@@ -100,6 +100,9 @@
 #pragma mark -编辑所属分校招生名片信息接口
 #define POSTTeamSchoolEdit KURL(@"app/v1_1/team/teamSchool/teamSchoolEdit")
 
+#pragma mark -推广名片
+#define POSTEnrollInfoExtension KURL(@"/app/enrollInfo/extension")
+
 #pragma mark -修改密码
 #define POSTEditPwd KURL(@"app/team/teamUser/editPwd")
 
@@ -124,9 +127,13 @@
 #define POSTReplyAdd KURL(@"app/reply/add")
 
 
-#pragma mark - 名片H5
+#pragma mark - 名片H5 - 教练
 #define HTMLMINGPIAN KURL(@"plat/#/?type=app&id=%@")
 #define HTMLMINGPIANFENXIANG KURL(@"plat/#/?id=%@")
+
+#pragma mark - 名片H5 - 驾校
+#define HTMLMINGPIANJIAXIAO KURL(@"plat/#/school/detail?type=app&id=%@")
+#define HTMLMINGPIANFENXIANGJIAXIAO KURL(@"plat/#/school/detail?type=share&id=%@")
 
 #pragma mark - 二维码
 #define XIAOCHENGXUEWM KURL(@"wechart/pages/index/detail/detail?id=%@")

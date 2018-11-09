@@ -84,6 +84,7 @@
     self.title = [[UILabel alloc] init];
     [self.contentView addSubview:self.title];
     self.title.text = @"安静地怕大家奥克兰的骄傲了肯德基啊";
+    self.title.numberOfLines = 0;
     [self.title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.name);
         make.top.mas_equalTo(self.name.mas_bottom).mas_offset(KFit_H6S(30));
@@ -180,11 +181,14 @@
         [self.contentView addSubview:self.reply];
         [self.reply setTitle:@"回复" forState:UIControlStateNormal];
         [self.reply addTarget:self action:@selector(toReplyV) forControlEvents:UIControlEventTouchUpInside];
+        self.reply.layer.cornerRadius = kFit_Font6(3);
+        self.reply.layer.masksToBounds = YES;
+        self.reply.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
         [self.reply setBackgroundImage:[UIImage imageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
         [self.reply mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(30));
             make.top.mas_equalTo(lb.mas_bottom).mas_offset(KFit_H6S(20));
-            make.size.mas_equalTo(CGSizeMake(KFit_H6S(50), KFit_W6S(120)));
+            make.size.mas_equalTo(CGSizeMake(KFit_H6S(120), KFit_W6S(50)));
         }];
         UILabel *lbtwo = [[UILabel alloc] init];
         [self.contentView addSubview:lbtwo];
@@ -249,6 +253,7 @@
 
 - (void)toReplyV{
     ReplyV *v = [[ReplyV alloc] init];
+    v.vc = self.vc;
     v.idid = self.model.idid;
     [v show];
 }

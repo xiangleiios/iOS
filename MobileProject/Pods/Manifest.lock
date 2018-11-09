@@ -52,6 +52,7 @@ PODS:
     - SDWebImage/Core (= 3.7.6)
   - SDWebImage/Core (3.7.6)
   - TZImagePickerController (3.0.9)
+  - UMengAnalytics-NO-IDFA (4.2.5)
   - UMengUShare/Core (6.4.8.2):
     - UMengUShare/Network
   - UMengUShare/Network (6.4.8.2)
@@ -102,6 +103,7 @@ DEPENDENCIES:
   - SDCycleScrollView (~> 1.65)
   - SDWebImage (~> 3.7.6)
   - TZImagePickerController
+  - UMengAnalytics-NO-IDFA
   - UMengUShare/Social/QQ
   - UMengUShare/Social/Sina
   - UMengUShare/Social/WeChat
@@ -135,6 +137,7 @@ SPEC REPOS:
     - SDCycleScrollView
     - SDWebImage
     - TZImagePickerController
+    - UMengAnalytics-NO-IDFA
     - UMengUShare
     - XAspect
     - YYCache
@@ -164,10 +167,11 @@ SPEC CHECKSUMS:
   SDCycleScrollView: f72904c77698a7f93a41bcbbc2d78b073bf7326c
   SDWebImage: c325cf02c30337336b95beff20a13df489ec0ec9
   TZImagePickerController: ea3e906af8caa7088f612ad673feb73cc6aa6bfc
+  UMengAnalytics-NO-IDFA: 16666e32edce5be44ae5b14aaaa7f3582e09d6ab
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
   XAspect: db50bf487f92dbb8557a7a5365556966c8493af8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: df07add8585e9ef970aba970a0563a32af88538b
+PODFILE CHECKSUM: 24180398681b6b46ad1c53ae4f632fd8b2a60449
 
 COCOAPODS: 1.5.3

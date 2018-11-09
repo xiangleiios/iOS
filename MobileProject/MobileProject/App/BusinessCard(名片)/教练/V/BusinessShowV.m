@@ -194,9 +194,12 @@
             i = 1;
         }
     }
+    if (self.type == 0) {
+        
     if (!i) {
         [MBProgressHUD showMsgHUD:@"请选择驾校名称在中天驾考学员端展示"];
         return;
+    }
     }
     
     for (UIButton *but in self.butArr) {
@@ -212,7 +215,7 @@
 - (void)updatawithdic:(NSDictionary *)dic{
     NSString *url;
     if (self.type == 1) {
-        url = POSTTeamSchoolEdit;
+        url = POSTEnrollInfoExtension;
     }else{
         url = POSTEnrollInfoEdit;
     }
