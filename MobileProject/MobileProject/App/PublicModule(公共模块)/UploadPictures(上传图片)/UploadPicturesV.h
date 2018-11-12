@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UIButton *addBut;
 @property (nonatomic , assign)int num;
 @property (nonatomic , strong)UIViewController *vc;
+@property (nonatomic , assign)NSInteger type;  /// 1 可裁剪   0 不可裁剪
 - (void)relodData;
 @end
 

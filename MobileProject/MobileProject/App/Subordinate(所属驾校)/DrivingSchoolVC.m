@@ -47,8 +47,8 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"所属驾校"];
     [self laodScroll];
+    [self laodData];
     
-    [self loadDataview];
     // Do any additional setup after loading the view.
 }
 
@@ -180,6 +180,22 @@
 //             bvc.isEqualRatio = NO;// 大图小图不等比时需要设置这个属性（建议等比）
 //    [bvc.navigationController fm_setStatusBarBackgroundColor:[UIColor clearColor]];
     [bvc showBrowseViewController];
+}
+
+
+
+- (void)laodData{
+    NSString *url = [NSString stringWithFormat:POSTTeamSchoolTeamSchoolInfo,self.idid];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        self.model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+        [self loadDataview];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 /*
 #pragma mark - Navigation

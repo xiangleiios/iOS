@@ -202,12 +202,21 @@
     }
     }
     
-    for (UIButton *but in self.butArr) {
+    for (int i = 0; i <self.butArr.count; i++) {
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-        [dic setObject:[NSString stringWithFormat:@"%ld",(long)but.tag] forKey:@"id"];
+        UIButton *but = self.butArr[i];
+        FMMainModel *model = self.dataArr[i];
+//        if (but.selected) {
+//            if (!model.perfectStatus) {
+//                [MBProgressHUD showMsgHUD:@"只能推广信息已完善的名片"];
+//                return;
+//            }
+//        }
+        [dic setObject:model.idid forKey:@"id"];
         [dic setObject:but.selected?@"2":@"1" forKey:@"isShow"];
         [self updatawithdic:dic];
     }
+    
     [_vc headerRefresh];
     [self shutDown];
 }

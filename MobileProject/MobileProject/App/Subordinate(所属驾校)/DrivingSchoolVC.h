@@ -9,5 +9,6 @@
 #import "FMBaseViewController.h"
 
 @interface DrivingSchoolVC : FMBaseViewController
+@property (nonatomic , strong)NSString *idid;
 @property (nonatomic , strong)FMMainModel *model;
 @end

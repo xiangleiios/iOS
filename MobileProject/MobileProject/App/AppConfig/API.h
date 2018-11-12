@@ -47,6 +47,10 @@
 #pragma mark 分校所属驾校管理
 #define POSTTeamSchoolList KURL(@"app/team/teamSchool/teamSchoolList")
 
+#pragma mark 分校所属驾校管理
+#define POSTTeamSchoolTeamSchoolInfo KURL(@"app/v1_1/team/teamSchool/teamSchoolInfo?teamSchoolId=%@")
+
+
 #pragma mark 数据字典接口
 #define POSTAppDictList KURL(@"system/dict/data/appDictList")
 

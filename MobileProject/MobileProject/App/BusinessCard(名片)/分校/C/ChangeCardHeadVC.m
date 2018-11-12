@@ -249,6 +249,7 @@
     self.xuanChuan = [[UploadPicturesV alloc] init];
     [self.backview addSubview:self.xuanChuan];
     self.xuanChuan.vc = self;
+    self.xuanChuan.type = 1;//可裁剪
     self.xuanChuan.num = 1;
     [self.xuanChuan mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view );
@@ -341,7 +342,7 @@
 
 
 - (void)refreshData{
-    
+    [MBProgressHUD showLoadingHUD:@"正在加载"];
     //    NSString *url = POSTgGetEnrollInfoInfo;
     NSString *url1 = [NSString stringWithFormat:@"%@?id=%@",POSTTeamSchoolEnrollInfo,self.idid];
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -349,10 +350,11 @@
 //    [dic setObject:@"1" forKey:@"operaType"];
     [FMNetworkHelper fm_request_postWithUrlString:url1 isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"11111%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
 //        self.scanPhotoIp = responseObject[@"scanPhotoIp"];
         self.model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
     } failureBlock:^(NSError *error) {
-        
+        [MBProgressHUD hideLoadingHUD];
         KKLog(@"%@", error);
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
@@ -456,25 +458,39 @@
         make.height.mas_equalTo(KFit_H6S(140) * _model.classList.count);
     }];
     if (_model.headImg.length > 1 ) {
-        [self.xuanChuan.dataArr addObjectsFromArray:[_model.headImg componentsSeparatedByString:@","]];
-        [self.xuanChuan relodData];
+        if (self.xuanChuan.dataArr.count < 1) {
+            
+            [self.xuanChuan.dataArr addObjectsFromArray:[_model.headImg componentsSeparatedByString:@","]];
+            [self.xuanChuan relodData];
+        }
+    }
+    if (self.jiaoXueHuanJing.dataArr.count < 1) {
+        
+        [self.jiaoXueHuanJing.dataArr addObjectsFromArray:self.imgarr];
+        [self.jiaoXueHuanJing relodData];
     }
     
-    [self.jiaoXueHuanJing.dataArr addObjectsFromArray:self.imgarr];
-    [self.jiaoXueHuanJing relodData];
-    
     if (_model.schoolAptitude.length > 1 ) {
-        [self.jiaoXueZiZhi.dataArr addObjectsFromArray:[_model.schoolAptitude componentsSeparatedByString:@","]];
-        [self.jiaoXueZiZhi relodData];
+        if (self.jiaoXueZiZhi.dataArr.count < 1) {
+            
+            [self.jiaoXueZiZhi.dataArr addObjectsFromArray:[_model.schoolAptitude componentsSeparatedByString:@","]];
+            [self.jiaoXueZiZhi relodData];
+        }
     }
     
     if (_model.brandAuthentication.length > 1 ) {
-        [self.jiaoXuePingPai.dataArr addObjectsFromArray:[_model.brandAuthentication componentsSeparatedByString:@","]];
-        [self.jiaoXuePingPai relodData];
+        if (self.jiaoXuePingPai.dataArr.count < 1) {
+            
+            [self.jiaoXuePingPai.dataArr addObjectsFromArray:[_model.brandAuthentication componentsSeparatedByString:@","]];
+            [self.jiaoXuePingPai relodData];
+        }
     }
     if (_model.schoolHonor.length > 1 ) {
-        [self.jiaoXueRongYu.dataArr addObjectsFromArray:[_model.schoolHonor componentsSeparatedByString:@","]];
-        [self.jiaoXueRongYu relodData];
+        if (self.jiaoXueRongYu.dataArr.count < 1) {
+            
+            [self.jiaoXueRongYu.dataArr addObjectsFromArray:[_model.schoolHonor componentsSeparatedByString:@","]];
+            [self.jiaoXueRongYu relodData];
+        }
     }
     if (_model.teamSchoolTags.length > 1) {
         self.teamSchoolTags = [_model.teamSchoolTags componentsSeparatedByString:@","];
@@ -501,6 +517,14 @@
     }
     if (self.xuanChuan.dataArr.count < 1) {
         [MBProgressHUD showMsgHUD:@"请上传宣传图"];
+        return;
+    }
+    if (self.schoolLb.dataArr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择标签"];
+        return;
+    }
+    if (self.course.dataArr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"请添加班型"];
         return;
     }
     NSString *url = POSTTeamSchoolEdit;
@@ -550,6 +574,7 @@
         if ([responseObject[@"code"] intValue] == 200) {
             XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"保存成功" SuccessOrFailure:YES];
             [alert showPrompt];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }

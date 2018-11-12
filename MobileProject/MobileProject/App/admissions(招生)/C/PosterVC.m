@@ -202,7 +202,9 @@
         make.height.mas_equalTo([self.imgBackView getLayoutCellHeightWithFlex:KFit_H6S(30)]);
     }];
     NSArray  *array = [_model.imgUrl componentsSeparatedByString:@","];
-    for (int i = 0; i< array.count; i ++) {
+    NSMutableArray *arr = [NSMutableArray arrayWithArray:array];
+    [arr removeLastObject];
+    for (int i = 0; i< arr.count; i ++) {
         [self.imgarr addObject:array[i]];
         UIImageView *img = [[UIImageView alloc] init];
         [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(array[i])]];

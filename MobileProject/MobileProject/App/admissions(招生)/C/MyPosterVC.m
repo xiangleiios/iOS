@@ -61,10 +61,10 @@
         [self.view addSubview:self.makebut];
         self.makebut.layer.cornerRadius = kFit_Font6(5);
         self.makebut.layer.masksToBounds = YES;
-        self.makebut.layer.borderColor = kColor_N(220, 220, 220).CGColor;
+        self.makebut.layer.borderColor = kColor_N(0, 112, 234).CGColor;
         self.makebut.layer.borderWidth = 0.5;
         [self.makebut setTitle:@"再次制作" forState:UIControlStateNormal];
-        [self.makebut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [self.makebut setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
         [self.makebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(255, 255, 255)] forState:UIControlStateNormal];
         [self.makebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(255, 255, 255, 0.6)] forState:UIControlStateHighlighted];
         [self.makebut addTarget:self action:@selector(making) forControlEvents:UIControlEventTouchUpInside];

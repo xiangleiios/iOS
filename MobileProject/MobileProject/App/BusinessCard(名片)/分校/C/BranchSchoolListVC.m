@@ -49,10 +49,20 @@
         [MBProgressHUD showMsgHUD:@"暂无可推广的名片"];
         return;
     }
+    NSMutableArray *arr = [NSMutableArray array];
+    for (FMMainModel *model in self.dataArr) {
+        if (model.perfectStatus) {
+            [arr addObject:model];
+        }
+    }
+    if (arr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"只有完善的名片才能推广"];
+        return;
+    }
     BusinessShowV *v = [[BusinessShowV alloc] init];
     v.vc = self;
     v.type = 1;
-    v.dataArr = self.dataArr;
+    v.dataArr = arr;
     [v show];
 }
 
@@ -81,11 +91,12 @@
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
-    [self headerRefresh];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self headerRefresh];
     //    [self.table.mj_header beginRefreshing];
 }
 - (void)headerRefresh{

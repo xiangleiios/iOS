@@ -159,7 +159,7 @@
     XLxqbut *buttwo = [[XLxqbut alloc] init];
     [buttwo addTarget:self action:@selector(toMingpan) forControlEvents:UIControlEventTouchUpInside];
     [buttwo setImage:[UIImage imageNamed:@"jlmp"] forState:UIControlStateNormal];
-    [buttwo setTitle:@"教练名片" forState:UIControlStateNormal];
+    [buttwo setTitle:@"招生名片" forState:UIControlStateNormal];
     [buttwo setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     XLxqbut *butthree = [[XLxqbut alloc] init];
@@ -294,7 +294,9 @@
     
 }
 - (void)toJiaxiao{
-    SubordinateVC *vc =[[SubordinateVC alloc] init];
+//    SubordinateVC *vc =[[SubordinateVC alloc] init];
+//    [self.navigationController pushViewController:vc animated:YES];
+    BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

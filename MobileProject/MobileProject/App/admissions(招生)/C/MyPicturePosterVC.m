@@ -84,12 +84,12 @@
     [self.view addSubview:self.makebut];
     self.makebut.layer.cornerRadius = kFit_Font6(5);
     self.makebut.layer.masksToBounds = YES;
-    self.makebut.layer.borderColor = kColor_N(220, 220, 220).CGColor;
+    self.makebut.layer.borderColor = kColor_N(0, 112, 234).CGColor;
     self.makebut.layer.borderWidth = 0.5;
     [self.makebut setTitle:@"再次制作" forState:UIControlStateNormal];
-    [self.makebut setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.makebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(255, 255, 255)] forState:UIControlStateNormal];
-    [self.makebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(255, 255, 255, 0.6)] forState:UIControlStateHighlighted];
+    [self.makebut setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+//    [self.makebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+//    [self.makebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(255, 255, 255, 0.6)] forState:UIControlStateHighlighted];
     [self.makebut addTarget:self action:@selector(making) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -108,8 +108,11 @@
     self.savebut.layer.cornerRadius = kFit_Font6(5);
     self.savebut.layer.masksToBounds = YES;
     [self.savebut setTitle:@"保存海报" forState:UIControlStateNormal];
-    [self.savebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(147, 158, 180)] forState:UIControlStateNormal];
-    [self.savebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(147, 158, 180, 0.6)] forState:UIControlStateHighlighted];
+    [self.savebut setTitleColor:kColor_N(26, 173, 25) forState:UIControlStateNormal];
+//    [self.savebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(26, 173, 25)] forState:UIControlStateNormal];
+//    [self.savebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(26, 173, 25, 0.6)] forState:UIControlStateHighlighted];
+    self.savebut.layer.borderColor = kColor_N(26, 173, 25).CGColor;
+    self.savebut.layer.borderWidth = 0.5;
     [self.savebut addTarget:self action:@selector(toSave) forControlEvents:UIControlEventTouchUpInside];
     
     NSArray *arr = @[self.makebut,self.sharebut,self.savebut];

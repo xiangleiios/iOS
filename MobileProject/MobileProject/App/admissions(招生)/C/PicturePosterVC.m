@@ -329,8 +329,11 @@
      self.savebut.layer.cornerRadius = kFit_Font6(5);
      self.savebut.layer.masksToBounds = YES;
      [self.savebut setTitle:@"保存海报" forState:UIControlStateNormal];
-     [self.savebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(147, 158, 180)] forState:UIControlStateNormal];
-     [self.savebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(147, 158, 180, 0.6)] forState:UIControlStateHighlighted];
+    self.savebut.layer.borderColor = kColor_N(0, 112, 234).CGColor;
+    self.savebut.layer.borderWidth = 0.5;
+    [self.savebut setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+//     [self.savebut setBackgroundImage:[UIImage createImageWithColor:kColor_N(147, 158, 180)] forState:UIControlStateNormal];
+//     [self.savebut setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(147, 158, 180, 0.6)] forState:UIControlStateHighlighted];
     [self.savebut addTarget:self action:@selector(toSave) forControlEvents:UIControlEventTouchUpInside];
     
     NSArray *arr = @[self.sharebut,self.savebut];

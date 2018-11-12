@@ -161,6 +161,9 @@
         [alerr show];
     }else{
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        if (self.type == 1) {
+            imagePickerController.allowsEditing = YES;
+        }
     }
     //利用模态进行调用系统框架
     [self.vc.navigationController presentViewController:imagePickerController animated:YES completion:nil];
@@ -176,6 +179,11 @@
     int i = self.num - self.dataArr.count;
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:i delegate:self];
     imagePickerVc.allowPickingVideo =  NO;
+    if (self.type == 1) {
+        imagePickerVc.allowCrop = YES;
+    }
+    
+    imagePickerVc.cropRect = CGRectMake(0, (SCREEN_HEIGHT - SCREEN_WIDTH)/2.0, SCREEN_WIDTH, SCREEN_WIDTH);
     // You can get the photos by block, the same as by delegate.
     // 你可以通过block或者代理，来得到用户选择的照片.
     [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
@@ -183,6 +191,7 @@
             [self uploadPictures:img];
         }
     }];
+    
     [self.vc presentViewController:imagePickerVc animated:YES completion:nil];
     
 }

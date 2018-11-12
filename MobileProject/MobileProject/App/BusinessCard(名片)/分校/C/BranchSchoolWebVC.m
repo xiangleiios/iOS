@@ -13,6 +13,7 @@
 #import "ChangeCardHeadVC.h"
 #import "FMJS.h"
 #import "CommentsVC.h"
+#import "DrivingSchoolVC.h"
 @interface BranchSchoolWebVC ()<UIWebViewDelegate,AppJSObjectDelegate>
 @property (nonatomic , strong)UIWebView *webView;
 @property (nonatomic , strong)NSMutableArray *dataArr;
@@ -55,9 +56,18 @@
             [weakself.navigationController popViewControllerAnimated:YES];
         }
     }];
-
     
+    [self.navigationView.navigationBackButton setImage:[UIImage imageNamed:@"back_white"] forState:UIControlStateNormal];
+    self.navigationView.titleLabel.textColor = [UIColor whiteColor];
+    [self.navigationView setNavigationBackgroundImage:[UIImage imageNamed:@"jiaxiao_bg"]];
+    [self.navigationView addRightButtonWithImage:[UIImage imageNamed:@"chakan"] clickCallBack:^(UIView *view) {
+        DrivingSchoolVC *vc = [[DrivingSchoolVC alloc] init];
+        vc.idid = weakself.model.teamSchoolId;
+        [weakself.navigationController pushViewController:vc animated:YES];
+    }];
 }
+
+
 
 - (void)loadWebview{
     UIWebView *web = [[UIWebView alloc] init];
@@ -140,7 +150,7 @@
     CodeShareV *v = [[CodeShareV alloc] init];
     v.type = ShareTypeText;
     XLshare *share = [[XLshare alloc]init];
-    share.title = [NSString stringWithFormat:@"我是%@的%@,邀您来学车！",self.model.schoolName,self.model.name];
+    share.title = [NSString stringWithFormat:@"%@(%@),邀您来学车！",self.model.schoolName,self.model.name];
     share.subTitle = _model.introduce;
     share.url = [NSString stringWithFormat:HTMLMINGPIANFENXIANGJIAXIAO,self.model.idid];
     share.xcxurl = [NSString stringWithFormat:@"pages/index/school/school?id=%@",self.model.idid];

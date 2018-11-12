@@ -204,7 +204,7 @@
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsListHeaderRefresh" object:nil];
-            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交资料成功，请在报名学员中查看"];
+            XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"提交资料成功，请在考试学员中查看"];
             [alert showPrompt];
             [[XLSingleton singleton].dateArr removeAllObjects];
         }else{

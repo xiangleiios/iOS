@@ -32,6 +32,7 @@
     _img = [[UIImageView alloc] init];
     [self.contentView addSubview:_img];
     [_img setImage:[UIImage imageNamed:@"nor_fenxiao_photo"]];
+    _img.contentMode = UIViewContentModeScaleAspectFit;
     [_img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView);
@@ -48,6 +49,7 @@
         make.top.mas_equalTo(_img);
         make.left.mas_equalTo(_img.mas_right).mas_offset(KFit_W6S(20));
         make.height.mas_equalTo(KFit_H6S(30));
+//        make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(200));
         
     }];
     
@@ -59,7 +61,7 @@
         make.top.mas_equalTo(_img);
         make.left.mas_equalTo(self.title.mas_right).mas_offset(KFit_W6S(20));
         make.height.mas_equalTo(KFit_H6S(30));
-        
+//        make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(200));
     }];
     
     self.name = [[UILabel alloc] init];
@@ -119,9 +121,14 @@
     _model = model;
     if (_model.headImg.length >0) {
         NSArray  *array = [_model.headImg componentsSeparatedByString:@","];
+        KKLog(@"%@",KURLIma([array firstObject]));
         [_img sd_setImageWithURL:[NSURL URLWithString:KURLIma([array firstObject])] placeholderImage:[UIImage imageNamed:@"nor_fenxiao_photo"]];
     }
-    self.title.text = _model.schoolName;
+    if (_model.schoolName.length > 6) {
+        self.title.text =  [_model.schoolName substringToIndex:6];
+    }else{
+        self.title.text = _model.schoolName;
+    }
     self.name.text = _model.name;
     self.titleSub.text = [NSString stringWithFormat:@"(%@)",_model.deptName];
     self.pho.text = _model.enrollPhone;
