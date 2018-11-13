@@ -12,6 +12,7 @@
 #import "MyInfoVC.h"
 #import "XLMineCell.h"
 #import "FMClearCacheTool.h"
+#import "SelectRoleVC.h"
 #define HEADERHEI KFit_H6S(320)
 
 @interface FMMineVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
@@ -240,10 +241,11 @@
         KKLog(@"%ld",(long)index);
         if (index == 2) {
             [[User UserOb] UserQuit];
-            LoginVC *Loginvc = [[LoginVC alloc] init];
+            SelectRoleVC *Loginvc = [[SelectRoleVC alloc] init];
+            EasyNavigationController * LoginvcNavigationController = [[EasyNavigationController alloc]initWithRootViewController:Loginvc];
             AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
             UIViewController *vc = delegete.window.rootViewController;
-            delegete.window.rootViewController = Loginvc;
+            delegete.window.rootViewController = LoginvcNavigationController;
             vc = nil;
 //            [self presentViewController:Loginvc animated:YES completion:NULL];
         }

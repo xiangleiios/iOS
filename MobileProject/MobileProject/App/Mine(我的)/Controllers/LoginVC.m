@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.title=@"手机快捷登录";
+    [self.navigationView setTitle:@""];
     self.view.backgroundColor=[UIColor whiteColor];
 
     
@@ -62,11 +62,29 @@
     self.logimg=img;
     [self.view addSubview:img];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(120));
+        make.top.mas_equalTo(self.view).mas_offset(KFit_H6S(130));
         make.centerX.mas_equalTo(self.view);
         make.height.width.mas_equalTo(KFit_W6S(200));
     }];
     [img setImage:[UIImage imageNamed:@"logo_icon"]];
+    
+    UILabel *lb = [[UILabel alloc] init];
+    [self.view addSubview:lb];
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(img);
+        make.top.mas_equalTo(img.mas_bottom).mas_offset(KFit_H6S(20));
+        make.height.mas_equalTo(KFit_H6S(50));
+        make.width.mas_equalTo(KFit_W6S(250));
+    }];
+    lb.backgroundColor = kColor_N(239, 246, 255);
+    lb.textAlignment = NSTextAlignmentCenter;
+    lb.textColor = kColor_N(15, 123, 236);
+    lb.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    if (self.type) {
+        lb.text = @"角色-负责人";
+    }else{
+        lb.text = @"角色-教练";
+    }
 }
 
 
@@ -79,9 +97,6 @@
         make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(70));
         make.height.mas_equalTo(KFit_H6S(220));
     }];
-//    UIImageView *imgpho=[[UIImageView alloc]initWithFrame:CGRectMake(0, KFit_H6S(30), KFit_W6S(32), KFit_H6S(50))];
-//    [imgpho setImage:[UIImage imageNamed:@"tel"]];
-//    [v addSubview:imgpho];
     self.pho=[[TKPhoneTextField alloc]initWithFrame:CGRectMake(0, 0, KFit_W6S(550), KFit_H6S(110))];
     self.pho.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.pho];

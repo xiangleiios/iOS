@@ -136,6 +136,19 @@
 		A78FBFF3218053E900F4759E /* EmptyV.m in Sources */ = {isa = PBXBuildFile; fileRef = A78FBFF2218053E900F4759E /* EmptyV.m */; };
 		A79276FE212A525D00B4D65D /* AddStudentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A79276FD212A525D00B4D65D /* AddStudentVC.m */; };
 		A7927701212A900200B4D65D /* StudentsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7927700212A900200B4D65D /* StudentsVC.m */; };
+		A794812A219A6CC0008F8D4B /* PPAddressBookHandle.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948124219A6CC0008F8D4B /* PPAddressBookHandle.m */; };
+		A794812B219A6CC0008F8D4B /* PPGetAddressBook.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948126219A6CC0008F8D4B /* PPGetAddressBook.m */; };
+		A794812C219A6CC0008F8D4B /* PPPersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948128219A6CC0008F8D4B /* PPPersonModel.m */; };
+		A7948131219A6CD0008F8D4B /* ChineseToPinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = A794812D219A6CCE008F8D4B /* ChineseToPinyin.m */; };
+		A7948132219A6CD0008F8D4B /* AddressBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A794812E219A6CCF008F8D4B /* AddressBookViewController.m */; };
+		A7948138219A71F2008F8D4B /* CoachListVc.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948137219A71F2008F8D4B /* CoachListVc.m */; };
+		A794813B219A721A008F8D4B /* CoachCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A794813A219A721A008F8D4B /* CoachCell.m */; };
+		A794813E219A778A008F8D4B /* AddCoachListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A794813D219A778A008F8D4B /* AddCoachListVC.m */; };
+		A7948141219A9B65008F8D4B /* SelectRoleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948140219A9B65008F8D4B /* SelectRoleVC.m */; };
+		A7948144219AAF2B008F8D4B /* SelectSchoolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948143219AAF2B008F8D4B /* SelectSchoolVC.m */; };
+		A7948147219ABA15008F8D4B /* SelectSchoolRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948146219ABA15008F8D4B /* SelectSchoolRootVC.m */; };
+		A794814A219AD0CD008F8D4B /* FMSchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7948149219AD0CD008F8D4B /* FMSchoolModel.m */; };
+		A794814D219AD939008F8D4B /* SelectSchoolCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A794814C219AD939008F8D4B /* SelectSchoolCell.m */; };
 		A798CEA621781E9300145440 /* ExamStudentsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A798CEA521781E9300145440 /* ExamStudentsListVC.m */; };
 		A798CEA921781F9F00145440 /* ExamStudentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A798CEA821781F9F00145440 /* ExamStudentsCell.m */; };
 		A798CEAC2178328700145440 /* ExamStudentsDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A798CEAB2178328700145440 /* ExamStudentsDetailsVC.m */; };
@@ -935,6 +948,33 @@
 		A79276FD212A525D00B4D65D /* AddStudentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentVC.m; sourceTree = "<group>"; };
 		A79276FF212A900200B4D65D /* StudentsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentsVC.h; sourceTree = "<group>"; };
 		A7927700212A900200B4D65D /* StudentsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentsVC.m; sourceTree = "<group>"; };
+		A7948123219A6CC0008F8D4B /* PPAddressBookHandle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPAddressBookHandle.h; sourceTree = "<group>"; };
+		A7948124219A6CC0008F8D4B /* PPAddressBookHandle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPAddressBookHandle.m; sourceTree = "<group>"; };
+		A7948125219A6CC0008F8D4B /* PPGetAddressBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPGetAddressBook.h; sourceTree = "<group>"; };
+		A7948126219A6CC0008F8D4B /* PPGetAddressBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPGetAddressBook.m; sourceTree = "<group>"; };
+		A7948127219A6CC0008F8D4B /* PPPersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPPersonModel.h; sourceTree = "<group>"; };
+		A7948128219A6CC0008F8D4B /* PPPersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PPPersonModel.m; sourceTree = "<group>"; };
+		A7948129219A6CC0008F8D4B /* PPSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PPSingleton.h; sourceTree = "<group>"; };
+		A794812D219A6CCE008F8D4B /* ChineseToPinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChineseToPinyin.m; sourceTree = "<group>"; };
+		A794812E219A6CCF008F8D4B /* AddressBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressBookViewController.m; sourceTree = "<group>"; };
+		A794812F219A6CD0008F8D4B /* AddressBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressBookViewController.h; sourceTree = "<group>"; };
+		A7948130219A6CD0008F8D4B /* ChineseToPinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChineseToPinyin.h; sourceTree = "<group>"; };
+		A7948136219A71F2008F8D4B /* CoachListVc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoachListVc.h; sourceTree = "<group>"; };
+		A7948137219A71F2008F8D4B /* CoachListVc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoachListVc.m; sourceTree = "<group>"; };
+		A7948139219A721A008F8D4B /* CoachCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoachCell.h; sourceTree = "<group>"; };
+		A794813A219A721A008F8D4B /* CoachCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoachCell.m; sourceTree = "<group>"; };
+		A794813C219A778A008F8D4B /* AddCoachListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCoachListVC.h; sourceTree = "<group>"; };
+		A794813D219A778A008F8D4B /* AddCoachListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCoachListVC.m; sourceTree = "<group>"; };
+		A794813F219A9B65008F8D4B /* SelectRoleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectRoleVC.h; sourceTree = "<group>"; };
+		A7948140219A9B65008F8D4B /* SelectRoleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectRoleVC.m; sourceTree = "<group>"; };
+		A7948142219AAF2B008F8D4B /* SelectSchoolVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSchoolVC.h; sourceTree = "<group>"; };
+		A7948143219AAF2B008F8D4B /* SelectSchoolVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSchoolVC.m; sourceTree = "<group>"; };
+		A7948145219ABA15008F8D4B /* SelectSchoolRootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSchoolRootVC.h; sourceTree = "<group>"; };
+		A7948146219ABA15008F8D4B /* SelectSchoolRootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSchoolRootVC.m; sourceTree = "<group>"; };
+		A7948148219AD0CD008F8D4B /* FMSchoolModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMSchoolModel.h; sourceTree = "<group>"; };
+		A7948149219AD0CD008F8D4B /* FMSchoolModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMSchoolModel.m; sourceTree = "<group>"; };
+		A794814B219AD939008F8D4B /* SelectSchoolCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SelectSchoolCell.h; sourceTree = "<group>"; };
+		A794814C219AD939008F8D4B /* SelectSchoolCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SelectSchoolCell.m; sourceTree = "<group>"; };
 		A798CEA421781E9300145440 /* ExamStudentsListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExamStudentsListVC.h; sourceTree = "<group>"; };
 		A798CEA521781E9300145440 /* ExamStudentsListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExamStudentsListVC.m; sourceTree = "<group>"; };
 		A798CEA721781F9F00145440 /* ExamStudentsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExamStudentsCell.h; sourceTree = "<group>"; };
@@ -2557,6 +2597,62 @@
 				A778F86E2134EEDA008A8948 /* QrCodeVC.m */,
 				A7153CDE21426164004D4441 /* StudentDetailsVC.h */,
 				A7153CDF21426164004D4441 /* StudentDetailsVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		A7948121219A6C83008F8D4B /* AddressBook(通讯录) */ = {
+			isa = PBXGroup;
+			children = (
+				A794812F219A6CD0008F8D4B /* AddressBookViewController.h */,
+				A794812E219A6CCF008F8D4B /* AddressBookViewController.m */,
+				A7948130219A6CD0008F8D4B /* ChineseToPinyin.h */,
+				A794812D219A6CCE008F8D4B /* ChineseToPinyin.m */,
+				A7948122219A6CC0008F8D4B /* PPGetAddressBook */,
+			);
+			path = "AddressBook(通讯录)";
+			sourceTree = "<group>";
+		};
+		A7948122219A6CC0008F8D4B /* PPGetAddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				A7948123219A6CC0008F8D4B /* PPAddressBookHandle.h */,
+				A7948124219A6CC0008F8D4B /* PPAddressBookHandle.m */,
+				A7948125219A6CC0008F8D4B /* PPGetAddressBook.h */,
+				A7948126219A6CC0008F8D4B /* PPGetAddressBook.m */,
+				A7948127219A6CC0008F8D4B /* PPPersonModel.h */,
+				A7948128219A6CC0008F8D4B /* PPPersonModel.m */,
+				A7948129219A6CC0008F8D4B /* PPSingleton.h */,
+			);
+			name = PPGetAddressBook;
+			path = "../../../../../../../../Downloads/AddressSearch-master/AddressSearch/PPGetAddressBook";
+			sourceTree = "<group>";
+		};
+		A7948133219A709C008F8D4B /* Coach(教练) */ = {
+			isa = PBXGroup;
+			children = (
+				A7948135219A70C5008F8D4B /* C */,
+				A7948134219A70B4008F8D4B /* V */,
+			);
+			path = "Coach(教练)";
+			sourceTree = "<group>";
+		};
+		A7948134219A70B4008F8D4B /* V */ = {
+			isa = PBXGroup;
+			children = (
+				A7948139219A721A008F8D4B /* CoachCell.h */,
+				A794813A219A721A008F8D4B /* CoachCell.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		A7948135219A70C5008F8D4B /* C */ = {
+			isa = PBXGroup;
+			children = (
+				A7948136219A71F2008F8D4B /* CoachListVc.h */,
+				A7948137219A71F2008F8D4B /* CoachListVc.m */,
+				A794813C219A778A008F8D4B /* AddCoachListVC.h */,
+				A794813D219A778A008F8D4B /* AddCoachListVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -4551,6 +4647,12 @@
 				DA4FA4981FDF7B7200C7C1F1 /* MyProfileVC.m */,
 				DA4FA49D1FDF7B7200C7C1F1 /* SetUpVC.h */,
 				DA4FA49E1FDF7B7200C7C1F1 /* SetUpVC.m */,
+				A794813F219A9B65008F8D4B /* SelectRoleVC.h */,
+				A7948140219A9B65008F8D4B /* SelectRoleVC.m */,
+				A7948142219AAF2B008F8D4B /* SelectSchoolVC.h */,
+				A7948143219AAF2B008F8D4B /* SelectSchoolVC.m */,
+				A7948145219ABA15008F8D4B /* SelectSchoolRootVC.h */,
+				A7948146219ABA15008F8D4B /* SelectSchoolRootVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -4575,6 +4677,8 @@
 				DA4FA4BA1FDF7B7200C7C1F1 /* XLPartyLoginV.m */,
 				4F44E98220C66668008330EF /* XLMineCell.h */,
 				4F44E98320C66668008330EF /* XLMineCell.m */,
+				A794814B219AD939008F8D4B /* SelectSchoolCell.h */,
+				A794814C219AD939008F8D4B /* SelectSchoolCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -4868,6 +4972,7 @@
 		DAAAEE7B1F18A9EF001D06DF /* PublicModule(公共模块) */ = {
 			isa = PBXGroup;
 			children = (
+				A7948121219A6C83008F8D4B /* AddressBook(通讯录) */,
 				A7DC8F57218986800058C654 /* UploadPictures(上传图片) */,
 				A79D3E14217F1744008BAB2C /* Address(地址选择) */,
 				A735A097212FE5F40044E9BC /* Search(搜索) */,
@@ -4914,6 +5019,7 @@
 				A7282F0F217DB9AE00117758 /* HelpToAppointment(帮预约) */,
 				A7EC17FB2176D8A4007793FC /* Training(训练场) */,
 				A71907A1213105B40072B8CF /* Subordinate(所属驾校) */,
+				A7948133219A709C008F8D4B /* Coach(教练) */,
 				A7B5A0FE2133A2BA00BC197B /* Vehicle(车辆管理) */,
 				A7BAB513218FD7DC0018CA27 /* Comments(评论) */,
 				A7AC8171212C2A1100C6AB6C /* MyNews(消息) */,
@@ -5005,6 +5111,8 @@
 				DAE210AF1EF2867A000EAB90 /* ModelGuaideIma.m */,
 				DA08F8E01FA08BDC000A63BD /* FMMainModel.h */,
 				DA08F8E11FA08BDC000A63BD /* FMMainModel.m */,
+				A7948148219AD0CD008F8D4B /* FMSchoolModel.h */,
+				A7948149219AD0CD008F8D4B /* FMSchoolModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5546,6 +5654,7 @@
 				A76CA20B216CA0740097798D /* MyPicturePosterListVC.m in Sources */,
 				A7EC18052176DA99007793FC /* FMTableViewCell.m in Sources */,
 				A7B5A10A2133C86800BC197B /* RegistrationInformationVC.m in Sources */,
+				A794812A219A6CC0008F8D4B /* PPAddressBookHandle.m in Sources */,
 				DA867D351F58F86B00D4D011 /* NSError+JYHandle.m in Sources */,
 				DAE212801EF2867B000EAB90 /* FMSearchBarViewController.m in Sources */,
 				DA78C30D1F5D41A3009BAA90 /* YTKChainRequest.m in Sources */,
@@ -5626,6 +5735,7 @@
 				DA0346CD1F509098008E7BE1 /* UILabel+AutoSize.m in Sources */,
 				DA0346991F509098008E7BE1 /* UIBezierPath+LxThroughPointsBezier.m in Sources */,
 				DA0346C01F509098008E7BE1 /* UIImage+PDF.m in Sources */,
+				A7948132219A6CD0008F8D4B /* AddressBookViewController.m in Sources */,
 				A7E97A0F21354B4500EA6F14 /* JQAVCaptureViewController.m in Sources */,
 				DA867D3E1F58FD4C00D4D011 /* UIImage+FMQrcodeBarcode.m in Sources */,
 				DAE2123F1EF2867B000EAB90 /* CommentController.m in Sources */,
@@ -5639,6 +5749,7 @@
 				A75D2CD9214BC01D0065FD7F /* FMJS.m in Sources */,
 				DA0346B61F509098008E7BE1 /* UIImage+BetterFace.m in Sources */,
 				A78E2DD6216B36C400CBAED1 /* PosterVC.m in Sources */,
+				A7948144219AAF2B008F8D4B /* SelectSchoolVC.m in Sources */,
 				DA03464C1F509098008E7BE1 /* NSDictionary+URL.m in Sources */,
 				A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */,
 				DA03470B1F509098008E7BE1 /* UIWebView+Alert.m in Sources */,
@@ -5741,7 +5852,9 @@
 				DA03464E1F509098008E7BE1 /* NSException+Trace.m in Sources */,
 				DA78C30C1F5D41A3009BAA90 /* YTKBatchRequestAgent.m in Sources */,
 				A7EC186021773E29007793FC /* UIColor+JXAdd.m in Sources */,
+				A7948141219A9B65008F8D4B /* SelectRoleVC.m in Sources */,
 				A7BA6F4B215F613C00A5FA0D /* AdmissionsVC.m in Sources */,
+				A7948147219ABA15008F8D4B /* SelectSchoolRootVC.m in Sources */,
 				DA867D221F58F01300D4D011 /* NSFileManager+JYPath.m in Sources */,
 				DA67305B1FB08033002B6894 /* MSSBrowseRemindView.m in Sources */,
 				DAE212401EF2867B000EAB90 /* CommentsModel.m in Sources */,
@@ -5769,6 +5882,7 @@
 				DA0346611F509098008E7BE1 /* NSObject+GCD.m in Sources */,
 				DA959E4D1F53BEE9002389F6 /* UIWindow+CurrentViewController.m in Sources */,
 				DA0346731F509098008E7BE1 /* NSString+MIME.m in Sources */,
+				A794813B219A721A008F8D4B /* CoachCell.m in Sources */,
 				DA0346E61F509098008E7BE1 /* UITextField+FMExtenion.m in Sources */,
 				4FF9266220C8D93700AB3E43 /* HomeControlsV.m in Sources */,
 				A7EC187821773E29007793FC /* JXCategoryTitleImageView.m in Sources */,
@@ -5788,6 +5902,7 @@
 				A7EC18082176E7A2007793FC /* TrainingVC.m in Sources */,
 				DA0347031F509098008E7BE1 /* UIViewController+BackButtonTouched.m in Sources */,
 				DA0346441F509098008E7BE1 /* NSDate+Utilities.m in Sources */,
+				A794812C219A6CC0008F8D4B /* PPPersonModel.m in Sources */,
 				DA0346D81F509098008E7BE1 /* UIResponder+FirstResponder.m in Sources */,
 				A7BA6F4E215F61BD00A5FA0D /* PicturePosterListVC.m in Sources */,
 				A7EC185C21773E29007793FC /* JXCategoryBaseView.m in Sources */,
@@ -5806,6 +5921,7 @@
 				DA0346621F509098008E7BE1 /* NSObject+KVOBlocks.m in Sources */,
 				DA867D551F5904EF00D4D011 /* JYAsyncRun.m in Sources */,
 				DA867D2B1F58F47D00D4D011 /* NSObject+FMEncode.m in Sources */,
+				A794813E219A778A008F8D4B /* AddCoachListVC.m in Sources */,
 				DAE2129C1EF2867B000EAB90 /* FMMediator+DesignerModuleActions.m in Sources */,
 				DA03467D1F509098008E7BE1 /* NSString+UUID.m in Sources */,
 				A7EC187421773E29007793FC /* JXCategoryTitleCellModel.m in Sources */,
@@ -5835,6 +5951,7 @@
 				DA03468B1F509098008E7BE1 /* CAAnimation+Blocks.m in Sources */,
 				A7E97A0B21354B4500EA6F14 /* IDAuthViewController.m in Sources */,
 				A7E97A1121354B4500EA6F14 /* JQIDCardScaningView.m in Sources */,
+				A794814A219AD0CD008F8D4B /* FMSchoolModel.m in Sources */,
 				A7A213BB212E4F9300920678 /* ChangeCardVC.m in Sources */,
 				DA03464F1F509098008E7BE1 /* NSFileHandle+readLine.m in Sources */,
 				DAE212831EF2867B000EAB90 /* WebViewController1.m in Sources */,
@@ -5842,6 +5959,7 @@
 				A79DD8382137DFE800665245 /* UITextView+ZWPlaceHolder.m in Sources */,
 				4F0944971F39A83200BA80E5 /* CommentDetailsVC.m in Sources */,
 				DA4FA4EB1FE2757800C7C1F1 /* LMWebProgressLayer.m in Sources */,
+				A794812B219A6CC0008F8D4B /* PPGetAddressBook.m in Sources */,
 				DA4FA4C21FDF7B7300C7C1F1 /* LoginVC.m in Sources */,
 				DA0346511F509098008E7BE1 /* NSHTTPCookieStorage+FreezeDry.m in Sources */,
 				DA0347141F509098008E7BE1 /* UIWindow+Hierarchy.m in Sources */,
@@ -5944,6 +6062,7 @@
 				DAE212AF1EF2867B000EAB90 /* Target_User.m in Sources */,
 				DA0346911F509098008E7BE1 /* UIAlertView+Block.m in Sources */,
 				DA0346C51F509098008E7BE1 /* UIImageView+Addition.m in Sources */,
+				A794814D219AD939008F8D4B /* SelectSchoolCell.m in Sources */,
 				DA867D301F58F83900D4D011 /* NSArray+JYSafe.m in Sources */,
 				DA03469F1F509098008E7BE1 /* UIButton+FMExtension.m in Sources */,
 				A7EC185B21773E29007793FC /* JXCategoryBaseCellModel.m in Sources */,
@@ -5988,6 +6107,7 @@
 				DA0346661F509098008E7BE1 /* NSRunLoop+PerformBlock.m in Sources */,
 				DAE212861EF2867B000EAB90 /* DHGuidePageHUD.m in Sources */,
 				4FF9265920C8CE0600AB3E43 /* CGXAddressPcikerView.m in Sources */,
+				A7948138219A71F2008F8D4B /* CoachListVc.m in Sources */,
 				A7EC186721773E29007793FC /* JXCategoryIndicatorBackgroundView.m in Sources */,
 				4F6F9CF82021620E00D571DA /* XLSingleton.m in Sources */,
 				DA03462E1F509098008E7BE1 /* NSManagedObjectContext+FetchRequestsConstructors.m in Sources */,
@@ -5995,6 +6115,7 @@
 				A76CA214216CA2C30097798D /* MyPictureCell.m in Sources */,
 				DA03470C1F509098008E7BE1 /* UIWebView+Blocks.m in Sources */,
 				DA0346961F509098008E7BE1 /* UIBarButtonItem+Action.m in Sources */,
+				A7948131219A6CD0008F8D4B /* ChineseToPinyin.m in Sources */,
 				DA0346CB1F509098008E7BE1 /* UIImageView+Reflect.m in Sources */,
 				DA6730591FB08033002B6894 /* MSSBrowseModel.m in Sources */,
 				DA0346C61F509098008E7BE1 /* UIImageView+BetterFace.m in Sources */,

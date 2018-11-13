@@ -35,7 +35,7 @@
 #import "GuideView.h"
 
 //#import "XLUPPay.h"
-
+#import "SelectRoleVC.h"
 #import "LoginVC.h"
 #import <IQKeyboardManager/IQKeyboardManager.h>
 // 如果需要使 idfa功能所需要引 的头 件(可选) #import <AdSupport/AdSupport.h>
@@ -98,9 +98,10 @@
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         self.window.rootViewController  = TabBarControllerConfig.tabBarController ;
     }else{
-        LoginVC *Loginvc = [[LoginVC alloc] init];
+        SelectRoleVC *Loginvc = [[SelectRoleVC alloc] init];
+        EasyNavigationController * LoginvcNavigationController = [[EasyNavigationController alloc]initWithRootViewController:Loginvc];
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        self.window.rootViewController  = Loginvc ;
+        self.window.rootViewController  = LoginvcNavigationController ;
     }
     
     

@@ -9,5 +9,5 @@
 #import "FMBaseViewController.h"
 
 @interface LoginVC : FMBaseViewController
-
+@property (nonatomic , assign)NSInteger type;  ///0 教练  1.分校负责人
 @end
