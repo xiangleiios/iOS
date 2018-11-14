@@ -28,7 +28,7 @@
 #import "XLWKWebVC.h"
 
 #import "BranchSchoolListVC.h"
-
+#import "CoachListVc.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -288,6 +288,19 @@
         make.left.right.height.mas_equalTo(jiaxiao);
         make.top.mas_equalTo(jiaxiao.mas_bottom).mas_offset(KFit_H6S(5));
     }];
+    User *user = [User UserOb];
+    if ([user.type  isEqual: @"1"]) {
+        UIButton *jiaolian = [[UIButton alloc] init];
+        [jiaolian addTarget:self action:@selector(toCoachListVC) forControlEvents:UIControlEventTouchUpInside];
+        [self.backview addSubview:jiaolian];
+        [jiaolian setImage:[UIImage imageNamed:@"xlcgl"] forState:UIControlStateNormal];
+        
+        [self.backview addSubview:jiaolian];
+        [jiaolian mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.height.mas_equalTo(cehliang);
+            make.top.mas_equalTo(cehliang.mas_bottom).mas_offset(KFit_H6S(5));
+        }];
+    }
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(30)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
@@ -312,10 +325,14 @@
 
 
 - (void)toMingpan{
-    BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-//    BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
+    User *user = [User UserOb];
+    if ([user.type  isEqual: @"1"]) {
+        BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)toAddStudent{
@@ -329,6 +346,11 @@
 
 - (void)toPracticeCarListVC{
     PracticeCarListVC *vc = [[PracticeCarListVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)toCoachListVC{
+    CoachListVc *vc = [[CoachListVc alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)statistical:(UIButton *)senter{

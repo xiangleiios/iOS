@@ -236,6 +236,8 @@
             [alert showPrompt];
             [XLSingleton singleton].scanPhotoIp =responseObject[@"urliIp"];
             User *user=[User UserOb];
+            
+            user.type = [NSString stringWithFormat:@"%ld",(long)self.type];
             user.accounttype=[NSNumber numberWithInteger:accountTypePhone];
             [user UserSave:responseObject];
 //            [[XLCache singleton] cacheWhitValue:responseObject[@"schoolList"] AndKey:SchoolList];

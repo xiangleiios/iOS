@@ -91,11 +91,10 @@
 
 
 - (void)toLogin:(UIButton *)senter{
-    SelectSchoolVC *vc = [[SelectSchoolVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-//    LoginVC *vc = [[LoginVC alloc] init];
-//    vc.type = senter.tag;
+//    SelectSchoolVC *vc = [[SelectSchoolVC alloc] init];
 //    [self.navigationController pushViewController:vc animated:YES];
-//    [self presentViewController:vc animated:NO completion:nil];
+    LoginVC *vc = [[LoginVC alloc] init];
+    vc.type = senter.tag;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 @end

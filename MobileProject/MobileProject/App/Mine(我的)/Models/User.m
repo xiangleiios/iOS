@@ -144,6 +144,21 @@ static User *user  =  nil;
     } seq:1];
     
 }
+
+#pragma mark -用户类型区分
+@synthesize type = _type;
+- (void)setType:(NSString *)type{
+    NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+    [defaults setObject:type forKey:@"userType"];
+    [defaults synchronize];
+}
+- (NSString *)type{
+    NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+    _type = [defaults objectForKey:@"userType"];
+    return _type;
+}
+
+
 - (void)setalis{
     
     User* bean = [User UserOb];
