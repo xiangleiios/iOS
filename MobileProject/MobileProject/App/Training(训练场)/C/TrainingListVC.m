@@ -63,7 +63,7 @@
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
         make.left.right.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view).mas_offset(KFit_H6S(150));
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
     }];
     self.table.delegate=self;
     self.table.dataSource=self;

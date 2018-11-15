@@ -123,23 +123,25 @@
             make.left.top.mas_equalTo(self).mas_offset(KFit_W6S(30));
             make.height.mas_equalTo(KFit_H6S(30));
         }];
-        
-        UIButton *but = [[UIButton alloc] init];
-        self.addBut = but;
-        [self addSubview:but];
-        but.layer.cornerRadius = 3;
-        but.layer.masksToBounds = YES;
-        but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
-        [but setTitle:@"+ 添加当日时段" forState:UIControlStateNormal];
-        [but setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [but setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
-        [but setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
-        [but mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(self).mas_offset(-KFit_W6S(30));
-            make.centerY.mas_equalTo(lb);
-            make.height.mas_equalTo(KFit_H6S(50));
-            make.width.mas_equalTo(KFit_W6S(250));
-        }];
+        if (USERFZR) {
+            
+            UIButton *but = [[UIButton alloc] init];
+            self.addBut = but;
+            [self addSubview:but];
+            but.layer.cornerRadius = 3;
+            but.layer.masksToBounds = YES;
+            but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+            [but setTitle:@"+ 添加当日时段" forState:UIControlStateNormal];
+            [but setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            [but setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+            [but setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
+            [but mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.right.mas_equalTo(self).mas_offset(-KFit_W6S(30));
+                make.centerY.mas_equalTo(lb);
+                make.height.mas_equalTo(KFit_H6S(50));
+                make.width.mas_equalTo(KFit_W6S(250));
+            }];
+        }
         UILabel *lbline = [[UILabel alloc] init];
         lbline.backgroundColor = kColor_N(240, 240, 240);
         [self addSubview:lbline];

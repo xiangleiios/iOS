@@ -362,7 +362,7 @@
 //                NSLog(@"%@",[XLCache singleton].teamCode_value[[selectRow intValue]]);
 //            }];
 //        };
-        XLInformationV *peixun = [[XLInformationV alloc] informationWithTitle:@"招生培训资料"];
+        XLInformationV *peixun = [[XLInformationV alloc] informationWithTitle:@"招生培训资料" Subtitle:@"" Must:YES];
         
         self.seniority = [[XLInformationV alloc] informationWithTitle:@"教龄" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.phone = [[XLInformationV alloc] informationWithTitle:@"招生电话" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];

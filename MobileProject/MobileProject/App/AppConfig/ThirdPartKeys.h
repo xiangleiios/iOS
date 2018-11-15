@@ -36,4 +36,8 @@
 
 //友盟
 #define keyUMengAppkey @"59b8dc10aed1794fab00001d"
+
+
+/// 高德
+#define GDAppkey @"f0b7f58e0e482bcaf3f92d4a62523b11"
 #endif /* ThirdPartKeys_h */

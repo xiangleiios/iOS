@@ -219,16 +219,17 @@
         make.left.mas_equalTo(lbthree).mas_offset(KFit_W6S(10));
         make.right.mas_equalTo(lbthree).mas_offset(-KFit_W6S(40));
     }];
-    
-    self.jiaxiaoChoose = [[UIButton alloc] init];
-    [self.imgback addSubview:self.jiaxiaoChoose];
-    [self.jiaxiaoChoose setImage:[UIImage imageNamed:@"down_click"] forState:UIControlStateNormal];
-    [self.jiaxiaoChoose addTarget:self action:@selector(chooseJX) forControlEvents:UIControlEventTouchUpInside];
-    [self.jiaxiaoChoose mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(lbthree);
-        make.right.mas_equalTo(lbthree.mas_right).mas_offset(-KFit_W6S(10));
-        make.width.height.mas_equalTo(KFit_W6S(40));
-    }];
+    if (USERFZR) {
+        self.jiaxiaoChoose = [[UIButton alloc] init];
+        [self.imgback addSubview:self.jiaxiaoChoose];
+        [self.jiaxiaoChoose setImage:[UIImage imageNamed:@"down_click"] forState:UIControlStateNormal];
+        [self.jiaxiaoChoose addTarget:self action:@selector(chooseJX) forControlEvents:UIControlEventTouchUpInside];
+        [self.jiaxiaoChoose mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(lbthree);
+            make.right.mas_equalTo(lbthree.mas_right).mas_offset(-KFit_W6S(10));
+            make.width.height.mas_equalTo(KFit_W6S(40));
+        }];
+    }
     
     self.name = [[UILabel alloc] init];
 //    self.name.text = @"想想想";

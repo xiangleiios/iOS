@@ -57,17 +57,18 @@
 - (void)laodNavigation{
     [self.navigationView setTitle:@"预约练车"];
     kWeakSelf(self)
-    UIButton *navBut = [self.navigationView addRightButtonWithTitle:@"设置" clickCallBack:^(UIView *view) {
-        TimeSetVC *vc = [[TimeSetVC alloc] init];
-        vc.groundId = weakself.groundId;
-        vc.model = weakself.model;
-        [weakself.navigationController pushViewController:vc animated:YES];
-        
-    }];
-    [navBut setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
-    navBut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    //    [self.choose setTitle:@"完成" forState:UIControlStateSelected];
     
+    if (USERFZR) {
+        UIButton *navBut = [self.navigationView addRightButtonWithTitle:@"设置" clickCallBack:^(UIView *view) {
+            TimeSetVC *vc = [[TimeSetVC alloc] init];
+            vc.groundId = weakself.groundId;
+            vc.model = weakself.model;
+            [weakself.navigationController pushViewController:vc animated:YES];
+            
+        }];
+        [navBut setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
+        navBut.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    }
 }
 - (void)loadscroll{
     self.scroll = [[UIScrollView alloc] init];
@@ -146,7 +147,7 @@
 
 - (void)loadEmptyV{
     self.empty = [[EmptyV alloc] init];
-    self.empty.title.text = @"您还没有设置默认的预约练车时段哦~";
+    
     [self.view addSubview:self.empty];
     [self.empty mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.scroll.mas_bottom);
@@ -155,6 +156,13 @@
     }];
     self.empty.hidden = YES;
     [self.empty.but addTarget:self action:@selector(toTimeSetVC) forControlEvents:UIControlEventTouchUpInside];
+    if (USERFZR) {
+        self.empty.title.text = @"您还没有设置默认的预约练车时段哦~";
+        self.empty.but.hidden = NO;
+    }else{
+        self.empty.title.text = @"管理员还没有设置默认预约练车时段\n请与分校管理员联系哦~";
+        self.empty.but.hidden = YES;
+    }
 }
 
 - (void)loadEmptytwoV{

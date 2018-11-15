@@ -104,4 +104,6 @@
 #define kTabBarH 49.0f
 
 #define ZTColor kColor_N(117, 127, 149)
+
+#define USERFZR [[User UserOb].type  isEqual: @"1"]
 #endif /* FMBaseMacro_h */

@@ -9,6 +9,7 @@
 #import "SelectRoleVC.h"
 #import "LoginVC.h"
 #import "SelectSchoolVC.h"
+#import "GDMapVC.h"
 @implementation SelectRoleVC
 - (void)viewDidLoad {
     [super viewDidLoad];

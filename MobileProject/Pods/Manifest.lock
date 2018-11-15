@@ -14,6 +14,13 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - AMap2DMap (5.6.1):
+    - AMapFoundation (~> 1.4)
+  - AMapFoundation (1.5.5)
+  - AMapLocation (2.6.1):
+    - AMapFoundation (~> 1.4)
+  - AMapSearch (6.5.0):
+    - AMapFoundation (~> 1.4)
   - Aspects (1.4.1)
   - BANetManager (2.2.2):
     - AFNetworking
@@ -83,6 +90,9 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
+  - AMap2DMap
+  - AMapLocation
+  - AMapSearch
   - Aspects (~> 1.4.1)
   - BANetManager (~> 2.2.2)
   - CYLTabBarController (~> 1.14.2)
@@ -114,6 +124,10 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - AMap2DMap
+    - AMapFoundation
+    - AMapLocation
+    - AMapSearch
     - Aspects
     - BANetManager
     - CYLTabBarController
@@ -144,6 +158,10 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  AMap2DMap: cac76bc057de18a1641f34df6b50bf5bc6b23571
+  AMapFoundation: 652bd70ba579f48a98bdf0c74d6e62a89a06ca58
+  AMapLocation: cf024b53dc03663efb4ea4bcce27d4cce58bb97a
+  AMapSearch: c22d8c98e04aad30615834e567781ec1367c4f36
   Aspects: 7595ba96a6727a58ebcbfc954497fc5d2fdde546
   BANetManager: bd2e6d0bcb5fc7397f3098b90c3bcf25a04127b5
   CYLTabBarController: 5eac1940e20aa934a609ecec38837da63a41dcfe
@@ -172,6 +190,6 @@ SPEC CHECKSUMS:
   XAspect: db50bf487f92dbb8557a7a5365556966c8493af8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
 
-PODFILE CHECKSUM: 24180398681b6b46ad1c53ae4f632fd8b2a60449
+PODFILE CHECKSUM: a14245a30cd7b2ac1a00c4f23b7ee1f02e6360b5
 
 COCOAPODS: 1.5.3

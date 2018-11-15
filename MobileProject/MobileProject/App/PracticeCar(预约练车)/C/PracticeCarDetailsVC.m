@@ -71,14 +71,18 @@
     if (section == 0) {
         PracticeCarHeaderOneV *v = [[PracticeCarHeaderOneV alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(250))];
         v.dic = dic;
-        [v.addBut addTarget:self action:@selector(toEditTimeVC) forControlEvents:UIControlEventTouchUpInside];
-        v.modifyBut.tag =section;
-        [v.modifyBut addTarget:self action:@selector(xiugai:) forControlEvents:UIControlEventTouchUpInside];
+        if (USERFZR) {
+            [v.addBut addTarget:self action:@selector(toEditTimeVC) forControlEvents:UIControlEventTouchUpInside];
+            v.modifyBut.tag =section;
+            [v.modifyBut addTarget:self action:@selector(xiugai:) forControlEvents:UIControlEventTouchUpInside];
+        }
         return v;
     }else{
     PracticeCarHeaderV *v = [[PracticeCarHeaderV alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(160))];
-        v.modifyBut.tag =section;
-        [v.modifyBut addTarget:self action:@selector(xiugai:) forControlEvents:UIControlEventTouchUpInside];
+        if (USERFZR) {
+            v.modifyBut.tag =section;
+            [v.modifyBut addTarget:self action:@selector(xiugai:) forControlEvents:UIControlEventTouchUpInside];
+        }
         v.dic = dic;
     return v;
     }

@@ -89,9 +89,9 @@
     // 设置系统返回按钮为样式
     options.navigationBackButtonImage = [UIImage imageNamed:@"arrows_left_icon"];
     
-    
+    XLCache *cache = [XLCache singleton];
 
-    if ([User UserOb].UserLogin) {
+    if ([User UserOb].UserLogin && cache.teamCode_title.count > 0) {
         CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
         self.tab = TabBarControllerConfig;
         TabBarControllerConfig.tabBarController.delegate=self;

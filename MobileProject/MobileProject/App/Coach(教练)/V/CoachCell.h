@@ -12,6 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface CoachCell : UITableViewCell
 @property (nonatomic ,strong)FMMainModel *model;
+@property (nonatomic , strong)UIImageView *head;
+@property (nonatomic , strong)UIImageView *xinImg;
+@property (nonatomic , strong)UILabel *name;
+@property (nonatomic , strong)UILabel *pho;
+@property (nonatomic , strong)UILabel *rank;
+@property (nonatomic , strong)UILabel *typeOne;
+@property (nonatomic , strong)UILabel *typeTwo;
+@property (nonatomic , strong)UILabel *typeThree;
+
 @end
 
 NS_ASSUME_NONNULL_END

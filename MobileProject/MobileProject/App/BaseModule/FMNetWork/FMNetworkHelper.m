@@ -13,7 +13,7 @@
 #import <AssetsLibrary/ALAssetsGroup.h>
 #import <AssetsLibrary/ALAssetRepresentation.h>
 #import "FMHelper.h"
-
+#import "SelectRoleVC.h"
 @implementation FMNetworkHelper
 
 #pragma mark - 网络类型判断
@@ -115,10 +115,11 @@
                 KKLog(@"%ld",(long)index);
                 if (index == 2) {
                     [[User UserOb] UserQuit];
-                    LoginVC *Loginvc = [[LoginVC alloc] init];
+                    SelectRoleVC *Loginvc = [[SelectRoleVC alloc] init];
+                    EasyNavigationController * LoginvcNavigationController = [[EasyNavigationController alloc]initWithRootViewController:Loginvc];
                     AppDelegate *delegete = (AppDelegate *)[UIApplication sharedApplication].delegate;
                     UIViewController *vc = delegete.window.rootViewController;
-                    delegete.window.rootViewController = Loginvc;
+                    delegete.window.rootViewController = LoginvcNavigationController;
                     vc = nil;
 //                    [self presentViewController:Loginvc animated:YES completion:NULL];
                 }

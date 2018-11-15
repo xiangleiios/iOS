@@ -40,6 +40,7 @@
     
     UILabel *noInfoLabel = [[UILabel alloc] init];
     self.title = noInfoLabel;
+    self.title.numberOfLines = 0;
     noInfoLabel.textAlignment = NSTextAlignmentCenter;
     noInfoLabel.textColor = ZTColor;
     noInfoLabel.backgroundColor = [UIColor clearColor];
@@ -48,7 +49,7 @@
     [noInfoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self);
         make.top.mas_equalTo(carImageView.mas_bottom).mas_offset(KFit_H6S(40));
-        make.height.mas_equalTo(KFit_H6S(40));
+//        make.height.mas_equalTo(KFit_H6S(40));
     }];
 
     self.but = [[UIButton alloc] init];

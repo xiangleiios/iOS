@@ -41,6 +41,12 @@
 #pragma mark 手机号登陆
 #define GETmembersLogin KURL(@"app/login?mobile=%@&password=%@")
 
+#pragma mark 手机号登陆- 教练
+#define GETCoachmembersLogin KURL(@"app/coach/login?mobile=%@&password=%@")
+
+#pragma mark 手机号登陆 - 负责人
+#define GETTeammembersLogin KURL(@"app/team/login?mobile=%@&password=%@")
+
 #pragma mark 分校车辆管理
 #define POSTTeamCarLis KURL(@"app/team/teamCar/teamCarList")
 
@@ -261,6 +267,9 @@
 
 #pragma mark -点赞操作接口
 #define POSTTeamSchoolDoPraise KURL(@"app/v1_1/team/teamSchool/doPraise")
+
+#pragma mark -教练列表
+#define POSTTeamSchoolCoachCoachList KURL(@"app/school/v1_2/teamSchoolCoach/coachList")
 
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------

@@ -287,6 +287,8 @@
 	<string>需要您的同意,才能访问日历</string>
 	<key>NSCameraUsageDescription</key>
 	<string>您可以发布图片，跟换头像</string>
+	<key>NSContactsUsageDescription</key>
+	<string>需要您的同意才能从通讯录导入教练</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string></string>
 	<key>NSLocationUsageDescription</key>

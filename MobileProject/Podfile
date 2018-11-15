@@ -51,6 +51,8 @@ pod 'DYSafeObject', '~> 0.1.1' #为了避免线上项目中的用到的数据而
 pod 'IQKeyboardManager','~> 6.1.1'    #键盘处理
 pod 'TZImagePickerController'
 #pod 'JXCategoryView'   #分页切换滚动视图
-
+pod 'AMap2DMap'  #高德地图 2D地图SDK
+pod 'AMapSearch' #高德地图 搜索功能
+pod 'AMapLocation' #高德地图 定位SDK
 
 end

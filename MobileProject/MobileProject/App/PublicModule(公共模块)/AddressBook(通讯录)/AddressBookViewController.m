@@ -46,6 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationView setTitle:@"通讯录"];
     self.title = @"通讯录";
 //    _titleArr = @[@"奥山集团办公信息化",@"我的部门",@"地产事业部",@"财务部门",@"行政部门"];
     [self createTableView];
@@ -73,7 +74,7 @@
 }
 
 -(void)createTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarH, SCREEN_WIDTH, SCREEN_HEIGHT-kNavBarH) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
@@ -104,7 +105,7 @@
         
     } authorizationFailure:^{
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"请在iPhone的“设置-隐私-通讯录”选项中，允许奥山移动办公访问您的通讯录"
+                                                        message:@"请在iPhone的“设置-隐私-通讯录”选项中，允许中天驾考访问您的通讯录"
                                                        delegate:nil
                                               cancelButtonTitle:@"知道了"
                                               otherButtonTitles:nil];

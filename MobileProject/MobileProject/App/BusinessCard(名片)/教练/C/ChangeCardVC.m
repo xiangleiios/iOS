@@ -12,6 +12,7 @@
 #import "CourseV.h"
 #import "TemplateV.h"
 #import "XLCache.h"
+#import "UploadPicturesV.h"
 #define BUT_W KFit_W6S(150)
 @interface ChangeCardVC ()<UIImagePickerControllerDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -30,6 +31,11 @@
 @property (nonatomic ,strong)XLInformationV *environment;
 @property (nonatomic ,strong)NSString *scanPhotoIp;  //图片头
 @property (nonatomic , strong)NSMutableArray *imageviewArr;
+
+
+@property (nonatomic , strong)UploadPicturesV *jiaoXueHuanJing;
+@property (nonatomic , strong)UploadPicturesV *jiaoXueRongYu;
+@property (nonatomic , strong)UploadPicturesV *jiaoXueChengGuo;
 @end
 
 @implementation ChangeCardVC
@@ -128,7 +134,7 @@
 }
 
 - (void)loadSubview{
-    XLInformationV *jiBenZiLiao = [[XLInformationV alloc] informationWithTitle:@"基本资料"];
+    XLInformationV *jiBenZiLiao = [[XLInformationV alloc] informationWithTitle:@"基本信息" Subtitle:@"" Must:YES];
     [self.backview addSubview:jiBenZiLiao];
     [jiBenZiLiao mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.mas_equalTo(self.backview);
@@ -191,7 +197,7 @@
     
     self.course = [[CourseFormsV alloc] initWithDataArr:_model.classList];
     self.course.senterBlockInt = ^(int tag) {
-        CourseV *v = [[CourseV alloc] initWithDictionary:_model.classList[tag]];
+        CourseV *v = [[CourseV alloc] initWithDictionary:weakself.model.classList[tag]];
         v.vc = weakself;
         v.idid = weakself.model.idid;
         [v show];
@@ -244,7 +250,7 @@
         make.right.bottom.mas_equalTo(inqutBack).mas_offset(-KFit_W6S(50));
     }];
     
-    _environment = [[XLInformationV alloc] informationWithTitle:@"教学环境图" ButTile:nil ButImg:nil];
+    _environment = [[XLInformationV alloc] informationWithTitle:@"教学环境" Subtitle:@"最多可上传9张" Must:YES];
     [self.backview addSubview:_environment];
     [_environment mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(inqutBack.mas_bottom).mas_offset(KFit_H6S(20));
@@ -252,186 +258,67 @@
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
-    self.imgBackView = [[XLView alloc] init];
-    self.imgBackView.backgroundColor = [UIColor whiteColor];
-    [self.backview addSubview:self.imgBackView];
-    
-    self.UpAttachment=[[UIButton alloc]initWithFrame:CGRectMake(KFit_W6S(30), KFit_W6S(30), BUT_W, BUT_W)];
-    [self.UpAttachment setImage:[UIImage imageNamed:@"add_photo"] forState:UIControlStateNormal];
-    [self.UpAttachment addTarget:self action:@selector(changeUp) forControlEvents:UIControlEventTouchUpInside];
-    [self.imgBackView addSubview:self.UpAttachment];
-    
-//    se
-    
-    [self.imgBackView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.backview);
-        make.top.mas_equalTo(_environment.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo([self.imgBackView getLayoutCellHeightWithFlex:KFit_H6S(30)]);
+    self.jiaoXueHuanJing = [[UploadPicturesV alloc] init];
+    [self.backview addSubview:self.jiaoXueHuanJing];
+    self.jiaoXueHuanJing.vc = self;
+    self.jiaoXueHuanJing.num = 9;
+    [self.jiaoXueHuanJing mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view );
+        make.top.mas_equalTo(_environment.mas_bottom);
+        make.height.mas_equalTo(KFit_H6S(210));
     }];
+    
+    XLInformationV *ry =[[XLInformationV alloc] informationWithTitle:@"驾校荣誉" Subtitle:@"最多可上传3张" Must:NO];
+    [self.backview addSubview:ry];
+    [ry mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.jiaoXueHuanJing.mas_bottom).mas_offset(KFit_H6S(20));
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+    self.jiaoXueRongYu = [[UploadPicturesV alloc] init];
+    [self.backview addSubview:self.jiaoXueRongYu];
+    self.jiaoXueRongYu.vc = self;
+    self.jiaoXueRongYu.num = 3;
+    [self.jiaoXueRongYu mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view );
+        make.top.mas_equalTo(ry.mas_bottom);
+        make.height.mas_equalTo(KFit_H6S(210));
+    }];
+    
+    
+    XLInformationV *cg =[[XLInformationV alloc] informationWithTitle:@"教练成果" Subtitle:@"最多可上传3张" Must:NO];
+    [self.backview addSubview:cg];
+    [cg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.jiaoXueRongYu.mas_bottom).mas_offset(KFit_H6S(20));
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+    self.jiaoXueChengGuo = [[UploadPicturesV alloc] init];
+    [self.backview addSubview:self.jiaoXueChengGuo];
+    self.jiaoXueChengGuo.vc = self;
+    self.jiaoXueChengGuo.num = 3;
+    [self.jiaoXueChengGuo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view );
+        make.top.mas_equalTo(cg.mas_bottom);
+        make.height.mas_equalTo(KFit_H6S(210));
+    }];
+    
+//    self.imgBackView = [[XLView alloc] init];
+//    self.imgBackView.backgroundColor = [UIColor whiteColor];
+//    [self.backview addSubview:self.imgBackView];
+//
+//
+//
+//    [self.imgBackView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(self.backview);
+//        make.top.mas_equalTo(_environment.mas_bottom).mas_offset(1);
+//        make.height.mas_equalTo([self.imgBackView getLayoutCellHeightWithFlex:KFit_H6S(30)]);
+//    }];
     
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
-
-#pragma mark - 要上传的图片显示；
-- (void)loadimgview{
-    
-    int j=0;
-    for (int i=0; i<self.imageviewArr.count; i++) {
-        UIImageView *imgv= self.imageviewArr[i];
-        imgv.frame=CGRectMake(i%3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30),i/3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30), BUT_W, BUT_W);;
-        [self.imgBackView addSubview:imgv];
-        /*删除按钮 */
-        UIButton *but=[[UIButton alloc]init];
-        [self.backview addSubview:but];
-        [but mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(imgv).mas_offset(-KFit_H6S(35));
-            make.left.mas_equalTo(imgv.mas_right).mas_offset(-KFit_H6S(35));
-            make.width.height.mas_equalTo(KFit_H6S(80));
-        }];
-        [but setImage:[UIImage imageNamed:@"delete_red_icon"] forState:UIControlStateNormal];
-//        but.backgroundColor = [UIColor redColor];
-        but.tag=i;
-        [but addTarget:self action:@selector(deleteimgdata:) forControlEvents:UIControlEventTouchUpInside];
-        [self.butarr addObject:but];
-        j++;
-    }
-    
-    if (j >= 9) {
-        self.UpAttachment.hidden = YES;
-    }else{
-        self.UpAttachment.hidden = NO;
-        self.UpAttachment.frame=CGRectMake(j%3*(KFit_W6S(20)+BUT_W) + KFit_W6S(30),j/3*(KFit_W6S(20)+BUT_W)+ KFit_W6S(30), BUT_W, BUT_W);
-    }
-    
-    [self.imgBackView mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.backview);
-        make.top.mas_equalTo(_environment.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo([self.imgBackView getLayoutCellHeightWithFlex:KFit_H6S(30)]);
-    }];
-    
-    self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
-    self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
-}
-#pragma mark -删除图片和数据
-- (void)deleteimgdata:(UIButton *)sender{
-    for (UIImageView *imgv in self.imageviewArr) {
-        [imgv removeFromSuperview];
-    }
-    for (UIButton *but in self.butarr) {
-        [but removeFromSuperview];
-    }
-    [self.imgarr removeObjectAtIndex:sender.tag];
-    [self.imageviewArr removeObjectAtIndex:sender.tag];
-    [self loadimgview];
-}
-
-- (void)changeUp{
-    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"请选择添加途径" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    //默认只有标题 没有操作的按钮:添加操作的按钮 UIAlertAction
-    
-    UIAlertAction *cancelBtn = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-//        NSLog(@"取消");
-        [self PhotoLibrary];
-    }];
-    
-    UIAlertAction *cancelBtXJ = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        [self xiangji];
-        NSLog(@"取消");
-
-    }];
-    //添加确定
-    UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"确定");
-        
-    }];
-    //设置`确定`按钮的颜色
-//    [sureBtn setValue:[UIColor redColor] forKey:@"titleTextColor"];
-    //将action添加到控制器
-    [alertVc addAction:cancelBtn];
-    [alertVc addAction:cancelBtXJ];
-    [alertVc addAction :sureBtn];
-    //展示
-    [self presentViewController:alertVc animated:YES completion:nil];
-    
-   
-}
-
-
-///
-- (void)xiangji{
-    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
-    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
-    imagePickerController.delegate = self;
-    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        UIAlertView * alerr = [[UIAlertView alloc]initWithTitle:@"警告!" message:@"未找到该硬件设备或设备已损坏" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
-        [alerr show];
-    }else{
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    //利用模态进行调用系统框架
-    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
-    
-}
-//照片库
-- (void)PhotoLibrary{
-    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
-    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
-    imagePickerController.delegate = self;
-    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
-}
-
-#pragma mark -相册代理
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
-    KKLog(@"%@    ----- %@",picker,info);
-    [self uploadPictures:info[UIImagePickerControllerOriginalImage]];
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-}
-
-
-- (void)uploadPictures:(UIImage *)image{
-    [MBProgressHUD showLoadingHUD:@"正在上传图片"];
-    
-
-    NSString *url = POSTUpLoadFile;
-    
-    
-    
-    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
-    [manager.requestSerializer setValue:[User UserOb].token forHTTPHeaderField:@"token"];
-    [manager.requestSerializer setValue:@"Mobile" forHTTPHeaderField:@"loginType"];
-    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"file" fileName:@"tupian.png" mimeType:@"image/png"];
-    } progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"成功返货=============%@",responseObject);
-        [MBProgressHUD hideLoadingHUD];
-        if (kResponseObjectStatusCodeIsEqual(200)) {
-            NSDictionary *dic =responseObject[@"data"][@"data"];
-            [self.imgarr addObject:dic[@"url"]];
-            UIImageView *img = [[UIImageView alloc] init];
-            [img sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",self.scanPhotoIp,dic[@"url"]]]];
-            [self.imageviewArr addObject:img];
-            for (UIImageView *imgv in self.imageviewArr) {
-                [imgv removeFromSuperview];
-            }
-            for (UIButton *but in self.butarr) {
-                [but removeFromSuperview];
-            }
-            [self loadimgview];
-           
-        }else{
-            [MBProgressHUD showAutoMessage:responseObject[@"message"]];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        [MBProgressHUD hideLoadingHUD];
-    }];
-}
-
-
 
 
 
@@ -549,7 +436,7 @@
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(140) * _model.classList.count);
     }];
-    [self loadimgview];
+    
     
 }
 - (void)nextVC{

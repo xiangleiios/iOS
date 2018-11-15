@@ -65,7 +65,7 @@
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
         make.left.right.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view).mas_offset(KFit_H6S(150));
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
@@ -102,10 +102,10 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamtrainingList;
+    NSString *url = POSTTeamSchoolCoachCoachList;
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"data"][@"rows"];
+        NSArray *tpArray = responseObject[@"list"][@"rows"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -134,7 +134,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataArr.count;
+//    return self.dataArr.count;
+    return 2;
     
 }
 

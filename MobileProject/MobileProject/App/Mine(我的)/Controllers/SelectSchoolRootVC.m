@@ -10,6 +10,7 @@
 #import "PPGetAddressBook.h"
 #import "FMSchoolModel.h"
 #import "SelectSchoolCell.h"
+#import "SelectSchoolRootTwoVC.h"
 @interface SelectSchoolRootVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray *dataArr;
@@ -138,6 +139,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *key = _keys[indexPath.section];
     FMSchoolModel *model = [_contactPeopleDict[key] objectAtIndex:indexPath.row];
+    SelectSchoolRootTwoVC *vc = [[SelectSchoolRootTwoVC alloc] init];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

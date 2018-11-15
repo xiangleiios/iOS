@@ -14,7 +14,11 @@
 #import "FMJS.h"
 #import "CommentsVC.h"
 #import "DrivingSchoolVC.h"
+#import "LMWebProgressLayer.h"
 @interface BranchSchoolWebVC ()<UIWebViewDelegate,AppJSObjectDelegate>
+{
+    LMWebProgressLayer *_progressLayer; ///< 网页加载进度条
+}
 @property (nonatomic , strong)UIWebView *webView;
 @property (nonatomic , strong)NSMutableArray *dataArr;
 @end
@@ -65,6 +69,11 @@
         vc.idid = weakself.model.teamSchoolId;
         [weakself.navigationController pushViewController:vc animated:YES];
     }];
+    
+    //web进度条
+    _progressLayer = [LMWebProgressLayer new];
+    _progressLayer.frame = CGRectMake(0, self.navigationController.navigationBar.height - 2, kScreenW, 2);
+    [self.navigationController.navigationBar.layer addSublayer:_progressLayer];
 }
 
 
@@ -160,6 +169,7 @@
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
+    [_progressLayer finishedLoad];
     JSContext *context = [self.webView valueForKeyPath:@"documentView.webView.mainFrame.javaScriptContext"];
     
     FMJS *jsObject = [FMJS new];
@@ -189,7 +199,21 @@
     };
     
 }
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+    [_progressLayer startLoad];
+    
+}
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+    [_progressLayer finishedLoad];
+    [self.webView.scrollView.mj_header endRefreshing];
+    
+}
 
+- (void)dealloc {
+    [_progressLayer closeTimer];
+    [_progressLayer removeFromSuperlayer];
+    _progressLayer = nil;
+}
 
 -(void)submit:(NSString *)message ID:(NSString *)idid{
     

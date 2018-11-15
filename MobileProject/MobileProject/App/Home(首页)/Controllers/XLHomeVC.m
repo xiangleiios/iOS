@@ -293,7 +293,7 @@
         UIButton *jiaolian = [[UIButton alloc] init];
         [jiaolian addTarget:self action:@selector(toCoachListVC) forControlEvents:UIControlEventTouchUpInside];
         [self.backview addSubview:jiaolian];
-        [jiaolian setImage:[UIImage imageNamed:@"xlcgl"] forState:UIControlStateNormal];
+        [jiaolian setImage:[UIImage imageNamed:@"jlgl"] forState:UIControlStateNormal];
         
         [self.backview addSubview:jiaolian];
         [jiaolian mas_makeConstraints:^(MASConstraintMaker *make) {

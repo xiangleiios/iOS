@@ -13,6 +13,7 @@
 #import "XLCache.h"
 #import "CYLTabBarControllerConfig.h"
 #import "JPUSHService.h"
+#import "SelectSchoolVC.h"
 @interface LoginVC ()<UITextFieldDelegate>
 @property (nonatomic , strong)TKPhoneTextField *pho;
 @property (nonatomic , strong)UITextField *password;
@@ -225,10 +226,16 @@
     
     
     //    appDelegate.tab = TabBarControllerConfig
-    NSString *url=[NSString stringWithFormat:GETmembersLogin,phone,password];
-
+    
+    NSString *url;
+//    if (self.type == 0) {
+//        // 教练
+//        url=[NSString stringWithFormat:GETCoachmembersLogin,phone,password];
+//    }else{
+//
+        url=[NSString stringWithFormat:GETTeammembersLogin,phone,password];
+//    }
     [MBProgressHUD showLoadingHUD:@"正在登陆"];
-
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
@@ -246,11 +253,18 @@
             [defaults synchronize];
             [UIWebView fm_setTokenToUIWebViewCookie]; //存token到域名cookie
             [self laodCacheData];
-            CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
-            AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
-            appDelegate.tab = TabBarControllerConfig;
-            appDelegate.window.rootViewController = TabBarControllerConfig.tabBarController;
-            [self networkDidLogin];
+            NSArray *arr = responseObject[@"schoolList"];
+            if (arr.count < 1) {
+                SelectSchoolVC *vc = [[SelectSchoolVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }else{
+                CYLTabBarControllerConfig * TabBarControllerConfig = [[CYLTabBarControllerConfig alloc] init];
+                AppDelegate * appDelegate = (AppDelegate*)[UIApplication sharedApplication].delegate;
+                appDelegate.tab = TabBarControllerConfig;
+                appDelegate.window.rootViewController = TabBarControllerConfig.tabBarController;
+                [self networkDidLogin];
+            }
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }
