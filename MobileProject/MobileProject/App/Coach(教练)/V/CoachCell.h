@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UILabel *typeTwo;
 @property (nonatomic , strong)UILabel *typeThree;
 
+@property (nonatomic , strong)UIImageView *typeFour;
+
 @end
 
 NS_ASSUME_NONNULL_END

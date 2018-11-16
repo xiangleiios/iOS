@@ -59,6 +59,7 @@
     
     [self laodNavigation];
     [self createTableView];
+    [self loadBut];
     self.allPeopleArr = [NSMutableArray array];
 }
 - (void)laodNavigation{
@@ -96,9 +97,35 @@
     }
     return _headView;
 }
+- (void)loadBut{
+    UIImageView *img = [[UIImageView alloc] init];
+    [self.view addSubview:img];
+    [img setImage:[UIImage imageNamed:@"white_bg_"]];
+    [img mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.bottom.mas_equalTo(self.view);
+        make.height.mas_equalTo(KFit_H6S(164));
+    }];
+    
+    UIButton *next = [[UIButton alloc] init];
+    [self.view addSubview:next];
+    [next setTitle:@"确定" forState:UIControlStateNormal];
+    [next addTarget:self action:@selector(queding) forControlEvents:UIControlEventTouchUpInside];
+    [next setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+    [next setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
+    [next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    next.layer.cornerRadius = 5;
+    next.layer.masksToBounds = YES;
+    [next mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(70));
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(70));
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(40));
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+}
+
 
 -(void)createTableView{
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarH, SCREEN_WIDTH, SCREEN_HEIGHT-kNavBarH) style:UITableViewStyleGrouped];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, kNavBarH, SCREEN_WIDTH, SCREEN_HEIGHT-kNavBarH - KFit_H6S(150)) style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.tableFooterView = [UIView new];
@@ -408,5 +435,9 @@
         [self.dataArr removeObject:model];
     }
     [self.navbut setTitle:[NSString stringWithFormat:@"%lu/5",(unsigned long)self.dataArr.count] forState:UIControlStateNormal];
+}
+
+- (void)queding{
+    
 }
 @end

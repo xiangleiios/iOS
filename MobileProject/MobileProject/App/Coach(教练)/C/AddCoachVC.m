@@ -15,6 +15,7 @@
 @property (nonatomic , strong)XLInformationV *name;
 @property (nonatomic , strong)XLInformationV *pho;
 @property (nonatomic , strong)UIImageView *head;
+@property (nonatomic , strong)NSString *headURL;
 @end
 
 @implementation AddCoachVC
@@ -23,6 +24,7 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"添加教练"];
     [self loadSubview];
+    [self loadBut];
     // Do any additional setup after loading the view.
 }
 
@@ -38,6 +40,7 @@
     }];
     UIButton *but = [[UIButton alloc] init];
     [self.view addSubview:but];
+    [but addTarget:self action:@selector(changeUp) forControlEvents:UIControlEventTouchUpInside];
     [but setImage:[UIImage imageNamed:@"arrows_right_icon"] forState:UIControlStateNormal];
     [but mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(20));
@@ -48,13 +51,18 @@
     
     self.head = [[UIImageView alloc] init];
     [self.view addSubview:self.head];
+    self.head.userInteractionEnabled = YES;
     [self.head setImage:[UIImage imageNamed:@"head_nor"]];
     [self.head mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(but.mas_left).mas_offset(-KFit_W6S(10));
         make.centerY.mas_equalTo(lb);
         make.width.height.mas_equalTo(KFit_H6S(100));
     }];
-    
+    self.head.layer.cornerRadius = KFit_W6S(50);
+    self.head.layer.masksToBounds = YES;
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeUp)];
+    // 允许用户交互
+    [self.head addGestureRecognizer:tap];
     UILabel *line = [[UILabel alloc] init];
     [self.view addSubview:line];
     line.backgroundColor = kColor_N(240, 240, 240);
@@ -82,6 +90,7 @@
     self.fenXiao = [[XLInformationV alloc] informationWithTitle:@"所属分校" SubTitle:@"" TSSubTitle:@"请选择分校" Must:NO Click:NO];
     self.fenXiao.userInteractionEnabled = NO;
     self.fenXiao.subfield.text = arrname[0][@"teamName"];
+    self.fenXiao.subfield.tag = [arrname[0][@"teamSchoolDeptId"] intValue];
     self.school.senterBlock = ^{
         [CGXPickerView showStringPickerWithTitle:@"总校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
             NSLog(@"%@",selectValue);
@@ -89,6 +98,7 @@
             weakself.school.subfield.text = selectValue;
             weakself.school.subfield.tag = [[XLCache singleton].teamCode_value[[selectRow intValue]] intValue];
             weakself.fenXiao.subfield.text = arrname[i][@"teamName"];
+            weakself.fenXiao.subfield.tag = [arrname[i][@"teamSchoolDeptId"] intValue];
         }];
     };
     self.school.subfield.text = [[XLCache singleton].teamCode_title firstObject];
@@ -112,8 +122,172 @@
     
 }
 
+- (void)loadBut{
+    UIButton *next = [[UIButton alloc] init];
+    [self.view addSubview:next];
+    //    [next setTitle:@"保存" forState:UIControlStateNormal];
+    [next addTarget:self action:@selector(toSave) forControlEvents:UIControlEventTouchUpInside];
+    [next setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
+    [next setBackgroundImage:[UIImage createImageWithColor:kRGBAColor(0, 112, 234, 0.6)] forState:UIControlStateHighlighted];
+    [next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    next.layer.cornerRadius = 5;
+    next.layer.masksToBounds = YES;
+    [next mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(70));
+        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(70));
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(40));
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+    [next setTitle:@"保存" forState:UIControlStateNormal];
+    
+}
+
+- (void)toSave{
+    if (self.school.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择总校"];
+        return;
+    }
+    if (self.name.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请填写教练姓名"];
+        return;
+    }
+    if (self.pho.subfield.text.length < 1) {
+        [MBProgressHUD showMsgHUD:@"请填写教练手机号"];
+        return;
+    }
+    if (self.pho.subfield.text.length != 11) {
+        [MBProgressHUD showMsgHUD:@"请填写正确的手机号"];
+        return;
+    }
+    
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:self.name.subfield.text forKey:@"coachName"];
+    [dic setValue:self.pho.subfield.text forKey:@"phoneNumber"];
+    [dic setValue:[NSString stringWithFormat:@"%ld",(long)self.fenXiao.subfield.tag] forKey:@"schoolId"];
+    if (self.headURL) {
+        
+        [dic setValue:self.headURL forKey:@"headPic"];
+    }
+    [FMNetworkHelper fm_request_postWithUrlString:POSTTeamSchoolCoachCoachAdd isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        [MBProgressHUD hideHUD];
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"保存成功"];
+            [self.navigationController popViewControllerAnimated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        [MBProgressHUD hideHUD];
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
+}
 
 
+
+
+
+
+
+
+- (void)changeUp{
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"请选择添加途径" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //默认只有标题 没有操作的按钮:添加操作的按钮 UIAlertAction
+    
+    UIAlertAction *cancelBtn = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //        NSLog(@"取消");
+        [self PhotoLibrary];
+    }];
+    
+    UIAlertAction *cancelBtXJ = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self xiangji];
+        NSLog(@"取消");
+        
+    }];
+    //添加确定
+    UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"确定");
+        
+    }];
+    //设置`确定`按钮的颜色
+    //    [sureBtn setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    //将action添加到控制器
+    [alertVc addAction:cancelBtn];
+    [alertVc addAction:cancelBtXJ];
+    [alertVc addAction :sureBtn];
+    //展示
+    [self presentViewController:alertVc animated:YES completion:nil];
+    
+    
+}
+
+
+///
+- (void)xiangji{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView * alerr = [[UIAlertView alloc]initWithTitle:@"警告!" message:@"未找到该硬件设备或设备已损坏" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
+        [alerr show];
+    }else{
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        imagePickerController.allowsEditing = YES;
+    }
+    //利用模态进行调用系统框架
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
+    
+}
+//照片库
+- (void)PhotoLibrary{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.allowsEditing = YES;
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
+}
+
+#pragma mark -相册代理
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    KKLog(@"%@    ----- %@",picker,info);
+    [self uploadPictures:info[UIImagePickerControllerOriginalImage]];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (void)uploadPictures:(UIImage *)image{
+    [MBProgressHUD showLoadingHUD:@"正在上传图片"];
+    
+    
+    NSString *url = POSTUpLoadFile;
+    
+    
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:[User UserOb].token forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:@"Mobile" forHTTPHeaderField:@"loginType"];
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"file" fileName:@"tupian.png" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"成功返货=============%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSDictionary *dic =responseObject[@"data"][@"data"];
+            //            [self.imgarr addObject:dic[@"url"]];
+            [self.head sd_setImageWithURL:[NSURL URLWithString:KURLIma(dic[@"url"])]];
+            self.headURL = dic[@"url"];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBProgressHUD hideLoadingHUD];
+    }];
+}
 
 /*
 #pragma mark - Navigation

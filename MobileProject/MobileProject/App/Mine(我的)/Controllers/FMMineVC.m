@@ -133,6 +133,7 @@
     self.HeadPortrait.userInteractionEnabled = YES;
     self.HeadPortrait.layer.cornerRadius = KFit_W6S(50);
     self.HeadPortrait.layer.masksToBounds = YES;
+    self.HeadPortrait.contentMode = UIViewContentModeScaleAspectFill;
 //    [self.HeadPortrait fm_setCircleHeader:];
     
 //    [self.HeadPortrait sd_setImageWithURL: ];

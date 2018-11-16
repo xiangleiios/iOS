@@ -134,8 +134,8 @@
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-//    return self.dataArr.count;
-    return 2;
+    return self.dataArr.count;
+//    return 2;
     
 }
 
@@ -151,7 +151,9 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return KFit_H6S(160);
+//    CoachCell *cell = (CoachCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+//    return [cell getLayoutCellHeightWithFlex:KFit_H6P(30)];
+    return KFit_H6S(180);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

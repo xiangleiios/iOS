@@ -296,8 +296,13 @@
 @property (nonatomic , strong)NSArray *replyList;
 @property (nonatomic , strong)NSString *praiseNum;
 @property (nonatomic , assign)float appraiseScore;
+@property (nonatomic , assign)float averageScore;
 @property (nonatomic , assign)int hasStart; /// 《null》 未点赞
 @property (nonatomic , strong)NSString *appraiseId;
+@property (nonatomic , strong)NSString *headPic;
+@property (nonatomic , assign)int enrollStudentCount;
+@property (nonatomic , assign)BOOL isDimission;
+@property (nonatomic , strong)NSString *licenses;
 @end
 
 
