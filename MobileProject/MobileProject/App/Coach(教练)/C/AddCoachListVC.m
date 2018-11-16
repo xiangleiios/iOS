@@ -11,6 +11,9 @@
 #import "AddressBookViewController.h"
 #import<AddressBook/AddressBook.h>
 #import "PPGetAddressBook.h"
+#import "AddCoachInstructionsVC.h"
+#import "AddCoachVC.h"
+#import "InvitationCoachVC.h"
 @interface AddCoachListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -27,13 +30,22 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationView setTitle:@"教练列表"];
-    self.titlerr = @[@"手机通讯录导入",@"手动添加学员",@"面对面扫码"];
-    self.imgarr = @[@"add_student_icon",@"add_student_icon",@"facetoface_icon"];
-    self.subtitlearr = @[@"批量导入分校内教练信息",@"手动录入学员报名信息",@"学员扫描二维码自行填写报名信息"];
+    [self laodNavigation];
+    self.titlerr = @[@"手机通讯录导入",@"手动添加教练",@"邀请教练"];
+    self.imgarr = @[@"add_student_icon",@"increase",@"invite"];
+    self.subtitlearr = @[@"批量导入分校内教练信息",@"手动录入分校内教练信息",@"分享链接，教练自行填写信息"];
     [self loadtable];
     [PPGetAddressBook requestAddressBookAuthorization];
     // Do any additional setup after loading the view.
+}
+- (void)laodNavigation{
+    kWeakSelf(self)
+    [self.navigationView setTitle:@"教练列表"];
+    //添加一个带图片的按钮，如果这个按钮只有点击事件，可以这样写，更加简洁。
+    [self.navigationView addRightButtonWithImage:kImage(@"more_gt") hightImage:kImage(@"more_gt") clickCallBack:^(UIView *view) {
+        AddCoachInstructionsVC *vc = [[AddCoachInstructionsVC alloc] init];
+        [weakself.navigationController pushViewController:vc animated:YES];
+    }];
 }
 
 - (void)loadtable{
@@ -92,10 +104,12 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row == 1) {
-        
+        AddCoachVC *vc = [[AddCoachVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     if (indexPath.row == 2) {
-        
+        InvitationCoachVC *vc = [[InvitationCoachVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

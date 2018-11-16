@@ -10,6 +10,7 @@
 #import "PPGetAddressBook.h"
 //#import "PersonDetailViewController.h"
 #import "ChineseToPinyin.h"
+#import "AddressBookCell.h"
 //#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 //#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
@@ -40,33 +41,56 @@
 /** 记录搜索的关键字*/
 @property (nonatomic, strong) NSString  *searchKeyText;
 
+@property (nonatomic , strong)NSMutableArray *dataArr;
+
+@property (nonatomic , strong)UIButton *navbut;
 @end
 
 @implementation AddressBookViewController
+- (NSMutableArray *)dataArr{
+    if (_dataArr == nil) {
+        _dataArr = [NSMutableArray array];
+    }
+    return _dataArr;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationView setTitle:@"通讯录"];
-    self.title = @"通讯录";
-//    _titleArr = @[@"奥山集团办公信息化",@"我的部门",@"地产事业部",@"财务部门",@"行政部门"];
+    
+    [self laodNavigation];
     [self createTableView];
     self.allPeopleArr = [NSMutableArray array];
 }
-
+- (void)laodNavigation{
+    [self.navigationView setTitle:@"通讯录"];
+    self.navbut = [self.navigationView addRightButtonWithTitle:@" 0/5" clickCallBack:^(UIView *view) {
+        
+    }];
+    
+}
 
 -(UIView *)CreateHeadView{
     if (!_headView) {
-        _headView = [[UIView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH, 54)];
+        _headView = [[UIView alloc]initWithFrame:CGRectMake(KFit_W6S(15), 0, SCREEN_WIDTH, 54)];
         _headView.backgroundColor = [UIColor whiteColor];
         _searchBar = [[UISearchBar alloc] init];
         _searchBar.placeholder = @"搜索联系人";
         _searchBar.delegate = self;
-        _searchBar.frame = CGRectMake(15,7,SCREEN_WIDTH - 30,40);
-        _searchBar.backgroundColor = [UIColor lightGrayColor];
+        _searchBar.frame = CGRectMake(KFit_W6S(15),7,SCREEN_WIDTH - KFit_W6S(30),40);
+//        _searchBar.backgroundColor = [UIColor lightGrayColor];
+        UITextField *searchField=[_searchBar valueForKey:@"_searchField"];
+        searchField.backgroundColor = kColor_N(240, 240, 240);
+        _searchBar.barTintColor = kColor_N(37, 190, 124);
+        UIButton *cancleBtn = [_searchBar valueForKey:@"cancelButton"];
+        [cancleBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [cancleBtn setTitleColor:kColor_N(37, 190, 124) forState:UIControlStateNormal];
+        
+        
         _searchBar.backgroundImage = [UIImage new];
         _searchBar.layer.cornerRadius = 3;
         _searchBar.layer.masksToBounds = YES;
-        [_searchBar.layer setBorderColor:[UIColor whiteColor].CGColor];
+        _searchBar.showsCancelButton = YES;
+        [_searchBar.layer setBorderColor:kColor_N(240, 240, 240).CGColor];
         [_headView addSubview:self.searchBar];
         
     }
@@ -121,7 +145,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (self.isSearch) {
-        return 2;
+        return 1;
     }else{
         return _keys.count;
 
@@ -158,62 +182,67 @@
 {
     
    
-        static NSString *reuseIdentifier = @"cell";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
+        static NSString *reuseIdentifier = @"AddressBookCell";
+        AddressBookCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
         if (!cell)
         {
-            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+            cell = [[AddressBookCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
         }
-        
+    
+    PPPersonModel *model;
         if (self.isSearch) {
             
-            PPPersonModel *pModel = self.searchArr[indexPath.row];
-            cell.imageView.image = pModel.headerImage ? pModel.headerImage : [UIImage imageNamed:@"defult"];
-            cell.imageView.layer.cornerRadius = 50/2;
-            cell.imageView.clipsToBounds = YES;
-            cell.textLabel.text = pModel.name;
+            model = self.searchArr[indexPath.row];
+            cell.model = model;
             cell.selectionStyle = UITableViewCellSeparatorStyleNone;
 
         }else{
             NSString *key = _keys[indexPath.section];
-            PPPersonModel *people = [_contactPeopleDict[key] objectAtIndex:indexPath.row];
-            cell.imageView.image = people.headerImage ? people.headerImage : [UIImage imageNamed:@"defult"];
-            cell.imageView.layer.cornerRadius = 50/2;
-            cell.imageView.clipsToBounds = YES;
-            cell.textLabel.text = people.name;
+            model = [_contactPeopleDict[key] objectAtIndex:indexPath.row];
+            cell.model = model;
             cell.selectionStyle = UITableViewCellSeparatorStyleNone;
 
         }
-        
+    if ([self.dataArr containsObject:model]) {
+        cell.but.selected = YES;
+    }else{
+        cell.but.selected = NO;
+    }
         return cell;
-
-    
-    
 
 }
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return KFit_H6S(130);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  
+    PPPersonModel *people;
         if (self.isSearch) {
-            PPPersonModel *people = self.searchArr[indexPath.row];
+            people = self.searchArr[indexPath.row];
             NSLog(@"%@=======%@",people.name,people.mobileArray);
             
             
         }else{
             NSString *key = _keys[indexPath.section];
-            PPPersonModel *people = [_contactPeopleDict[key] objectAtIndex:indexPath.row];
+            people = [_contactPeopleDict[key] objectAtIndex:indexPath.row];
             NSLog(@"%@=======%@",people.name,people.mobileArray);
 
         }
-        
+    AddressBookCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    if (!cell.but.selected) {
+        if (self.dataArr.count > 4) {
+            [MBProgressHUD showMsgHUD:@"一次最多添加5个人"];
+            return;
+        }
+        [self addCoachData:people];
+    }else{
+        [self reductionCoachData:people];
+    }
+    cell.but.selected = !cell.but.selected;
 
 
 }
@@ -250,7 +279,7 @@
 
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
     
-    [searchBar setShowsCancelButton:YES animated:NO];
+//    [searchBar setShowsCancelButton:YES animated:NO];
     /**
      *  将系统自带的cancel修改为“取消”
      */
@@ -265,7 +294,7 @@
 }
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
     //将要结束编辑模式
-    [searchBar setShowsCancelButton:NO animated:NO];
+//    [searchBar setShowsCancelButton:NO animated:NO];
     return YES;//yes 可以结束
 }
 //点击cancel 按钮
@@ -363,5 +392,21 @@
         _searchArr = [NSMutableArray array];
     }
     return _searchArr;
+}
+
+#pragma mark - 数据处理
+//添加数据
+- (void)addCoachData:(PPPersonModel *)model{
+    if (![self.dataArr containsObject:model]) {
+        [self.dataArr addObject:model];
+    }
+    [self.navbut setTitle:[NSString stringWithFormat:@"%lu/5",(unsigned long)self.dataArr.count] forState:UIControlStateNormal];
+}
+//删除数据
+- (void)reductionCoachData:(PPPersonModel *)model{
+    if ([self.dataArr containsObject:model]) {
+        [self.dataArr removeObject:model];
+    }
+    [self.navbut setTitle:[NSString stringWithFormat:@"%lu/5",(unsigned long)self.dataArr.count] forState:UIControlStateNormal];
 }
 @end

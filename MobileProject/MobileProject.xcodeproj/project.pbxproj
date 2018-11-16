@@ -113,6 +113,10 @@
 		A75F943D212D4C0B00384EB0 /* AddInformationTwoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943C212D4C0B00384EB0 /* AddInformationTwoVC.m */; };
 		A75F9440212D57F900384EB0 /* AddInformationThreeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F943F212D57F900384EB0 /* AddInformationThreeVC.m */; };
 		A75F9446212D706600384EB0 /* BusinessCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75F9445212D706600384EB0 /* BusinessCardVC.m */; };
+		A7629BA9219E5E3E0001D2A7 /* AddCoachInstructionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7629BA8219E5E3E0001D2A7 /* AddCoachInstructionsVC.m */; };
+		A7629BAC219E62DD0001D2A7 /* AddCoachVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7629BAB219E62DD0001D2A7 /* AddCoachVC.m */; };
+		A7629BB0219E75EA0001D2A7 /* InvitationCoachVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7629BAF219E75EA0001D2A7 /* InvitationCoachVC.m */; };
+		A7629BB3219E9DC70001D2A7 /* AddressBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7629BB2219E9DC70001D2A7 /* AddressBookCell.m */; };
 		A76CA208216C46300097798D /* pictureV.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA207216C46300097798D /* pictureV.m */; };
 		A76CA20B216CA0740097798D /* MyPicturePosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA20A216CA0740097798D /* MyPicturePosterListVC.m */; };
 		A76CA20E216CA0920097798D /* MyPosterListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CA20D216CA0920097798D /* MyPosterListVC.m */; };
@@ -911,6 +915,14 @@
 		A75F943F212D57F900384EB0 /* AddInformationThreeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddInformationThreeVC.m; sourceTree = "<group>"; };
 		A75F9444212D706600384EB0 /* BusinessCardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BusinessCardVC.h; sourceTree = "<group>"; };
 		A75F9445212D706600384EB0 /* BusinessCardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BusinessCardVC.m; sourceTree = "<group>"; };
+		A7629BA7219E5E3E0001D2A7 /* AddCoachInstructionsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCoachInstructionsVC.h; sourceTree = "<group>"; };
+		A7629BA8219E5E3E0001D2A7 /* AddCoachInstructionsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCoachInstructionsVC.m; sourceTree = "<group>"; };
+		A7629BAA219E62DD0001D2A7 /* AddCoachVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddCoachVC.h; sourceTree = "<group>"; };
+		A7629BAB219E62DD0001D2A7 /* AddCoachVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddCoachVC.m; sourceTree = "<group>"; };
+		A7629BAE219E75EA0001D2A7 /* InvitationCoachVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitationCoachVC.h; sourceTree = "<group>"; };
+		A7629BAF219E75EA0001D2A7 /* InvitationCoachVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitationCoachVC.m; sourceTree = "<group>"; };
+		A7629BB1219E9DC70001D2A7 /* AddressBookCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddressBookCell.h; sourceTree = "<group>"; };
+		A7629BB2219E9DC70001D2A7 /* AddressBookCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressBookCell.m; sourceTree = "<group>"; };
 		A76CA206216C46300097798D /* pictureV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pictureV.h; sourceTree = "<group>"; };
 		A76CA207216C46300097798D /* pictureV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pictureV.m; sourceTree = "<group>"; };
 		A76CA209216CA0740097798D /* MyPicturePosterListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyPicturePosterListVC.h; sourceTree = "<group>"; };
@@ -2646,6 +2658,8 @@
 				A794812E219A6CCF008F8D4B /* AddressBookViewController.m */,
 				A7948130219A6CD0008F8D4B /* ChineseToPinyin.h */,
 				A794812D219A6CCE008F8D4B /* ChineseToPinyin.m */,
+				A7629BB1219E9DC70001D2A7 /* AddressBookCell.h */,
+				A7629BB2219E9DC70001D2A7 /* AddressBookCell.m */,
 			);
 			path = "AddressBook(通讯录)";
 			sourceTree = "<group>";
@@ -2675,6 +2689,12 @@
 				A7948137219A71F2008F8D4B /* CoachListVc.m */,
 				A794813C219A778A008F8D4B /* AddCoachListVC.h */,
 				A794813D219A778A008F8D4B /* AddCoachListVC.m */,
+				A7629BA7219E5E3E0001D2A7 /* AddCoachInstructionsVC.h */,
+				A7629BA8219E5E3E0001D2A7 /* AddCoachInstructionsVC.m */,
+				A7629BAA219E62DD0001D2A7 /* AddCoachVC.h */,
+				A7629BAB219E62DD0001D2A7 /* AddCoachVC.m */,
+				A7629BAE219E75EA0001D2A7 /* InvitationCoachVC.h */,
+				A7629BAF219E75EA0001D2A7 /* InvitationCoachVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -5677,6 +5697,7 @@
 				DA0346D31F509098008E7BE1 /* UINavigationItem+Loading.m in Sources */,
 				A7E97A1321354B4500EA6F14 /* UIAlertController+Extend.m in Sources */,
 				A704E541219C1AC500AD0141 /* GDMapVC.m in Sources */,
+				A7629BB3219E9DC70001D2A7 /* AddressBookCell.m in Sources */,
 				4F09449A1F39A83200BA80E5 /* ToolbarVC.m in Sources */,
 				DA0346571F509098008E7BE1 /* NSDecimalNumber+Extensions.m in Sources */,
 				DA0347241F509098008E7BE1 /* FMHelper.m in Sources */,
@@ -5782,6 +5803,7 @@
 				A778F8692134DF0B008A8948 /* StudentsListTwoVC.m in Sources */,
 				DA03470B1F509098008E7BE1 /* UIWebView+Alert.m in Sources */,
 				DA03466B1F509098008E7BE1 /* NSString+DictionaryValue.m in Sources */,
+				A7629BB0219E75EA0001D2A7 /* InvitationCoachVC.m in Sources */,
 				DA78C3041F5D41A3009BAA90 /* FMBaseRequest.m in Sources */,
 				DA959E491F53BEE9002389F6 /* UINavigationController+ZFPlayerRotation.m in Sources */,
 				DA0346971F509098008E7BE1 /* UIBezierPath+BasicShapes.m in Sources */,
@@ -5851,6 +5873,7 @@
 				A7BA6F51215F6AC400A5FA0D /* PosterListVC.m in Sources */,
 				A7AC816A212BBC5A00C6AB6C /* FMAskZhengView.m in Sources */,
 				4F6091791FE1129C00029A7E /* XLAlertView.m in Sources */,
+				A7629BA9219E5E3E0001D2A7 /* AddCoachInstructionsVC.m in Sources */,
 				DA0346EC1F509098008E7BE1 /* UITextView+PinchZoom.m in Sources */,
 				DA0346BA1F509098008E7BE1 /* UIImage+FileName.m in Sources */,
 				DA0346B41F509098008E7BE1 /* UIImage+Alpha.m in Sources */,
@@ -6122,6 +6145,7 @@
 				A733725B2139499A005CD384 /* XLImageView.m in Sources */,
 				DAE212951EF2867B000EAB90 /* XLshare.m in Sources */,
 				DA0346AD1F509098008E7BE1 /* UIControl+Block.m in Sources */,
+				A7629BAC219E62DD0001D2A7 /* AddCoachVC.m in Sources */,
 				DA0346271F509098008E7BE1 /* FMAnalyticsHelper.m in Sources */,
 				DA0346551F509098008E7BE1 /* NSNotificationCenter+MainThread.m in Sources */,
 				DA0346F71F509098008E7BE1 /* UIView+Frame.m in Sources */,
