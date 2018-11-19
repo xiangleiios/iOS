@@ -201,7 +201,7 @@
 #define POSTTagRemove KURL(@"app/tag/remove?ids=%d")
 
 #pragma mark - 训练场列表
-#define POSTTeamtrainingList KURL(@"app/teamtraining/teamtrainingList")
+#define POSTTeamtrainingList KURL(@"app/v1_2/teamtraining/teamtrainingList")
 
 #pragma mark - 省 市 区
 #define POSTProvinceList KURL(@"system/province/list")
@@ -277,7 +277,17 @@
 #pragma mark -批量添加教练
 #define POSTTeamSchoolCoachCoachAddll KURL(@"app/school/v1_2/teamSchoolCoach/coachAddll?data=%@&schoolId=%d&originalDeptId=%d")
 
+#pragma mark -获取驾校
+#define POSTBindSchools KURL(@"app/coach/bind/schools?city=%@")
+
+
+#pragma mark -获取分校
+#define POSTBindTeamSchools KURL(@"app/coach/bind/teamSchools?deptId=%@")
 //plat/#/poster/index?type=app&id=
+
+
+#pragma mark -教练驾校绑定
+#define POSTBindBindCoach KURL(@"app/coach/bind/bindCoach?id=%@&originalDeptId=%@&schoolId=%@")
 //--------------------------------------------------------------------------------------------------
 
 #pragma mark 一下全部要删除掉

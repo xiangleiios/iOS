@@ -21,15 +21,7 @@
 
 - (NSMutableArray *)dataArr{
     if (_dataArr == nil) {
-        FMSchoolModel *model = [[FMSchoolModel alloc] init];
-        model.name = @"向蕾";
-        FMSchoolModel *model1 = [[FMSchoolModel alloc] init];
-        model1.name = @"张飞";
-        FMSchoolModel *model2 = [[FMSchoolModel alloc] init];
-        model2.name = @"王五";
-        FMSchoolModel *model3 = [[FMSchoolModel alloc] init];
-        model3.name = @"王四";
-        _dataArr = [NSMutableArray arrayWithObjects:model,model1,model2,model3, nil];
+        _dataArr = [NSMutableArray array];
     }
     return _dataArr;
 }
@@ -39,7 +31,8 @@
     [self laodNavigation];
     [self loadSubview];
     
-    [self sort];
+    
+    [self loadRefreshData];
 }
 - (void)laodNavigation{
     [self.navigationView setTitle:@"选择所在驾校"];
@@ -177,4 +170,28 @@
         [self.table reloadData];
     }];
 }
+
+- (void)loadRefreshData{
+    NSString *url = [NSString stringWithFormat:POSTBindSchools,@"武汉市"];
+    NSString* url1 = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [FMNetworkHelper fm_request_postWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSArray *arr = responseObject[@"list"];
+            for (NSDictionary *dic in arr) {
+                FMSchoolModel *model = [FMSchoolModel mj_objectWithKeyValues:dic];
+                [self.dataArr addObject:model];
+            }
+        }
+        [self sort];
+        [self.table reloadData];
+    } failureBlock:^(NSError *error) {
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+
+
 @end

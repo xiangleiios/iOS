@@ -132,6 +132,9 @@
 		A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */; };
 		A787212E21A2670300D2B553 /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A787212D21A2670300D2B553 /* ResultsVC.m */; };
 		A787213121A2866A00D2B553 /* AllCoachLBV.m in Sources */ = {isa = PBXBuildFile; fileRef = A787213021A2866A00D2B553 /* AllCoachLBV.m */; };
+		A787213421A2B5A000D2B553 /* FMCoachModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A787213321A2B5A000D2B553 /* FMCoachModel.m */; };
+		A787213A21A2C36100D2B553 /* GDSearchMapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A787213921A2C36100D2B553 /* GDSearchMapVC.m */; };
+		A787213D21A2C37200D2B553 /* PlaceAroundTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = A787213C21A2C37200D2B553 /* PlaceAroundTableView.m */; };
 		A787E179215DFB0900EF01F2 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; };
 		A787E17C215DFB3600EF01F2 /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E177215DFB0900EF01F2 /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A787E17F215DFB3700EF01F2 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -955,6 +958,12 @@
 		A787212D21A2670300D2B553 /* ResultsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsVC.m; sourceTree = "<group>"; };
 		A787212F21A2866A00D2B553 /* AllCoachLBV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCoachLBV.h; sourceTree = "<group>"; };
 		A787213021A2866A00D2B553 /* AllCoachLBV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCoachLBV.m; sourceTree = "<group>"; };
+		A787213221A2B5A000D2B553 /* FMCoachModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMCoachModel.h; sourceTree = "<group>"; };
+		A787213321A2B5A000D2B553 /* FMCoachModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMCoachModel.m; sourceTree = "<group>"; };
+		A787213821A2C36100D2B553 /* GDSearchMapVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GDSearchMapVC.h; sourceTree = "<group>"; };
+		A787213921A2C36100D2B553 /* GDSearchMapVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GDSearchMapVC.m; sourceTree = "<group>"; };
+		A787213B21A2C37200D2B553 /* PlaceAroundTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceAroundTableView.h; sourceTree = "<group>"; };
+		A787213C21A2C37200D2B553 /* PlaceAroundTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceAroundTableView.m; sourceTree = "<group>"; };
 		A787E175215DFB0800EF01F2 /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
 		A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		A787E177215DFB0900EF01F2 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
@@ -2314,6 +2323,10 @@
 			children = (
 				A704E53F219C1AC500AD0141 /* GDMapVC.h */,
 				A704E540219C1AC500AD0141 /* GDMapVC.m */,
+				A787213821A2C36100D2B553 /* GDSearchMapVC.h */,
+				A787213921A2C36100D2B553 /* GDSearchMapVC.m */,
+				A787213B21A2C37200D2B553 /* PlaceAroundTableView.h */,
+				A787213C21A2C37200D2B553 /* PlaceAroundTableView.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -5168,6 +5181,8 @@
 				DA08F8E11FA08BDC000A63BD /* FMMainModel.m */,
 				A7948148219AD0CD008F8D4B /* FMSchoolModel.h */,
 				A7948149219AD0CD008F8D4B /* FMSchoolModel.m */,
+				A787213221A2B5A000D2B553 /* FMCoachModel.h */,
+				A787213321A2B5A000D2B553 /* FMCoachModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5693,6 +5708,7 @@
 				DA81E08D20439CAF00A9F622 /* UIView+TL.m in Sources */,
 				4F0772491FA72BF8002D13E1 /* XLCommonUse.m in Sources */,
 				DA0346A71F509098008E7BE1 /* UIColor+Gradient.m in Sources */,
+				A787213A21A2C36100D2B553 /* GDSearchMapVC.m in Sources */,
 				DA03469B1F509098008E7BE1 /* UIBezierPath+Symbol.m in Sources */,
 				DA959E4E1F53BEE9002389F6 /* MMMaterialDesignSpinner.m in Sources */,
 				A7282F0E217DA87700117758 /* ReservationDetailsVC.m in Sources */,
@@ -5941,6 +5957,7 @@
 				A71907A721312B850072B8CF /* DrivingSchoolVC.m in Sources */,
 				DA03465A1F509098008E7BE1 /* NSNumber+Round.m in Sources */,
 				DA0347011F509098008E7BE1 /* UIViewController+BackButtonHandler.m in Sources */,
+				A787213421A2B5A000D2B553 /* FMCoachModel.m in Sources */,
 				4FD0717A1FB428BA003497AD /* PictureDetailViewController.m in Sources */,
 				DA78C3181F5E4646009BAA90 /* FMPlaceholdTextView.m in Sources */,
 				DA0346611F509098008E7BE1 /* NSObject+GCD.m in Sources */,
@@ -6166,6 +6183,7 @@
 				DA0346B01F509098008E7BE1 /* UIDevice+PasscodeStatus.m in Sources */,
 				DA03462A1F509098008E7BE1 /* NSManagedObject+DictionaryExport.m in Sources */,
 				DA0346741F509098008E7BE1 /* NSString+FMPinyin.m in Sources */,
+				A787213D21A2C37200D2B553 /* PlaceAroundTableView.m in Sources */,
 				A798CEBE217892AE00145440 /* DataBut.m in Sources */,
 				DA0346F61F509098008E7BE1 /* UIView+Find.m in Sources */,
 				A7EC186521773E29007793FC /* JXCategoryImageCellModel.m in Sources */,

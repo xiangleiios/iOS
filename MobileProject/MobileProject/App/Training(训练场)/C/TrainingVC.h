@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)NSDictionary *city;
 @property (nonatomic , strong)NSDictionary *areadic;
 @property (nonatomic , assign)int type;/// 1:新增  0：编辑
+@property (nonatomic , strong)NSArray *coachArr;
+@property (nonatomic , strong)NSMutableArray *selectArr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -18,15 +18,7 @@
 
 - (NSMutableArray *)dataArr{
     if (_dataArr == nil) {
-        FMSchoolModel *model = [[FMSchoolModel alloc] init];
-        model.name = @"向蕾";
-        FMSchoolModel *model1 = [[FMSchoolModel alloc] init];
-        model1.name = @"张飞";
-        FMSchoolModel *model2 = [[FMSchoolModel alloc] init];
-        model2.name = @"王五";
-        FMSchoolModel *model3 = [[FMSchoolModel alloc] init];
-        model3.name = @"王四";
-        _dataArr = [NSMutableArray arrayWithObjects:model,model1,model2,model3, nil];
+        _dataArr = [NSMutableArray array];
     }
     return _dataArr;
 }
@@ -35,6 +27,7 @@
     //    self.view.backgroundColor = kColor_N(240, 240, 240);
     [self laodNavigation];
     [self loadSubview];
+    [self loadRefreshData];
 }
 - (void)laodNavigation{
     [self.navigationView setTitle:@"选择所在驾校"];
@@ -126,6 +119,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    FMSchoolModel *model = self.dataArr[indexPath.row];
+    [self bangdingWithModel:model];
     
 }
 
@@ -134,5 +129,45 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 0.0010;
+}
+
+
+
+- (void)loadRefreshData{
+    NSString *url = [NSString stringWithFormat:POSTBindTeamSchools,self.model.deptId];
+    NSString* url1 = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [FMNetworkHelper fm_request_postWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSArray *arr = responseObject[@"list"];
+            for (NSDictionary *dic in arr) {
+                FMSchoolModel *model = [FMSchoolModel mj_objectWithKeyValues:dic];
+                [self.dataArr addObject:model];
+            }
+        }
+        [self.table reloadData];
+    } failureBlock:^(NSError *error) {
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+
+- (void)bangdingWithModel:(FMSchoolModel *)model{
+    NSString *url = [NSString stringWithFormat:POSTBindBindCoach,[User UserOb].userId,self.model.deptId,model.deptId];
+    NSString* url1 = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [FMNetworkHelper fm_request_postWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"绑定成功，请再次登录"];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 @end

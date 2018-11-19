@@ -10,9 +10,12 @@
 #import "UITableView+FMPlaceholder.h"
 #import "FMTableViewCell.h"
 #import "TrainingVC.h"
+
 @interface TrainingListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
+@property (nonatomic , strong)NSMutableArray <FMCoachModel *>*coachArr;
+
 @end
 
 @implementation TrainingListVC
@@ -21,6 +24,12 @@
         _dataArr = [NSMutableArray array];
     }
     return _dataArr;
+}
+- (NSMutableArray *)coachArr{
+    if (_coachArr == nil) {
+        _coachArr = [NSMutableArray array];
+    }
+    return _coachArr;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -104,6 +113,7 @@
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"data"][@"rows"];
+        NSArray *coacharr = responseObject[@"coachList"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
@@ -112,6 +122,11 @@
                 FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
                 [self.dataArr addObject:mode];
             }
+        }
+        [self.coachArr removeAllObjects];
+        for (NSDictionary *dic in coacharr) {
+            FMCoachModel *model = [FMCoachModel mj_objectWithKeyValues:dic];
+            [self.coachArr addObject:model];
         }
         
         [_table reloadData];
@@ -155,6 +170,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TrainingVC *vc = [[TrainingVC alloc] init];
     vc.type = 0;
+    vc.coachArr = self.coachArr;
     vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
     [vc.navigationView setTitle:@"训练场详情"];
@@ -164,6 +180,7 @@
 - (void)addAddress{
     TrainingVC *vc = [[TrainingVC alloc] init];
     vc.type = 1;
+    vc.coachArr = self.coachArr;
     [self.navigationController pushViewController:vc animated:YES];
     [vc.navigationView setTitle:@"添加训练场"];
 }

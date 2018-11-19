@@ -12,6 +12,8 @@
 #import "XLCache.h"
 #import "AddressV.h"
 #import "AllCoachLBV.h"
+#import "GDMapVC.h"
+#import "GDSearchMapVC.h"
 @interface TrainingVC ()
 @property (nonatomic , strong)XLInformationV *school;
 @property (nonatomic , strong)XLInformationV *fenXiao;
@@ -22,7 +24,12 @@
 @end
 
 @implementation TrainingVC
-
+- (NSMutableArray *)selectArr{
+    if (_selectArr == nil) {
+        _selectArr = [NSMutableArray array];
+    }
+    return _selectArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadSubview];
@@ -70,7 +77,7 @@
     [v mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
-        make.height.mas_equalTo(KFit_H6S(540));
+        make.height.mas_equalTo(KFit_H6S(630));
     }];
     
     kWeakSelf(self)
@@ -101,14 +108,16 @@
     self.area = [[XLInformationV alloc] informationWithTitle:@"训练场区域" SubTitle:@"" TSSubTitle:@"请选择区域" Must:YES Click:YES];
     self.area.senterBlock = ^{
         [weakself.view endEditing:YES];
-        AddressV *v = [[AddressV alloc] init];
-        v.vc = weakself;
-        [v show];
+        GDSearchMapVC *vc = [[GDSearchMapVC alloc] init];
+        [weakself.navigationController pushViewController:vc animated:YES];
+//        AddressV *v = [[AddressV alloc] init];
+//        v.vc = weakself;
+//        [v show];
     };
     self.address = [[XLInformationV alloc] informationWithTitle:@"详细地址" SubTitle:@"" TSSubTitle:@"请输入训练场详细地址" Must:YES Click:NO];
     
-    
-    
+    XLInformationV *jiaol = [[XLInformationV alloc] informationWithTitle:@"分配教练" SubTitle:@"" TSSubTitle:@"" Must:YES Click:NO];
+    jiaol.userInteractionEnabled = NO;
     
     
     [v addSubview:baokao];
@@ -117,7 +126,8 @@
     [v addSubview:self.name];
     [v addSubview:self.area];
     [v addSubview:self.address];
-    NSArray *arr = @[baokao,self.school,self.fenXiao,self.name,self.area,self.address];
+    [v addSubview:jiaol];
+    NSArray *arr = @[baokao,self.school,self.fenXiao,self.name,self.area,self.address,jiaol];
     [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(v);
@@ -143,8 +153,38 @@
         [choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
         choose.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     }
+    
+    XLView *bg = [[XLView alloc] init];
+    bg.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:bg];
+    [bg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(v.mas_bottom).mas_offset(-1);
+        make.height.mas_equalTo(KFit_H6S(450));
+    }];
+    float w = KFit_W6S(160);
+    float h = KFit_H6S(55);
+    for (int i = 0 ; i < self.coachArr.count ; i++) {
+        FMCoachModel * model = self.coachArr[i];
+        UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(KFit_W6S(30) + i%4*(w +KFit_W6S(15)), i/4*(h + KFit_H6S(15)), w, h)];
+        [bg addSubview:but];
+        but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+        but.tag = i;
+        [but setTitle:model.coachName forState:UIControlStateNormal];
+        [but setTitleColor:ZTColor forState:UIControlStateNormal];
+        [but setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+        [but setBackgroundImage:[UIImage createImageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateSelected];
+        but.layer.cornerRadius = 3;
+        but.layer.masksToBounds = YES;
+        but.layer.borderColor = ZTColor.CGColor;
+        but.layer.borderWidth = 0.5;
+        [self.selectArr addObject:but];
+        [but addTarget:self action:@selector(butselect:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
-
+- (void)butselect:(UIButton *)senter{
+    senter.selected = !senter.selected;
+}
 -(void)setProvince:(NSDictionary *)province{
     _province = [province copy];
     KKLog(@"%@",_province);

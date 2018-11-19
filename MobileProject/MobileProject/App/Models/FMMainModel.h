@@ -303,6 +303,7 @@
 @property (nonatomic , assign)int enrollStudentCount;
 @property (nonatomic , assign)BOOL isDimission;
 @property (nonatomic , strong)NSString *licenses;
+
 @end
 
 

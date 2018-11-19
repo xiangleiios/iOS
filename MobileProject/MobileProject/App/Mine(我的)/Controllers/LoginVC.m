@@ -129,7 +129,7 @@
 //    [self.veribut addTarget:self action:@selector(getVerificationCode) forControlEvents:UIControlEventTouchUpInside];
 //    self.veribut.titleLabel.font=[UIFont systemFontOfSize:kFit_Font6(12)];
     
-    //15658458745   18810395609  13154898589  15512341234  15007125433  17764076879  13100704043
+    //15658458745   18810395609  13154898589  15512341234  15007125433  17764076879
 #ifdef DEBUG
     self.pho.text = @"13100704044";
     self.password.text = @"123456";
@@ -228,13 +228,13 @@
     //    appDelegate.tab = TabBarControllerConfig
     
     NSString *url;
-//    if (self.type == 0) {
-//        // 教练
-//        url=[NSString stringWithFormat:GETCoachmembersLogin,phone,password];
-//    }else{
-//
+    if (self.type == 0) {
+        // 教练
+        url=[NSString stringWithFormat:GETCoachmembersLogin,phone,password];
+    }else{
+
         url=[NSString stringWithFormat:GETTeammembersLogin,phone,password];
-//    }
+    }
     [MBProgressHUD showLoadingHUD:@"正在登陆"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         [MBProgressHUD hideLoadingHUD];
