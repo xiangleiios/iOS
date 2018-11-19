@@ -164,6 +164,7 @@
     [dic setValue:self.name.subfield.text forKey:@"coachName"];
     [dic setValue:self.pho.subfield.text forKey:@"phoneNumber"];
     [dic setValue:[NSString stringWithFormat:@"%ld",(long)self.fenXiao.subfield.tag] forKey:@"schoolId"];
+    [dic setValue:[NSString stringWithFormat:@"%ld",(long)self.school.subfield.tag] forKey:@"originalDeptId"];
     if (self.headURL) {
         
         [dic setValue:self.headURL forKey:@"headPic"];

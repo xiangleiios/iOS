@@ -11,6 +11,7 @@
 #import "CGXPickerView.h"
 #import "XLCache.h"
 #import "AddressV.h"
+#import "AllCoachLBV.h"
 @interface TrainingVC ()
 @property (nonatomic , strong)XLInformationV *school;
 @property (nonatomic , strong)XLInformationV *fenXiao;
@@ -236,6 +237,9 @@
     };
     
 }
+
+
+
 /*
 #pragma mark - Navigation
 

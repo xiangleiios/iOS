@@ -11,6 +11,8 @@
 //#import "PersonDetailViewController.h"
 #import "ChineseToPinyin.h"
 #import "AddressBookCell.h"
+#import "CGXPickerView.h"
+#import "ResultsVC.h"
 //#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
 //#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
 
@@ -44,6 +46,9 @@
 @property (nonatomic , strong)NSMutableArray *dataArr;
 
 @property (nonatomic , strong)UIButton *navbut;
+
+@property (nonatomic , assign)NSInteger schoolId;
+@property (nonatomic , assign)NSInteger originalDeptId;
 @end
 
 @implementation AddressBookViewController
@@ -438,6 +443,72 @@
 }
 
 - (void)queding{
+    if (self.dataArr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"请选择联系人"];
+        return;
+    }
+    kWeakSelf(self)
+    NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+    NSArray *arrname = (NSArray *)[defaults objectForKey:SchoolList];
+    [CGXPickerView showStringPickerWithTitle:@"选择驾校" DataSource:[XLCache singleton].teamCode_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+        NSLog(@"%@",selectValue);
+        int i = [selectRow intValue];
+//        weakself.school.subfield.text = selectValue;
+        weakself.originalDeptId = [[XLCache singleton].teamCode_value[[selectRow intValue]] intValue];
+//        weakself.fenXiao.subfield.text = arrname[i][@"teamName"];
+        self.schoolId = [arrname[i][@"teamSchoolDeptId"] intValue];
+        XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat:@"是否添加到\n%@(%@)",selectValue,arrname[i][@"teamName"]] sureBtn:@"确定" cancleBtn:@"取消"];
+        [alert showXLAlertView];
+        alert.resultIndex = ^(NSInteger index) {
+            if (index == 2) {
+                [weakself toSave];
+            }
+        };
+    }];
+}
+
+
+- (void)toSave{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    NSMutableArray *arr = [NSMutableArray array];
+    for (PPPersonModel *model in self.dataArr) {
+        NSDictionary *dic= @{@"coachName":model.name,@"phoneNumber":[model.mobileArray firstObject]};
+        [arr addObject:dic];
+    }
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:arr
+                                                       options:kNilOptions
+                                                         error:nil];
+    
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData
+                                                 encoding:NSUTF8StringEncoding];
+    [dic setValue:[arr mj_JSONString] forKey:@"data"];
+    [dic setValue:[NSString stringWithFormat:@"%ld",(long)self.schoolId] forKey:@"schoolId"];
+    [dic setValue:[NSString stringWithFormat:@"%ld",(long)self.originalDeptId] forKey:@"originalDeptId"];
+    NSString *url = [NSString stringWithFormat:POSTTeamSchoolCoachCoachAddll,jsonString,(long)self.schoolId,self.originalDeptId];
+//    [url stringByRemovingPercentEncoding]
+    //POSTTeamSchoolCoachCoachAddll
+//    NSString* url1 = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString* url1 = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    [FMNetworkHelper fm_request_postWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        [MBProgressHUD hideHUD];
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            
+            ResultsVC *vc = [[ResultsVC alloc] init];
+            vc.message = responseObject[@"message"];
+            vc.seccessCount = [responseObject[@"seccessCount"] integerValue];
+            vc.errorCount = [responseObject[@"errorCount"] integerValue];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        [MBProgressHUD hideHUD];
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
     
 }
+
 @end

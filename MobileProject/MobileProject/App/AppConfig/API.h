@@ -274,6 +274,8 @@
 #pragma mark -添加教练
 #define POSTTeamSchoolCoachCoachAdd KURL(@"app/school/v1_2/teamSchoolCoach/coachAdd")
 
+#pragma mark -批量添加教练
+#define POSTTeamSchoolCoachCoachAddll KURL(@"app/school/v1_2/teamSchoolCoach/coachAddll?data=%@&schoolId=%d&originalDeptId=%d")
 
 //plat/#/poster/index?type=app&id=
 //--------------------------------------------------------------------------------------------------

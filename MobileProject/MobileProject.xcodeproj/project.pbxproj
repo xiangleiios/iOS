@@ -130,6 +130,8 @@
 		A77EC4F5218BEBD2004CBDFB /* SelectLabelShow.m in Sources */ = {isa = PBXBuildFile; fileRef = A77EC4F4218BEBD2004CBDFB /* SelectLabelShow.m */; };
 		A7825C49213CD29D0056FDA2 /* AddStudentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C48213CD29D0056FDA2 /* AddStudentCell.m */; };
 		A7825C4C213D35750056FDA2 /* InsuranceInformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */; };
+		A787212E21A2670300D2B553 /* ResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A787212D21A2670300D2B553 /* ResultsVC.m */; };
+		A787213121A2866A00D2B553 /* AllCoachLBV.m in Sources */ = {isa = PBXBuildFile; fileRef = A787213021A2866A00D2B553 /* AllCoachLBV.m */; };
 		A787E179215DFB0900EF01F2 /* AipOcrSdk.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; };
 		A787E17C215DFB3600EF01F2 /* AipBase.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E177215DFB0900EF01F2 /* AipBase.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A787E17F215DFB3700EF01F2 /* AipOcrSdk.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -949,6 +951,10 @@
 		A7825C48213CD29D0056FDA2 /* AddStudentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddStudentCell.m; sourceTree = "<group>"; };
 		A7825C4A213D35750056FDA2 /* InsuranceInformationVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InsuranceInformationVC.h; sourceTree = "<group>"; };
 		A7825C4B213D35750056FDA2 /* InsuranceInformationVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InsuranceInformationVC.m; sourceTree = "<group>"; };
+		A787212C21A2670300D2B553 /* ResultsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsVC.h; sourceTree = "<group>"; };
+		A787212D21A2670300D2B553 /* ResultsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsVC.m; sourceTree = "<group>"; };
+		A787212F21A2866A00D2B553 /* AllCoachLBV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllCoachLBV.h; sourceTree = "<group>"; };
+		A787213021A2866A00D2B553 /* AllCoachLBV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllCoachLBV.m; sourceTree = "<group>"; };
 		A787E175215DFB0800EF01F2 /* IdcardQuality.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IdcardQuality.framework; sourceTree = "<group>"; };
 		A787E176215DFB0900EF01F2 /* AipOcrSdk.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipOcrSdk.framework; sourceTree = "<group>"; };
 		A787E177215DFB0900EF01F2 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
@@ -2695,6 +2701,8 @@
 				A7629BAB219E62DD0001D2A7 /* AddCoachVC.m */,
 				A7629BAE219E75EA0001D2A7 /* InvitationCoachVC.h */,
 				A7629BAF219E75EA0001D2A7 /* InvitationCoachVC.m */,
+				A787212C21A2670300D2B553 /* ResultsVC.h */,
+				A787212D21A2670300D2B553 /* ResultsVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -3010,6 +3018,8 @@
 			children = (
 				A7EC18032176DA99007793FC /* FMTableViewCell.h */,
 				A7EC18042176DA99007793FC /* FMTableViewCell.m */,
+				A787212F21A2866A00D2B553 /* AllCoachLBV.h */,
+				A787213021A2866A00D2B553 /* AllCoachLBV.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5733,6 +5743,7 @@
 				DA03464D1F509098008E7BE1 /* NSDictionary+XML.m in Sources */,
 				DA0347221F509098008E7BE1 /* SegmentViewController.m in Sources */,
 				A75E5CBE2179B21C0033F6A5 /* TimeSetCell.m in Sources */,
+				A787212E21A2670300D2B553 /* ResultsVC.m in Sources */,
 				DA0346861F509098008E7BE1 /* NSUserDefaults+iCloudSync.m in Sources */,
 				DA867D251F58F29800D4D011 /* NSDictionary+JYSafe.m in Sources */,
 				A7A213BE212EA98600920678 /* CourseV.m in Sources */,
@@ -5821,6 +5832,7 @@
 				DA0346E41F509098008E7BE1 /* UITableViewCell+TS_delaysContentTouches.m in Sources */,
 				A7EC187121773E29007793FC /* JXCategoryNumberCellModel.m in Sources */,
 				A7282F05217D74C500117758 /* ReservationRecordVC.m in Sources */,
+				A787213121A2866A00D2B553 /* AllCoachLBV.m in Sources */,
 				DA78C3081F5D41A3009BAA90 /* NetworkProtocolOBJ.m in Sources */,
 				DA911BF01F3462830048E119 /* XLSmV.m in Sources */,
 				DAE2128C1EF2867B000EAB90 /* XLHeader.m in Sources */,

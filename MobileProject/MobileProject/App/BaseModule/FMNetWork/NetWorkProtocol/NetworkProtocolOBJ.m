@@ -35,7 +35,7 @@
         NSString *path = [[NSBundle mainBundle] pathForResource:@"DebugNetworkProtocol" ofType:@"plist"];
 //        https://test.ztjwsoft.com/   http://192.168.0.201:8080/   https://test.ztjwsoft.com/dsmp/#/
         //https://jk.ztjwsoft.com/     http://192.168.0.233:8080/
-//http://192.168.0.234:18989/
+//http://192.168.0.234:18989/          http://192.168.0.201:80/
         _customMadeDic = [NSDictionary dictionaryWithContentsOfFile:path];
     }
     return _customMadeDic;
