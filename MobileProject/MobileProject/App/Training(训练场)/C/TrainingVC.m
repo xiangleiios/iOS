@@ -14,13 +14,16 @@
 #import "AllCoachLBV.h"
 #import "GDMapVC.h"
 #import "GDSearchMapVC.h"
-@interface TrainingVC ()
+@interface TrainingVC ()<GDSearchMapVCDelegate,AMapSearchDelegate>
 @property (nonatomic , strong)XLInformationV *school;
 @property (nonatomic , strong)XLInformationV *fenXiao;
 @property (nonatomic , strong)XLInformationV *name;
 @property (nonatomic , strong)XLInformationV *area;
 @property (nonatomic , strong)XLInformationV *address;
 @property (nonatomic , strong)UIButton *choose;
+@property (nonatomic, strong)AMapSearchAPI *search;
+@property (nonatomic , assign)CGFloat latitude;///纬度
+@property (nonatomic , assign)CGFloat longitude;///经度
 @end
 
 @implementation TrainingVC
@@ -32,6 +35,9 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.search = [[AMapSearchAPI alloc] init];
+    self.search.delegate = self;
+    
     [self loadSubview];
     [self loadBut];
     // Do any additional setup after loading the view.
@@ -109,6 +115,7 @@
     self.area.senterBlock = ^{
         [weakself.view endEditing:YES];
         GDSearchMapVC *vc = [[GDSearchMapVC alloc] init];
+        vc.delegate = weakself;
         [weakself.navigationController pushViewController:vc animated:YES];
 //        AddressV *v = [[AddressV alloc] init];
 //        v.vc = weakself;
@@ -135,11 +142,12 @@
     if (self.model) {
         XLCache *cache = [XLCache singleton];
         self.name.subfield.text = _model.teamTrainingName;
-        self.province = @{@"name":_model.provinceStr,@"code":_model.province};
-        self.city = @{@"name":_model.cityStr,@"code":_model.city};
-        self.areadic = @{@"name":_model.areaStr,@"code":_model.area};
+        self.province = @{@"name":_model.province};
+        self.city = @{@"name":_model.city};
+        self.areadic = @{@"name":_model.area};
         self.address.subfield.text = _model.address;
-        
+        self.latitude = _model.latitude;
+        self.longitude = _model.latitude;
         self.school.subfield.text = cache.teamCode_title[[cache.teamCode_value indexOfObject:_model.teamSchoolId]];
         self.school.subfield.tag = [_model.teamSchoolId integerValue];
         self.fenXiao.subfield.text = _model.teamSchoolName;
@@ -216,13 +224,29 @@
         [MBProgressHUD showMsgHUD:@"请选择训练场详区域"];
         return;
     }
+    NSMutableArray *arr = [NSMutableArray array];
+    for (int i = 0; i < self.selectArr.count; i ++) {
+        UIButton *but = self.selectArr[i];
+        if (but.selected) {
+            FMCoachModel *model = self.coachArr[i];
+            [arr addObject:model.idid];
+        }
+    }
+    if (arr.count < 1) {
+        [MBProgressHUD showMsgHUD:@"绑定教练"];
+        return;
+    }
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:self.province[@"code"] forKey:@"province"];
-    [dic setObject:self.city[@"code"] forKey:@"city"];
-    [dic setObject:self.areadic[@"code"] forKey:@"area"];
+    [dic setObject:self.province[@"name"] forKey:@"province"];
+    [dic setObject:self.city[@"name"] forKey:@"city"];
+    [dic setObject:self.areadic[@"name"] forKey:@"area"];
     [dic setObject:[NSString stringWithFormat:@"%ld",(long)self.school.subfield.tag] forKey:@"teamSchoolId"];
     [dic setObject:self.name.subfield.text forKey:@"teamTrainingName"];
     [dic setObject:self.address.subfield.text forKey:@"address"];
+    [dic setObject:[NSString stringWithFormat:@"%f",self.latitude] forKey:@"latitude"];
+    [dic setObject:[NSString stringWithFormat:@"%f",self.longitude] forKey:@"longitude"];
+    [dic setObject:arr forKey:@"coachIds"];
+
     NSString *url;
     if (self.type) {
         url =POSTAddTeamtraining;//新增
@@ -231,6 +255,7 @@
     }else{
         url =POSTEditTeamtraining;//编辑
         [dic setObject:self.model.teamTrainingId forKey:@"teamTrainingId"];
+        [dic setObject:@"0" forKey:@"status"];
     }
     [MBProgressHUD showLoadingHUD:@"正在保存"];
     
@@ -278,11 +303,55 @@
     
 }
 
+- (void)GDSearchMapVCDelegateWith:(AMapPOI *)amapPOI And:(nonnull AMapReGeocodeSearchResponse *)response{
+    KKLog(@"%@",amapPOI);
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(amapPOI.location.latitude,amapPOI.location.longitude);//纬度，经度
+    self.latitude = amapPOI.location.latitude;
+    self.longitude = amapPOI.location.longitude;
+    self.province = @{@"name":response.regeocode.addressComponent.province};
+    self.city = @{@"name":response.regeocode.addressComponent.city};
+    self.areadic = @{@"name":response.regeocode.addressComponent.district};
+    self.address.subfield.text = amapPOI.address;
+}
+- (void)GDSearchMapVCDelegateWithAddressComponent:(AMapReGeocodeSearchResponse *)response And:(AMapPOI *)amapPOI{
+    KKLog(@"%@",response);
+    self.province = @{@"name":response.regeocode.addressComponent.province};
+    self.city = @{@"name":response.regeocode.addressComponent.city};
+    self.areadic = @{@"name":response.regeocode.addressComponent.district};
+    self.address.subfield.text =response.regeocode.formattedAddress;
+    NSInteger n = response.regeocode.addressComponent.province.length + response.regeocode.addressComponent.city.length + response.regeocode.addressComponent.district.length;
+    self.address.subfield.text = [response.regeocode.formattedAddress substringFromIndex:n];
+    self.latitude = amapPOI.location.latitude;
+    self.longitude = amapPOI.location.longitude;
+}
 
 
+
+//- (void)loadAddressWith:(AMapReGeocodeSearchResponse *)response{
+//    self.province = @{@"name":response.regeocode.addressComponent.province};
+//    self.city = @{@"name":response.regeocode.addressComponent.city};
+//    self.areadic = @{@"name":response.regeocode.addressComponent.district};
+//    self.address.subfield.text =response.regeocode.formattedAddress;
+//    NSInteger n = response.regeocode.addressComponent.province.length + response.regeocode.addressComponent.city.length + response.regeocode.addressComponent.district.length;
+//    self.address.subfield.text = [response.regeocode.formattedAddress substringFromIndex:n];//截取范围内的字符串
+//}
 /*
 #pragma mark - Navigation
-
+ ///格式化地址
+ @property (nonatomic, copy)   NSString             *formattedAddress;
+ ///地址组成要素
+ @property (nonatomic, strong) AMapAddressComponent *addressComponent;
+ 
+ ///道路信息 AMapRoad 数组
+ @property (nonatomic, strong) NSArray<AMapRoad *> *roads;
+ ///道路路口信息 AMapRoadInter 数组
+ @property (nonatomic, strong) NSArray<AMapRoadInter *> *roadinters;
+ ///兴趣点信息 AMapPOI 数组
+ @property (nonatomic, strong) NSArray<AMapPOI *> *pois;
+ ///兴趣区域信息 AMapAOI 数组
+ @property (nonatomic, strong) NSArray<AMapAOI *> *aois;
+ 
+ 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].

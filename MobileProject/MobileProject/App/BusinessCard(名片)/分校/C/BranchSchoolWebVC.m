@@ -150,8 +150,9 @@
 
 - (void)toChange{
     ChangeCardHeadVC *vc = [[ChangeCardHeadVC alloc] init];
-    //    vc.model = self.model;
+    vc.model = self.model;
     vc.idid = self.model.idid;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

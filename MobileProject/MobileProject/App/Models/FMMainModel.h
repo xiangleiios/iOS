@@ -291,6 +291,9 @@
 @property (nonatomic , strong)NSString *schoolAptitude; /// 驾校资质
 @property (nonatomic , strong)NSString *brandAuthentication; /// 驾校认证
 @property (nonatomic , strong)NSString *schoolHonor; /// 驾校荣誉
+
+@property (nonatomic , strong)NSString *coachHonor;///教练荣誉
+@property (nonatomic , strong)NSString *teachHarvest; ///教学成果
 @property (nonatomic , strong)NSString *enrollCode;
 @property (nonatomic , strong)NSString *stuHead;
 @property (nonatomic , strong)NSArray *replyList;
@@ -303,7 +306,14 @@
 @property (nonatomic , assign)int enrollStudentCount;
 @property (nonatomic , assign)BOOL isDimission;
 @property (nonatomic , strong)NSString *licenses;
+@property (nonatomic , strong)NSString *coachId;
+@property (nonatomic , assign)BOOL isCheck;
+@property (nonatomic , assign)CGFloat latitude;///纬度
+@property (nonatomic , assign)CGFloat longitude;///经度
+@property (nonatomic , strong)NSString *detailAddress;
 
+@property (nonatomic , strong)NSString *county;
+@property (nonatomic , strong)NSString *provice;
 @end
 
 

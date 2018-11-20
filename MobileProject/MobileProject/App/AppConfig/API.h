@@ -104,7 +104,7 @@
 #define POSTUpLoadFile KURL(@"system/file/upLoadFile")
 
 #pragma mark -修改招生名片接口
-#define POSTEnrollInfoEdit KURL(@"app/enrollInfo/edit")
+#define POSTEnrollInfoEdit KURL(@"app/coach/v1_2/coach/editCoachEnrollInfo")
 
 
 #pragma mark -编辑所属分校招生名片信息接口
@@ -274,6 +274,9 @@
 #pragma mark -添加教练
 #define POSTTeamSchoolCoachCoachAdd KURL(@"app/school/v1_2/teamSchoolCoach/coachAdd")
 
+#pragma mark -编辑教练
+#define POSTTeamSchoolCoachCoachEdit KURL(@"app/school/v1_2/teamSchoolCoach/coachEdit")
+
 #pragma mark -批量添加教练
 #define POSTTeamSchoolCoachCoachAddll KURL(@"app/school/v1_2/teamSchoolCoach/coachAddll?data=%@&schoolId=%d&originalDeptId=%d")
 
@@ -286,8 +289,34 @@
 //plat/#/poster/index?type=app&id=
 
 
+//#pragma mark -教练驾校绑定
+//#define POSTBindBindCoach KURL(@"app/coach/bind/bindCoach?id=%@&originalDeptId=%@&schoolId=%@")
 #pragma mark -教练驾校绑定
-#define POSTBindBindCoach KURL(@"app/coach/bind/bindCoach?id=%@&originalDeptId=%@&schoolId=%@")
+#define POSTBindBindCoach KURL(@"app/coach/bind/bindCoach")
+#pragma mark -教练名片详情接口
+#define POSTCoachEnrollInfo KURL(@"app/coach/v1_2/coach/coachEnrollInfo?id=%@")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //--------------------------------------------------------------------------------------------------
 
 #pragma mark 一下全部要删除掉

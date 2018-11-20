@@ -11,6 +11,7 @@
 #import "CodeShareV.h"
 #import "ChangeCardHeadVC.h"
 #import "FMJS.h"
+#import "AddCoachVC.h"
 @interface BusinessCardVC ()<UIWebViewDelegate,AppJSObjectDelegate>
 @property (nonatomic , strong)UIWebView *webView;
 @property (nonatomic , strong)NSMutableArray *dataArr;
@@ -28,7 +29,9 @@
     
     [self laodNavigation];
     [self loadWebview];
-    [self loadSubview];
+    if (!USERFZR) {
+        [self loadSubview];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -37,20 +40,55 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - 导航相关
+#pragma mark - 导航相关
 - (void)laodNavigation{
-    [self.navigationView setTitle:@"招生名片"];
+    [self.navigationView setTitle:@"教练详情"];
+    kWeakSelf(self)
+    [self.navigationView setNavigationBackButtonCallback:^(UIView *view) {
+        if (weakself.webView.canGoBack == YES) {
+            [weakself.webView goBack];
+            return;
+        }else{
+            [weakself.navigationController popViewControllerAnimated:YES];
+        }
+    }];
     
+    [self.navigationView.navigationBackButton setImage:[UIImage imageNamed:@"back_white"] forState:UIControlStateNormal];
+    self.navigationView.titleLabel.textColor = [UIColor whiteColor];
+    [self.navigationView setNavigationBackgroundImage:[UIImage imageNamed:@"jiaxiao_bg"]];
+    if (USERFZR) {
+        [self.navigationView addRightButtonWithImage:[UIImage imageNamed:@"chakan"] clickCallBack:^(UIView *view) {
+            AddCoachVC *vc = [[AddCoachVC alloc] init];
+            vc.type = 1;
+            vc.model = weakself.model;
+            [weakself.navigationController pushViewController:vc animated:YES];
+        }];
+    }
+    
+    //web进度条
+//    _progressLayer = [LMWebProgressLayer new];
+//    _progressLayer.frame = CGRectMake(0, self.navigationController.navigationBar.height - 2, kScreenW, 2);
+//    [self.navigationController.navigationBar.layer addSublayer:_progressLayer];
 }
 
 - (void)loadWebview{
     UIWebView *web = [[UIWebView alloc] init];
     self.webView = web;
     [self.view addSubview:web];
-    [web mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
-        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
-    }];
+    if (USERFZR) {
+        [web mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+            make.bottom.mas_equalTo(self.view);
+        }];
+    }else{
+        
+        [web mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+            make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
+        }];
+    }
     self.webView.delegate = self;
 }
 

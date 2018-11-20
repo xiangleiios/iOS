@@ -7,11 +7,7 @@
 //
 
 #import "GDSearchMapVC.h"
-#import <MAMapKit/MAMapKit.h>
-#import <MAMapKit/MAMapView.h>
-#import <AMapSearchKit/AMapSearchKit.h>
-#import "PlaceAroundTableView.h"
-#import <AMapFoundationKit/AMapFoundationKit.h>
+
 
 @interface GDSearchMapVC ()<MAMapViewDelegate, PlaceAroundTableViewDeleagate>
 @property (nonatomic, strong) MAMapView            *mapView;
@@ -208,7 +204,7 @@
 {
     self.tableview = [[PlaceAroundTableView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height/2, CGRectGetWidth(self.view.bounds), self.view.bounds.size.height/2)];
     self.tableview.delegate = self;
-    
+    self.tableview.vc = self;
     [self.view addSubview:self.tableview];
 }
 

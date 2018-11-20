@@ -341,6 +341,9 @@
     if (self) {
         kWeakSelf(self)
         self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.name.userInteractionEnabled = NO;
+        self.name.subfield.textColor = kColor_N(210, 210, 210);
+        
         self.gender = [[XLInformationV alloc] informationWithTitle:@"性别" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
         self.gender.senterBlock = ^{
             [weakself endEditing:YES];
@@ -366,6 +369,8 @@
         
         self.seniority = [[XLInformationV alloc] informationWithTitle:@"教龄" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.phone = [[XLInformationV alloc] informationWithTitle:@"招生电话" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.phone.userInteractionEnabled = NO;
+        self.phone.subfield.textColor = kColor_N(210, 210, 210);
         self.names = [[XLInformationV alloc] informationWithTitle:@"分校名称" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.names.userInteractionEnabled = NO;
         self.names.subfield.textColor = kColor_N(210, 210, 210);
@@ -458,7 +463,7 @@
 
 
 
-
+#pragma mark - 分校详情基本资料表单
 @implementation FXAdmissionsFormsV
 
 - (instancetype)init
@@ -481,18 +486,20 @@
         self.names = [[XLInformationV alloc] informationWithTitle:@"分校名称" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
         self.names.userInteractionEnabled = NO;
         self.names.subfield.textColor = kColor_N(210, 210, 210);
-        self.address = [[XLInformationV alloc] informationWithTitle:@"分校地址" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
-        self.address.userInteractionEnabled = NO;
-        self.address.subfield.textColor = kColor_N(210, 210, 210);
+        self.address = [[XLInformationV alloc] informationWithTitle:@"详细地址" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        
+        self.addressarea = [[XLInformationV alloc] informationWithTitle:@"分校区域" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
+//        self.address.userInteractionEnabled = NO;
+//        self.address.subfield.textColor = kColor_N(210, 210, 210);
         
         [self addSubview:self.name];
         [self addSubview:self.school];
         [self addSubview:self.phone];
         [self addSubview:self.names];
         [self addSubview:self.address];
+        [self addSubview:self.addressarea];
         
-        
-        NSArray *arr = @[self.school,self.names,self.address,self.name,self.phone];
+        NSArray *arr = @[self.school,self.names,self.addressarea,self.address,self.name,self.phone];
         [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
         [arr mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self);

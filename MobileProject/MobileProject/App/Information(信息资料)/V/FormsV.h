@@ -143,7 +143,8 @@ typedef void(^SenterBlcokInt) (int tag);
 @property (nonatomic , strong)XLInformationV *names;
 /// 分校地址
 @property (nonatomic , strong)XLInformationV *address;
-
+/// 分校区域
+@property (nonatomic , strong)XLInformationV *addressarea;
 
 @end
 

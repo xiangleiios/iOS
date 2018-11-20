@@ -9,9 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MAMapKit/MAMapView.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-
+@class GDSearchMapVC;
 @protocol PlaceAroundTableViewDeleagate <NSObject>
-
 - (void)didTableViewSelectedChanged:(AMapPOI *)selectedPoi;
 
 - (void)didLoadMorePOIButtonTapped;
@@ -28,7 +27,7 @@
 @property (nonatomic, weak) id<PlaceAroundTableViewDeleagate> delegate;
 
 @property (nonatomic, copy) NSString *currentAddress;
-
+@property (nonatomic , weak)GDSearchMapVC *vc;
 - (instancetype)initWithFrame:(CGRect)frame;
 
 - (AMapPOI *)selectedTableViewCellPoi;

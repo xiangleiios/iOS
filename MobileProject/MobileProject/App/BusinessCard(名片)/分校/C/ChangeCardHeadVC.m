@@ -16,10 +16,10 @@
 
 #import "UploadPicturesV.h"
 #import "SchoolLable.h"
-
+#import "GDSearchMapVC.h"
 
 #define BUT_W KFit_W6S(150)
-@interface ChangeCardHeadVC ()<UIImagePickerControllerDelegate>
+@interface ChangeCardHeadVC ()<UIImagePickerControllerDelegate,GDSearchMapVCDelegate,AMapSearchDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
 @property (nonatomic , strong)UIImageView *headImg;
@@ -45,9 +45,30 @@
 
 @property (nonatomic , strong)NSArray *teamSchoolTags; ///标签入口
 
+@property (nonatomic , strong)NSDictionary *province;
+@property (nonatomic , strong)NSDictionary *city;
+@property (nonatomic , strong)NSDictionary *areadic;
+@property (nonatomic , assign)CGFloat latitude;///纬度
+@property (nonatomic , assign)CGFloat longitude;///经度
 @end
 
 @implementation ChangeCardHeadVC
+-(void)setProvince:(NSDictionary *)province{
+    _province = [province copy];
+    KKLog(@"%@",_province);
+}
+- (void)setCity:(NSDictionary *)city{
+    _city = [city copy];
+    KKLog(@"%@",_city);
+}
+- (void)setAreadic:(NSDictionary *)areadic{
+    _areadic = [areadic copy];
+//    if (_province[@"name"]&&_city[@"name"]&&_areadic[@"name"]) {
+//        self.admissions.addressarea.subfield.text = [NSString stringWithFormat:@"%@-%@-%@",_province[@"name"],_city[@"name"],_areadic[@"name"]];
+//    }
+    self.admissions.addressarea.subfield.text = [NSString stringWithFormat:@"%@-%@-%@",_province[@"name"],_city[@"name"],_areadic[@"name"]];
+    
+}
 
 - (NSMutableArray *)butarr{
     if (_butarr==nil) {
@@ -158,10 +179,23 @@
     [self.admissions mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(jiBenZiLiao.mas_bottom);
         make.left.right.mas_equalTo(self.backview);
-        make.height.mas_equalTo(KFit_H6S(450));
+        make.height.mas_equalTo(KFit_H6S(540));
     }];
-    
+    self.province = @{@"name":_model.provice};
+    self.city = @{@"name":_model.city};
+    self.areadic = @{@"name":_model.county};
+    self.admissions.address.subfield.text = _model.detailAddress;
+    self.latitude = _model.latitude;
+    self.longitude = _model.latitude;
     kWeakSelf(self)
+    
+    self.admissions.addressarea.senterBlock = ^{
+        [weakself.view endEditing:YES];
+        GDSearchMapVC *vc = [[GDSearchMapVC alloc] init];
+        vc.delegate = weakself;
+        [weakself.navigationController pushViewController:vc animated:YES];
+    };
+    
     _keCheng = [[XLInformationV alloc] informationWithTitle:@"培训课程" ButTile:@"创建课程" ButImg:@"add_cj"];
     [self.backview addSubview:_keCheng];
     _keCheng.senterBlock = ^{
@@ -277,7 +311,7 @@
     }];
     
     
-    XLInformationV *zz =[[XLInformationV alloc] informationWithTitle:@"驾校资质" Subtitle:@"最多可上传9张" Must:NO];
+    XLInformationV *zz =[[XLInformationV alloc] informationWithTitle:@"驾校资质" Subtitle:@"最多可上传3张" Must:NO];
     [self.backview addSubview:zz];
     [zz mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.jiaoXueHuanJing.mas_bottom).mas_offset(KFit_H6S(20));
@@ -287,7 +321,7 @@
     self.jiaoXueZiZhi = [[UploadPicturesV alloc] init];
     [self.backview addSubview:self.jiaoXueZiZhi];
     self.jiaoXueZiZhi.vc = self;
-    self.jiaoXueZiZhi.num = 9;
+    self.jiaoXueZiZhi.num = 3;
     [self.jiaoXueZiZhi mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view );
         make.top.mas_equalTo(zz.mas_bottom);
@@ -295,7 +329,7 @@
     }];
     
     
-    XLInformationV *pp =[[XLInformationV alloc] informationWithTitle:@"品牌认证" Subtitle:@"最多可上传9张" Must:NO];
+    XLInformationV *pp =[[XLInformationV alloc] informationWithTitle:@"品牌认证" Subtitle:@"最多可上传3张" Must:NO];
     [self.backview addSubview:pp];
     [pp mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.jiaoXueZiZhi.mas_bottom).mas_offset(KFit_H6S(20));
@@ -305,14 +339,14 @@
     self.jiaoXuePingPai = [[UploadPicturesV alloc] init];
     [self.backview addSubview:self.jiaoXuePingPai];
     self.jiaoXuePingPai.vc = self;
-    self.jiaoXuePingPai.num = 9;
+    self.jiaoXuePingPai.num = 3;
     [self.jiaoXuePingPai mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view );
         make.top.mas_equalTo(pp.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(210));
     }];
     
-    XLInformationV *ry =[[XLInformationV alloc] informationWithTitle:@"驾校荣誉" Subtitle:@"最多可上传9张" Must:NO];
+    XLInformationV *ry =[[XLInformationV alloc] informationWithTitle:@"驾校荣誉" Subtitle:@"最多可上传3张" Must:NO];
     [self.backview addSubview:ry];
     [ry mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.jiaoXuePingPai.mas_bottom).mas_offset(KFit_H6S(20));
@@ -322,7 +356,7 @@
     self.jiaoXueRongYu = [[UploadPicturesV alloc] init];
     [self.backview addSubview:self.jiaoXueRongYu];
     self.jiaoXueRongYu.vc = self;
-    self.jiaoXueRongYu.num = 9;
+    self.jiaoXueRongYu.num = 3;
     [self.jiaoXueRongYu mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view );
         make.top.mas_equalTo(ry.mas_bottom);
@@ -536,7 +570,7 @@
 //    [dic setObject:self.admissions.seniority.subfield.text forKey:@"coachAge"];
     [dic setObject:self.admissions.phone.subfield.text forKey:@"enrollPhone"];
     [dic setObject:self.admissions.names.subfield.text forKey:@"deptName"];
-    [dic setObject:self.admissions.address.subfield.text forKey:@"deptAddress"];
+    [dic setObject:self.admissions.address.subfield.text forKey:@"detailAddress"];
     [dic setObject:self.textView.text forKey:@"introduce"];
     [dic setObject:self.admissions.school.subfield.text forKey:@"schoolName"];
 //    [dic setObject:self.admissions.names.subfield.text forKey:@"deptName"];
@@ -561,7 +595,11 @@
     [dic setObject:@"" forKey:@"url7"];
     [dic setObject:@"" forKey:@"url8"];
     [dic setObject:@"" forKey:@"url9"];
-    
+    [dic setObject:self.province[@"name"] forKey:@"provice"];
+    [dic setObject:self.city[@"name"] forKey:@"city"];
+    [dic setObject:self.areadic[@"name"] forKey:@"county"];
+    [dic setObject:[NSString stringWithFormat:@"%f",self.latitude] forKey:@"latitude"];
+    [dic setObject:[NSString stringWithFormat:@"%f",self.longitude] forKey:@"longitude"];
     for (int i = 0; i <self.jiaoXueHuanJing.dataArr.count; i++) {
         NSString *key = [NSString stringWithFormat:@"url%d",(i + 1)];
         [dic setObject:self.jiaoXueHuanJing.dataArr[i] forKey:key];
@@ -600,4 +638,28 @@
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
+
+- (void)GDSearchMapVCDelegateWith:(AMapPOI *)amapPOI And:(nonnull AMapReGeocodeSearchResponse *)response{
+    KKLog(@"%@",amapPOI);
+    CLLocationCoordinate2D coords = CLLocationCoordinate2DMake(amapPOI.location.latitude,amapPOI.location.longitude);//纬度，经度
+    self.latitude = amapPOI.location.latitude;
+    self.longitude = amapPOI.location.longitude;
+    self.province = @{@"name":response.regeocode.addressComponent.province};
+    self.city = @{@"name":response.regeocode.addressComponent.city};
+    self.areadic = @{@"name":response.regeocode.addressComponent.district};
+    self.admissions.address.subfield.text = amapPOI.address;
+}
+- (void)GDSearchMapVCDelegateWithAddressComponent:(AMapReGeocodeSearchResponse *)response And:(AMapPOI *)amapPOI{
+    KKLog(@"%@",response);
+    self.province = @{@"name":response.regeocode.addressComponent.province};
+    self.city = @{@"name":response.regeocode.addressComponent.city};
+    self.areadic = @{@"name":response.regeocode.addressComponent.district};
+//    self.address.subfield.text =response.regeocode.formattedAddress;
+    NSInteger n = response.regeocode.addressComponent.province.length + response.regeocode.addressComponent.city.length + response.regeocode.addressComponent.district.length;
+    self.admissions.address.subfield.text = [response.regeocode.formattedAddress substringFromIndex:n];
+    self.latitude = amapPOI.location.latitude;
+    self.longitude = amapPOI.location.longitude;
+}
+
+
 @end

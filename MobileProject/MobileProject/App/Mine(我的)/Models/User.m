@@ -33,6 +33,7 @@ static User *user  =  nil;
                 user.points = [defaults objectForKey:@"points"];
                 user.token = [defaults objectForKey:@"token"];
                 user.uid = [defaults objectForKey:@"uid"];
+                user.userId = [defaults objectForKey:@"userId"];
                 user.accounttype = [defaults objectForKey:@"accounttype"];
                 user.teamUserHead = [defaults objectForKey:@"teamUserHead"];
             }

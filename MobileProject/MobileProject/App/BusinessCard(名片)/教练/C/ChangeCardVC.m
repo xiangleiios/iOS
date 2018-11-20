@@ -13,6 +13,7 @@
 #import "TemplateV.h"
 #import "XLCache.h"
 #import "UploadPicturesV.h"
+#import "CGXPickerView.h"
 #define BUT_W KFit_W6S(150)
 @interface ChangeCardVC ()<UIImagePickerControllerDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -36,6 +37,8 @@
 @property (nonatomic , strong)UploadPicturesV *jiaoXueHuanJing;
 @property (nonatomic , strong)UploadPicturesV *jiaoXueRongYu;
 @property (nonatomic , strong)UploadPicturesV *jiaoXueChengGuo;
+@property (nonatomic ,strong)XLInformationV *istuiguang;
+@property (nonatomic , assign)NSInteger tuguang;
 @end
 
 @implementation ChangeCardVC
@@ -303,6 +306,30 @@
         make.height.mas_equalTo(KFit_H6S(210));
     }];
     
+//    kWeakSelf(self)
+    self.istuiguang = [[XLInformationV alloc] informationWithTitle:@"学员端推广" SubTitle:@"" TSSubTitle:@"" Must:NO Click:YES];
+    self.istuiguang.backgroundColor = [UIColor whiteColor];
+    [self.backview addSubview:self.istuiguang];
+    [self.istuiguang mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.top.mas_equalTo(self.jiaoXueChengGuo.mas_bottom).mas_offset(KFit_H6S(20));
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+    self.istuiguang.senterBlock = ^{
+        [weakself.view endEditing:YES];
+        [CGXPickerView showStringPickerWithTitle:@"是否在学员端推广" DataSource:@[@"否",@"是"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+            NSLog(@"%@",selectValue);
+            weakself.istuiguang.subfield.text = selectValue;
+            weakself.tuguang = [selectRow integerValue];
+        }];
+    };
+    if (self.model.isCheck) {
+        weakself.istuiguang.subfield.text = @"是";
+        self.tuguang = 1;
+    }else{
+        weakself.istuiguang.subfield.text = @"否";
+        self.tuguang = 0;
+    }
 //    self.imgBackView = [[XLView alloc] init];
 //    self.imgBackView.backgroundColor = [UIColor whiteColor];
 //    [self.backview addSubview:self.imgBackView];
@@ -316,11 +343,13 @@
 //    }];
     
     
+    
+}
+
+- (void)viewDidLayoutSubviews{
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
-
-
 
 
 
@@ -332,22 +361,39 @@
 - (void)refreshData{
 
 //    NSString *url = POSTgGetEnrollInfoInfo;
-    NSString *url1 = [NSString stringWithFormat:@"%@?id=%@&operaType=1",POSTgGetEnrollInfoInfo,self.idid];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setObject:self.idid forKey:@"id"];
-    [dic setObject:@"1" forKey:@"operaType"];
-    
-    [FMNetworkHelper fm_request_getWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+//    NSString *url1 = [NSString stringWithFormat:@"%@?id=%@&operaType=1",POSTgGetEnrollInfoInfo,self.idid];
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    [dic setObject:self.idid forKey:@"id"];
+//    [dic setObject:@"1" forKey:@"operaType"];
+//
+//    [FMNetworkHelper fm_request_getWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+//        KKLog(@"%@",responseObject);
+//        self.scanPhotoIp = responseObject[@"scanPhotoIp"];
+//        self.model = [FMMainModel mj_objectWithKeyValues:responseObject[@"enrollInfo"]];
+//
+//    } failureBlock:^(NSError *error) {
+//
+//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+//
+//    }];
+    User *uer = [User UserOb];
+    KKLog(@"%@",uer.userId);
+    NSString *url = [NSString stringWithFormat:POSTCoachEnrollInfo,[User UserOb].userId];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        self.scanPhotoIp = responseObject[@"scanPhotoIp"];
-        self.model = [FMMainModel mj_objectWithKeyValues:responseObject[@"enrollInfo"]];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            self.scanPhotoIp = responseObject[@"scanPhotoIp"];
+            FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+            self.model = model;
+            
+        }
         
     } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -365,7 +411,8 @@
     self.admissions.gender.subfield.tag = [_model.sex integerValue];
     
     KKLog(@"%@",_model.schoolDeptId);
-    self.admissions.school.subfield.text = cache.teamCode_title[[cache.schoolDeptId indexOfObject:_model.schoolDeptId]];
+//    self.admissions.school.subfield.text = cache.teamCode_title[[cache.schoolDeptId indexOfObject:_model.schoolDeptId]];
+    self.admissions.school.subfield.text = _model.schoolName;
     self.admissions.school.subfield.tag = [_model.schoolDeptId integerValue];
     
     self.admissions.seniority.subfield.text = _model.coachAge;
@@ -436,21 +483,50 @@
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(140) * _model.classList.count);
     }];
+    if (self.jiaoXueHuanJing.dataArr.count < 1) {
+        
+        [self.jiaoXueHuanJing.dataArr addObjectsFromArray:self.imgarr];
+        [self.jiaoXueHuanJing relodData];
+    }
+    if (_model.coachHonor.length > 1 ) {
+        if (self.jiaoXueRongYu.dataArr.count < 1) {
+            [self.jiaoXueRongYu.dataArr addObjectsFromArray:[_model.coachHonor componentsSeparatedByString:@","]];
+            [self.jiaoXueRongYu relodData];
+        }
+    }
     
+    if (_model.teachHarvest.length > 1 ) {
+        if (self.jiaoXueChengGuo.dataArr.count < 1) {
+            [self.jiaoXueChengGuo.dataArr addObjectsFromArray:[_model.teachHarvest componentsSeparatedByString:@","]];
+            [self.jiaoXueChengGuo relodData];
+        }
+    }
+    
+    self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
+    self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
     
 }
 - (void)nextVC{
-
+    
+    if (self.tuguang == 1) {
+        if (self.jiaoXueHuanJing.dataArr.count < 1) {
+            [MBProgressHUD showMsgHUD:@"请上传教学环境图"];
+            return;
+        }
+        if (self.course.dataArr.count < 1) {
+            [MBProgressHUD showMsgHUD:@"请添加班型"];
+            return;
+        }
+        if (self.textView.text.length < 1) {
+            [MBProgressHUD showMsgHUD:@"请添加自我介绍"];
+            return;
+        }
+    }
     NSString *url = POSTEnrollInfoEdit;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:self.model.idid forKey:@"id"];
-    [dic setObject:self.admissions.name.subfield.text forKey:@"name"];
     [dic setObject:[NSString stringWithFormat:@"%ld",self.admissions.gender.subfield.tag] forKey:@"sex"];
-    [dic setObject:[NSString stringWithFormat:@"%ld",self.admissions.school.subfield.tag] forKey:@"schoolDeptId"];
     [dic setObject:self.admissions.seniority.subfield.text forKey:@"coachAge"];
-    [dic setObject:self.admissions.phone.subfield.text forKey:@"enrollPhone"];
-    [dic setObject:self.admissions.names.subfield.text forKey:@"deptName"];
-    [dic setObject:self.admissions.address.subfield.text forKey:@"deptAddress"];
     [dic setObject:self.textView.text forKey:@"introduce"];
     [dic setObject:@"" forKey:@"url1"];
     [dic setObject:@"" forKey:@"url2"];
@@ -461,12 +537,14 @@
     [dic setObject:@"" forKey:@"url7"];
     [dic setObject:@"" forKey:@"url8"];
     [dic setObject:@"" forKey:@"url9"];
-    
-    for (int i = 0; i <self.imgarr.count; i++) {
+    [dic setObject:self.model.coachId forKey:@"coachId"];
+    for (int i = 0; i <self.jiaoXueHuanJing.dataArr.count; i++) {
         NSString *key = [NSString stringWithFormat:@"url%d",(i + 1)];
-        [dic setObject:_imgarr[i] forKey:key];
+        [dic setObject:self.jiaoXueHuanJing.dataArr[i] forKey:key];
     }
-    
+    [dic setObject:[self.jiaoXueChengGuo.dataArr componentsJoinedByString:@","] forKey:@"teachHarvest"];
+    [dic setObject:[self.jiaoXueRongYu.dataArr componentsJoinedByString:@","] forKey:@"coachHonor"];
+    [dic setObject:[NSString stringWithFormat:@"%ld",(long)self.tuguang] forKey:@"isCheck"];
     [MBProgressHUD showLoadingHUD:@"正在提交保存"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"11111%@",responseObject);

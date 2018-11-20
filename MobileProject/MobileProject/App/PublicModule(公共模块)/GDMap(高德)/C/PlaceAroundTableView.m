@@ -7,7 +7,7 @@
 //
 
 #import "PlaceAroundTableView.h"
-
+#import "GDSearchMapVC.h"
 #define kMoreButtonTitle @"更多..."
 
 @interface PlaceAroundTableView()
@@ -22,7 +22,7 @@
 
 @property (nonatomic, assign) BOOL isFromMoreButton;
 @property (nonatomic, strong) UIButton *moreButton;
-
+@property (nonatomic, strong)AMapReGeocodeSearchResponse *response;
 @end
 
 @implementation PlaceAroundTableView
@@ -74,7 +74,7 @@
     if (response.regeocode != nil)
     {
         self.currentAddress = response.regeocode.formattedAddress;
-        
+        self.response = response;
         NSIndexPath *reloadIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [self.tableView reloadRowsAtIndexPaths:@[reloadIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
@@ -91,16 +91,20 @@
     if (indexPath.section == 0)
     {
         self.selectedPoi = nil;
-        [self.delegate didPositionCellTapped];
+//        [self.delegate didPositionCellTapped];
+        [self.vc.delegate GDSearchMapVCDelegateWithAddressComponent:self.response And:self.selectedPoi];
+        [self.vc.navigationController popViewControllerAnimated:YES];
         return ;
     }
-    
+//
     self.selectedPoi = self.searchPoiArray[indexPath.row];
-    
-    if ([self.delegate respondsToSelector:@selector(didTableViewSelectedChanged:)])
-    {
-        [self.delegate didTableViewSelectedChanged:self.selectedPoi];
-    }
+//
+//    if ([self.delegate respondsToSelector:@selector(didTableViewSelectedChanged:)])
+//    {
+//        [self.delegate didTableViewSelectedChanged:self.selectedPoi];
+//    }
+    [self.vc.delegate GDSearchMapVCDelegateWith:self.selectedPoi And:self.response];
+    [self.vc.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath

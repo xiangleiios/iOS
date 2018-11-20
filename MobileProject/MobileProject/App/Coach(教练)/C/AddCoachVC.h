@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AddCoachVC : FMBaseViewController
-
+@property (nonatomic , strong)FMMainModel *model;
+@property (nonatomic , assign)int type; /// 0 添加  1 修改
 @end
 
 NS_ASSUME_NONNULL_END

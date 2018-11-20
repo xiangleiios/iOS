@@ -29,6 +29,7 @@
 
 #import "BranchSchoolListVC.h"
 #import "CoachListVc.h"
+#import "BusinessCardVC.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -40,6 +41,8 @@
 @property (nonatomic, strong) PagingButtonView *pagingScr;
 @property (nonatomic , strong)NSMutableArray *newsArr;
 @property (nonatomic , strong)UILabel *xiaoxi;
+
+@property (nonatomic , strong)FMMainModel *coachModel;
 @end
 
 @implementation XLHomeVC
@@ -53,6 +56,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self loadCoachInfo];
     [self loadnews];
     //加载导航
     [self laodNavigation];
@@ -330,11 +335,61 @@
         BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        BusinessCardListVC *vc = [[BusinessCardListVC alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (self.coachModel) {
+            BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+            vc.model = self.coachModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [self loadCoachInfoToVC];
+        }
+        
     }
 }
 
+- (void)loadCoachInfo{
+    User *uer = [User UserOb];
+    KKLog(@"%@",uer.userId);
+    NSString *url = [NSString stringWithFormat:POSTCoachEnrollInfo,[User UserOb].userId];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+            self.coachModel = model;
+            
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+- (void)loadCoachInfoToVC{
+    User *uer = [User UserOb];
+    KKLog(@"%@",uer.userId);
+    NSString *url = [NSString stringWithFormat:POSTCoachEnrollInfo,[User UserOb].userId];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+            self.coachModel = model;
+            BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+            vc.model = self.coachModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 - (void)toAddStudent{
     AddStudentVC *vc = [[AddStudentVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];

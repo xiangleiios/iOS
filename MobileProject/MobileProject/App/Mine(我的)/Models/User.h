@@ -44,12 +44,9 @@
 @property (nonatomic , strong)NSString *type;
 @property (nonatomic , strong)NSString *source;
 @property (nonatomic , strong)NSString *uid;
-@property (nonatomic , strong)NSString *vip_start;
-@property (nonatomic , strong)NSString *vip_end;
+
 @property (nonatomic , strong)NSString *state;
-@property (nonatomic , strong)NSString *signed_at;
-@property (nonatomic , strong)NSString *created_at;
-@property (nonatomic , strong)NSString *updated_at;
+
 @property (nonatomic , strong)NSNumber *accounttype;
 @property (nonatomic , strong)NSString *teamUserHead;
 // accountType

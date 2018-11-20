@@ -155,9 +155,11 @@
 
 
 - (void)bangdingWithModel:(FMSchoolModel *)model{
-    NSString *url = [NSString stringWithFormat:POSTBindBindCoach,[User UserOb].userId,self.model.deptId,model.deptId];
+//    NSString *url = [NSString stringWithFormat:POSTBindBindCoach,[User UserOb].userId,self.model.deptId,model.deptId];
+    NSString *url = POSTBindBindCoach;
     NSString* url1 = [url stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
-    [FMNetworkHelper fm_request_postWithUrlString:url1 isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    NSDictionary *dic = @{@"id":[User UserOb].userId,@"originalDeptId":self.model.deptId,@"schoolId":model.deptId};
+    [FMNetworkHelper fm_request_postWithUrlString:url1 isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
             [MBProgressHUD showMsgHUD:@"绑定成功，请再次登录"];

@@ -12,6 +12,8 @@
 #import "CoachCell.h"
 
 #import "AddCoachListVC.h"
+
+#import "BusinessCardVC.h"
 @interface CoachListVc ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -158,6 +160,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+    vc.model = self.dataArr[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

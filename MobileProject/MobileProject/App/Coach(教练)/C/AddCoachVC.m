@@ -14,6 +14,8 @@
 @property (nonatomic , strong)XLInformationV *fenXiao;
 @property (nonatomic , strong)XLInformationV *name;
 @property (nonatomic , strong)XLInformationV *pho;
+@property (nonatomic , strong)XLInformationV *zhuangtai;
+@property (nonatomic , assign)int isDimission;
 @property (nonatomic , strong)UIImageView *head;
 @property (nonatomic , strong)NSString *headURL;
 @end
@@ -119,6 +121,41 @@
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(view);
     }];
+    if (self.type) {
+        self.zhuangtai = [[XLInformationV alloc] informationWithTitle:@"供职状态" SubTitle:@"" TSSubTitle:@"请选择是否离职" Must:YES Click:YES];
+        self.zhuangtai.senterBlock = ^{
+            [CGXPickerView showStringPickerWithTitle:@"供职状态" DataSource:@[@"在职",@"离职"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+                NSLog(@"%@",selectValue);
+                int i = [selectRow intValue];
+                weakself.isDimission = i;
+                weakself.zhuangtai.subfield.text = selectValue;
+                
+            }];
+        };
+        [self.view addSubview:self.zhuangtai];
+        [self.zhuangtai mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.top.mas_equalTo(view.mas_bottom);
+            make.height.mas_equalTo(KFit_H6S(90));
+        }];
+        
+    }
+    if (self.model) {
+        self.name.subfield.text = self.model.name;
+        self.pho.subfield.text = self.model.enrollPhone;
+        [self.head sd_setImageWithURL:[NSURL URLWithString:self.model.headPic]placeholderImage:[UIImage imageNamed:@"head_nor"]];
+        self.headURL = self.model.headPic;
+        self.school.subfield.text = self.model.schoolName;
+        self.fenXiao.subfield.text = self.model.deptName;
+        self.school.subfield.tag = [self.model.schoolDeptId integerValue];
+        self.fenXiao.subfield.tag = [self.model.deptId integerValue];
+        self.isDimission = self.model.isDimission;
+        if (self.model.isDimission) {
+            self.zhuangtai.subfield.text = @"离职";
+        }else{
+            self.zhuangtai.subfield.text = @"在职";
+        }
+    }
     
 }
 
@@ -163,13 +200,23 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.name.subfield.text forKey:@"coachName"];
     [dic setValue:self.pho.subfield.text forKey:@"phoneNumber"];
+    
     [dic setValue:[NSString stringWithFormat:@"%ld",(long)self.fenXiao.subfield.tag] forKey:@"schoolId"];
     [dic setValue:[NSString stringWithFormat:@"%ld",(long)self.school.subfield.tag] forKey:@"originalDeptId"];
     if (self.headURL) {
         
         [dic setValue:self.headURL forKey:@"headPic"];
     }
-    [FMNetworkHelper fm_request_postWithUrlString:POSTTeamSchoolCoachCoachAdd isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+    NSString *url;
+    if (self.type) {
+        [dic setValue:[NSString stringWithFormat:@"%d",self.isDimission] forKey:@"isDimission"];
+        [dic setValue:self.model.coachId forKey:@"id"];
+        url = POSTTeamSchoolCoachCoachEdit;
+    }else{
+        url = POSTTeamSchoolCoachCoachAdd;
+    }
+    
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         [MBProgressHUD hideHUD];
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
