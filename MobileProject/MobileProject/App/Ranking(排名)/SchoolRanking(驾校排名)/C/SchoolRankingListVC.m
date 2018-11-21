@@ -1,64 +1,45 @@
 //
-//  CommentsListVC.m
+//  SchoolRankingListVC.m
 //  MobileProject
 //
-//  Created by 向蕾 on 2018/11/5.
+//  Created by 向蕾 on 2018/11/21.
 //  Copyright © 2018年 ZSGY. All rights reserved.
 //
 
-#import "CommentsListVC.h"
+#import "SchoolRankingListVC.h"
 #import "UITableView+FMPlaceholder.h"
-#import "CommentsCell.h"
-@interface CommentsListVC ()<UITableViewDelegate,UITableViewDataSource>
+#import "SchoolRankingCell.h"
+#import "RankingDetailsVC.h"
+@interface SchoolRankingListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
 
 @end
 
-@implementation CommentsListVC
-- (NSMutableDictionary *)dic{
-    if (_dic == nil) {
-        _dic = [NSMutableDictionary dictionary];
-        [_dic setObject:@"20" forKey:@"pageSize"];
-    }
-    return _dic;
-}
-
+@implementation SchoolRankingListVC
 - (NSMutableArray *)dataArr{
-    if (_dataArr==nil) {
-        _dataArr=[NSMutableArray array];
+    if (_dataArr ==nil) {
+        _dataArr = [NSMutableArray array];
     }
     return _dataArr;
 }
-
-- (NSInteger)pageNum {
-    
-    if (_pageNum < 1) {
-        _pageNum = 1;
-    }
-    
-    return _pageNum;
-}
-
-- (NSInteger)pageSize {
-    
-    if (_pageSize < 1) {
-        _pageSize = 20;
-    }
-    return _pageSize;
-}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.navigationView setTitle:@"分校排行"];
+    UIButton *but = [self.navigationView addRightButtonWithTitle:@"规则说明" clickCallBack:^(UIView *view) {
+        
+    }];
+    [but setTitleColor:kColor_N(12, 118, 235) forState:UIControlStateNormal];
     [self loadtable];
     // Do any additional setup after loading the view.
 }
-
 - (void)loadtable{
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.right.bottom.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view);
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
@@ -70,16 +51,26 @@
     self.table.mj_header=[XLHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
     //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
+    self.table.backgroundColor = kColor_N(240, 240, 240);
     __weak __typeof(self)weakSelf = self;
+    _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;
     _table.reloadBlock = ^{
         [weakSelf.table.mj_header beginRefreshing];
     };
-    [self headerRefresh];
     
+}
+
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self headerRefresh];
+    //    [self.table.mj_header beginRefreshing];
 }
 
 - (void)headerRefresh{
     self.pageNum=1;
+    
     [self loadRefreshData];
 }
 - (void)footerRefresh{
@@ -87,17 +78,16 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-//    NSString *url = POSTTeamSchoolTeamSchoolList;
-    [FMNetworkHelper fm_request_postWithUrlString:self.url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    NSString *url = POSTBindTeamSchools;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
-        NSArray *tpArray = responseObject[@"list"][@"rows"];
+        NSArray *tpArray = responseObject[@"list"];
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }
         if (tpArray) {
             for (NSDictionary *dic in tpArray) {
                 FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
-                mode.deptId = self.deptId;
                 [self.dataArr addObject:mode];
             }
         }
@@ -114,36 +104,41 @@
     //    POSTTeamSchoolList
 }
 
-
 #pragma mark-tableview代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArr.count;
-//        return 2;
+//    return 2;
+    
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *cellID = [NSString stringWithFormat:@"CommentsCell"];
-    CommentsCell *cell = [[CommentsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-//    if (!cell) {
-//        cell = [[CommentsCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
-//    }
-    cell.type = self.type;
+    NSString *cellID = [NSString stringWithFormat:@"SchoolRankingCell"];
+    SchoolRankingCell *cell = (SchoolRankingCell *)[tableView dequeueReusableCellWithIdentifier:cellID];
+    if (!cell) {
+        cell = [[SchoolRankingCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+    }
     cell.model = self.dataArr[indexPath.row];
     return cell;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CommentsCell *cell = (CommentsCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-    return [cell getLayoutCellHeight];
+    return KFit_H6S(190);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+    RankingDetailsVC *vc = [[RankingDetailsVC alloc] init];
+//    vc.type = 0;
+//    vc.coachArr = self.coachArr;
+    vc.model = self.dataArr[indexPath.row];
+    [self.navigationController pushViewController:vc animated:YES];
+//    [vc.navigationView setTitle:@"训练场详情"];
 }
+
 /*
 #pragma mark - Navigation
 

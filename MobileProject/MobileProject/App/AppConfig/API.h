@@ -63,8 +63,11 @@
 #pragma mark -新增学员咨询接口
 #define POSTStudenteamAdd KURL(@"app/studenteam/add")
 
-#pragma mark -学员咨询列表接口
+#pragma mark -学员咨询列表接口 - 分校负责人
 #define POSTStudenteamList KURL(@"app/studenteam/list")
+
+#pragma mark -学员咨询列表接口 - 教练
+#define POSTCoachStudenteamList KURL(@"app/coach/studenteam/list")
 
 #pragma mark -修改学员咨询接口
 #define POSTStudenteamEdit KURL(@"app/studenteam/edit")
@@ -72,8 +75,11 @@
 #pragma mark -学员报名-修改资料接口
 #define POSTUpdateStudent KURL(@"app/team/student/updateStudent")
 
-#pragma mark -查询报名学员列表接口
+#pragma mark -查询报名学员列表接口 - 负责人
 #define POSTStudentSignList KURL(@"app/team/student/studentSignList")
+
+#pragma mark -查询报名学员列表接口 - 教练
+#define POSTCoachStudentSignList KURL(@"app/coach/teamStuState/list")
 
 #pragma mark -查询招生名片列表接口
 #define POSTEnrollInfoList KURL(@"app/enrollInfo/list")
@@ -288,6 +294,8 @@
 #define POSTBindTeamSchools KURL(@"app/coach/bind/teamSchools?deptId=%@")
 //plat/#/poster/index?type=app&id=
 
+#pragma mark -获取分校积分排行
+#define POSTBindTeamSchools KURL(@"app/school/ranking/teamSchoolRankings")
 
 //#pragma mark -教练驾校绑定
 //#define POSTBindBindCoach KURL(@"app/coach/bind/bindCoach?id=%@&originalDeptId=%@&schoolId=%@")

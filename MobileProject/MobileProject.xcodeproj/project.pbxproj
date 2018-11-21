@@ -98,6 +98,10 @@
 		A74FE43A2126D951008E159E /* XLInformationV.m in Sources */ = {isa = PBXBuildFile; fileRef = A74FE4392126D951008E159E /* XLInformationV.m */; };
 		A75024982186A18100519552 /* PromptSuccessV.m in Sources */ = {isa = PBXBuildFile; fileRef = A75024972186A18100519552 /* PromptSuccessV.m */; };
 		A750249B2186E1F800519552 /* MyNewsRootVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A750249A2186E1F800519552 /* MyNewsRootVC.m */; };
+		A7506F7421A4F7430003CC7A /* SchoolRankingListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F7321A4F7430003CC7A /* SchoolRankingListVC.m */; };
+		A7506F7721A4F7E50003CC7A /* SchoolRankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F7621A4F7E50003CC7A /* SchoolRankingCell.m */; };
+		A7506F7B21A5031E0003CC7A /* RankingDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F7A21A5031E0003CC7A /* RankingDetailsVC.m */; };
+		A7506F7F21A531770003CC7A /* TaskV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F7E21A531770003CC7A /* TaskV.m */; };
 		A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A754B7CA21476D280029CC04 /* XLNetwork.m */; };
 		A75ACC932160A5EE00E5467C /* PicturePosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75ACC922160A5EE00E5467C /* PicturePosterVC.m */; };
 		A75D2CD6214BB5620065FD7F /* shareimg.png in Resources */ = {isa = PBXBuildFile; fileRef = A75D2CD5214BB5620065FD7F /* shareimg.png */; };
@@ -891,6 +895,14 @@
 		A75024972186A18100519552 /* PromptSuccessV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PromptSuccessV.m; sourceTree = "<group>"; };
 		A75024992186E1F800519552 /* MyNewsRootVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyNewsRootVC.h; sourceTree = "<group>"; };
 		A750249A2186E1F800519552 /* MyNewsRootVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyNewsRootVC.m; sourceTree = "<group>"; };
+		A7506F7221A4F7430003CC7A /* SchoolRankingListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SchoolRankingListVC.h; sourceTree = "<group>"; };
+		A7506F7321A4F7430003CC7A /* SchoolRankingListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolRankingListVC.m; sourceTree = "<group>"; };
+		A7506F7521A4F7E50003CC7A /* SchoolRankingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SchoolRankingCell.h; sourceTree = "<group>"; };
+		A7506F7621A4F7E50003CC7A /* SchoolRankingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolRankingCell.m; sourceTree = "<group>"; };
+		A7506F7921A5031E0003CC7A /* RankingDetailsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingDetailsVC.h; sourceTree = "<group>"; };
+		A7506F7A21A5031E0003CC7A /* RankingDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingDetailsVC.m; sourceTree = "<group>"; };
+		A7506F7D21A531770003CC7A /* TaskV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskV.h; sourceTree = "<group>"; };
+		A7506F7E21A531770003CC7A /* TaskV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskV.m; sourceTree = "<group>"; };
 		A754B7C921476D280029CC04 /* XLNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLNetwork.h; sourceTree = "<group>"; };
 		A754B7CA21476D280029CC04 /* XLNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLNetwork.m; sourceTree = "<group>"; };
 		A75ACC912160A5EE00E5467C /* PicturePosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturePosterVC.h; sourceTree = "<group>"; };
@@ -2527,6 +2539,24 @@
 			path = "Information(信息条)";
 			sourceTree = "<group>";
 		};
+		A7506F7821A501D00003CC7A /* C */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F7921A5031E0003CC7A /* RankingDetailsVC.h */,
+				A7506F7A21A5031E0003CC7A /* RankingDetailsVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		A7506F7C21A531470003CC7A /* V */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F7D21A531770003CC7A /* TaskV.h */,
+				A7506F7E21A531770003CC7A /* TaskV.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
 		A75F9432212D190000384EB0 /* Information(信息资料) */ = {
 			isa = PBXGroup;
 			children = (
@@ -2598,6 +2628,67 @@
 				A7322288213F7F6A007735CE /* BusinessCardCell.m */,
 				A7C59F1C2148E24800948074 /* BusinessShowV.h */,
 				A7C59F1D2148E24800948074 /* BusinessShowV.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		A77FCF4A21A41A6800604CA8 /* Ranking(排名) */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F7C21A531470003CC7A /* V */,
+				A7506F7821A501D00003CC7A /* C */,
+				A77FCF4C21A41AE400604CA8 /* CoachRanking(教练排行) */,
+				A77FCF4B21A41AAB00604CA8 /* SchoolRanking(驾校排名) */,
+			);
+			path = "Ranking(排名)";
+			sourceTree = "<group>";
+		};
+		A77FCF4B21A41AAB00604CA8 /* SchoolRanking(驾校排名) */ = {
+			isa = PBXGroup;
+			children = (
+				A77FCF4E21A41B2100604CA8 /* V */,
+				A77FCF4D21A41B1900604CA8 /* C */,
+			);
+			path = "SchoolRanking(驾校排名)";
+			sourceTree = "<group>";
+		};
+		A77FCF4C21A41AE400604CA8 /* CoachRanking(教练排行) */ = {
+			isa = PBXGroup;
+			children = (
+				A77FCF5021A41B2A00604CA8 /* V */,
+				A77FCF4F21A41B2500604CA8 /* C */,
+			);
+			path = "CoachRanking(教练排行)";
+			sourceTree = "<group>";
+		};
+		A77FCF4D21A41B1900604CA8 /* C */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F7221A4F7430003CC7A /* SchoolRankingListVC.h */,
+				A7506F7321A4F7430003CC7A /* SchoolRankingListVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		A77FCF4E21A41B2100604CA8 /* V */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F7521A4F7E50003CC7A /* SchoolRankingCell.h */,
+				A7506F7621A4F7E50003CC7A /* SchoolRankingCell.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		A77FCF4F21A41B2500604CA8 /* C */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		A77FCF5021A41B2A00604CA8 /* V */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -5091,6 +5182,7 @@
 				A7B5A0FE2133A2BA00BC197B /* Vehicle(车辆管理) */,
 				A7BAB513218FD7DC0018CA27 /* Comments(评论) */,
 				A7AC8171212C2A1100C6AB6C /* MyNews(消息) */,
+				A77FCF4A21A41A6800604CA8 /* Ranking(排名) */,
 				DA4FA47F1FDF7B7200C7C1F1 /* Mine(我的) */,
 				A7BA6F46215F609500A5FA0D /* admissions(招生) */,
 				A7EC180921770BF3007793FC /* ExamStudents(考试学员) */,
@@ -5824,6 +5916,7 @@
 				DA959E441F53BEE9002389F6 /* README.md in Sources */,
 				A75D2CD9214BC01D0065FD7F /* FMJS.m in Sources */,
 				DA0346B61F509098008E7BE1 /* UIImage+BetterFace.m in Sources */,
+				A7506F7B21A5031E0003CC7A /* RankingDetailsVC.m in Sources */,
 				A78E2DD6216B36C400CBAED1 /* PosterVC.m in Sources */,
 				A7948144219AAF2B008F8D4B /* SelectSchoolVC.m in Sources */,
 				DA03464C1F509098008E7BE1 /* NSDictionary+URL.m in Sources */,
@@ -5945,6 +6038,7 @@
 				DA867D561F5904EF00D4D011 /* JYDelayRun.m in Sources */,
 				DA03469D1F509098008E7BE1 /* UIButton+Block.m in Sources */,
 				A73E7F5F215B2397007849EE /* UIImage+colorImage.m in Sources */,
+				A7506F7721A4F7E50003CC7A /* SchoolRankingCell.m in Sources */,
 				DAE212961EF2867B000EAB90 /* XLxqbut.m in Sources */,
 				DA0346901F509098008E7BE1 /* CATransaction+AnimateWithDuration.m in Sources */,
 				A79D3E17217F1E79008BAB2C /* AddressV.m in Sources */,
@@ -5995,6 +6089,7 @@
 				DA0346E81F509098008E7BE1 /* UITextField+Select.m in Sources */,
 				DA0346481F509098008E7BE1 /* NSDictionary+FMExtension.m in Sources */,
 				DA03469C1F509098008E7BE1 /* UIButton+BackgroundColor.m in Sources */,
+				A7506F7421A4F7430003CC7A /* SchoolRankingListVC.m in Sources */,
 				A75E5CBB2179AE920033F6A5 /* TimeSetVC.m in Sources */,
 				DAE212851EF2867B000EAB90 /* DHGifImageOperation.m in Sources */,
 				A7A92EE3219D17F500CF088E /* PPAddressBookHandle.m in Sources */,
@@ -6091,6 +6186,7 @@
 				A7322289213F7F6A007735CE /* BusinessCardCell.m in Sources */,
 				4FF9265820C8CE0600AB3E43 /* NSDate+CGXPicker.m in Sources */,
 				DA0346721F509098008E7BE1 /* NSString+Matcher.m in Sources */,
+				A7506F7F21A531770003CC7A /* TaskV.m in Sources */,
 				DA03473C1F509098008E7BE1 /* FMShareMenuView.m in Sources */,
 				A798CEA921781F9F00145440 /* ExamStudentsCell.m in Sources */,
 				DA0346C81F509098008E7BE1 /* UIImageView+FMExtension.m in Sources */,

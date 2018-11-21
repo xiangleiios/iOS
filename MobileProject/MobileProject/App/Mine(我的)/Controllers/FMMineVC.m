@@ -13,6 +13,7 @@
 #import "XLMineCell.h"
 #import "FMClearCacheTool.h"
 #import "SelectRoleVC.h"
+#import "SchoolRankingListVC.h"
 #define HEADERHEI KFit_H6S(320)
 
 @interface FMMineVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
@@ -29,8 +30,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titlerr = @[@"账户信息",@"关于我们",@"清除缓存"];
-    self.imgarr = @[@"my_news_icon",@"my_about_icon",@"my_clean_icon"];
+    self.titlerr = @[@"会员福利",@"分校排名",@"邀请教练",@"账户信息",@"关于我们",@"清除缓存"];
+    self.imgarr = @[@"benefits",@"branch",@"invite",@"account",@"about",@"my_clean_icon"];
     [self laodNavigation];
     
     [self loadtable];
@@ -99,8 +100,8 @@
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
-    self.table.scrollEnabled = NO;
-    _table.tableFooterView = [UIView new];
+//    self.table.scrollEnabled = NO;
+    _table.tableFooterView = [self FooterView];
     _table.tableHeaderView = [self headerview];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
 
@@ -110,24 +111,41 @@
     [super viewWillAppear:animated];
     //    [self.table.mj_header beginRefreshing];
 }
-
+- (UIView *)FooterView{
+    UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(150))];
+    UIButton *next = [[UIButton alloc] init];
+    [footer addSubview:next];
+    [next setTitle:@"退出登录" forState:UIControlStateNormal];
+    [next addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
+    next.backgroundColor = kColor_N(0, 112, 234);
+    [next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    next.layer.cornerRadius = 5;
+    next.layer.masksToBounds = YES;
+    [next mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(footer).mas_offset(KFit_W6S(70));
+        make.right.mas_equalTo(footer).mas_offset(-KFit_W6S(70));
+        make.bottom.mas_equalTo(footer).mas_offset(-KFit_W6S(30));
+        make.height.mas_equalTo(KFit_H6S(90));
+    }];
+    return footer;
+}
 - (UIView *)headerview{
-    UIView *head = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(320))];
+    UIView *head = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(400))];
     UIImageView *img = [[UIImageView alloc] init];
     [head addSubview:img];
-    [img setImage:[UIImage imageNamed:@"my_white_bg"]];
+    [img setImage:[UIImage imageNamed:@"bg_my"]];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(head).mas_offset(KFit_W6S(30));
-        make.top.mas_equalTo(head).mas_offset(KFit_W6S(20));
-        make.right.mas_equalTo(head).mas_offset(-KFit_W6S(30));
-        make.height.mas_equalTo(KFit_H6S(274));
+        make.centerX.mas_equalTo(head);
+        make.top.mas_equalTo(head).mas_offset(KFit_W6S(40));
+        make.width.mas_equalTo(KFit_W6S(730));
+        make.height.mas_equalTo(KFit_H6S(360));
     }];
     
     self.HeadPortrait = [[UIImageView alloc] init];
     [head addSubview:self.HeadPortrait];
     [self.HeadPortrait mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(img);
-        make.left.mas_equalTo(img).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(img).mas_offset(KFit_W6S(60));
         make.width.height.mas_equalTo(KFit_W6S(100));
     }];
     self.HeadPortrait.userInteractionEnabled = YES;
@@ -172,7 +190,7 @@
     }
     cell.title.text = self.titlerr[indexPath.row];
     [cell.img setImage:[UIImage imageNamed:self.imgarr[indexPath.row]]];
-    if (indexPath.row == 2) {
+    if (indexPath.row == 5) {
         cell.subtitle.text = [FMClearCacheTool fm_getCacheSizeWithFilePath:kCachePath];;
     }
     //    cell.model = self.dataArr[indexPath.row];
@@ -186,15 +204,25 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     if (indexPath.row == 0) {
+        
+    }
+    if (indexPath.row == 1) {
+        SchoolRankingListVC *vc = [[SchoolRankingListVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    if (indexPath.row == 2) {
+        
+    }
+    if (indexPath.row == 3) {
         MyInfoVC *VC = [[MyInfoVC alloc] init];
         VC.vc = self;
         [self.navigationController pushViewController:VC animated:YES];
     }
-    if (indexPath.row == 1) {
+    if (indexPath.row == 4) {
         AboutUs *vc = [[AboutUs alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    if (indexPath.row == 2) {
+    if (indexPath.row == 5) {
         [self cleanUpcache];
     }
     
@@ -220,20 +248,7 @@
 
 
 - (void)loadfunctionbut{
-    UIButton *next = [[UIButton alloc] init];
-    [self.view addSubview:next];
-    [next setTitle:@"退出登录" forState:UIControlStateNormal];
-    [next addTarget:self action:@selector(logOut:) forControlEvents:UIControlEventTouchUpInside];
-    next.backgroundColor = kColor_N(0, 112, 234);
-    [next setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    next.layer.cornerRadius = 5;
-    next.layer.masksToBounds = YES;
-    [next mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view).mas_offset(KFit_W6S(70));
-        make.right.mas_equalTo(self.view).mas_offset(-KFit_W6S(70));
-        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_W6S(40));
-        make.height.mas_equalTo(KFit_H6S(90));
-    }];
+    
 }
 - (void)logOut:(UIButton *)sender{
     XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"是否退出登录" sureBtn:@"确定" cancleBtn:@"取消"];

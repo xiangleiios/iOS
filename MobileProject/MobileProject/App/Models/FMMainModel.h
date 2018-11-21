@@ -314,6 +314,7 @@
 
 @property (nonatomic , strong)NSString *county;
 @property (nonatomic , strong)NSString *provice;
+@property (nonatomic , strong)NSString *schoolrankingCount;
 @end
 
 

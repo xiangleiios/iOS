@@ -165,7 +165,12 @@
 
 - (void)laodStudenListVC{
     self.studentsvc = [[StudentsListVC alloc] init];
-    self.studentsvc.url = POSTStudenteamList;
+    if (USERFZR) {
+        self.studentsvc.url = POSTStudenteamList;
+    }else{
+        self.studentsvc.url = POSTCoachStudenteamList;
+    }
+    
     self.studentsvc.PayCost = NO;
     [self.studentsvc.dic setObject:@"0" forKey:@"isComplete"];
     [self.studentsvc.dic setObject:@"" forKey:@"teamCode"];

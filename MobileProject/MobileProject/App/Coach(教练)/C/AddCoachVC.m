@@ -107,7 +107,7 @@
     self.school.subfield.tag = [[[XLCache singleton].teamCode_value firstObject] integerValue];
     
     
-    self.name = [[XLInformationV alloc] informationWithTitle:@"教练名称" SubTitle:@"" TSSubTitle:@"请填写真实姓名" Must:YES Click:NO];
+    self.name = [[XLInformationV alloc] informationWithTitle:@"教练姓名" SubTitle:@"" TSSubTitle:@"请填写真实姓名" Must:YES Click:NO];
     
     self.pho = [[XLInformationV alloc] informationWithTitle:@"教练手机号" SubTitle:@"" TSSubTitle:@"请填写教练手机号码" Must:YES Click:NO];
     
@@ -143,7 +143,7 @@
     if (self.model) {
         self.name.subfield.text = self.model.name;
         self.pho.subfield.text = self.model.enrollPhone;
-        [self.head sd_setImageWithURL:[NSURL URLWithString:self.model.headPic]placeholderImage:[UIImage imageNamed:@"head_nor"]];
+        [self.head sd_setImageWithURL:[NSURL URLWithString:KURLIma(self.model.headPic)]placeholderImage:[UIImage imageNamed:@"head_nor"]];
         self.headURL = self.model.headPic;
         self.school.subfield.text = self.model.schoolName;
         self.fenXiao.subfield.text = self.model.deptName;
@@ -196,7 +196,10 @@
         [MBProgressHUD showMsgHUD:@"请填写正确的手机号"];
         return;
     }
-    
+    if (self.name.subfield.text.length > 5) {
+        [MBProgressHUD showMsgHUD:@"教练姓名不能超过5个字符"];
+        return;
+    }
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setValue:self.name.subfield.text forKey:@"coachName"];
     [dic setValue:self.pho.subfield.text forKey:@"phoneNumber"];

@@ -411,7 +411,7 @@
             [sing.timeArr removeAllObjects];
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];
-            [sing.timeArr removeAllObjects];
+//            [sing.timeArr removeAllObjects];
         }
     } failureBlock:^(NSError *error) {
         [MBProgressHUD hideHUD];
