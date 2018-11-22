@@ -65,6 +65,7 @@
     UILabel *subtitleLable = [[UILabel alloc] init];
     [self addSubview:subtitleLable];
     self.subtitle = subtitleLable;
+    self.subtitle.textColor = ZTColor;
 //    subtitleLable.text = subtitle;
     subtitleLable.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     //        subtitleLable.textColor = kColor_N(183, 190, 205);

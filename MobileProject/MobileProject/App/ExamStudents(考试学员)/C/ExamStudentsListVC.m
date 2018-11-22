@@ -142,11 +142,22 @@
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     FMMainModel *model = self.dataArr[senter.tag];
     [dic setObject:model.idid forKey:@"id"];
-    [CGXPickerView showStringPickerWithTitle:@"请y选择科目" DataSource:@[@"科目一",@"科目二",@"科目三",@"科目四",@"拿证",@"作废（补考五次挂科）"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+    [CGXPickerView showStringPickerWithTitle:@"请选择科目" DataSource:@[@"科目一",@"科目二",@"科目三",@"科目四",@"拿证",@"作废（补考五次挂科）"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
         NSLog(@"%@  %@",selectValue,selectRow);
         int i= [selectRow intValue];
         [dic setObject:[NSString stringWithFormat:@"%d",(i + 1)] forKey:@"progress"];
-        [self teamStuStateEdit:dic AndModel:model];
+        if (i == 5) {
+            XLAlertView *alert = [[XLAlertView alloc] initWithTitle:@"提示" message:@"是否更改为作废" sureBtn:@"确定" cancleBtn:@"取消"];
+            [alert showXLAlertView];
+            alert.resultIndex = ^(NSInteger index) {
+                if (index == 2) {
+                    [self teamStuStateEdit:dic AndModel:model];
+                }
+            };
+        }else{
+            
+            [self teamStuStateEdit:dic AndModel:model];
+        }
         
     }];
 }

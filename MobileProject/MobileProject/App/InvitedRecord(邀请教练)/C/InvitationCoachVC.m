@@ -7,7 +7,7 @@
 //
 
 #import "InvitationCoachVC.h"
-
+#import "InvitedRecordList.h"
 @interface InvitationCoachVC ()
 
 @end
@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"邀请教练"];
+    kWeakSelf(self)
+    UIButton *but = [self.navigationView addRightButtonWithTitle:@"邀请记录" clickCallBack:^(UIView *view) {
+        InvitedRecordList *vc = [[InvitedRecordList alloc] init];
+        [weakself.navigationController pushViewController:vc animated:YES];
+    }];
+    [but setTitleColor:kColor_N(12, 118, 235) forState:UIControlStateNormal];
     
     UIImageView *img = [[UIImageView alloc] init];
     [self.view addSubview:img];

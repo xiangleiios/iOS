@@ -121,7 +121,7 @@
     }];
     //添加确定
     UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"确定");
+        NSLog(@"取消");
         
     }];
     //设置`确定`按钮的颜色

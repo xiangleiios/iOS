@@ -30,6 +30,7 @@ pod 'Aspects','~> 1.4.1'
 pod 'MJRefresh','~> 3.1.12'
 pod 'FMDB', '~> 2.6.2'
 pod 'YYCache','~> 1.0.4'
+pod 'YYText','~> 1.0.7'
 #pod 'KSYMediaPlayer_iOS','~> 2.3.0' #金山云iOS播放SDK
 #pod 'ZFPlayer', '~> 2.1.5' #为便于自定义，已经改成手托在FMCoreTool文件夹
 #pod 'UITableView+FDTemplateLayoutCell', '~> 1.6'

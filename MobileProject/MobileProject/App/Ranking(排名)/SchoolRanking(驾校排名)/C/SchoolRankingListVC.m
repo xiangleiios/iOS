@@ -10,6 +10,7 @@
 #import "UITableView+FMPlaceholder.h"
 #import "SchoolRankingCell.h"
 #import "RankingDetailsVC.h"
+#import "RuleDescriptionVC.h"
 @interface SchoolRankingListVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic , strong)UITableView *table;
 @property (nonatomic , strong)NSMutableArray <FMMainModel *>*dataArr;
@@ -26,8 +27,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"分校排行"];
+    kWeakSelf(self)
     UIButton *but = [self.navigationView addRightButtonWithTitle:@"规则说明" clickCallBack:^(UIView *view) {
-        
+        RuleDescriptionVC *vc = [[RuleDescriptionVC alloc] init];
+        [weakself.navigationController pushViewController:vc animated:YES];
     }];
     [but setTitleColor:kColor_N(12, 118, 235) forState:UIControlStateNormal];
     [self loadtable];
@@ -78,7 +81,13 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTBindTeamSchools;
+    NSString *url;
+    if (USERFZR) {
+        url = POSTRankingTeamSchoolRankings;
+    }else{
+        url = POSTRankingCoachRankings;
+    }
+    
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"list"];

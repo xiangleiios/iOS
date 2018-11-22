@@ -40,6 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"学员详情"];
+    [self laodTages];
     [self laodScroll];
     
     [self loadSubview];
@@ -157,10 +158,11 @@
     self.studentlb = [[StudentsLabelV alloc] init];
     [self.backview addSubview:self.studentlb];
     self.studentlb.frame = CGRectMake(0, KFit_H6S(160), SCREEN_WIDTH, [self.studentlb getLayoutCellHeight]);
-    NSArray  *array = [_model.stuTags componentsSeparatedByString:@","];
-    if (array.count>0) {
+    if (_model.stuTags.length > 0) {
+        NSArray  *array = [_model.stuTags componentsSeparatedByString:@","];
         [self.studentlb.selectDataArr addObjectsFromArray:array];
     }
+    
 //    [self.studentlb.dataArr addObjectsFromArray:@[@"123",@"12313",@"3453453",@"1231231"]];
     [self.studentlb relodData];
     
@@ -290,7 +292,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)chooseKM{
-    [CGXPickerView showStringPickerWithTitle:@"请y选择科目" DataSource:@[@"科目一",@"科目二",@"科目三",@"科目四",@"拿证",@"作废（补考五次挂科）"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
+    [CGXPickerView showStringPickerWithTitle:@"请选择科目" DataSource:@[@"科目一",@"科目二",@"科目三",@"科目四",@"拿证",@"作废（补考五次挂科）"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
         NSLog(@"%@  %@",selectValue,selectRow);
         int i= [selectRow intValue];
         [self.state setTitle:[self ButTitleWith:(++i)] forState:UIControlStateNormal];
@@ -386,7 +388,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self laodTages];
+    
 }
 
 - (void)laodTages{
@@ -427,6 +429,7 @@
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
             [MBProgressHUD showMsgHUD:@"保存成功"];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     } failureBlock:^(NSError *error) {
         KKLog(@"%@", error);

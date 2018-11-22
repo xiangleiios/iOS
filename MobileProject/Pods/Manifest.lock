@@ -87,6 +87,7 @@ PODS:
     - XAspect/Macros
   - XAspect/Macros (1.0.5)
   - YYCache (1.0.4)
+  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.1.0)
@@ -120,6 +121,7 @@ DEPENDENCIES:
   - UMengUShare/UI
   - XAspect (~> 1.0.5)
   - YYCache (~> 1.0.4)
+  - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -155,6 +157,7 @@ SPEC REPOS:
     - UMengUShare
     - XAspect
     - YYCache
+    - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -189,7 +192,8 @@ SPEC CHECKSUMS:
   UMengUShare: 370d180101e13ee0227ae657ab119ba97243d2b3
   XAspect: db50bf487f92dbb8557a7a5365556966c8493af8
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
+  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: a14245a30cd7b2ac1a00c4f23b7ee1f02e6360b5
+PODFILE CHECKSUM: 33a16383ce30d579c5e4b22368699005e4aa2b26
 
 COCOAPODS: 1.5.3

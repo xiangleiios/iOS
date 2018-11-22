@@ -315,6 +315,12 @@
 @property (nonatomic , strong)NSString *county;
 @property (nonatomic , strong)NSString *provice;
 @property (nonatomic , strong)NSString *schoolrankingCount;
+@property (nonatomic , strong)NSString *teamSchoolrankingCount;
+@property (nonatomic , strong)NSString *compScore;
+@property (nonatomic , strong)NSString *coachPhone;
+@property (nonatomic , strong)NSString *coachName;
+@property (nonatomic , strong)NSString *originalDeptName;
+@property (nonatomic , strong)NSDictionary *rankingMap;
 @end
 
 

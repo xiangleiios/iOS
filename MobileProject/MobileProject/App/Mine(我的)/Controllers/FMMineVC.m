@@ -14,6 +14,8 @@
 #import "FMClearCacheTool.h"
 #import "SelectRoleVC.h"
 #import "SchoolRankingListVC.h"
+#import "InvitationCoachVC.h"
+#import "RankingDetailsVC.h"
 #define HEADERHEI KFit_H6S(320)
 
 @interface FMMineVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
@@ -30,8 +32,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.titlerr = @[@"会员福利",@"分校排名",@"邀请教练",@"账户信息",@"关于我们",@"清除缓存"];
-    self.imgarr = @[@"benefits",@"branch",@"invite",@"account",@"about",@"my_clean_icon"];
+    if (USERFZR) {
+        self.titlerr = @[@"会员福利",@"分校排名",@"邀请教练",@"账户信息",@"关于我们",@"清除缓存"];
+        self.imgarr = @[@"benefits",@"branch",@"invite",@"account",@"about",@"my_clean_icon"];
+    }else{
+        self.titlerr = @[@"教练排名",@"邀请教练",@"账户信息",@"关于我们",@"清除缓存"];
+        self.imgarr = @[@"branch",@"invite",@"account",@"about",@"my_clean_icon"];
+    }
+    
     [self laodNavigation];
     
     [self loadtable];
@@ -141,11 +149,23 @@
         make.height.mas_equalTo(KFit_H6S(360));
     }];
     
+    UILabel *lb = [[UILabel alloc] init];
+    lb.backgroundColor = [UIColor whiteColor];
+    [head addSubview:lb];
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(img).mas_offset(-KFit_H6S(10));
+        make.left.mas_equalTo(img).mas_offset(KFit_W6S(60));
+        make.width.height.mas_equalTo(KFit_W6S(120));
+    }];
+    lb.layer.cornerRadius = KFit_W6S(60);
+    lb.layer.masksToBounds = YES;
+    
+    
     self.HeadPortrait = [[UIImageView alloc] init];
     [head addSubview:self.HeadPortrait];
     [self.HeadPortrait mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(img);
-        make.left.mas_equalTo(img).mas_offset(KFit_W6S(60));
+        make.center.mas_equalTo(lb);
+//        make.left.mas_equalTo(img).mas_offset(KFit_W6S(60));
         make.width.height.mas_equalTo(KFit_W6S(100));
     }];
     self.HeadPortrait.userInteractionEnabled = YES;
@@ -165,12 +185,22 @@
     
     self.pho = [[UILabel alloc] init];
     [head addSubview:self.pho];
+    self.pho.textColor = [UIColor whiteColor];
     [self.pho mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(img);
+        make.centerY.mas_equalTo(self.HeadPortrait);
         make.left.mas_equalTo(self.HeadPortrait.mas_right).mas_offset(KFit_W6S(25));
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(300), KFit_H6S(40)));
     }];
     self.pho.text = [User UserOb].mobile;
+    
+    UIImageView *imgrz = [[UIImageView alloc] init];
+    [head addSubview:imgrz];
+    [imgrz setImage:[UIImage imageNamed:@"attestation"]];
+    [imgrz mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.pho);
+        make.right.mas_equalTo(head).mas_offset(-KFit_W6S(80));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(90), KFit_H6S(30)));
+    }];
     return head;
 }
 
@@ -190,9 +220,12 @@
     }
     cell.title.text = self.titlerr[indexPath.row];
     [cell.img setImage:[UIImage imageNamed:self.imgarr[indexPath.row]]];
-    if (indexPath.row == 5) {
+    if ([self.titlerr[indexPath.row]  isEqual: @"清除缓存"]) {
         cell.subtitle.text = [FMClearCacheTool fm_getCacheSizeWithFilePath:kCachePath];;
     }
+//    if ([self.titlerr[indexPath.row]  isEqual: @"邀请教练"]) {
+//        cell.subtitle.text = @"奖励8元现金";
+//    }
     //    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
@@ -203,30 +236,59 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == 0) {
+    NSInteger i = indexPath.row;
+    if (!USERFZR) {
+        i++;
+    }
+    if (i == 0) {
         
     }
-    if (indexPath.row == 1) {
-        SchoolRankingListVC *vc = [[SchoolRankingListVC alloc] init];
+    if (i == 1) {
+        if (USERFZR) {
+            SchoolRankingListVC *vc = [[SchoolRankingListVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [self loadRefreshData];
+        }
+    }
+    if (i == 2) {
+        InvitationCoachVC *vc = [[InvitationCoachVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    if (indexPath.row == 2) {
-        
-    }
-    if (indexPath.row == 3) {
+    if (i == 3) {
         MyInfoVC *VC = [[MyInfoVC alloc] init];
         VC.vc = self;
         [self.navigationController pushViewController:VC animated:YES];
     }
-    if (indexPath.row == 4) {
+    if (i == 4) {
         AboutUs *vc = [[AboutUs alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    if (indexPath.row == 5) {
+    if (i == 5) {
         [self cleanUpcache];
     }
     
 }
+
+- (void)loadRefreshData{
+    NSString *url = POSTRankingCoachRankings;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:responseObject[@"list"]];
+        RankingDetailsVC *vc = [[RankingDetailsVC alloc] init];
+        vc.model = mode;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    //    POSTTeamSchoolList
+}
+
+
+
 
 
 - (void)cleanUpcache{

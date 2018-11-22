@@ -66,6 +66,7 @@
 #import "UITableView+WFEmpty.h"
 #import "XLCache.h"
 #import "FMCoachModel.h"
+#import <YYText/YYText.h>
 //DDLog等级
 //static const int ddLogLevel = DDLogLevelVerbose;
 #define HEIGHT_CHATBOXVIEW  215

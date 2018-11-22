@@ -55,13 +55,14 @@ static char UITableViewEmptyView;
         noInfoLabel.textAlignment = NSTextAlignmentCenter;
         noInfoLabel.textColor = ZTColor;
         noInfoLabel.text = text;
+        noInfoLabel.numberOfLines = 0;
         noInfoLabel.backgroundColor = [UIColor clearColor];
         noInfoLabel.font = [UIFont systemFontOfSize:kFit_Font6(17)];
         [noMessageView addSubview:noInfoLabel];
         [noInfoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(noMessageView);
             make.top.mas_equalTo(carImageView.mas_bottom).mas_offset(KFit_H6S(30));
-            make.height.mas_equalTo(KFit_H6S(40));
+//            make.height.mas_equalTo(KFit_H6S(40));
         }];
         [self addSubview:noMessageView];
         
@@ -95,11 +96,12 @@ static char UITableViewEmptyView;
         noInfoLabel.text = text;
         noInfoLabel.backgroundColor = [UIColor clearColor];
         noInfoLabel.font = [UIFont systemFontOfSize:kFit_Font6(17)];
+        noInfoLabel.numberOfLines = 0;
         [noMessageView addSubview:noInfoLabel];
         [noInfoLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(noMessageView);
             make.top.mas_equalTo(carImageView.mas_bottom).mas_offset(KFit_H6S(40));
-            make.height.mas_equalTo(KFit_H6S(40));
+//            make.height.mas_equalTo(KFit_H6S(40));
         }];
         [self addSubview:noMessageView];
         

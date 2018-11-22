@@ -102,6 +102,10 @@
 		A7506F7721A4F7E50003CC7A /* SchoolRankingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F7621A4F7E50003CC7A /* SchoolRankingCell.m */; };
 		A7506F7B21A5031E0003CC7A /* RankingDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F7A21A5031E0003CC7A /* RankingDetailsVC.m */; };
 		A7506F7F21A531770003CC7A /* TaskV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F7E21A531770003CC7A /* TaskV.m */; };
+		A7506F8521A554C00003CC7A /* IntegralListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F8421A554C00003CC7A /* IntegralListVC.m */; };
+		A7506F8821A5580A0003CC7A /* IntegralCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F8721A5580A0003CC7A /* IntegralCell.m */; };
+		A7506F8B21A55D140003CC7A /* RuleDescriptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F8A21A55D140003CC7A /* RuleDescriptionVC.m */; };
+		A7506F9121A5618D0003CC7A /* InvitedRecordList.m in Sources */ = {isa = PBXBuildFile; fileRef = A7506F9021A5618D0003CC7A /* InvitedRecordList.m */; };
 		A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */ = {isa = PBXBuildFile; fileRef = A754B7CA21476D280029CC04 /* XLNetwork.m */; };
 		A75ACC932160A5EE00E5467C /* PicturePosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A75ACC922160A5EE00E5467C /* PicturePosterVC.m */; };
 		A75D2CD6214BB5620065FD7F /* shareimg.png in Resources */ = {isa = PBXBuildFile; fileRef = A75D2CD5214BB5620065FD7F /* shareimg.png */; };
@@ -173,6 +177,7 @@
 		A79D3E17217F1E79008BAB2C /* AddressV.m in Sources */ = {isa = PBXBuildFile; fileRef = A79D3E16217F1E79008BAB2C /* AddressV.m */; };
 		A79D3E1A217F213B008BAB2C /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A79D3E19217F213B008BAB2C /* AddressCell.m */; };
 		A79DD8382137DFE800665245 /* UITextView+ZWPlaceHolder.m in Sources */ = {isa = PBXBuildFile; fileRef = A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */; };
+		A7A10CFF21A6494400D8F669 /* InvitedRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A10CFE21A6494400D8F669 /* InvitedRecordCell.m */; };
 		A7A213BB212E4F9300920678 /* ChangeCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213BA212E4F9300920678 /* ChangeCardVC.m */; };
 		A7A213BE212EA98600920678 /* CourseV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213BD212EA98600920678 /* CourseV.m */; };
 		A7A213C1212EBB0F00920678 /* LicenseTayeV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7A213C0212EBB0F00920678 /* LicenseTayeV.m */; };
@@ -203,6 +208,7 @@
 		A7DC8F5621897B080058C654 /* ChangeCardHeadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC8F5521897B080058C654 /* ChangeCardHeadVC.m */; };
 		A7DC8F5A218988840058C654 /* UploadPicturesV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC8F59218988840058C654 /* UploadPicturesV.m */; };
 		A7DC8F5D2189A6790058C654 /* SchoolLable.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC8F5C2189A6790058C654 /* SchoolLable.m */; };
+		A7DD3F9521A69F7100D579B6 /* FMIntegralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DD3F9421A69F7100D579B6 /* FMIntegralModel.m */; };
 		A7E979D6213535CB00EA6F14 /* CodeShareV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E979D5213535CB00EA6F14 /* CodeShareV.m */; };
 		A7E979E821354AFC00EA6F14 /* RectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E979E721354AFC00EA6F14 /* RectManager.m */; };
 		A7E979EF21354B3300EA6F14 /* zocr0.lib in Resources */ = {isa = PBXBuildFile; fileRef = A7E979EC21354B3300EA6F14 /* zocr0.lib */; };
@@ -903,6 +909,14 @@
 		A7506F7A21A5031E0003CC7A /* RankingDetailsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingDetailsVC.m; sourceTree = "<group>"; };
 		A7506F7D21A531770003CC7A /* TaskV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskV.h; sourceTree = "<group>"; };
 		A7506F7E21A531770003CC7A /* TaskV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskV.m; sourceTree = "<group>"; };
+		A7506F8321A554C00003CC7A /* IntegralListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralListVC.h; sourceTree = "<group>"; };
+		A7506F8421A554C00003CC7A /* IntegralListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralListVC.m; sourceTree = "<group>"; };
+		A7506F8621A5580A0003CC7A /* IntegralCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntegralCell.h; sourceTree = "<group>"; };
+		A7506F8721A5580A0003CC7A /* IntegralCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IntegralCell.m; sourceTree = "<group>"; };
+		A7506F8921A55D140003CC7A /* RuleDescriptionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RuleDescriptionVC.h; sourceTree = "<group>"; };
+		A7506F8A21A55D140003CC7A /* RuleDescriptionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RuleDescriptionVC.m; sourceTree = "<group>"; };
+		A7506F8F21A5618D0003CC7A /* InvitedRecordList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitedRecordList.h; sourceTree = "<group>"; };
+		A7506F9021A5618D0003CC7A /* InvitedRecordList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitedRecordList.m; sourceTree = "<group>"; };
 		A754B7C921476D280029CC04 /* XLNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLNetwork.h; sourceTree = "<group>"; };
 		A754B7CA21476D280029CC04 /* XLNetwork.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLNetwork.m; sourceTree = "<group>"; };
 		A75ACC912160A5EE00E5467C /* PicturePosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PicturePosterVC.h; sourceTree = "<group>"; };
@@ -1037,6 +1051,8 @@
 		A79D3E19217F213B008BAB2C /* AddressCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressCell.m; sourceTree = "<group>"; };
 		A79DD8362137DFE700665245 /* UITextView+ZWPlaceHolder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+ZWPlaceHolder.h"; sourceTree = "<group>"; };
 		A79DD8372137DFE800665245 /* UITextView+ZWPlaceHolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+ZWPlaceHolder.m"; sourceTree = "<group>"; };
+		A7A10CFD21A6494400D8F669 /* InvitedRecordCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InvitedRecordCell.h; sourceTree = "<group>"; };
+		A7A10CFE21A6494400D8F669 /* InvitedRecordCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InvitedRecordCell.m; sourceTree = "<group>"; };
 		A7A213B9212E4F9300920678 /* ChangeCardVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangeCardVC.h; sourceTree = "<group>"; };
 		A7A213BA212E4F9300920678 /* ChangeCardVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangeCardVC.m; sourceTree = "<group>"; };
 		A7A213BC212EA98600920678 /* CourseV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CourseV.h; sourceTree = "<group>"; };
@@ -1098,6 +1114,8 @@
 		A7DC8F59218988840058C654 /* UploadPicturesV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UploadPicturesV.m; sourceTree = "<group>"; };
 		A7DC8F5B2189A6780058C654 /* SchoolLable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SchoolLable.h; sourceTree = "<group>"; };
 		A7DC8F5C2189A6790058C654 /* SchoolLable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolLable.m; sourceTree = "<group>"; };
+		A7DD3F9321A69F7100D579B6 /* FMIntegralModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMIntegralModel.h; sourceTree = "<group>"; };
+		A7DD3F9421A69F7100D579B6 /* FMIntegralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMIntegralModel.m; sourceTree = "<group>"; };
 		A7E979D4213535CB00EA6F14 /* CodeShareV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeShareV.h; sourceTree = "<group>"; };
 		A7E979D5213535CB00EA6F14 /* CodeShareV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeShareV.m; sourceTree = "<group>"; };
 		A7E979E621354AFC00EA6F14 /* RectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectManager.h; sourceTree = "<group>"; };
@@ -2544,6 +2562,8 @@
 			children = (
 				A7506F7921A5031E0003CC7A /* RankingDetailsVC.h */,
 				A7506F7A21A5031E0003CC7A /* RankingDetailsVC.m */,
+				A7506F8921A55D140003CC7A /* RuleDescriptionVC.h */,
+				A7506F8A21A55D140003CC7A /* RuleDescriptionVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -2553,6 +2573,62 @@
 			children = (
 				A7506F7D21A531770003CC7A /* TaskV.h */,
 				A7506F7E21A531770003CC7A /* TaskV.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		A7506F8021A553D10003CC7A /* Integral(积分) */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F8221A553FE0003CC7A /* V */,
+				A7506F8121A553F70003CC7A /* C */,
+			);
+			path = "Integral(积分)";
+			sourceTree = "<group>";
+		};
+		A7506F8121A553F70003CC7A /* C */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F8321A554C00003CC7A /* IntegralListVC.h */,
+				A7506F8421A554C00003CC7A /* IntegralListVC.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		A7506F8221A553FE0003CC7A /* V */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F8621A5580A0003CC7A /* IntegralCell.h */,
+				A7506F8721A5580A0003CC7A /* IntegralCell.m */,
+			);
+			path = V;
+			sourceTree = "<group>";
+		};
+		A7506F8C21A561080003CC7A /* InvitedRecord(邀请教练) */ = {
+			isa = PBXGroup;
+			children = (
+				A7506F8E21A561420003CC7A /* V */,
+				A7506F8D21A5613C0003CC7A /* C */,
+			);
+			path = "InvitedRecord(邀请教练)";
+			sourceTree = "<group>";
+		};
+		A7506F8D21A5613C0003CC7A /* C */ = {
+			isa = PBXGroup;
+			children = (
+				A7629BAE219E75EA0001D2A7 /* InvitationCoachVC.h */,
+				A7629BAF219E75EA0001D2A7 /* InvitationCoachVC.m */,
+				A7506F8F21A5618D0003CC7A /* InvitedRecordList.h */,
+				A7506F9021A5618D0003CC7A /* InvitedRecordList.m */,
+			);
+			path = C;
+			sourceTree = "<group>";
+		};
+		A7506F8E21A561420003CC7A /* V */ = {
+			isa = PBXGroup;
+			children = (
+				A7A10CFD21A6494400D8F669 /* InvitedRecordCell.h */,
+				A7A10CFE21A6494400D8F669 /* InvitedRecordCell.m */,
 			);
 			path = V;
 			sourceTree = "<group>";
@@ -2803,8 +2879,6 @@
 				A7629BA8219E5E3E0001D2A7 /* AddCoachInstructionsVC.m */,
 				A7629BAA219E62DD0001D2A7 /* AddCoachVC.h */,
 				A7629BAB219E62DD0001D2A7 /* AddCoachVC.m */,
-				A7629BAE219E75EA0001D2A7 /* InvitationCoachVC.h */,
-				A7629BAF219E75EA0001D2A7 /* InvitationCoachVC.m */,
 				A787212C21A2670300D2B553 /* ResultsVC.h */,
 				A787212D21A2670300D2B553 /* ResultsVC.m */,
 			);
@@ -5178,10 +5252,12 @@
 				A7282F0F217DB9AE00117758 /* HelpToAppointment(帮预约) */,
 				A7EC17FB2176D8A4007793FC /* Training(训练场) */,
 				A71907A1213105B40072B8CF /* Subordinate(所属驾校) */,
+				A7506F8C21A561080003CC7A /* InvitedRecord(邀请教练) */,
 				A7948133219A709C008F8D4B /* Coach(教练) */,
 				A7B5A0FE2133A2BA00BC197B /* Vehicle(车辆管理) */,
 				A7BAB513218FD7DC0018CA27 /* Comments(评论) */,
 				A7AC8171212C2A1100C6AB6C /* MyNews(消息) */,
+				A7506F8021A553D10003CC7A /* Integral(积分) */,
 				A77FCF4A21A41A6800604CA8 /* Ranking(排名) */,
 				DA4FA47F1FDF7B7200C7C1F1 /* Mine(我的) */,
 				A7BA6F46215F609500A5FA0D /* admissions(招生) */,
@@ -5275,6 +5351,8 @@
 				A7948149219AD0CD008F8D4B /* FMSchoolModel.m */,
 				A787213221A2B5A000D2B553 /* FMCoachModel.h */,
 				A787213321A2B5A000D2B553 /* FMCoachModel.m */,
+				A7DD3F9321A69F7100D579B6 /* FMIntegralModel.h */,
+				A7DD3F9421A69F7100D579B6 /* FMIntegralModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -5848,6 +5926,7 @@
 				A7C311F2214A6004006A96EA /* InstructionsVC.m in Sources */,
 				DA725FED1F5FF09000F96FDA /* FMHelperKeyboard.m in Sources */,
 				A7282F20217DD51D00117758 /* ChooseTimeCell.m in Sources */,
+				A7506F8521A554C00003CC7A /* IntegralListVC.m in Sources */,
 				DA03464D1F509098008E7BE1 /* NSDictionary+XML.m in Sources */,
 				DA0347221F509098008E7BE1 /* SegmentViewController.m in Sources */,
 				A75E5CBE2179B21C0033F6A5 /* TimeSetCell.m in Sources */,
@@ -5887,6 +5966,7 @@
 				DA78C30B1F5D41A3009BAA90 /* YTKBatchRequest.m in Sources */,
 				DA0346411F509098008E7BE1 /* NSDate+InternetDateTime.m in Sources */,
 				DA959E4F1F53BEE9002389F6 /* ZFBrightnessView.m in Sources */,
+				A7506F8821A5580A0003CC7A /* IntegralCell.m in Sources */,
 				DA78C30A1F5D41A3009BAA90 /* YTKBaseRequest.m in Sources */,
 				DA0347061F509098008E7BE1 /* UIViewController+FMExtenion.m in Sources */,
 				DA959E531F53BEE9002389F6 /* ZFPlayerView.m in Sources */,
@@ -5970,6 +6050,7 @@
 				A754B7CB21476D280029CC04 /* XLNetwork.m in Sources */,
 				DA867D311F58F83900D4D011 /* NSMutableArray+JYSafe.m in Sources */,
 				DA0346D21F509098008E7BE1 /* UINavigationController+FMObjMethods.m in Sources */,
+				A7506F8B21A55D140003CC7A /* RuleDescriptionVC.m in Sources */,
 				DA0346821F509098008E7BE1 /* NSURL+QueryDictionary.m in Sources */,
 				DA4FA4CD1FDF7B7300C7C1F1 /* User.m in Sources */,
 				DAE212B21EF2867B000EAB90 /* FMUserConfigManager.m in Sources */,
@@ -6072,6 +6153,7 @@
 				DA0346641F509098008E7BE1 /* NSObject+Reflection.m in Sources */,
 				DA03466F1F509098008E7BE1 /* NSString+FMExtension.m in Sources */,
 				DA0346DB1F509098008E7BE1 /* UIScrollView+Addition.m in Sources */,
+				A7DD3F9521A69F7100D579B6 /* FMIntegralModel.m in Sources */,
 				4FF9265B20C8CE0600AB3E43 /* CGXPickerUIBaseView.m in Sources */,
 				DA959E4A1F53BEE9002389F6 /* UITabBarController+ZFPlayerRotation.m in Sources */,
 				A7EC18082176E7A2007793FC /* TrainingVC.m in Sources */,
@@ -6262,6 +6344,7 @@
 				DA867D3B1F58F99300D4D011 /* UIView+FMExtension.m in Sources */,
 				DAE2129B1EF2867B000EAB90 /* Target_Designer.m in Sources */,
 				DA0346D11F509098008E7BE1 /* UINavigationBar+Awesome.m in Sources */,
+				A7A10CFF21A6494400D8F669 /* InvitedRecordCell.m in Sources */,
 				DA0347261F509098008E7BE1 /* FMAlertView.m in Sources */,
 				A7B5A1072133A9F100BC197B /* VehicleInformationVC.m in Sources */,
 				DA0346BC1F509098008E7BE1 /* UIImage+FX.m in Sources */,
@@ -6396,6 +6479,7 @@
 				DA78C30F1F5D41A3009BAA90 /* YTKNetworkAgent.m in Sources */,
 				A798CEAF21785BE400145440 /* StudentsLabelV.m in Sources */,
 				A7BAB51B218FD9F50018CA27 /* CommentsListVC.m in Sources */,
+				A7506F9121A5618D0003CC7A /* InvitedRecordList.m in Sources */,
 				A73C5B7D216F27BA006262B5 /* ScreeningV.m in Sources */,
 				A7C59F1E2148E24800948074 /* BusinessShowV.m in Sources */,
 				DA867D4A1F59031C00D4D011 /* UIApplication+JYHandle.m in Sources */,

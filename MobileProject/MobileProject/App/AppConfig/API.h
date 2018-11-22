@@ -294,9 +294,18 @@
 #define POSTBindTeamSchools KURL(@"app/coach/bind/teamSchools?deptId=%@")
 //plat/#/poster/index?type=app&id=
 
-#pragma mark -获取分校积分排行
-#define POSTBindTeamSchools KURL(@"app/school/ranking/teamSchoolRankings")
+#pragma mark -获取积分排行 -负责排行
+#define POSTRankingTeamSchoolRankings KURL(@"app/school/ranking/teamSchoolRankings")
 
+#pragma mark -获取积分排行 -教练
+#define POSTRankingCoachRankings KURL(@"app/coach/ranking/coachRankings")
+
+#pragma mark -获取积分明细列表- 负责人
+#define POSTCompositeScoreListSchool KURL(@"app/school/ranking/compositeScore")
+
+#pragma mark -获取积分明细列表- 教练
+#define POSTCompositeScoreListCoach KURL(@"app/coach/ranking/compositeScore")
+//system/compositeScore/list?id=1
 //#pragma mark -教练驾校绑定
 //#define POSTBindBindCoach KURL(@"app/coach/bind/bindCoach?id=%@&originalDeptId=%@&schoolId=%@")
 #pragma mark -教练驾校绑定
@@ -305,13 +314,18 @@
 #define POSTCoachEnrollInfo KURL(@"app/coach/v1_2/coach/coachEnrollInfo?id=%@")
 
 
+#pragma mark -邀请记录 - 负责人
+#define POSTInvitationrecordListSchool KURL(@"app/school/invitationRecord/invitationrecordList")
+
+#pragma mark -邀请记录 - 教练
+#define POSTInvitationrecordListCoach KURL(@"app/coach/invitationRecord/invitationrecordList")
 
 
+#pragma mark -签到 - 负责人
+#define POSTRankingSignBoardSchool KURL(@"app/school/ranking/signBoard")
 
-
-
-
-
+#pragma mark -签到 - 教练
+#define POSTRankingSignBoardCoach KURL(@"app/coach/ranking/signBoard")
 
 
 

@@ -8,9 +8,24 @@
 
 #import "RankingDetailsVC.h"
 #import "TaskV.h"
+#import "IntegralListVC.h"
+#import "RuleDescriptionVC.h"
+#import "BusinessCardVC.h"
+#import "MyAdmissionsVC.h"
+#import "InvitationCoachVC.h"
+#import "PracticeCarListVC.h"
+#import "StudentsVC.h"
 @interface RankingDetailsVC ()
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backView;
+@property (nonatomic , strong)TaskV *v1;
+@property (nonatomic , strong)TaskV *v2;
+@property (nonatomic , strong)TaskV *v3;
+@property (nonatomic , strong)TaskV *v4;
+@property (nonatomic , strong)TaskV *v5;
+@property (nonatomic , strong)TaskV *v6;
+@property (nonatomic , strong)TaskV *v7;
+@property (nonatomic , strong)TaskV *v8;
 @end
 
 @implementation RankingDetailsVC
@@ -18,6 +33,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@"排名"];
+    kWeakSelf(self)
+    UIButton *but = [self.navigationView addRightButtonWithTitle:@"规则说明" clickCallBack:^(UIView *view) {
+        RuleDescriptionVC *vc = [[RuleDescriptionVC alloc] init];
+        [weakself.navigationController pushViewController:vc animated:YES];
+    }];
+    [but setTitleColor:kColor_N(12, 118, 235) forState:UIControlStateNormal];
     [self loadSubview];
     // Do any additional setup after loading the view.
 }
@@ -43,7 +64,12 @@
     }];
     
     UILabel *title = [[UILabel alloc] init];
-    title.text = [NSString stringWithFormat:@"%@ (%@)",_model.deptFatherName,_model.name];
+    if (USERFZR) {
+        
+        title.text = [NSString stringWithFormat:@"%@ (%@)",_model.deptFatherName,_model.name];
+    }else{
+        title.text = [NSString stringWithFormat:@"%@",_model.coachName];
+    }
     [self.backView addSubview:title];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(img).mas_offset(KFit_H6S(10));
@@ -52,11 +78,31 @@
         make.width.mas_equalTo(KFit_W6S(400));
     }];
     
-    UILabel *lb = [[UILabel alloc] init];
+    YYLabel *lb = [[YYLabel alloc] init];
     [self.backView addSubview:lb];
-    lb.text = [NSString stringWithFormat:@"排名:武汉市排名第"];
-    lb.textColor = ZTColor;
-    lb.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    NSString *str;
+    if (USERFZR) {
+        
+        str = [NSString stringWithFormat:@"排名:%@排名第%@,%@排名%@",_model.city,_model.schoolrankingCount,_model.deptFatherName,_model.teamSchoolrankingCount];
+    }else{
+//        NSString *team = [[XLCache singleton].teamCode_title firstObject];
+        str = [NSString stringWithFormat:@"排名:%@排名第%@,%@排名%@",_model.city,_model.schoolrankingCount,_model.originalDeptName,_model.teamSchoolrankingCount];
+    }
+    
+    NSMutableAttributedString *attri_str = [[NSMutableAttributedString alloc] initWithString:str];
+    attri_str.yy_font = [UIFont systemFontOfSize:kFit_Font6(13)];
+    attri_str.yy_color = ZTColor;
+    [attri_str yy_setFont:[UIFont boldSystemFontOfSize:kFit_Font6(16)] range:[str rangeOfString:_model.schoolrankingCount]];
+    [attri_str yy_setFont:[UIFont boldSystemFontOfSize:kFit_Font6(16)] range:[str rangeOfString:_model.teamSchoolrankingCount]];
+    [attri_str yy_setColor:kColor_N(0, 100, 233) range:[str rangeOfString:_model.schoolrankingCount]];
+    [attri_str yy_setColor:kColor_N(0, 100, 233) range:[str rangeOfString:_model.teamSchoolrankingCount]];
+    
+    lb.attributedText = attri_str;
+    
+  
+//    lb.text = [NSString stringWithFormat:@""];
+//    lb.textColor = ZTColor;
+//    lb.font = [UIFont systemFontOfSize:kFit_Font6(13)];
     [lb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(img).mas_offset(-KFit_H6S(10));
         make.height.mas_equalTo(KFit_H6S(40));
@@ -75,7 +121,7 @@
     UILabel *fen = [[UILabel alloc] init];
     [self.backView addSubview:fen];
     fen.textColor = kColor_N(0, 100, 233);
-    fen.text = @"57分";
+    fen.text = [NSString stringWithFormat:@"%@积分",_model.compScore];
     fen.font = [UIFont systemFontOfSize:kFit_Font6(20)];
     [fen mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.backView).mas_offset(KFit_W6S(30));
@@ -88,6 +134,7 @@
     [self.backView addSubview:but];
     [but setTitle:@"积分明细 >" forState:UIControlStateNormal];
     [but setTitleColor:ZTColor forState:UIControlStateNormal];
+    [but addTarget:self action:@selector(toIntegralListVC) forControlEvents:UIControlEventTouchUpInside];
     but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [but mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self.backView).mas_offset(-KFit_W6S(30));
@@ -143,116 +190,212 @@
         make.height.mas_equalTo(KFit_H6S(1120));
     }];
     
-    TaskV *v1 = [[TaskV alloc] init];
-    v1.title.text = @"完善招生名片";
-    v1.subtitle.text = @"制作分校招生名片，学员主动找到您";
-    v1.fen.text = @"10积分";
-    [v1.but setImage:[UIImage imageNamed:@"perfect"] forState:UIControlStateNormal];
-    v1.but.tag = 1;
-    [v1.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
-    
-    TaskV *v2 = [[TaskV alloc] init];
-    v2.title.text = @"分享招生名片";
-    v2.subtitle.text = @"每日上限1次";
-    v2.fen.text = @"2分";
-    [v2.but setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    v2.but.tag = 2;
-    [v2.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
-    
-    TaskV *v3 = [[TaskV alloc] init];
-    v3.title.text = @"分享图片海报";
-    v3.subtitle.text = @"每日上限1次";
-    v3.fen.text = @"2分";
-    [v3.but setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    v3.but.tag = 3;
-    [v3.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
-    
-    TaskV *v4 = [[TaskV alloc] init];
-    v4.title.text = @"分享图文海报";
-    v4.subtitle.text = @"每日上限1次";
-    v4.fen.text = @"2分";
-    [v4.but setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
-    v4.but.tag = 4;
-    [v4.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
+//    SCORE_1
+    _v1 = [[TaskV alloc] init];
+    _v1.title.text = @"完善招生名片";
+    _v1.subtitle.text = @"制作分校招生名片，学员主动找到您";
+    _v1.fen.text = @"10积分";
+    [_v1.but setImage:[UIImage imageNamed:@"perfect"] forState:UIControlStateNormal];
+    [_v1.but setImage:[UIImage imageNamed:@"perfect_copy"] forState:UIControlStateSelected];
+    _v1.but.tag = 1;
+    [_v1.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    TaskV *v5 = [[TaskV alloc] init];
-    v5.title.text = @"邀请教练";
-    v5.subtitle.text = @"邀请教练成功入驻APP";
-    v5.fen.text = @"5积分";
-    [v5.but setImage:[UIImage imageNamed:@"Invitation"] forState:UIControlStateNormal];
-    v5.but.tag = 5;
-    [v5.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
+    _v2 = [[TaskV alloc] init];
+    _v2.title.text = @"分享招生名片";
+    _v2.subtitle.text = @"每日上限1次";
+    _v2.fen.text = @"2分";
+    [_v2.but setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [_v2.but setImage:[UIImage imageNamed:@"share_copy"] forState:UIControlStateSelected];
+    _v2.but.tag = 2;
+    [_v2.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
     
-    TaskV *v6 = [[TaskV alloc] init];
-    v6.title.text = @"提交学员资料";
-    v6.subtitle.text = @"成功提交学员资料至总校";
-    v6.fen.text = @"5积分";
-    [v6.but setImage:[UIImage imageNamed:@"submit"] forState:UIControlStateNormal];
-    v6.but.tag = 6;
-    [v6.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
+    _v3 = [[TaskV alloc] init];
+    _v3.title.text = @"分享图片海报";
+    _v3.subtitle.text = @"每日上限1次";
+    _v3.fen.text = @"2分";
+    [_v3.but setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [_v3.but setImage:[UIImage imageNamed:@"share_copy"] forState:UIControlStateSelected];
+    _v3.but.tag = 3;
+    [_v3.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
     
-    TaskV *v7 = [[TaskV alloc] init];
-    v7.title.text = @"预约练车";
-    v7.subtitle.text = @"预约练车:+2/人，取消预约:-2/人，每日上限一次";
-    v7.fen.text = @"2积分";
-    [v7.but setImage:[UIImage imageNamed:@"appointment"] forState:UIControlStateNormal];
-    v7.but.tag = 7;
-    [v7.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
+    _v4 = [[TaskV alloc] init];
+    _v4.title.text = @"分享图文海报";
+    _v4.subtitle.text = @"每日上限1次";
+    _v4.fen.text = @"2分";
+    [_v4.but setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [_v4.but setImage:[UIImage imageNamed:@"share_copy"] forState:UIControlStateSelected];
+    _v4.but.tag = 4;
+    [_v4.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
     
-    TaskV *v8 = [[TaskV alloc] init];
-    v8.title.text = @"每日签到";
-    v8.subtitle.text = @"每日APP签到";
-    v8.fen.text = @"1积分";
-    [v8.but setImage:[UIImage imageNamed:@"register"] forState:UIControlStateNormal];
-    v8.but.tag = 8;
-    [v8.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
     
-    [view addSubview:v1];
-    [view addSubview:v2];
-    [view addSubview:v3];
-    [view addSubview:v4];
-    [view addSubview:v5];
-    [view addSubview:v6];
-    [view addSubview:v7];
-    [view addSubview:v8];
+    _v5 = [[TaskV alloc] init];
+    _v5.title.text = @"邀请教练";
+    _v5.subtitle.text = @"邀请教练成功入驻APP";
+    _v5.fen.text = @"5积分";
+    [_v5.but setImage:[UIImage imageNamed:@"Invitation"] forState:UIControlStateNormal];
+//    [v1.but setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+    _v5.but.tag = 5;
+    [_v5.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSArray *arr = @[v1,v2,v3,v4,v5,v6,v7,v8];
+    _v6 = [[TaskV alloc] init];
+    _v6.title.text = @"提交学员资料";
+    _v6.subtitle.text = @"成功提交学员资料至总校";
+    _v6.fen.text = @"5积分";
+    [_v6.but setImage:[UIImage imageNamed:@"submit"] forState:UIControlStateNormal];
+//    [v6.but setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
+    _v6.but.tag = 6;
+    [_v6.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _v7 = [[TaskV alloc] init];
+    _v7.title.text = @"预约练车";
+    _v7.subtitle.text = @"预约练车:+2/人，取消预约:-2/人，每日上限一次";
+    _v7.fen.text = @"2积分";
+    [_v7.but setImage:[UIImage imageNamed:@"appointment"] forState:UIControlStateNormal];
+    [_v7.but setImage:[UIImage imageNamed:@"share_copy_2"] forState:UIControlStateSelected];
+    _v7.but.tag = 7;
+    [_v7.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
+    
+    _v8 = [[TaskV alloc] init];
+    _v8.title.text = @"每日签到";
+    _v8.subtitle.text = @"每日APP签到";
+    _v8.fen.text = @"1积分";
+    [_v8.but setImage:[UIImage imageNamed:@"register"] forState:UIControlStateNormal];
+    [_v8.but setImage:[UIImage imageNamed:@"share_copy_2"] forState:UIControlStateSelected];
+    _v8.but.tag = 8;
+    [_v8.but addTarget:self action:@selector(toranwu:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [view addSubview:_v1];
+    [view addSubview:_v2];
+    [view addSubview:_v3];
+    [view addSubview:_v4];
+    [view addSubview:_v5];
+    [view addSubview:_v6];
+    [view addSubview:_v7];
+    [view addSubview:_v8];
+    
+    NSArray *arr = @[_v1,_v2,_v3,_v4,_v5,_v6,_v7,_v8];
     [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(view);
     }];
+    
+    //    SCORE_1
+    
+    _v1.but.selected = [self.model.rankingMap[@"SCORE_1"] boolValue];
+    _v2.but.selected = [self.model.rankingMap[@"SCORE_2"] boolValue];
+    _v3.but.selected = [self.model.rankingMap[@"SCORE_3"] boolValue];
+    _v4.but.selected = [self.model.rankingMap[@"SCORE_4"] boolValue];
+    _v5.but.selected = [self.model.rankingMap[@"SCORE_5"] boolValue];
+    _v6.but.selected = [self.model.rankingMap[@"SCORE_6"] boolValue];
+    _v7.but.selected = [self.model.rankingMap[@"SCORE_7"] boolValue];
+    _v8.but.selected = [self.model.rankingMap[@"SCORE_9"] boolValue];
+    
 }
 
 - (void)toranwu:(UIButton *)senter{
     switch (senter.tag) {
         case 1:
-            
+            if (!self.v1.but.selected) {
+                [self loadCoachInfoToVC];
+            }
             break;
         case 2:
-            
+            if (!self.v2.but.selected) {
+                [self loadCoachInfoToVC];
+            }
             break;
         case 3:
-            
+            if (!self.v3.but.selected) {
+                MyAdmissionsVC *vc = [[MyAdmissionsVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
             break;
         case 4:
-            
+            if (!self.v4.but.selected) {
+                MyAdmissionsVC *vc = [[MyAdmissionsVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
             break;
-        case 5:
-            
+        case 5:{
+            InvitationCoachVC *vc = [[InvitationCoachVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
-        case 6:
+        case 6:{
+            StudentsVC * vc = [[StudentsVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             
             break;
         case 7:
-            
+            if (!self.v7.but.selected) {
+                PracticeCarListVC *vc = [[PracticeCarListVC alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }
             break;
         case 8:
-            
+            if (!self.v8.but.selected) {
+                [self qiandao];
+            }
             break;
         default:
             break;
     }
+}
+
+- (void)toIntegralListVC{
+    IntegralListVC *vc = [[IntegralListVC alloc] init];
+    vc.model = self.model;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
+- (void)qiandao{
+    NSString *url;
+    NSDictionary *dic;
+    if (USERFZR) {
+        url = POSTRankingSignBoardSchool;
+        dic = @{@"UserId":_model.deptId};
+    }else{
+        url = POSTRankingSignBoardCoach;
+    }
+    
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"签到成功"];
+            self.v8.but.selected = YES;
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+- (void)loadCoachInfoToVC{
+    User *uer = [User UserOb];
+    KKLog(@"%@",uer.userId);
+    NSString *url = [NSString stringWithFormat:POSTCoachEnrollInfo,[User UserOb].userId];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+            BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+            vc.model = model;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 /*[view addSubview:v1];
 #pragma mark - Navigation
