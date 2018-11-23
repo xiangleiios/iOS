@@ -76,12 +76,13 @@
 }
 - (void)loadRefreshData{
     NSString *url;
+    NSDictionary *dic;
     if (USERFZR) {
         url = POSTCompositeScoreListSchool;
+        dic = @{@"userId":self.model.deptId};
     }else{
         url = POSTCompositeScoreListCoach;
     }
-    NSDictionary *dic = @{@"id":self.model.deptId};
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"list"];

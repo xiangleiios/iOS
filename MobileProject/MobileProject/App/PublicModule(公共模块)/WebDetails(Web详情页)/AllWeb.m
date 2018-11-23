@@ -1,24 +1,25 @@
 //
-//  XLWKWebVC.m
+//  AllWeb.m
 //  MobileProject
 //
-//  Created by 向蕾 on 2018/10/30.
+//  Created by 向蕾 on 2018/11/22.
 //  Copyright © 2018年 ZSGY. All rights reserved.
 //
 
-#import "XLWKWebVC.h"
+#import "AllWeb.h"
 #import <WebKit/WebKit.h>
-@interface XLWKWebVC ()<WKNavigationDelegate,WKUIDelegate>
+@interface AllWeb ()<WKNavigationDelegate,WKUIDelegate>
 @property (nonatomic , strong)WKWebView *webView;
 @end
 
-@implementation XLWKWebVC
+@implementation AllWeb
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationView setTitle:@""];
     self.webView = [[WKWebView alloc] init];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"https://pu12561238.m.icoc.me"]]];
+    
+    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.url]]];
     self.webView.navigationDelegate = self;
     self.webView.UIDelegate = self; //开了支持滑动返回
     self.webView.allowsBackForwardNavigationGestures = YES;

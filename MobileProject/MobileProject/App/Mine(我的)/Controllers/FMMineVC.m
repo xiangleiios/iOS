@@ -16,6 +16,7 @@
 #import "SchoolRankingListVC.h"
 #import "InvitationCoachVC.h"
 #import "RankingDetailsVC.h"
+#import "AllWeb.h"
 #define HEADERHEI KFit_H6S(320)
 
 @interface FMMineVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
@@ -26,6 +27,7 @@
 @property (nonatomic , strong)NSString *cacheSize;
 
 @property (nonatomic , strong)UILabel *pho;
+@property (nonatomic , strong)UILabel *school;
 @end
 
 @implementation FMMineVC
@@ -39,7 +41,7 @@
         self.titlerr = @[@"教练排名",@"邀请教练",@"账户信息",@"关于我们",@"清除缓存"];
         self.imgarr = @[@"branch",@"invite",@"account",@"about",@"my_clean_icon"];
     }
-    
+    [self loadCoachInfo];
     [self laodNavigation];
     
     [self loadtable];
@@ -186,23 +188,71 @@
     self.pho = [[UILabel alloc] init];
     [head addSubview:self.pho];
     self.pho.textColor = [UIColor whiteColor];
-    [self.pho mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self.HeadPortrait);
-        make.left.mas_equalTo(self.HeadPortrait.mas_right).mas_offset(KFit_W6S(25));
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(300), KFit_H6S(40)));
-    }];
-    self.pho.text = [User UserOb].mobile;
+    
+    if (USERFZR) {
+        
+        [self.pho mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.HeadPortrait);
+            make.left.mas_equalTo(self.HeadPortrait.mas_right).mas_offset(KFit_W6S(25));
+            make.height.mas_equalTo(KFit_H6S(40));
+        }];
+        self.pho.text = [User UserOb].mobile;
+    }else{
+        [self.pho mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.HeadPortrait).mas_offset(-KFit_H6S(30));
+            make.left.mas_equalTo(self.HeadPortrait.mas_right).mas_offset(KFit_W6S(25));
+            make.height.mas_equalTo(KFit_H6S(40));
+        }];
+//        self.pho.text = [User UserOb].mobile;
+        self.school = [[UILabel alloc] init];
+        [head addSubview:self.school];
+        self.school.font = [UIFont systemFontOfSize:kFit_Font6(14)];
+        self.school.textColor = [UIColor whiteColor];
+        [self.school mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.mas_equalTo(self.HeadPortrait).mas_offset(KFit_H6S(30));
+            make.left.mas_equalTo(self.HeadPortrait.mas_right).mas_offset(KFit_W6S(25));
+            make.size.mas_equalTo(CGSizeMake(KFit_W6S(460), KFit_H6S(40)));
+        }];
+        
+        
+    }
     
     UIImageView *imgrz = [[UIImageView alloc] init];
     [head addSubview:imgrz];
     [imgrz setImage:[UIImage imageNamed:@"attestation"]];
     [imgrz mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.pho);
-        make.right.mas_equalTo(head).mas_offset(-KFit_W6S(80));
+        make.left.mas_equalTo(self.pho.mas_right).mas_offset(KFit_W6S(30));
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(90), KFit_H6S(30)));
     }];
     return head;
 }
+
+- (void)loadCoachInfo{
+    User *uer = [User UserOb];
+    KKLog(@"%@",uer.userId);
+    NSString *url = [NSString stringWithFormat:POSTCoachEnrollInfo,[User UserOb].userId];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+            self.pho.text = model.name;
+            self.school.text = [NSString stringWithFormat:@"%@年教龄 %@ (%@)",model.coachAge,model.schoolName,model.deptName];
+            
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
+
+
+
+
 
 #pragma mark-tableview代理
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -241,7 +291,11 @@
         i++;
     }
     if (i == 0) {
+        AllWeb *vc = [[AllWeb alloc] init];
+        vc.url = KURL(@"plat/#/members/members");
         
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc.navigationView setTitle:@"会员福利"];
     }
     if (i == 1) {
         if (USERFZR) {

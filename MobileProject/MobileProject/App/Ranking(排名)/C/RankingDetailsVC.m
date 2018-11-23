@@ -356,7 +356,7 @@
     NSDictionary *dic;
     if (USERFZR) {
         url = POSTRankingSignBoardSchool;
-        dic = @{@"UserId":_model.deptId};
+        dic = @{@"userId":_model.deptId};
     }else{
         url = POSTRankingSignBoardCoach;
     }

@@ -323,13 +323,8 @@
             weakself.tuguang = [selectRow integerValue];
         }];
     };
-    if (self.model.isCheck) {
-        weakself.istuiguang.subfield.text = @"是";
-        self.tuguang = 1;
-    }else{
-        weakself.istuiguang.subfield.text = @"否";
-        self.tuguang = 0;
-    }
+    KKLog(@"%@",self.model.isShow);
+    
 //    self.imgBackView = [[XLView alloc] init];
 //    self.imgBackView.backgroundColor = [UIColor whiteColor];
 //    [self.backview addSubview:self.imgBackView];
@@ -494,7 +489,13 @@
             [self.jiaoXueRongYu relodData];
         }
     }
-    
+    if ([_model.isShow integerValue] == 2) {
+        self.istuiguang.subfield.text = @"是";
+        self.tuguang = 1;
+    }else{
+        self.istuiguang.subfield.text = @"否";
+        self.tuguang = 0;
+    }
     if (_model.teachHarvest.length > 1 ) {
         if (self.jiaoXueChengGuo.dataArr.count < 1) {
             [self.jiaoXueChengGuo.dataArr addObjectsFromArray:[_model.teachHarvest componentsSeparatedByString:@","]];
@@ -545,6 +546,10 @@
     [dic setObject:[self.jiaoXueChengGuo.dataArr componentsJoinedByString:@","] forKey:@"teachHarvest"];
     [dic setObject:[self.jiaoXueRongYu.dataArr componentsJoinedByString:@","] forKey:@"coachHonor"];
     [dic setObject:[NSString stringWithFormat:@"%ld",(long)self.tuguang] forKey:@"isCheck"];
+    
+    [dic setObject:self.model.schoolDeptId forKey:@"schoolDeptId"];
+    [dic setObject:self.model.deptId forKey:@"deptId"];
+    
     [MBProgressHUD showLoadingHUD:@"正在提交保存"];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"11111%@",responseObject);

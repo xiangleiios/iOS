@@ -225,7 +225,8 @@
 
 @property (nonatomic , strong)NSString *deptName; ///分队名称
 @property (nonatomic , strong)NSString *enrollPhone;  ///招生电话
-@property (nonatomic , strong)NSString *isShow;  //是否展示（1：默认展示 2：不展示）
+/// 是否展示（1：默认展示 2：不展示）
+@property (nonatomic , strong)NSString *isShow;
 @property (nonatomic , strong)NSString *headImg; //头像
 @property (nonatomic , strong)NSString *schoolDeptId;  //驾校部门id
 @property (nonatomic , strong)NSString *coachAge; //教龄
@@ -321,6 +322,7 @@
 @property (nonatomic , strong)NSString *coachName;
 @property (nonatomic , strong)NSString *originalDeptName;
 @property (nonatomic , strong)NSDictionary *rankingMap;
+@property (nonatomic , strong)NSArray *coachIds;
 @end
 
 

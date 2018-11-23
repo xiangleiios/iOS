@@ -7,7 +7,7 @@
 //
 
 #import "MyInfoVC.h"
-
+#import "ChangePhoVC.h"
 #import "XLInformationV.h"
 #import "ChangePasswordVC.h"
 #import <CommonCrypto/CommonDigest.h>//MD5加密导入框架
@@ -64,7 +64,16 @@
         make.height.mas_equalTo(1);
     }];
     
-    XLInformationV *name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile];
+    XLInformationV *name;
+    if (USERFZR) {
+        name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile];
+    }else{
+        name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile TSSubTitle:@"" Must:NO Click:YES];
+        name.senterBlock = ^{
+            ChangePhoVC *vc = [[ChangePhoVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+        };
+    }
     [self.view addSubview:name];
     [name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(lb.mas_bottom);

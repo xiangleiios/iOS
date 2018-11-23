@@ -188,6 +188,11 @@
         but.layer.borderWidth = 0.5;
         [self.selectArr addObject:but];
         [but addTarget:self action:@selector(butselect:) forControlEvents:UIControlEventTouchUpInside];
+        for (NSString *str in self.model.coachIds) {
+            if ([str integerValue] == [model.idid integerValue]) {
+                but.selected = YES;
+            }
+        }
     }
 }
 - (void)butselect:(UIButton *)senter{

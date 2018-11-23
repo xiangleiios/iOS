@@ -329,7 +329,8 @@
 
 
 
-
+#pragma mark - 邀请H5
+#define HTMLInvitationCoach KURL(@"plat/#/InvitationCoach/InvitationCoach?schoolDeptId=%@&teamSchoolDeptId=%@&coachId=%@&type=%d")
 
 
 

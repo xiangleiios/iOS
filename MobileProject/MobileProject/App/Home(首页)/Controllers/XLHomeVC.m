@@ -312,10 +312,15 @@
     
 }
 - (void)toJiaxiao{
-//    SubordinateVC *vc =[[SubordinateVC alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-    BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (USERFZR) {
+        BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        SubordinateVC *vc =[[SubordinateVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
 }
 
 - (void)toCheliang{

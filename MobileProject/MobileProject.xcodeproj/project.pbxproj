@@ -209,6 +209,8 @@
 		A7DC8F5A218988840058C654 /* UploadPicturesV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC8F59218988840058C654 /* UploadPicturesV.m */; };
 		A7DC8F5D2189A6790058C654 /* SchoolLable.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DC8F5C2189A6790058C654 /* SchoolLable.m */; };
 		A7DD3F9521A69F7100D579B6 /* FMIntegralModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DD3F9421A69F7100D579B6 /* FMIntegralModel.m */; };
+		A7DD3F9821A6A51500D579B6 /* ChangePhoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DD3F9721A6A51500D579B6 /* ChangePhoVC.m */; };
+		A7DD3F9C21A6D7BD00D579B6 /* AllWeb.m in Sources */ = {isa = PBXBuildFile; fileRef = A7DD3F9B21A6D7BD00D579B6 /* AllWeb.m */; };
 		A7E979D6213535CB00EA6F14 /* CodeShareV.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E979D5213535CB00EA6F14 /* CodeShareV.m */; };
 		A7E979E821354AFC00EA6F14 /* RectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E979E721354AFC00EA6F14 /* RectManager.m */; };
 		A7E979EF21354B3300EA6F14 /* zocr0.lib in Resources */ = {isa = PBXBuildFile; fileRef = A7E979EC21354B3300EA6F14 /* zocr0.lib */; };
@@ -1116,6 +1118,10 @@
 		A7DC8F5C2189A6790058C654 /* SchoolLable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SchoolLable.m; sourceTree = "<group>"; };
 		A7DD3F9321A69F7100D579B6 /* FMIntegralModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMIntegralModel.h; sourceTree = "<group>"; };
 		A7DD3F9421A69F7100D579B6 /* FMIntegralModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMIntegralModel.m; sourceTree = "<group>"; };
+		A7DD3F9621A6A51500D579B6 /* ChangePhoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChangePhoVC.h; sourceTree = "<group>"; };
+		A7DD3F9721A6A51500D579B6 /* ChangePhoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChangePhoVC.m; sourceTree = "<group>"; };
+		A7DD3F9A21A6D7BD00D579B6 /* AllWeb.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllWeb.h; sourceTree = "<group>"; };
+		A7DD3F9B21A6D7BD00D579B6 /* AllWeb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllWeb.m; sourceTree = "<group>"; };
 		A7E979D4213535CB00EA6F14 /* CodeShareV.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeShareV.h; sourceTree = "<group>"; };
 		A7E979D5213535CB00EA6F14 /* CodeShareV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeShareV.m; sourceTree = "<group>"; };
 		A7E979E621354AFC00EA6F14 /* RectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectManager.h; sourceTree = "<group>"; };
@@ -2214,6 +2220,8 @@
 				4FAF62D820E4BCFE00552D50 /* HWebVc.m */,
 				A7278E97218857C900118BC3 /* XLWKWebVC.h */,
 				A7278E98218857C900118BC3 /* XLWKWebVC.m */,
+				A7DD3F9A21A6D7BD00D579B6 /* AllWeb.h */,
+				A7DD3F9B21A6D7BD00D579B6 /* AllWeb.m */,
 			);
 			path = "WebDetails(Web详情页)";
 			sourceTree = "<group>";
@@ -4885,6 +4893,8 @@
 				A7948146219ABA15008F8D4B /* SelectSchoolRootVC.m */,
 				A704E539219C0FC300AD0141 /* SelectSchoolRootTwoVC.h */,
 				A704E53A219C0FC300AD0141 /* SelectSchoolRootTwoVC.m */,
+				A7DD3F9621A6A51500D579B6 /* ChangePhoVC.h */,
+				A7DD3F9721A6A51500D579B6 /* ChangePhoVC.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -6299,6 +6309,7 @@
 				A798CEB821787BFD00145440 /* PracticeCarCell.m in Sources */,
 				A75E5CC72179DA960033F6A5 /* PracticeCarDetailsCell.m in Sources */,
 				DA0346BE1F509098008E7BE1 /* UIImage+Merge.m in Sources */,
+				A7DD3F9821A6A51500D579B6 /* ChangePhoVC.m in Sources */,
 				4FB0F37020F5D57F0047BF7B /* GuideViewCell.m in Sources */,
 				DA6730531FB08033002B6894 /* MSSBrowseActionSheet.m in Sources */,
 				DA0346391F509098008E7BE1 /* NSData+Base64.m in Sources */,
@@ -6314,6 +6325,7 @@
 				DA03471F1F509098008E7BE1 /* UITableView+FMPlaceholder.m in Sources */,
 				DA03462D1F509098008E7BE1 /* NSManagedObjectContext+Fetching.m in Sources */,
 				DA03471C1F509098008E7BE1 /* FMPlaceholderView.m in Sources */,
+				A7DD3F9C21A6D7BD00D579B6 /* AllWeb.m in Sources */,
 				4FF9265E20C8CE0600AB3E43 /* CGXStringPickerView.m in Sources */,
 				DA867D581F5904EF00D4D011 /* JYOnceRun.m in Sources */,
 				DA03467A1F509098008E7BE1 /* NSString+Size.m in Sources */,
