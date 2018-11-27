@@ -46,14 +46,14 @@
                 make.left.mas_equalTo(redlb.mas_right).mas_offset(KFit_W6S(10));
                 make.centerY.mas_equalTo(self);
                 make.height.mas_equalTo(KFit_H6S(50));
-//                make.width.mas_equalTo(KFit_W6S(280));
+                make.width.mas_equalTo(KFit_W6S(200));
             }];
         }else{
             [titleLable mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
                 make.centerY.mas_equalTo(self);
                 make.height.mas_equalTo(KFit_H6S(50));
-//                make.width.mas_equalTo(KFit_W6S(280));
+                make.width.mas_equalTo(KFit_W6S(200));
             }];
         }
         
@@ -120,7 +120,7 @@
             make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
             make.centerY.mas_equalTo(self);
             make.height.mas_equalTo(KFit_H6S(50));
-            //                make.width.mas_equalTo(KFit_W6S(280));
+            make.width.mas_equalTo(KFit_W6S(230));
         }];
         
         UILabel *subLable = [[UILabel alloc] init];

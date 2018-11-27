@@ -118,6 +118,7 @@
 #pragma mark - 导航相关
 - (void)laodNavigation{
     [self.navigationView setTitle:@"学员"];
+    if (USERFZR) {
     kWeakSelf(self)
     self.choose = [self.navigationView addRightButtonWithTitle:@"提交资料" clickCallBack:^(UIView *view) {
         [weakself ts];
@@ -125,6 +126,7 @@
     }];
     [self.choose setTitleColor:kColor_N(0, 112, 234) forState:UIControlStateNormal];
     self.choose.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    }
 //    [self.choose setTitle:@"完成" forState:UIControlStateSelected];
     
 }
@@ -211,7 +213,7 @@
             NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc] initWithData:[responseObject[@"message"] dataUsingEncoding: NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
 //            self.articelContent.text = [attrStr string];
             
-            
+            [[XLSingleton singleton].dateArr removeAllObjects];
             [MBProgressHUD showMsgHUD:[attrStr string]];
 //            [[XLSingleton singleton].dateArr removeAllObjects];
         }

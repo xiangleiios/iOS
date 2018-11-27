@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface PosterVC : FMBaseViewController
 @property (nonatomic , strong)FMMainModel *model;
 @property (nonatomic , strong)NSString *url;
+@property (nonatomic , assign)NSInteger type;
 @end
 
 NS_ASSUME_NONNULL_END

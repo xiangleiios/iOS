@@ -40,8 +40,8 @@
     }else{
         self.titlerr = @[@"教练排名",@"邀请教练",@"账户信息",@"关于我们",@"清除缓存"];
         self.imgarr = @[@"branch",@"invite",@"account",@"about",@"my_clean_icon"];
+        [self loadCoachInfo];
     }
-    [self loadCoachInfo];
     [self laodNavigation];
     
     [self loadtable];
@@ -237,7 +237,7 @@
         if (kResponseObjectStatusCodeIsEqual(200)) {
             FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
             self.pho.text = model.name;
-            self.school.text = [NSString stringWithFormat:@"%@年教龄 %@ (%@)",model.coachAge,model.schoolName,model.deptName];
+            self.school.text = [NSString stringWithFormat:@"%@年教龄 %@ (%@)",model.coachAge?model.coachAge:@"2",model.schoolName,model.deptName];
             
         }
         
@@ -272,11 +272,9 @@
     [cell.img setImage:[UIImage imageNamed:self.imgarr[indexPath.row]]];
     if ([self.titlerr[indexPath.row]  isEqual: @"清除缓存"]) {
         cell.subtitle.text = [FMClearCacheTool fm_getCacheSizeWithFilePath:kCachePath];;
+    }else{
+        cell.subtitle.text = @"";
     }
-//    if ([self.titlerr[indexPath.row]  isEqual: @"邀请教练"]) {
-//        cell.subtitle.text = @"奖励8元现金";
-//    }
-    //    cell.model = self.dataArr[indexPath.row];
     return cell;
 }
 
@@ -433,6 +431,7 @@
     }else{
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
         imagePickerController.allowsEditing = YES;
+        
     }
     //利用模态进行调用系统框架
     [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
@@ -445,13 +444,15 @@
     imagePickerController.delegate = self;
     imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePickerController.allowsEditing = YES;
+    
     [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
 }
 
 #pragma mark -相册代理
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     KKLog(@"%@    ----- %@",picker,info);
-    [self uploadPictures:info[UIImagePickerControllerOriginalImage]];
+    //UIImagePickerControllerEditedImage   UIImagePickerControllerOriginalImage
+    [self uploadPictures:info[UIImagePickerControllerEditedImage]];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -489,12 +490,21 @@
 
 
 - (void)chengHeader:(NSString *)img{
-    [FMNetworkHelper fm_request_postWithUrlString:[NSString stringWithFormat:POSTUpdateTeamUserHeadImg,img] isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    NSString *url;
+    NSDictionary *dic;
+    if (USERFZR) {
+        url = [NSString stringWithFormat:POSTUpdateTeamUserHeadImg,img];
+    }else{
+        url = POSTUpdateCoach;
+        dic = @{@"headPic":img};
+    }
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
             NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
             [defaults setObject:KURLIma(img) forKey:@"teamUserHead"];
             [defaults synchronize];
+            [User UserOb].teamUserHead = KURLIma(img);
             [self.HeadPortrait sd_setImageWithURL:[NSURL URLWithString:KURLIma(img)] placeholderImage:[UIImage imageNamed:@"touxiang_nor"]];
             
         }
@@ -506,4 +516,6 @@
         
     }];
 }
+
+
 @end

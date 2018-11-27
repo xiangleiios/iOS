@@ -249,6 +249,8 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.scroll.contentOffset = CGPointMake(w, 0);
     }];
+    XLSingleton *single = [XLSingleton singleton];
+    [single.timeArr removeAllObjects];
     self.selectTime = [XLCommonUse TimeToInterceptYYYYMMddHHMMSS:self.timeArr[but.tag]];
     [self loadDataWithTime:self.selectTime];
     //    }

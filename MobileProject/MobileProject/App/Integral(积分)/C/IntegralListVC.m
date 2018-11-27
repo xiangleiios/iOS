@@ -82,7 +82,9 @@
         dic = @{@"userId":self.model.deptId};
     }else{
         url = POSTCompositeScoreListCoach;
+        dic = @{@"userId":[User UserOb].userId};
     }
+    
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"list"];

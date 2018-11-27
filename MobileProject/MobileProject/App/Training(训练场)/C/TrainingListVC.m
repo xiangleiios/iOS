@@ -35,7 +35,9 @@
     [super viewDidLoad];
     [self.navigationView setTitle:@"训练场"];
     [self loadtable];
-    [self loadBut];
+    if (USERFZR) {
+        [self loadBut];
+    }
     // Do any additional setup after loading the view.
 }
 
@@ -69,11 +71,20 @@
 - (void)loadtable{
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
-    [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
-        make.left.right.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
-    }];
+    if (USERFZR) {
+        [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+            make.left.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
+        }];
+    }else{
+        [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+            make.left.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view);
+        }];
+    }
+    
     self.table.delegate=self;
     self.table.dataSource=self;
     

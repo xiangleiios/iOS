@@ -10,4 +10,6 @@
 
 @interface BusinessCardVC : FMBaseViewController
 @property (nonatomic , strong)FMMainModel *model;
+@property (nonatomic , strong)NSString *idid;
+@property (nonatomic , strong)NSString *type;
 @end

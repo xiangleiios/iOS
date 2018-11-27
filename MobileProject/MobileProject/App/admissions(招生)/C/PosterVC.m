@@ -121,7 +121,7 @@
 #pragma mark -调用保存接口
 - (void)laodSave{
     if (![self.idArr containsObject:[NSNumber numberWithInteger:self.jiaxiao.tag]]) {
-        [MBProgressHUD showMsgHUD:@"数据错误"];
+        [MBProgressHUD showMsgHUD:@"请选择驾校"];
         return;
     }
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -203,7 +203,10 @@
     }];
     NSArray  *array = [_model.imgUrl componentsSeparatedByString:@","];
     NSMutableArray *arr = [NSMutableArray arrayWithArray:array];
-    [arr removeLastObject];
+    if (self.type) {
+        [arr removeLastObject];
+    }
+
     for (int i = 0; i< arr.count; i ++) {
         [self.imgarr addObject:array[i]];
         UIImageView *img = [[UIImageView alloc] init];

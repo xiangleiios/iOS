@@ -164,7 +164,12 @@
     
     
     self.headImg = [[UIImageView alloc] init];
+    self.headImg.userInteractionEnabled = YES;
     [self.backview addSubview:self.headImg];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeUp)];
+    // 允许用户交互
+    [self.headImg addGestureRecognizer:tap];
+    
     [self.headImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(jiBenZiLiao.mas_bottom).mas_offset(KFit_H6S(20));
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
@@ -398,7 +403,7 @@
 
 - (void)setModel:(FMMainModel *)model{
     _model = model;
-    [self.headImg sd_setImageWithURL:[NSURL URLWithString:KURLIma(_model.headImg)] placeholderImage:[UIImage imageNamed:@"head_nor"]];
+    [self.headImg sd_setImageWithURL:[NSURL URLWithString:KURLIma(self.model.headPic)] placeholderImage:[UIImage imageNamed:@"head_nor"]];
     XLCache *cache = [XLCache singleton];
     self.admissions.name.subfield.text = _model.name;
     
@@ -416,7 +421,7 @@
     
     self.admissions.names.subfield.text = _model.deptName;
     KKLog(@"%@",_model.deptAddress);
-    self.admissions.address.subfield.text = _model.deptAddress;
+    self.admissions.address.subfield.text = _model.detailAddress;
     self.textView.text = _model.introduce;
     self.course.dataArr = _model.classList;
     if (_model.url1 && ![_model.url1  isEqual: @""] && ![self.imgarr containsObject:_model.url1]) {
@@ -522,6 +527,10 @@
             [MBProgressHUD showMsgHUD:@"请添加自我介绍"];
             return;
         }
+        if (self.admissions.seniority.subfield.text.length < 1) {
+            [MBProgressHUD showMsgHUD:@"请填写教龄"];
+            return;
+        }
     }
     NSString *url = POSTEnrollInfoEdit;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -578,5 +587,132 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)changeUp{
+    UIAlertController *alertVc = [UIAlertController alertControllerWithTitle:@"请选择添加途径" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //默认只有标题 没有操作的按钮:添加操作的按钮 UIAlertAction
+    
+    UIAlertAction *cancelBtn = [UIAlertAction actionWithTitle:@"相册" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        //        NSLog(@"取消");
+        [self PhotoLibrary];
+    }];
+    
+    UIAlertAction *cancelBtXJ = [UIAlertAction actionWithTitle:@"相机" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [self xiangji];
+        NSLog(@"取消");
+        
+    }];
+    //添加确定
+    UIAlertAction *sureBtn = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        NSLog(@"确定");
+        
+    }];
+    //设置`确定`按钮的颜色
+    //    [sureBtn setValue:[UIColor redColor] forKey:@"titleTextColor"];
+    //将action添加到控制器
+    [alertVc addAction:cancelBtn];
+    [alertVc addAction:cancelBtXJ];
+    [alertVc addAction :sureBtn];
+    //展示
+    [self presentViewController:alertVc animated:YES completion:nil];
+    
+    
+}
+
+
+///
+- (void)xiangji{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        UIAlertView * alerr = [[UIAlertView alloc]initWithTitle:@"警告!" message:@"未找到该硬件设备或设备已损坏" delegate:self cancelButtonTitle:nil otherButtonTitles:@"我知道了", nil];
+        [alerr show];
+    }else{
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.allowsEditing = YES;
+    }
+    //利用模态进行调用系统框架
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];
+    
+}
+//照片库
+- (void)PhotoLibrary{
+    UIImagePickerController * imagePickerController = [[UIImagePickerController alloc]init];
+    imagePickerController.mediaTypes = [NSArray arrayWithObject:(__bridge NSString *)kUTTypeImage];
+    imagePickerController.delegate = self;
+    imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePickerController.allowsEditing = YES;
+    [self.navigationController presentViewController:imagePickerController animated:YES completion:nil];;
+}
+
+#pragma mark -相册代理
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    KKLog(@"%@    ----- %@",picker,info);
+    [self uploadPictures:info[UIImagePickerControllerEditedImage]];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+
+- (void)uploadPictures:(UIImage *)image{
+    [MBProgressHUD showLoadingHUD:@"正在上传图片"];
+    
+    
+    NSString *url = POSTUpLoadFile;
+    
+    
+    
+    AFHTTPSessionManager * manager = [AFHTTPSessionManager manager];
+    [manager.requestSerializer setValue:[User UserOb].token forHTTPHeaderField:@"token"];
+    [manager.requestSerializer setValue:@"Mobile" forHTTPHeaderField:@"loginType"];
+    [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:UIImageJPEGRepresentation(image, 0.1) name:@"file" fileName:@"tupian.png" mimeType:@"image/png"];
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"成功返货=============%@",responseObject);
+        [MBProgressHUD hideLoadingHUD];
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSDictionary *dic =responseObject[@"data"][@"data"];
+            //            [self.imgarr addObject:dic[@"url"]];
+            [self chengHeader:dic[@"url"]];
+            
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [MBProgressHUD hideLoadingHUD];
+    }];
+}
+
+
+
+
+- (void)chengHeader:(NSString *)img{
+    NSString *url;
+    NSDictionary *dic;
+    if (USERFZR) {
+        url = [NSString stringWithFormat:POSTUpdateTeamUserHeadImg,img];
+    }else{
+        url = POSTUpdateCoach;
+        dic = @{@"headPic":img};
+    }
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+            [defaults setObject:KURLIma(img) forKey:@"teamUserHead"];
+            [defaults synchronize];
+            [User UserOb].teamUserHead = KURLIma(img);
+            [self.headImg sd_setImageWithURL:[NSURL URLWithString:KURLIma(img)] placeholderImage:[UIImage imageNamed:@"touxiang_nor"]];
+            
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
+
 
 @end

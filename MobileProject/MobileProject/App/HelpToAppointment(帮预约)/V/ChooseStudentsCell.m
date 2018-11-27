@@ -40,10 +40,12 @@
     self.name = [[UILabel alloc] init];
     [self.contentView addSubview:self.name];
     self.name.text = @"向蕾";
+    self.name.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.contentView);
         make.left.mas_equalTo(img.mas_right).mas_offset(KFit_W6S(25));
         make.height.mas_equalTo(KFit_H6S(40));
+        make.width.mas_equalTo(KFit_W6S(150));
     }];
     
     self.but = [[UIButton alloc] init];
@@ -59,6 +61,7 @@
 
     self.xunlianchang = [[UILabel alloc] init];
     [self.contentView addSubview:self.xunlianchang];
+    self.xunlianchang.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     self.xunlianchang.text = @"上次预约：2号训练场";
     self.xunlianchang.textAlignment = NSTextAlignmentRight;
     [self.xunlianchang mas_makeConstraints:^(MASConstraintMaker *make) {

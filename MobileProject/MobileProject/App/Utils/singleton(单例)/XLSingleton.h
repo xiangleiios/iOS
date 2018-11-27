@@ -16,4 +16,7 @@
 @property (nonatomic , strong)NSMutableArray *timeArr;   ///预约时段
 @property (nonatomic , strong)NSMutableArray *courseArr;
 @property (nonatomic , strong)NSString *scanPhotoIp;
+@property (nonatomic , strong)NSString *shareId;
+/// 分享类型  1：海报  2：名片
+@property (nonatomic , assign)NSInteger type;
 @end

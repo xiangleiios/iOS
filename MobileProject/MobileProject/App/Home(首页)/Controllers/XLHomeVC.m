@@ -26,7 +26,7 @@
 #import "PracticeCarListVC.h"
 #import "MyNewsRootVC.h"
 #import "XLWKWebVC.h"
-
+#import "AllWeb.h"
 #import "BranchSchoolListVC.h"
 #import "CoachListVc.h"
 #import "BusinessCardVC.h"
@@ -127,7 +127,12 @@
     _banner.backgroundColor = kWhiteColor;
     _banner.titleLabelTextFont = [UIFont systemFontOfSize:kFit_Font6(15)];
     _banner.titleLabelHeight = kFit_Font6(40);
-    _banner.localizationImageNamesGroup = @[@"banner",@"banner2"];
+    if (USERFZR) {
+        _banner.localizationImageNamesGroup = @[@"banner",@"banner2",@"banner3"];
+    }else{
+        _banner.localizationImageNamesGroup = @[@"banner",@"banner2"];
+    }
+    
     [self.backview addSubview:_banner];
     
 }
@@ -142,6 +147,11 @@
     }else if(index == 1){
         XLWKWebVC *vc = [[XLWKWebVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 2){
+        AllWeb *vc = [[AllWeb alloc] init];
+        vc.url = KURL(@"plat/#/members/members");
+        [self.navigationController pushViewController:vc animated:YES];
+        [vc.navigationView setTitle:@"会员福利"];
     }
 }
 
@@ -257,55 +267,57 @@
         make.height.mas_equalTo(KFit_W6S(236));
     }];
     
-    
-    XLColumnsV *management = [[XLColumnsV alloc] initWithTitle:@"分校管理" Color:kColor_N(64, 75, 105)];
-    [self.backview addSubview:management];
-    [management mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_one.mas_bottom).mas_offset(KFit_H6S(50));
-        make.left.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(KFit_H6S(30));
-    }];
-    
-    UIButton *jiaxiao = [[UIButton alloc] init];
-    [jiaxiao addTarget:self action:@selector(toJiaxiao) forControlEvents:UIControlEventTouchUpInside];
-    [self.backview addSubview:jiaxiao];
-    [jiaxiao setImage:[UIImage imageNamed:@"suosujiax"] forState:UIControlStateNormal];
-    
-    UIButton *cehliang = [[UIButton alloc] init];
-    [cehliang addTarget:self action:@selector(toCheliang) forControlEvents:UIControlEventTouchUpInside];
-    [self.backview addSubview:cehliang];
-    [cehliang setImage:[UIImage imageNamed:@"cheliangguanl"] forState:UIControlStateNormal];
-    
-    NSArray *arrtwo = @[jiaxiao,cehliang];
-    [arrtwo mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:KFit_W6S(362) leadSpacing:KFit_W6S(20) tailSpacing:KFit_W6S(20)];
-    [arrtwo mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(management.mas_bottom).mas_offset(KFit_H6S(30));
-        make.height.mas_equalTo(KFit_W6S(146));
-    }];
-    
-    UIButton *xunlianchang = [[UIButton alloc] init];
-    [xunlianchang addTarget:self action:@selector(toTrainingListVC) forControlEvents:UIControlEventTouchUpInside];
-    [self.backview addSubview:xunlianchang];
-    [xunlianchang setImage:[UIImage imageNamed:@"xlcgl"] forState:UIControlStateNormal];
-    
-    [self.backview addSubview:xunlianchang];
-    [xunlianchang mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.height.mas_equalTo(jiaxiao);
-        make.top.mas_equalTo(jiaxiao.mas_bottom).mas_offset(KFit_H6S(5));
-    }];
-    User *user = [User UserOb];
-    if ([user.type  isEqual: @"1"]) {
-        UIButton *jiaolian = [[UIButton alloc] init];
-        [jiaolian addTarget:self action:@selector(toCoachListVC) forControlEvents:UIControlEventTouchUpInside];
-        [self.backview addSubview:jiaolian];
-        [jiaolian setImage:[UIImage imageNamed:@"jlgl"] forState:UIControlStateNormal];
-        
-        [self.backview addSubview:jiaolian];
-        [jiaolian mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.right.height.mas_equalTo(cehliang);
-            make.top.mas_equalTo(cehliang.mas_bottom).mas_offset(KFit_H6S(5));
+    if (USERFZR) {
+        XLColumnsV *management = [[XLColumnsV alloc] initWithTitle:@"分校管理" Color:kColor_N(64, 75, 105)];
+        [self.backview addSubview:management];
+        [management mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_one.mas_bottom).mas_offset(KFit_H6S(50));
+            make.left.right.mas_equalTo(self.view);
+            make.height.mas_equalTo(KFit_H6S(30));
         }];
+        
+        UIButton *jiaxiao = [[UIButton alloc] init];
+        [jiaxiao addTarget:self action:@selector(toJiaxiao) forControlEvents:UIControlEventTouchUpInside];
+        [self.backview addSubview:jiaxiao];
+        [jiaxiao setImage:[UIImage imageNamed:@"suosujiax"] forState:UIControlStateNormal];
+        
+        UIButton *cehliang = [[UIButton alloc] init];
+        [cehliang addTarget:self action:@selector(toCheliang) forControlEvents:UIControlEventTouchUpInside];
+        [self.backview addSubview:cehliang];
+        [cehliang setImage:[UIImage imageNamed:@"cheliangguanl"] forState:UIControlStateNormal];
+        
+        NSArray *arrtwo = @[jiaxiao,cehliang];
+        [arrtwo mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:KFit_W6S(362) leadSpacing:KFit_W6S(20) tailSpacing:KFit_W6S(20)];
+        [arrtwo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(management.mas_bottom).mas_offset(KFit_H6S(30));
+            make.height.mas_equalTo(KFit_W6S(146));
+        }];
+        
+        UIButton *xunlianchang = [[UIButton alloc] init];
+        [xunlianchang addTarget:self action:@selector(toTrainingListVC) forControlEvents:UIControlEventTouchUpInside];
+        [self.backview addSubview:xunlianchang];
+        [xunlianchang setImage:[UIImage imageNamed:@"xlcgl"] forState:UIControlStateNormal];
+        
+        [self.backview addSubview:xunlianchang];
+        [xunlianchang mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.height.mas_equalTo(jiaxiao);
+            make.top.mas_equalTo(jiaxiao.mas_bottom).mas_offset(KFit_H6S(5));
+        }];
+       
+            UIButton *jiaolian = [[UIButton alloc] init];
+            [jiaolian addTarget:self action:@selector(toCoachListVC) forControlEvents:UIControlEventTouchUpInside];
+            [self.backview addSubview:jiaolian];
+            [jiaolian setImage:[UIImage imageNamed:@"jlgl"] forState:UIControlStateNormal];
+            
+            [self.backview addSubview:jiaolian];
+            [jiaolian mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.right.height.mas_equalTo(cehliang);
+                make.top.mas_equalTo(cehliang.mas_bottom).mas_offset(KFit_H6S(5));
+            }];
+        
     }
+    
+    
     
     self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(30)]);
     self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
@@ -343,8 +355,10 @@
         
         if (self.coachModel) {
             BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+            vc.type = @"coach";
             vc.model = self.coachModel;
             [self.navigationController pushViewController:vc animated:YES];
+            [vc.navigationView setTitle:@"招生名片"];
         }else{
             [self loadCoachInfoToVC];
         }
@@ -382,8 +396,10 @@
             FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
             self.coachModel = model;
             BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+            vc.type = @"coach";
             vc.model = self.coachModel;
             [self.navigationController pushViewController:vc animated:YES];
+            [vc.navigationView setTitle:@"招生名片"];
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }
@@ -419,20 +435,35 @@
     if (senter.tag == 1) {
         StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
 //        [vc.navigationView setTitle:@"今日咨询"];
-        vc.url = POSTCensiusList;
+        if (USERFZR) {
+            vc.url = POSTCensiusList;
+        }else{
+            vc.url = POSTCensiusListcoach;
+        }
+        
         [self.navigationController pushViewController:vc animated:YES];
         [vc.navigationView setTitle:@"今日咨询"];
     }else if (senter.tag == 2){
         StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
         //        [vc.navigationView setTitle:@"今日咨询"];
-        vc.url = POSTSignList;
+        
+        if (USERFZR) {
+            vc.url = POSTSignList;
+        }else{
+            vc.url = POSTSignListcoach;
+        }
         [self.navigationController pushViewController:vc animated:YES];
         vc.PayCost = YES;
         [vc.navigationView setTitle:@"今日报名"];
     }else if (senter.tag == 3){
         StudentsListTwoVC *vc = [[StudentsListTwoVC alloc] init];
         //        [vc.navigationView setTitle:@"今日咨询"];
-        vc.url = POSTMonthSignList;
+        
+        if (USERFZR) {
+            vc.url = POSTMonthSignList;
+        }else{
+            vc.url = POSTMonthSignListcoach;
+        }
         vc.PayCost = YES;
         [self.navigationController pushViewController:vc animated:YES];
         [vc.navigationView setTitle:@"本月报名"];
@@ -448,6 +479,8 @@
 
 - (void)askZhengView:(FMAskZhengView *)askZhengView tagIndex:(NSInteger)index {
     KKLog(@"%ld",(long)index);
+    MyNewsRootVC *vc = [[MyNewsRootVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -457,7 +490,12 @@
 }
 - (void)loaddata{
     
-    NSString *url = POSTCensusList;
+    NSString *url;
+    if (USERFZR) {
+        url = POSTCensusList;
+    }else{
+        url = POSTCensusListcoach;
+    }
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
@@ -476,8 +514,12 @@
 
 
 - (void)loadnews{
-
-    NSString *url = POSTFirstList;
+    NSString *url;
+    if (USERFZR) {
+        url = POSTFirstList;
+    }else{
+        url = POSTFirstcoachList;
+    }
     //    NSString *urlstr = [NSString stringWithFormat:@"%@?pageNum=%ld&pageSize=20",self.url,self.pageNum];
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);

@@ -323,6 +323,7 @@
 @property (nonatomic , strong)NSString *originalDeptName;
 @property (nonatomic , strong)NSDictionary *rankingMap;
 @property (nonatomic , strong)NSArray *coachIds;
+@property (nonatomic , assign)BOOL coachStatus;
 @end
 
 

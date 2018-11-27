@@ -79,7 +79,12 @@
     MyNewsVC *vc = [[MyNewsVC alloc] init];
     self.one = vc;
     vc.type = 1;
-    vc.url = POSTFirstList;
+    if (USERFZR) {
+        vc.url = POSTFirstList;
+    }else{
+        vc.url = POSTFirstcoachList;
+    }
+    
     [self addChildViewController:vc];
     [self.scrollView addSubview:vc.view];
     vc.view.frame = CGRectMake(0, 0, self.scrollView.frame.size.width , self.scrollView.frame.size.height);

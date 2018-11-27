@@ -26,7 +26,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationView setTitle:@"分校排行"];
+    [self.navigationView setTitle:@"分校排名"];
     kWeakSelf(self)
     UIButton *but = [self.navigationView addRightButtonWithTitle:@"规则说明" clickCallBack:^(UIView *view) {
         RuleDescriptionVC *vc = [[RuleDescriptionVC alloc] init];
@@ -143,7 +143,9 @@
     RankingDetailsVC *vc = [[RankingDetailsVC alloc] init];
 //    vc.type = 0;
 //    vc.coachArr = self.coachArr;
-    vc.model = self.dataArr[indexPath.row];
+    FMMainModel *model = self.dataArr[indexPath.row];
+    vc.deptId = model.deptId;
+    vc.model =model;
     [self.navigationController pushViewController:vc animated:YES];
 //    [vc.navigationView setTitle:@"训练场详情"];
 }

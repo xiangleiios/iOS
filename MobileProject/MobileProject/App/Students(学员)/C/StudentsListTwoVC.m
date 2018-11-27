@@ -66,8 +66,8 @@
     self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.bottom.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+        make.left.right.bottom.mas_equalTo(self.view);
     }];
     self.table.delegate=self;
     self.table.dataSource=self;

@@ -220,8 +220,8 @@
 /// 最老的版本，最好也写上
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
-    if (!result) {
-//        return [FLPAYMANAGER fl_handleUrl:url];
+    if (result) {
+    
     }
     return result;
 }
@@ -229,11 +229,11 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
-    if (!result) {
+    if (result) {
+//        [XLshare ShareSuccess];
 //         return [FLPAYMANAGER fl_handleUrl:url];
     }
-    NSLog(@"url=====%@ \n  sourceApplication=======%@ \n  annotation======%@", url, sourceApplication, annotation);
-    NSString *str=[NSString stringWithFormat:@"%@",url];
+    
     return result;
 }
 
@@ -242,16 +242,18 @@
     BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
     NSLog(@"url=====%@", url);
     NSString *str=[NSString stringWithFormat:@"%@",url];
-    
-    /// 判断返回链接是否是银联的返回
-    if([str rangeOfString:@"uppayresult"].location != NSNotFound){
-//        [XLUPPay uppay_handleUrl:url];
-        return result;
+    if (result) {
+//        [XLshare ShareSuccess];
     }
-   
-    if (!result) {
-//        return [FLPAYMANAGER fl_handleUrl:url];
-    }
+//    /// 判断返回链接是否是银联的返回
+//    if([str rangeOfString:@"uppayresult"].location != NSNotFound){
+////        [XLUPPay uppay_handleUrl:url];
+//        return result;
+//    }
+//
+//    if (!result) {
+////        return [FLPAYMANAGER fl_handleUrl:url];
+//    }
     
     return result;
 }

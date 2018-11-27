@@ -119,14 +119,25 @@
 #pragma mark -推广名片
 #define POSTEnrollInfoExtension KURL(@"/app/enrollInfo/extension")
 
-#pragma mark -修改密码
+#pragma mark -修改密码 - 负责人
 #define POSTEditPwd KURL(@"app/team/teamUser/editPwd")
 
-#pragma mark -招生日报
+#pragma mark -修改密码 - 教练
+#define POSTEditPwdCoach KURL(@"app/coach/ranking/updateCoachPassword")
+
+
+
+#pragma mark -招生日报 - 负责人
 #define POSTCensusList KURL(@"app/census/list")
+
+#pragma mark -招生日报 - 教练
+#define POSTCensusListcoach KURL(@"/app/coach/census/list")
 
 #pragma mark - 消息中心
 #define POSTFirstList KURL(@"appMessage/first/list")
+
+#pragma mark - 消息中心 - 教练
+#define POSTFirstcoachList KURL(@"appMessage/first/coach/list")
 
 #pragma mark - 通知公告
 #define POSTNoticetwoList KURL(@"app/noticetwo/list")
@@ -144,8 +155,8 @@
 
 
 #pragma mark - 名片H5 - 教练
-#define HTMLMINGPIAN KURL(@"plat/#/?type=app&id=%@")
-#define HTMLMINGPIANFENXIANG KURL(@"plat/#/?id=%@")
+#define HTMLMINGPIAN KURL(@"plat/#/coach/detail?type=%@&id=%@")
+#define HTMLMINGPIANFENXIANG KURL(@"plat/#/coach/detail?id=%@&type=share")
 
 #pragma mark - 名片H5 - 驾校
 #define HTMLMINGPIANJIAXIAO KURL(@"plat/#/school/detail?type=app&id=%@")
@@ -178,21 +189,38 @@
 #define POSTPostRemove KURL(@"app/post/remove?id=%@")
 
 
-#pragma mark - 日咨询学员列表接口
+#pragma mark - 日咨询学员列表接口 - 负责人
 #define POSTCensiusList KURL(@"app/census/censiusList")
 
-#pragma mark - 今日报名学员列表接口
+#pragma mark - 今日报名学员列表接口 - 负责人
 #define POSTSignList KURL(@"app/census/signList")
 
-#pragma mark - 本月报名学员列表接口
+#pragma mark - 本月报名学员列表接口 - 负责人
 #define POSTMonthSignList KURL(@"app/census/monthSignList")
 
-#pragma mark -上传用户头像
+#pragma mark - 日咨询学员列表接口 - 教练
+#define POSTCensiusListcoach KURL(@"/app/coach/census/censiusList")
+
+#pragma mark - 今日报名学员列表接口 - 教练
+#define POSTSignListcoach KURL(@"/app/coach/census/signList")
+
+#pragma mark - 本月报名学员列表接口 - 教练
+#define POSTMonthSignListcoach KURL(@"/app/coach/census/monthSignList")
+
+
+#pragma mark -上传用户头像 - 负责人
 #define POSTUpdateTeamUserHeadImg KURL(@"app/team/teamUser/updateTeamUserHeadImg?teamUserHeadImg=%@")
 
+#pragma mark -上传用户头像 - 教练
+#define POSTUpdateCoach KURL(@"app/coach/ranking/updateCoach")
 
 #pragma mark -考试学员
 #define POSTTeamStuStateList KURL(@"app/teamStuState/list")
+
+#pragma mark -考试学员 - 教练
+#define POSTCoachTeamStuStateList KURL(@"app/coach/teamStuState/list")
+
+
 
 #pragma mark -修改考试学员
 #define POSTTeamStuStateEdit KURL(@"app/teamStuState/edit")
@@ -222,9 +250,9 @@
 #define POSTRemoveTeamtraining KURL(@"app/teamtraining/removeTeamtraining?teamTrainingId=%@")
 
 #pragma mark - 预约练车  训练场列表
-#define POSTTrainingRecordTrainingList KURL(@"app/trainingRecord/trainingList");
+#define POSTTrainingRecordTrainingList KURL(@"app/trainingRecordRev2/trainingList/rev2");
 #pragma mark - 查询训练场２周预约信息
-#define POSTTrainingRecordTwoWeekRecords KURL(@"app/trainingRecord/twoWeekRecords")
+#define POSTTrainingRecordTwoWeekRecords KURL(@"app/trainingRecordRev2/twoWeekRecordsRev2")
 
 #pragma mark - 学员约车列表接口
 #define POSTTrainStuslist KURL(@"app/teamStuState/trainStuslist")
@@ -260,10 +288,10 @@
 #define POSTToCloseOrOpen KURL(@"app/trainOpenStatus/toCloseOrOpen")
 
 #pragma mark - 获取约练车记录信息接口
-#define POSTGetTrainingRecordInfoList KURL(@"app/trainingRecord/getTrainingRecordInfoList")
+#define POSTGetTrainingRecordInfoList KURL(@"app/trainingRecordRev2/getTrainingRecordInfoListRev2")
 
 #pragma mark - 获取学员约练车记录信息接口
-#define POSTGetStuRecordsList KURL(@"app/trainingRecord/getStuRecordsList")
+#define POSTGetStuRecordsList KURL(@"app/trainingRecordRev2/getStuRecordsListRev2")
 
 #pragma mark - 获取约练车记录详情
 #define POSTGetTrainingRecordInfo KURL(@"app/trainingRecord/getTrainingRecordInfo?id=%@")
@@ -300,6 +328,10 @@
 #pragma mark -获取积分排行 -教练
 #define POSTRankingCoachRankings KURL(@"app/coach/ranking/coachRankings")
 
+
+#pragma mark -获取积分排行详情 -负责人
+#define POSTRankingTeamSchoolRankingDetails KURL(@"app/school/ranking/teamSchoolRankingDetails?deptId=%@")
+
 #pragma mark -获取积分明细列表- 负责人
 #define POSTCompositeScoreListSchool KURL(@"app/school/ranking/compositeScore")
 
@@ -334,10 +366,17 @@
 
 
 
+#pragma mark - 海报分享统计
+#define POSTSmallRoutineSystemAddSroce KURL(@"smallRoutine/system/addSroce?id=%@")
 
+#pragma mark - 名片分享统计
+#define POSTSmallRoutineSystemShareOrClickNum KURL(@"smallRoutine/system/shareOrClickNum?id=%@&type=1")
 
+#pragma mark - 验证码
+#define GETmembersMobileCheckcode KURL(@"app/coach/ranking/verCode?phone=%@")
 
-
+#pragma mark - 跟换手机号码
+#define POSTupdateCoachPhone KURL(@"app/coach/ranking/updateCoachPhone")
 
 
 //--------------------------------------------------------------------------------------------------
@@ -391,8 +430,7 @@
 //的三方登录
 #define GETmembersExlogin \
 KURL(@"/api/members/exlogin?member_name=%@&nick_name=%@&avatar_url=%@&source=%@")
-//验证码
-#define GETmembersMobileCheckcode KURL(@"/api/members/mobile/captcha?mobile=%@&type=%d&site_id=8")
+
 //绑定手机
 #define GETBindingMobilePhone KURL(@"/api/members/mobile/bind?token=%@&mobile=%@&captcha=%@")
 //修改昵称

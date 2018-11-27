@@ -51,7 +51,20 @@
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
         if (error) {
             NSLog(@"************Share fail with error %@*********",error);
+            [MBProgressHUD showMsgHUD:@"分享失败"];
         }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                KKLog(@"000000000000%@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                [XLshare ShareSuccess];
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+            
             NSLog(@"response data is %@",data);
         }
     }];
@@ -110,7 +123,9 @@
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
         if (error) {
             UMSocialLogInfo(@"************Share fail with error %@*********",error);
+            [MBProgressHUD showMsgHUD:@"分享失败"];
         }else{
+            [XLshare ShareSuccess];
             if ([data isKindOfClass:[UMSocialShareResponse class]]) {
                 UMSocialShareResponse *resp = data;
                 //分享结果消息
@@ -156,12 +171,36 @@
     //调用分享接口
     [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:nil completion:^(id data, NSError *error) {
         if (error) {
+            [MBProgressHUD showMsgHUD:@"分享失败"];
             NSLog(@"************Share fail with error %@*********",error);
         }else{
+            [XLshare ShareSuccess];
             NSLog(@"response data is %@",data);
         }
     }];
 }
 
-
++ (void)ShareSuccess{
+    XLSingleton *sing = [XLSingleton singleton];
+    NSString *url;
+    if (sing.type == 1) {
+        url = [NSString stringWithFormat:POSTSmallRoutineSystemAddSroce,sing.shareId];
+    }else if (sing.type == 2){
+        url = [NSString stringWithFormat:POSTSmallRoutineSystemShareOrClickNum,sing.shareId];
+    }else{
+        return;
+    }
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            [MBProgressHUD showMsgHUD:@"分享成功"];
+        }
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
+}
 @end

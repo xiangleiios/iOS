@@ -209,10 +209,17 @@
 - (void)choose:(UIButton *)senter{
     senter.selected = !senter.selected;
     KKLog(@"%ld",(long)senter.tag);
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (FMMainModel *model in self.dataArr) {
+        if ([model.idid integerValue] == senter.tag) {
+            [dic setValue:model.studentName forKey:@"name"];
+            [dic setValue:model.idid forKey:@"idid"];
+        }
+    }
     if (senter.selected) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsSubmit" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsSubmit" object:dic];
     }else{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsDelete" object:[NSString stringWithFormat:@"%ld",(long)senter.tag]];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsDelete" object:dic];
     }
 }
 /*

@@ -162,8 +162,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+    vc.type = @"school";
     vc.model = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
+    [vc.navigationView setTitle:@"教练详情"];
 }
 
 

@@ -31,6 +31,7 @@
     self.time = [[UILabel alloc] init];
     [self.contentView addSubview:self.time];
     self.time.text = @"08:00-20:00";
+    self.time.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [self.time mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(-KFit_H6S(30));

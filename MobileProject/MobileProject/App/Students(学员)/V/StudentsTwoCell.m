@@ -63,7 +63,7 @@
     self.typeone.layer.borderWidth = 0.3;
     
     self.typeone.layer.cornerRadius = 3;
-    self.typeone.textColor = kColor_N(77, 213, 185);
+    
     self.typeone.font = [UIFont systemFontOfSize:kFit_Font6(13)];
     self.typeone.textAlignment = NSTextAlignmentCenter;
     
@@ -73,20 +73,20 @@
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(160), KFit_H6S(40)));
     }];
     
-//    self.typetwo = [[UILabel alloc] init];
-//    [self.contentView addSubview:self.typetwo];
-//    self.typetwo.layer.borderWidth = 0.3;
-//    
-//    self.typetwo.layer.cornerRadius = 3;
-//    self.typetwo.textColor = kColor_N(77, 213, 185);
-//    self.typetwo.font = [UIFont systemFontOfSize:kFit_Font6(13)];
-//    self.typetwo.textAlignment = NSTextAlignmentCenter;
-//    
-//    [self.typetwo mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self.typeone.mas_right).mas_offset(KFit_W6S(10));
-//        make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
-//        make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
-//    }];
+    self.typetwo = [[UILabel alloc] init];
+    [self.contentView addSubview:self.typetwo];
+    self.typetwo.layer.borderWidth = 0.3;
+    
+    self.typetwo.layer.cornerRadius = 3;
+    self.typetwo.textColor = kColor_N(77, 213, 185);
+    self.typetwo.font = [UIFont systemFontOfSize:kFit_Font6(13)];
+    self.typetwo.textAlignment = NSTextAlignmentCenter;
+    
+    [self.typetwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.typeone.mas_right).mas_offset(KFit_W6S(10));
+        make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(160), KFit_H6S(40)));
+    }];
     
     
     self.dial = [[UIButton alloc] init];
@@ -132,6 +132,23 @@
         self.typeone.layer.borderColor = kColor_N(77, 213, 185).CGColor;
         self.typeone.textColor = kColor_N(77, 213, 185);
     }
+    
+    if (_model.coachName) {
+        self.typetwo.text = _model.coachName;
+        if (model.coachStatus) {
+            self.typetwo.textColor = kColor_N(204, 209, 218);
+            self.typetwo.layer.borderColor = kColor_N(204, 209, 218).CGColor;
+        }else{
+            self.typetwo.textColor = kColor_N(255, 132, 30);
+            self.typetwo.layer.borderColor = kColor_N(255, 132, 30).CGColor;
+        }
+        
+    }else{
+        self.typetwo.text = @"分校";
+        self.typetwo.textColor = kColor_N(255, 132, 30);
+        self.typetwo.layer.borderColor = kColor_N(255, 132, 30).CGColor;
+        
+    }
     //1:未缴费 2：已缴费
 //    if ([model.isPay intValue] == 1) {
 //        self.typetwo.text = @"未收费";
@@ -143,10 +160,14 @@
 //        self.typetwo.layer.borderColor = kColor_N(77, 213, 185).CGColor;
 //        self.typetwo.textColor = kColor_N(77, 213, 185);
 //    }
+    if (USERFZR) {
     if ([model.isComplete  isEqual: @"1"]) {
         self.selelctBut.hidden = YES;
     }else{
         self.selelctBut.hidden = NO;
+    }
+    }else{
+        self.selelctBut.hidden = YES;
     }
 }
 

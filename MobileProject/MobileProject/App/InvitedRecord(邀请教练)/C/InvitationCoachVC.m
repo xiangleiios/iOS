@@ -74,7 +74,7 @@
     XLxqbut *butone = [[XLxqbut alloc] init];
     [self.view addSubview:butone];
     butone.tag = 1;
-    [butone setTitle:@"微信好友" forState:UIControlStateNormal];
+    [butone setTitle:@"微信" forState:UIControlStateNormal];
     [butone setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [butone setImage:[UIImage imageNamed:@"enjoy_weixin"] forState:UIControlStateNormal];
     [butone addTarget:self action:@selector(toSave:) forControlEvents:UIControlEventTouchUpInside];
@@ -132,12 +132,15 @@
 }
 
 - (void)toSave:(UIButton *)senter{
+    XLSingleton *sing = [XLSingleton singleton];
+    sing.type = 0;
+//    sing.shareId = self.model.idid;
     if (USERFZR) {
         self.share.url = [NSString stringWithFormat:HTMLInvitationCoach,self.schoolID,self.teamSchoolID,@"",2];
         self.share.title = [NSString stringWithFormat:@"%@邀您瓜分30000元年会红包",self.school.text];
     }else{
         self.share.url = [NSString stringWithFormat:HTMLInvitationCoach,self.schoolID,self.teamSchoolID,[User UserOb].userId,1];
-        self.share.title = [NSString stringWithFormat:@"教练邀您瓜分30000元年会红包"];
+        self.share.title = [NSString stringWithFormat:@"中天驾考邀您瓜分30000元年会红包"];
     }
     
     self.share.subTitle = @"30000元年会现金红包助力首届“优秀驾校”评选，参与教练越多奖池红包越高，奖金将会在总校年会上以现金红包发放哦！";

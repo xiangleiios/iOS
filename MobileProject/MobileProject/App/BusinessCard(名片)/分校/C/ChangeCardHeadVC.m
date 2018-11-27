@@ -429,7 +429,7 @@
     
     self.admissions.names.subfield.text = _model.deptName;
     KKLog(@"%@",_model.deptAddress);
-    self.admissions.address.subfield.text = _model.deptAddress;
+    self.admissions.address.subfield.text = _model.detailAddress;
     self.textView.text = _model.introduce;
     self.course.dataArr = _model.classList;
     if (_model.url1 && ![_model.url1  isEqual: @""] && ![self.imgarr containsObject:_model.url1]) {

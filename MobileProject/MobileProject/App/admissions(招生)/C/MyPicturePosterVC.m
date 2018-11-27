@@ -133,6 +133,9 @@
 
 #pragma mark -调用分享
 - (void)toShare{
+    XLSingleton *sing = [XLSingleton singleton];
+    sing.type = 1;
+    sing.shareId = self.model.idid;
     CodeShareV *v = [[CodeShareV alloc] init];
     v.type = ShareTypeImage;
     XLshare *share = [[XLshare alloc]init];

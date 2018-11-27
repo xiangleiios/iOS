@@ -42,7 +42,7 @@
 #pragma mark - 导航相关
 #pragma mark - 导航相关
 - (void)laodNavigation{
-    [self.navigationView setTitle:@"教练详情"];
+    
     kWeakSelf(self)
     [self.navigationView setNavigationBackButtonCallback:^(UIView *view) {
         if (weakself.webView.canGoBack == YES) {
@@ -102,7 +102,7 @@
     [self load];
 }
 - (void)load{
-    NSString *urls =  [NSString stringWithFormat:HTMLMINGPIAN,self.model.idid];
+    NSString *urls =  [NSString stringWithFormat:HTMLMINGPIAN,self.type,self.model.coachId];
     KKLog(@"url :%@",urls);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urls]];
     [self.webView loadRequest:request];
@@ -149,6 +149,9 @@
 }
 
 - (void)share{
+    XLSingleton *sing = [XLSingleton singleton];
+    sing.type = 2;
+    sing.shareId = self.model.idid;
     CodeShareV *v = [[CodeShareV alloc] init];
     v.type = ShareTypeText;
     XLshare *share = [[XLshare alloc]init];

@@ -252,6 +252,7 @@
     }];
     
     self.pho = [[UITextField alloc] init];
+    self.pho.userInteractionEnabled = NO;
     [self.imgback addSubview:self.pho];
     self.pho.text = [User UserOb].mobile;
     self.pho.font = [UIFont systemFontOfSize:FONT];

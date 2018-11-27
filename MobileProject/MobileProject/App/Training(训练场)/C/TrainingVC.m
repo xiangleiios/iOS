@@ -24,6 +24,8 @@
 @property (nonatomic, strong)AMapSearchAPI *search;
 @property (nonatomic , assign)CGFloat latitude;///纬度
 @property (nonatomic , assign)CGFloat longitude;///经度
+@property (nonatomic , strong)UIScrollView *scroll;
+@property (nonatomic , strong)XLView *backview;
 @end
 
 @implementation TrainingVC
@@ -78,11 +80,23 @@
 
 
 - (void)loadSubview{
-    UIView *v = [[UIView alloc] init];
-    [self.view addSubview:v];
-    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.scroll = [[UIScrollView alloc] init];
+    [self.view addSubview:self.scroll];
+    [self.scroll mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+        make.bottom.mas_equalTo(self.view).mas_offset(-KFit_H6S(150));
+    }];
+    
+    self.backview = [[XLView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    [self.scroll addSubview:self.backview];
+    
+    
+    UIView *v = [[UIView alloc] init];
+    [self.backview addSubview:v];
+    [v mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(630));
     }];
     
@@ -164,9 +178,9 @@
     
     XLView *bg = [[XLView alloc] init];
     bg.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:bg];
+    [self.backview addSubview:bg];
     [bg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.backview);
         make.top.mas_equalTo(v.mas_bottom).mas_offset(-1);
         make.height.mas_equalTo(KFit_H6S(450));
     }];
@@ -194,6 +208,11 @@
             }
         }
     }
+    [bg mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo([bg getLayoutCellHeightWithFlex:KFit_H6S(20)]);
+    }];
+    self.backview.frame = CGRectMake(0, 0, SCREEN_WIDTH, [self.backview getLayoutCellHeightWithFlex:KFit_H6S(60)]);
+    self.scroll.contentSize = CGSizeMake(0, CGRectGetMaxY(self.backview.frame));
 }
 - (void)butselect:(UIButton *)senter{
     senter.selected = !senter.selected;
@@ -219,6 +238,10 @@
 - (void)toSave{
     if (self.name.subfield.text.length < 1) {
         [MBProgressHUD showMsgHUD:@"请填写训练场名称"];
+        return;
+    }
+    if (self.name.subfield.text.length > 10) {
+        [MBProgressHUD showMsgHUD:@"训练场名称不能大于10个字符"];
         return;
     }
     if (self.address.subfield.text.length < 1) {

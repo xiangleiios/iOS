@@ -131,7 +131,7 @@
     
     //15658458745   18810395609  13154898589  15512341234  15007125433  17764076879 13100704044
 #ifdef DEBUG
-    self.pho.text = @"17764076879";
+    self.pho.text = @"13100704044";
     self.password.text = @"123456";
 #else
     
@@ -240,6 +240,11 @@
         [MBProgressHUD hideLoadingHUD];
         if ([responseObject[@"code"] integerValue] == 200) {
             XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"登录成功" SuccessOrFailure:YES];
+            XLSingleton *sing = [XLSingleton singleton];
+            [sing.dateArr removeAllObjects];
+            [sing.practiceArr removeAllObjects];
+            [sing.timeArr removeAllObjects];
+            [sing.courseArr removeAllObjects];
             [alert showPrompt];
             [XLSingleton singleton].scanPhotoIp =responseObject[@"urliIp"];
             User *user=[User UserOb];

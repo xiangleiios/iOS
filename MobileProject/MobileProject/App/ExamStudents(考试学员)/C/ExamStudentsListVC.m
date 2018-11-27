@@ -76,7 +76,13 @@
     [self loadRefreshData];
 }
 - (void)loadRefreshData{
-    NSString *url = POSTTeamStuStateList;
+    NSString *url;
+    if (USERFZR) {
+        url = POSTTeamStuStateList;
+    }else{
+        url = POSTCoachTeamStuStateList;
+    }
+    
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         if (self.pageNum==1) {

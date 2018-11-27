@@ -23,4 +23,6 @@
 - (void)shareMiniProgramToPlatformType:(UMSocialPlatformType)platformType;
 /// 图片分享
 - (void)shareImageToPlatformType:(UMSocialPlatformType)platformType;
+
++ (void)ShareSuccess;
 @end

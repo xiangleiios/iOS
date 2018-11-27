@@ -13,6 +13,7 @@
 #import <CommonCrypto/CommonDigest.h>//MD5加密导入框架
 @interface MyInfoVC ()<UIImagePickerControllerDelegate>
 //@property (nonatomic , strong)XLMyNewsFunction *headerview;
+@property (nonatomic , strong)XLInformationV *name;
 @property (nonatomic , strong)UIImageView *HeadPortrait;
 @end
 
@@ -64,18 +65,18 @@
         make.height.mas_equalTo(1);
     }];
     
-    XLInformationV *name;
+//    XLInformationV *name;
     if (USERFZR) {
-        name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile];
+        _name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile];
     }else{
-        name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile TSSubTitle:@"" Must:NO Click:YES];
-        name.senterBlock = ^{
+        _name = [[XLInformationV alloc] informationWithTitle:@"登录账户" SubTitle:[User UserOb].mobile TSSubTitle:@"" Must:NO Click:YES];
+        _name.senterBlock = ^{
             ChangePhoVC *vc = [[ChangePhoVC alloc] init];
             [self.navigationController pushViewController:vc animated:YES];
         };
     }
-    [self.view addSubview:name];
-    [name mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.view addSubview:_name];
+    [_name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(lb.mas_bottom);
         make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(KFit_H6S(90));
@@ -88,13 +89,16 @@
         [self.navigationController pushViewController:vc animated:YES];
     };
     [mima mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(name.mas_bottom);
+        make.top.mas_equalTo(_name.mas_bottom);
         make.left.right.mas_equalTo(self.view);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
     
 }
-
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    _name.subfield.text = [User UserOb].mobile;
+}
 - (void)loadfunctionbut{
     UIButton *next = [[UIButton alloc] init];
     [self.view addSubview:next];
@@ -212,7 +216,7 @@
 #pragma mark -相册代理
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     KKLog(@"%@    ----- %@",picker,info);
-    [self uploadPictures:info[UIImagePickerControllerOriginalImage]];
+    [self uploadPictures:info[UIImagePickerControllerEditedImage]];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
@@ -250,7 +254,15 @@
 
 
 - (void)chengHeader:(NSString *)img{
-    [FMNetworkHelper fm_request_postWithUrlString:[NSString stringWithFormat:POSTUpdateTeamUserHeadImg,img] isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+    NSString *url;
+    NSDictionary *dic;
+    if (USERFZR) {
+        url = [NSString stringWithFormat:POSTUpdateTeamUserHeadImg,img];
+    }else{
+        url = POSTUpdateCoach;
+        dic = @{@"headPic":img};
+    }
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
             NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];

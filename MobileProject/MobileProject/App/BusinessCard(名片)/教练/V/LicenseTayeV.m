@@ -40,7 +40,8 @@
     [redlb mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).mas_offset(KFit_W6S(30));
         make.top.mas_equalTo(self).mas_offset(KFit_H6S(35));
-        make.width.height.mas_equalTo(KFit_W6S(20));
+        make.width.mas_equalTo(KFit_W6S(20));
+        make.height.mas_equalTo(KFit_W6S(30));
     }];
     UILabel *titleLable = [[UILabel alloc] init];
     [self addSubview:titleLable];
@@ -68,6 +69,7 @@
         }
         [but setTitle:arrone[i] forState:UIControlStateNormal];
         [but setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(17)];
         but.titleEdgeInsets = UIEdgeInsetsMake(0, KFit_W6S(15), 0, 0);
         [but setImage:[UIImage imageNamed:@"button_nor"] forState:UIControlStateNormal];
         [but setImage:[UIImage imageNamed:@"button_down"] forState:UIControlStateSelected];

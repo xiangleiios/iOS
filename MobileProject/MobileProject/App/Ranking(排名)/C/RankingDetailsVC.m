@@ -15,6 +15,7 @@
 #import "InvitationCoachVC.h"
 #import "PracticeCarListVC.h"
 #import "StudentsVC.h"
+#import "BranchSchoolListVC.h"
 @interface RankingDetailsVC ()
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backView;
@@ -26,6 +27,7 @@
 @property (nonatomic , strong)TaskV *v6;
 @property (nonatomic , strong)TaskV *v7;
 @property (nonatomic , strong)TaskV *v8;
+@property (nonatomic , strong)UILabel *jifen;
 @end
 
 @implementation RankingDetailsVC
@@ -83,10 +85,10 @@
     NSString *str;
     if (USERFZR) {
         
-        str = [NSString stringWithFormat:@"排名:%@排名第%@,%@排名%@",_model.city,_model.schoolrankingCount,_model.deptFatherName,_model.teamSchoolrankingCount];
+        str = [NSString stringWithFormat:@"排名:%@排名第%@,%@排名%@",_model.city?_model.city:@"",_model.schoolrankingCount,_model.deptFatherName,_model.teamSchoolrankingCount];
     }else{
 //        NSString *team = [[XLCache singleton].teamCode_title firstObject];
-        str = [NSString stringWithFormat:@"排名:%@排名第%@,%@排名%@",_model.city,_model.schoolrankingCount,_model.originalDeptName,_model.teamSchoolrankingCount];
+        str = [NSString stringWithFormat:@"排名:%@排名第%@,%@排名%@",_model.city?_model.city:@"",_model.schoolrankingCount,_model.originalDeptName,_model.teamSchoolrankingCount];
     }
     
     NSMutableAttributedString *attri_str = [[NSMutableAttributedString alloc] initWithString:str];
@@ -119,6 +121,7 @@
     }];
     
     UILabel *fen = [[UILabel alloc] init];
+    self.jifen = fen;
     [self.backView addSubview:fen];
     fen.textColor = kColor_N(0, 100, 233);
     fen.text = [NSString stringWithFormat:@"%@积分",_model.compScore];
@@ -282,14 +285,7 @@
     
     //    SCORE_1
     
-    _v1.but.selected = [self.model.rankingMap[@"SCORE_1"] boolValue];
-    _v2.but.selected = [self.model.rankingMap[@"SCORE_2"] boolValue];
-    _v3.but.selected = [self.model.rankingMap[@"SCORE_3"] boolValue];
-    _v4.but.selected = [self.model.rankingMap[@"SCORE_4"] boolValue];
-    _v5.but.selected = [self.model.rankingMap[@"SCORE_5"] boolValue];
-    _v6.but.selected = [self.model.rankingMap[@"SCORE_6"] boolValue];
-    _v7.but.selected = [self.model.rankingMap[@"SCORE_7"] boolValue];
-    _v8.but.selected = [self.model.rankingMap[@"SCORE_9"] boolValue];
+    
     
 }
 
@@ -297,12 +293,22 @@
     switch (senter.tag) {
         case 1:
             if (!self.v1.but.selected) {
-                [self loadCoachInfoToVC];
+                if (USERFZR) {
+                    BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [self loadCoachInfoToVC];
+                }
             }
             break;
         case 2:
             if (!self.v2.but.selected) {
-                [self loadCoachInfoToVC];
+                if (USERFZR) {
+                    BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [self loadCoachInfoToVC];
+                }
             }
             break;
         case 3:
@@ -359,6 +365,7 @@
         dic = @{@"userId":_model.deptId};
     }else{
         url = POSTRankingSignBoardCoach;
+        dic = @{@"userId":[User UserOb].userId};
     }
     
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
@@ -366,6 +373,7 @@
         if (kResponseObjectStatusCodeIsEqual(200)) {
             [MBProgressHUD showMsgHUD:@"签到成功"];
             self.v8.but.selected = YES;
+            [self reloadData];
         }
     } failureBlock:^(NSError *error) {
         KKLog(@"%@", error);
@@ -406,5 +414,48 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self reloadData];
+}
+
+- (void)setModel:(FMMainModel *)model{
+    _model = model;
+    self.jifen.text = [NSString stringWithFormat:@"%@积分",_model.compScore];
+    _v1.but.selected = [self.model.rankingMap[@"SCORE_1"] boolValue];
+    _v2.but.selected = [self.model.rankingMap[@"SCORE_2"] boolValue];
+    _v3.but.selected = [self.model.rankingMap[@"SCORE_3"] boolValue];
+    _v4.but.selected = [self.model.rankingMap[@"SCORE_4"] boolValue];
+    _v5.but.selected = [self.model.rankingMap[@"SCORE_5"] boolValue];
+    _v6.but.selected = [self.model.rankingMap[@"SCORE_6"] boolValue];
+    _v7.but.selected = [self.model.rankingMap[@"SCORE_7"] boolValue];
+    _v8.but.selected = [self.model.rankingMap[@"SCORE_9"] boolValue];
+    
+    
+}
+
+- (void)reloadData{
+    NSString *url;
+    if (USERFZR) {
+        url = [NSString stringWithFormat:POSTRankingTeamSchoolRankingDetails,self.deptId];
+    }else{
+        url = POSTRankingCoachRankings;
+    }
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (USERFZR) {
+            self.model=[FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+        }else{
+            self.model=[FMMainModel mj_objectWithKeyValues:responseObject[@"list"]];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 
 @end

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RankingDetailsVC : FMBaseViewController
 @property (nonatomic ,strong)FMMainModel *model;
+@property (nonatomic , strong)NSString *deptId;
 @end
 
 NS_ASSUME_NONNULL_END

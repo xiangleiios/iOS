@@ -199,7 +199,7 @@
 #pragma mark -相册代理
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     KKLog(@"%@    ----- %@",picker,info);
-    [self uploadPictures:info[UIImagePickerControllerOriginalImage]];
+    [self uploadPictures:info[UIImagePickerControllerEditedImage]];
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 

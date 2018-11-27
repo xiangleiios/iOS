@@ -35,7 +35,7 @@
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(-KFit_H6S(25));
         make.height.mas_equalTo(KFit_H6S(30));
-        make.width.mas_equalTo(KFit_W6S(210));
+        make.width.mas_equalTo(KFit_W6S(310));
     }];
     
     self.time = [[UILabel alloc] init];
@@ -73,6 +73,13 @@
 - (void)setModel:(FMIntegralModel *)model{
     self.title.text = model.scoreName;
     self.time.text = model.dateTime;
-    self.fen.text = model.score;
+    if ([model.score intValue] > 0) {
+        self.fen.text = [NSString stringWithFormat:@"+%@",model.score];
+        self.fen.textColor = kColor_N(49, 187, 75);
+    }else{
+        
+        self.fen.text = model.score;
+        self.fen.textColor = [UIColor redColor];
+    }
 }
 @end

@@ -237,7 +237,12 @@
 }
 
 - (void)loadRefreshData{
-    NSString *url = POSTTeamStuStateList;
+    NSString *url;
+    if (USERFZR) {
+        url = POSTTeamStuStateList;
+    }else{
+        url = POSTCoachTeamStuStateList;
+    }
     NSDictionary *dic = @{@"progress":@"1"};
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);

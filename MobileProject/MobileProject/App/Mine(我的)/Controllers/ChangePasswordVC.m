@@ -148,7 +148,14 @@
         return;
     }
     
-    NSString *url=[NSString stringWithFormat:@"%@?userId=%@&password=%@&newPass=%@",POSTEditPwd,[User UserOb].userId,odl,passwordo];
+    NSString *url;
+    
+    if (USERFZR) {
+        url=[NSString stringWithFormat:@"%@?userId=%@&password=%@&newPass=%@",POSTEditPwd,[User UserOb].userId,odl,passwordo];
+    }else{
+        url=[NSString stringWithFormat:@"%@?userId=%@&password=%@&newPass=%@",POSTEditPwdCoach,[User UserOb].userId,odl,passwordo];
+    }
+    
     [MBProgressHUD showLoadingHUD:@"正在修改"];
     
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {

@@ -504,7 +504,9 @@
     [self.studentDic setObject:self.otherForms.referees.subfield.text forKey:@"recommender"];
     [self.studentDic setObject:self.otherForms.note.subfield.text forKey:@"remark"];
     //    [self.studentDic setObject:[NSString stringWithFormat:@"%ld",(long)self.otherForms.state.subfield.tag] forKey:@"isPay"];
-    
+    if (!USERFZR) {
+        [self.studentDic setObject:[User UserOb].userId forKey:@"coachId"];
+    }
     
     KKLog(@"%@",self.studentDic);
     NSString *url = POSTStudenteamAdd;

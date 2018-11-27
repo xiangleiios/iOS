@@ -247,6 +247,9 @@
 }
 
 - (void)toShare{
+    XLSingleton *sing = [XLSingleton singleton];
+    sing.type = 1;
+    sing.shareId = self.model.idid;
     CodeShareV *v = [[CodeShareV alloc] init];
     v.type = ShareTypeText;
     XLshare *share = [[XLshare alloc]init];

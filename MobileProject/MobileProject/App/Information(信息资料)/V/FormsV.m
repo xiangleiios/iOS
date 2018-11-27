@@ -25,6 +25,7 @@
         kWeakSelf(self)
         self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:@"" TSSubTitle:@"请输入姓名" Must:YES Click:NO];
         self.gender = [[XLInformationV alloc] informationWithTitle:@"性别" SubTitle:@"" TSSubTitle:@"请选择性别" Must:YES Click:YES];
+        self.gender.red.textColor = [UIColor blackColor];
         self.gender.senterBlock = ^{
             [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"性别" DataSource:[XLCache singleton].sys_user_sex_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
@@ -34,6 +35,7 @@
             }];
         };
         self.ethnic = [[XLInformationV alloc] informationWithTitle:@"民族" SubTitle:@"" TSSubTitle:@"请选择民族" Must:YES Click:YES];
+        self.ethnic.red.textColor = [UIColor blackColor];
         self.ethnic.senterBlock = ^{
             [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"民族" DataSource:[XLCache singleton].ethnicTitleArr DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
@@ -43,6 +45,7 @@
             }];
         };
         self.birthday = [[XLInformationV alloc] informationWithTitle:@"出生年月日" SubTitle:@"" TSSubTitle:@"请选择出生年月日" Must:YES Click:YES];
+        self.birthday.red.textColor = [UIColor blackColor];
         self.birthday.senterBlock = ^{
             [weakself endEditing:YES];
             [CGXPickerView showDatePickerWithTitle:@"出生年月日" DateType:UIDatePickerModeDate DefaultSelValue: weakself.birthday.subfield.text MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
@@ -51,7 +54,9 @@
             }];
         };
         self.address = [[XLInformationV alloc] informationWithTitle:@"住址" SubTitle:@"" TSSubTitle:@"请填写地址" Must:YES Click:NO];
+        self.address.red.textColor = [UIColor blackColor];
         self.IdNumber = [[XLInformationV alloc] informationWithTitle:@"身份证号码" SubTitle:@"" TSSubTitle:@"请填写身份证号" Must:YES Click:NO];
+        self.IdNumber.red.textColor = [UIColor blackColor];
         [self addSubview:self.name];
         [self addSubview:self.gender];
         [self addSubview:self.ethnic];
@@ -227,6 +232,7 @@
         self.phone = [[XLInformationV alloc] informationWithTitle:@"手机号" SubTitle:@"" TSSubTitle:@"请输入手机号" Must:YES Click:NO];
         
         self.hukou = [[XLInformationV alloc] informationWithTitle:@"本外地" SubTitle:@"" TSSubTitle:@"" Must:YES Click:YES];
+        self.hukou.red.textColor = [UIColor blackColor];
         self.hukou.senterBlock = ^{
             [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"本外地" DataSource:[XLCache singleton].student_is_enter_type_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
@@ -237,6 +243,7 @@
         };
         
         self.carType = [[XLInformationV alloc] informationWithTitle:@"车型" SubTitle:@"" TSSubTitle:@"" Must:YES Click:YES];
+        self.carType.red.textColor = [UIColor blackColor];
         self.carType.senterBlock = ^{
             [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"车型" DataSource:[XLCache singleton].student_license_type_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
@@ -250,6 +257,7 @@
 //        self.price = [[XLInformationV alloc] informationWithTitle:@"报考价格" SubTitle:@"" TSSubTitle:@"请输入报名金额" Must:NO Click:NO];
         
         self.school = [[XLInformationV alloc] informationWithTitle:@"报考驾校" SubTitle:@"" TSSubTitle:@"请选择报考驾校" Must:YES Click:YES];
+        self.school.red.textColor = [UIColor blackColor];
         self.school.senterBlock = ^{
             [weakself endEditing:YES];
             KKLog(@"%@",[XLCache singleton].teamCode_title);
@@ -262,6 +270,7 @@
         
         
         self.type = [[XLInformationV alloc] informationWithTitle:@"申请类型" SubTitle:@"" TSSubTitle:@"请选择申请类型" Must:YES Click:YES];
+        self.type.red.textColor = [UIColor blackColor];
         self.type.senterBlock = ^{
             [weakself endEditing:YES];
             [CGXPickerView showStringPickerWithTitle:@"申请类型" DataSource:[XLCache singleton].student_apply_type_title DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {

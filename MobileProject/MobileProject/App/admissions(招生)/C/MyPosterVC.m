@@ -112,12 +112,16 @@
 
 - (void)making{
     PosterVC *vc = [[PosterVC alloc] init];
+    vc.type = 1;
     vc.url = POSTUserDetail;
     vc.model = self.model;
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark -调用分享
 - (void)toShare{
+    XLSingleton *sing = [XLSingleton singleton];
+    sing.type = 1;
+    sing.shareId = self.model.idid;
     CodeShareV *v = [[CodeShareV alloc] init];
     v.type = ShareTypeText;
     XLshare *share = [[XLshare alloc]init];

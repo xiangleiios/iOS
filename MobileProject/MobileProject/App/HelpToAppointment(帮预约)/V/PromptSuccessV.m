@@ -43,8 +43,9 @@
     [but mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.backview).mas_offset(KFit_H6S(60));
         make.centerX.mas_equalTo(self.backview);
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(270), KFit_H6S(50)));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(300), KFit_H6S(50)));
     }];
+    but.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [but setTitle:@"约课成功！" forState:UIControlStateNormal];
     [but setImage:[UIImage imageNamed:@"gouxuan_norcopy"] forState:UIControlStateNormal];
     

@@ -15,6 +15,7 @@
 #import "CommentsVC.h"
 #import "DrivingSchoolVC.h"
 #import "LMWebProgressLayer.h"
+#import "CoachListVc.h"
 @interface BranchSchoolWebVC ()<UIWebViewDelegate,AppJSObjectDelegate>
 {
     LMWebProgressLayer *_progressLayer; ///< 网页加载进度条
@@ -157,6 +158,9 @@
 }
 
 - (void)share{
+    XLSingleton *sing = [XLSingleton singleton];
+    sing.type = 2;
+    sing.shareId = self.model.idid;
     CodeShareV *v = [[CodeShareV alloc] init];
     v.type = ShareTypeText;
     XLshare *share = [[XLshare alloc]init];
@@ -196,6 +200,11 @@
     context[@"jsObject"][@"more"] = ^() {
         NSLog(@"+++++++Begin Log+++++++");
         [self toCommentsVC];
+        NSLog(@"-------End Log-------");
+    };
+    context[@"jsObject"][@"getCoachList"] = ^() {
+        NSLog(@"+++++++Begin Log+++++++");
+        [self toCoachListVC];
         NSLog(@"-------End Log-------");
     };
     
@@ -246,6 +255,11 @@
 - (void)toCommentsVC{
     CommentsVC *vc = [[CommentsVC alloc] init];
     vc.model = self.model;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)toCoachListVC{
+    CoachListVc *vc = [[CoachListVc alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 /*
