@@ -137,9 +137,18 @@
         share.subTitle = self.model.content;
     }
     if (self.idid.length > 0) {
-        share.url = [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"share"];
+        if (USERFZR) {
+            share.url = [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"share",@"school"];
+        }else{
+            share.url = [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"share",@"coach"];
+        }
+        
     }else{
-        share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share"];
+        if (USERFZR) {
+            share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share",@"school"];
+        }else{
+            share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share",@"coach"];
+        }
     }
 //    share.url = [NSString stringWithFormat:HTMLMINGPIANFENXIANG,self.model.idid];
     v.share = share;
@@ -167,7 +176,12 @@
 }
 - (void)load{
 //    NSString *urls =  [NSString stringWithFormat:HTMLMINGPIAN,self.model.idid];
-    NSString *urls =  [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"app"];
+    NSString *urls;
+    if (USERFZR) {
+        urls =  [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"app",@"school"];
+    }else{
+        urls =  [NSString stringWithFormat:HTMLHAIBAO,self.idid,@"app",@"coach"];
+    }
 //    NSString *urls = @"http://192.168.0.120:8080/#/poster/index?id=60&type=app";
     KKLog(@"url :%@",urls);
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:urls]];

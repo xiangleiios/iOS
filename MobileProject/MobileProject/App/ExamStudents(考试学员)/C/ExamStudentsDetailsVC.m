@@ -246,11 +246,14 @@
     [self.backview addSubview:self.bukao];
     self.bukao.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     self.bukao.textAlignment = NSTextAlignmentRight;
-    self.bukao.text =[NSString stringWithFormat:@"%d",_model.failNum];
+    self.bukao.placeholder = @"请输入补考次数";
+    if (_model.failNum) {
+        self.bukao.text =[NSString stringWithFormat:@"%d",_model.failNum];
+    }
     [self.bukao mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(lbtwo);
         make.right.mas_equalTo(self.backview).mas_offset(-KFit_W6S(30));
-        make.size.mas_equalTo(CGSizeMake(KFit_W6S(100), KFit_H6S(40)));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(250), KFit_H6S(40)));
     }];
     
     UILabel *linefive = [[UILabel alloc] init];
@@ -289,6 +292,7 @@
     NSDictionary *dic = _model.student;
     FMMainModel *model = [FMMainModel mj_objectWithKeyValues:dic];
     vc.model = model;
+    vc.model.coachName = _model.coachName;
     [self.navigationController pushViewController:vc animated:YES];
 }
 - (void)chooseKM{
@@ -420,7 +424,7 @@
     NSString *url =POSTTeamStuStateEdit;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     [dic setObject:[NSString stringWithFormat:@"%ld",(long)self.state.tag] forKey:@"progress"];
-    [dic setObject:[self.studentlb.selectDataArr componentsJoinedByString:@","] forKey:@"stuTags"];
+    [dic setObject:[self.studentlb.selectDataArrNew componentsJoinedByString:@","] forKey:@"stuTags"];
     [dic setObject:self.bukao.text forKey:@"failNum"];
     [dic setObject:self.note.text forKey:@"memo"];
     [dic setObject:_model.idid forKey:@"id"];

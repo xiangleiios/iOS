@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view.
 }
 - (void)loadtable{
-    self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.table=[[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
     [self.view addSubview:self.table];
     [self.table mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
@@ -40,13 +40,19 @@
     }];
     self.table.delegate=self;
     self.table.dataSource=self;
-    
+//    if (@available(iOS 11.0, *)) {
+//        self.table.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+//    } else {
+//        // Fallback on earlier versions
+//        self.automaticallyAdjustsScrollViewInsets = NO;
+//    }
+
     //设置可编辑
     //    self.table.allowsMultipleSelectionDuringEditing = YES;
-    _table.tableFooterView = [UIView new];
+    
+//    _table.tableHeaderView = [UIView new];
     self.table.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.table.mj_header=[XLHeader headerWithRefreshingTarget:self refreshingAction:@selector(headerRefresh)];
-    //    self.table.mj_footer=[MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(footerRefresh)];
     _table.needPlaceholderView = YES;
     self.table.backgroundColor = kColor_N(240, 240, 240);
     __weak __typeof(self)weakSelf = self;
@@ -130,7 +136,13 @@
     return cell;
     
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    return [UIView new];
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return KFit_H6S(140);
 }
@@ -139,6 +151,24 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return KFit_H6S(140);
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(140))];
+    v.backgroundColor = kColor_N(240, 240, 240);
+    UILabel *lb = [[UILabel alloc] init];
+    lb.textAlignment = NSTextAlignmentCenter;
+    [v addSubview:lb];
+    lb.text = @"仅显示最近3个月的积分明细";
+    lb.textColor = ZTColor;
+    lb.font = [UIFont systemFontOfSize:kFit_Font6(15)];
+    [lb mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.width.mas_equalTo(v);
+        make.height.mas_equalTo(KFit_H6S(40));
+    }];
+    return v;
 }
 /*
 #pragma mark - Navigation

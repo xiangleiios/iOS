@@ -96,7 +96,7 @@
     }];
     
     self.img = [[UIImageView alloc] init];
-    self.img.backgroundColor = [UIColor redColor];
+//    self.img.backgroundColor = [UIColor redColor];
     [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(_model.imgUrl)]];
     [self.imgback addSubview:self.img];
     
@@ -184,6 +184,7 @@
     self.price.delegate = self;
     self.price.keyboardType = UIKeyboardTypeNumberPad;
     self.price.font = [UIFont systemFontOfSize:FONT];
+    [self.price addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.imgback addSubview:self.price];
     [self.price mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.mas_equalTo(lbtwo);
@@ -449,7 +450,13 @@
 - (void)making{
     self.mobanChoose.hidden = YES;
     self.jiaxiaoChoose.hidden = YES;
-    NSString *str = [NSString stringWithFormat:XIAOCHENGXUEWM,[NSString stringWithFormat:@"%ld",(long)self.jiaxia.tag]];
+    NSString *str;
+    if (USERFZR) {
+        str = [NSString stringWithFormat:XIAOCHENGXUEWMschool,[NSString stringWithFormat:@"%ld",(long)self.jiaxia.tag]];
+    }else{
+        str = [NSString stringWithFormat:XIAOCHENGXUEWM,[NSString stringWithFormat:@"%ld",(long)self.jiaxia.tag]];
+    }
+    
 //    UIImage *logImage = [UIImage LX_ImageOfQRFromURL:str codeSize:KFit_W6S(120)];
     UIImage *logImage =[UIImage LX_ImageOfQRFromURL:str codeSize:self.QrCode.width logoName:@"erwim_ewm" radius:KFit_W6S(40) borderWidth:3 borderColor:[UIColor whiteColor]];
     [self.QrCode setImage:logImage];
@@ -563,5 +570,35 @@
     }
     return res;
 }
+
+
+- (void)textFieldDidChange:(UITextField *)textField{
+    UITextRange *selectedRange = textField.markedTextRange;
+    UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+    if (!position) {
+        // 没有高亮选择的字
+        // 1. 过滤非汉字、字母、数字字符
+        
+        // 2. 截取
+        if (textField.text.length >= 5) {
+            textField.text = [textField.text substringToIndex:5];
+            
+        }
+        
+    } else {
+        // 有高亮选择的字 不做任何操作
+        
+    }
+    
+}
+// 过滤字符串中的非汉字、字母、数字
+- (NSString *)filterCharactor:(NSString *)string withRegex:(NSString *)regexStr{
+    NSString *filterText = string; NSError *error = NULL;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regexStr options:NSRegularExpressionCaseInsensitive error:&error];
+    NSString *result = [regex stringByReplacingMatchesInString:filterText options:NSMatchingReportCompletion range:NSMakeRange(0, filterText.length) withTemplate:@""];
+    return result;
+    
+}
+    
 
 @end

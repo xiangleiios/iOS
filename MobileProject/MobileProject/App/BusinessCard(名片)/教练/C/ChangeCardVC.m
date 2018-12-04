@@ -566,6 +566,7 @@
         if ([responseObject[@"code"] intValue] == 200) {
             XLAlertView *alert = [[XLAlertView alloc] initWithMessage:@"保存成功" SuccessOrFailure:YES];
             [alert showPrompt];
+            [self.navigationController popViewControllerAnimated:YES];
         }else{
             [MBProgressHUD showMsgHUD:responseObject[@"message"]];
         }

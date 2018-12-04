@@ -162,8 +162,13 @@
 #define HTMLMINGPIANJIAXIAO KURL(@"plat/#/school/detail?type=app&id=%@")
 #define HTMLMINGPIANFENXIANGJIAXIAO KURL(@"plat/#/school/detail?type=share&id=%@")
 
-#pragma mark - 二维码
+#pragma mark - 二维码 - 教练
 #define XIAOCHENGXUEWM KURL(@"wechart/pages/index/detail/detail?id=%@")
+
+
+#pragma mark - 二维码 - 驾校
+#define XIAOCHENGXUEWMschool KURL(@"wechart/pages/index/school/school?id=%@")
+
 
 #pragma mark - 今日咨询学员
 #define POSTCensiusList KURL(@"app/census/censiusList")
@@ -183,7 +188,7 @@
 #define POSTPostAdd KURL(@"app/post/add")
 
 #pragma mark - h图文海报H5
-#define HTMLHAIBAO KURL(@"plat/#/poster/index?id=%@&type=%@")
+#define HTMLHAIBAO KURL(@"plat/#/poster/index?id=%@&type=%@&role=%@")
 
 #pragma mark - 删除海报
 #define POSTPostRemove KURL(@"app/post/remove?id=%@")

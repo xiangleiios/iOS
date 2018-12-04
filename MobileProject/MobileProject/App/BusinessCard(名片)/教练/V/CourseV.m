@@ -232,6 +232,10 @@
         [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
         return;
     }
+    if (self.price.subfield.text.length > 10) {
+        [MBProgressHUD showMsgHUD:@"课程价格不能超过10位字符"];
+        return;
+    }
     [MBProgressHUD showLoadingHUD:@"正在修改"];
     NSString *url = POSTClassTypeEdit;
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -276,6 +280,10 @@
     }
     if (![XLCommonUse isPureNum:self.price.subfield.text]) {
         [MBProgressHUD showMsgHUD:@"课程价格必须为数字"];
+        return;
+    }
+    if (self.price.subfield.text.length > 10) {
+        [MBProgressHUD showMsgHUD:@"课程价格不能超过10位字符"];
         return;
     }
     if (self.type.length <= 0) {

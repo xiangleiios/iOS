@@ -12,6 +12,7 @@
 @interface ReservationDetailsVC ()
 @property (nonatomic ,strong)XLInformationV *KE;
 @property (nonatomic ,strong)XLInformationV *KS;
+@property (nonatomic , strong)UILabel *studentType;
 @end
 
 @implementation ReservationDetailsVC
@@ -58,7 +59,7 @@
     UILabel *type = [[UILabel alloc] init];
     [v addSubview:type];
     type.textColor = [UIColor whiteColor];
-    type.text = @"光谷驾校";
+    _studentType = type;
     type.textAlignment = NSTextAlignmentCenter;
     type.layer.cornerRadius = kFit_Font6(3);
     type.layer.masksToBounds = YES;
@@ -72,23 +73,7 @@
         make.width.mas_equalTo(KFit_W6S(160));
     }];
     
-    switch ([_model.type intValue]) {
-        case 0:
-            type.text = @"等待练车";
-            break;
-        case 1:
-            type.text = @"练车中";
-            break;
-        case 2:
-            type.text = @"已完成";
-            break;
-        case 3:
-            type.text = @"已取消";
-            break;
-            
-        default:
-            break;
-    }
+    
     
     
     UILabel *didian = [[UILabel alloc] init];
@@ -228,6 +213,23 @@
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
+            switch ([responseObject[@"type"] intValue]) {
+                case 0:
+                    _studentType.text = @"等待练车";
+                    break;
+                case 1:
+                    _studentType.text = @"练车中";
+                    break;
+                case 2:
+                    _studentType.text = @"已完成";
+                    break;
+                case 3:
+                    _studentType.text = @"已取消";
+                    break;
+                    
+                default:
+                    break;
+            }
             NSArray *arr = responseObject[@"keMuCount"];
             if (arr) {
                 for (NSDictionary *dic in arr) {

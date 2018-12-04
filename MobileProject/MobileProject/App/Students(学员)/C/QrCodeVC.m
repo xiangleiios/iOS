@@ -169,8 +169,13 @@
     
     UIImageView *cordimg = [[UIImageView alloc] init];
     [backv addSubview:cordimg];
-
-    NSString *str = [NSString stringWithFormat:XIAOCHENGXUEWM,model.idid];
+    NSString *str;
+    if (USERFZR) {
+        str = [NSString stringWithFormat:XIAOCHENGXUEWMschool,model.idid];
+    }else{
+        str = [NSString stringWithFormat:XIAOCHENGXUEWM,model.idid];
+    }
+    
 //    [cordimg setImage:[UIImage getQRWithString:str size:KFit_W6S(400) foreColor:[UIColor blackColor] logoImage:[UIImage imageNamed:@"erwim_ewm"] logoRadius:KFit_W6S(40)]];
     [cordimg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(backv);
@@ -189,6 +194,9 @@
 }
 
 - (void)loadRefreshData{
+    if (USERFZR) {
+        
+    
     NSString *url = POSTEnrollInfoList;
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
@@ -207,7 +215,26 @@
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
     }];
-    //    POSTTeamSchoolList
+    }else{
+        User *uer = [User UserOb];
+        KKLog(@"%@",uer.userId);
+        NSString *url = [NSString stringWithFormat:POSTCoachEnrollInfo,[User UserOb].userId];
+        [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+            KKLog(@"%@",responseObject);
+            if (kResponseObjectStatusCodeIsEqual(200)) {
+                FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+                [self.dataArr addObject:model];
+                
+            }
+            [self loadsub];
+        } failureBlock:^(NSError *error) {
+            KKLog(@"%@", error);
+            
+        } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+            
+        }];
+    }
+    
 }
 
 

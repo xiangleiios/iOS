@@ -37,6 +37,12 @@
     }
     return _selectDataArr;
 }
+- (NSMutableArray *)selectDataArrNew{
+    if (_selectDataArrNew == nil) {
+        _selectDataArrNew = [NSMutableArray array];
+    }
+    return _selectDataArrNew;
+}
 - (void)laodsubview{
     XLInformationV *lb = [[XLInformationV alloc] informationStudentsWithTitle:@"学员状态"];
     [self addSubview:lb];
@@ -57,8 +63,10 @@
     float w = (SCREEN_WIDTH - KFit_W6S(100))/3;
     float h = KFit_H6S(40);
     int j = 0;
+    NSMutableArray *arr = [NSMutableArray array];
     for (int i = 0; i < self.dataArr.count; i++) {
         TageModel *model = self.dataArr[i];
+        [arr addObject:model.tagTitle];
         UIButton *but = [[UIButton alloc] initWithFrame:CGRectMake(KFit_W6S(30) + (i % 3)*(w + KFit_W6S(20)),KFit_W6S(30) + (i / 3)*(h + KFit_H6S(20)), w, h)];
         [self.backview addSubview:but];
         but.layer.borderWidth = 0.3;
@@ -75,6 +83,7 @@
         [but addTarget:self action:@selector(butSelect:) forControlEvents:UIControlEventTouchUpInside];
         if ([self.selectDataArr containsObject:model.tagTitle]) {
             but.selected = YES;
+            [self.selectDataArrNew addObject:model.tagTitle];
         }
         if (i >= 3) {
             UIButton *delectbut = [[UIButton alloc] initWithFrame:CGRectMake(w - KFit_W6S(10) + (i % 3)*(w + KFit_W6S(20)),(i / 3)*(h + KFit_H6S(20)) - KFit_H6S(10), KFit_W6S(80), KFit_W6S(80))];
@@ -86,6 +95,7 @@
         
         j++;
     }
+    
     self.addBut = [[UIButton alloc] init];
     self.addBut.layer.borderWidth = 0.3;
     self.addBut.layer.borderColor = kColor_N(0, 110, 230).CGColor;
@@ -110,8 +120,10 @@
     TageModel *model = self.dataArr[senter.tag];
     if (senter.selected) {
         [self.selectDataArr addObject:model.tagTitle];
+        [self.selectDataArrNew addObject:model.tagTitle];
     }else{
         [self.selectDataArr removeObject:model.tagTitle];
+        [self.selectDataArrNew removeObject:model.tagTitle];
     }
 }
 - (void)deleteBut:(UIButton *)senter{

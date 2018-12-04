@@ -17,7 +17,7 @@
 #import "UploadPicturesV.h"
 #import "SchoolLable.h"
 #import "GDSearchMapVC.h"
-
+#import "TSView.h"
 #define BUT_W KFit_W6S(150)
 @interface ChangeCardHeadVC ()<UIImagePickerControllerDelegate,GDSearchMapVCDelegate,AMapSearchDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
@@ -273,7 +273,7 @@
         make.height.mas_equalTo(KFit_H6S(180));
     }];
     
-    XLInformationV *xc =[[XLInformationV alloc] informationWithTitle:@"宣传图" Subtitle:@"最多可上传1张" Must:YES];
+    XLInformationV *xc =[[XLInformationV alloc] informationWithTitle:@"分校封面" Subtitle:@"最多可上传1张" Must:YES];
     [self.backview addSubview:xc];
     [xc mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.schoolLb.mas_bottom).mas_offset(KFit_H6S(20));
@@ -290,12 +290,20 @@
         make.top.mas_equalTo(xc.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(210));
     }];
-
+    
+    TSView *lbone = [[TSView alloc] init];
+    [self.backview addSubview:lbone];
+    lbone.tslb.text = @"可上传分校门头，品牌logo等照片";
+    [lbone mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(80));
+        make.top.mas_equalTo(self.xuanChuan.mas_bottom).mas_offset(-KFit_H6S(10));
+    }];
     
     _environment = [[XLInformationV alloc] informationWithTitle:@"教学环境" Subtitle:@"最多可上传9张" Must:YES];
     [self.backview addSubview:_environment];
     [_environment mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.xuanChuan.mas_bottom).mas_offset(KFit_H6S(20));
+        make.top.mas_equalTo(lbone.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
@@ -309,12 +317,20 @@
         make.top.mas_equalTo(_environment.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(210));
     }];
+    TSView *lbtwo = [[TSView alloc] init];
+    [self.backview addSubview:lbtwo];
+    lbtwo.tslb.text = @"可上传分校门头，品牌logo等照片";
+    [lbtwo mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(80));
+        make.top.mas_equalTo(self.jiaoXueHuanJing.mas_bottom).mas_offset(-KFit_H6S(10));
+    }];
     
     
     XLInformationV *zz =[[XLInformationV alloc] informationWithTitle:@"驾校资质" Subtitle:@"最多可上传3张" Must:NO];
     [self.backview addSubview:zz];
     [zz mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.jiaoXueHuanJing.mas_bottom).mas_offset(KFit_H6S(20));
+        make.top.mas_equalTo(lbtwo.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
@@ -327,12 +343,21 @@
         make.top.mas_equalTo(zz.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(210));
     }];
+    TSView *lbthree = [[TSView alloc] init];
+    [self.backview addSubview:lbthree];
+    lbthree.tslb.text = @"可上传驾校营业执照或其他资质图等照片";
+    [lbthree mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(80));
+        make.top.mas_equalTo(self.jiaoXueZiZhi.mas_bottom).mas_offset(-KFit_H6S(10));
+    }];
+    
     
     
     XLInformationV *pp =[[XLInformationV alloc] informationWithTitle:@"品牌认证" Subtitle:@"最多可上传3张" Must:NO];
     [self.backview addSubview:pp];
     [pp mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.jiaoXueZiZhi.mas_bottom).mas_offset(KFit_H6S(20));
+        make.top.mas_equalTo(lbthree.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
@@ -345,11 +370,20 @@
         make.top.mas_equalTo(pp.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(210));
     }];
+    TSView *lbfour = [[TSView alloc] init];
+    [self.backview addSubview:lbfour];
+    lbfour.tslb.text = @"可上传驾校品牌授权(加盟),品牌注册(连锁)等照片";
+    [lbfour mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(80));
+        make.top.mas_equalTo(self.jiaoXuePingPai.mas_bottom).mas_offset(-KFit_H6S(10));
+    }];
+    
     
     XLInformationV *ry =[[XLInformationV alloc] informationWithTitle:@"驾校荣誉" Subtitle:@"最多可上传3张" Must:NO];
     [self.backview addSubview:ry];
     [ry mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.jiaoXuePingPai.mas_bottom).mas_offset(KFit_H6S(20));
+        make.top.mas_equalTo(lbfour.mas_bottom).mas_offset(KFit_H6S(20));
         make.left.right.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
@@ -363,6 +397,14 @@
         make.height.mas_equalTo(KFit_H6S(210));
     }];
     
+    TSView *lbfire = [[TSView alloc] init];
+    [self.backview addSubview:lbfire];
+    lbfire.tslb.text = @"可上传驾校获奖证书、锦旗等照片";
+    [lbfire mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.backview);
+        make.height.mas_equalTo(KFit_H6S(80));
+        make.top.mas_equalTo(self.jiaoXueRongYu.mas_bottom).mas_offset(-KFit_H6S(10));
+    }];
     
 }
 
@@ -550,7 +592,7 @@
         return;
     }
     if (self.xuanChuan.dataArr.count < 1) {
-        [MBProgressHUD showMsgHUD:@"请上传宣传图"];
+        [MBProgressHUD showMsgHUD:@"请上传分校封面"];
         return;
     }
     if (self.schoolLb.dataArr.count < 1) {

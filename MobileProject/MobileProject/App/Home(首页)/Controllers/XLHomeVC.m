@@ -30,6 +30,7 @@
 #import "BranchSchoolListVC.h"
 #import "CoachListVc.h"
 #import "BusinessCardVC.h"
+#import "InvitationCoachVC.h"
 @interface XLHomeVC ()<SDCycleScrollViewDelegate,FMAskZhengViewDelegate,PagingButtonViewDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
@@ -128,9 +129,9 @@
     _banner.titleLabelTextFont = [UIFont systemFontOfSize:kFit_Font6(15)];
     _banner.titleLabelHeight = kFit_Font6(40);
     if (USERFZR) {
-        _banner.localizationImageNamesGroup = @[@"banner",@"banner2",@"banner3"];
+        _banner.localizationImageNamesGroup = @[@"banner",@"banner2",@"banner4",@"banner3"];
     }else{
-        _banner.localizationImageNamesGroup = @[@"banner",@"banner2"];
+        _banner.localizationImageNamesGroup = @[@"banner",@"banner2",@"banner4"];
     }
     
     [self.backview addSubview:_banner];
@@ -148,6 +149,9 @@
         XLWKWebVC *vc = [[XLWKWebVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (index == 2){
+        InvitationCoachVC *vc = [[InvitationCoachVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (index == 3){
         AllWeb *vc = [[AllWeb alloc] init];
         vc.url = KURL(@"plat/#/members/members");
         [self.navigationController pushViewController:vc animated:YES];

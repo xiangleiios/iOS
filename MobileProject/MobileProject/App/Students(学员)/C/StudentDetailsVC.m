@@ -29,6 +29,7 @@
 @property (nonatomic , strong)XLInformationV *school;
 @property (nonatomic , strong)XLInformationV *referees;
 @property (nonatomic , strong)XLInformationV *note;
+@property (nonatomic , strong)XLInformationV *jiaolian;
 //@property (nonatomic , strong)XLInformationV *state;
 
 @end
@@ -37,7 +38,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationView setTitle:@"学员详情"];
+    [self.navigationView setTitle:@"报名信息"];
     [self laodScroll];
     [self loadDataview];
     // Do any additional setup after loading the view.
@@ -145,7 +146,7 @@
     [vtwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.backview);
         make.top.mas_equalTo(lb.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(1080));
+        make.height.mas_equalTo(KFit_H6S(1170));
     }];
     
     self.IdNumber = [[XLInformationV alloc] informationWithTitle:@"身份证号" SubTitle:_model.idcard];
@@ -169,7 +170,7 @@
     
     self.referees = [[XLInformationV alloc] informationWithTitle:@"推荐人" SubTitle:_model.recommender];
     
-
+    self.jiaolian = [[XLInformationV alloc] informationWithTitle:@"报名教练" SubTitle:_model.coachName?_model.coachName:@"分校"];
     [vtwo addSubview:self.IdNumber];
     [vtwo addSubview:SFZFM];
     [vtwo addSubview:self.start_time];
@@ -183,9 +184,9 @@
     [vtwo addSubview:self.type];
     [vtwo addSubview:oter];
     [vtwo addSubview:self.referees];
+    [vtwo addSubview:self.jiaolian];
     
-    
-    NSArray *arrtwo = @[self.IdNumber,SFZFM,self.start_time,self.enf_time,baomin,self.pho,self.hukou,self.carType,self.school,self.type,oter,self.referees];
+    NSArray *arrtwo = @[self.IdNumber,SFZFM,self.start_time,self.enf_time,baomin,self.pho,self.hukou,self.carType,self.school,self.type,oter,self.referees,self.jiaolian];
     [arrtwo mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
     [arrtwo mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(vone);

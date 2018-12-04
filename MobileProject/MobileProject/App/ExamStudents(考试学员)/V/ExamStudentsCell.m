@@ -48,6 +48,19 @@
         make.height.mas_equalTo(KFit_H6S(40));
     }];
     
+    self.type = [[UILabel alloc] init];
+    [self.contentView addSubview:self.type];
+    self.type.layer.borderWidth = 0.3;
+    self.type.layer.cornerRadius = 3;
+    self.type.font = [UIFont systemFontOfSize:kFit_Font6(13)];
+    self.type.textAlignment = NSTextAlignmentCenter;
+    
+    [self.type mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(img.mas_right).mas_offset(KFit_W6S(30));
+        make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(160), KFit_H6S(40)));
+    }];
+    
     self.typeOne = [[UILabel alloc] init];
     [self.contentView addSubview:self.typeOne];
         self.typeOne.layer.borderWidth = 0.3;
@@ -58,7 +71,7 @@
         self.typeOne.textAlignment = NSTextAlignmentCenter;
         self.typeOne.text = @"已收费";
     [self.typeOne mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(img.mas_right).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(self.type.mas_right).mas_offset(KFit_W6S(10));
         make.centerY.mas_equalTo(self.contentView).mas_offset(KFit_H6S(25));
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(130), KFit_H6S(40)));
     }];
@@ -159,7 +172,22 @@
     }else{
         self.typeFour.hidden = YES;
     }
-    
+    if (_model.coachName) {
+        self.type.text = _model.coachName;
+        if (model.coachStatus) {
+            self.type.textColor = kColor_N(204, 209, 218);
+            self.type.layer.borderColor = kColor_N(204, 209, 218).CGColor;
+        }else{
+            self.type.textColor = kColor_N(255, 132, 30);
+            self.type.layer.borderColor = kColor_N(255, 132, 30).CGColor;
+        }
+        
+    }else{
+        self.type.text = @"分校";
+        self.type.textColor = kColor_N(255, 132, 30);
+        self.type.layer.borderColor = kColor_N(255, 132, 30).CGColor;
+        
+    }
     if (arr.count == 0) {
         self.typeOne.hidden =YES;
         self.typeTwo.hidden = YES;

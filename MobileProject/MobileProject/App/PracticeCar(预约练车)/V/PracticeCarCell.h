@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UILabel *address;
 @property (nonatomic , strong)UILabel *num;
 @property (nonatomic , strong)UILabel *redlb;
+@property (nonatomic , strong)UILabel *type;
 @end
 
 NS_ASSUME_NONNULL_END

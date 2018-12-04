@@ -324,6 +324,7 @@
 @property (nonatomic , strong)NSDictionary *rankingMap;
 @property (nonatomic , strong)NSArray *coachIds;
 @property (nonatomic , assign)BOOL coachStatus;
+@property (nonatomic , strong)NSString *demo;
 @end
 
 

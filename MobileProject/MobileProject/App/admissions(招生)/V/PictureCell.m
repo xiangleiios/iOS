@@ -60,6 +60,15 @@
         make.height.mas_equalTo(KFit_W6S(30));
     }];
     
+    self.typeImg = [[UIImageView alloc] init];
+    [self.contentView addSubview:self.typeImg];
+    [self.typeImg setImage:[UIImage imageNamed:@"label_new"]];
+    [self.typeImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.name);
+        make.left.mas_equalTo(self.name.mas_right).mas_offset(KFit_W6S(20));
+        make.width.height.mas_equalTo(KFit_W6S(30));
+    }];
+    
     self.frome = [[UILabel alloc] init];
     self.frome.text = @"官网频道";
     self.frome.font = [UIFont systemFontOfSize:kFit_Font6(13)];

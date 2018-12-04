@@ -82,14 +82,14 @@
         make.top.mas_equalTo(self.backview);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
-    self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:@"" TSSubTitle:@"" Must:YES Click:NO];
+    self.name = [[XLInformationV alloc] informationWithTitle:@"姓名" SubTitle:@"" TSSubTitle:@"请填写真实姓名" Must:YES Click:NO];
     [self.backview addSubview:self.name];
     [self.name mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(jiben.mas_bottom);
         make.height.mas_equalTo(KFit_H6S(90));
     }];
-    self.pho = [[XLInformationV alloc] informationWithTitle:@"手机号" SubTitle:@"" TSSubTitle:@"请输入手机号" Must:YES Click:NO];
+    self.pho = [[XLInformationV alloc] informationWithTitle:@"手机号" SubTitle:@"" TSSubTitle:@"请填写真实手机号" Must:YES Click:NO];
     [self.backview addSubview:self.pho];
     [self.pho mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);

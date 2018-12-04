@@ -255,7 +255,12 @@
     XLshare *share = [[XLshare alloc]init];
     share.title = self.model.tittle;
     share.subTitle = self.model.content;
-    share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share"];
+    if (USERFZR) {
+        share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share",@"school"];
+    }else{
+        share.url = [NSString stringWithFormat:HTMLHAIBAO,self.model.idid,@"share",@"coach"];
+    }
+    
     v.share = share;
     [v show];
 }

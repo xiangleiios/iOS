@@ -64,6 +64,7 @@
     [down addTarget:self action:@selector(changeTemplate) forControlEvents:UIControlEventTouchUpInside];
     [down setImage:[UIImage imageNamed:@"refresh"] forState:UIControlStateNormal];
     [down setTitle:@"换一个" forState:UIControlStateNormal];
+    down.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     [down setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     down.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     down.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, KFit_W6S(1));

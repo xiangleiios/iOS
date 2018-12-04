@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)XLView *imgbavk;
 @property (nonatomic , strong)UILabel *biaoqian;
 @property (nonatomic , strong)NSMutableArray *browseItemArray;
+@property (nonatomic , strong)UIImageView *typeImg;
 
 @property (nonatomic , strong)UILabel *lb;
 - (void)setCellContent:(NSString *)contentStr andIsShow:(BOOL)isShow andCellIndexPath:(NSIndexPath *)indexPath;

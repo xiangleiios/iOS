@@ -13,6 +13,7 @@
 #import "EnrollVC.h"
 #import "AddInformationVC.h"
 #import "ExamStudentsVC.h"
+#import "AddStudentVC.h"
 @interface StudentsVC ()<JXCategoryViewDelegate>
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
@@ -63,7 +64,7 @@
 }
 
 - (void)toAddStudents{
-    AddInformationVC *vc = [[AddInformationVC alloc] init];
+    AddStudentVC *vc = [[AddStudentVC alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -215,6 +216,7 @@
             
             [[XLSingleton singleton].dateArr removeAllObjects];
             [MBProgressHUD showMsgHUD:[attrStr string]];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"NotificationStudentsListHeaderRefresh" object:nil];
 //            [[XLSingleton singleton].dateArr removeAllObjects];
         }
         

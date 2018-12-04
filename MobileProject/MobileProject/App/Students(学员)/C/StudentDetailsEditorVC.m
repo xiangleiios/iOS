@@ -318,7 +318,10 @@
     self.SFZforms.gender.subfield.tag = [_model.sex integerValue];
     self.SFZforms.ethnic.subfield.text = cache.ethnicTitleArr[[cache.ethnicValueArr indexOfObject:_model.nation]];
     self.SFZforms.ethnic.subfield.tag = [_model.nation integerValue];
-    self.SFZforms.birthday.subfield.text = [XLCommonUse datetimestampToString:_model.birthday];
+    if (_model.birthday) {
+        
+        self.SFZforms.birthday.subfield.text = [XLCommonUse datetimestampToString:_model.birthday];
+    }
     self.SFZforms.address.subfield.text = _model.idcardAddress;
     self.SFZforms.IdNumber.subfield.text = _model.idcard;
     
@@ -350,7 +353,9 @@
     kWeakSelf(self)
     self.start_time = [[XLInformationV alloc] informationWithTitle:@"有效期起始" SubTitle:@"" TSSubTitle:@"请选择日期" Must:YES Click:YES];
     self.start_time.red.textColor = [UIColor blackColor];
-    self.start_time.subfield.text = [XLCommonUse datetimestampToString:_model.idcardStartDate];
+    if (_model.idcardStartDate) {
+        self.start_time.subfield.text = [XLCommonUse datetimestampToString:_model.idcardStartDate];
+    }
     self.start_time.senterBlock = ^{
         [CGXPickerView showDatePickerWithTitle:@"有效期起始" DateType:UIDatePickerModeDate DefaultSelValue:nil MinDateStr:nil MaxDateStr:nil IsAutoSelect:NO Manager:nil ResultBlock:^(NSString *selectValue) {
             NSLog(@"%@",selectValue);

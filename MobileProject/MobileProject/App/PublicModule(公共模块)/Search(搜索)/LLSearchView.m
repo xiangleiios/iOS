@@ -24,8 +24,8 @@
     if (self = [super initWithFrame:frame]) {
         self.historyArray = historyArr;
         self.hotArray = hotArr;
-        [self addSubview:self.searchHistoryView];
-        [self addSubview:self.hotSearchView];
+//        [self addSubview:self.searchHistoryView];
+//        [self addSubview:self.hotSearchView];
     }
     return self;
 }

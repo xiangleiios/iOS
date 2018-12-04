@@ -19,13 +19,18 @@
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIButton *screeningOne;
 @property (nonatomic, strong) UIButton *screeningTwo;
+@property (nonatomic, strong) UIButton *screeningThree;
+
 @property (nonatomic, strong) UIView *sousuoview;
 
 @property (nonatomic, strong) ScreeningV *information;
 @property (nonatomic, strong) ScreeningV *scholl;
+@property (nonatomic, strong) ScreeningV *coach;
 
 @property (nonatomic, strong) NSArray *informationArr;
 @property (nonatomic, strong) NSArray *schollArr;
+@property (nonatomic, strong) NSMutableArray *coachArr;
+@property (nonatomic, strong) NSMutableArray *coachIDArr;
 
 @property (nonatomic, strong) NSMutableDictionary *dic;
 @property (nonatomic, strong) StudentsListVC *studentsvc;
@@ -40,8 +45,18 @@
     }
     return _dic;
 }
-
-
+- (NSMutableArray *)coachArr{
+    if (_coachArr == nil) {
+        _coachArr = [NSMutableArray array];
+    }
+    return _coachArr;
+}
+- (NSMutableArray *)coachIDArr{
+    if (_coachIDArr == nil) {
+        _coachIDArr = [NSMutableArray array];
+    }
+    return _coachIDArr;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     XLCache *coche = [XLCache singleton];
@@ -50,6 +65,10 @@
     NSMutableArray *arr = [NSMutableArray arrayWithObject:@"全部驾校"];
     [arr addObjectsFromArray:coche.teamCode_title];
     _schollArr = [NSArray arrayWithArray:arr];
+    
+    if (USERFZR) {
+        [self loadRefreshData];
+    }
     [self loadSousuo];
     [self loadScreningBut];
     
@@ -85,7 +104,22 @@
     self.screeningTwo.layer.borderColor = kColor_N(235, 235, 235).CGColor;
     [self.screeningTwo addTarget:self action:@selector(jiaXiao:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSArray *arr = @[self.screeningOne,self.screeningTwo];
+    
+    NSArray *arr;
+    if (USERFZR) {
+        self.screeningThree = [[UIButton alloc] init];
+        [self.screeningThree setTitle:@"报名教练  ▾" forState:UIControlStateNormal];
+        self.screeningThree.titleLabel.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+        [self.screeningThree setTitleColor:kColor_N(64, 78, 108) forState:UIControlStateNormal];
+        [self.view addSubview:self.screeningThree];
+        self.screeningThree.layer.borderWidth = 0.3;
+        self.screeningThree.layer.borderColor = kColor_N(235, 235, 235).CGColor;
+        [self.screeningThree addTarget:self action:@selector(jiaolian:) forControlEvents:UIControlEventTouchUpInside];
+        
+        arr = @[self.screeningOne,self.screeningThree,self.screeningTwo];
+    }else{
+        arr = @[self.screeningOne,self.screeningTwo];
+    }
     [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
     [arr mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.sousuoview.mas_bottom);
@@ -102,13 +136,47 @@
     self.scholl = [[ScreeningV alloc] init];
     self.scholl.dataArr = _schollArr;
     self.scholl.delegate =self;
+    
+    self.coach = [[ScreeningV alloc] init];
+//    self.coach.dataArr = _schollArr;
+    self.coach.delegate =self;
+    
 //    [self.information show];
+}
+#pragma mark - 加载教练数据
+- (void)loadRefreshData{
+    NSString *url = POSTTeamSchoolCoachCoachList;
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        NSArray *tpArray = responseObject[@"list"][@"rows"];
+        [self.coachArr removeAllObjects];
+        [self.coachArr addObject:@"全部教练"];
+        [self.coachIDArr removeAllObjects];
+        [self.coachIDArr addObject:@"0"];
+        if (tpArray) {
+            for (NSDictionary *dic in tpArray) {
+                FMMainModel *mode=[FMMainModel mj_objectWithKeyValues:dic];
+                [self.coachArr addObject:mode.name];
+                [self.coachIDArr addObject:mode.coachId];
+            }
+        }
+        self.coach.dataArr = self.coachArr;
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    //    POSTTeamSchoolList
 }
 - (void)xingXi:(UIButton *)senter{
     [self.information show];
 }
 - (void)jiaXiao:(UIButton *)senter{
     [self.scholl show];
+}
+- (void)jiaolian:(UIButton *)senter{
+    [self.coach show];
 }
 - (void)loadSousuo{
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, KFit_H6S(100))];
@@ -207,6 +275,16 @@
             XLCache *coche = [XLCache singleton];
             [self.studentsvc.dic setObject:coche.teamCode_value[i] forKey:@"teamCode"];
         }
+    }
+    if (screnningv == self.coach) {
+        NSString *str = self.coachArr[index];
+        [self.screeningThree setTitle:[NSString stringWithFormat:@"%@  ▾",str] forState:UIControlStateNormal];
+        if (index == 0) {
+            [self.studentsvc.dic setObject:@"" forKey:@"coachId"];
+        }else{
+            [self.studentsvc.dic setObject:self.coachIDArr[index] forKey:@"coachId"];
+        }
+        
     }
     [self.studentsvc headerRefresh];
     

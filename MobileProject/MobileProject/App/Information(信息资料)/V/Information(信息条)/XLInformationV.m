@@ -134,7 +134,7 @@
             make.right.mas_equalTo(self).mas_offset(-KFit_W6S(30));
             make.centerY.mas_equalTo(self);
             make.height.mas_equalTo(self);
-            make.left.mas_equalTo(titleLable.mas_right).mas_offset(KFit_W6S(20));
+            make.left.mas_equalTo(titleLable.mas_right).mas_offset(KFit_W6S(10));
         }];
         
         UILabel *lb = [[UILabel alloc] init];

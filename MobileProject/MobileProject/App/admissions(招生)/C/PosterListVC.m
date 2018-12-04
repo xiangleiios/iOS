@@ -132,6 +132,11 @@
     [cell setCellContent:model.content andIsShow:[[self.cellIsShowAll objectForKey:[NSString stringWithFormat:@"%ld", indexPath.row]] boolValue]  andCellIndexPath:indexPath];
     cell.model = model;
     cell.delegate = self;
+    if (indexPath.row >2) {
+        cell.typeImg.hidden = YES;
+    }else{
+        cell.typeImg.hidden = NO;
+    }
     return cell;
 }
 

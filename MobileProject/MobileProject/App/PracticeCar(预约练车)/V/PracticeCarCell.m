@@ -102,6 +102,22 @@
         make.height.mas_equalTo(KFit_H6S(70));
     }];
     
+    self.type = [[UILabel alloc] init];
+    [self.contentView addSubview:self.type];
+    self.type.text = @"所在训练场";
+    [self.type mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.num);
+        make.right.mas_equalTo(self.contentView).mas_offset(-KFit_W6S(30));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(200), KFit_H6S(50)));
+    }];
+    self.type.textColor = [UIColor whiteColor];
+    self.type.textAlignment = NSTextAlignmentCenter;
+    self.type.font = [UIFont systemFontOfSize:kFit_Font6(16)];
+    self.type.layer.cornerRadius = 3;
+    self.type.layer.masksToBounds = YES;
+    self.type.backgroundColor = kColor_N(0, 112, 234);
+    
+    
     UILabel *lbtwo = [[UILabel alloc] init];
     [self.contentView addSubview:lbtwo];
     lbtwo.backgroundColor = kColor_N(240, 240, 240);
@@ -121,6 +137,11 @@
         self.redlb.hidden = NO;
     }else{
         self.redlb.hidden = YES;
+    }
+    if (model.demo.length < 1) {
+        self.type.hidden = YES;
+    }else{
+        self.type.hidden = NO;
     }
 }
 @end

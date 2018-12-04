@@ -26,7 +26,7 @@
 - (NSMutableArray *)hotArray
 {
     if (!_hotArray) {
-//        self.hotArray = [NSMutableArray arrayWithObjects:@"悦诗风吟", @"洗面奶", @"兰芝", @"面膜", @"篮球鞋", @"阿迪达斯", @"耐克", @"运动鞋", nil];
+//        self.hotArray = [NSMutableArray array];
         self.hotArray = [NSMutableArray array];
     }
     return _hotArray;

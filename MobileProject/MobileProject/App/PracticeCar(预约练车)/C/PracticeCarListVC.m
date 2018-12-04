@@ -50,7 +50,12 @@
     [but setTitle:@"立即添加" forState:UIControlStateNormal];
     [but addTarget:self action:@selector(toTrainingVC) forControlEvents:UIControlEventTouchUpInside];
     [but setBackgroundImage:[UIImage imageWithColor:kColor_N(0, 112, 234)] forState:UIControlStateNormal];
-    [self.table addEmptyViewWithImageName:@"placeholder" title:@"还没有添加训练场信息哦~" But:but];
+    if (USERFZR) {
+        [self.table addEmptyViewWithImageName:@"placeholder" title:@"还没有添加训练场信息哦~" But:but];
+    }else{
+        [self.table addEmptyViewWithImageName:@"placeholder" title:@"还没有添加训练场信息哦~" But:nil];
+    }
+    
     _table.emptyView.hidden = YES;
     self.table.backgroundColor = kColor_N(240, 240, 240);
     _table.mj_footer.ignoredScrollViewContentInsetBottom = iPhoneX;

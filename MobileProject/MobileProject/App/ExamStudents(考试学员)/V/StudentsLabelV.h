@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)NSMutableArray *selectDataArr;
 @property (nonatomic , strong)XLView *backview;
 @property (nonatomic , strong)UIButton *addBut;
+@property (nonatomic , strong)NSMutableArray *selectDataArrNew;
 - (void)relodData;
 @end
 

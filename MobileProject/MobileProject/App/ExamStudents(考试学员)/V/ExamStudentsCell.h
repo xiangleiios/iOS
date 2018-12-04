@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UILabel *typeTwo;
 @property (nonatomic , strong)UILabel *typeThree;
 @property (nonatomic , strong)UILabel *typeFour;
+@property (nonatomic , strong)UILabel *type;
 @property (nonatomic , strong)UIButton *state;
 @end
 

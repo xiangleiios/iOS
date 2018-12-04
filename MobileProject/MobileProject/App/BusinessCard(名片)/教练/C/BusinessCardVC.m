@@ -157,8 +157,8 @@
     XLshare *share = [[XLshare alloc]init];
     share.title = [NSString stringWithFormat:@"我是%@的%@,邀您来学车！",self.model.schoolName,self.model.name];
     share.subTitle = _model.introduce;
-    share.url = [NSString stringWithFormat:HTMLMINGPIANFENXIANG,self.model.idid];
-    share.xcxurl = [NSString stringWithFormat:@"pages/index/detail/detail?id=%@",self.model.idid];
+    share.url = [NSString stringWithFormat:HTMLMINGPIANFENXIANG,self.model.coachId];
+    share.xcxurl = [NSString stringWithFormat:@"pages/index/detail/detail?id=%@",self.model.coachId];
     v.share = share;
     [v show];
 }

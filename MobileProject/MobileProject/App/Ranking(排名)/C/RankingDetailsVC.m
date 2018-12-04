@@ -73,11 +73,12 @@
         title.text = [NSString stringWithFormat:@"%@",_model.coachName];
     }
     [self.backView addSubview:title];
+    title.font = [UIFont systemFontOfSize:kFit_Font6(17)];
     [title mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(img).mas_offset(KFit_H6S(10));
         make.left.mas_equalTo(img.mas_right).mas_offset(KFit_W6S(30));
         make.height.mas_equalTo(KFit_H6S(40));
-        make.width.mas_equalTo(KFit_W6S(400));
+        make.width.mas_equalTo(KFit_W6S(430));
     }];
     
     YYLabel *lb = [[YYLabel alloc] init];

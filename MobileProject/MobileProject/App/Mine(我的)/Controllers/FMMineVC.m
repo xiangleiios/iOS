@@ -17,6 +17,8 @@
 #import "InvitationCoachVC.h"
 #import "RankingDetailsVC.h"
 #import "AllWeb.h"
+#import "BusinessCardVC.h"
+#import "BranchSchoolListVC.h"
 #define HEADERHEI KFit_H6S(320)
 
 @interface FMMineVC ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
@@ -28,6 +30,7 @@
 
 @property (nonatomic , strong)UILabel *pho;
 @property (nonatomic , strong)UILabel *school;
+@property (nonatomic , strong)FMMainModel *coachModel;
 @end
 
 @implementation FMMineVC
@@ -216,16 +219,72 @@
         
         
     }
+    UIButton *but = [[UIButton alloc] init];
+    [head addSubview:but];
+    [but addTarget:self action:@selector(toMingpan) forControlEvents:UIControlEventTouchUpInside];
+    [but setImage:[UIImage imageNamed:@"white_jjt"] forState:UIControlStateNormal];
+    [but mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(self.pho);
+        make.left.mas_equalTo(self.pho.mas_right).mas_offset(KFit_W6S(10));
+        make.size.mas_equalTo(CGSizeMake(KFit_W6S(40), KFit_H6S(40)));
+        
+    }];
     
     UIImageView *imgrz = [[UIImageView alloc] init];
     [head addSubview:imgrz];
     [imgrz setImage:[UIImage imageNamed:@"attestation"]];
     [imgrz mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(self.pho);
-        make.left.mas_equalTo(self.pho.mas_right).mas_offset(KFit_W6S(30));
+        make.left.mas_equalTo(but.mas_right).mas_offset(KFit_W6S(10));
         make.size.mas_equalTo(CGSizeMake(KFit_W6S(90), KFit_H6S(30)));
     }];
+    
+    
     return head;
+}
+- (void)toMingpan{
+    User *user = [User UserOb];
+    if ([user.type  isEqual: @"1"]) {
+        BranchSchoolListVC *vc = [[BranchSchoolListVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        
+        if (self.coachModel) {
+            BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+            vc.type = @"coach";
+            vc.model = self.coachModel;
+            [self.navigationController pushViewController:vc animated:YES];
+            [vc.navigationView setTitle:@"招生名片"];
+        }else{
+            [self loadCoachInfoToVC];
+        }
+        
+    }
+}
+- (void)loadCoachInfoToVC{
+    User *uer = [User UserOb];
+    KKLog(@"%@",uer.userId);
+    NSString *url = [NSString stringWithFormat:POSTCoachEnrollInfo,[User UserOb].userId];
+    [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:nil successBlock:^(id responseObject) {
+        KKLog(@"%@",responseObject);
+        if (kResponseObjectStatusCodeIsEqual(200)) {
+            FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+            self.coachModel = model;
+            BusinessCardVC *vc = [[BusinessCardVC alloc] init];
+            vc.type = @"coach";
+            vc.model = self.coachModel;
+            [self.navigationController pushViewController:vc animated:YES];
+            [vc.navigationView setTitle:@"招生名片"];
+        }else{
+            [MBProgressHUD showMsgHUD:responseObject[@"message"]];
+        }
+        
+    } failureBlock:^(NSError *error) {
+        KKLog(@"%@", error);
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
 }
 
 - (void)loadCoachInfo{
@@ -236,6 +295,7 @@
         KKLog(@"%@",responseObject);
         if (kResponseObjectStatusCodeIsEqual(200)) {
             FMMainModel *model = [FMMainModel mj_objectWithKeyValues:responseObject[@"data"]];
+            self.coachModel = model;
             self.pho.text = model.name;
             self.school.text = [NSString stringWithFormat:@"%@年教龄 %@ (%@)",model.coachAge?model.coachAge:@"2",model.schoolName,model.deptName];
             

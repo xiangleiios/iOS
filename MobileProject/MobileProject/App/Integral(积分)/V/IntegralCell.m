@@ -35,7 +35,7 @@
         make.left.mas_equalTo(self.contentView).mas_offset(KFit_W6S(30));
         make.centerY.mas_equalTo(self.contentView).mas_offset(-KFit_H6S(25));
         make.height.mas_equalTo(KFit_H6S(30));
-        make.width.mas_equalTo(KFit_W6S(310));
+        make.width.mas_equalTo(KFit_W6S(410));
     }];
     
     self.time = [[UILabel alloc] init];
