@@ -41,5 +41,12 @@ typedef NS_ENUM(NSInteger, accountType) {
 //account
 
 
+typedef NS_ENUM(NSInteger, SearchType) {
+    SearchTypeCoach = 1, // 搜索教练
+    SearchTypeStudent = 2, // 搜索咨询学员
+    SearchTypeExamStudent = 3 // 搜索考试学员
+};
+
+
 
 #endif /* FMEnums_h */

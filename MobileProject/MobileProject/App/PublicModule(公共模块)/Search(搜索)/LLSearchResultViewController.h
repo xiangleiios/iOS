@@ -14,4 +14,5 @@
 @property (nonatomic, strong) NSMutableArray *hotArray;
 @property (nonatomic, strong) NSMutableArray *historyArray;
 @property (nonatomic , assign)BOOL PayCost;
+@property (nonatomic , assign)SearchType type; /// 搜索类型  
 @end

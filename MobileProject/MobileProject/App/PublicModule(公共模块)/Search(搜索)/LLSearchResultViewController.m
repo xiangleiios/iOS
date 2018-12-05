@@ -11,6 +11,7 @@
 #import "LLSearchSuggestionVC.h"
 #import "LLSearchView.h"
 #import "SearchListVC.h"
+#import "CoachTabviewVC.h"
 @interface LLSearchResultViewController ()<UISearchBarDelegate>
 
 @property (nonatomic, strong) NSMutableArray *searchArray;
@@ -241,6 +242,16 @@
 }
 
 - (void)loadSearchView{
+    if (self.type == SearchTypeCoach) {
+        CoachTabviewVC *vc = [[CoachTabviewVC alloc] init];
+        [vc.dic setObject:self.searchStr forKey:@"searchValue"];
+        [self.view addSubview:vc.view];
+        [self addChildViewController:vc];
+        [vc.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.bottom.mas_equalTo(self.view);
+            make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
+        }];
+    }else{
     SearchListVC *vc = [[SearchListVC alloc] init];
     self.student = vc;
     vc.PayCost = self.PayCost;
@@ -256,6 +267,8 @@
         make.left.right.bottom.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view).mas_offset(kNavBarH);
     }];
+        
+    }
 }
 
 /*

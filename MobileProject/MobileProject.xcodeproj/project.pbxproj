@@ -150,6 +150,8 @@
 		A787E180215DFB3C00EF01F2 /* IdcardQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; };
 		A787E181215DFB3C00EF01F2 /* IdcardQuality.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A787E175215DFB0800EF01F2 /* IdcardQuality.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A7890C2F21845181008AA62C /* ReservationRecordListMyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A7890C2E21845181008AA62C /* ReservationRecordListMyVC.m */; };
+		A789A92E21B668BC003725D9 /* CoachTabviewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A789A92D21B668BC003725D9 /* CoachTabviewVC.m */; };
+		A789A93121B67B6A003725D9 /* SearchResultVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A789A93021B67B6A003725D9 /* SearchResultVC.m */; };
 		A78E2DD3216AF37200CBAED1 /* PictureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD2216AF37200CBAED1 /* PictureCell.m */; };
 		A78E2DD6216B36C400CBAED1 /* PosterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD5216B36C400CBAED1 /* PosterVC.m */; };
 		A78E2DD9216B5FA900CBAED1 /* MyAdmissionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A78E2DD8216B5FA900CBAED1 /* MyAdmissionsVC.m */; };
@@ -1000,6 +1002,10 @@
 		A787E177215DFB0900EF01F2 /* AipBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AipBase.framework; sourceTree = "<group>"; };
 		A7890C2D21845181008AA62C /* ReservationRecordListMyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReservationRecordListMyVC.h; sourceTree = "<group>"; };
 		A7890C2E21845181008AA62C /* ReservationRecordListMyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReservationRecordListMyVC.m; sourceTree = "<group>"; };
+		A789A92C21B668BC003725D9 /* CoachTabviewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoachTabviewVC.h; sourceTree = "<group>"; };
+		A789A92D21B668BC003725D9 /* CoachTabviewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoachTabviewVC.m; sourceTree = "<group>"; };
+		A789A92F21B67B6A003725D9 /* SearchResultVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchResultVC.h; sourceTree = "<group>"; };
+		A789A93021B67B6A003725D9 /* SearchResultVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchResultVC.m; sourceTree = "<group>"; };
 		A78E2DD1216AF37200CBAED1 /* PictureCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PictureCell.h; sourceTree = "<group>"; };
 		A78E2DD2216AF37200CBAED1 /* PictureCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PictureCell.m; sourceTree = "<group>"; };
 		A78E2DD4216B36C400CBAED1 /* PosterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PosterVC.h; sourceTree = "<group>"; };
@@ -2498,6 +2504,8 @@
 				A735A0A4212FE6890044E9BC /* LLSearchViewController.m */,
 				A7C311ED214A085A006A96EA /* SearchListVC.h */,
 				A7C311EE214A085A006A96EA /* SearchListVC.m */,
+				A789A92F21B67B6A003725D9 /* SearchResultVC.h */,
+				A789A93021B67B6A003725D9 /* SearchResultVC.m */,
 			);
 			path = "Search(搜索)";
 			sourceTree = "<group>";
@@ -2894,6 +2902,8 @@
 				A7629BAB219E62DD0001D2A7 /* AddCoachVC.m */,
 				A787212C21A2670300D2B553 /* ResultsVC.h */,
 				A787212D21A2670300D2B553 /* ResultsVC.m */,
+				A789A92C21B668BC003725D9 /* CoachTabviewVC.h */,
+				A789A92D21B668BC003725D9 /* CoachTabviewVC.m */,
 			);
 			path = C;
 			sourceTree = "<group>";
@@ -6222,6 +6232,7 @@
 				A7BAB521218FEB2D0018CA27 /* CoachReplyV.m in Sources */,
 				DA0346A11F509098008E7BE1 /* UIButton+Indicator.m in Sources */,
 				DA03468B1F509098008E7BE1 /* CAAnimation+Blocks.m in Sources */,
+				A789A92E21B668BC003725D9 /* CoachTabviewVC.m in Sources */,
 				A7E97A0B21354B4500EA6F14 /* IDAuthViewController.m in Sources */,
 				A7E97A1121354B4500EA6F14 /* JQIDCardScaningView.m in Sources */,
 				A794814A219AD0CD008F8D4B /* FMSchoolModel.m in Sources */,
@@ -6456,6 +6467,7 @@
 				A7DC8F5D2189A6790058C654 /* SchoolLable.m in Sources */,
 				DAE212B11EF2867B000EAB90 /* UserViewController.m in Sources */,
 				A7BAB51E218FDBB50018CA27 /* CommentsCell.m in Sources */,
+				A789A93121B67B6A003725D9 /* SearchResultVC.m in Sources */,
 				4F0944AD1F3AF3D900BA80E5 /* UIDevice+Adaptation.m in Sources */,
 				DA0346431F509098008E7BE1 /* NSDate+TimeAgo.m in Sources */,
 				A7DC8F5621897B080058C654 /* ChangeCardHeadVC.m in Sources */,

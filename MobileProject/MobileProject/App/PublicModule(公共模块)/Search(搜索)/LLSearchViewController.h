@@ -10,4 +10,5 @@
 
 @interface LLSearchViewController : UIViewController
 @property (nonatomic , assign)BOOL PayCost;
+@property (nonatomic , assign)SearchType type; /// 搜索类型  
 @end

@@ -155,6 +155,7 @@
     searchResultVC.hotArray = _hotArray;
     searchResultVC.historyArray = _historyArray;
     searchResultVC.PayCost = self.PayCost;
+    searchResultVC.type = self.type;
     [self.navigationController pushViewController:searchResultVC animated:YES];
     [self setHistoryArrWithStr:str];
 }
