@@ -82,6 +82,9 @@
     [FMNetworkHelper fm_request_postWithUrlString:url isNeedCache:NO parameters:self.dic successBlock:^(id responseObject) {
         KKLog(@"%@",responseObject);
         NSArray *tpArray = responseObject[@"list"][@"rows"];
+        if (tpArray.count < 1 && self.dic) {
+            [MBProgressHUD showMsgHUD:@"暂无结果"];
+        }
         if (self.pageNum==1) {
             [self.dataArr removeAllObjects];
         }

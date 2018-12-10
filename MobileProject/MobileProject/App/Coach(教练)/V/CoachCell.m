@@ -157,6 +157,9 @@
 //    if (model.headPic.length > 1) {
         [self.head sd_setImageWithURL:[NSURL URLWithString:KURLIma(model.headPic)] placeholderImage:[UIImage imageNamed:@"head_nor"]];
 //    }
+    [self.xinImg mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(KFit_W6S(120) * (model.averageScore/5.0));
+    }];
     if (model.enrollStudentCount == 0) {
         self.typeOne.hidden = YES;
         [self.typeTwo mas_updateConstraints:^(MASConstraintMaker *make) {

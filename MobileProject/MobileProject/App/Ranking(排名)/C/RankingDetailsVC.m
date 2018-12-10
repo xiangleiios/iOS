@@ -58,7 +58,8 @@
     
     UIImageView *img = [[UIImageView alloc] init];
     [self.backView addSubview:img];
-    [img setImage:[UIImage imageNamed:@"nor_fenxiao_photo"]];
+//    [img setImage:[UIImage imageNamed:@"nor_fenxiao_photo"]];
+    [img sd_setImageWithURL:[NSURL URLWithString:KURLIma(_model.headImg)] placeholderImage:[UIImage imageNamed:@"nor_fenxiao_photo"]];
     [img mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.backView).mas_offset(KFit_H6S(40));
         make.left.mas_equalTo(self.backView).mas_offset(KFit_H6S(30));

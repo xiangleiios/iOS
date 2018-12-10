@@ -427,10 +427,11 @@
     [self.otherForms mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(baokao.mas_bottom);
-        make.height.mas_equalTo(KFit_H6S(180));
+        make.height.mas_equalTo(KFit_H6S(270));
     }];
     self.otherForms.referees.subfield.text = _model.recommender;
     self.otherForms.note.subfield.text =_model.remark;
+    self.otherForms.coach.subfield.text = _model.coachName?_model.coachName:@"分校";
 //    ///1:未缴费 2：已缴费
 //    if ([_model.isPay  isEqual: @"1"]) {
 //        self.otherForms.state.subfield.text = @"未收费";

@@ -54,7 +54,7 @@
     self.odlpassword.placeholder=@"请输入旧密码";
     self.odlpassword.keyboardType=UIKeyboardTypeNumberPad;
     self.odlpassword.secureTextEntry=YES;
-    
+    [self.odlpassword addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
 //    UIImageView *imgCompany = [[UIImageView alloc]initWithFrame:CGRectMake(0, imgY + viewHight, KFit_W6S(32), KFit_H6S(45))];
 //    [imgCompany setImage:[UIImage imageNamed:@"password"]];
@@ -62,9 +62,9 @@
     self.password=[[UITextField alloc]initWithFrame:CGRectMake(KFit_W6S(30), viewHight, KFit_W6S(650), viewHight)];
     self.password.font=[UIFont systemFontOfSize:kFit_Font6(15)];
     [v addSubview:self.password];
-    self.password.placeholder=@"请输入包含数字和字母的新密码6-11位密码";
+    self.password.placeholder=@"请输入包含数字和字母的新密码6-20位密码";
     self.password.secureTextEntry=YES;
-    
+    [self.password addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     
 //    UIImageView *imgpass=[[UIImageView alloc]initWithFrame:CGRectMake(0, imgY + viewHight *2, KFit_W6S(32), KFit_H6S(45))];
 //    [imgpass setImage:[UIImage imageNamed:@"password2"]];
@@ -74,7 +74,7 @@
     [v addSubview:self.passwordtwo];
     self.passwordtwo.placeholder=@"请再次输入密码";
     self.passwordtwo.secureTextEntry=YES;
-    
+    [self.passwordtwo addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     UILabel *lb=[[UILabel alloc]init];
     lb.backgroundColor=kRGBColor(239, 239, 246);
     [v addSubview:lb];
@@ -125,22 +125,31 @@
     NSString* odl =self.odlpassword.text;
     NSString* passwordo=self.password.text;
     NSString *passwordt=self.passwordtwo.text;
-    if( odl.length < 1 ||passwordo.length<1||passwordt.length<1)
+    if( odl.length < 1)
     {
         
         [MBProgressHUD showAutoMessage:@"请输入密码"];
         return;
     }
+    
+    if( passwordo.length<1||passwordt.length<1)
+    {
+        
+        [MBProgressHUD showAutoMessage:@"请输入新密码"];
+        return;
+    }
+    
+    
     if( odl.length < 6 ||passwordo.length<6||passwordt.length<6)
     {
         
         [MBProgressHUD showAutoMessage:@"密码不能小于6个字符"];
         return;
     }
-    if( odl.length > 12 ||passwordo.length > 12||passwordt.length > 12)
+    if( odl.length > 20 ||passwordo.length > 20||passwordt.length > 20)
     {
         
-        [MBProgressHUD showAutoMessage:@"密码不能大于12个字符"];
+        [MBProgressHUD showAutoMessage:@"密码不能大于20个字符"];
         return;
     }
     if (![passwordo isEqualToString:passwordt]) {
@@ -203,7 +212,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)textFieldDidChange:(UITextField *)textField{
+    UITextRange *selectedRange = textField.markedTextRange;
+    UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];
+    if (!position) {
+        // 没有高亮选择的字
+        // 1. 过滤非汉字、字母、数字字符
+        
+        // 2. 截取
+        if (textField.text.length >= 20) {
+            textField.text = [textField.text substringToIndex:20];
+            
+        }
+        
+    } else {
+        // 有高亮选择的字 不做任何操作
+        
+    }
+    
+}
 
 /*
 #pragma mark - Navigation

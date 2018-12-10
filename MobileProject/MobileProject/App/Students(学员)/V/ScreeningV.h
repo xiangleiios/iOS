@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic , strong)UIView *backview;
 @property (nonatomic , strong)UIButton *selectBut;
 @property (nonatomic , weak)id <ScreeningVDelegate> delegate;
+@property (nonatomic , strong)UIScrollView *scroll;
 - (void)show;
 - (void)shutDown;
 @end

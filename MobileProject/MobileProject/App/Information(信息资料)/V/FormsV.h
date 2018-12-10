@@ -92,7 +92,7 @@
 /// 备注
 @property (nonatomic , strong)XLInformationV *note;
 /// 报名状态
-//@property (nonatomic , strong)XLInformationV *state;   //不要了
+@property (nonatomic , strong)XLInformationV *coach;   //不要了
 
 
 @end

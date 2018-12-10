@@ -136,6 +136,9 @@
 #else
     
 #endif
+    NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+    self.pho.text = [defaults objectForKey:@"Loginaccount"];
+    
     UILabel *lb=[[UILabel alloc]init];
     lb.backgroundColor=kRGBColor(239, 239, 246);
     [v addSubview:lb];
@@ -253,7 +256,9 @@
             user.accounttype=[NSNumber numberWithInteger:accountTypePhone];
             [user UserSave:responseObject];
 //            [[XLCache singleton] cacheWhitValue:responseObject[@"schoolList"] AndKey:SchoolList];
+//            NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
             NSUserDefaults *defaults  =  [NSUserDefaults standardUserDefaults];
+            [defaults setObject:self.pho.text forKey:@"Loginaccount"];
             [defaults setObject:responseObject[@"schoolList"] forKey:SchoolList];
             [defaults synchronize];
             [UIWebView fm_setTokenToUIWebViewCookie]; //存token到域名cookie

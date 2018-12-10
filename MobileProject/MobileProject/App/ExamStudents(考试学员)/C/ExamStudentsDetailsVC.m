@@ -12,7 +12,7 @@
 #import "CGXPickerView.h"
 #import "StudentDetailsVC.h"
 #define MAX_LIMIT_NUMS   100
-@interface ExamStudentsDetailsVC ()<UITextViewDelegate>
+@interface ExamStudentsDetailsVC ()<UITextViewDelegate,UITextFieldDelegate>
 @property (nonatomic , strong)UIScrollView *scroll;
 @property (nonatomic , strong)XLView *backview;
 @property (nonatomic , strong)UIButton *state;
@@ -215,6 +215,7 @@
     
     self.note = [[UITextView alloc] init];
     [self.backview addSubview:self.note];
+    self.note.placeholder = @"请输入备注内容";
     self.note.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     self.note.delegate = self;
     self.note.text = _model.memo;
@@ -247,6 +248,8 @@
     self.bukao.font = [UIFont systemFontOfSize:kFit_Font6(16)];
     self.bukao.textAlignment = NSTextAlignmentRight;
     self.bukao.placeholder = @"请输入补考次数";
+    self.bukao.keyboardType=UIKeyboardTypeNumberPad;
+    self.bukao.delegate = self;
     if (_model.failNum) {
         self.bukao.text =[NSString stringWithFormat:@"%d",_model.failNum];
     }
@@ -448,4 +451,38 @@
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"telprompt:%@",_model.student[@"studentPhone"]]]];
     }
 }
+
+
+
+
+//设置文本框只能输入数字
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    //如果是限制只能输入数字的文本框
+    return [self validateNumber:string];
+    
+}
+
+- (BOOL)validateNumber:(NSString*)number {
+    
+    BOOL res =YES;
+    
+    NSCharacterSet* tmpSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    
+    int i =0;
+    
+    while (i < number.length) {
+        NSString * string = [number substringWithRange:NSMakeRange(i,1)];
+        NSRange range = [string rangeOfCharacterFromSet:tmpSet];
+        if (range.length ==0) {
+            res =NO;
+            break;
+        }
+        i++;
+    }
+    return res;
+}
+
+
+
 @end

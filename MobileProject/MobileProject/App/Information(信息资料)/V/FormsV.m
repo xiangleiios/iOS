@@ -308,10 +308,12 @@
 {
     self = [super init];
     if (self) {
-        kWeakSelf(self)
+//        kWeakSelf(self)
         self.referees = [[XLInformationV alloc] informationWithTitle:@"推荐人" SubTitle:@"" TSSubTitle:@"请输入推荐人" Must:NO Click:NO];
         self.note = [[XLInformationV alloc] informationWithTitle:@"备注" SubTitle:@"" TSSubTitle:@"请输入备注" Must:NO Click:NO];
-//        self.state = [[XLInformationV alloc] informationWithTitle:@"收费状态" SubTitle:@"" TSSubTitle:@"请选择收费状态" Must:YES Click:YES];
+        self.coach = [[XLInformationV alloc] informationWithTitle:@"报名教练" SubTitle:@"" TSSubTitle:@"" Must:NO Click:NO];
+        self.coach.userInteractionEnabled = NO;
+        self.coach.subfield.textColor = ZTColor;
 //        self.state.senterBlock = ^{
 //            [weakself endEditing:YES];
 //            [CGXPickerView showStringPickerWithTitle:@"收费状态" DataSource:@[@"未收费",@"已收费"] DefaultSelValue:nil IsAutoSelect:NO ResultBlock:^(id selectValue, id selectRow) {
@@ -323,9 +325,9 @@
 //        };
         [self addSubview:self.referees];
         [self addSubview:self.note];
-//        [self addSubview:self.state];
+        [self addSubview:self.coach];
         
-        NSArray *arr = @[self.referees,self.note];
+        NSArray *arr = @[self.referees,self.note,self.coach];
         [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:0.1 leadSpacing:0.1 tailSpacing:0.1];
         [arr mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.right.mas_equalTo(self);

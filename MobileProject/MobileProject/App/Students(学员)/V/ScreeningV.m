@@ -31,17 +31,20 @@
     UIView *back = [[UIView alloc] initWithFrame:CGRectMake(0, (kNavBarH + KFit_H6S(300)), SCREEN_WIDTH, SCREEN_HEIGHT - (kNavBarH + KFit_H6S(300)))];
     self.backview = back;
     [self addSubview:back];
+    self.scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - (kNavBarH + KFit_H6S(300)))];
+    [self.backview  addSubview:self.scroll];
+    
     back.backgroundColor = kRGBAColor(0, 0, 0, 0.8);
 }
 
 - (void)setDataArr:(NSArray *)dataArr{
     _dataArr = dataArr;
     NSMutableArray *arr = [NSMutableArray array];
-    UIView *back = [[UIView alloc] init];
-    [self addSubview:back];
+    XLView *back = [[XLView alloc] init];
+    [self.scroll addSubview:back];
     [back mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self);
-        make.top.mas_equalTo(self.backview);
+        make.top.mas_equalTo(self.scroll);
         make.height.mas_equalTo(dataArr.count * KFit_H6S(90));
     }];
     if (dataArr.count == 1) {
@@ -87,6 +90,7 @@
         }];
     }
     
+    self.scroll.contentSize = CGSizeMake(0, dataArr.count * KFit_H6S(90));
     
 }
 

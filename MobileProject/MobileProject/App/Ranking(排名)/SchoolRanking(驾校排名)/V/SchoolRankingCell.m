@@ -83,5 +83,6 @@
     _model = model;
     self.title.text = [NSString stringWithFormat:@"%@ (%@)",model.deptFatherName,model.name];
     self.rank.text = model.schoolrankingCount;
+    [self.img sd_setImageWithURL:[NSURL URLWithString:KURLIma(_model.headImg)] placeholderImage:[UIImage imageNamed:@"nor_fenxiao_photo"]];
 }
 @end
